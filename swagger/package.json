@@ -1,0 +1,14 @@
+{
+  "name": "swagger-merger",
+  "version": "1.0.0",
+  "description": "[![Build Status](https://travis-ci.org/HoS0/SwaggerMerge.svg?branch=master)](https://travis-ci.org/HoS0/SwaggerMerge) [![Coverage Status](https://coveralls.io/repos/github/HoS0/SwaggerMerge/badge.svg?branch=master)](https://coveralls.io/github/HoS0/SwaggerMerge?branch=master)",
+  "main": "test.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "swagger-merge": "^0.3.3"
+  }
+}

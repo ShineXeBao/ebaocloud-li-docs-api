@@ -1,0 +1,2892 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0",
+        "title": "eBaoCould Open API",
+        "termsOfService": "http://li.ebaocloud.com.cn/proposals/",
+        "contact": {
+            "name": "eBaoTech"
+        }
+    },
+    "host": "api.ebaocloud.life",
+    "basePath": "/rest",
+    "tags": [
+        {
+            "name": "Proposal"
+        }
+    ],
+    "paths": {
+        "/proposals/application": {
+            "post": {
+                "tags": [
+                    "Proposal"
+                ],
+                "summary": "投保",
+                "description": "计算保费并校验投核保规则，如果通过，则生成投保单号",
+                "operationId": "applyUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "request",
+                        "description": "request",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ApplicationRequest"
+                        }
+                    },
+                    {
+                        "name": "X-ebao-tenant-id",
+                        "in": "header",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ApplicationResponse"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/proposals/issurance": {
+            "post": {
+                "tags": [
+                    "Proposal"
+                ],
+                "summary": "收费承保",
+                "description": "投核保后收费承保",
+                "operationId": "issueUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "request",
+                        "description": "request",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/IssuranceRequest"
+                        }
+                    },
+                    {
+                        "name": "X-ebao-tenant-id",
+                        "in": "header",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/IssuranceResponse"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/proposals/pre-verification": {
+            "post": {
+                "tags": [
+                    "Proposal"
+                ],
+                "summary": "投保预检",
+                "description": "计算保费并校验投保风险",
+                "operationId": "quoteUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "request",
+                        "description": "request",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/QuotationRequest"
+                        }
+                    },
+                    {
+                        "name": "X-ebao-tenant-id",
+                        "in": "header",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/QuotationResponse"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Policy": {
+            "type": "object",
+            "properties": {
+                "applyDate": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "申请日期，非空，日期格式：yyyy-MM-dd'T'HH:mm:ss"
+                },
+                "beneficiaries": {
+                    "type": "array",
+                    "description": "受益人列表",
+                    "items": {
+                        "$ref": "#/definitions/Beneficiary"
+                    }
+                },
+                "coverages": {
+                    "type": "array",
+                    "description": "保单险种列表",
+                    "items": {
+                        "$ref": "#/definitions/Coverage"
+                    }
+                },
+                "currency": {
+                    "type": "integer",
+                    "format": "int32",
+                    "example": 1,
+                    "description": "币种，非空，1-人民币",
+                    "enum": [
+                        1
+                    ]
+                },
+                "customers": {
+                    "type": "array",
+                    "description": "保单客户列表",
+                    "items": {
+                        "$ref": "#/definitions/PolicyCustomer"
+                    }
+                },
+                "declarations": {
+                    "type": "array",
+                    "description": "客户告知列表",
+                    "items": {
+                        "$ref": "#/definitions/CustomerDeclaration"
+                    }
+                },
+                "deliverType": {
+                    "type": "string",
+                    "example": "M",
+                    "description": "保单递送方式，H-手工；M-邮件",
+                    "enum": [
+                        "H",
+                        "M"
+                    ]
+                },
+                "ePolicyDownloadUrl": {
+                    "type": "string",
+                    "description": "电子保单下载地址"
+                },
+                "expiryDate": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "终止日期，日期格式：yyyy-MM-dd'T'HH:mm:ss"
+                },
+                "extendedProps": {
+                    "type": "object",
+                    "description": "扩展信息, Map类型, Key/Value都是字符型",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "inceptionDate": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "保单生效日期，日期格式：yyyy-MM-dd'T'HH:mm:ss"
+                },
+                "installPrem": {
+                    "type": "number",
+                    "format": "double",
+                    "description": "保单保费",
+                    "readOnly": true
+                },
+                "insureds": {
+                    "type": "array",
+                    "description": "保单被保人列表",
+                    "items": {
+                        "$ref": "#/definitions/Insured"
+                    }
+                },
+                "insurerCode": {
+                    "type": "string",
+                    "description": "保险公司代码"
+                },
+                "issueDate": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "承保日期，日期格式：yyyy-MM-dd'T'HH:mm:ss"
+                },
+                "payerAccounts": {
+                    "type": "array",
+                    "description": "付款方式列表",
+                    "items": {
+                        "$ref": "#/definitions/PayerAccount"
+                    }
+                },
+                "payers": {
+                    "type": "array",
+                    "description": "付款人列表",
+                    "items": {
+                        "$ref": "#/definitions/Payer"
+                    }
+                },
+                "policyHolder": {
+                    "description": "投保人",
+                    "$ref": "#/definitions/PolicyHolder"
+                },
+                "policyId": {
+                    "type": "string",
+                    "description": "保单内部序列号, UUID type",
+                    "readOnly": true
+                },
+                "policyNumber": {
+                    "type": "string",
+                    "description": "保单号码"
+                },
+                "policyPackage": {
+                    "description": "产品组合",
+                    "$ref": "#/definitions/PolicyPackage"
+                },
+                "proposalNumber": {
+                    "type": "string",
+                    "description": "投保单号码"
+                },
+                "quotationCode": {
+                    "type": "string",
+                    "description": "试算请求编号"
+                },
+                "riskStatus": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "保单状态,0-未生效；1-生效；2-失效；3-终止",
+                    "readOnly": true
+                },
+                "salesChannelCode": {
+                    "type": "string",
+                    "description": "销售渠道代码"
+                },
+                "serviceAgentCode": {
+                    "type": "string",
+                    "description": "保单代理人代码"
+                },
+                "submissionDate": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "提交日期，日期格式：yyyy-MM-dd'T'HH:mm:ss"
+                },
+                "tenantCode": {
+                    "type": "string",
+                    "example": "ebao",
+                    "description": "Tenant code"
+                },
+                "trustees": {
+                    "type": "array",
+                    "description": "监护人列表",
+                    "items": {
+                        "$ref": "#/definitions/Trustee"
+                    }
+                }
+            }
+        },
+        "PolicyPackage": {
+            "type": "object",
+            "properties": {
+                "packageCode": {
+                    "type": "string",
+                    "description": "产品组合代码"
+                },
+                "packageId": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "组合内部序列号",
+                    "readOnly": true
+                },
+                "unit": {
+                    "type": "number",
+                    "format": "double",
+                    "description": "产品组合投保份数，默认为1"
+                }
+            }
+        },
+        "QuotationResponse": {
+            "type": "object",
+            "properties": {
+                "clientRequestId": {
+                    "type": "string",
+                    "description": "外部交易流水号"
+                },
+                "clientRequestTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "外部请求时间"
+                },
+                "exceptions": {
+                    "type": "array",
+                    "description": "异常信息",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "messages": {
+                    "type": "array",
+                    "description": "业务失败原因描述列表节点",
+                    "items": {
+                        "$ref": "#/definitions/GenericValidationResult"
+                    }
+                },
+                "policy": {
+                    "description": "保单",
+                    "$ref": "#/definitions/QuotationPolicyResult"
+                },
+                "result": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "请求结果，1-业务成功；0-业务失败；-1-程序异常"
+                }
+            }
+        },
+        "Address": {
+            "type": "object",
+            "properties": {
+                "address1": {
+                    "type": "string",
+                    "example": "上海市",
+                    "description": "省"
+                },
+                "address2": {
+                    "type": "string",
+                    "example": "上海市",
+                    "description": "市"
+                },
+                "address3": {
+                    "type": "string",
+                    "example": "杨浦区",
+                    "description": "区县"
+                },
+                "address4": {
+                    "type": "string",
+                    "example": "淞沪路270号创智天地3号楼3楼",
+                    "description": "地址"
+                },
+                "addressId": {
+                    "type": "string",
+                    "description": "地址内部序列号, UUID type",
+                    "readOnly": true
+                },
+                "postCode": {
+                    "type": "string",
+                    "example": "200433",
+                    "description": "邮编"
+                }
+            }
+        },
+        "CoverageInsuredInput": {
+            "type": "object",
+            "properties": {
+                "age": {
+                    "type": "integer",
+                    "format": "int32",
+                    "example": 25,
+                    "description": "年龄"
+                },
+                "extendedProps": {
+                    "type": "object",
+                    "description": "扩展信息, Map类型, Key/Value都是字符型",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "occupationClass": {
+                    "type": "integer",
+                    "format": "int32",
+                    "example": 1,
+                    "description": "职业等级"
+                },
+                "orderId": {
+                    "type": "integer",
+                    "format": "int32",
+                    "example": 1,
+                    "description": "险种被保人序号，默认为1，同一险种多被保人（家庭保单或连身险）时大于1"
+                },
+                "partySerialId": {
+                    "type": "integer",
+                    "format": "int32",
+                    "example": 1,
+                    "description": "被保人客户临时编号，请求内使用，唯一标识请求内某一当事人"
+                }
+            }
+        },
+        "AddressInput": {
+            "type": "object",
+            "properties": {
+                "address1": {
+                    "type": "string",
+                    "example": "上海市",
+                    "description": "省"
+                },
+                "address2": {
+                    "type": "string",
+                    "example": "上海市",
+                    "description": "市"
+                },
+                "address3": {
+                    "type": "string",
+                    "example": "杨浦区",
+                    "description": "区县"
+                },
+                "address4": {
+                    "type": "string",
+                    "example": "淞沪路270号创智天地3号楼3楼",
+                    "description": "地址"
+                },
+                "postCode": {
+                    "type": "string",
+                    "example": "200433",
+                    "description": "邮编"
+                }
+            }
+        },
+        "InsuredInput": {
+            "type": "object",
+            "properties": {
+                "extendedProps": {
+                    "type": "object",
+                    "description": "扩展信息, Map类型, Key/Value都是字符型",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "medicalIndi": {
+                    "type": "string",
+                    "example": "Y",
+                    "description": "是否有医保，Y-是；N-否",
+                    "enum": [
+                        "Y",
+                        "N"
+                    ]
+                },
+                "partySerialId": {
+                    "type": "integer",
+                    "format": "int32",
+                    "example": 1,
+                    "description": "客户临时编号，请求内使用，唯一标识请求内某一当事人"
+                },
+                "relationToPH": {
+                    "type": "integer",
+                    "format": "int32",
+                    "example": 1,
+                    "description": "被保人与投保人关系，数字类型，1-自己；2-子女；3-配偶；10-父母；7-其他",
+                    "enum": [
+                        1,
+                        2,
+                        3,
+                        10,
+                        7
+                    ]
+                },
+                "socialSecurityIndi": {
+                    "type": "string",
+                    "example": "Y",
+                    "description": "是否有社保，Y-是；N-否",
+                    "enum": [
+                        "Y",
+                        "N"
+                    ]
+                }
+            }
+        },
+        "PayerAccount": {
+            "type": "object",
+            "properties": {
+                "bankAccount": {
+                    "description": "首期银行账户",
+                    "$ref": "#/definitions/BankAccount"
+                },
+                "extendedProps": {
+                    "type": "object",
+                    "description": "扩展信息, Map类型, Key/Value都是字符型",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "listId": {
+                    "type": "string",
+                    "description": "保单客户内部序列号, UUID type",
+                    "readOnly": true
+                },
+                "nextBankAccount": {
+                    "description": "续期银行账户",
+                    "$ref": "#/definitions/BankAccount"
+                },
+                "paymentMethod": {
+                    "type": "integer",
+                    "format": "int32",
+                    "example": 3,
+                    "description": "首期付款方式，数字类型，1-现金；2-支票；3-银行转账；30-信用卡",
+                    "enum": [
+                        1,
+                        2,
+                        3,
+                        30
+                    ]
+                },
+                "paymentMethodNext": {
+                    "type": "integer",
+                    "format": "int32",
+                    "example": 3,
+                    "description": "续期付款方式，数字类型，1-现金；2-支票；3-银行转账；30-信用卡",
+                    "enum": [
+                        1,
+                        2,
+                        3,
+                        30
+                    ]
+                },
+                "policyId": {
+                    "type": "string",
+                    "description": "保单内部序列号, UUID type",
+                    "readOnly": true
+                }
+            }
+        },
+        "PayPlanInput": {
+            "type": "object",
+            "properties": {
+                "endPeriod": {
+                    "type": "string",
+                    "example": "3",
+                    "description": "年金领取期间类型，计划类型为年金/变额年金/GMWB时非空，1-领取固定年数；2-领取到一定年龄；3-终身领取",
+                    "enum": [
+                        "1",
+                        "2",
+                        "3"
+                    ]
+                },
+                "endYear": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "领取年数"
+                },
+                "extendedProps": {
+                    "type": "object",
+                    "description": "扩展信息, Map类型, Key/Value都是字符型",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "gurntPeriod": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "年金保证领取期间（年数或年龄"
+                },
+                "payOption": {
+                    "type": "string",
+                    "example": "1",
+                    "description": "年金领取方式，1-现金领取；2-抵交保费；3-累积生息；4-累积生息x年后转抵交保费；5-买一个附加的缴清的附加险",
+                    "enum": [
+                        "1",
+                        "2",
+                        "3",
+                        "4",
+                        "5"
+                    ]
+                },
+                "payOptionTerm": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "年数，当payOption为4时有意义，其他为空"
+                },
+                "payPeriod": {
+                    "type": "string",
+                    "example": "3",
+                    "description": "年金开始领取期间类型，1-立即领取；2-到一定年龄的周年日领取；3-若干年后领取；4-一定年龄后领取",
+                    "enum": [
+                        "1",
+                        "2",
+                        "3",
+                        "4"
+                    ]
+                },
+                "payYear": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "年金开始领取期间（年数或年龄）"
+                },
+                "planFreq": {
+                    "type": "string",
+                    "example": "1",
+                    "description": "领取频率，1-年；2-半年；3-季；4-月；5-趸领",
+                    "enum": [
+                        "1",
+                        "2",
+                        "3",
+                        "4",
+                        "5"
+                    ]
+                },
+                "planType": {
+                    "type": "string",
+                    "example": "1",
+                    "description": "支付计划类型，非空，1-现金红利；2-年金；3-生存金；4-满期金；5-GMWB（保证最小提取利益）；6-变额年金；7-部分退保；8-保额红利",
+                    "enum": [
+                        "1",
+                        "2",
+                        "3",
+                        "4",
+                        "5",
+                        "6",
+                        "7",
+                        "8"
+                    ]
+                }
+            }
+        },
+        "CoverageInput": {
+            "type": "object",
+            "properties": {
+                "chargePeriod": {
+                    "type": "string",
+                    "example": "2",
+                    "description": "缴费年期类型，非空，1-趸缴；2-按年限缴；3-缴至某确定年龄；4-终身",
+                    "enum": [
+                        "1",
+                        "2",
+                        "3",
+                        "4"
+                    ]
+                },
+                "chargeYear": {
+                    "type": "integer",
+                    "format": "int32",
+                    "example": 20,
+                    "description": "缴费年期，非空，趸缴为0；按年限缴时为缴费年限；缴至某确定年龄时为缴费期满年龄；终身为100"
+                },
+                "coverageAgents": {
+                    "type": "array",
+                    "description": "业绩分摊代理人列表",
+                    "items": {
+                        "$ref": "#/definitions/CoverageAgentInput"
+                    }
+                },
+                "coveragePeriod": {
+                    "type": "string",
+                    "example": "1",
+                    "description": "保障年期类型，1-保终身；2-按年限保；3-保至某确定年龄；4-按月保；5-按天保",
+                    "enum": [
+                        "1",
+                        "2",
+                        "3",
+                        "4",
+                        "5"
+                    ]
+                },
+                "coverageSeriaId": {
+                    "type": "integer",
+                    "format": "int32",
+                    "example": 1,
+                    "description": "保单险种临时序列号，请求内使用，唯一标识请求内某一险种"
+                },
+                "coverageYear": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "保障年期，保终身时为9999；按年限保时为保障年限；保至某确定年龄时为保障期满年龄；按月保时为保障月数；按天保时为保障天数"
+                },
+                "currentPremium": {
+                    "description": "当期保费",
+                    "$ref": "#/definitions/CoveragePremium"
+                },
+                "extendedProps": {
+                    "type": "object",
+                    "description": "扩展信息, Map类型, Key/Value都是字符型",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "insureds": {
+                    "type": "array",
+                    "description": "险种被保人列表",
+                    "items": {
+                        "$ref": "#/definitions/CoverageInsuredInput"
+                    }
+                },
+                "masterCoverageSerialId": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "主险临时序列号，当前险种为主险时为空，为附加险时须填入主险的险种序列号"
+                },
+                "payPlans": {
+                    "type": "array",
+                    "description": "支付计划列表",
+                    "items": {
+                        "$ref": "#/definitions/PayPlanInput"
+                    }
+                },
+                "productCode": {
+                    "type": "string",
+                    "description": "产品代码"
+                },
+                "waiverExt": {
+                    "description": "险种豁免信息",
+                    "$ref": "#/definitions/CoverageExtWaiverInput"
+                }
+            }
+        },
+        "PolicyCustomerInput": {
+            "type": "object",
+            "properties": {
+                "address": {
+                    "description": "客户地址",
+                    "$ref": "#/definitions/AddressInput"
+                },
+                "extendedProps": {
+                    "type": "object",
+                    "description": "扩展信息, Map类型, Key/Value都是字符型",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "organization": {
+                    "description": "机构客户信息",
+                    "$ref": "#/definitions/Organization"
+                },
+                "partyContact": {
+                    "description": "当事人联系信息",
+                    "$ref": "#/definitions/PartyContact"
+                },
+                "partySerialId": {
+                    "type": "integer",
+                    "format": "int32",
+                    "example": 1,
+                    "description": "客户临时编号，请求内使用，唯一标识请求内某一当事人"
+                },
+                "partyType": {
+                    "type": "integer",
+                    "format": "int32",
+                    "example": 1,
+                    "description": "当事人类型，1-个人当事人；2-机构当事人",
+                    "enum": [
+                        1,
+                        2
+                    ]
+                },
+                "person": {
+                    "description": "个人客户信息",
+                    "$ref": "#/definitions/Person"
+                }
+            }
+        },
+        "PayPlan": {
+            "type": "object",
+            "properties": {
+                "coverageId": {
+                    "type": "string",
+                    "description": "保单险种序列号, UUID type",
+                    "readOnly": true
+                },
+                "endPeriod": {
+                    "type": "string",
+                    "example": "3",
+                    "description": "年金领取期间类型，计划类型为年金/变额年金/GMWB时非空，1-领取固定年数；2-领取到一定年龄；3-终身领取",
+                    "enum": [
+                        "1",
+                        "2",
+                        "3"
+                    ]
+                },
+                "endYear": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "领取年数"
+                },
+                "extendedProps": {
+                    "type": "object",
+                    "description": "扩展信息, Map类型, Key/Value都是字符型",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "gurntPeriod": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "年金保证领取期间（年数或年龄"
+                },
+                "payOption": {
+                    "type": "string",
+                    "example": "1",
+                    "description": "年金领取方式，1-现金领取；2-抵交保费；3-累积生息；4-累积生息x年后转抵交保费；5-买一个附加的缴清的附加险",
+                    "enum": [
+                        "1",
+                        "2",
+                        "3",
+                        "4",
+                        "5"
+                    ]
+                },
+                "payOptionTerm": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "年数，当payOption为4时有意义，其他为空"
+                },
+                "payPeriod": {
+                    "type": "string",
+                    "example": "3",
+                    "description": "年金开始领取期间类型，1-立即领取；2-到一定年龄的周年日领取；3-若干年后领取；4-一定年龄后领取",
+                    "enum": [
+                        "1",
+                        "2",
+                        "3",
+                        "4"
+                    ]
+                },
+                "payYear": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "年金开始领取期间（年数或年龄）"
+                },
+                "planFreq": {
+                    "type": "string",
+                    "example": "1",
+                    "description": "领取频率，1-年；2-半年；3-季；4-月；5-趸领",
+                    "enum": [
+                        "1",
+                        "2",
+                        "3",
+                        "4",
+                        "5"
+                    ]
+                },
+                "planId": {
+                    "type": "string",
+                    "description": "支付计划内部序列号, UUID type",
+                    "readOnly": true
+                },
+                "planType": {
+                    "type": "string",
+                    "example": "1",
+                    "description": "支付计划类型，非空，1-现金红利；2-年金；3-生存金；4-满期金；5-GMWB（保证最小提取利益）；6-变额年金；7-部分退保；8-保额红利",
+                    "enum": [
+                        "1",
+                        "2",
+                        "3",
+                        "4",
+                        "5",
+                        "6",
+                        "7",
+                        "8"
+                    ]
+                },
+                "policyId": {
+                    "type": "string",
+                    "description": "保单内部序列号, UUID type",
+                    "readOnly": true
+                }
+            }
+        },
+        "CustomerDeclaration": {
+            "type": "object",
+            "properties": {
+                "declarationDate": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "告知日期，日期格式：yyyy-MM-dd'T'HH:mm:ss"
+                },
+                "details": {
+                    "type": "array",
+                    "description": "告知详细信息",
+                    "items": {
+                        "$ref": "#/definitions/CustomerDeclarationDetail"
+                    }
+                },
+                "extendedProps": {
+                    "type": "object",
+                    "description": "扩展信息, Map类型, Key/Value都是字符型",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "listId": {
+                    "type": "string",
+                    "description": "客户告知内部序列号, UUID type",
+                    "readOnly": true
+                },
+                "partyId": {
+                    "type": "string",
+                    "description": "客户编号, UUID type",
+                    "readOnly": true
+                },
+                "policyId": {
+                    "type": "string",
+                    "description": "保单内部序列号, UUID type",
+                    "readOnly": true
+                }
+            }
+        },
+        "CoverageAgent": {
+            "type": "object",
+            "properties": {
+                "agentCode": {
+                    "type": "string",
+                    "description": "保单代理人代码"
+                },
+                "assignRate": {
+                    "type": "number",
+                    "format": "double",
+                    "example": 1,
+                    "description": "业绩分摊比例，最大为1"
+                },
+                "coverageId": {
+                    "type": "string",
+                    "description": "保单险种序列号, UUID type",
+                    "readOnly": true
+                },
+                "extendedProps": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "listId": {
+                    "type": "string",
+                    "description": "险种业绩分摊信息内部序列号, UUID type",
+                    "readOnly": true
+                },
+                "policyId": {
+                    "type": "string",
+                    "description": "保单内部序列号, UUID type",
+                    "readOnly": true
+                }
+            }
+        },
+        "GenericVO": {
+            "type": "object",
+            "properties": {
+                "extObject": {
+                    "$ref": "#/definitions/GenericVO"
+                }
+            }
+        },
+        "Payer": {
+            "type": "object",
+            "properties": {
+                "extendedProps": {
+                    "type": "object",
+                    "description": "扩展信息, Map类型, Key/Value都是字符型",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "listId": {
+                    "type": "string",
+                    "description": "保单角色内部序列号, UUID type",
+                    "readOnly": true
+                },
+                "partyId": {
+                    "type": "string",
+                    "description": "客户编号, UUID type",
+                    "readOnly": true
+                },
+                "policyId": {
+                    "type": "string",
+                    "description": "保单内部序列号, UUID type",
+                    "readOnly": true
+                },
+                "relationToPH": {
+                    "type": "integer",
+                    "format": "int32",
+                    "example": 1,
+                    "description": "被保人与投保人关系，数字类型，1-自己；2-子女；3-配偶；10-父母；7-其他",
+                    "enum": [
+                        1,
+                        2,
+                        3,
+                        10,
+                        7
+                    ]
+                },
+                "shareRate": {
+                    "type": "number",
+                    "format": "double",
+                    "example": 1,
+                    "description": "付款比例，最大为1"
+                }
+            }
+        },
+        "CollectionInput": {
+            "type": "object",
+            "properties": {
+                "currency": {
+                    "type": "integer",
+                    "format": "int32",
+                    "example": 1,
+                    "description": "币种，非空，1-人民币",
+                    "enum": [
+                        1
+                    ]
+                },
+                "extendedProps": {
+                    "type": "object",
+                    "description": "扩展信息, Map类型, Key/Value都是字符型",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "feeAmount": {
+                    "type": "number",
+                    "format": "double",
+                    "example": 2314,
+                    "description": "实际收费金额"
+                },
+                "payMode": {
+                    "type": "integer",
+                    "format": "int32",
+                    "example": 3,
+                    "description": "首期付款方式，数字类型，1-现金；2-支票；3-银行转账；30-信用卡",
+                    "enum": [
+                        1,
+                        2,
+                        3,
+                        30
+                    ]
+                },
+                "paymentPlatform": {
+                    "type": "string",
+                    "description": "第三方支付平台代码"
+                },
+                "thirdPtyPayNO": {
+                    "type": "string",
+                    "description": "第三方支付号码"
+                }
+            }
+        },
+        "IssurancePolicyResult": {
+            "type": "object",
+            "properties": {
+                "coverages": {
+                    "type": "array",
+                    "description": "保单险种列表",
+                    "items": {
+                        "$ref": "#/definitions/CoverageCalculationResult"
+                    }
+                },
+                "currency": {
+                    "type": "integer",
+                    "format": "int32",
+                    "example": 1,
+                    "description": "币种，非空，1-人民币",
+                    "enum": [
+                        1
+                    ]
+                },
+                "ePolicyDownloadUrl": {
+                    "type": "string",
+                    "description": "电子保单下载地址"
+                },
+                "expiryDate": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "终止日期，日期格式：yyyy-MM-dd'T'HH:mm:ss"
+                },
+                "extendedProps": {
+                    "type": "object",
+                    "description": "扩展信息, Map类型, Key/Value都是字符型",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "inceptionDate": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "保单生效日期，日期格式：yyyy-MM-dd'T'HH:mm:ss"
+                },
+                "installPrem": {
+                    "type": "number",
+                    "format": "double",
+                    "description": "保单保费",
+                    "readOnly": true
+                },
+                "issueDate": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "承保日期，日期格式：yyyy-MM-dd'T'HH:mm:ss"
+                },
+                "policyNumber": {
+                    "type": "string",
+                    "description": "保单号码"
+                },
+                "proposalNumber": {
+                    "type": "string",
+                    "description": "投保单号码"
+                },
+                "quotationCode": {
+                    "type": "string",
+                    "description": "试算请求编号"
+                },
+                "riskStatus": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "保单状态,0-未生效；1-生效；2-失效；3-终止",
+                    "readOnly": true
+                }
+            }
+        },
+        "Insured": {
+            "type": "object",
+            "properties": {
+                "extendedProps": {
+                    "type": "object",
+                    "description": "扩展信息, Map类型, Key/Value都是字符型",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "listId": {
+                    "type": "string",
+                    "description": "保单角色内部序列号, UUID type",
+                    "readOnly": true
+                },
+                "medicalIndi": {
+                    "type": "string",
+                    "example": "Y",
+                    "description": "是否有医保，Y-是；N-否",
+                    "enum": [
+                        "Y",
+                        "N"
+                    ]
+                },
+                "partyId": {
+                    "type": "string",
+                    "description": "客户编号, UUID type",
+                    "readOnly": true
+                },
+                "policyId": {
+                    "type": "string",
+                    "description": "保单内部序列号, UUID type",
+                    "readOnly": true
+                },
+                "relationToPH": {
+                    "type": "integer",
+                    "format": "int32",
+                    "example": 1,
+                    "description": "被保人与投保人关系，数字类型，1-自己；2-子女；3-配偶；10-父母；7-其他",
+                    "enum": [
+                        1,
+                        2,
+                        3,
+                        10,
+                        7
+                    ]
+                },
+                "socialSecurityIndi": {
+                    "type": "string",
+                    "example": "Y",
+                    "description": "是否有社保，Y-是；N-否",
+                    "enum": [
+                        "Y",
+                        "N"
+                    ]
+                }
+            }
+        },
+        "CoverageAgentInput": {
+            "type": "object",
+            "properties": {
+                "agentCode": {
+                    "type": "string",
+                    "description": "保单代理人代码"
+                },
+                "assignRate": {
+                    "type": "number",
+                    "format": "double",
+                    "example": 1,
+                    "description": "业绩分摊比例，最大为1"
+                },
+                "extendedProps": {
+                    "type": "object",
+                    "description": "扩展信息, Map类型, Key/Value都是字符型",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "TrusteeInput": {
+            "type": "object",
+            "properties": {
+                "extendedProps": {
+                    "type": "object",
+                    "description": "扩展信息, Map类型, Key/Value都是字符型",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "partySerialId": {
+                    "type": "integer",
+                    "format": "int32",
+                    "example": 1,
+                    "description": "客户临时编号，请求内使用，唯一标识请求内某一当事人"
+                }
+            }
+        },
+        "PartyContact": {
+            "type": "object",
+            "properties": {
+                "contact": {
+                    "type": "string",
+                    "example": "张三",
+                    "description": "联系人"
+                },
+                "contactTel": {
+                    "type": "string",
+                    "example": "88888888",
+                    "description": "联系人电话"
+                },
+                "email": {
+                    "type": "string",
+                    "example": "TestPerson14@126.com",
+                    "description": "电子邮箱"
+                },
+                "fax": {
+                    "type": "string",
+                    "example": "88888887",
+                    "description": "传真"
+                },
+                "homeTel": {
+                    "type": "string",
+                    "example": "87654321",
+                    "description": "家庭电话"
+                },
+                "mobileTel": {
+                    "type": "string",
+                    "example": "15012345678",
+                    "description": "手机号"
+                },
+                "officeTel": {
+                    "type": "string",
+                    "example": "88888888",
+                    "description": "工作电话"
+                },
+                "officeTelExt": {
+                    "type": "string",
+                    "example": "1234",
+                    "description": "工作电话分机号"
+                }
+            }
+        },
+        "CoverageCalculationResult": {
+            "type": "object",
+            "properties": {
+                "extendedProps": {
+                    "type": "object",
+                    "description": "扩展信息, Map类型, Key/Value都是字符型",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "premium": {
+                    "type": "number",
+                    "format": "double",
+                    "example": 2314,
+                    "description": "险种保费，保费算保额时非空"
+                },
+                "productCode": {
+                    "type": "string",
+                    "description": "产品代码"
+                },
+                "sumAssured": {
+                    "type": "number",
+                    "format": "double",
+                    "example": 100000,
+                    "description": "险种保额，保额算保费时非空"
+                },
+                "unit": {
+                    "type": "number",
+                    "format": "double",
+                    "description": "险种份数，产品按份数投保时非空"
+                }
+            }
+        },
+        "IssuranceResponse": {
+            "type": "object",
+            "properties": {
+                "clientRequestId": {
+                    "type": "string",
+                    "description": "外部交易流水号"
+                },
+                "clientRequestTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "外部请求时间"
+                },
+                "exceptions": {
+                    "type": "array",
+                    "description": "异常信息",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "messages": {
+                    "type": "array",
+                    "description": "业务失败原因描述列表节点",
+                    "items": {
+                        "$ref": "#/definitions/GenericValidationResult"
+                    }
+                },
+                "policy": {
+                    "description": "保单",
+                    "$ref": "#/definitions/IssurancePolicyResult"
+                },
+                "result": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "请求结果，1-业务成功；0-业务失败；-1-程序异常"
+                }
+            }
+        },
+        "Person": {
+            "type": "object",
+            "properties": {
+                "birthdate": {
+                    "type": "string",
+                    "format": "date-time",
+                    "example": "1980-01-01",
+                    "description": "生日，非空，日期格式：yyyy-MM-dd"
+                },
+                "certiCode": {
+                    "type": "string",
+                    "example": "1234567890",
+                    "description": "证件号码"
+                },
+                "certiEnd": {
+                    "type": "string",
+                    "format": "date-time",
+                    "example": "2019-12-31",
+                    "description": "证件有效截止日，日期格式：yyyy-MM-dd"
+                },
+                "certiStart": {
+                    "type": "string",
+                    "format": "date-time",
+                    "example": "2000-01-01",
+                    "description": "证件起始有效日，日期格式：yyyy-MM-dd"
+                },
+                "certiType": {
+                    "type": "integer",
+                    "format": "int32",
+                    "example": 3,
+                    "description": "证件类型，数字类型，1-身份证；2-军人证；3-护照；4-出生证；9-其他",
+                    "enum": [
+                        1,
+                        2,
+                        3,
+                        4,
+                        9
+                    ]
+                },
+                "firstName": {
+                    "type": "string",
+                    "example": "三",
+                    "description": "名"
+                },
+                "gender": {
+                    "type": "string",
+                    "example": "M",
+                    "description": "性别，M-男性；F-女性",
+                    "enum": [
+                        "M",
+                        "F"
+                    ]
+                },
+                "height": {
+                    "type": "number",
+                    "format": "double",
+                    "example": 175.3,
+                    "description": "身高（cm）"
+                },
+                "income": {
+                    "type": "integer",
+                    "format": "int64",
+                    "example": 200000,
+                    "description": "年收入"
+                },
+                "lastName": {
+                    "type": "string",
+                    "example": "张",
+                    "description": "Last name of prospect"
+                },
+                "marriageStatus": {
+                    "type": "string",
+                    "example": "1",
+                    "description": "婚姻状况，1-已婚；2-未婚；3-离异；4-丧偶；5-分居；6-其他",
+                    "enum": [
+                        "1",
+                        "2",
+                        "3",
+                        "4",
+                        "5",
+                        "6"
+                    ]
+                },
+                "midName": {
+                    "type": "string",
+                    "description": "Middle name of prospect"
+                },
+                "nationality": {
+                    "type": "string",
+                    "example": "7",
+                    "description": "国籍，7-中国"
+                },
+                "occupationCode": {
+                    "type": "string",
+                    "example": "1",
+                    "description": "职业代码"
+                },
+                "preferredLifeIndi": {
+                    "type": "string",
+                    "example": "0",
+                    "description": "是否优选体, 0-N/A；1-否；2-是"
+                },
+                "salutation": {
+                    "type": "string",
+                    "example": "1",
+                    "description": "称呼，1-先生；2-女士",
+                    "enum": [
+                        "1",
+                        "2"
+                    ]
+                },
+                "smoking": {
+                    "type": "string",
+                    "example": "N",
+                    "description": "是否吸烟，Y-是；N-否",
+                    "enum": [
+                        "Y",
+                        "N"
+                    ]
+                },
+                "weight": {
+                    "type": "number",
+                    "format": "double",
+                    "example": 70.25,
+                    "description": "体重（kg）"
+                }
+            }
+        },
+        "PolicyPackageInput": {
+            "type": "object",
+            "properties": {
+                "packageCode": {
+                    "type": "string",
+                    "description": "产品组合代码"
+                },
+                "unit": {
+                    "type": "number",
+                    "format": "double",
+                    "description": "产品组合投保份数，默认为1"
+                }
+            }
+        },
+        "Organization": {
+            "type": "object",
+            "properties": {
+                "companyName": {
+                    "type": "string",
+                    "example": "xxxxxx",
+                    "description": "公司名称"
+                },
+                "countryCode": {
+                    "type": "string",
+                    "example": "156",
+                    "description": "注册国家，156-中国"
+                },
+                "registerCode": {
+                    "type": "string",
+                    "example": "xxxx",
+                    "description": "公司证件号"
+                },
+                "registerType": {
+                    "type": "string",
+                    "example": "1001",
+                    "description": "公司证件类型，1001-公司注册号"
+                }
+            }
+        },
+        "CoverageInsured": {
+            "type": "object",
+            "properties": {
+                "age": {
+                    "type": "integer",
+                    "format": "int32",
+                    "example": 25,
+                    "description": "年龄"
+                },
+                "coverageId": {
+                    "type": "string",
+                    "description": "保单险种序列号, UUID type",
+                    "readOnly": true
+                },
+                "extendedProps": {
+                    "type": "object",
+                    "description": "扩展信息, Map类型, Key/Value都是字符型",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "insuredPartyId": {
+                    "type": "string",
+                    "description": "被保人内部序列号, UUID type",
+                    "readOnly": true
+                },
+                "listId": {
+                    "type": "string",
+                    "description": "险种被保人内部序列号, UUID type",
+                    "readOnly": true
+                },
+                "occupationClass": {
+                    "type": "integer",
+                    "format": "int32",
+                    "example": 1,
+                    "description": "职业等级"
+                },
+                "orderId": {
+                    "type": "integer",
+                    "format": "int32",
+                    "example": 1,
+                    "description": "险种被保人序号，默认为1，同一险种多被保人（家庭保单或连身险）时大于1"
+                },
+                "policyId": {
+                    "type": "string",
+                    "description": "保单内部序列号, UUID type",
+                    "readOnly": true
+                }
+            }
+        },
+        "CollectionPolicyInput": {
+            "type": "object",
+            "properties": {
+                "extendedProps": {
+                    "type": "object",
+                    "description": "扩展信息, Map类型, Key/Value都是字符型",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "payerAccount": {
+                    "description": "付款方式",
+                    "$ref": "#/definitions/CollectionPayerAccountInput"
+                },
+                "proposalNumber": {
+                    "type": "string",
+                    "description": "投保单号码"
+                }
+            }
+        },
+        "BeneficiaryInput": {
+            "type": "object",
+            "properties": {
+                "beneType": {
+                    "type": "string",
+                    "example": "2",
+                    "description": "受益类型，1-生存受益人；2-身故受益人；3-投保受益人",
+                    "enum": [
+                        "1",
+                        "2",
+                        "3"
+                    ]
+                },
+                "designation": {
+                    "type": "integer",
+                    "format": "int32",
+                    "example": 1,
+                    "description": "与被保人关系，1-妻子；2-丈夫；3-子女；4-父亲；5-母亲；6-祖父/外祖父；7-祖母/外祖母；8-兄弟；9-姐妹；10-叔父/伯父；11-阿姨；12-表兄弟/表姐妹；13-外甥/外甥女/侄子/侄女；14-雇主；15-其他；16-被保人本人",
+                    "enum": [
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9,
+                        10,
+                        11,
+                        12,
+                        13,
+                        14,
+                        15,
+                        16
+                    ]
+                },
+                "extendedProps": {
+                    "type": "object",
+                    "description": "扩展信息, Map类型, Key/Value都是字符型",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "insuredPartySerialId": {
+                    "type": "integer",
+                    "format": "int32",
+                    "example": 1,
+                    "description": "被保人客户临时编号，请求内使用，唯一标识请求内某一当事人"
+                },
+                "partySerialId": {
+                    "type": "integer",
+                    "format": "int32",
+                    "example": 2,
+                    "description": "客户临时编号，请求内使用，唯一标识请求内某一当事人"
+                },
+                "shareOrder": {
+                    "type": "integer",
+                    "format": "int32",
+                    "example": 1,
+                    "description": "受益顺位"
+                },
+                "shareRate": {
+                    "type": "number",
+                    "format": "double",
+                    "example": 1,
+                    "description": "受益比例，最大为1"
+                }
+            }
+        },
+        "PolicyCustomer": {
+            "type": "object",
+            "properties": {
+                "address": {
+                    "description": "客户地址",
+                    "$ref": "#/definitions/Address"
+                },
+                "extendedProps": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "listId": {
+                    "type": "string",
+                    "description": "保单客户内部序列号, UUID type",
+                    "readOnly": true
+                },
+                "organization": {
+                    "description": "机构客户信息",
+                    "$ref": "#/definitions/Organization"
+                },
+                "partyContact": {
+                    "description": "当事人联系信息",
+                    "$ref": "#/definitions/PartyContact"
+                },
+                "partyId": {
+                    "type": "string",
+                    "description": "客户编号, UUID type",
+                    "readOnly": true
+                },
+                "partyType": {
+                    "type": "integer",
+                    "format": "int32",
+                    "example": 1,
+                    "description": "当事人类型，1-个人当事人；2-机构当事人",
+                    "enum": [
+                        1,
+                        2
+                    ]
+                },
+                "person": {
+                    "description": "个人客户信息",
+                    "$ref": "#/definitions/Person"
+                },
+                "policyId": {
+                    "type": "string",
+                    "description": "保单内部序列号, UUID type",
+                    "readOnly": true
+                }
+            }
+        },
+        "CustomerDeclarationDetail": {
+            "type": "object",
+            "properties": {
+                "declId": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "告知项编号，数字类型"
+                },
+                "declListId": {
+                    "type": "string",
+                    "description": "客户告知内部序列号, UUID type",
+                    "readOnly": true
+                },
+                "extendedProps": {
+                    "type": "object",
+                    "description": "扩展信息, Map类型, Key/Value都是字符型",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "fill1": {
+                    "type": "string",
+                    "description": "告知项回答内容1，字符类型，内容随告知项不同而不同"
+                },
+                "fill10": {
+                    "type": "string",
+                    "description": "告知项回答内容10，字符类型，内容随告知项不同而不同"
+                },
+                "fill2": {
+                    "type": "string",
+                    "description": "告知项回答内容2，字符类型，内容随告知项不同而不同"
+                },
+                "fill3": {
+                    "type": "string",
+                    "description": "告知项回答内容3，字符类型，内容随告知项不同而不同"
+                },
+                "fill4": {
+                    "type": "string",
+                    "description": "告知项回答内容4，字符类型，内容随告知项不同而不同"
+                },
+                "fill5": {
+                    "type": "string",
+                    "description": "告知项回答内容5，字符类型，内容随告知项不同而不同"
+                },
+                "fill6": {
+                    "type": "string",
+                    "description": "告知项回答内容6，字符类型，内容随告知项不同而不同"
+                },
+                "fill7": {
+                    "type": "string",
+                    "description": "告知项回答内容7，字符类型，内容随告知项不同而不同"
+                },
+                "fill8": {
+                    "type": "string",
+                    "description": "告知项回答内容8，字符类型，内容随告知项不同而不同"
+                },
+                "fill9": {
+                    "type": "string",
+                    "description": "告知项回答内容9，字符类型，内容随告知项不同而不同"
+                },
+                "listId": {
+                    "type": "string",
+                    "description": "客户告知详细信息内部序列号, UUID type",
+                    "readOnly": true
+                },
+                "partyId": {
+                    "type": "string",
+                    "description": "客户编号, UUID type",
+                    "readOnly": true
+                },
+                "policyId": {
+                    "type": "string",
+                    "description": "保单内部序列号, UUID type",
+                    "readOnly": true
+                }
+            }
+        },
+        "PolicyHolder": {
+            "type": "object",
+            "properties": {
+                "extendedProps": {
+                    "type": "object",
+                    "description": "扩展信息, Map类型, Key/Value都是字符型",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "listId": {
+                    "type": "string",
+                    "description": "保单角色内部序列号, UUID type",
+                    "readOnly": true
+                },
+                "partyId": {
+                    "type": "string",
+                    "description": "客户编号, UUID type",
+                    "readOnly": true
+                },
+                "policyId": {
+                    "type": "string",
+                    "description": "保单内部序列号, UUID type",
+                    "readOnly": true
+                },
+                "relationToLA": {
+                    "type": "integer",
+                    "format": "int32",
+                    "example": 1,
+                    "description": "投保人与被保人关系，数字类型，1-自己；2-父母；3-配偶；10-子女；7-其他",
+                    "enum": [
+                        1,
+                        2,
+                        3,
+                        10,
+                        7
+                    ]
+                }
+            }
+        },
+        "PolicyHolderInput": {
+            "type": "object",
+            "properties": {
+                "extendedProps": {
+                    "type": "object",
+                    "description": "扩展信息, Map类型, Key/Value都是字符型",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "partySerialId": {
+                    "type": "integer",
+                    "format": "int32",
+                    "example": 1,
+                    "description": "客户临时编号，请求内使用，唯一标识请求内某一当事人"
+                },
+                "relationToLA": {
+                    "type": "integer",
+                    "format": "int32",
+                    "example": 1,
+                    "description": "投保人与被保人关系，数字类型，1-自己；2-父母；3-配偶；10-子女；7-其他",
+                    "enum": [
+                        1,
+                        2,
+                        3,
+                        10,
+                        7
+                    ]
+                }
+            }
+        },
+        "CustomerDeclarationDetailInput": {
+            "type": "object",
+            "properties": {
+                "declId": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "告知项编号，数字类型"
+                },
+                "extendedProps": {
+                    "type": "object",
+                    "description": "扩展信息, Map类型, Key/Value都是字符型",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "fill1": {
+                    "type": "string",
+                    "description": "告知项回答内容1，字符类型，内容随告知项不同而不同"
+                },
+                "fill10": {
+                    "type": "string",
+                    "description": "告知项回答内容10，字符类型，内容随告知项不同而不同"
+                },
+                "fill2": {
+                    "type": "string",
+                    "description": "告知项回答内容2，字符类型，内容随告知项不同而不同"
+                },
+                "fill3": {
+                    "type": "string",
+                    "description": "告知项回答内容3，字符类型，内容随告知项不同而不同"
+                },
+                "fill4": {
+                    "type": "string",
+                    "description": "告知项回答内容4，字符类型，内容随告知项不同而不同"
+                },
+                "fill5": {
+                    "type": "string",
+                    "description": "告知项回答内容5，字符类型，内容随告知项不同而不同"
+                },
+                "fill6": {
+                    "type": "string",
+                    "description": "告知项回答内容6，字符类型，内容随告知项不同而不同"
+                },
+                "fill7": {
+                    "type": "string",
+                    "description": "告知项回答内容7，字符类型，内容随告知项不同而不同"
+                },
+                "fill8": {
+                    "type": "string",
+                    "description": "告知项回答内容8，字符类型，内容随告知项不同而不同"
+                },
+                "fill9": {
+                    "type": "string",
+                    "description": "告知项回答内容9，字符类型，内容随告知项不同而不同"
+                }
+            }
+        },
+        "ApplicationRequest": {
+            "type": "object",
+            "required": [
+                "policy"
+            ],
+            "properties": {
+                "clientRequestId": {
+                    "type": "string",
+                    "description": "外部交易流水号"
+                },
+                "clientRequestTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "外部请求时间"
+                },
+                "extObject": {
+                    "$ref": "#/definitions/GenericVO"
+                },
+                "policy": {
+                    "description": "保单",
+                    "$ref": "#/definitions/PolicyInput"
+                }
+            }
+        },
+        "GenericValidationResult": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "ruleType": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            }
+        },
+        "CustomerDeclarationInput": {
+            "type": "object",
+            "properties": {
+                "declarationDate": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "告知日期，日期格式：yyyy-MM-dd'T'HH:mm:ss"
+                },
+                "details": {
+                    "type": "array",
+                    "description": "告知详细信息",
+                    "items": {
+                        "$ref": "#/definitions/CustomerDeclarationDetailInput"
+                    }
+                },
+                "extendedProps": {
+                    "type": "object",
+                    "description": "扩展信息, Map类型, Key/Value都是字符型",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "partySerialId": {
+                    "type": "integer",
+                    "format": "int32",
+                    "example": 1,
+                    "description": "客户临时编号，请求内使用，唯一标识请求内某一当事人"
+                }
+            }
+        },
+        "PolicyInput": {
+            "type": "object",
+            "properties": {
+                "applyDate": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "申请日期，非空，日期格式：yyyy-MM-dd'T'HH:mm:ss"
+                },
+                "beneficiaries": {
+                    "type": "array",
+                    "description": "受益人列表",
+                    "items": {
+                        "$ref": "#/definitions/BeneficiaryInput"
+                    }
+                },
+                "coverages": {
+                    "type": "array",
+                    "description": "保单险种列表",
+                    "items": {
+                        "$ref": "#/definitions/CoverageInput"
+                    }
+                },
+                "currency": {
+                    "type": "integer",
+                    "format": "int32",
+                    "example": 1,
+                    "description": "币种，非空，1-人民币",
+                    "enum": [
+                        1
+                    ]
+                },
+                "customers": {
+                    "type": "array",
+                    "description": "保单客户列表",
+                    "items": {
+                        "$ref": "#/definitions/PolicyCustomerInput"
+                    }
+                },
+                "declarations": {
+                    "type": "array",
+                    "description": "客户告知列表",
+                    "items": {
+                        "$ref": "#/definitions/CustomerDeclarationInput"
+                    }
+                },
+                "deliverType": {
+                    "type": "string",
+                    "example": "M",
+                    "description": "保单递送方式，H-手工；M-邮件",
+                    "enum": [
+                        "H",
+                        "M"
+                    ]
+                },
+                "expiryDate": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "终止日期，日期格式：yyyy-MM-dd'T'HH:mm:ss"
+                },
+                "extendedProps": {
+                    "type": "object",
+                    "description": "扩展信息, Map类型, Key/Value都是字符型",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "inceptionDate": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "保单生效日期，日期格式：yyyy-MM-dd'T'HH:mm:ss"
+                },
+                "installPrem": {
+                    "type": "number",
+                    "format": "double",
+                    "description": "保单保费",
+                    "readOnly": true
+                },
+                "insureds": {
+                    "type": "array",
+                    "description": "保单被保人列表",
+                    "items": {
+                        "$ref": "#/definitions/InsuredInput"
+                    }
+                },
+                "insurerCode": {
+                    "type": "string",
+                    "description": "保险公司代码"
+                },
+                "payerAccounts": {
+                    "type": "array",
+                    "description": "付款方式列表",
+                    "items": {
+                        "$ref": "#/definitions/PayerAccountInput"
+                    }
+                },
+                "payers": {
+                    "type": "array",
+                    "description": "付款人列表",
+                    "items": {
+                        "$ref": "#/definitions/PayerInput"
+                    }
+                },
+                "policyHolder": {
+                    "description": "投保人",
+                    "$ref": "#/definitions/PolicyHolderInput"
+                },
+                "policyPackage": {
+                    "description": "产品组合",
+                    "$ref": "#/definitions/PolicyPackageInput"
+                },
+                "quotationCode": {
+                    "type": "string",
+                    "description": "试算请求编号"
+                },
+                "salesChannelCode": {
+                    "type": "string",
+                    "description": "销售渠道代码"
+                },
+                "serviceAgentCode": {
+                    "type": "string",
+                    "description": "保单代理人代码"
+                },
+                "submissionDate": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "提交日期，日期格式：yyyy-MM-dd'T'HH:mm:ss"
+                },
+                "trustees": {
+                    "type": "array",
+                    "description": "监护人列表",
+                    "items": {
+                        "$ref": "#/definitions/TrusteeInput"
+                    }
+                }
+            }
+        },
+        "Trustee": {
+            "type": "object",
+            "properties": {
+                "extendedProps": {
+                    "type": "object",
+                    "description": "扩展信息, Map类型, Key/Value都是字符型",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "listId": {
+                    "type": "string",
+                    "description": "保单角色内部序列号, UUID type",
+                    "readOnly": true
+                },
+                "partyId": {
+                    "type": "string",
+                    "description": "客户编号, UUID type",
+                    "readOnly": true
+                },
+                "policyId": {
+                    "type": "string",
+                    "description": "保单内部序列号, UUID type",
+                    "readOnly": true
+                }
+            }
+        },
+        "CoverageExtWaiverInput": {
+            "type": "object",
+            "properties": {
+                "waivedSa": {
+                    "type": "number",
+                    "format": "double"
+                }
+            }
+        },
+        "ApplicationResponse": {
+            "type": "object",
+            "properties": {
+                "clientRequestId": {
+                    "type": "string",
+                    "description": "外部交易流水号"
+                },
+                "clientRequestTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "外部请求时间"
+                },
+                "exceptions": {
+                    "type": "array",
+                    "description": "异常信息",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "messages": {
+                    "type": "array",
+                    "description": "业务失败原因描述列表节点",
+                    "items": {
+                        "$ref": "#/definitions/GenericValidationResult"
+                    }
+                },
+                "policy": {
+                    "description": "保单",
+                    "$ref": "#/definitions/ApplicationPolicyResult"
+                },
+                "result": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "请求结果，1-业务成功；0-业务失败；-1-程序异常"
+                }
+            }
+        },
+        "ApplicationPolicyResult": {
+            "type": "object",
+            "properties": {
+                "coverages": {
+                    "type": "array",
+                    "description": "保单险种列表",
+                    "items": {
+                        "$ref": "#/definitions/CoverageCalculationResult"
+                    }
+                },
+                "currency": {
+                    "type": "integer",
+                    "format": "int32",
+                    "example": 1,
+                    "description": "币种，非空，1-人民币",
+                    "enum": [
+                        1
+                    ]
+                },
+                "extendedProps": {
+                    "type": "object",
+                    "description": "扩展信息, Map类型, Key/Value都是字符型",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "inceptionDate": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "保单生效日期，日期格式：yyyy-MM-dd'T'HH:mm:ss"
+                },
+                "installPrem": {
+                    "type": "number",
+                    "format": "double",
+                    "description": "保单保费",
+                    "readOnly": true
+                },
+                "proposalNumber": {
+                    "type": "string",
+                    "description": "投保单号码"
+                },
+                "quotationCode": {
+                    "type": "string",
+                    "description": "试算请求编号"
+                }
+            }
+        },
+        "IssuranceRequest": {
+            "type": "object",
+            "required": [
+                "policy"
+            ],
+            "properties": {
+                "clientRequestId": {
+                    "type": "string",
+                    "description": "外部交易流水号"
+                },
+                "clientRequestTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "外部请求时间"
+                },
+                "collection": {
+                    "description": "收费信息",
+                    "$ref": "#/definitions/CollectionInput"
+                },
+                "extObject": {
+                    "$ref": "#/definitions/GenericVO"
+                },
+                "policy": {
+                    "description": "保单",
+                    "$ref": "#/definitions/CollectionPolicyInput"
+                }
+            }
+        },
+        "Coverage": {
+            "type": "object",
+            "properties": {
+                "chargePeriod": {
+                    "type": "string",
+                    "example": "2",
+                    "description": "缴费年期类型，非空，1-趸缴；2-按年限缴；3-缴至某确定年龄；4-终身",
+                    "enum": [
+                        "1",
+                        "2",
+                        "3",
+                        "4"
+                    ]
+                },
+                "chargeYear": {
+                    "type": "integer",
+                    "format": "int32",
+                    "example": 20,
+                    "description": "缴费年期，非空，趸缴为0；按年限缴时为缴费年限；缴至某确定年龄时为缴费期满年龄；终身为100"
+                },
+                "coverageAgents": {
+                    "type": "array",
+                    "description": "业绩分摊代理人列表",
+                    "items": {
+                        "$ref": "#/definitions/CoverageAgent"
+                    }
+                },
+                "coverageId": {
+                    "type": "string",
+                    "description": "保单险种序列号, UUID type",
+                    "readOnly": true
+                },
+                "coveragePeriod": {
+                    "type": "string",
+                    "example": "1",
+                    "description": "保障年期类型，1-保终身；2-按年限保；3-保至某确定年龄；4-按月保；5-按天保",
+                    "enum": [
+                        "1",
+                        "2",
+                        "3",
+                        "4",
+                        "5"
+                    ]
+                },
+                "coverageSeriaId": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "保单险种临时序列号，请求内使用，唯一标识请求内某一险种"
+                },
+                "coverageYear": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "保障年期，保终身时为9999；按年限保时为保障年限；保至某确定年龄时为保障期满年龄；按月保时为保障月数；按天保时为保障天数"
+                },
+                "currentPremium": {
+                    "description": "当期保费",
+                    "$ref": "#/definitions/CoveragePremium"
+                },
+                "extendedProps": {
+                    "type": "object",
+                    "description": "扩展信息, Map类型, Key/Value都是字符型",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "insureds": {
+                    "type": "array",
+                    "description": "险种被保人列表",
+                    "items": {
+                        "$ref": "#/definitions/CoverageInsured"
+                    }
+                },
+                "masterCoverageId": {
+                    "type": "string",
+                    "description": "主险序列号, UUID type",
+                    "readOnly": true
+                },
+                "nextPremium": {
+                    "$ref": "#/definitions/CoveragePremium"
+                },
+                "payPlans": {
+                    "type": "array",
+                    "description": "支付计划列表",
+                    "items": {
+                        "$ref": "#/definitions/PayPlan"
+                    }
+                },
+                "policyId": {
+                    "type": "string",
+                    "description": "保单内部序列号, UUID type",
+                    "readOnly": true
+                },
+                "productCode": {
+                    "type": "string",
+                    "description": "产品代码"
+                },
+                "productId": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "产品ID"
+                },
+                "waiverExt": {
+                    "description": "险种豁免信息",
+                    "$ref": "#/definitions/CoverageExtWaiver"
+                }
+            }
+        },
+        "BankAccount": {
+            "type": "object",
+            "properties": {
+                "accoName": {
+                    "type": "string",
+                    "example": "张三",
+                    "description": "帐号持有人姓名"
+                },
+                "accountId": {
+                    "type": "string",
+                    "description": "银行帐号内部序列号, UUID type",
+                    "readOnly": true
+                },
+                "accountType": {
+                    "type": "string",
+                    "example": "2",
+                    "description": "账户类型，2-借记卡；8-信用卡",
+                    "enum": [
+                        "2",
+                        "8"
+                    ]
+                },
+                "bankAccount": {
+                    "type": "string",
+                    "example": "1111222233334444567",
+                    "description": "银行帐号"
+                },
+                "bankAccountCity": {
+                    "type": "string",
+                    "example": "Shanghai",
+                    "description": "银行帐号所属城市"
+                },
+                "bankAccountProvince": {
+                    "type": "string",
+                    "example": "Shanghai",
+                    "description": "银行帐号所属省份"
+                },
+                "bankCode": {
+                    "type": "string",
+                    "example": "test_bank",
+                    "description": "银行代码"
+                },
+                "branchCode": {
+                    "type": "string",
+                    "example": "1001",
+                    "description": "分行代码"
+                },
+                "creditCardType": {
+                    "type": "string",
+                    "example": "1",
+                    "description": "信用卡类型，非信用卡为空，1-Master；2-Visa；3-BCA；4-JCB",
+                    "enum": [
+                        "1",
+                        "2",
+                        "3",
+                        "4"
+                    ]
+                },
+                "debitCreditType": {
+                    "type": "string",
+                    "example": "0",
+                    "description": "帐号用途，0-收付两用；1-收费；2-退费",
+                    "enum": [
+                        "0",
+                        "1",
+                        "2"
+                    ]
+                },
+                "expireDate": {
+                    "type": "string",
+                    "format": "date-time",
+                    "example": "10/2020",
+                    "description": "帐号失效日期，MM/yyyy"
+                },
+                "issueBankName": {
+                    "type": "string",
+                    "example": "ICBC",
+                    "description": "发卡行"
+                }
+            }
+        },
+        "QuotationPolicyResult": {
+            "type": "object",
+            "properties": {
+                "coverages": {
+                    "type": "array",
+                    "description": "保单险种列表",
+                    "items": {
+                        "$ref": "#/definitions/CoverageCalculationResult"
+                    }
+                },
+                "currency": {
+                    "type": "integer",
+                    "format": "int32",
+                    "example": 1,
+                    "description": "币种，非空，1-人民币",
+                    "enum": [
+                        1
+                    ]
+                },
+                "extendedProps": {
+                    "type": "object",
+                    "description": "扩展信息, Map类型, Key/Value都是字符型",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "inceptionDate": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "保单生效日期，日期格式：yyyy-MM-dd'T'HH:mm:ss"
+                },
+                "installPrem": {
+                    "type": "number",
+                    "format": "double",
+                    "description": "保单保费",
+                    "readOnly": true
+                },
+                "quotationCode": {
+                    "type": "string",
+                    "description": "试算请求编号"
+                }
+            }
+        },
+        "PayerInput": {
+            "type": "object",
+            "properties": {
+                "extendedProps": {
+                    "type": "object",
+                    "description": "扩展信息, Map类型, Key/Value都是字符型",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "partySerialId": {
+                    "type": "integer",
+                    "format": "int32",
+                    "example": 1,
+                    "description": "客户临时编号，请求内使用，唯一标识请求内某一当事人"
+                },
+                "relationToPH": {
+                    "type": "integer",
+                    "format": "int32",
+                    "example": 1,
+                    "description": "被保人与投保人关系，数字类型，1-自己；2-子女；3-配偶；10-父母；7-其他",
+                    "enum": [
+                        1,
+                        2,
+                        3,
+                        10,
+                        7
+                    ]
+                },
+                "shareRate": {
+                    "type": "number",
+                    "format": "double",
+                    "example": 1,
+                    "description": "付款比例，最大为1"
+                }
+            }
+        },
+        "CoverageExtWaiver": {
+            "type": "object",
+            "properties": {
+                "waivedSa": {
+                    "type": "number",
+                    "format": "double",
+                    "description": "豁免保额，0表示全额豁免，不为0表示豁免指定金额，不能超过被豁免险种保费"
+                },
+                "waiver": {
+                    "type": "string",
+                    "example": "N",
+                    "description": "是否豁免险，Y-是；N-否",
+                    "enum": [
+                        "Y",
+                        "N"
+                    ]
+                }
+            }
+        },
+        "CoveragePremium": {
+            "type": "object",
+            "properties": {
+                "benefitLevel": {
+                    "type": "string",
+                    "description": "险种档次，产品按档次投保时非空"
+                },
+                "paymentFreq": {
+                    "type": "string",
+                    "example": "1",
+                    "description": "缴费频率，1-年缴；2-半年缴；3-季缴；4-月缴；5-趸缴",
+                    "enum": [
+                        "1",
+                        "2",
+                        "3",
+                        "4",
+                        "5"
+                    ]
+                },
+                "premium": {
+                    "type": "number",
+                    "format": "double",
+                    "example": 2314,
+                    "description": "险种保费，保费算保额时非空"
+                },
+                "sumAssured": {
+                    "type": "number",
+                    "format": "double",
+                    "example": 100000,
+                    "description": "险种保额，保额算保费时非空"
+                },
+                "unit": {
+                    "type": "number",
+                    "format": "double",
+                    "description": "险种份数，产品按份数投保时非空"
+                }
+            }
+        },
+        "BankAccountInput": {
+            "type": "object",
+            "properties": {
+                "accoName": {
+                    "type": "string",
+                    "example": "张三",
+                    "description": "帐号持有人姓名"
+                },
+                "accountType": {
+                    "type": "string",
+                    "example": "2",
+                    "description": "账户类型，2-借记卡；8-信用卡",
+                    "enum": [
+                        "2",
+                        "8"
+                    ]
+                },
+                "bankAccount": {
+                    "type": "string",
+                    "example": "1111222233334444567",
+                    "description": "银行帐号"
+                },
+                "bankAccountCity": {
+                    "type": "string",
+                    "example": "Shanghai",
+                    "description": "银行帐号所属城市"
+                },
+                "bankAccountProvince": {
+                    "type": "string",
+                    "example": "Shanghai",
+                    "description": "银行帐号所属省份"
+                },
+                "bankCode": {
+                    "type": "string",
+                    "example": "test_bank",
+                    "description": "银行代码"
+                },
+                "creditCardType": {
+                    "type": "string",
+                    "example": "1",
+                    "description": "信用卡类型，非信用卡为空，1-Master；2-Visa；3-BCA；4-JCB",
+                    "enum": [
+                        "1",
+                        "2",
+                        "3",
+                        "4"
+                    ]
+                },
+                "debitCreditType": {
+                    "type": "string",
+                    "example": "0",
+                    "description": "帐号用途，0-收付两用；1-收费；2-退费",
+                    "enum": [
+                        "0",
+                        "1",
+                        "2"
+                    ]
+                },
+                "expireDate": {
+                    "type": "string",
+                    "format": "date-time",
+                    "example": "10/2020",
+                    "description": "帐号失效日期，MM/yyyy"
+                },
+                "issueBankName": {
+                    "type": "string",
+                    "example": "ICBC",
+                    "description": "发卡行"
+                }
+            }
+        },
+        "CollectionPayerAccountInput": {
+            "type": "object",
+            "properties": {
+                "bankAccount": {
+                    "description": "首期银行账户",
+                    "$ref": "#/definitions/BankAccountInput"
+                },
+                "extendedProps": {
+                    "type": "object",
+                    "description": "扩展信息, Map类型, Key/Value都是字符型",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "paymentMethod": {
+                    "type": "integer",
+                    "format": "int32"
+                }
+            }
+        },
+        "PayerAccountInput": {
+            "type": "object",
+            "properties": {
+                "bankAccount": {
+                    "description": "首期银行账户",
+                    "$ref": "#/definitions/BankAccountInput"
+                },
+                "extendedProps": {
+                    "type": "object",
+                    "description": "扩展信息, Map类型, Key/Value都是字符型",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "nextBankAccount": {
+                    "description": "续期银行账户",
+                    "$ref": "#/definitions/BankAccountInput"
+                },
+                "paymentMethod": {
+                    "type": "integer",
+                    "format": "int32",
+                    "example": 3,
+                    "description": "首期付款方式，数字类型，1-现金；2-支票；3-银行转账；30-信用卡",
+                    "enum": [
+                        1,
+                        2,
+                        3,
+                        30
+                    ]
+                },
+                "paymentMethodNext": {
+                    "type": "integer",
+                    "format": "int32",
+                    "example": 3,
+                    "description": "续期付款方式，数字类型，1-现金；2-支票；3-银行转账；30-信用卡",
+                    "enum": [
+                        1,
+                        2,
+                        3,
+                        30
+                    ]
+                }
+            }
+        },
+        "QuotationRequest": {
+            "type": "object",
+            "required": [
+                "policy"
+            ],
+            "properties": {
+                "clientRequestId": {
+                    "type": "string",
+                    "description": "外部交易流水号"
+                },
+                "clientRequestTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "外部请求时间"
+                },
+                "extObject": {
+                    "$ref": "#/definitions/GenericVO"
+                },
+                "policy": {
+                    "description": "保单",
+                    "$ref": "#/definitions/PolicyInput"
+                }
+            }
+        },
+        "Beneficiary": {
+            "type": "object",
+            "properties": {
+                "beneType": {
+                    "type": "string",
+                    "example": "2",
+                    "description": "受益类型，1-生存受益人；2-身故受益人；3-投保受益人",
+                    "enum": [
+                        "1",
+                        "2",
+                        "3"
+                    ]
+                },
+                "designation": {
+                    "type": "integer",
+                    "format": "int32",
+                    "example": 1,
+                    "description": "与被保人关系，1-妻子；2-丈夫；3-子女；4-父亲；5-母亲；6-祖父/外祖父；7-祖母/外祖母；8-兄弟；9-姐妹；10-叔父/伯父；11-阿姨；12-表兄弟/表姐妹；13-外甥/外甥女/侄子/侄女；14-雇主；15-其他；16-被保人本人",
+                    "enum": [
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9,
+                        10,
+                        11,
+                        12,
+                        13,
+                        14,
+                        15,
+                        16
+                    ]
+                },
+                "extendedProps": {
+                    "type": "object",
+                    "description": "扩展信息, Map类型, Key/Value都是字符型",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "insuredPartyId": {
+                    "type": "string",
+                    "description": "受益人所对应被保人的当事人编号, UUID type",
+                    "readOnly": true
+                },
+                "listId": {
+                    "type": "string",
+                    "description": "保单角色内部序列号, UUID type",
+                    "readOnly": true
+                },
+                "partyId": {
+                    "type": "string",
+                    "description": "客户编号, UUID type",
+                    "readOnly": true
+                },
+                "policyId": {
+                    "type": "string",
+                    "description": "保单内部序列号, UUID type",
+                    "readOnly": true
+                },
+                "shareOrder": {
+                    "type": "integer",
+                    "format": "int32",
+                    "example": 1,
+                    "description": "受益顺位"
+                },
+                "shareRate": {
+                    "type": "number",
+                    "format": "double",
+                    "example": 1,
+                    "description": "受益比例，最大为1"
+                }
+            }
+        }
+    }
+}
