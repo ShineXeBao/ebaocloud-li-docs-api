@@ -1,27 +1,20 @@
-var swaggermerge = require('swagger-merge')
-var swaggerOne = require('./product.json')
-var swaggerTwo = require('./proposal.json')
-var info = {
-    version: "0.5",
-    title: "eBaoCould Open API",
-    description: "eBaoCloud API 文档 (To be update)\n"
-}
-var schemes = ['http']
+var _ = require('underscore')._
 
-swaggermerge.on('warn', function (msg) {
-    console.log(msg)
-})
+var users = {
+    aa: {name: ['mmm', 'xxxx'], age: 40},
+    cc: {bb: {name: ['larry', 'ss'], age: 50}},
+    sc: {bb: {nmes: ['larry', 'ss'], age: 50}},
+    xx: {}
+};
+// console.log(users[1]);
+console.log(
+    _.chain(users)
+    .filter(function(item){ return (_.has(item, 'bb') || _.has(item, 'name'));})
 
-merged = swaggermerge.merge([swaggerOne, swaggerTwo], info, '/', 'api.ebaocloud.life', schemes);
-debugger;
+    //.filter(function(item._wrapped){ return (_.has(item, 'bb') || _.has(item, 'name'));})
+  );
 
-//merged.info.x-logo.url = 'https://cn.vuejs.org/images/logo.png'
-
-var fs = require('fs');
-fs.writeFile("../demo/swagger.json", JSON.stringify(merged ), function(err) {
-    if(err) {
-        return console.log(err);
-    }
-
-    console.log("The file was saved!");
-});
+    // console.log(
+    //     _.chain(users)
+    //     .contains(_.values(users), 'name')
+    // );

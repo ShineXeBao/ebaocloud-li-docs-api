@@ -3,26 +3,33 @@
   <head>
     <title>eBaoCould API Document</title>
     <link rel="stylesheet" href="main.css">
+    <link rel="shortcut icon" href="./favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://cdn.vaadin.com/vaadin-core-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
-    <link rel="import" href="https://cdn.vaadin.com/vaadin-core-elements/master/vaadin-combo-box/vaadin-combo-box-light.html">
-  </head>
+    <!-- <script src="https://cdn.vaadin.com/vaadin-core-elements/latest/webcomponentsjs/webcomponents-lite.min.js"></script>
+    <link rel="import" href="https://cdn.vaadin.com/vaadin-core-elements/master/vaadin-combo-box/vaadin-combo-box-light.html"> -->
+    <style>
+    .logo-img {
+      margin-top: 10px;
+      height: 35px;
+    }
+    </style>
+    </head>
   <body>
     <nav>
-      <header>  <a href="./"> <img src="./logo_eBaoCloud.png" height="35px">API Document </a> </header>
-      <template is="dom-bind" id="specs">
+      <header>  <a href="./"> <img class="logo-img" src="./logo_eBaoCloud.png">API Document </a> </header>
+      <!-- <template is="dom-bind" id="specs">
         <form id="schema-url-form" is="iron-form">
           <vaadin-combo-box-light id="spec-input" items="[[specs]]" allow-custom-value>
             <input placeholder="URL to a spec to try" id="schema-url-input" type="text" is="iron-input" value="https://rebilly.github.io/RebillyAPI/swagger.json">
           </vaadin-combo-box-light>
           <button type="submit"> Explore </button>
         </form>
-      </template>
+      </template> -->
       <!-- <iframe src="https://ghbtns.com/github-btn.html?user=Rebilly&repo=ReDoc&type=star&count=true&size=large"
       frameborder="0" scrolling="0" width="130px" height="30px"></iframe> -->
     </nav>
 
-    <redoc scroll-y-offset="body > nav" spec-url='swagger.json' lazy-rendering untrusted-spec></redoc>
+    <redoc scroll-y-offset="body > nav" spec-url='http://apidoc.ebaocloud.life/api/swagger.json' lazy-rendering untrusted-spec></redoc>
 
     <script>
       window.__REDOC_DEV__ = true;
@@ -42,4 +49,5 @@
       ga('send', 'pageview');
     </script> -->
   </body>
+
 </html>
