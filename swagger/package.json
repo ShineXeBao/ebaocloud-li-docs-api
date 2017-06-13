@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "request": "^2.81.0",
     "swagger-merge": "^0.3.3",
     "underscore": "^1.8.3"
   }
