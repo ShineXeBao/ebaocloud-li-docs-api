@@ -37,3 +37,7 @@ compiled
 /coverage
 .ghpages-tmp
 stats.json
+/swagger/product.json
+/swagger/proposal.json
+/swagger/swagger.json
+/demo/wagger.json
