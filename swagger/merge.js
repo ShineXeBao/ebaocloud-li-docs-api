@@ -29,7 +29,7 @@ mergedString = mergedString.replace(/\[TIMESTAMP\]/, timeStamp);
 mergedString = mergedString.replace(/\/pd\/rest\/packages/g, "\/pakcages");
 mergedString = mergedString.replace(/\/pd\/rest\/products/g, "\/products");
 mergedString = mergedString.replace(/\/proposal\/proposals/g, "\/proposals");
-mergedString = mergedString.replace(/Product-Controller/g, "\/Product");
+mergedString = mergedString.replace(/product-controller/g, "Product");
 
 // 本地保存
 fs.writeFileSync("./swagger.json", mergedString);
