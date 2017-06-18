@@ -1,12 +1,12 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "0.5",
-    "title": "eBaoCould Open API",
-    "description": "eBaoCloud API 文档 (To be update)\n  #TimeStamp:2017-06-13T04:11:32.774Z"
+    "version": "0.6",
+    "title": "eBaoCould LI OpenAPI",
+    "description": "eBaoCloud API 文档 (To be update)\n# Built on\nMon Jun 19 2017 - 01:13:03 GMT+0800 (CST)\n\n# Versioning\nAPI version| Date  |Comments\n--|---|--\n0.5  | 2017-06-13  | Init version\n0.6  | 2017-06-19  | Add new category and readme\n\n# Authentication\neBaoCloud offers 3rd party applications the ability to issue authenticated requests on behalf of the eBaoCloud itself. eBaoCloud's implementation is based on the Client Credentials Grant flow of the OAuth 2 specification.\n\n## Auth Flow\nThe oauth2 / token authentication flow follows these 3 major steps:\n1.An application (backend) encodes its consumer key and secret (provided by eBaoCloud as an authorized vender) into a specially encoded set of credentials.\n1.An application (backend) makes a request to the POST oauth2 / token endpoint to exchange these credentials for a bearer token.\n1.When accessing the REST API, the application (the APP or website) uses the bearer token to authenticate.\n\n## Sample code\n### Request auth from application\n``` bash\ncurl --request POST \\\n  --url http://url/cas/ebao/v1/json/tickets \\\n  --header 'content-type: application/json' \\\n  --data '{\\n \\n \"username\":\"username\",\\n \"password\":\"pwd123!\"\\n}'\n```\n### Response from API GateWay\n- Success\n``` json\n{\n\"access_token\" : \"TGT-233-e7Zuc5FlSAa0SShO3B1f2iugYzRQGQrSSoGwAi0VnWbnBNDwHg\"\n}\n```\n- Failed （TBD）\n``` json\n{\n\"access_token\" : \"\"\n}\n```\n### App call (Java code sample)\n\n``` java\nHttpResponse<String> response = Unirest.post(url) // url：the UAT/product URL\n  .header(\"content-type\", \"application/json\") // application/json\n  .header(\"authorization\", \"Bearer \" + accessToken) // oauth2 access token：the accessToken\n  .body(body) // body: http body\n  .asString();\n```\n\n## Others\n### Tokens are passwords\nKeep in mind that the consumer key & secret, bearer token credentials, and the bearer token itself grant access to make requests on behalf of an application. These values should be considered as sensitive as passwords, and must not be shared or distributed to untrusted parties.\n### SSL required\nAll requests (both to obtain and use the tokens) **must use** HTTPS endpoints. (TBD)\n"
   },
   "host": "api.ebaocloud.life",
-  "basePath": "/",
+  "basePath": "/rest",
   "schemes": [
     "http"
   ],
@@ -1196,6 +1196,32 @@
         }
       }
     },
+    "Annuity": {
+      "type": "object",
+      "properties": {
+        "annuity_End_Period": {
+          "type": "string",
+          "description": "年金结束支付时期类型 1：几年      2：到多少岁   3：终身  "
+        },
+        "annuity_End_Year": {
+          "type": "integer",
+          "format": "int64",
+          "description": "年或年龄"
+        },
+        "annuity_Start_Period": {
+          "type": "string",
+          "description": "年金开始支付时期类型 1：立刻      2：从保单周年日年龄开始给付   3：几年之后开始给付   4：生日年龄那天开始给付  "
+        },
+        "annuity_Start_Year": {
+          "type": "integer",
+          "format": "int64",
+          "description": "年或年龄"
+        },
+        "extObject": {
+          "$ref": "#/definitions/GenericVO"
+        }
+      }
+    },
     "ProductSalesCategory": {
       "type": "object",
       "properties": {
@@ -1307,6 +1333,10 @@
         "productCode"
       ],
       "properties": {
+        "annuity": {
+          "description": "年金信息",
+          "$ref": "#/definitions/Annuity"
+        },
         "calculatePremium": {
           "description": "保费计算相关因子",
           "$ref": "#/definitions/CalculatePremium"
@@ -4204,7 +4234,7 @@
     }
   },
   "paths": {
-    "/pd/rest/rpc/packages": {
+    "/pakcages": {
       "get": {
         "tags": [
           "product-controller"
@@ -4266,7 +4296,7 @@
         }
       }
     },
-    "/pd/rest/rpc/packages/{packageCode}": {
+    "/pakcages/{packageCode}": {
       "get": {
         "tags": [
           "product-controller"
@@ -4274,6 +4304,380 @@
         "summary": "获取某一组合信息",
         "description": "根据组合代码，获取某一产品的详细信息",
         "operationId": "findProductPackageUsingGET_2",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "packageCode",
+            "in": "path",
+            "description": "组合代码",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "X-ebao-tenant-id",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PackageResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/products": {
+      "get": {
+        "tags": [
+          "product-controller"
+        ],
+        "summary": "获取产品列表",
+        "description": "根据条件获取产品列表，产品列表包含产品基本信息",
+        "operationId": "findProductsUsingGET_4",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "date",
+            "in": "query",
+            "description": "日期，在此日期在售的产品,格式(YYYY-MM-DD)",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "salesCategory",
+            "in": "query",
+            "description": "产品销售大类，可以多个，如果多个以逗号（，）分隔",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "insurerIds",
+            "in": "query",
+            "description": "保险公司列表，可以多个，如果多个以逗号（，）分隔",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "isMainProduct",
+            "in": "query",
+            "description": "是否是主险",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "X-ebao-tenant-id",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProductsResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/products/benefitIllustration": {
+      "post": {
+        "tags": [
+          "product-controller"
+        ],
+        "summary": "利益展示",
+        "description": "产品利益展示",
+        "operationId": "illustrateCalculationUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "calculateRequest",
+            "description": "保费保额计算数据",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IllustrationRequest"
+            }
+          },
+          {
+            "name": "X-ebao-tenant-id",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CalculatePremSAResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/products/benefitPremiumSA": {
+      "post": {
+        "tags": [
+          "product-controller"
+        ],
+        "summary": "计算保费或保额",
+        "description": "根据保费算保额或根据保额算保费",
+        "operationId": "benefitPremiumSAUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "calculateRequest",
+            "description": "保费保额计算数据",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CalculatePremSARequest"
+            }
+          },
+          {
+            "name": "X-ebao-tenant-id",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CalculatePremSAResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/products/salesCategory": {
+      "get": {
+        "tags": [
+          "product-controller"
+        ],
+        "summary": "获取某租户销售产品大类",
+        "description": "获取某租户所有销售产品大类",
+        "operationId": "findSalesCategoryUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "X-ebao-tenant-id",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SalesCategoryResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/products/{productCode}": {
+      "get": {
+        "tags": [
+          "product-controller"
+        ],
+        "summary": "获取某一产品信息",
+        "description": "根据产品代码，获取某一产品的详细信息",
+        "operationId": "findProductUsingGET_2",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "productCode",
+            "in": "path",
+            "description": "产品代码",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "X-ebao-tenant-id",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProductResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/pd/rest/rpc/packages": {
+      "get": {
+        "tags": [
+          "product-controller"
+        ],
+        "summary": "获取组合列表",
+        "description": "根据条件获取组合列表，组合列表包含组合基本信息",
+        "operationId": "findPackagesUsingGET_5",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "date",
+            "in": "query",
+            "description": "日期，在此日期在售的产品,格式(YYYY-MM-DD)",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "salesCategory",
+            "in": "query",
+            "description": "产品销售大类，可以多个，如果多个以逗号（，）分隔",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "insurerIds",
+            "in": "query",
+            "description": "保险公司列表，可以多个，如果多个以逗号（，）分隔",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "X-ebao-tenant-id",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PackagesResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/pd/rest/rpc/packages/{packageCode}": {
+      "get": {
+        "tags": [
+          "product-controller"
+        ],
+        "summary": "获取某一组合信息",
+        "description": "根据组合代码，获取某一产品的详细信息",
+        "operationId": "findProductPackageUsingGET_1",
         "consumes": [
           "application/json"
         ],
@@ -4390,7 +4794,7 @@
         ],
         "summary": "利益展示",
         "description": "产品利益展示",
-        "operationId": "illustrateCalculationUsingPOST_2",
+        "operationId": "illustrateCalculationUsingPOST_3",
         "consumes": [
           "application/json"
         ],
@@ -4443,7 +4847,7 @@
         ],
         "summary": "计算保费或保额",
         "description": "根据保费算保额或根据保额算保费",
-        "operationId": "benefitPremiumSAUsingPOST_2",
+        "operationId": "benefitPremiumSAUsingPOST_3",
         "consumes": [
           "application/json"
         ],
@@ -4496,7 +4900,7 @@
         ],
         "summary": "获取某租户销售产品大类",
         "description": "获取某租户所有销售产品大类",
-        "operationId": "findSalesCategoryUsingGET_1",
+        "operationId": "findSalesCategoryUsingGET_5",
         "consumes": [
           "application/json"
         ],
@@ -4537,7 +4941,7 @@
         ],
         "summary": "获取某一产品信息",
         "description": "根据产品代码，获取某一产品的详细信息",
-        "operationId": "findProductUsingGET_2",
+        "operationId": "findProductUsingGET_3",
         "consumes": [
           "application/json"
         ],
@@ -4578,7 +4982,7 @@
         }
       }
     },
-    "/proposal/proposals/application": {
+    "/proposals/application": {
       "post": {
         "tags": [
           "Proposal"
@@ -4634,7 +5038,7 @@
         }
       }
     },
-    "/proposal/proposals/issurance": {
+    "/proposals/issurance": {
       "post": {
         "tags": [
           "Proposal"
@@ -4690,7 +5094,7 @@
         }
       }
     },
-    "/proposal/proposals/pre-verification": {
+    "/proposals/pre-verification": {
       "post": {
         "tags": [
           "Proposal"
