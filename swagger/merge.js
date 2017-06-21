@@ -26,8 +26,8 @@ var mergedString = JSON.stringify(mergedJson, null, 2);
 var timeStamp = `${new Date().toDateString()} - ${new Date().toTimeString()}`;
 mergedString = mergedString.replace(/\[TIMESTAMP\]/, timeStamp);
 //更新rest地址
-mergedString = mergedString.replace(/\/pd\/rest\/packages/g, "\/pakcages");
-mergedString = mergedString.replace(/\/pd\/rest\/products/g, "\/products");
+mergedString = mergedString.replace(/\/pd\/packages/g, "\/packages");
+mergedString = mergedString.replace(/\/pd\/products/g, "\/products");
 mergedString = mergedString.replace(/\/proposal\/proposals/g, "\/proposals");
 mergedString = mergedString.replace(/product-controller/g, "Product");
 
