@@ -1,0 +1,4184 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "0.6",
+    "title": "eBaoCould LI OpenAPI",
+    "description": "eBaoCloud API 文档 (To be update)\n# Built on\nWed Jun 21 2017 - 14:09:33 GMT+0800 (CST)\n\n# Versioning\nAPI version| Date  |Comments\n--|---|--\n0.5  | 2017-06-13  | Init version\n0.6  | 2017-06-19  | Add new category and readme\n\n# Authentication\neBaoCloud offers 3rd party applications the ability to issue authenticated requests on behalf of the eBaoCloud itself. eBaoCloud's implementation is based on the Client Credentials Grant flow of the OAuth 2 specification.\n\n## Auth Flow\nThe oauth2 / token authentication flow follows these 3 major steps:\n1.An application (backend) encodes its consumer key and secret (provided by eBaoCloud as an authorized vender) into a specially encoded set of credentials.\n1.An application (backend) makes a request to the POST oauth2 / token endpoint to exchange these credentials for a bearer token.\n1.When accessing the REST API, the application (the APP or website) uses the bearer token to authenticate.\n\n## Sample code\n### Request auth from application\n``` bash\ncurl --request POST \\\n  --url http://url/cas/ebao/v1/json/tickets \\\n  --header 'content-type: application/json' \\\n  --data '{\\n \\n \"username\":\"username\",\\n \"password\":\"pwd123!\"\\n}'\n```\n### Response from API GateWay\n- Success\n``` json\n{\n\"access_token\" : \"TGT-233-e7Zuc5FlSAa0SShO3B1f2iugYzRQGQrSSoGwAi0VnWbnBNDwHg\"\n}\n```\n- Failed （TBD）\n``` json\n{\n\"access_token\" : \"\"\n}\n```\n### App call (Java code sample)\n\n``` java\nHttpResponse<String> response = Unirest.post(url) // url：the UAT/product URL\n  .header(\"content-type\", \"application/json\") // application/json\n  .header(\"authorization\", \"Bearer \" + accessToken) // oauth2 access token：the accessToken\n  .body(body) // body: http body\n  .asString();\n```\n\n## Others\n### Tokens are passwords\nKeep in mind that the consumer key & secret, bearer token credentials, and the bearer token itself grant access to make requests on behalf of an application. These values should be considered as sensitive as passwords, and must not be shared or distributed to untrusted parties.\n### SSL required\nAll requests (both to obtain and use the tokens) **must use** HTTPS endpoints. (TBD)\n"
+  },
+  "host": "api.ebaocloud.life",
+  "basePath": "/rest",
+  "schemes": [
+    "http"
+  ],
+  "consumes": [],
+  "produces": [],
+  "tags": [
+    {
+      "name": "Product",
+      "description": "Product Controller"
+    },
+    {
+      "name": "Proposal"
+    }
+  ],
+  "definitions": {
+    "SalesCategoryResponse": {
+      "type": "object",
+      "properties": {
+        "clientRequestId": {
+          "type": "string"
+        },
+        "clientRequestTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "exceptions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "listSalesCategory": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProductSalesCategory"
+          }
+        },
+        "messages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GenericValidationResult"
+          }
+        },
+        "result": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "serviceReqTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "serviceResTime": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "Illustrations": {
+      "type": "object",
+      "properties": {
+        "illustrationResultList": {
+          "type": "array",
+          "description": "List of benefits illustration results",
+          "items": {
+            "$ref": "#/definitions/IllustrationResult"
+          }
+        },
+        "illustrationSingleResultList": {
+          "type": "array",
+          "description": "List of individual benefits",
+          "items": {
+            "$ref": "#/definitions/IllustrationResult"
+          }
+        }
+      }
+    },
+    "AgeRange": {
+      "type": "object",
+      "properties": {
+        "maxAge": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum age allowed"
+        },
+        "minAge": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The minimum age allowed"
+        }
+      }
+    },
+    "MainInformation": {
+      "type": "object",
+      "properties": {
+        "currency": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Product currency"
+        },
+        "endDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End of sale of product"
+        },
+        "familyType": {
+          "type": "string",
+          "description": "Family product"
+        },
+        "mainPlan": {
+          "type": "string",
+          "description": "Is it a main plan"
+        },
+        "orgId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Which agency belongs to this product"
+        },
+        "productAbbreviation": {
+          "type": "string",
+          "description": "Product Introduction"
+        },
+        "productCode": {
+          "type": "string",
+          "description": "Product Code"
+        },
+        "productDescription": {
+          "type": "string",
+          "description": "product description"
+        },
+        "productName": {
+          "type": "string",
+          "description": "product name"
+        },
+        "salesCategory": {
+          "description": "Product sales category",
+          "$ref": "#/definitions/ProductSalesCategory"
+        },
+        "startDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Product sale time"
+        }
+      }
+    },
+    "CalculatePremSARequest": {
+      "type": "object"
+    },
+    "ValidationResult": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "ruleType": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "PackageResponse": {
+      "type": "object",
+      "properties": {
+        "clientRequestId": {
+          "type": "string"
+        },
+        "clientRequestTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "exceptions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "messages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ValidationResult"
+          }
+        },
+        "productPackageInfo": {
+          "description": "Combination details",
+          "$ref": "#/definitions/ProductPackageInfo"
+        },
+        "result": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "serviceReqTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "serviceResTime": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "ProductPackageInfo": {
+      "type": "object"
+    },
+    "LiabilityInformation": {
+      "type": "object",
+      "properties": {
+        "categoryId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Responsibility category Id"
+        },
+        "categoryName": {
+          "type": "string",
+          "description": "Responsibility category name"
+        },
+        "liabilityId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Responsibility Id"
+        },
+        "liabilityName": {
+          "type": "string",
+          "description": "Responsibility Name"
+        }
+      }
+    },
+    "ProductLiability": {
+      "type": "object",
+      "properties": {
+        "annuity": {
+          "type": "boolean",
+          "example": false,
+          "description": "Whether there is an annuity"
+        },
+        "liabilities": {
+          "type": "array",
+          "description": "Product liability list",
+          "items": {
+            "$ref": "#/definitions/LiabilityInformation"
+          }
+        },
+        "survivalBenefitOptions": {
+          "type": "array",
+          "description": "Allowed Survival Benefit Option (1: Get it now 2: Pay with premium for payment 3: Exist insurance company account",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ProductRelationship": {
+      "type": "object",
+      "properties": {
+        "attachCompulsory": {
+          "type": "string",
+          "description": "Whether it is mandatory"
+        },
+        "attachType": {
+          "type": "string",
+          "description": "Additional Type 1: Only one additional time allowed 2: Allows multiple times"
+        },
+        "masterProductCode": {
+          "type": "string",
+          "description": "Main product code"
+        },
+        "masterProductId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Main product Id"
+        },
+        "maxAthAge": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Allow additional maximum age"
+        },
+        "maxAthMastAge": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum age allowed to be attached to the main risk"
+        },
+        "maxAttachSa2MainSaRate": {
+          "type": "number",
+          "format": "double",
+          "description": "The ratio of the maximum additional risk to the main risk"
+        },
+        "maxAttachedSa": {
+          "type": "number",
+          "format": "double",
+          "description": "Maximum additional value"
+        },
+        "maxTotalSa2MainSaRate": {
+          "type": "number",
+          "format": "double",
+          "description": "The ratio of the maximum additional risk to the main risk"
+        },
+        "minAthAge": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Allow additional minimum age"
+        },
+        "minAthMastAge": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Allow the minimum age of the additional main risk"
+        },
+        "minAttachSa2MainSaRate": {
+          "type": "number",
+          "format": "double",
+          "description": "The ratio of the minimum additional risk to the main risk"
+        },
+        "minMastSaAmount": {
+          "type": "number",
+          "format": "double",
+          "description": "Allow the minimum age of the additional main risk"
+        },
+        "riderProductCode": {
+          "type": "string",
+          "description": "Additional product code"
+        },
+        "riderProductId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Additional risk product Id"
+        },
+        "saNoEqual": {
+          "type": "string",
+          "description": "Whether the additional insurance can be equal to the amount of insurance coverage"
+        },
+        "totalOverRate": {
+          "type": "number",
+          "format": "double",
+          "description": "The maximum additional insurance premium plus the main insurance ratio than the main insurance ratio"
+        }
+      }
+    },
+    "GenericValidationResult": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "ruleType": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "ProductTerm": {
+      "type": "object",
+      "properties": {
+        "annuityEndPayTerm": {
+          "type": "array",
+          "description": "Annuity termination deadline",
+          "items": {
+            "$ref": "#/definitions/TermLimit"
+          }
+        },
+        "annuityPayEnsureTerm": {
+          "type": "array",
+          "description": "Annuity guarantee deadline",
+          "items": {
+            "$ref": "#/definitions/TermLimit"
+          }
+        },
+        "annuityStartPayTerm": {
+          "type": "array",
+          "description": "The annuity begins to pay the deadline",
+          "items": {
+            "$ref": "#/definitions/TermLimit"
+          }
+        },
+        "coverageTerm": {
+          "type": "array",
+          "description": "Guarantee period limit",
+          "items": {
+            "$ref": "#/definitions/TermLimit"
+          }
+        },
+        "premiumTerm": {
+          "type": "array",
+          "description": "Payment period limit",
+          "items": {
+            "$ref": "#/definitions/TermLimit"
+          }
+        }
+      }
+    },
+    "ProductSumAssured": {
+      "type": "object",
+      "properties": {
+        "saLimit": {
+          "description": "Product limit",
+          "$ref": "#/definitions/SaLimit"
+        }
+      }
+    },
+    "IllustrationRequest": {
+      "type": "object"
+    },
+    "IllustrationResult": {
+      "type": "object",
+      "properties": {
+        "age": {
+          "type": "integer",
+          "format": "int32",
+          "description": "age"
+        },
+        "amount": {
+          "type": "number",
+          "format": "double",
+          "description": "Amount of money"
+        },
+        "calcType": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Type of calculation"
+        },
+        "coverageId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Guarantee number"
+        },
+        "fundCode": {
+          "type": "string",
+          "description": "Fund code"
+        },
+        "name": {
+          "type": "string",
+          "description": "name"
+        },
+        "orderSeq": {
+          "type": "integer",
+          "format": "int32",
+          "description": "order"
+        },
+        "performanceType": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Interest display type"
+        },
+        "policyMonth": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Warrant month"
+        },
+        "policyYear": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Policy year"
+        }
+      }
+    },
+    "ProductInfo": {
+      "type": "object",
+      "properties": {
+        "attachedRiders": {
+          "type": "array",
+          "description": "Main risk additional risk relationship",
+          "items": {
+            "$ref": "#/definitions/ProductRelationship"
+          }
+        },
+        "benefitType": {
+          "type": "string",
+          "description": "Product protection category. 23 subsidized medical insurance 31 accident insurance 11 two full insurance 12 years gold insurance 13 life insurance 14 regular insurance 41 investment insurance 15 mortgage risk 16 long-term care 17 heavy risk"
+        },
+        "bonus": {
+          "description": "Bonus information",
+          "$ref": "#/definitions/Bonus"
+        },
+        "liability": {
+          "description": "Product liability",
+          "$ref": "#/definitions/ProductLiability"
+        },
+        "maininfo": {
+          "description": "Product main information",
+          "$ref": "#/definitions/MainInformation"
+        },
+        "premSaCalc": {
+          "description": "Product premium calculation related information",
+          "$ref": "#/definitions/PremiumSaCalculation"
+        },
+        "productAge": {
+          "description": "Product age limit",
+          "$ref": "#/definitions/ProductAge"
+        },
+        "productId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Product Id"
+        },
+        "productSumAssured": {
+          "description": "Product limit",
+          "$ref": "#/definitions/ProductSumAssured"
+        },
+        "productTerm": {
+          "description": "Product age limit",
+          "$ref": "#/definitions/ProductTerm"
+        }
+      }
+    },
+    "ProductBasicInformation": {
+      "type": "object",
+      "properties": {
+        "benefitType": {
+          "type": "string",
+          "description": "Product protection category. 23 subsidized medical insurance 31 accident insurance 11 two full insurance 12 years gold insurance 13 life insurance 14 regular insurance 41 investment insurance 15 mortgage risk 16 long-term care 17 heavy risk"
+        },
+        "endDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End of sale of product"
+        },
+        "isMainProduct": {
+          "type": "string",
+          "description": "Whether it is the main risk"
+        },
+        "productAbbr": {
+          "type": "string",
+          "description": "Product Introduction"
+        },
+        "productCode": {
+          "type": "string",
+          "description": "Product Code"
+        },
+        "productDescription": {
+          "type": "string",
+          "description": "product description"
+        },
+        "productId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Product Id"
+        },
+        "productName": {
+          "type": "string",
+          "description": "product name"
+        },
+        "startDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Product date of sale"
+        }
+      }
+    },
+    "SaLimit": {
+      "type": "object",
+      "properties": {
+        "limitUnit": {
+          "type": "string",
+          "description": "Limit or Unit Limit 1: 2: Unit"
+        },
+        "maxAmount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Maximum amount, amount or unit"
+        },
+        "minAmount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Minimum amount, insured amount or unit"
+        },
+        "moneyId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Currency"
+        }
+      }
+    },
+    "BasicProductPackageInfo": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Combination description"
+        },
+        "moneyId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Combination of currency"
+        },
+        "packageCode": {
+          "type": "string",
+          "description": "Combination code"
+        },
+        "packageId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Combination Id"
+        },
+        "packageName": {
+          "type": "string",
+          "description": "Combination name"
+        }
+      }
+    },
+    "Bonus": {
+      "type": "object",
+      "properties": {
+        "cashBonus": {
+          "type": "boolean",
+          "example": false,
+          "description": "Whether there is a cash dividend"
+        },
+        "cashBonusOptions": {
+          "type": "array",
+          "description": "Allowed cash bonus option (1: receive immediately 2: pay dividend with cash bonus 3: exist in insurance company account",
+          "items": {
+            "type": "string"
+          }
+        },
+        "cashBonusUnitAmount": {
+          "type": "number",
+          "format": "double",
+          "description": "Cash dividend unit"
+        },
+        "cashBonusVestYear": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Cash dividends must be left in the insurance company after years of investment can be received"
+        }
+      }
+    },
+    "CalculatePremSAResponse": {
+      "type": "object",
+      "properties": {
+        "calculatePolicyResult": {
+          "description": "Calculation results",
+          "$ref": "#/definitions/CalculatePolicyResult"
+        },
+        "clientRequestId": {
+          "type": "string"
+        },
+        "clientRequestTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "exceptions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "messages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GenericValidationResult"
+          }
+        },
+        "result": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "serviceReqTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "serviceResTime": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "CalculatePolicyResult": {
+      "type": "object",
+      "properties": {
+        "calculateCoverageResults": {
+          "type": "array",
+          "description": "The detailed calculation of the results",
+          "items": {
+            "$ref": "#/definitions/CalculateCoverageResult"
+          }
+        },
+        "inceptionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Insured day"
+        },
+        "installPrem": {
+          "type": "number",
+          "format": "double",
+          "description": "Total payment premium"
+        }
+      }
+    },
+    "PackagesResponse": {
+      "type": "object",
+      "properties": {
+        "clientRequestId": {
+          "type": "string"
+        },
+        "clientRequestTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "exceptions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "listBasicProductPackageInfo": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BasicProductPackageInfo"
+          }
+        },
+        "messages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ValidationResult"
+          }
+        },
+        "result": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "serviceReqTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "serviceResTime": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "ProductSalesCategory": {
+      "type": "object"
+    },
+    "PremiumSaCalculation": {
+      "type": "object",
+      "properties": {
+        "ageBase": {
+          "type": "string",
+          "description": "Age calculation method 1: according to the age of insurance 2: according to the year of the policy anniversary date"
+        },
+        "premiumFrequency": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "unitFlag": {
+          "type": "string",
+          "description": "Premium Assurance Calculation Method 0 Premiums Guaranteed by User Input 1 Product sold by unit 2 Premium under premium, but agreement is also allowed Premium 3 Product sold under plan or unit 4 Product is only allowed to be sold on schedule 5 According to the premium, But also allow the agreement premium 6 only to allow the amount of insurance premium but also allow the agreement premium 7 only allow insurance premiums 8 insurance premiums or insurance premiums"
+        },
+        "waiver": {
+          "type": "boolean",
+          "example": false,
+          "description": "Whether it is exempt from insurance"
+        }
+      }
+    },
+    "ProductResponse": {
+      "type": "object",
+      "properties": {
+        "clientRequestId": {
+          "type": "string"
+        },
+        "clientRequestTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "exceptions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "messages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GenericValidationResult"
+          }
+        },
+        "productInfo": {
+          "description": "product detailed information",
+          "$ref": "#/definitions/ProductInfo"
+        },
+        "result": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "serviceReqTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "serviceResTime": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "CalculateCoverageResult": {
+      "type": "object",
+      "properties": {
+        "coverageId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Incoming security code"
+        },
+        "productCode": {
+          "type": "string",
+          "description": "Calculate the product code"
+        },
+        "sumAssured": {
+          "type": "number",
+          "format": "double",
+          "description": "Insured amount"
+        },
+        "totalPremAf": {
+          "type": "number",
+          "format": "double",
+          "description": "Pay premium"
+        },
+        "unit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Purchase unit"
+        }
+      }
+    },
+    "TermLimit": {
+      "type": "object",
+      "properties": {
+        "periodType": {
+          "type": "string",
+          "description": "Term type (1: 2: pay a few years 3: pay a certain age 4: pay for life)"
+        },
+        "periodValueMax": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Allow maximum deadline"
+        },
+        "periodValueMin": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Allow minimum deadline"
+        }
+      }
+    },
+    "ProductAge": {
+      "type": "object",
+      "properties": {
+        "insuredAge": {
+          "description": "The age limit of the insured person",
+          "$ref": "#/definitions/AgeRange"
+        },
+        "policyHolderAge": {
+          "description": "Insured age limit",
+          "$ref": "#/definitions/AgeRange"
+        }
+      }
+    },
+    "ProductsResponse": {
+      "type": "object",
+      "properties": {
+        "clientRequestId": {
+          "type": "string"
+        },
+        "clientRequestTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "exceptions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "listProductBasicInformation": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProductBasicInformation"
+          }
+        },
+        "messages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GenericValidationResult"
+          }
+        },
+        "result": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "serviceReqTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "serviceResTime": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "IllustrationResponse": {
+      "type": "object",
+      "properties": {
+        "clientRequestId": {
+          "type": "string"
+        },
+        "clientRequestTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "exceptions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "illustrations": {
+          "description": "Benefit presentation results",
+          "$ref": "#/definitions/Illustrations"
+        },
+        "messages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GenericValidationResult"
+          }
+        },
+        "result": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "serviceReqTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "serviceResTime": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "Policy": {
+      "type": "object",
+      "properties": {
+        "applyDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date of application, non-empty, date format: yyyy-MM-dd'T'HH: mm: ss"
+        },
+        "beneficiaries": {
+          "type": "array",
+          "description": "List of beneficiaries",
+          "items": {
+            "$ref": "#/definitions/Beneficiary"
+          }
+        },
+        "coverages": {
+          "type": "array",
+          "description": "List of insurance insurance",
+          "items": {
+            "$ref": "#/definitions/Coverage"
+          }
+        },
+        "currency": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "Currency, non-empty, 1 - RMB",
+          "enum": [
+            1
+          ]
+        },
+        "customers": {
+          "type": "array",
+          "description": "Policy customer list",
+          "items": {
+            "$ref": "#/definitions/PolicyCustomer"
+          }
+        },
+        "declarations": {
+          "type": "array",
+          "description": "Customer informs list",
+          "items": {
+            "$ref": "#/definitions/CustomerDeclaration"
+          }
+        },
+        "deliverType": {
+          "type": "string",
+          "example": "M",
+          "description": "Policy delivery, H-manual; M-mail",
+          "enum": [
+            "H",
+            "M"
+          ]
+        },
+        "ePolicyDownloadUrl": {
+          "type": "string",
+          "description": "Electronic policy download address"
+        },
+        "expiryDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Termination Date, Date Format: yyyy-MM-dd'T'HH: mm: ss"
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "Extended information, Map type, Key / Value are character",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "inceptionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Policy effective date, date format: yyyy-MM-dd'T'HH: mm: ss"
+        },
+        "installPrem": {
+          "type": "number",
+          "format": "double",
+          "description": "Insurance premium",
+          "readOnly": true
+        },
+        "insureds": {
+          "type": "array",
+          "description": "List of policy insured",
+          "items": {
+            "$ref": "#/definitions/Insured"
+          }
+        },
+        "insurerCode": {
+          "type": "string",
+          "description": "Insurance company code"
+        },
+        "issueDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Underwriting date, date format: yyyy-MM-dd'T'HH: mm: ss"
+        },
+        "payerAccounts": {
+          "type": "array",
+          "description": "Payment method list",
+          "items": {
+            "$ref": "#/definitions/PayerAccount"
+          }
+        },
+        "payers": {
+          "type": "array",
+          "description": "Payer list",
+          "items": {
+            "$ref": "#/definitions/Payer"
+          }
+        },
+        "policyHolder": {
+          "description": "Insured",
+          "$ref": "#/definitions/PolicyHolder"
+        },
+        "policyId": {
+          "type": "string",
+          "description": "Policy internal serial number, UUID type",
+          "readOnly": true
+        },
+        "policyNumber": {
+          "type": "string",
+          "description": "Policy number"
+        },
+        "policyPackage": {
+          "description": "Product portfolio",
+          "$ref": "#/definitions/PolicyPackage"
+        },
+        "proposalNumber": {
+          "type": "string",
+          "description": "Insured number"
+        },
+        "quotationCode": {
+          "type": "string",
+          "description": "Trial request number"
+        },
+        "riskStatus": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Policy status, 0 - not effective; 1 effective; 2 - failure; 3 - terminated",
+          "readOnly": true
+        },
+        "salesChannelCode": {
+          "type": "string",
+          "description": "Sales channel code"
+        },
+        "serviceAgentCode": {
+          "type": "string",
+          "description": "Policy agent code"
+        },
+        "submissionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date of submission, date format: yyyy-MM-dd'T'HH: mm: ss"
+        },
+        "tenantCode": {
+          "type": "string",
+          "example": "ebao",
+          "description": "Tenant code"
+        },
+        "trustees": {
+          "type": "array",
+          "description": "Guardian List",
+          "items": {
+            "$ref": "#/definitions/Trustee"
+          }
+        }
+      }
+    },
+    "PolicyPackage": {
+      "type": "object",
+      "properties": {
+        "packageCode": {
+          "type": "string",
+          "description": "Product portfolio code"
+        },
+        "packageId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Combine the internal serial number",
+          "readOnly": true
+        },
+        "unit": {
+          "type": "number",
+          "format": "double",
+          "description": "Product portfolio number of shares, the default is 1"
+        }
+      }
+    },
+    "QuotationResponse": {
+      "type": "object",
+      "properties": {
+        "clientRequestId": {
+          "type": "string",
+          "description": "External trading serial number"
+        },
+        "clientRequestTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "External request time"
+        },
+        "exceptions": {
+          "type": "array",
+          "description": "abnormal information",
+          "items": {
+            "type": "string"
+          }
+        },
+        "messages": {
+          "type": "array",
+          "description": "Business Failure Reason Description List Node",
+          "items": {
+            "$ref": "#/definitions/GenericValidationResult"
+          }
+        },
+        "policy": {
+          "description": "Policy",
+          "$ref": "#/definitions/QuotationPolicyResult"
+        },
+        "result": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Request results, 1 - business success; 0 - business failure;"
+        }
+      }
+    },
+    "Address": {
+      "type": "object",
+      "properties": {
+        "address1": {
+          "type": "string",
+          "example": "上海市",
+          "description": "province"
+        },
+        "address2": {
+          "type": "string",
+          "example": "上海市",
+          "description": "city"
+        },
+        "address3": {
+          "type": "string",
+          "example": "杨浦区",
+          "description": "County"
+        },
+        "address4": {
+          "type": "string",
+          "example": "淞沪路270号创智天地3号楼3楼",
+          "description": "address"
+        },
+        "addressId": {
+          "type": "string",
+          "description": "Address internal serial number, UUID type",
+          "readOnly": true
+        },
+        "postCode": {
+          "type": "string",
+          "example": "200433",
+          "description": "Zip code"
+        }
+      }
+    },
+    "CoverageInsuredInput": {
+      "type": "object",
+      "properties": {
+        "age": {
+          "type": "integer",
+          "format": "int32",
+          "example": 25,
+          "description": "age"
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "Extended information, Map type, Key / Value are character",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "occupationClass": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "Professional grade"
+        },
+        "orderId": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "Type of insured person serial number, the default is 1, the same insurance more than the insured (family policy or personal risk) is greater than 1"
+        },
+        "partySerialId": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "Insured customer temporary number, request within the use of a unique identification of a party within the request"
+        }
+      }
+    },
+    "AddressInput": {
+      "type": "object",
+      "properties": {
+        "address1": {
+          "type": "string",
+          "example": "上海市",
+          "description": "province"
+        },
+        "address2": {
+          "type": "string",
+          "example": "上海市",
+          "description": "city"
+        },
+        "address3": {
+          "type": "string",
+          "example": "杨浦区",
+          "description": "County"
+        },
+        "address4": {
+          "type": "string",
+          "example": "淞沪路270号创智天地3号楼3楼",
+          "description": "address"
+        },
+        "postCode": {
+          "type": "string",
+          "example": "200433",
+          "description": "Zip code"
+        }
+      }
+    },
+    "InsuredInput": {
+      "type": "object",
+      "properties": {
+        "extendedProps": {
+          "type": "object",
+          "description": "Extended information, Map type, Key / Value are character",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "medicalIndi": {
+          "type": "string",
+          "example": "Y",
+          "description": "Whether there is health insurance, Y-yes; N-no",
+          "enum": [
+            "Y",
+            "N"
+          ]
+        },
+        "partySerialId": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "Customer temporary number, request within the use of a unique request within a party"
+        },
+        "relationToPH": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "The relationship between the insured and the insured, the number type, 1 - own; 2 - child; 3 - spouse; 10 - parent;",
+          "enum": [
+            1,
+            2,
+            3,
+            10,
+            7
+          ]
+        },
+        "socialSecurityIndi": {
+          "type": "string",
+          "example": "Y",
+          "description": "Whether there is social security, Y - yes;",
+          "enum": [
+            "Y",
+            "N"
+          ]
+        }
+      }
+    },
+    "PayerAccount": {
+      "type": "object",
+      "properties": {
+        "bankAccount": {
+          "description": "First bank account",
+          "$ref": "#/definitions/BankAccount"
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "Extended information, Map type, Key / Value are character",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "listId": {
+          "type": "string",
+          "description": "Policy customer internal serial number, UUID type",
+          "readOnly": true
+        },
+        "nextBankAccount": {
+          "description": "Renewal of bank account",
+          "$ref": "#/definitions/BankAccount"
+        },
+        "paymentMethod": {
+          "type": "integer",
+          "format": "int32",
+          "example": 3,
+          "description": "Down payment, digital type, 1 - cash; 2 - check; 3 - bank transfer; 30 - credit card",
+          "enum": [
+            1,
+            2,
+            3,
+            30
+          ]
+        },
+        "paymentMethodNext": {
+          "type": "integer",
+          "format": "int32",
+          "example": 3,
+          "description": "Renewal payment method, number type, 1 - cash; 2 - check; 3 - bank transfer; 30 - credit card",
+          "enum": [
+            1,
+            2,
+            3,
+            30
+          ]
+        },
+        "policyId": {
+          "type": "string",
+          "description": "Policy internal serial number, UUID type",
+          "readOnly": true
+        }
+      }
+    },
+    "PayPlanInput": {
+      "type": "object",
+      "properties": {
+        "endPeriod": {
+          "type": "string",
+          "example": "3",
+          "description": "Annuity type, type of annuity annuity / variable annuity / GMWB non-empty, 1 to receive a fixed number of years; 2 to receive a certain age; 3 -",
+          "enum": [
+            "1",
+            "2",
+            "3"
+          ]
+        },
+        "endYear": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Years of collection"
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "Extended information, Map type, Key / Value are character",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "gurntPeriod": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Annuity guarantee collection period (years or age)"
+        },
+        "payOption": {
+          "type": "string",
+          "example": "1",
+          "description": "3-cash accrual; 3-cash accrual; 2-deposit premium; 3-cumulative interest; 4 - accumulated interest x years after the transfer of premiums; 5 to buy an additional payment of additional insurance",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+          ]
+        },
+        "payOptionTerm": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of years, when payOption is 4 when the meaning of the other empty"
+        },
+        "payPeriod": {
+          "type": "string",
+          "example": "3",
+          "description": "Annuities began to receive the type of period, 1 to receive immediately; 2- to a certain age to receive the anniversary; 3- years after the collection; 4- after a certain age to receive",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ]
+        },
+        "payYear": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Annuity begins to receive period (years or age)"
+        },
+        "planFreq": {
+          "type": "string",
+          "example": "1",
+          "description": "Receive frequency, 1 year; 2-year; 3-season; 4-month;",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+          ]
+        },
+        "planType": {
+          "type": "string",
+          "example": "1",
+          "description": "5-GMWB (guaranteed minimum benefit); 6-variable annuity; 7-part surrender; 8-GMWB - insured dividend",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ]
+        }
+      }
+    },
+    "CoverageInput": {
+      "type": "object",
+      "properties": {
+        "chargePeriod": {
+          "type": "string",
+          "example": "2",
+          "description": "Payment period type, non-empty, 1-paid; 2-year payment; 3 to a certain age; 4-life",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ]
+        },
+        "chargeYear": {
+          "type": "integer",
+          "format": "int32",
+          "example": 20,
+          "description": "Payment period, non-empty, the bargain is 0; by age to pay the payment period; to pay a certain age to pay the expiry of the age;"
+        },
+        "coverageAgents": {
+          "type": "array",
+          "description": "List of performance appraisal agents",
+          "items": {
+            "$ref": "#/definitions/CoverageAgentInput"
+          }
+        },
+        "coveragePeriod": {
+          "type": "string",
+          "example": "1",
+          "description": "Protection of the type of age, 1-life-long; 2-year limit; 3 to a certain age;",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+          ]
+        },
+        "coverageSeriaId": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "The insurance serial number, the use of the request, the only identification within a certain type of insurance"
+        },
+        "coverageYear": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of years of protection, the number of guarantees for the number of days; the number of days to protect the number of days"
+        },
+        "currentPremium": {
+          "description": "Current premium",
+          "$ref": "#/definitions/CoveragePremium"
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "Extended information, Map type, Key / Value are character",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "insureds": {
+          "type": "array",
+          "description": "List of insured persons",
+          "items": {
+            "$ref": "#/definitions/CoverageInsuredInput"
+          }
+        },
+        "masterCoverageSerialId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The temporary serial number of the main risk, the current insurance for the main risk is empty, for the additional risk to be filled into the main risk of the serial number"
+        },
+        "payPlans": {
+          "type": "array",
+          "description": "Payment plan list",
+          "items": {
+            "$ref": "#/definitions/PayPlanInput"
+          }
+        },
+        "productCode": {
+          "type": "string",
+          "description": "Product Code"
+        },
+        "waiverExt": {
+          "description": "Insurance information",
+          "$ref": "#/definitions/CoverageExtWaiverInput"
+        }
+      }
+    },
+    "PolicyCustomerInput": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "description": "customer address",
+          "$ref": "#/definitions/AddressInput"
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "Extended information, Map type, Key / Value are character",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "organization": {
+          "description": "Institutional customer information",
+          "$ref": "#/definitions/Organization"
+        },
+        "partyContact": {
+          "description": "Party contact information",
+          "$ref": "#/definitions/PartyContact"
+        },
+        "partySerialId": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "Customer temporary number, request within the use of a unique request within a party"
+        },
+        "partyType": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "Party type, 1-person party; 2-party party",
+          "enum": [
+            1,
+            2
+          ]
+        },
+        "person": {
+          "description": "Personal customer information",
+          "$ref": "#/definitions/Person"
+        }
+      }
+    },
+    "PayPlan": {
+      "type": "object",
+      "properties": {
+        "coverageId": {
+          "type": "string",
+          "description": "Insurance type serial number, UUID type",
+          "readOnly": true
+        },
+        "endPeriod": {
+          "type": "string",
+          "example": "3",
+          "description": "Annuity type, type of annuity annuity / variable annuity / GMWB non-empty, 1 to receive a fixed number of years; 2 to receive a certain age; 3 -",
+          "enum": [
+            "1",
+            "2",
+            "3"
+          ]
+        },
+        "endYear": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Years of collection"
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "Extended information, Map type, Key / Value are character",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "gurntPeriod": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Annuity guarantee collection period (years or age)"
+        },
+        "payOption": {
+          "type": "string",
+          "example": "1",
+          "description": "3-cash accrual; 3-cash accrual; 2-deposit premium; 3-cumulative interest; 4 - accumulated interest x years after the transfer of premiums; 5 to buy an additional payment of additional insurance",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+          ]
+        },
+        "payOptionTerm": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of years, when payOption is 4 when the meaning of the other empty"
+        },
+        "payPeriod": {
+          "type": "string",
+          "example": "3",
+          "description": "Annuities began to receive the type of period, 1 to receive immediately; 2- to a certain age to receive the anniversary; 3- years after the collection; 4- after a certain age to receive",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ]
+        },
+        "payYear": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Annuity begins to receive period (years or age)"
+        },
+        "planFreq": {
+          "type": "string",
+          "example": "1",
+          "description": "Receive frequency, 1 year; 2-year; 3-season; 4-month;",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+          ]
+        },
+        "planId": {
+          "type": "string",
+          "description": "Payment plan internal serial number, UUID type",
+          "readOnly": true
+        },
+        "planType": {
+          "type": "string",
+          "example": "1",
+          "description": "5-GMWB (guaranteed minimum benefit); 6-variable annuity; 7-part surrender; 8-GMWB - insured dividend",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"
+          ]
+        },
+        "policyId": {
+          "type": "string",
+          "description": "Policy internal serial number, UUID type",
+          "readOnly": true
+        }
+      }
+    },
+    "CustomerDeclaration": {
+      "type": "object",
+      "properties": {
+        "declarationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Inform date, date format: yyyy-MM-dd'T'HH: mm: ss"
+        },
+        "details": {
+          "type": "array",
+          "description": "Inform the details",
+          "items": {
+            "$ref": "#/definitions/CustomerDeclarationDetail"
+          }
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "Extended information, Map type, Key / Value are character",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "listId": {
+          "type": "string",
+          "description": "The customer informs the internal serial number, UUID type",
+          "readOnly": true
+        },
+        "partyId": {
+          "type": "string",
+          "description": "Customer ID, UUID type",
+          "readOnly": true
+        },
+        "policyId": {
+          "type": "string",
+          "description": "Policy internal serial number, UUID type",
+          "readOnly": true
+        }
+      }
+    },
+    "CoverageAgent": {
+      "type": "object",
+      "properties": {
+        "agentCode": {
+          "type": "string",
+          "description": "Policy agent code"
+        },
+        "assignRate": {
+          "type": "number",
+          "format": "double",
+          "example": 1,
+          "description": "Performance ratio of up to 1"
+        },
+        "coverageId": {
+          "type": "string",
+          "description": "Insurance type serial number, UUID type",
+          "readOnly": true
+        },
+        "extendedProps": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "listId": {
+          "type": "string",
+          "description": "Types of insurance performance sharing information Internal serial number, UUID type",
+          "readOnly": true
+        },
+        "policyId": {
+          "type": "string",
+          "description": "Policy internal serial number, UUID type",
+          "readOnly": true
+        }
+      }
+    },
+    "GenericVO": {
+      "type": "object",
+      "properties": {
+        "extObject": {
+          "$ref": "#/definitions/GenericVO"
+        }
+      }
+    },
+    "Payer": {
+      "type": "object",
+      "properties": {
+        "extendedProps": {
+          "type": "object",
+          "description": "Extended information, Map type, Key / Value are character",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "listId": {
+          "type": "string",
+          "description": "Policy role Internal serial number, UUID type",
+          "readOnly": true
+        },
+        "partyId": {
+          "type": "string",
+          "description": "Customer ID, UUID type",
+          "readOnly": true
+        },
+        "policyId": {
+          "type": "string",
+          "description": "Policy internal serial number, UUID type",
+          "readOnly": true
+        },
+        "relationToPH": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "The relationship between the insured and the insured, the number type, 1 - own; 2 - child; 3 - spouse; 10 - parent;",
+          "enum": [
+            1,
+            2,
+            3,
+            10,
+            7
+          ]
+        },
+        "shareRate": {
+          "type": "number",
+          "format": "double",
+          "example": 1,
+          "description": "Payment ratio, maximum 1"
+        }
+      }
+    },
+    "CollectionInput": {
+      "type": "object",
+      "properties": {
+        "currency": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "Currency, non-empty, 1 - RMB",
+          "enum": [
+            1
+          ]
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "Extended information, Map type, Key / Value are character",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "feeAmount": {
+          "type": "number",
+          "format": "double",
+          "example": 2314,
+          "description": "Actual charge amount"
+        },
+        "payMode": {
+          "type": "integer",
+          "format": "int32",
+          "example": 3,
+          "description": "Down payment, digital type, 1 - cash; 2 - check; 3 - bank transfer; 30 - credit card",
+          "enum": [
+            1,
+            2,
+            3,
+            30
+          ]
+        },
+        "paymentPlatform": {
+          "type": "string",
+          "description": "Third party payment platform code"
+        },
+        "thirdPtyPayNO": {
+          "type": "string",
+          "description": "Third party payment number"
+        }
+      }
+    },
+    "IssurancePolicyResult": {
+      "type": "object",
+      "properties": {
+        "coverages": {
+          "type": "array",
+          "description": "List of insurance insurance",
+          "items": {
+            "$ref": "#/definitions/CoverageCalculationResult"
+          }
+        },
+        "currency": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "Currency, non-empty, 1 - RMB",
+          "enum": [
+            1
+          ]
+        },
+        "ePolicyDownloadUrl": {
+          "type": "string",
+          "description": "Electronic policy download address"
+        },
+        "expiryDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Termination Date, Date Format: yyyy-MM-dd'T'HH: mm: ss"
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "Extended information, Map type, Key / Value are character",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "inceptionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Policy effective date, date format: yyyy-MM-dd'T'HH: mm: ss"
+        },
+        "installPrem": {
+          "type": "number",
+          "format": "double",
+          "description": "Insurance premium",
+          "readOnly": true
+        },
+        "issueDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Underwriting date, date format: yyyy-MM-dd'T'HH: mm: ss"
+        },
+        "policyNumber": {
+          "type": "string",
+          "description": "Policy number"
+        },
+        "proposalNumber": {
+          "type": "string",
+          "description": "Insured number"
+        },
+        "quotationCode": {
+          "type": "string",
+          "description": "Trial request number"
+        },
+        "riskStatus": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Policy status, 0 - not effective; 1 effective; 2 - failure; 3 - terminated",
+          "readOnly": true
+        }
+      }
+    },
+    "Insured": {
+      "type": "object",
+      "properties": {
+        "extendedProps": {
+          "type": "object",
+          "description": "Extended information, Map type, Key / Value are character",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "listId": {
+          "type": "string",
+          "description": "Policy role Internal serial number, UUID type",
+          "readOnly": true
+        },
+        "medicalIndi": {
+          "type": "string",
+          "example": "Y",
+          "description": "Whether there is health insurance, Y-yes; N-no",
+          "enum": [
+            "Y",
+            "N"
+          ]
+        },
+        "partyId": {
+          "type": "string",
+          "description": "Customer ID, UUID type",
+          "readOnly": true
+        },
+        "policyId": {
+          "type": "string",
+          "description": "Policy internal serial number, UUID type",
+          "readOnly": true
+        },
+        "relationToPH": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "The relationship between the insured and the insured, the number type, 1 - own; 2 - child; 3 - spouse; 10 - parent;",
+          "enum": [
+            1,
+            2,
+            3,
+            10,
+            7
+          ]
+        },
+        "socialSecurityIndi": {
+          "type": "string",
+          "example": "Y",
+          "description": "Whether there is social security, Y - yes;",
+          "enum": [
+            "Y",
+            "N"
+          ]
+        }
+      }
+    },
+    "CoverageAgentInput": {
+      "type": "object",
+      "properties": {
+        "agentCode": {
+          "type": "string",
+          "description": "Policy agent code"
+        },
+        "assignRate": {
+          "type": "number",
+          "format": "double",
+          "example": 1,
+          "description": "Performance ratio of up to 1"
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "Extended information, Map type, Key / Value are character",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "TrusteeInput": {
+      "type": "object",
+      "properties": {
+        "extendedProps": {
+          "type": "object",
+          "description": "Extended information, Map type, Key / Value are character",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "partySerialId": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "Customer temporary number, request within the use of a unique request within a party"
+        }
+      }
+    },
+    "PartyContact": {
+      "type": "object",
+      "properties": {
+        "contact": {
+          "type": "string",
+          "example": "张三",
+          "description": "Contact person"
+        },
+        "contactTel": {
+          "type": "string",
+          "example": "88888888",
+          "description": "contact number"
+        },
+        "email": {
+          "type": "string",
+          "example": "TestPerson14@126.com",
+          "description": "E-mail"
+        },
+        "fax": {
+          "type": "string",
+          "example": "88888887",
+          "description": "fax"
+        },
+        "homeTel": {
+          "type": "string",
+          "example": "87654321",
+          "description": "home phone"
+        },
+        "mobileTel": {
+          "type": "string",
+          "example": "15012345678",
+          "description": "phone number"
+        },
+        "officeTel": {
+          "type": "string",
+          "example": "88888888",
+          "description": "office number"
+        },
+        "officeTelExt": {
+          "type": "string",
+          "example": "1234",
+          "description": "Work telephone extension number"
+        }
+      }
+    },
+    "CoverageCalculationResult": {
+      "type": "object",
+      "properties": {
+        "extendedProps": {
+          "type": "object",
+          "description": "Extended information, Map type, Key / Value are character",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "premium": {
+          "type": "number",
+          "format": "double",
+          "example": 2314,
+          "description": "Insurance premiums, insurance premiums when the amount of non-empty"
+        },
+        "productCode": {
+          "type": "string",
+          "description": "Product Code"
+        },
+        "sumAssured": {
+          "type": "number",
+          "format": "double",
+          "example": 100000,
+          "description": "Insurance premium, the amount of insurance premium is not empty"
+        },
+        "unit": {
+          "type": "number",
+          "format": "double",
+          "description": "Insurance number of copies, the number of products by the number of non-empty insurance"
+        }
+      }
+    },
+    "IssuranceResponse": {
+      "type": "object",
+      "properties": {
+        "clientRequestId": {
+          "type": "string",
+          "description": "External trading serial number"
+        },
+        "clientRequestTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "External request time"
+        },
+        "exceptions": {
+          "type": "array",
+          "description": "abnormal information",
+          "items": {
+            "type": "string"
+          }
+        },
+        "messages": {
+          "type": "array",
+          "description": "Business Failure Reason Description List Node",
+          "items": {
+            "$ref": "#/definitions/GenericValidationResult"
+          }
+        },
+        "policy": {
+          "description": "Policy",
+          "$ref": "#/definitions/IssurancePolicyResult"
+        },
+        "result": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Request results, 1 - business success; 0 - business failure;"
+        }
+      }
+    },
+    "Person": {
+      "type": "object",
+      "properties": {
+        "birthdate": {
+          "type": "string",
+          "format": "date-time",
+          "example": "1980-01-01",
+          "description": "Birthday, non-empty, date format: yyyy-MM-dd"
+        },
+        "certiCode": {
+          "type": "string",
+          "example": "1234567890",
+          "description": "Certificate number"
+        },
+        "certiEnd": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2019-12-31",
+          "description": "Certificate Effective Deadline, Date Format: yyyy-MM-dd"
+        },
+        "certiStart": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2000-01-01",
+          "description": "Certificate start date, date format: yyyy-MM-dd"
+        },
+        "certiType": {
+          "type": "integer",
+          "format": "int32",
+          "example": 3,
+          "description": "Certificate type, number type, 1 - ID card; 2 - Military certificate; 3 - passport; 4 - birth certificate; 9 - other",
+          "enum": [
+            1,
+            2,
+            3,
+            4,
+            9
+          ]
+        },
+        "firstName": {
+          "type": "string",
+          "example": "三",
+          "description": "name"
+        },
+        "gender": {
+          "type": "string",
+          "example": "M",
+          "description": "Sex, M-male; F-female",
+          "enum": [
+            "M",
+            "F"
+          ]
+        },
+        "height": {
+          "type": "number",
+          "format": "double",
+          "example": 175.3,
+          "description": "Height (cm)"
+        },
+        "income": {
+          "type": "integer",
+          "format": "int64",
+          "example": 200000,
+          "description": "Annual income"
+        },
+        "lastName": {
+          "type": "string",
+          "example": "张",
+          "description": "Last name of prospect"
+        },
+        "marriageStatus": {
+          "type": "string",
+          "example": "1",
+          "description": "Marital status, 1 - married; 2 - unmarried; 3 - divorced; 4 - widowed; 5 - separated;",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6"
+          ]
+        },
+        "midName": {
+          "type": "string",
+          "description": "Middle name of prospect"
+        },
+        "nationality": {
+          "type": "string",
+          "example": "7",
+          "description": "Nationality, 7 - China"
+        },
+        "occupationCode": {
+          "type": "string",
+          "example": "1",
+          "description": "Professional code"
+        },
+        "preferredLifeIndi": {
+          "type": "string",
+          "example": "0",
+          "description": "Whether the preferred body, 0-N / A; 1-no;"
+        },
+        "salutation": {
+          "type": "string",
+          "example": "1",
+          "description": "Title， 1-Mr. 2-Ms.",
+          "enum": [
+            "1",
+            "2"
+          ]
+        },
+        "smoking": {
+          "type": "string",
+          "example": "N",
+          "description": "Whether smoking, Y-yes; N-no",
+          "enum": [
+            "Y",
+            "N"
+          ]
+        },
+        "weight": {
+          "type": "number",
+          "format": "double",
+          "example": 70.25,
+          "description": "Weight (kg)"
+        }
+      }
+    },
+    "PolicyPackageInput": {
+      "type": "object",
+      "properties": {
+        "packageCode": {
+          "type": "string",
+          "description": "Product portfolio code"
+        },
+        "unit": {
+          "type": "number",
+          "format": "double",
+          "description": "Product portfolio number of shares, the default is 1"
+        }
+      }
+    },
+    "Organization": {
+      "type": "object",
+      "properties": {
+        "companyName": {
+          "type": "string",
+          "example": "xxxxxx",
+          "description": "company name"
+        },
+        "countryCode": {
+          "type": "string",
+          "example": "156",
+          "description": "Registered country, 156 - China"
+        },
+        "registerCode": {
+          "type": "string",
+          "example": "xxxx",
+          "description": "Company ID number"
+        },
+        "registerType": {
+          "type": "string",
+          "example": "1001",
+          "description": "Company certificate type, 1001 - company registration number"
+        }
+      }
+    },
+    "CoverageInsured": {
+      "type": "object",
+      "properties": {
+        "age": {
+          "type": "integer",
+          "format": "int32",
+          "example": 25,
+          "description": "age"
+        },
+        "coverageId": {
+          "type": "string",
+          "description": "Insurance type serial number, UUID type",
+          "readOnly": true
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "Extended information, Map type, Key / Value are character",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "insuredPartyId": {
+          "type": "string",
+          "description": "Insured internal serial number, UUID type",
+          "readOnly": true
+        },
+        "listId": {
+          "type": "string",
+          "description": "Insurance insured internal serial number, UUID type",
+          "readOnly": true
+        },
+        "occupationClass": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "Professional grade"
+        },
+        "orderId": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "Type of insured person serial number, the default is 1, the same insurance more than the insured (family policy or personal risk) is greater than 1"
+        },
+        "policyId": {
+          "type": "string",
+          "description": "Policy internal serial number, UUID type",
+          "readOnly": true
+        }
+      }
+    },
+    "CollectionPolicyInput": {
+      "type": "object",
+      "properties": {
+        "extendedProps": {
+          "type": "object",
+          "description": "Extended information, Map type, Key / Value are character",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "payerAccount": {
+          "description": "payment method",
+          "$ref": "#/definitions/CollectionPayerAccountInput"
+        },
+        "proposalNumber": {
+          "type": "string",
+          "description": "Insured number"
+        }
+      }
+    },
+    "BeneficiaryInput": {
+      "type": "object",
+      "properties": {
+        "beneType": {
+          "type": "string",
+          "example": "2",
+          "description": "Benefit type, 1 survivor beneficiary; 2 - Victim beneficiary; 3 - Insured beneficiary",
+          "enum": [
+            "1",
+            "2",
+            "3"
+          ]
+        },
+        "designation": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "6 - grandfather; grandmother grandmother; grandfather grandmother grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather Uncle; 11 - aunt; 12 - cousin / cousin; 13 - nephew / niece / nephew / niece; 14 - employer; 15 - others; 16 -",
+          "enum": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16
+          ]
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "Extended information, Map type, Key / Value are character",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "insuredPartySerialId": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "Insured customer temporary number, request within the use of a unique identification of a party within the request"
+        },
+        "partySerialId": {
+          "type": "integer",
+          "format": "int32",
+          "example": 2,
+          "description": "Customer temporary number, request within the use of a unique request within a party"
+        },
+        "shareOrder": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "Benefit"
+        },
+        "shareRate": {
+          "type": "number",
+          "format": "double",
+          "example": 1,
+          "description": "Benefit ratio, up to 1"
+        }
+      }
+    },
+    "PolicyCustomer": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "description": "customer address",
+          "$ref": "#/definitions/Address"
+        },
+        "extendedProps": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "listId": {
+          "type": "string",
+          "description": "Policy customer internal serial number, UUID type",
+          "readOnly": true
+        },
+        "organization": {
+          "description": "Institutional customer information",
+          "$ref": "#/definitions/Organization"
+        },
+        "partyContact": {
+          "description": "Party contact information",
+          "$ref": "#/definitions/PartyContact"
+        },
+        "partyId": {
+          "type": "string",
+          "description": "Customer ID, UUID type",
+          "readOnly": true
+        },
+        "partyType": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "Party type, 1-person party; 2-party party",
+          "enum": [
+            1,
+            2
+          ]
+        },
+        "person": {
+          "description": "Personal customer information",
+          "$ref": "#/definitions/Person"
+        },
+        "policyId": {
+          "type": "string",
+          "description": "Policy internal serial number, UUID type",
+          "readOnly": true
+        }
+      }
+    },
+    "CustomerDeclarationDetail": {
+      "type": "object",
+      "properties": {
+        "declId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Tell item number, number type"
+        },
+        "declListId": {
+          "type": "string",
+          "description": "The customer informs the internal serial number, UUID type",
+          "readOnly": true
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "Extended information, Map type, Key / Value are character",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "fill1": {
+          "type": "string",
+          "description": "Inform the answer item 1, the character type, the content with the different items and different"
+        },
+        "fill10": {
+          "type": "string",
+          "description": "Tell the item to answer the content 10, the character type, the content with the different items and different"
+        },
+        "fill2": {
+          "type": "string",
+          "description": "2, the character type, the content varies with the notification item"
+        },
+        "fill3": {
+          "type": "string",
+          "description": "3, the character type, the content with the different items and different"
+        },
+        "fill4": {
+          "type": "string",
+          "description": "4, the type of character, the content with the different items and different"
+        },
+        "fill5": {
+          "type": "string",
+          "description": "5, the character type, the content varies with the notification item"
+        },
+        "fill6": {
+          "type": "string",
+          "description": "Inform the answer content 6, character type, content with the different items and different"
+        },
+        "fill7": {
+          "type": "string",
+          "description": "7, the character type, the content with the different items and different"
+        },
+        "fill8": {
+          "type": "string",
+          "description": "8, the character type, the content varies with the notification item"
+        },
+        "fill9": {
+          "type": "string",
+          "description": "9, the type of character, the content with the different items and different"
+        },
+        "listId": {
+          "type": "string",
+          "description": "Customer informs the details of the internal serial number, UUID type",
+          "readOnly": true
+        },
+        "partyId": {
+          "type": "string",
+          "description": "Customer ID, UUID type",
+          "readOnly": true
+        },
+        "policyId": {
+          "type": "string",
+          "description": "Policy internal serial number, UUID type",
+          "readOnly": true
+        }
+      }
+    },
+    "PolicyHolder": {
+      "type": "object",
+      "properties": {
+        "extendedProps": {
+          "type": "object",
+          "description": "Extended information, Map type, Key / Value are character",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "listId": {
+          "type": "string",
+          "description": "Policy role Internal serial number, UUID type",
+          "readOnly": true
+        },
+        "partyId": {
+          "type": "string",
+          "description": "Customer ID, UUID type",
+          "readOnly": true
+        },
+        "policyId": {
+          "type": "string",
+          "description": "Policy internal serial number, UUID type",
+          "readOnly": true
+        },
+        "relationToLA": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "The relationship between the insured and the insured, the number type, 1 - own; 2 - parent; 3 - spouse; 10 - child;",
+          "enum": [
+            1,
+            2,
+            3,
+            10,
+            7
+          ]
+        }
+      }
+    },
+    "PolicyHolderInput": {
+      "type": "object",
+      "properties": {
+        "extendedProps": {
+          "type": "object",
+          "description": "Extended information, Map type, Key / Value are character",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "partySerialId": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "Customer temporary number, request within the use of a unique request within a party"
+        },
+        "relationToLA": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "The relationship between the insured and the insured, the number type, 1 - own; 2 - parent; 3 - spouse; 10 - child;",
+          "enum": [
+            1,
+            2,
+            3,
+            10,
+            7
+          ]
+        }
+      }
+    },
+    "CustomerDeclarationDetailInput": {
+      "type": "object",
+      "properties": {
+        "declId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Tell item number, number type"
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "Extended information, Map type, Key / Value are character",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "fill1": {
+          "type": "string",
+          "description": "Inform the answer item 1, the character type, the content with the different items and different"
+        },
+        "fill10": {
+          "type": "string",
+          "description": "Tell the item to answer the content 10, the character type, the content with the different items and different"
+        },
+        "fill2": {
+          "type": "string",
+          "description": "2, the character type, the content varies with the notification item"
+        },
+        "fill3": {
+          "type": "string",
+          "description": "3, the character type, the content with the different items and different"
+        },
+        "fill4": {
+          "type": "string",
+          "description": "4, the type of character, the content with the different items and different"
+        },
+        "fill5": {
+          "type": "string",
+          "description": "5, the character type, the content varies with the notification item"
+        },
+        "fill6": {
+          "type": "string",
+          "description": "Inform the answer content 6, character type, content with the different items and different"
+        },
+        "fill7": {
+          "type": "string",
+          "description": "7, the character type, the content with the different items and different"
+        },
+        "fill8": {
+          "type": "string",
+          "description": "8, the character type, the content varies with the notification item"
+        },
+        "fill9": {
+          "type": "string",
+          "description": "9, the type of character, the content with the different items and different"
+        }
+      }
+    },
+    "ApplicationRequest": {
+      "type": "object",
+      "required": [
+        "policy"
+      ],
+      "properties": {
+        "clientRequestId": {
+          "type": "string",
+          "description": "External trading serial number"
+        },
+        "clientRequestTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "External request time"
+        },
+        "extObject": {
+          "$ref": "#/definitions/GenericVO"
+        },
+        "policy": {
+          "description": "Policy",
+          "$ref": "#/definitions/PolicyInput"
+        }
+      }
+    },
+    "CustomerDeclarationInput": {
+      "type": "object",
+      "properties": {
+        "declarationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Inform date, date format: yyyy-MM-dd'T'HH: mm: ss"
+        },
+        "details": {
+          "type": "array",
+          "description": "Inform the details",
+          "items": {
+            "$ref": "#/definitions/CustomerDeclarationDetailInput"
+          }
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "Extended information, Map type, Key / Value are character",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "partySerialId": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "Customer temporary number, request within the use of a unique request within a party"
+        }
+      }
+    },
+    "PolicyInput": {
+      "type": "object",
+      "properties": {
+        "applyDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date of application, non-empty, date format: yyyy-MM-dd'T'HH: mm: ss"
+        },
+        "beneficiaries": {
+          "type": "array",
+          "description": "List of beneficiaries",
+          "items": {
+            "$ref": "#/definitions/BeneficiaryInput"
+          }
+        },
+        "coverages": {
+          "type": "array",
+          "description": "List of insurance insurance",
+          "items": {
+            "$ref": "#/definitions/CoverageInput"
+          }
+        },
+        "currency": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "Currency, non-empty, 1 - RMB",
+          "enum": [
+            1
+          ]
+        },
+        "customers": {
+          "type": "array",
+          "description": "Policy customer list",
+          "items": {
+            "$ref": "#/definitions/PolicyCustomerInput"
+          }
+        },
+        "declarations": {
+          "type": "array",
+          "description": "Customer informs list",
+          "items": {
+            "$ref": "#/definitions/CustomerDeclarationInput"
+          }
+        },
+        "deliverType": {
+          "type": "string",
+          "example": "M",
+          "description": "Policy delivery, H-manual; M-mail",
+          "enum": [
+            "H",
+            "M"
+          ]
+        },
+        "expiryDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Termination Date, Date Format: yyyy-MM-dd'T'HH: mm: ss"
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "Extended information, Map type, Key / Value are character",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "inceptionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Policy effective date, date format: yyyy-MM-dd'T'HH: mm: ss"
+        },
+        "installPrem": {
+          "type": "number",
+          "format": "double",
+          "description": "Insurance premium",
+          "readOnly": true
+        },
+        "insureds": {
+          "type": "array",
+          "description": "List of policy insured",
+          "items": {
+            "$ref": "#/definitions/InsuredInput"
+          }
+        },
+        "insurerCode": {
+          "type": "string",
+          "description": "Insurance company code"
+        },
+        "payerAccounts": {
+          "type": "array",
+          "description": "Payment method list",
+          "items": {
+            "$ref": "#/definitions/PayerAccountInput"
+          }
+        },
+        "payers": {
+          "type": "array",
+          "description": "Payer list",
+          "items": {
+            "$ref": "#/definitions/PayerInput"
+          }
+        },
+        "policyHolder": {
+          "description": "Insured",
+          "$ref": "#/definitions/PolicyHolderInput"
+        },
+        "policyPackage": {
+          "description": "Product portfolio",
+          "$ref": "#/definitions/PolicyPackageInput"
+        },
+        "quotationCode": {
+          "type": "string",
+          "description": "Trial request number"
+        },
+        "salesChannelCode": {
+          "type": "string",
+          "description": "Sales channel code"
+        },
+        "serviceAgentCode": {
+          "type": "string",
+          "description": "Policy agent code"
+        },
+        "submissionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date of submission, date format: yyyy-MM-dd'T'HH: mm: ss"
+        },
+        "trustees": {
+          "type": "array",
+          "description": "Guardian List",
+          "items": {
+            "$ref": "#/definitions/TrusteeInput"
+          }
+        }
+      }
+    },
+    "Trustee": {
+      "type": "object",
+      "properties": {
+        "extendedProps": {
+          "type": "object",
+          "description": "Extended information, Map type, Key / Value are character",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "listId": {
+          "type": "string",
+          "description": "Policy role Internal serial number, UUID type",
+          "readOnly": true
+        },
+        "partyId": {
+          "type": "string",
+          "description": "Customer ID, UUID type",
+          "readOnly": true
+        },
+        "policyId": {
+          "type": "string",
+          "description": "Policy internal serial number, UUID type",
+          "readOnly": true
+        }
+      }
+    },
+    "CoverageExtWaiverInput": {
+      "type": "object",
+      "properties": {
+        "waivedSa": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "ApplicationResponse": {
+      "type": "object",
+      "properties": {
+        "clientRequestId": {
+          "type": "string",
+          "description": "External trading serial number"
+        },
+        "clientRequestTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "External request time"
+        },
+        "exceptions": {
+          "type": "array",
+          "description": "abnormal information",
+          "items": {
+            "type": "string"
+          }
+        },
+        "messages": {
+          "type": "array",
+          "description": "Business Failure Reason Description List Node",
+          "items": {
+            "$ref": "#/definitions/GenericValidationResult"
+          }
+        },
+        "policy": {
+          "description": "Policy",
+          "$ref": "#/definitions/ApplicationPolicyResult"
+        },
+        "result": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Request results, 1 - business success; 0 - business failure;"
+        }
+      }
+    },
+    "ApplicationPolicyResult": {
+      "type": "object",
+      "properties": {
+        "coverages": {
+          "type": "array",
+          "description": "List of insurance insurance",
+          "items": {
+            "$ref": "#/definitions/CoverageCalculationResult"
+          }
+        },
+        "currency": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "Currency, non-empty, 1 - RMB",
+          "enum": [
+            1
+          ]
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "Extended information, Map type, Key / Value are character",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "inceptionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Policy effective date, date format: yyyy-MM-dd'T'HH: mm: ss"
+        },
+        "installPrem": {
+          "type": "number",
+          "format": "double",
+          "description": "Insurance premium",
+          "readOnly": true
+        },
+        "proposalNumber": {
+          "type": "string",
+          "description": "Insured number"
+        },
+        "quotationCode": {
+          "type": "string",
+          "description": "Trial request number"
+        }
+      }
+    },
+    "IssuranceRequest": {
+      "type": "object",
+      "required": [
+        "policy"
+      ],
+      "properties": {
+        "clientRequestId": {
+          "type": "string",
+          "description": "External trading serial number"
+        },
+        "clientRequestTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "External request time"
+        },
+        "collection": {
+          "description": "Charge information",
+          "$ref": "#/definitions/CollectionInput"
+        },
+        "extObject": {
+          "$ref": "#/definitions/GenericVO"
+        },
+        "policy": {
+          "description": "Policy",
+          "$ref": "#/definitions/CollectionPolicyInput"
+        }
+      }
+    },
+    "Coverage": {
+      "type": "object",
+      "properties": {
+        "chargePeriod": {
+          "type": "string",
+          "example": "2",
+          "description": "Payment period type, non-empty, 1-paid; 2-year payment; 3 to a certain age; 4-life",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ]
+        },
+        "chargeYear": {
+          "type": "integer",
+          "format": "int32",
+          "example": 20,
+          "description": "Payment period, non-empty, the bargain is 0; by age to pay the payment period; to pay a certain age to pay the expiry of the age;"
+        },
+        "coverageAgents": {
+          "type": "array",
+          "description": "List of performance appraisal agents",
+          "items": {
+            "$ref": "#/definitions/CoverageAgent"
+          }
+        },
+        "coverageId": {
+          "type": "string",
+          "description": "Insurance type serial number, UUID type",
+          "readOnly": true
+        },
+        "coveragePeriod": {
+          "type": "string",
+          "example": "1",
+          "description": "Protection of the type of age, 1-life-long; 2-year limit; 3 to a certain age;",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+          ]
+        },
+        "coverageSeriaId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The insurance serial number, the use of the request, the only identification within a certain type of insurance"
+        },
+        "coverageYear": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of years of protection, the number of guarantees for the number of days; the number of days to protect the number of days"
+        },
+        "currentPremium": {
+          "description": "Current premium",
+          "$ref": "#/definitions/CoveragePremium"
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "Extended information, Map type, Key / Value are character",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "insureds": {
+          "type": "array",
+          "description": "List of insured persons",
+          "items": {
+            "$ref": "#/definitions/CoverageInsured"
+          }
+        },
+        "masterCoverageId": {
+          "type": "string",
+          "description": "Main serial number, UUID type",
+          "readOnly": true
+        },
+        "nextPremium": {
+          "$ref": "#/definitions/CoveragePremium"
+        },
+        "payPlans": {
+          "type": "array",
+          "description": "Payment plan list",
+          "items": {
+            "$ref": "#/definitions/PayPlan"
+          }
+        },
+        "policyId": {
+          "type": "string",
+          "description": "Policy internal serial number, UUID type",
+          "readOnly": true
+        },
+        "productCode": {
+          "type": "string",
+          "description": "Product Code"
+        },
+        "productId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Product ID"
+        },
+        "waiverExt": {
+          "description": "Insurance information",
+          "$ref": "#/definitions/CoverageExtWaiver"
+        }
+      }
+    },
+    "BankAccount": {
+      "type": "object",
+      "properties": {
+        "accoName": {
+          "type": "string",
+          "example": "张三",
+          "description": "Account holder name"
+        },
+        "accountId": {
+          "type": "string",
+          "description": "Bank account internal serial number, UUID type",
+          "readOnly": true
+        },
+        "accountType": {
+          "type": "string",
+          "example": "2",
+          "description": "Account type, 2 debit card; 8 - credit card",
+          "enum": [
+            "2",
+            "8"
+          ]
+        },
+        "bankAccount": {
+          "type": "string",
+          "example": "1111222233334444567",
+          "description": "Bank account"
+        },
+        "bankAccountCity": {
+          "type": "string",
+          "example": "Shanghai",
+          "description": "Bank account city"
+        },
+        "bankAccountProvince": {
+          "type": "string",
+          "example": "Shanghai",
+          "description": "Bank account number"
+        },
+        "bankCode": {
+          "type": "string",
+          "example": "test_bank",
+          "description": "Bank Code"
+        },
+        "branchCode": {
+          "type": "string",
+          "example": "1001",
+          "description": "Branch code"
+        },
+        "creditCardType": {
+          "type": "string",
+          "example": "1",
+          "description": "Credit card type, non credit card is empty, 1-Master; 2-Visa; 3-BCA; 4-JCB",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ]
+        },
+        "debitCreditType": {
+          "type": "string",
+          "example": "0",
+          "description": "Account use, 0 - pay and use; 1 - fee; 2 - refund",
+          "enum": [
+            "0",
+            "1",
+            "2"
+          ]
+        },
+        "expireDate": {
+          "type": "string",
+          "format": "date-time",
+          "example": "10/2020",
+          "description": "Account expiration date, MM / yyyy"
+        },
+        "issueBankName": {
+          "type": "string",
+          "example": "ICBC",
+          "description": "Issuer"
+        }
+      }
+    },
+    "QuotationPolicyResult": {
+      "type": "object",
+      "properties": {
+        "coverages": {
+          "type": "array",
+          "description": "List of insurance insurance",
+          "items": {
+            "$ref": "#/definitions/CoverageCalculationResult"
+          }
+        },
+        "currency": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "Currency, non-empty, 1 - RMB",
+          "enum": [
+            1
+          ]
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "Extended information, Map type, Key / Value are character",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "inceptionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Policy effective date, date format: yyyy-MM-dd'T'HH: mm: ss"
+        },
+        "installPrem": {
+          "type": "number",
+          "format": "double",
+          "description": "Insurance premium",
+          "readOnly": true
+        },
+        "quotationCode": {
+          "type": "string",
+          "description": "Trial request number"
+        }
+      }
+    },
+    "PayerInput": {
+      "type": "object",
+      "properties": {
+        "extendedProps": {
+          "type": "object",
+          "description": "Extended information, Map type, Key / Value are character",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "partySerialId": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "Customer temporary number, request within the use of a unique request within a party"
+        },
+        "relationToPH": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "The relationship between the insured and the insured, the number type, 1 - own; 2 - child; 3 - spouse; 10 - parent;",
+          "enum": [
+            1,
+            2,
+            3,
+            10,
+            7
+          ]
+        },
+        "shareRate": {
+          "type": "number",
+          "format": "double",
+          "example": 1,
+          "description": "Payment ratio, maximum 1"
+        }
+      }
+    },
+    "CoverageExtWaiver": {
+      "type": "object",
+      "properties": {
+        "waivedSa": {
+          "type": "number",
+          "format": "double",
+          "description": "Exemptions, 0 means full exemption, not 0 means exemption specified amount, can not exceed the exemption insurance premium"
+        },
+        "waiver": {
+          "type": "string",
+          "example": "N",
+          "description": "Whether it is exempt from risk, Y-yes;",
+          "enum": [
+            "Y",
+            "N"
+          ]
+        }
+      }
+    },
+    "CoveragePremium": {
+      "type": "object",
+      "properties": {
+        "benefitLevel": {
+          "type": "string",
+          "description": "Insurance grade, the product insured when the grade is not empty"
+        },
+        "paymentFreq": {
+          "type": "string",
+          "example": "1",
+          "description": "Payment frequency, 1-year payment; 2-year payment; 3-quarter payment; 4-month payment;",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"
+          ]
+        },
+        "premium": {
+          "type": "number",
+          "format": "double",
+          "example": 2314,
+          "description": "Insurance premiums, insurance premiums when the amount of non-empty"
+        },
+        "sumAssured": {
+          "type": "number",
+          "format": "double",
+          "example": 100000,
+          "description": "Insurance premium, the amount of insurance premium is not empty"
+        },
+        "unit": {
+          "type": "number",
+          "format": "double",
+          "description": "Insurance number of copies, the number of products by the number of non-empty insurance"
+        }
+      }
+    },
+    "BankAccountInput": {
+      "type": "object",
+      "properties": {
+        "accoName": {
+          "type": "string",
+          "example": "张三",
+          "description": "Account holder name"
+        },
+        "accountType": {
+          "type": "string",
+          "example": "2",
+          "description": "Account type, 2 debit card; 8 - credit card",
+          "enum": [
+            "2",
+            "8"
+          ]
+        },
+        "bankAccount": {
+          "type": "string",
+          "example": "1111222233334444567",
+          "description": "Bank account"
+        },
+        "bankAccountCity": {
+          "type": "string",
+          "example": "Shanghai",
+          "description": "Bank account city"
+        },
+        "bankAccountProvince": {
+          "type": "string",
+          "example": "Shanghai",
+          "description": "Bank account number"
+        },
+        "bankCode": {
+          "type": "string",
+          "example": "test_bank",
+          "description": "Bank Code"
+        },
+        "creditCardType": {
+          "type": "string",
+          "example": "1",
+          "description": "Credit card type, non credit card is empty, 1-Master; 2-Visa; 3-BCA; 4-JCB",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ]
+        },
+        "debitCreditType": {
+          "type": "string",
+          "example": "0",
+          "description": "Account use, 0 - pay and use; 1 - fee; 2 - refund",
+          "enum": [
+            "0",
+            "1",
+            "2"
+          ]
+        },
+        "expireDate": {
+          "type": "string",
+          "format": "date-time",
+          "example": "10/2020",
+          "description": "Account expiration date, MM / yyyy"
+        },
+        "issueBankName": {
+          "type": "string",
+          "example": "ICBC",
+          "description": "Issuer"
+        }
+      }
+    },
+    "CollectionPayerAccountInput": {
+      "type": "object",
+      "properties": {
+        "bankAccount": {
+          "description": "First bank account",
+          "$ref": "#/definitions/BankAccountInput"
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "Extended information, Map type, Key / Value are character",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "paymentMethod": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "PayerAccountInput": {
+      "type": "object",
+      "properties": {
+        "bankAccount": {
+          "description": "First bank account",
+          "$ref": "#/definitions/BankAccountInput"
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "Extended information, Map type, Key / Value are character",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "nextBankAccount": {
+          "description": "Renewal of bank account",
+          "$ref": "#/definitions/BankAccountInput"
+        },
+        "paymentMethod": {
+          "type": "integer",
+          "format": "int32",
+          "example": 3,
+          "description": "Down payment, digital type, 1 - cash; 2 - check; 3 - bank transfer; 30 - credit card",
+          "enum": [
+            1,
+            2,
+            3,
+            30
+          ]
+        },
+        "paymentMethodNext": {
+          "type": "integer",
+          "format": "int32",
+          "example": 3,
+          "description": "Renewal payment method, number type, 1 - cash; 2 - check; 3 - bank transfer; 30 - credit card",
+          "enum": [
+            1,
+            2,
+            3,
+            30
+          ]
+        }
+      }
+    },
+    "QuotationRequest": {
+      "type": "object",
+      "required": [
+        "policy"
+      ],
+      "properties": {
+        "clientRequestId": {
+          "type": "string",
+          "description": "External trading serial number"
+        },
+        "clientRequestTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "External request time"
+        },
+        "extObject": {
+          "$ref": "#/definitions/GenericVO"
+        },
+        "policy": {
+          "description": "Policy",
+          "$ref": "#/definitions/PolicyInput"
+        }
+      }
+    },
+    "Beneficiary": {
+      "type": "object",
+      "properties": {
+        "beneType": {
+          "type": "string",
+          "example": "2",
+          "description": "Benefit type, 1 survivor beneficiary; 2 - Victim beneficiary; 3 - Insured beneficiary",
+          "enum": [
+            "1",
+            "2",
+            "3"
+          ]
+        },
+        "designation": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "6 - grandfather; grandmother grandmother; grandfather grandmother grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather Uncle; 11 - aunt; 12 - cousin / cousin; 13 - nephew / niece / nephew / niece; 14 - employer; 15 - others; 16 -",
+          "enum": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16
+          ]
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "Extended information, Map type, Key / Value are character",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "insuredPartyId": {
+          "type": "string",
+          "description": "The number of parties to the beneficiary, UUID type",
+          "readOnly": true
+        },
+        "listId": {
+          "type": "string",
+          "description": "Policy role Internal serial number, UUID type",
+          "readOnly": true
+        },
+        "partyId": {
+          "type": "string",
+          "description": "Customer ID, UUID type",
+          "readOnly": true
+        },
+        "policyId": {
+          "type": "string",
+          "description": "Policy internal serial number, UUID type",
+          "readOnly": true
+        },
+        "shareOrder": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "Benefit"
+        },
+        "shareRate": {
+          "type": "number",
+          "format": "double",
+          "example": 1,
+          "description": "Benefit ratio, up to 1"
+        }
+      }
+    }
+  },
+  "paths": {
+    "/packages": {
+      "get": {
+        "tags": [
+          "Product"
+        ],
+        "summary": "Get the combination list",
+        "description": "The combination list is obtained according to the conditions, and the combination list contains the basic information of the combination",
+        "operationId": "findPackagesUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "date",
+            "in": "query",
+            "description": "日期，在此日期在售的产品,格式(YYYY-MM-DD)",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "salesCategory",
+            "in": "query",
+            "description": "产品销售大类，可以多个，如果多个以逗号（，）分隔",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "insurerIds",
+            "in": "query",
+            "description": "保险公司列表，可以多个，如果多个以逗号（，）分隔",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "X-ebao-tenant-id",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PackagesResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/packages/{packageCode}": {
+      "get": {
+        "tags": [
+          "Product"
+        ],
+        "summary": "Get a combination of information",
+        "description": "According to the combination of code, access to a product of detailed information",
+        "operationId": "findProductPackageUsingGET_1",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "packageCode",
+            "in": "path",
+            "description": "组合代码",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "X-ebao-tenant-id",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PackageResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/products": {
+      "get": {
+        "tags": [
+          "Product"
+        ],
+        "summary": "Get a list of products",
+        "description": "Obtain a list of products according to the conditions, the product list contains the basic information of the product",
+        "operationId": "findProductsUsingGET_1",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "date",
+            "in": "query",
+            "description": "日期，在此日期在售的产品,格式(YYYY-MM-DD)",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "salesCategory",
+            "in": "query",
+            "description": "产品销售大类，可以多个，如果多个以逗号（，）分隔",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "insurerIds",
+            "in": "query",
+            "description": "保险公司列表，可以多个，如果多个以逗号（，）分隔",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "isMainProduct",
+            "in": "query",
+            "description": "是否是主险",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "X-ebao-tenant-id",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProductsResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/products/benefitIllustration": {
+      "post": {
+        "tags": [
+          "Product"
+        ],
+        "summary": "Interest show",
+        "description": "Product benefits show",
+        "operationId": "illustrateCalculationUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "calculateRequest",
+            "description": "保费保额计算数据",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IllustrationRequest"
+            }
+          },
+          {
+            "name": "X-ebao-tenant-id",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CalculatePremSAResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/products/benefitPremiumSA": {
+      "post": {
+        "tags": [
+          "Product"
+        ],
+        "summary": "Calculate premium or insured amount",
+        "description": "According to the premium or the amount of insurance premium",
+        "operationId": "benefitPremiumSAUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "calculateRequest",
+            "description": "保费保额计算数据",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CalculatePremSARequest"
+            }
+          },
+          {
+            "name": "X-ebao-tenant-id",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CalculatePremSAResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/products/salesCategory": {
+      "get": {
+        "tags": [
+          "Product"
+        ],
+        "summary": "Get a category of sales for a tenant",
+        "description": "Get a list of all sales of a tenant",
+        "operationId": "findSalesCategoryUsingGET_1",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "X-ebao-tenant-id",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SalesCategoryResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/products/{productCode}": {
+      "get": {
+        "tags": [
+          "Product"
+        ],
+        "summary": "Get a product information",
+        "description": "According to the product code, get the details of a product",
+        "operationId": "findProductUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "productCode",
+            "in": "path",
+            "description": "产品代码",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "X-ebao-tenant-id",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProductResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/proposals/application": {
+      "post": {
+        "tags": [
+          "Proposal"
+        ],
+        "summary": "Insured",
+        "description": "Calculate the premium and verify the underwriting rules, if passed, then generate an insurance policy number",
+        "operationId": "applyUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "request",
+            "description": "request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationRequest"
+            }
+          },
+          {
+            "name": "X-ebao-tenant-id",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ApplicationResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/proposals/issurance": {
+      "post": {
+        "tags": [
+          "Proposal"
+        ],
+        "summary": "Charge underwriting",
+        "description": "After the nuclear insurance charges underwriting",
+        "operationId": "issueUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "request",
+            "description": "request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IssuranceRequest"
+            }
+          },
+          {
+            "name": "X-ebao-tenant-id",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IssuranceResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/proposals/pre-verification": {
+      "post": {
+        "tags": [
+          "Proposal"
+        ],
+        "summary": "Insured preflight",
+        "description": "Calculate the premium and verify the risk of insurance",
+        "operationId": "quoteUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "request",
+            "description": "request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/QuotationRequest"
+            }
+          },
+          {
+            "name": "X-ebao-tenant-id",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/QuotationResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    }
+  }
+}
