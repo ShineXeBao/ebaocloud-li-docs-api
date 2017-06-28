@@ -3822,7 +3822,7 @@
         "tags": [
           "Product"
         ],
-        "summary": "Interest show",
+        "summary": "Benefit Illustration",
         "description": "Product benefit illustration",
         "operationId": "illustrateCalculationUsingPOST",
         "consumes": [
