@@ -4073,7 +4073,7 @@
         "tags": [
           "Proposal"
         ],
-        "summary": "Collet & Issue policy",
+        "summary": "Collection & Issue policy",
         "description": "After the premium collection, issue the policy",
         "operationId": "issueUsingPOST",
         "consumes": [
