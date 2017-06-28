@@ -3705,7 +3705,7 @@
         "tags": [
           "Product"
         ],
-        "summary": "Get a Product package of information",
+        "summary": "Get product package detail",
         "description": "According to the Product package of code, get a product of the details",
         "operationId": "findProductPackageUsingGET_1",
         "consumes": [
@@ -3875,7 +3875,7 @@
         "tags": [
           "Product"
         ],
-        "summary": "Calculate the premium or insured",
+        "summary": "Calculate premium or SA",
         "description": "Calculate premium base on SA or calculate SA base on premium",
         "operationId": "benefitPremiumSAUsingPOST",
         "consumes": [
@@ -3928,7 +3928,7 @@
         "tags": [
           "Product"
         ],
-        "summary": "Get a list of all sales products for one tenant",
+        "summary": "Get a list of all sales products",
         "description": "Get a list of all sales products for one tenant",
         "operationId": "findSalesCategoryUsingGET_1",
         "consumes": [
@@ -3969,7 +3969,7 @@
         "tags": [
           "Product"
         ],
-        "summary": "Get a product information",
+        "summary": "Get product detail",
         "description": "According to the product code, get the details of a product",
         "operationId": "findProductUsingGET",
         "consumes": [
