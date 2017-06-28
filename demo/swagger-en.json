@@ -4017,7 +4017,7 @@
         "tags": [
           "Proposal"
         ],
-        "summary": "Insured",
+        "summary": "Insurance",
         "description": "Calculate the premium and verify the insurance underwriting rules, if passed, then generate an insurance policy number",
         "operationId": "applyUsingPOST",
         "consumes": [
@@ -4073,8 +4073,8 @@
         "tags": [
           "Proposal"
         ],
-        "summary": "Charge underwriting",
-        "description": "After the nuclear insurance after the insurance underwriting",
+        "summary": "Collet & Issue policy",
+        "description": "After the premium collection, issue the policy",
         "operationId": "issueUsingPOST",
         "consumes": [
           "application/json"
