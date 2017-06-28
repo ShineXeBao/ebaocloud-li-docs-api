@@ -69,14 +69,14 @@
       "properties": {
         "illustrationResultList": {
           "type": "array",
-          "description": "List of benefits illustration results",
+          "description": "Illustration results list",
           "items": {
             "$ref": "#/definitions/IllustrationResult"
           }
         },
         "illustrationSingleResultList": {
           "type": "array",
-          "description": "List of individual benefits",
+          "description": "Single illustration results list",
           "items": {
             "$ref": "#/definitions/IllustrationResult"
           }
@@ -109,36 +109,36 @@
         "endDate": {
           "type": "string",
           "format": "date-time",
-          "description": "End of sale of product"
+          "description": "Product sales end d"
         },
         "familyType": {
           "type": "string",
-          "description": "Family product"
+          "description": "Family product type"
         },
         "mainPlan": {
           "type": "string",
-          "description": "Is it a main plan"
+          "description": "Whether it is the main plan"
         },
         "orgId": {
           "type": "integer",
           "format": "int64",
-          "description": "Which agency belongs to this product"
+          "description": "The organization this product belongs to"
         },
         "productAbbreviation": {
           "type": "string",
-          "description": "Product Introduction"
+          "description": "Product introduction"
         },
         "productCode": {
           "type": "string",
-          "description": "Product Code"
+          "description": "Product code"
         },
         "productDescription": {
           "type": "string",
-          "description": "product description"
+          "description": "Product description"
         },
         "productName": {
           "type": "string",
-          "description": "product name"
+          "description": "Product Name"
         },
         "salesCategory": {
           "description": "Product sales category",
@@ -147,7 +147,7 @@
         "startDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Product sale time"
+          "description": "Product sales start date"
         }
       }
     },
@@ -192,7 +192,7 @@
           }
         },
         "productPackageInfo": {
-          "description": "Combination details",
+          "description": "Product package details",
           "$ref": "#/definitions/ProductPackageInfo"
         },
         "result": {
@@ -218,20 +218,20 @@
         "categoryId": {
           "type": "integer",
           "format": "int64",
-          "description": "Responsibility category Id"
+          "description": "Liability category Id"
         },
         "categoryName": {
           "type": "string",
-          "description": "Responsibility category name"
+          "description": "Liability category name"
         },
         "liabilityId": {
           "type": "integer",
           "format": "int64",
-          "description": "Responsibility Id"
+          "description": "Liability Id"
         },
         "liabilityName": {
           "type": "string",
-          "description": "Responsibility Name"
+          "description": "Liability name"
         }
       }
     },
@@ -241,7 +241,7 @@
         "annuity": {
           "type": "boolean",
           "example": false,
-          "description": "Whether there is an annuity"
+          "description": "Is it annuity product"
         },
         "liabilities": {
           "type": "array",
@@ -252,7 +252,7 @@
         },
         "survivalBenefitOptions": {
           "type": "array",
-          "description": "Allowed Survival Benefit Option (1: Get it now 2: Pay with premium for payment 3: Exist insurance company account",
+          "description": "Allowed Survival Benefit Option (1: Get it now 2: Pay with premium for payment 3: There is an insurance company account)",
           "items": {
             "type": "string"
           }
@@ -264,11 +264,11 @@
       "properties": {
         "attachCompulsory": {
           "type": "string",
-          "description": "Whether it is mandatory"
+          "description": "Whether to force attach to main plan"
         },
         "attachType": {
           "type": "string",
-          "description": "Additional Type 1: Only one additional time allowed 2: Allows multiple times"
+          "description": "Additional type 1: only allowed once again 2: allowed to attach multiple times"
         },
         "masterProductCode": {
           "type": "string",
@@ -277,70 +277,70 @@
         "masterProductId": {
           "type": "integer",
           "format": "int64",
-          "description": "Main product Id"
+          "description": "The main product Id"
         },
         "maxAthAge": {
           "type": "integer",
           "format": "int32",
-          "description": "Allow additional maximum age"
+          "description": "Allow the maximum age of additional"
         },
         "maxAthMastAge": {
           "type": "integer",
           "format": "int32",
-          "description": "The maximum age allowed to be attached to the main risk"
+          "description": "@Shanhe The maximum age allowed to be attached to the main plan"
         },
         "maxAttachSa2MainSaRate": {
           "type": "number",
           "format": "double",
-          "description": "The ratio of the maximum additional risk to the main risk"
+          "description": "@Shanhe The maximum proportion of the additional rider"
         },
         "maxAttachedSa": {
           "type": "number",
           "format": "double",
-          "description": "Maximum additional value"
+          "description": "@Shanhe The maximum attached SA"
         },
         "maxTotalSa2MainSaRate": {
           "type": "number",
           "format": "double",
-          "description": "The ratio of the maximum additional risk to the main risk"
+          "description": "@Shanhe The maximum proportion of the rider"
         },
         "minAthAge": {
           "type": "integer",
           "format": "int32",
-          "description": "Allow additional minimum age"
+          "description": "@Shanhe The minimum age allowed to be attached"
         },
         "minAthMastAge": {
           "type": "integer",
           "format": "int32",
-          "description": "Allow the minimum age of the additional main risk"
+          "description": "@Shanhe The minimum age that is allowed to be attached to the main plan"
         },
         "minAttachSa2MainSaRate": {
           "type": "number",
           "format": "double",
-          "description": "The ratio of the minimum additional risk to the main risk"
+          "description": "@Shanhe The proportion of the minimum rider to the main insurance"
         },
         "minMastSaAmount": {
           "type": "number",
           "format": "double",
-          "description": "Allow the minimum age of the additional main risk"
+          "description": "@Shanhe The minimum age that is allowed to be attached to the main plan"
         },
         "riderProductCode": {
           "type": "string",
-          "description": "Additional product code"
+          "description": "Rider product code"
         },
         "riderProductId": {
           "type": "integer",
           "format": "int64",
-          "description": "Additional risk product Id"
+          "description": "Rider products Id"
         },
         "saNoEqual": {
           "type": "string",
-          "description": "Whether the additional insurance can be equal to the amount of insurance coverage"
+          "description": "Whether the rider‘s SA can be equal to the main plan's"
         },
         "totalOverRate": {
           "type": "number",
           "format": "double",
-          "description": "The maximum additional insurance premium plus the main insurance ratio than the main insurance ratio"
+          "description": "@Shanhe The maximum rider premium plus the main insurance amount than the main insurance ratio"
         }
       }
     },
@@ -364,35 +364,35 @@
       "properties": {
         "annuityEndPayTerm": {
           "type": "array",
-          "description": "Annuity termination deadline",
+          "description": "Annuity end payment term",
           "items": {
             "$ref": "#/definitions/TermLimit"
           }
         },
         "annuityPayEnsureTerm": {
           "type": "array",
-          "description": "Annuity guarantee deadline",
+          "description": "Annuity payment ensure term",
           "items": {
             "$ref": "#/definitions/TermLimit"
           }
         },
         "annuityStartPayTerm": {
           "type": "array",
-          "description": "The annuity begins to pay the deadline",
+          "description": "The annuity start pay term",
           "items": {
             "$ref": "#/definitions/TermLimit"
           }
         },
         "coverageTerm": {
           "type": "array",
-          "description": "Guarantee period limit",
+          "description": "Coverage term",
           "items": {
             "$ref": "#/definitions/TermLimit"
           }
         },
         "premiumTerm": {
           "type": "array",
-          "description": "Payment period limit",
+          "description": "Payment term",
           "items": {
             "$ref": "#/definitions/TermLimit"
           }
@@ -403,7 +403,7 @@
       "type": "object",
       "properties": {
         "saLimit": {
-          "description": "Product limit",
+          "description": "Product sum assured limit",
           "$ref": "#/definitions/SaLimit"
         }
       }
@@ -417,22 +417,22 @@
         "age": {
           "type": "integer",
           "format": "int32",
-          "description": "age"
+          "description": "Age"
         },
         "amount": {
           "type": "number",
           "format": "double",
-          "description": "Amount of money"
+          "description": "Amount"
         },
         "calcType": {
           "type": "integer",
           "format": "int32",
-          "description": "Type of calculation"
+          "description": "Calculation type"
         },
         "coverageId": {
           "type": "integer",
           "format": "int64",
-          "description": "Guarantee number"
+          "description": "Coverage ID"
         },
         "fundCode": {
           "type": "string",
@@ -445,17 +445,17 @@
         "orderSeq": {
           "type": "integer",
           "format": "int32",
-          "description": "order"
+          "description": "Sequence"
         },
         "performanceType": {
           "type": "integer",
           "format": "int32",
-          "description": "Interest display type"
+          "description": "Illustration type"
         },
         "policyMonth": {
           "type": "integer",
           "format": "int32",
-          "description": "Warrant month"
+          "description": "Policy month"
         },
         "policyYear": {
           "type": "integer",
@@ -469,14 +469,14 @@
       "properties": {
         "attachedRiders": {
           "type": "array",
-          "description": "Main risk additional risk relationship",
+          "description": "The relationship of main plan and rider",
           "items": {
             "$ref": "#/definitions/ProductRelationship"
           }
         },
         "benefitType": {
           "type": "string",
-          "description": "Product protection category. 23 subsidized medical insurance 31 accident insurance 11 two full insurance 12 years gold insurance 13 life insurance 14 regular insurance 41 investment insurance 15 mortgage risk 16 long-term care 17 heavy risk"
+          "description": "Product benefit category: 22 Reimbursement medical insurance 23 subsidised medical insurance 31 accident insurance 11 endowment insurance 12 annuities insurance 13 life insurance 14 term insurance 41 investment insurance 15 mortgage insurance 16 long-term care 17 critical illness"
         },
         "bonus": {
           "description": "Bonus information",
@@ -504,7 +504,7 @@
           "description": "Product Id"
         },
         "productSumAssured": {
-          "description": "Product limit",
+          "description": "Product sum assured limit",
           "$ref": "#/definitions/ProductSumAssured"
         },
         "productTerm": {
@@ -518,28 +518,28 @@
       "properties": {
         "benefitType": {
           "type": "string",
-          "description": "Product protection category. 23 subsidized medical insurance 31 accident insurance 11 two full insurance 12 years gold insurance 13 life insurance 14 regular insurance 41 investment insurance 15 mortgage risk 16 long-term care 17 heavy risk"
+          "description": "Product benefit category: 22 Reimbursement medical insurance 23 subsidised medical insurance 31 accident insurance 11 endowment insurance 12 annuities insurance 13 life insurance 14 term insurance 41 investment insurance 15 mortgage insurance 16 long-term care 17 critical illness"
         },
         "endDate": {
           "type": "string",
           "format": "date-time",
-          "description": "End of sale of product"
+          "description": "Product end sale date"
         },
         "isMainProduct": {
           "type": "string",
-          "description": "Whether it is the main risk"
+          "description": "Whether it is the main plan"
         },
         "productAbbr": {
           "type": "string",
-          "description": "Product Introduction"
+          "description": "Product introduction"
         },
         "productCode": {
           "type": "string",
-          "description": "Product Code"
+          "description": "Product code"
         },
         "productDescription": {
           "type": "string",
-          "description": "product description"
+          "description": "Product description"
         },
         "productId": {
           "type": "integer",
@@ -548,12 +548,12 @@
         },
         "productName": {
           "type": "string",
-          "description": "product name"
+          "description": "Product name"
         },
         "startDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Product date of sale"
+          "description": "Product start sales date"
         }
       }
     },
@@ -562,17 +562,17 @@
       "properties": {
         "limitUnit": {
           "type": "string",
-          "description": "Limit or Unit Limit 1: 2: Unit"
+          "description": "Insured or unit limit 1: insured amount 2: unit"
         },
         "maxAmount": {
           "type": "integer",
           "format": "int64",
-          "description": "Maximum amount, amount or unit"
+          "description": "The maximum amount of money or unit"
         },
         "minAmount": {
           "type": "integer",
           "format": "int64",
-          "description": "Minimum amount, insured amount or unit"
+          "description": "The minimum amount, the amount of money, or the unit"
         },
         "moneyId": {
           "type": "integer",
@@ -586,25 +586,25 @@
       "properties": {
         "description": {
           "type": "string",
-          "description": "Combination description"
+          "description": "Product package description"
         },
         "moneyId": {
           "type": "integer",
           "format": "int64",
-          "description": "Combination of currency"
+          "description": "Product package of currency"
         },
         "packageCode": {
           "type": "string",
-          "description": "Combination code"
+          "description": "Product package code"
         },
         "packageId": {
           "type": "integer",
           "format": "int64",
-          "description": "Combination Id"
+          "description": "Product package Id"
         },
         "packageName": {
           "type": "string",
-          "description": "Combination name"
+          "description": "Product package name"
         }
       }
     },
@@ -614,11 +614,11 @@
         "cashBonus": {
           "type": "boolean",
           "example": false,
-          "description": "Whether there is a cash dividend"
+          "description": "Whether there is a cash bonus"
         },
         "cashBonusOptions": {
           "type": "array",
-          "description": "Allowed cash bonus option (1: receive immediately 2: pay dividend with cash bonus 3: exist in insurance company account",
+          "description": "Allowed cash bonus option (1: Get it now 2: Pay with cash bonus premium 3: There is an insurance company account",
           "items": {
             "type": "string"
           }
@@ -626,12 +626,12 @@
         "cashBonusUnitAmount": {
           "type": "number",
           "format": "double",
-          "description": "Cash dividend unit"
+          "description": "Cash bonus unit"
         },
         "cashBonusVestYear": {
           "type": "integer",
           "format": "int32",
-          "description": "Cash dividends must be left in the insurance company after years of investment can be received"
+          "description": "Cash bonus must stay in the insurance company after years of investment before they can receive"
         }
       }
     },
@@ -639,7 +639,7 @@
       "type": "object",
       "properties": {
         "calculatePolicyResult": {
-          "description": "Calculation results",
+          "description": "Calculation result",
           "$ref": "#/definitions/CalculatePolicyResult"
         },
         "clientRequestId": {
@@ -680,7 +680,7 @@
       "properties": {
         "calculateCoverageResults": {
           "type": "array",
-          "description": "The detailed calculation of the results",
+          "description": "The detailed calculation of the results of the",
           "items": {
             "$ref": "#/definitions/CalculateCoverageResult"
           }
@@ -688,12 +688,12 @@
         "inceptionDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Insured day"
+          "description": "inception date"
         },
         "installPrem": {
           "type": "number",
           "format": "double",
-          "description": "Total payment premium"
+          "description": "Install premium"
         }
       }
     },
@@ -747,7 +747,7 @@
       "properties": {
         "ageBase": {
           "type": "string",
-          "description": "Age calculation method 1: according to the age of insurance 2: according to the year of the policy anniversary date"
+          "description": "Age calculation method 1: according to the age of insurance 2: according to the year of the annual anniversary of the policy"
         },
         "premiumFrequency": {
           "type": "array",
@@ -757,12 +757,12 @@
         },
         "unitFlag": {
           "type": "string",
-          "description": "Premium Assurance Calculation Method 0 Premiums Guaranteed by User Input 1 Product sold by unit 2 Premium under premium, but agreement is also allowed Premium 3 Product sold under plan or unit 4 Product is only allowed to be sold on schedule 5 According to the premium, But also allow the agreement premium 6 only to allow the amount of insurance premium but also allow the agreement premium 7 only allow insurance premiums 8 insurance premiums or insurance premiums"
+          "description": "Premiums calculation method: 0 premium/SA by the user input 1 products sold by the unit 2 calculate premiums base on sum assured, but also allows the agreement premium 3 products sold under the plan or unit 4 products are only allowed to sell according to plan 5 according to the premium , But also allow the agreement premium 6 only to allow the sum assured to premium but also allow the agreement premium 7 only allow premiums to  sum assured 8 both  sum assured to premium or  sum assured to premium"
         },
         "waiver": {
           "type": "boolean",
           "example": false,
-          "description": "Whether it is exempt from insurance"
+          "description": "Whether it is an exemption"
         }
       }
     },
@@ -789,7 +789,7 @@
           }
         },
         "productInfo": {
-          "description": "product detailed information",
+          "description": "Product details",
           "$ref": "#/definitions/ProductInfo"
         },
         "result": {
@@ -812,26 +812,26 @@
         "coverageId": {
           "type": "integer",
           "format": "int64",
-          "description": "Incoming security code"
+          "description": "Inputed coverage code"
         },
         "productCode": {
           "type": "string",
-          "description": "Calculate the product code"
+          "description": "Product code for calculation"
         },
         "sumAssured": {
           "type": "number",
           "format": "double",
-          "description": "Insured amount"
+          "description": "Sum assured"
         },
         "totalPremAf": {
           "type": "number",
           "format": "double",
-          "description": "Pay premium"
+          "description": "Total premium"
         },
         "unit": {
           "type": "integer",
           "format": "int32",
-          "description": "Purchase unit"
+          "description": "Total unit"
         }
       }
     },
@@ -840,7 +840,7 @@
       "properties": {
         "periodType": {
           "type": "string",
-          "description": "Term type (1: 2: pay a few years 3: pay a certain age 4: pay for life)"
+          "description": "Period type (1: Single payment  2: pay next few years 3: pay till a certain age 4: pay for whole life)"
         },
         "periodValueMax": {
           "type": "integer",
@@ -850,7 +850,7 @@
         "periodValueMin": {
           "type": "integer",
           "format": "int32",
-          "description": "Allow minimum deadline"
+          "description": "Allow minimum term"
         }
       }
     },
@@ -862,7 +862,7 @@
           "$ref": "#/definitions/AgeRange"
         },
         "policyHolderAge": {
-          "description": "Insured age limit",
+          "description": "The age limit of the insured",
           "$ref": "#/definitions/AgeRange"
         }
       }
@@ -926,7 +926,7 @@
           }
         },
         "illustrations": {
-          "description": "Benefit presentation results",
+          "description": "Illustration results",
           "$ref": "#/definitions/Illustrations"
         },
         "messages": {
@@ -955,7 +955,7 @@
         "applyDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Date of application, non-empty, date format: yyyy-MM-dd'T'HH: mm: ss"
+          "description": "Application date, non-empty, date format: yyyy-MM-dd'T'HH: mm: ss"
         },
         "beneficiaries": {
           "type": "array",
@@ -966,7 +966,7 @@
         },
         "coverages": {
           "type": "array",
-          "description": "List of insurance insurance",
+          "description": "Insured list",
           "items": {
             "$ref": "#/definitions/Coverage"
           }
@@ -975,7 +975,7 @@
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "Currency, non-empty, 1 - RMB",
+          "description": "Currency, non-empty, 1 CNY",
           "enum": [
             1
           ]
@@ -989,7 +989,7 @@
         },
         "declarations": {
           "type": "array",
-          "description": "Customer informs list",
+          "description": "Customer declaration list",
           "items": {
             "$ref": "#/definitions/CustomerDeclaration"
           }
@@ -997,7 +997,7 @@
         "deliverType": {
           "type": "string",
           "example": "M",
-          "description": "Policy delivery, H-manual; M-mail",
+          "description": "Policy delivery method, H-by people; M-mail",
           "enum": [
             "H",
             "M"
@@ -1010,11 +1010,11 @@
         "expiryDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Termination Date, Date Format: yyyy-MM-dd'T'HH: mm: ss"
+          "description": "Termination date, date format: yyyy-MM-dd'T'HH: mm: ss"
         },
         "extendedProps": {
           "type": "object",
-          "description": "Extended information, Map type, Key / Value are character",
+          "description": "Extended information, Map type, Key / Value, should be character",
           "additionalProperties": {
             "type": "string"
           }
@@ -1027,12 +1027,12 @@
         "installPrem": {
           "type": "number",
           "format": "double",
-          "description": "Insurance premium",
+          "description": "Policy premium",
           "readOnly": true
         },
         "insureds": {
           "type": "array",
-          "description": "List of policy insured",
+          "description": "Policy issured list",
           "items": {
             "$ref": "#/definitions/Insured"
           }
@@ -1044,7 +1044,7 @@
         "issueDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Underwriting date, date format: yyyy-MM-dd'T'HH: mm: ss"
+          "description": "Policy issue date, date format: yyyy-MM-dd'T'HH: mm: ss"
         },
         "payerAccounts": {
           "type": "array",
@@ -1061,7 +1061,7 @@
           }
         },
         "policyHolder": {
-          "description": "Insured",
+          "description": "Policy holder",
           "$ref": "#/definitions/PolicyHolder"
         },
         "policyId": {
@@ -1074,21 +1074,21 @@
           "description": "Policy number"
         },
         "policyPackage": {
-          "description": "Product portfolio",
+          "description": "Product package",
           "$ref": "#/definitions/PolicyPackage"
         },
         "proposalNumber": {
           "type": "string",
-          "description": "Insured number"
+          "description": "Proposal number"
         },
         "quotationCode": {
           "type": "string",
-          "description": "Trial request number"
+          "description": "Quotation calculation request number"
         },
         "riskStatus": {
           "type": "integer",
           "format": "int32",
-          "description": "Policy status, 0 - not effective; 1 effective; 2 - failure; 3 - terminated",
+          "description": "Policy status, 0 - not inforce; 1 - inforce; 2 - lapsed; 3 - terminated",
           "readOnly": true
         },
         "salesChannelCode": {
@@ -1111,7 +1111,7 @@
         },
         "trustees": {
           "type": "array",
-          "description": "Guardian List",
+          "description": "List of trustees",
           "items": {
             "$ref": "#/definitions/Trustee"
           }
@@ -1123,18 +1123,18 @@
       "properties": {
         "packageCode": {
           "type": "string",
-          "description": "Product portfolio code"
+          "description": "Product package code"
         },
         "packageId": {
           "type": "integer",
           "format": "int64",
-          "description": "Combine the internal serial number",
+          "description": "Product package of internal serial number",
           "readOnly": true
         },
         "unit": {
           "type": "number",
           "format": "double",
-          "description": "Product portfolio number of shares, the default is 1"
+          "description": "Product package unit, the default is 1"
         }
       }
     },
@@ -1143,23 +1143,23 @@
       "properties": {
         "clientRequestId": {
           "type": "string",
-          "description": "External trading serial number"
+          "description": "External transaction serial number"
         },
         "clientRequestTime": {
           "type": "string",
           "format": "date-time",
-          "description": "External request time"
+          "description": "External client request time"
         },
         "exceptions": {
           "type": "array",
-          "description": "abnormal information",
+          "description": "Exception information:",
           "items": {
             "type": "string"
           }
         },
         "messages": {
           "type": "array",
-          "description": "Business Failure Reason Description List Node",
+          "description": "Business failure reason description list node",
           "items": {
             "$ref": "#/definitions/GenericValidationResult"
           }
@@ -1171,7 +1171,7 @@
         "result": {
           "type": "integer",
           "format": "int32",
-          "description": "Request results, 1 - business success; 0 - business failure;"
+          "description": "Request result, 1 - business success; 0 - business failure; -1- application exception"
         }
       }
     },
@@ -1181,22 +1181,22 @@
         "address1": {
           "type": "string",
           "example": "上海市",
-          "description": "province"
+          "description": "Province"
         },
         "address2": {
           "type": "string",
           "example": "上海市",
-          "description": "city"
+          "description": "City"
         },
         "address3": {
           "type": "string",
           "example": "杨浦区",
-          "description": "County"
+          "description": "District"
         },
         "address4": {
           "type": "string",
           "example": "淞沪路270号创智天地3号楼3楼",
-          "description": "address"
+          "description": "Address"
         },
         "addressId": {
           "type": "string",
@@ -1206,7 +1206,7 @@
         "postCode": {
           "type": "string",
           "example": "200433",
-          "description": "Zip code"
+          "description": "Post code"
         }
       }
     },
@@ -1217,11 +1217,11 @@
           "type": "integer",
           "format": "int32",
           "example": 25,
-          "description": "age"
+          "description": "Age"
         },
         "extendedProps": {
           "type": "object",
-          "description": "Extended information, Map type, Key / Value are character",
+          "description": "Extended information, Map type, Key / Value, should be character",
           "additionalProperties": {
             "type": "string"
           }
@@ -1230,19 +1230,19 @@
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "Professional grade"
+          "description": "Occupation level"
         },
         "orderId": {
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "Type of insured person serial number, the default is 1, the same insurance more than the insured (family policy or personal risk) is greater than 1"
+          "description": "Insurance type of the insured person, the default is 1, if one plan applied by more than one insured (family policy or personal risk), the value is greater than 1"
         },
         "partySerialId": {
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "Insured customer temporary number, request within the use of a unique identification of a party within the request"
+          "description": "Insured customer temporary number, request within the use of a unique identification request within a party"
         }
       }
     },
@@ -1252,27 +1252,27 @@
         "address1": {
           "type": "string",
           "example": "上海市",
-          "description": "province"
+          "description": "Province"
         },
         "address2": {
           "type": "string",
           "example": "上海市",
-          "description": "city"
+          "description": "City"
         },
         "address3": {
           "type": "string",
           "example": "杨浦区",
-          "description": "County"
+          "description": "District"
         },
         "address4": {
           "type": "string",
           "example": "淞沪路270号创智天地3号楼3楼",
-          "description": "address"
+          "description": "Address"
         },
         "postCode": {
           "type": "string",
           "example": "200433",
-          "description": "Zip code"
+          "description": "Post code"
         }
       }
     },
@@ -1281,7 +1281,7 @@
       "properties": {
         "extendedProps": {
           "type": "object",
-          "description": "Extended information, Map type, Key / Value are character",
+          "description": "Extended information, Map type, Key / Value, should be character",
           "additionalProperties": {
             "type": "string"
           }
@@ -1289,7 +1289,7 @@
         "medicalIndi": {
           "type": "string",
           "example": "Y",
-          "description": "Whether there is health insurance, Y-yes; N-no",
+          "description": "Whether there is medical insurance coverage, Y - yes; N - no",
           "enum": [
             "Y",
             "N"
@@ -1299,13 +1299,13 @@
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "Customer temporary number, request within the use of a unique request within a party"
+          "description": "Customer temporary number, internal usage. Unique identify the customer for one request"
         },
         "relationToPH": {
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "The relationship between the insured and the insured, the number type, 1 - own; 2 - child; 3 - spouse; 10 - parent;",
+          "description": "The relationship between the insured and the insured, integer type, 1 - self; 2 - child; 3 - spouse; 10 - parent; 7 - others",
           "enum": [
             1,
             2,
@@ -1317,7 +1317,7 @@
         "socialSecurityIndi": {
           "type": "string",
           "example": "Y",
-          "description": "Whether there is social security, Y - yes;",
+          "description": "Whether there is social medical insurance coverage, Y - yes; N - no",
           "enum": [
             "Y",
             "N"
@@ -1329,12 +1329,12 @@
       "type": "object",
       "properties": {
         "bankAccount": {
-          "description": "First bank account",
+          "description": "The first premium bank account",
           "$ref": "#/definitions/BankAccount"
         },
         "extendedProps": {
           "type": "object",
-          "description": "Extended information, Map type, Key / Value are character",
+          "description": "Extended information, Map type, Key / Value, should be character",
           "additionalProperties": {
             "type": "string"
           }
@@ -1345,14 +1345,14 @@
           "readOnly": true
         },
         "nextBankAccount": {
-          "description": "Renewal of bank account",
+          "description": "Renewal premium bank account",
           "$ref": "#/definitions/BankAccount"
         },
         "paymentMethod": {
           "type": "integer",
           "format": "int32",
           "example": 3,
-          "description": "Down payment, digital type, 1 - cash; 2 - check; 3 - bank transfer; 30 - credit card",
+          "description": "First time payment method, integer, 1 - cash; 2 - check; 3 - bank transfer; 30 - credit card",
           "enum": [
             1,
             2,
@@ -1364,7 +1364,7 @@
           "type": "integer",
           "format": "int32",
           "example": 3,
-          "description": "Renewal payment method, number type, 1 - cash; 2 - check; 3 - bank transfer; 30 - credit card",
+          "description": "Renewal payment method, integer, 1 - cash; 2 - check; 3 - bank transfer; 30 - credit card",
           "enum": [
             1,
             2,
@@ -1385,7 +1385,7 @@
         "endPeriod": {
           "type": "string",
           "example": "3",
-          "description": "Annuity type, type of annuity annuity / variable annuity / GMWB non-empty, 1 to receive a fixed number of years; 2 to receive a certain age; 3 -",
+          "description": "Year to receive the type of annuity, the type of annuity / variable annuity / GMWB should not be empty, 1 to receive a fixed number of years; 2 to receive till a certain age; 3 - receive whole life",
           "enum": [
             "1",
             "2",
@@ -1395,11 +1395,11 @@
         "endYear": {
           "type": "integer",
           "format": "int32",
-          "description": "Years of collection"
+          "description": "The number of payment years"
         },
         "extendedProps": {
           "type": "object",
-          "description": "Extended information, Map type, Key / Value are character",
+          "description": "Extended information, Map type, Key / Value, should be character",
           "additionalProperties": {
             "type": "string"
           }
@@ -1407,12 +1407,12 @@
         "gurntPeriod": {
           "type": "integer",
           "format": "int32",
-          "description": "Annuity guarantee collection period (years or age)"
+          "description": "Annuity guarantee period (years or age)"
         },
         "payOption": {
           "type": "string",
           "example": "1",
-          "description": "3-cash accrual; 3-cash accrual; 2-deposit premium; 3-cumulative interest; 4 - accumulated interest x years after the transfer of premiums; 5 to buy an additional payment of additional insurance",
+          "description": "The annuity receive payment options: 1 - to receive payment by cash; 2 - to pay premium; 3 - accumulated interest; 4 - accumulated interest x years after the transfer to pay premium; 5 - to buy an additional payment of rider ",
           "enum": [
             "1",
             "2",
@@ -1424,12 +1424,12 @@
         "payOptionTerm": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of years, when payOption is 4 when the meaning of the other empty"
+          "description": "Years, only when payOption is 4, this field has value, for others are empty"
         },
         "payPeriod": {
           "type": "string",
           "example": "3",
-          "description": "Annuities began to receive the type of period, 1 to receive immediately; 2- to a certain age to receive the anniversary; 3- years after the collection; 4- after a certain age to receive",
+          "description": "The annuity begins to receive the type of period, 1- is immediately received; 2- till a certain age to receive; 3 - years after the collection; 4- after a certain age to receive ",
           "enum": [
             "1",
             "2",
@@ -1440,12 +1440,12 @@
         "payYear": {
           "type": "integer",
           "format": "int32",
-          "description": "Annuity begins to receive period (years or age)"
+          "description": "The annuity begins to receive the period (years or age)"
         },
         "planFreq": {
           "type": "string",
           "example": "1",
-          "description": "Receive frequency, 1 year; 2-year; 3-season; 4-month;",
+          "description": "To receive frequency, 1 yearly; 2-half yearly; 3- quarterly ; 4-monthly; 5 - single;",
           "enum": [
             "1",
             "2",
@@ -1457,7 +1457,7 @@
         "planType": {
           "type": "string",
           "example": "1",
-          "description": "5-GMWB (guaranteed minimum benefit); 6-variable annuity; 7-part surrender; 8-GMWB - insured dividend",
+          "description": "Payment plan type: 1-cash payment; 2-annuity; 3-survival benefit; 4-maturity  5-GMWB (guaranteed minimum benefit); 6-variable annuity; 7-partial surrender; 8 - SA dividends ",
           "enum": [
             "1",
             "2",
@@ -1477,7 +1477,7 @@
         "chargePeriod": {
           "type": "string",
           "example": "2",
-          "description": "Payment period type, non-empty, 1-paid; 2-year payment; 3 to a certain age; 4-life",
+          "description": "Payment period type, non-empty, 1 - single; 2 - per year; 3 to a certain age; 4 - whole life",
           "enum": [
             "1",
             "2",
@@ -1489,11 +1489,11 @@
           "type": "integer",
           "format": "int32",
           "example": 20,
-          "description": "Payment period, non-empty, the bargain is 0; by age to pay the payment period; to pay a certain age to pay the expiry of the age;"
+          "description": "Payment period, non-empty, 0-single; by age: till which age or to pay the payment period: the pay years;  whole life is 100"
         },
         "coverageAgents": {
           "type": "array",
-          "description": "List of performance appraisal agents",
+          "description": "List of performance sharing of agent",
           "items": {
             "$ref": "#/definitions/CoverageAgentInput"
           }
@@ -1501,7 +1501,7 @@
         "coveragePeriod": {
           "type": "string",
           "example": "1",
-          "description": "Protection of the type of age, 1-life-long; 2-year limit; 3 to a certain age;",
+          "description": "Coverage type, 1 - whole life; 2 - per year; 3 - Cover to a certain age; 4- per month; 5-per day",
           "enum": [
             "1",
             "2",
@@ -1514,27 +1514,27 @@
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "The insurance serial number, the use of the request, the only identification within a certain type of insurance"
+          "description": "Plan internal serial number, the request within the use of a unique identification within a certain kind of insurance"
         },
         "coverageYear": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of years of protection, the number of guarantees for the number of days; the number of days to protect the number of days"
+          "description": "@Yanzhang. To protect the period of time, to protect the life of 9999; yearly security for the protection of the number of years; to a certain age to protect the expiry of age; monthly security for the number of months; according to the day when the number of days to protect the number of days "
         },
         "currentPremium": {
-          "description": "Current premium",
+          "description": "The current period premium",
           "$ref": "#/definitions/CoveragePremium"
         },
         "extendedProps": {
           "type": "object",
-          "description": "Extended information, Map type, Key / Value are character",
+          "description": "Extended information, Map type, Key / Value, should be character",
           "additionalProperties": {
             "type": "string"
           }
         },
         "insureds": {
           "type": "array",
-          "description": "List of insured persons",
+          "description": "List of insured",
           "items": {
             "$ref": "#/definitions/CoverageInsuredInput"
           }
@@ -1542,7 +1542,7 @@
         "masterCoverageSerialId": {
           "type": "integer",
           "format": "int32",
-          "description": "The temporary serial number of the main risk, the current insurance for the main risk is empty, for the additional risk to be filled into the main risk of the serial number"
+          "description": "Temporary main plan serial number, the current insurance for the main plan is empty, for the rider to be filled into the main insurance of the serial number"
         },
         "payPlans": {
           "type": "array",
@@ -1553,10 +1553,10 @@
         },
         "productCode": {
           "type": "string",
-          "description": "Product Code"
+          "description": "Product code"
         },
         "waiverExt": {
-          "description": "Insurance information",
+          "description": "Waiver plan information",
           "$ref": "#/definitions/CoverageExtWaiverInput"
         }
       }
@@ -1565,18 +1565,18 @@
       "type": "object",
       "properties": {
         "address": {
-          "description": "customer address",
+          "description": "Customer address",
           "$ref": "#/definitions/AddressInput"
         },
         "extendedProps": {
           "type": "object",
-          "description": "Extended information, Map type, Key / Value are character",
+          "description": "Extended information, Map type, Key / Value, should be character",
           "additionalProperties": {
             "type": "string"
           }
         },
         "organization": {
-          "description": "Institutional customer information",
+          "description": "Organization customer information",
           "$ref": "#/definitions/Organization"
         },
         "partyContact": {
@@ -1587,13 +1587,13 @@
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "Customer temporary number, request within the use of a unique request within a party"
+          "description": "Customer temporary number, internal usage. Unique identify the customer for one request"
         },
         "partyType": {
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "Party type, 1-person party; 2-party party",
+          "description": "The type of the party, 1 - the personal party; 2- organization",
           "enum": [
             1,
             2
@@ -1610,13 +1610,13 @@
       "properties": {
         "coverageId": {
           "type": "string",
-          "description": "Insurance type serial number, UUID type",
+          "description": "Insurance model serial number, UUID type",
           "readOnly": true
         },
         "endPeriod": {
           "type": "string",
           "example": "3",
-          "description": "Annuity type, type of annuity annuity / variable annuity / GMWB non-empty, 1 to receive a fixed number of years; 2 to receive a certain age; 3 -",
+          "description": "Year to receive the type of annuity, the type of annuity / variable annuity / GMWB should not be empty, 1 to receive a fixed number of years; 2 to receive till a certain age; 3 - receive whole life",
           "enum": [
             "1",
             "2",
@@ -1626,11 +1626,11 @@
         "endYear": {
           "type": "integer",
           "format": "int32",
-          "description": "Years of collection"
+          "description": "The number of payment years"
         },
         "extendedProps": {
           "type": "object",
-          "description": "Extended information, Map type, Key / Value are character",
+          "description": "Extended information, Map type, Key / Value, should be character",
           "additionalProperties": {
             "type": "string"
           }
@@ -1638,12 +1638,12 @@
         "gurntPeriod": {
           "type": "integer",
           "format": "int32",
-          "description": "Annuity guarantee collection period (years or age)"
+          "description": "Annuity guarantee period (years or age)"
         },
         "payOption": {
           "type": "string",
           "example": "1",
-          "description": "3-cash accrual; 3-cash accrual; 2-deposit premium; 3-cumulative interest; 4 - accumulated interest x years after the transfer of premiums; 5 to buy an additional payment of additional insurance",
+          "description": "The annuity receive payment options: 1 - to receive payment by cash; 2 - to pay premium; 3 - accumulated interest; 4 - accumulated interest x years after the transfer to pay premium; 5 - to buy an additional payment of rider ",
           "enum": [
             "1",
             "2",
@@ -1655,12 +1655,12 @@
         "payOptionTerm": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of years, when payOption is 4 when the meaning of the other empty"
+          "description": "Years, only when payOption is 4, this field has value, for others are empty"
         },
         "payPeriod": {
           "type": "string",
           "example": "3",
-          "description": "Annuities began to receive the type of period, 1 to receive immediately; 2- to a certain age to receive the anniversary; 3- years after the collection; 4- after a certain age to receive",
+          "description": "The annuity begins to receive the type of period, 1- is immediately received; 2- till a certain age to receive; 3 - years after the collection; 4- after a certain age to receive ",
           "enum": [
             "1",
             "2",
@@ -1671,12 +1671,12 @@
         "payYear": {
           "type": "integer",
           "format": "int32",
-          "description": "Annuity begins to receive period (years or age)"
+          "description": "The annuity begins to receive the period (years or age)"
         },
         "planFreq": {
           "type": "string",
           "example": "1",
-          "description": "Receive frequency, 1 year; 2-year; 3-season; 4-month;",
+          "description": "To receive frequency, 1 yearly; 2-half yearly; 3- quarterly ; 4-monthly; 5 - single;",
           "enum": [
             "1",
             "2",
@@ -1693,7 +1693,7 @@
         "planType": {
           "type": "string",
           "example": "1",
-          "description": "5-GMWB (guaranteed minimum benefit); 6-variable annuity; 7-part surrender; 8-GMWB - insured dividend",
+          "description": "Payment plan type: 1-cash payment; 2-annuity; 3-survival benefit; 4-maturity  5-GMWB (guaranteed minimum benefit); 6-variable annuity; 7-partial surrender; 8 - SA dividends ",
           "enum": [
             "1",
             "2",
@@ -1718,30 +1718,30 @@
         "declarationDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Inform date, date format: yyyy-MM-dd'T'HH: mm: ss"
+          "description": "Declaration date, date format: yyyy-MM-dd'T'HH: mm: ss"
         },
         "details": {
           "type": "array",
-          "description": "Inform the details",
+          "description": "Declaration details",
           "items": {
             "$ref": "#/definitions/CustomerDeclarationDetail"
           }
         },
         "extendedProps": {
           "type": "object",
-          "description": "Extended information, Map type, Key / Value are character",
+          "description": "Extended information, Map type, Key / Value, should be character",
           "additionalProperties": {
             "type": "string"
           }
         },
         "listId": {
           "type": "string",
-          "description": "The customer informs the internal serial number, UUID type",
+          "description": "Customer declaration internal serial number, UUID type",
           "readOnly": true
         },
         "partyId": {
           "type": "string",
-          "description": "Customer ID, UUID type",
+          "description": "Customer number, UUID type",
           "readOnly": true
         },
         "policyId": {
@@ -1762,11 +1762,11 @@
           "type": "number",
           "format": "double",
           "example": 1,
-          "description": "Performance ratio of up to 1"
+          "description": "Performance rating, the maximum for the 1"
         },
         "coverageId": {
           "type": "string",
-          "description": "Insurance type serial number, UUID type",
+          "description": "Insurance model serial number, UUID type",
           "readOnly": true
         },
         "extendedProps": {
@@ -1777,7 +1777,7 @@
         },
         "listId": {
           "type": "string",
-          "description": "Types of insurance performance sharing information Internal serial number, UUID type",
+          "description": "The insurance type The internal serial number, UUID type",
           "readOnly": true
         },
         "policyId": {
@@ -1800,19 +1800,19 @@
       "properties": {
         "extendedProps": {
           "type": "object",
-          "description": "Extended information, Map type, Key / Value are character",
+          "description": "Extended information, Map type, Key / Value, should be character",
           "additionalProperties": {
             "type": "string"
           }
         },
         "listId": {
           "type": "string",
-          "description": "Policy role Internal serial number, UUID type",
+          "description": "Policy role internal serial number, UUID type",
           "readOnly": true
         },
         "partyId": {
           "type": "string",
-          "description": "Customer ID, UUID type",
+          "description": "Customer number, UUID type",
           "readOnly": true
         },
         "policyId": {
@@ -1824,7 +1824,7 @@
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "The relationship between the insured and the insured, the number type, 1 - own; 2 - child; 3 - spouse; 10 - parent;",
+          "description": "The relationship between the insured and the insured, integer type, 1 - self; 2 - child; 3 - spouse; 10 - parent; 7 - others",
           "enum": [
             1,
             2,
@@ -1837,7 +1837,7 @@
           "type": "number",
           "format": "double",
           "example": 1,
-          "description": "Payment ratio, maximum 1"
+          "description": "Payment ratio, up to 1"
         }
       }
     },
@@ -1848,14 +1848,14 @@
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "Currency, non-empty, 1 - RMB",
+          "description": "Currency, non-empty, 1 yuan",
           "enum": [
             1
           ]
         },
         "extendedProps": {
           "type": "object",
-          "description": "Extended information, Map type, Key / Value are character",
+          "description": "Extended information, Map type, Key / Value, should be character",
           "additionalProperties": {
             "type": "string"
           }
@@ -1864,13 +1864,13 @@
           "type": "number",
           "format": "double",
           "example": 2314,
-          "description": "Actual charge amount"
+          "description": "The actual amount of money"
         },
         "payMode": {
           "type": "integer",
           "format": "int32",
           "example": 3,
-          "description": "Down payment, digital type, 1 - cash; 2 - check; 3 - bank transfer; 30 - credit card",
+          "description": "First time payment method, integer, 1 - cash; 2 - check; 3 - bank transfer; 30 - credit card",
           "enum": [
             1,
             2,
@@ -1893,7 +1893,7 @@
       "properties": {
         "coverages": {
           "type": "array",
-          "description": "List of insurance insurance",
+          "description": "Insurance list",
           "items": {
             "$ref": "#/definitions/CoverageCalculationResult"
           }
@@ -1902,7 +1902,7 @@
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "Currency, non-empty, 1 - RMB",
+          "description": "Currency, non-empty, 1 yuan",
           "enum": [
             1
           ]
@@ -1914,11 +1914,11 @@
         "expiryDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Termination Date, Date Format: yyyy-MM-dd'T'HH: mm: ss"
+          "description": "Termination date, date format: yyyy-MM-dd'T'HH: mm: ss"
         },
         "extendedProps": {
           "type": "object",
-          "description": "Extended information, Map type, Key / Value are character",
+          "description": "Extended information, Map type, Key / Value, should be character",
           "additionalProperties": {
             "type": "string"
           }
@@ -1931,7 +1931,7 @@
         "installPrem": {
           "type": "number",
           "format": "double",
-          "description": "Insurance premium",
+          "description": "Policy premium",
           "readOnly": true
         },
         "issueDate": {
@@ -1945,16 +1945,16 @@
         },
         "proposalNumber": {
           "type": "string",
-          "description": "Insured number"
+          "description": "Proposal number"
         },
         "quotationCode": {
           "type": "string",
-          "description": "Trial request number"
+          "description": "Quotation calculation request number"
         },
         "riskStatus": {
           "type": "integer",
           "format": "int32",
-          "description": "Policy status, 0 - not effective; 1 effective; 2 - failure; 3 - terminated",
+          "description": "Policy status, 0 - not inforce; 1 - inforce; 2 - lapsed; 3 - terminated",
           "readOnly": true
         }
       }
@@ -1964,20 +1964,20 @@
       "properties": {
         "extendedProps": {
           "type": "object",
-          "description": "Extended information, Map type, Key / Value are character",
+          "description": "Extended information, Map type, Key / Value, should be character",
           "additionalProperties": {
             "type": "string"
           }
         },
         "listId": {
           "type": "string",
-          "description": "Policy role Internal serial number, UUID type",
+          "description": "Policy role internal serial number, UUID type",
           "readOnly": true
         },
         "medicalIndi": {
           "type": "string",
           "example": "Y",
-          "description": "Whether there is health insurance, Y-yes; N-no",
+          "description": "Whether there is medical insurance coverage, Y - yes; N - no",
           "enum": [
             "Y",
             "N"
@@ -1985,7 +1985,7 @@
         },
         "partyId": {
           "type": "string",
-          "description": "Customer ID, UUID type",
+          "description": "Customer number, UUID type",
           "readOnly": true
         },
         "policyId": {
@@ -1997,7 +1997,7 @@
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "The relationship between the insured and the insured, the number type, 1 - own; 2 - child; 3 - spouse; 10 - parent;",
+          "description": "The relationship between the insured and the insured, integer type, 1 - self; 2 - child; 3 - spouse; 10 - parent; 7 - others",
           "enum": [
             1,
             2,
@@ -2009,7 +2009,7 @@
         "socialSecurityIndi": {
           "type": "string",
           "example": "Y",
-          "description": "Whether there is social security, Y - yes;",
+          "description": "Whether there is social medical insurance coverage, Y - yes; N - no",
           "enum": [
             "Y",
             "N"
@@ -2028,11 +2028,11 @@
           "type": "number",
           "format": "double",
           "example": 1,
-          "description": "Performance ratio of up to 1"
+          "description": "Performance rating, the maximum for the 1"
         },
         "extendedProps": {
           "type": "object",
-          "description": "Extended information, Map type, Key / Value are character",
+          "description": "Extended information, Map type, Key / Value, should be character",
           "additionalProperties": {
             "type": "string"
           }
@@ -2044,7 +2044,7 @@
       "properties": {
         "extendedProps": {
           "type": "object",
-          "description": "Extended information, Map type, Key / Value are character",
+          "description": "Extended information, Map type, Key / Value, should be character",
           "additionalProperties": {
             "type": "string"
           }
@@ -2053,7 +2053,7 @@
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "Customer temporary number, request within the use of a unique request within a party"
+          "description": "Customer temporary number, internal usage. Unique identify the customer for one request"
         }
       }
     },
@@ -2063,42 +2063,42 @@
         "contact": {
           "type": "string",
           "example": "张三",
-          "description": "Contact person"
+          "description": "Contact:"
         },
         "contactTel": {
           "type": "string",
           "example": "88888888",
-          "description": "contact number"
+          "description": "Contact Phone"
         },
         "email": {
           "type": "string",
           "example": "TestPerson14@126.com",
-          "description": "E-mail"
+          "description": "E-mail:"
         },
         "fax": {
           "type": "string",
           "example": "88888887",
-          "description": "fax"
+          "description": "Fax: (+86) {0}022-24143117{/0}"
         },
         "homeTel": {
           "type": "string",
           "example": "87654321",
-          "description": "home phone"
+          "description": "Home telephone"
         },
         "mobileTel": {
           "type": "string",
           "example": "15012345678",
-          "description": "phone number"
+          "description": "Phone number"
         },
         "officeTel": {
           "type": "string",
           "example": "88888888",
-          "description": "office number"
+          "description": "Work phone"
         },
         "officeTelExt": {
           "type": "string",
           "example": "1234",
-          "description": "Work telephone extension number"
+          "description": "Work phone extension"
         }
       }
     },
@@ -2107,7 +2107,7 @@
       "properties": {
         "extendedProps": {
           "type": "object",
-          "description": "Extended information, Map type, Key / Value are character",
+          "description": "Extended information, Map type, Key / Value, should be character",
           "additionalProperties": {
             "type": "string"
           }
@@ -2116,22 +2116,22 @@
           "type": "number",
           "format": "double",
           "example": 2314,
-          "description": "Insurance premiums, insurance premiums when the amount of non-empty"
+          "description": "Insurance premium, non empty when calculate SA base on premium"
         },
         "productCode": {
           "type": "string",
-          "description": "Product Code"
+          "description": "Product code"
         },
         "sumAssured": {
           "type": "number",
           "format": "double",
           "example": 100000,
-          "description": "Insurance premium, the amount of insurance premium is not empty"
+          "description": "Insurance SA, non empty when calculate premium base on SA"
         },
         "unit": {
           "type": "number",
           "format": "double",
-          "description": "Insurance number of copies, the number of products by the number of non-empty insurance"
+          "description": "Product unit, non empty when by unit insurance"
         }
       }
     },
@@ -2140,23 +2140,23 @@
       "properties": {
         "clientRequestId": {
           "type": "string",
-          "description": "External trading serial number"
+          "description": "External transaction serial number"
         },
         "clientRequestTime": {
           "type": "string",
           "format": "date-time",
-          "description": "External request time"
+          "description": "External client request time"
         },
         "exceptions": {
           "type": "array",
-          "description": "abnormal information",
+          "description": "Exception information:",
           "items": {
             "type": "string"
           }
         },
         "messages": {
           "type": "array",
-          "description": "Business Failure Reason Description List Node",
+          "description": "Business failure reason description list node",
           "items": {
             "$ref": "#/definitions/GenericValidationResult"
           }
@@ -2168,7 +2168,7 @@
         "result": {
           "type": "integer",
           "format": "int32",
-          "description": "Request results, 1 - business success; 0 - business failure;"
+          "description": "Request result, 1 - business success; 0 - business failure; -1- application exception"
         }
       }
     },
@@ -2184,13 +2184,13 @@
         "certiCode": {
           "type": "string",
           "example": "1234567890",
-          "description": "Certificate number"
+          "description": "ID Number"
         },
         "certiEnd": {
           "type": "string",
           "format": "date-time",
           "example": "2019-12-31",
-          "description": "Certificate Effective Deadline, Date Format: yyyy-MM-dd"
+          "description": "Valid date, date format: yyyy-MM-dd"
         },
         "certiStart": {
           "type": "string",
@@ -2202,7 +2202,7 @@
           "type": "integer",
           "format": "int32",
           "example": 3,
-          "description": "Certificate type, number type, 1 - ID card; 2 - Military certificate; 3 - passport; 4 - birth certificate; 9 - other",
+          "description": "ID type, number type, 1 - ID card; 2 - military certificate; 3 - passport; 4 - birth certificate; 9 - other",
           "enum": [
             1,
             2,
@@ -2214,12 +2214,12 @@
         "firstName": {
           "type": "string",
           "example": "三",
-          "description": "name"
+          "description": "First name"
         },
         "gender": {
           "type": "string",
           "example": "M",
-          "description": "Sex, M-male; F-female",
+          "description": "Sex, M - male; F - female",
           "enum": [
             "M",
             "F"
@@ -2229,7 +2229,7 @@
           "type": "number",
           "format": "double",
           "example": 175.3,
-          "description": "Height (cm)"
+          "description": "Height e.g. 172cm"
         },
         "income": {
           "type": "integer",
@@ -2272,12 +2272,12 @@
         "preferredLifeIndi": {
           "type": "string",
           "example": "0",
-          "description": "Whether the preferred body, 0-N / A; 1-no;"
+          "description": "Is the preferred body, 0-N / A; 1-no;"
         },
         "salutation": {
           "type": "string",
           "example": "1",
-          "description": "Title， 1-Mr. 2-Ms.",
+          "description": "Call, 1 - 2;",
           "enum": [
             "1",
             "2"
@@ -2286,7 +2286,7 @@
         "smoking": {
           "type": "string",
           "example": "N",
-          "description": "Whether smoking, Y-yes; N-no",
+          "description": "Whether smoking, Y-yes; N =",
           "enum": [
             "Y",
             "N"
@@ -2305,12 +2305,12 @@
       "properties": {
         "packageCode": {
           "type": "string",
-          "description": "Product portfolio code"
+          "description": "Product Product package code"
         },
         "unit": {
           "type": "number",
           "format": "double",
-          "description": "Product portfolio number of shares, the default is 1"
+          "description": "Product package unit, the default is 1"
         }
       }
     },
@@ -2320,7 +2320,7 @@
         "companyName": {
           "type": "string",
           "example": "xxxxxx",
-          "description": "company name"
+          "description": "Name of company"
         },
         "countryCode": {
           "type": "string",
@@ -2330,7 +2330,7 @@
         "registerCode": {
           "type": "string",
           "example": "xxxx",
-          "description": "Company ID number"
+          "description": "Company ID"
         },
         "registerType": {
           "type": "string",
@@ -2346,16 +2346,16 @@
           "type": "integer",
           "format": "int32",
           "example": 25,
-          "description": "age"
+          "description": "Age"
         },
         "coverageId": {
           "type": "string",
-          "description": "Insurance type serial number, UUID type",
+          "description": "Insurance model serial number, UUID type",
           "readOnly": true
         },
         "extendedProps": {
           "type": "object",
-          "description": "Extended information, Map type, Key / Value are character",
+          "description": "Extended information, Map type, Key / Value, should be character",
           "additionalProperties": {
             "type": "string"
           }
@@ -2367,20 +2367,20 @@
         },
         "listId": {
           "type": "string",
-          "description": "Insurance insured internal serial number, UUID type",
+          "description": "Insurance type insured internal serial number, UUID type",
           "readOnly": true
         },
         "occupationClass": {
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "Professional grade"
+          "description": "Occupation level"
         },
         "orderId": {
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "Type of insured person serial number, the default is 1, the same insurance more than the insured (family policy or personal risk) is greater than 1"
+          "description": "Insurance type of the insured person, the default is 1, if one plan applied by more than one insured (family policy or personal risk), the value is greater than 1"
         },
         "policyId": {
           "type": "string",
@@ -2394,18 +2394,18 @@
       "properties": {
         "extendedProps": {
           "type": "object",
-          "description": "Extended information, Map type, Key / Value are character",
+          "description": "Extended information, Map type, Key / Value, should be character",
           "additionalProperties": {
             "type": "string"
           }
         },
         "payerAccount": {
-          "description": "payment method",
+          "description": "Payment Method:",
           "$ref": "#/definitions/CollectionPayerAccountInput"
         },
         "proposalNumber": {
           "type": "string",
-          "description": "Insured number"
+          "description": "Proposal number"
         }
       }
     },
@@ -2415,7 +2415,7 @@
         "beneType": {
           "type": "string",
           "example": "2",
-          "description": "Benefit type, 1 survivor beneficiary; 2 - Victim beneficiary; 3 - Insured beneficiary",
+          "description": "Beneficiaries, 1 beneficiaries; 2 - beneficiaries; 3 - insured beneficiaries",
           "enum": [
             "1",
             "2",
@@ -2426,7 +2426,7 @@
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "6 - grandfather; grandmother grandmother; grandfather grandmother grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather Uncle; 11 - aunt; 12 - cousin / cousin; 13 - nephew / niece / nephew / niece; 14 - employer; 15 - others; 16 -",
+          "description": "The relationship to the insured. 1-wife;2-husband;3-child;4-father;5-mother;6-Grand father;7-Grandparent;8-brother;9-sister;10-uncle;11-untie;12-cousin;13-nephew(niece);14-employer;15-other;16-self",
           "enum": [
             1,
             2,
@@ -2448,7 +2448,7 @@
         },
         "extendedProps": {
           "type": "object",
-          "description": "Extended information, Map type, Key / Value are character",
+          "description": "Extended information, Map type, Key / Value, should be character",
           "additionalProperties": {
             "type": "string"
           }
@@ -2457,19 +2457,19 @@
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "Insured customer temporary number, request within the use of a unique identification of a party within the request"
+          "description": "Insured customer temporary number, request within the use of a unique identification request within a party"
         },
         "partySerialId": {
           "type": "integer",
           "format": "int32",
           "example": 2,
-          "description": "Customer temporary number, request within the use of a unique request within a party"
+          "description": "Customer temporary number, internal usage. Unique identify the customer for one request"
         },
         "shareOrder": {
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "Benefit"
+          "description": "Benefit order"
         },
         "shareRate": {
           "type": "number",
@@ -2483,7 +2483,7 @@
       "type": "object",
       "properties": {
         "address": {
-          "description": "customer address",
+          "description": "Customer address",
           "$ref": "#/definitions/Address"
         },
         "extendedProps": {
@@ -2498,7 +2498,7 @@
           "readOnly": true
         },
         "organization": {
-          "description": "Institutional customer information",
+          "description": "Organization customer information",
           "$ref": "#/definitions/Organization"
         },
         "partyContact": {
@@ -2507,14 +2507,14 @@
         },
         "partyId": {
           "type": "string",
-          "description": "Customer ID, UUID type",
+          "description": "Customer number, UUID type",
           "readOnly": true
         },
         "partyType": {
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "Party type, 1-person party; 2-party party",
+          "description": "The type of the party, 1 - the personal party; 2- organization",
           "enum": [
             1,
             2
@@ -2537,68 +2537,68 @@
         "declId": {
           "type": "integer",
           "format": "int64",
-          "description": "Tell item number, number type"
+          "description": "Declaration item number, number type"
         },
         "declListId": {
           "type": "string",
-          "description": "The customer informs the internal serial number, UUID type",
+          "description": "Customer declaration internal serial number, UUID type",
           "readOnly": true
         },
         "extendedProps": {
           "type": "object",
-          "description": "Extended information, Map type, Key / Value are character",
+          "description": "Extended information, Map type, Key / Value, should be character",
           "additionalProperties": {
             "type": "string"
           }
         },
         "fill1": {
           "type": "string",
-          "description": "Inform the answer item 1, the character type, the content with the different items and different"
+          "description": "Declaration item to answer the content 1, the character type, the content with the different items and different"
         },
         "fill10": {
           "type": "string",
-          "description": "Tell the item to answer the content 10, the character type, the content with the different items and different"
+          "description": "Declaration item to answer the content 10, character type, content with the different items and different"
         },
         "fill2": {
           "type": "string",
-          "description": "2, the character type, the content varies with the notification item"
+          "description": "Declaration the item to answer the content 2, the character type, the content with the different items and different"
         },
         "fill3": {
           "type": "string",
-          "description": "3, the character type, the content with the different items and different"
+          "description": "Declaration item to answer the content  3, character type, content with the different items and different"
         },
         "fill4": {
           "type": "string",
-          "description": "4, the type of character, the content with the different items and different"
+          "description": "Declaration item to answer the content  4, the type of character, the contents of the different items with different"
         },
         "fill5": {
           "type": "string",
-          "description": "5, the character type, the content varies with the notification item"
+          "description": "Declaration item to answer the content  5, character type, content with the different items and different"
         },
         "fill6": {
           "type": "string",
-          "description": "Inform the answer content 6, character type, content with the different items and different"
+          "description": "Declaration item to answer the content  6, character type, content with the different items and different"
         },
         "fill7": {
           "type": "string",
-          "description": "7, the character type, the content with the different items and different"
+          "description": "Declaration item to answer the content  7, character type, content with the different items and different"
         },
         "fill8": {
           "type": "string",
-          "description": "8, the character type, the content varies with the notification item"
+          "description": "Declaration item to answer the content  8, character type, content with the different items and different"
         },
         "fill9": {
           "type": "string",
-          "description": "9, the type of character, the content with the different items and different"
+          "description": "Declaration item to answer the content  9, character type, content with the different items and different"
         },
         "listId": {
           "type": "string",
-          "description": "Customer informs the details of the internal serial number, UUID type",
+          "description": "Customer declaration details of the internal serial number, UUID type",
           "readOnly": true
         },
         "partyId": {
           "type": "string",
-          "description": "Customer ID, UUID type",
+          "description": "Customer number, UUID type",
           "readOnly": true
         },
         "policyId": {
@@ -2613,19 +2613,19 @@
       "properties": {
         "extendedProps": {
           "type": "object",
-          "description": "Extended information, Map type, Key / Value are character",
+          "description": "Extended information, Map type, Key / Value, should be character",
           "additionalProperties": {
             "type": "string"
           }
         },
         "listId": {
           "type": "string",
-          "description": "Policy role Internal serial number, UUID type",
+          "description": "Policy role internal serial number, UUID type",
           "readOnly": true
         },
         "partyId": {
           "type": "string",
-          "description": "Customer ID, UUID type",
+          "description": "Customer number, UUID type",
           "readOnly": true
         },
         "policyId": {
@@ -2637,7 +2637,7 @@
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "The relationship between the insured and the insured, the number type, 1 - own; 2 - parent; 3 - spouse; 10 - child;",
+          "description": "The relationship between the insured and the insured, the number type, 1 - own; 2 - parent; 3 - spouse; 10 - child; 7-others",
           "enum": [
             1,
             2,
@@ -2653,7 +2653,7 @@
       "properties": {
         "extendedProps": {
           "type": "object",
-          "description": "Extended information, Map type, Key / Value are character",
+          "description": "Extended information, Map type, Key / Value, should be character",
           "additionalProperties": {
             "type": "string"
           }
@@ -2662,13 +2662,13 @@
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "Customer temporary number, request within the use of a unique request within a party"
+          "description": "Customer temporary number, internal usage. Unique identify the customer for one request"
         },
         "relationToLA": {
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "The relationship between the insured and the insured, the number type, 1 - own; 2 - parent; 3 - spouse; 10 - child;",
+          "description": "The relationship between the insured and the insured, the number type, 1 - own; 2 - parent; 3 - spouse; 10 - child; 7-others",
           "enum": [
             1,
             2,
@@ -2685,54 +2685,54 @@
         "declId": {
           "type": "integer",
           "format": "int64",
-          "description": "Tell item number, number type"
+          "description": "Declaration item number, number type"
         },
         "extendedProps": {
           "type": "object",
-          "description": "Extended information, Map type, Key / Value are character",
+          "description": "Extended information, Map type, Key / Value, should be character",
           "additionalProperties": {
             "type": "string"
           }
         },
         "fill1": {
           "type": "string",
-          "description": "Inform the answer item 1, the character type, the content with the different items and different"
+          "description": "Declaration item to answer the content 1, the character type, the content with the different items and different"
         },
         "fill10": {
           "type": "string",
-          "description": "Tell the item to answer the content 10, the character type, the content with the different items and different"
+          "description": "Declaration item to answer the content 10, character type, content with the different items and different"
         },
         "fill2": {
           "type": "string",
-          "description": "2, the character type, the content varies with the notification item"
+          "description": "Declaration item to answer the content  2, the character type, the content with the different items and different"
         },
         "fill3": {
           "type": "string",
-          "description": "3, the character type, the content with the different items and different"
+          "description": "Declaration item to answer the content  3, character type, content with the different items and different"
         },
         "fill4": {
           "type": "string",
-          "description": "4, the type of character, the content with the different items and different"
+          "description": "Declaration item to answer the content  4, the type of character, the contents of the different items with different"
         },
         "fill5": {
           "type": "string",
-          "description": "5, the character type, the content varies with the notification item"
+          "description": "Declaration item to answer the content  5, character type, content with the different items and different"
         },
         "fill6": {
           "type": "string",
-          "description": "Inform the answer content 6, character type, content with the different items and different"
+          "description": "Declaration item to answer the content  6, character type, content with the different items and different"
         },
         "fill7": {
           "type": "string",
-          "description": "7, the character type, the content with the different items and different"
+          "description": "Declaration item to answer the content  7, character type, content with the different items and different"
         },
         "fill8": {
           "type": "string",
-          "description": "8, the character type, the content varies with the notification item"
+          "description": "Declaration item to answer the content  8, character type, content with the different items and different"
         },
         "fill9": {
           "type": "string",
-          "description": "9, the type of character, the content with the different items and different"
+          "description": "Declaration item to answer the content  9, character type, content with the different items and different"
         }
       }
     },
@@ -2744,12 +2744,12 @@
       "properties": {
         "clientRequestId": {
           "type": "string",
-          "description": "External trading serial number"
+          "description": "External transaction serial number"
         },
         "clientRequestTime": {
           "type": "string",
           "format": "date-time",
-          "description": "External request time"
+          "description": "External client request time"
         },
         "extObject": {
           "$ref": "#/definitions/GenericVO"
@@ -2766,18 +2766,18 @@
         "declarationDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Inform date, date format: yyyy-MM-dd'T'HH: mm: ss"
+          "description": "Declaration date, date format: yyyy-MM-dd'T'HH: mm: ss"
         },
         "details": {
           "type": "array",
-          "description": "Inform the details",
+          "description": "Declaration details",
           "items": {
             "$ref": "#/definitions/CustomerDeclarationDetailInput"
           }
         },
         "extendedProps": {
           "type": "object",
-          "description": "Extended information, Map type, Key / Value are character",
+          "description": "Extended information, Map type, Key / Value, should be character",
           "additionalProperties": {
             "type": "string"
           }
@@ -2786,7 +2786,7 @@
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "Customer temporary number, request within the use of a unique request within a party"
+          "description": "Customer temporary number, internal usage. Unique identify the customer for one request"
         }
       }
     },
@@ -2796,7 +2796,7 @@
         "applyDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Date of application, non-empty, date format: yyyy-MM-dd'T'HH: mm: ss"
+          "description": "Application date, non-empty, date format: yyyy-MM-dd'T'HH: mm: ss"
         },
         "beneficiaries": {
           "type": "array",
@@ -2807,7 +2807,7 @@
         },
         "coverages": {
           "type": "array",
-          "description": "List of insurance insurance",
+          "description": "Insurance list",
           "items": {
             "$ref": "#/definitions/CoverageInput"
           }
@@ -2816,7 +2816,7 @@
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "Currency, non-empty, 1 - RMB",
+          "description": "Currency, non-empty, 1 yuan",
           "enum": [
             1
           ]
@@ -2830,7 +2830,7 @@
         },
         "declarations": {
           "type": "array",
-          "description": "Customer informs list",
+          "description": "Customer declaration list",
           "items": {
             "$ref": "#/definitions/CustomerDeclarationInput"
           }
@@ -2838,7 +2838,7 @@
         "deliverType": {
           "type": "string",
           "example": "M",
-          "description": "Policy delivery, H-manual; M-mail",
+          "description": "Policy delivery method, H-by people; M-mail",
           "enum": [
             "H",
             "M"
@@ -2847,11 +2847,11 @@
         "expiryDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Termination Date, Date Format: yyyy-MM-dd'T'HH: mm: ss"
+          "description": "Termination date, date format: yyyy-MM-dd'T'HH: mm: ss"
         },
         "extendedProps": {
           "type": "object",
-          "description": "Extended information, Map type, Key / Value are character",
+          "description": "Extended information, Map type, Key / Value, should be character",
           "additionalProperties": {
             "type": "string"
           }
@@ -2864,12 +2864,12 @@
         "installPrem": {
           "type": "number",
           "format": "double",
-          "description": "Insurance premium",
+          "description": "Policy premium",
           "readOnly": true
         },
         "insureds": {
           "type": "array",
-          "description": "List of policy insured",
+          "description": "Policy issured list",
           "items": {
             "$ref": "#/definitions/InsuredInput"
           }
@@ -2880,7 +2880,7 @@
         },
         "payerAccounts": {
           "type": "array",
-          "description": "Payment method list",
+          "description": "Payment list",
           "items": {
             "$ref": "#/definitions/PayerAccountInput"
           }
@@ -2893,16 +2893,16 @@
           }
         },
         "policyHolder": {
-          "description": "Insured",
+          "description": "Insured person",
           "$ref": "#/definitions/PolicyHolderInput"
         },
         "policyPackage": {
-          "description": "Product portfolio",
+          "description": "Product package",
           "$ref": "#/definitions/PolicyPackageInput"
         },
         "quotationCode": {
           "type": "string",
-          "description": "Trial request number"
+          "description": "Quotation calculation request number"
         },
         "salesChannelCode": {
           "type": "string",
@@ -2919,7 +2919,7 @@
         },
         "trustees": {
           "type": "array",
-          "description": "Guardian List",
+          "description": "List of trustees",
           "items": {
             "$ref": "#/definitions/TrusteeInput"
           }
@@ -2931,19 +2931,19 @@
       "properties": {
         "extendedProps": {
           "type": "object",
-          "description": "Extended information, Map type, Key / Value are character",
+          "description": "Extended information, Map type, Key / Value, should be character",
           "additionalProperties": {
             "type": "string"
           }
         },
         "listId": {
           "type": "string",
-          "description": "Policy role Internal serial number, UUID type",
+          "description": "Policy role internal serial number, UUID type",
           "readOnly": true
         },
         "partyId": {
           "type": "string",
-          "description": "Customer ID, UUID type",
+          "description": "Customer number, UUID type",
           "readOnly": true
         },
         "policyId": {
@@ -2967,23 +2967,23 @@
       "properties": {
         "clientRequestId": {
           "type": "string",
-          "description": "External trading serial number"
+          "description": "External transaction serial number"
         },
         "clientRequestTime": {
           "type": "string",
           "format": "date-time",
-          "description": "External request time"
+          "description": "External client request time"
         },
         "exceptions": {
           "type": "array",
-          "description": "abnormal information",
+          "description": "Exception information:",
           "items": {
             "type": "string"
           }
         },
         "messages": {
           "type": "array",
-          "description": "Business Failure Reason Description List Node",
+          "description": "Business failure reason description list node",
           "items": {
             "$ref": "#/definitions/GenericValidationResult"
           }
@@ -2995,7 +2995,7 @@
         "result": {
           "type": "integer",
           "format": "int32",
-          "description": "Request results, 1 - business success; 0 - business failure;"
+          "description": "Request result, 1 - business success; 0 - business failure; -1- application exception"
         }
       }
     },
@@ -3004,7 +3004,7 @@
       "properties": {
         "coverages": {
           "type": "array",
-          "description": "List of insurance insurance",
+          "description": "Insurance list",
           "items": {
             "$ref": "#/definitions/CoverageCalculationResult"
           }
@@ -3013,14 +3013,14 @@
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "Currency, non-empty, 1 - RMB",
+          "description": "Currency, non-empty, 1 yuan",
           "enum": [
             1
           ]
         },
         "extendedProps": {
           "type": "object",
-          "description": "Extended information, Map type, Key / Value are character",
+          "description": "Extended information, Map type, Key / Value, should be character",
           "additionalProperties": {
             "type": "string"
           }
@@ -3033,16 +3033,16 @@
         "installPrem": {
           "type": "number",
           "format": "double",
-          "description": "Insurance premium",
+          "description": "Policy premium",
           "readOnly": true
         },
         "proposalNumber": {
           "type": "string",
-          "description": "Insured number"
+          "description": "Proposal number"
         },
         "quotationCode": {
           "type": "string",
-          "description": "Trial request number"
+          "description": "Quotation calculation request number"
         }
       }
     },
@@ -3054,12 +3054,12 @@
       "properties": {
         "clientRequestId": {
           "type": "string",
-          "description": "External trading serial number"
+          "description": "External transaction serial number"
         },
         "clientRequestTime": {
           "type": "string",
           "format": "date-time",
-          "description": "External request time"
+          "description": "External client request time"
         },
         "collection": {
           "description": "Charge information",
@@ -3080,7 +3080,7 @@
         "chargePeriod": {
           "type": "string",
           "example": "2",
-          "description": "Payment period type, non-empty, 1-paid; 2-year payment; 3 to a certain age; 4-life",
+          "description": "Payment period type, non-empty, 1 - single; 2 - per year; 3 to a certain age; 4 - whole life",
           "enum": [
             "1",
             "2",
@@ -3092,24 +3092,24 @@
           "type": "integer",
           "format": "int32",
           "example": 20,
-          "description": "Payment period, non-empty, the bargain is 0; by age to pay the payment period; to pay a certain age to pay the expiry of the age;"
+          "description": "Payment period, non-empty, 0-single; by age: till which age or to pay the payment period: the pay years;  whole life is 100"
         },
         "coverageAgents": {
           "type": "array",
-          "description": "List of performance appraisal agents",
+          "description": "List of performance sharing of agent",
           "items": {
             "$ref": "#/definitions/CoverageAgent"
           }
         },
         "coverageId": {
           "type": "string",
-          "description": "Insurance type serial number, UUID type",
+          "description": "Insurance model serial number, UUID type",
           "readOnly": true
         },
         "coveragePeriod": {
           "type": "string",
           "example": "1",
-          "description": "Protection of the type of age, 1-life-long; 2-year limit; 3 to a certain age;",
+          "description": "Coverage type, 1 - whole life; 2 - per year; 3 - Cover to a certain age; 4- per month; 5-per day",
           "enum": [
             "1",
             "2",
@@ -3121,27 +3121,27 @@
         "coverageSeriaId": {
           "type": "integer",
           "format": "int64",
-          "description": "The insurance serial number, the use of the request, the only identification within a certain type of insurance"
+          "description": "sum assured type temporary serial number, the request within the use of a unique identification within a certain kind of insurance"
         },
         "coverageYear": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of years of protection, the number of guarantees for the number of days; the number of days to protect the number of days"
+          "description": "@Yanzhang. To protect the period of time, to protect the life of 9999; yearly security for the protection of the number of years; to a certain age to protect the expiry of age; monthly security for the number of months; according to the day when the number of days to protect the number of days "
         },
         "currentPremium": {
-          "description": "Current premium",
+          "description": "The current period premium",
           "$ref": "#/definitions/CoveragePremium"
         },
         "extendedProps": {
           "type": "object",
-          "description": "Extended information, Map type, Key / Value are character",
+          "description": "Extended information, Map type, Key / Value, should be character",
           "additionalProperties": {
             "type": "string"
           }
         },
         "insureds": {
           "type": "array",
-          "description": "List of insured persons",
+          "description": "List of insured",
           "items": {
             "$ref": "#/definitions/CoverageInsured"
           }
@@ -3168,7 +3168,7 @@
         },
         "productCode": {
           "type": "string",
-          "description": "Product Code"
+          "description": "Product code"
         },
         "productId": {
           "type": "integer",
@@ -3176,7 +3176,7 @@
           "description": "Product ID"
         },
         "waiverExt": {
-          "description": "Insurance information",
+          "description": "Waiver plan information",
           "$ref": "#/definitions/CoverageExtWaiver"
         }
       }
@@ -3206,22 +3206,22 @@
         "bankAccount": {
           "type": "string",
           "example": "1111222233334444567",
-          "description": "Bank account"
+          "description": "Bank Account"
         },
         "bankAccountCity": {
           "type": "string",
           "example": "Shanghai",
-          "description": "Bank account city"
+          "description": "The city, the bank account belongs to"
         },
         "bankAccountProvince": {
           "type": "string",
           "example": "Shanghai",
-          "description": "Bank account number"
+          "description": "The province, the bank account belongs to"
         },
         "bankCode": {
           "type": "string",
           "example": "test_bank",
-          "description": "Bank Code"
+          "description": "Bank code"
         },
         "branchCode": {
           "type": "string",
@@ -3231,7 +3231,7 @@
         "creditCardType": {
           "type": "string",
           "example": "1",
-          "description": "Credit card type, non credit card is empty, 1-Master; 2-Visa; 3-BCA; 4-JCB",
+          "description": "Credit card type, if not credit card, be empty, 1-Master; 2-Visa; 3-BCA; 4-JCB",
           "enum": [
             "1",
             "2",
@@ -3258,7 +3258,7 @@
         "issueBankName": {
           "type": "string",
           "example": "ICBC",
-          "description": "Issuer"
+          "description": "Card issue bank"
         }
       }
     },
@@ -3267,7 +3267,7 @@
       "properties": {
         "coverages": {
           "type": "array",
-          "description": "List of insurance insurance",
+          "description": "Insurance list",
           "items": {
             "$ref": "#/definitions/CoverageCalculationResult"
           }
@@ -3276,14 +3276,14 @@
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "Currency, non-empty, 1 - RMB",
+          "description": "Currency, non-empty, 1 yuan",
           "enum": [
             1
           ]
         },
         "extendedProps": {
           "type": "object",
-          "description": "Extended information, Map type, Key / Value are character",
+          "description": "Extended information, Map type, Key / Value, should be character",
           "additionalProperties": {
             "type": "string"
           }
@@ -3296,12 +3296,12 @@
         "installPrem": {
           "type": "number",
           "format": "double",
-          "description": "Insurance premium",
+          "description": "Policy premium",
           "readOnly": true
         },
         "quotationCode": {
           "type": "string",
-          "description": "Trial request number"
+          "description": "Quotation calculation request number"
         }
       }
     },
@@ -3310,7 +3310,7 @@
       "properties": {
         "extendedProps": {
           "type": "object",
-          "description": "Extended information, Map type, Key / Value are character",
+          "description": "Extended information, Map type, Key / Value, should be character",
           "additionalProperties": {
             "type": "string"
           }
@@ -3319,13 +3319,13 @@
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "Customer temporary number, request within the use of a unique request within a party"
+          "description": "Customer temporary number, internal usage. Unique identify the customer for one request"
         },
         "relationToPH": {
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "The relationship between the insured and the insured, the number type, 1 - own; 2 - child; 3 - spouse; 10 - parent;",
+          "description": "The relationship between the insured and the insured, integer type, 1 - self; 2 - child; 3 - spouse; 10 - parent; 7 - others",
           "enum": [
             1,
             2,
@@ -3338,7 +3338,7 @@
           "type": "number",
           "format": "double",
           "example": 1,
-          "description": "Payment ratio, maximum 1"
+          "description": "Payment ratio, up to 1"
         }
       }
     },
@@ -3348,12 +3348,12 @@
         "waivedSa": {
           "type": "number",
           "format": "double",
-          "description": "Exemptions, 0 means full exemption, not 0 means exemption specified amount, can not exceed the exemption insurance premium"
+          "description": "Exempt from the amount of insurance, 0 that a full exemption, not 0 that exemption from the specified amount, can not exceed the insurance premium is exempt"
         },
         "waiver": {
           "type": "string",
           "example": "N",
-          "description": "Whether it is exempt from risk, Y-yes;",
+          "description": "Is waiver, Y - yes; N - no",
           "enum": [
             "Y",
             "N"
@@ -3366,12 +3366,12 @@
       "properties": {
         "benefitLevel": {
           "type": "string",
-          "description": "Insurance grade, the product insured when the grade is not empty"
+          "description": "Plan benefit level, the product insured by the level of non-empty"
         },
         "paymentFreq": {
           "type": "string",
           "example": "1",
-          "description": "Payment frequency, 1-year payment; 2-year payment; 3-quarter payment; 4-month payment;",
+          "description": "Pay frequency, 1-yearly payment; 2-half yearly payment; 3-quarterly payment; 4-monthly payment;",
           "enum": [
             "1",
             "2",
@@ -3384,18 +3384,18 @@
           "type": "number",
           "format": "double",
           "example": 2314,
-          "description": "Insurance premiums, insurance premiums when the amount of non-empty"
+          "description": "Insurance premium, non empty when calculate SA base on premium"
         },
         "sumAssured": {
           "type": "number",
           "format": "double",
           "example": 100000,
-          "description": "Insurance premium, the amount of insurance premium is not empty"
+          "description": "Insurance SA, non empty when calculate premium base on SA"
         },
         "unit": {
           "type": "number",
           "format": "double",
-          "description": "Insurance number of copies, the number of products by the number of non-empty insurance"
+          "description": "Product unit, non empty when by unit insurance"
         }
       }
     },
@@ -3419,27 +3419,27 @@
         "bankAccount": {
           "type": "string",
           "example": "1111222233334444567",
-          "description": "Bank account"
+          "description": "Bank Account"
         },
         "bankAccountCity": {
           "type": "string",
           "example": "Shanghai",
-          "description": "Bank account city"
+          "description": "The city, the bank account belongs to"
         },
         "bankAccountProvince": {
           "type": "string",
           "example": "Shanghai",
-          "description": "Bank account number"
+          "description": "The province, the bank account belongs to"
         },
         "bankCode": {
           "type": "string",
           "example": "test_bank",
-          "description": "Bank Code"
+          "description": "Bank code"
         },
         "creditCardType": {
           "type": "string",
           "example": "1",
-          "description": "Credit card type, non credit card is empty, 1-Master; 2-Visa; 3-BCA; 4-JCB",
+          "description": "Credit card type, if not credit card, be empty, 1-Master; 2-Visa; 3-BCA; 4-JCB",
           "enum": [
             "1",
             "2",
@@ -3466,7 +3466,7 @@
         "issueBankName": {
           "type": "string",
           "example": "ICBC",
-          "description": "Issuer"
+          "description": "Card issue bank"
         }
       }
     },
@@ -3474,12 +3474,12 @@
       "type": "object",
       "properties": {
         "bankAccount": {
-          "description": "First bank account",
+          "description": "The first premium bank account",
           "$ref": "#/definitions/BankAccountInput"
         },
         "extendedProps": {
           "type": "object",
-          "description": "Extended information, Map type, Key / Value are character",
+          "description": "Extended information, Map type, Key / Value, should be character",
           "additionalProperties": {
             "type": "string"
           }
@@ -3494,25 +3494,25 @@
       "type": "object",
       "properties": {
         "bankAccount": {
-          "description": "First bank account",
+          "description": "The first premium bank account",
           "$ref": "#/definitions/BankAccountInput"
         },
         "extendedProps": {
           "type": "object",
-          "description": "Extended information, Map type, Key / Value are character",
+          "description": "Extended information, Map type, Key / Value, should be character",
           "additionalProperties": {
             "type": "string"
           }
         },
         "nextBankAccount": {
-          "description": "Renewal of bank account",
+          "description": "Renewal premium bank account",
           "$ref": "#/definitions/BankAccountInput"
         },
         "paymentMethod": {
           "type": "integer",
           "format": "int32",
           "example": 3,
-          "description": "Down payment, digital type, 1 - cash; 2 - check; 3 - bank transfer; 30 - credit card",
+          "description": "First time payment method, integer, 1 - cash; 2 - check; 3 - bank transfer; 30 - credit card",
           "enum": [
             1,
             2,
@@ -3524,7 +3524,7 @@
           "type": "integer",
           "format": "int32",
           "example": 3,
-          "description": "Renewal payment method, number type, 1 - cash; 2 - check; 3 - bank transfer; 30 - credit card",
+          "description": "Renewal payment method, integer, 1 - cash; 2 - check; 3 - bank transfer; 30 - credit card",
           "enum": [
             1,
             2,
@@ -3542,12 +3542,12 @@
       "properties": {
         "clientRequestId": {
           "type": "string",
-          "description": "External trading serial number"
+          "description": "External transaction serial number"
         },
         "clientRequestTime": {
           "type": "string",
           "format": "date-time",
-          "description": "External request time"
+          "description": "External client request time"
         },
         "extObject": {
           "$ref": "#/definitions/GenericVO"
@@ -3564,7 +3564,7 @@
         "beneType": {
           "type": "string",
           "example": "2",
-          "description": "Benefit type, 1 survivor beneficiary; 2 - Victim beneficiary; 3 - Insured beneficiary",
+          "description": "Beneficiaries, 1 beneficiaries; 2 - beneficiaries; 3 - insured beneficiaries",
           "enum": [
             "1",
             "2",
@@ -3575,7 +3575,7 @@
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "6 - grandfather; grandmother grandmother; grandfather grandmother grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather grandfather Uncle; 11 - aunt; 12 - cousin / cousin; 13 - nephew / niece / nephew / niece; 14 - employer; 15 - others; 16 -",
+          "description": "The relationship to the insured. 1-wife;2-husband;3-child;4-father;5-mother;6-Grand father;7-Grandparent;8-brother;9-sister;10-uncle;11-untie;12-cousin;13-nephew(niece);14-employer;15-other;16-self",
           "enum": [
             1,
             2,
@@ -3597,24 +3597,24 @@
         },
         "extendedProps": {
           "type": "object",
-          "description": "Extended information, Map type, Key / Value are character",
+          "description": "Extended information, Map type, Key / Value, should be character",
           "additionalProperties": {
             "type": "string"
           }
         },
         "insuredPartyId": {
           "type": "string",
-          "description": "The number of parties to the beneficiary, UUID type",
+          "description": "Internal ID for the beneficiary according to the issured , UUID type",
           "readOnly": true
         },
         "listId": {
           "type": "string",
-          "description": "Policy role Internal serial number, UUID type",
+          "description": "Policy role internal serial number, UUID type",
           "readOnly": true
         },
         "partyId": {
           "type": "string",
-          "description": "Customer ID, UUID type",
+          "description": "Customer number, UUID type",
           "readOnly": true
         },
         "policyId": {
@@ -3626,7 +3626,7 @@
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "Benefit"
+          "description": "Benefit order"
         },
         "shareRate": {
           "type": "number",
@@ -3643,8 +3643,8 @@
         "tags": [
           "Product"
         ],
-        "summary": "Get the combination list",
-        "description": "The combination list is obtained according to the conditions, and the combination list contains the basic information of the combination",
+        "summary": "Get the Product package list",
+        "description": "Obtain a Product package list according to the criteria, the Product package list contains the Product package of basic information",
         "operationId": "findPackagesUsingGET",
         "consumes": [
           "application/json"
@@ -3656,21 +3656,21 @@
           {
             "name": "date",
             "in": "query",
-            "description": "日期，在此日期在售的产品,格式(YYYY-MM-DD)",
+            "description": "Date, product sales before this date, format (YYYY-MM-DD)",
             "required": false,
             "type": "string"
           },
           {
             "name": "salesCategory",
             "in": "query",
-            "description": "产品销售大类，可以多个，如果多个以逗号（，）分隔",
+            "description": "Product sales category can be multiple, if multiple are separated by commas (,)",
             "required": false,
             "type": "string"
           },
           {
             "name": "insurerIds",
             "in": "query",
-            "description": "保险公司列表，可以多个，如果多个以逗号（，）分隔",
+            "description": "The list of insurance companies, can be multiple if multiple are separated by commas (,)",
             "required": false,
             "type": "string"
           },
@@ -3689,7 +3689,7 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorised"
           },
           "403": {
             "description": "Forbidden"
@@ -3705,8 +3705,8 @@
         "tags": [
           "Product"
         ],
-        "summary": "Get a combination of information",
-        "description": "According to the combination of code, access to a product of detailed information",
+        "summary": "Get a Product package of information",
+        "description": "According to the Product package of code, get a product of the details",
         "operationId": "findProductPackageUsingGET_1",
         "consumes": [
           "application/json"
@@ -3718,7 +3718,7 @@
           {
             "name": "packageCode",
             "in": "path",
-            "description": "组合代码",
+            "description": "Product package code",
             "required": true,
             "type": "string"
           },
@@ -3737,7 +3737,7 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorised"
           },
           "403": {
             "description": "Forbidden"
@@ -3753,8 +3753,8 @@
         "tags": [
           "Product"
         ],
-        "summary": "Get a list of products",
-        "description": "Obtain a list of products according to the conditions, the product list contains the basic information of the product",
+        "summary": "Get the product list",
+        "description": "Obtain the product list according to the condition, the product list contains the basic information of the product",
         "operationId": "findProductsUsingGET_1",
         "consumes": [
           "application/json"
@@ -3766,28 +3766,28 @@
           {
             "name": "date",
             "in": "query",
-            "description": "日期，在此日期在售的产品,格式(YYYY-MM-DD)",
+            "description": "Date, product sales before this date, format (YYYY-MM-DD)",
             "required": false,
             "type": "string"
           },
           {
             "name": "salesCategory",
             "in": "query",
-            "description": "产品销售大类，可以多个，如果多个以逗号（，）分隔",
+            "description": "Product sales category can be multiple, if multiple are separated by commas (,)",
             "required": false,
             "type": "string"
           },
           {
             "name": "insurerIds",
             "in": "query",
-            "description": "保险公司列表，可以多个，如果多个以逗号（，）分隔",
+            "description": "The list of insurance companies, can be multiple if multiple are separated by commas (,)",
             "required": false,
             "type": "string"
           },
           {
             "name": "isMainProduct",
             "in": "query",
-            "description": "是否是主险",
+            "description": "Whether it is the main plan",
             "required": false,
             "type": "string"
           },
@@ -3806,7 +3806,7 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorised"
           },
           "403": {
             "description": "Forbidden"
@@ -3823,7 +3823,7 @@
           "Product"
         ],
         "summary": "Interest show",
-        "description": "Product benefits show",
+        "description": "Product benefit illustration",
         "operationId": "illustrateCalculationUsingPOST",
         "consumes": [
           "application/json"
@@ -3835,7 +3835,7 @@
           {
             "in": "body",
             "name": "calculateRequest",
-            "description": "保费保额计算数据",
+            "description": "Insurance premium calculation data",
             "required": true,
             "schema": {
               "$ref": "#/definitions/IllustrationRequest"
@@ -3859,7 +3859,7 @@
             "description": "Created"
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorised"
           },
           "403": {
             "description": "Forbidden"
@@ -3875,8 +3875,8 @@
         "tags": [
           "Product"
         ],
-        "summary": "Calculate premium or insured amount",
-        "description": "According to the premium or the amount of insurance premium",
+        "summary": "Calculate the premium or insured",
+        "description": "Calculate premium base on SA or calculate SA base on premium",
         "operationId": "benefitPremiumSAUsingPOST",
         "consumes": [
           "application/json"
@@ -3888,7 +3888,7 @@
           {
             "in": "body",
             "name": "calculateRequest",
-            "description": "保费保额计算数据",
+            "description": "Insurance premium calculation data",
             "required": true,
             "schema": {
               "$ref": "#/definitions/CalculatePremSARequest"
@@ -3912,7 +3912,7 @@
             "description": "Created"
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorised"
           },
           "403": {
             "description": "Forbidden"
@@ -3928,8 +3928,8 @@
         "tags": [
           "Product"
         ],
-        "summary": "Get a category of sales for a tenant",
-        "description": "Get a list of all sales of a tenant",
+        "summary": "Get a list of all sales products for one tenant",
+        "description": "Get a list of all sales products for one tenant",
         "operationId": "findSalesCategoryUsingGET_1",
         "consumes": [
           "application/json"
@@ -3953,7 +3953,7 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorised"
           },
           "403": {
             "description": "Forbidden"
@@ -3982,7 +3982,7 @@
           {
             "name": "productCode",
             "in": "path",
-            "description": "产品代码",
+            "description": "Product code",
             "required": true,
             "type": "string"
           },
@@ -4001,7 +4001,7 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorised"
           },
           "403": {
             "description": "Forbidden"
@@ -4018,7 +4018,7 @@
           "Proposal"
         ],
         "summary": "Insured",
-        "description": "Calculate the premium and verify the underwriting rules, if passed, then generate an insurance policy number",
+        "description": "Calculate the premium and verify the insurance underwriting rules, if passed, then generate an insurance policy number",
         "operationId": "applyUsingPOST",
         "consumes": [
           "application/json"
@@ -4030,7 +4030,7 @@
           {
             "in": "body",
             "name": "request",
-            "description": "request",
+            "description": "Request",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ApplicationRequest"
@@ -4057,7 +4057,7 @@
             "description": "Bad request"
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorised"
           },
           "403": {
             "description": "Forbidden"
@@ -4074,7 +4074,7 @@
           "Proposal"
         ],
         "summary": "Charge underwriting",
-        "description": "After the nuclear insurance charges underwriting",
+        "description": "After the nuclear insurance after the insurance underwriting",
         "operationId": "issueUsingPOST",
         "consumes": [
           "application/json"
@@ -4086,7 +4086,7 @@
           {
             "in": "body",
             "name": "request",
-            "description": "request",
+            "description": "Request",
             "required": true,
             "schema": {
               "$ref": "#/definitions/IssuranceRequest"
@@ -4113,7 +4113,7 @@
             "description": "Bad request"
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorised"
           },
           "403": {
             "description": "Forbidden"
@@ -4129,7 +4129,7 @@
         "tags": [
           "Proposal"
         ],
-        "summary": "Insured preflight",
+        "summary": "Proposal pre-verification",
         "description": "Calculate the premium and verify the risk of insurance",
         "operationId": "quoteUsingPOST",
         "consumes": [
@@ -4142,7 +4142,7 @@
           {
             "in": "body",
             "name": "request",
-            "description": "request",
+            "description": "Request",
             "required": true,
             "schema": {
               "$ref": "#/definitions/QuotationRequest"
@@ -4169,7 +4169,7 @@
             "description": "Bad request"
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorised"
           },
           "403": {
             "description": "Forbidden"
