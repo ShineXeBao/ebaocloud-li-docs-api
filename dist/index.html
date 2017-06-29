@@ -17,18 +17,17 @@
         margin: 10px;
         padding: 5px 20px;
     }
-    .langSwitch-en {
+    .lang-bar {
         display: inline-block;
         padding: 15px;
         cursor: pointer;
-        background: url(./img/en.png) no-repeat bottom left;
+    }
+    .lang-cn {
+        background: url(./img/cn.png) no-repeat bottom left;
         background-size:25px 25px;
     }
-    .langSwitch-cn {
-        display: inline-block;
-        padding: 15px;
-        cursor: pointer;
-        background: url(./img/cn.png) no-repeat bottom left;
+    .lang-en {
+        background: url(./img/en.png) no-repeat bottom left;
         background-size:25px 25px;
     }
     .links {
@@ -74,7 +73,7 @@
       var $list = document.getElementById('links_container');
       apis.forEach(function(api) {
         var $listitem = document.createElement('li');
-        $listitem.className = 'langSwitch-'+api.name;
+        $listitem.className = 'lang-bar lang-'+api.name;
         $listitem.setAttribute('data-link', api.url);
         $listitem.addEventListener('click', onClick);
         $list.appendChild($listitem);
