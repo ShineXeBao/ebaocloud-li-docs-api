@@ -287,42 +287,42 @@
         "maxAthMastAge": {
           "type": "integer",
           "format": "int32",
-          "description": "@Shanhe The maximum age allowed to be attached to the main plan"
+          "description": "The maximum age of attached"
         },
         "maxAttachSa2MainSaRate": {
           "type": "number",
           "format": "double",
-          "description": "@Shanhe The maximum proportion of the additional rider"
+          "description": "The maximum proportion of SA of attached product to SA of master product"
         },
         "maxAttachedSa": {
           "type": "number",
           "format": "double",
-          "description": "@Shanhe The maximum attached SA"
+          "description": "The maximum SA of the attached product"
         },
         "maxTotalSa2MainSaRate": {
           "type": "number",
           "format": "double",
-          "description": "@Shanhe The maximum proportion of the rider"
+          "description": "The maximum proportion of SA of policy to SA of master product"
         },
         "minAthAge": {
           "type": "integer",
           "format": "int32",
-          "description": "@Shanhe The minimum age allowed to be attached"
+          "description": "The minimum age of attaching"
         },
         "minAthMastAge": {
           "type": "integer",
           "format": "int32",
-          "description": "@Shanhe The minimum age that is allowed to be attached to the main plan"
+          "description": "The minimum age of attached"
         },
         "minAttachSa2MainSaRate": {
           "type": "number",
           "format": "double",
-          "description": "@Shanhe The proportion of the minimum rider to the main insurance"
+          "description": "The minimum proportion of SA of attached product to SA of master product"
         },
         "minMastSaAmount": {
           "type": "number",
           "format": "double",
-          "description": "@Shanhe The minimum age that is allowed to be attached to the main plan"
+          "description": "The minimum SA of master product"
         },
         "riderProductCode": {
           "type": "string",
@@ -340,7 +340,7 @@
         "totalOverRate": {
           "type": "number",
           "format": "double",
-          "description": "@Shanhe The maximum rider premium plus the main insurance amount than the main insurance ratio"
+          "description": "The maximum total SA over SA of attached plan rate"
         }
       }
     },
@@ -1519,7 +1519,7 @@
         "coverageYear": {
           "type": "integer",
           "format": "int32",
-          "description": "@Yanzhang. To protect the period of time, to protect the life of 9999; yearly security for the protection of the number of years; to a certain age to protect the expiry of age; monthly security for the number of months; according to the day when the number of days to protect the number of days "
+          "description": "Coverage Term. Meaning of this property is associated with property \"coveragePeriod\" (\"type\" for short). when covers whole life, value of this property is 9999; and if type is 2, means years covered; and if type is 3, means age when coverage expired; and if type is 4, means months covered; and if type is 5, means days covered."
         },
         "currentPremium": {
           "description": "The current period premium",
@@ -3126,7 +3126,7 @@
         "coverageYear": {
           "type": "integer",
           "format": "int32",
-          "description": "@Yanzhang. To protect the period of time, to protect the life of 9999; yearly security for the protection of the number of years; to a certain age to protect the expiry of age; monthly security for the number of months; according to the day when the number of days to protect the number of days "
+          "description": "Coverage Term. Meaning of this property is associated with property \"coveragePeriod\" (\"type\" for short). when covers whole life, value of this property is 9999; and if type is 2, means years covered; and if type is 3, means age when coverage expired; and if type is 4, means months covered; and if type is 5, means days covered."
         },
         "currentPremium": {
           "description": "The current period premium",
