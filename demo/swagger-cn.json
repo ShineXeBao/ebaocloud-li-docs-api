@@ -1477,7 +1477,7 @@
         "chargePeriod": {
           "type": "string",
           "example": "2",
-          "description": "缴费年期类型，非空，1-趸缴；2-按年限缴；3-缴至某确定年龄；4-终身",
+          "description": "缴费年期类型，非空，<br>1-趸缴；<br>2-按年限缴；<br>3-缴至某确定年龄；<br>4-终身",
           "enum": [
             "1",
             "2",
@@ -1501,7 +1501,7 @@
         "coveragePeriod": {
           "type": "string",
           "example": "1",
-          "description": "保障年期类型，1-保终身；2-按年限保；3-保至某确定年龄；4-按月保；5-按天保",
+          "description": "保障年期类型，<br>1-保终身；<br>2-按年限保；<br>3-保至某确定年龄；<br>4-按月保；<br>5-按天保",
           "enum": [
             "1",
             "2",
