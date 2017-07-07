@@ -363,7 +363,7 @@
         "gender": {
           "type": "string",
           "example": "M",
-          "description": "被保人性别<br>M - 男性<br>F - 女性",
+          "description": "被保人性别（M:男性    F:女性  ）",
           "enum": [
             "M",
             "F"
@@ -471,7 +471,7 @@
         "baseAmount": {
           "type": "integer",
           "format": "int64",
-          "description": "基本保额"
+          "description": "基本保额 "
         },
         "description": {
           "type": "string",
@@ -484,50 +484,50 @@
         "maxAge": {
           "type": "integer",
           "format": "int32",
-          "description": "最大年龄"
+          "description": "最大年龄 "
         },
         "maxAgeUnit": {
           "type": "string",
-          "description": "最大年龄单位"
+          "description": "最大年龄单位 "
         },
         "maxAmount": {
           "type": "integer",
           "format": "int64",
-          "description": "最大保额"
+          "description": "最大保额 "
         },
         "maxPhAge": {
           "type": "integer",
           "format": "int32",
-          "description": "最大投保人年龄"
+          "description": "最大投保人年龄 "
         },
         "maxPremium": {
           "type": "integer",
           "format": "int64",
-          "description": "最大保费"
+          "description": "最大保费 "
         },
         "minAge": {
           "type": "integer",
           "format": "int32",
-          "description": "最小年龄"
+          "description": "最小年龄 "
         },
         "minAgeUnit": {
           "type": "string",
-          "description": "最小年龄单位"
+          "description": "最小年龄单位 "
         },
         "minAmount": {
           "type": "integer",
           "format": "int64",
-          "description": "最小保额"
+          "description": "最小保额 "
         },
         "minPhAge": {
           "type": "integer",
           "format": "int32",
-          "description": "最小投保人年龄"
+          "description": "最小投保人年龄 "
         },
         "minPremium": {
           "type": "integer",
           "format": "int64",
-          "description": "最小保费"
+          "description": "最小保费 "
         },
         "moneyId": {
           "type": "integer",
@@ -549,7 +549,7 @@
         },
         "pricingMethod": {
           "type": "string",
-          "description": "保费保额计算方法<br>0 - 保费保额由用户输入<br>1 - 产品按单位售卖<br>2 - 根据保额算保费，但是也允许协议保费<br>3 - 产品根据计划或单位售卖<br>4 - 产品只允许按计划售卖<br>5 - 根据保费算保额，但是也允许协议保费<br>6 - 只允许保额算保费但是也允许协议保费<br>7 - 只允许保费算保额<br>8 - 保费算保额或保额算保费"
+          "description": "保费保额计算方法  0         保费保额由用户输入   1         产品按单位售卖   2         根据保额算保费，但是也允许协议保费   3         产品根据计划或单位售卖   4         产品只允许按计划售卖   5          根据保费算保额，但是也允许协议保费   6         只允许保额算保费但是也允许协议保费   7         只允许保费算保额   8         保费算保额或保额算保费\t"
         },
         "productPkgProductMatrixs": {
           "type": "array",
@@ -560,14 +560,14 @@
         },
         "productPkgProducts": {
           "type": "array",
-          "description": "基本产品",
+          "description": "基本产品 ",
           "items": {
             "$ref": "#/definitions/ProductPkgProduct"
           }
         },
         "productPkgTerms": {
           "type": "array",
-          "description": "基本期限限制",
+          "description": "基本期限限制 ",
           "items": {
             "$ref": "#/definitions/ProductPackageTerm"
           }
@@ -579,12 +579,12 @@
         "unitAmount": {
           "type": "integer",
           "format": "int64",
-          "description": "单位保额"
+          "description": "单位保额 "
         },
         "unitPremium": {
           "type": "integer",
           "format": "int64",
-          "description": "单位保费"
+          "description": "单位保费 "
         }
       }
     },
@@ -660,7 +660,7 @@
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "缴费频率（1 - 年缴   2 - 半年缴   3 - 季缴    4 - 月缴   5 - 趸缴）",
+          "description": "缴费频率（1:年缴   2:半年缴   3:季缴    4:月缴   5-趸缴）",
           "enum": [
             1,
             2,
@@ -706,7 +706,7 @@
         },
         "survivalBenefitOptions": {
           "type": "array",
-          "description": "允许的生存给付选项<br>1 - 马上领取<br>2 - 用生存给付支付保费<br>3 - 存在保险公司帐户中",
+          "description": "允许的生存给付选项 (1:马上领取      2:用生存给付支付保费     3:存在保险公司帐户中 ",
           "items": {
             "type": "string"
           }
@@ -722,7 +722,7 @@
         },
         "attachType": {
           "type": "string",
-          "description": "附加类型<br>1 - 只允许 附加一次<br>2 - 允许附加多次"
+          "description": "附加类型 1:只允许 附加一次       2:允许附加多次"
         },
         "masterProductCode": {
           "type": "string",
@@ -987,7 +987,7 @@
         },
         "benefitType": {
           "type": "string",
-          "description": "产品保障大类<br?>2 - 报销型医疗险<br>23 - 补贴型医疗险<br>31 - 意外险<br>11 - 两全险<br>12 - 年金险<br>13 - 终身险<br>14 - 定期险<br>41 - 投资险<br>15 - 抵押贷款险<br>16 - 长期照料险 <br>17 - 重疾险"
+          "description": "产品保障大类\t  22       报销型医疗险        \t  23       补贴型医疗险       \t  31       意外险             \t  11       两全险             \t  12       年金险             \t  13       终身险             \t  14       定期险             \t  41       投资险             \t  15       抵押贷款险        \t  16       长期照料险         \t  17       重疾险             "
         },
         "bonus": {
           "description": "红利信息",
@@ -1029,7 +1029,7 @@
       "properties": {
         "benefitType": {
           "type": "string",
-          "description": "产品保障大类<br?>2 - 报销型医疗险<br>23 - 补贴型医疗险<br>31 - 意外险<br>11 - 两全险<br>12 - 年金险<br>13 - 终身险<br>14 - 定期险<br>41 - 投资险<br>15 - 抵押贷款险<br>16 - 长期照料险 <br>17 - 重疾险"
+          "description": "产品保障大类\t  22       报销型医疗险        \t  23       补贴型医疗险       \t  31       意外险             \t  11       两全险             \t  12       年金险             \t  13       终身险             \t  14       定期险             \t  41       投资险             \t  15       抵押贷款险        \t  16       长期照料险         \t  17       重疾险             "
         },
         "endDate": {
           "type": "string",
@@ -1083,7 +1083,7 @@
         },
         "limitUnit": {
           "type": "string",
-          "description": "保额或单位限制 1 - 保额    2 - 单位"
+          "description": "保额或单位限制 1：保额    2：单位"
         },
         "lowAgeMonth": {
           "type": "integer",
@@ -1149,7 +1149,7 @@
         },
         "cashBonusOptions": {
           "type": "array",
-          "description": "允许的现金红利选项<br>1 - 马上领取<br>2 - 用现金红利支付保费<br>3 - 存在保险公司帐户中",
+          "description": "允许的现金红利选项 (1:马上领取      2:用现金红利支付保费     3:存在保险公司帐户中 ",
           "items": {
             "type": "string"
           }
@@ -1276,11 +1276,11 @@
         "attachId": {
           "type": "integer",
           "format": "int64",
-          "description": "附加险Id"
+          "description": "附加险Id "
         },
         "attachMode": {
           "type": "string",
-          "description": "附加方式 1 - 共存关系   2 - 依赖关系    3 - 互斥关系"
+          "description": "附加方式 1：共存关系   2：依赖关系    3：互斥关系 "
         },
         "entityId": {
           "type": "integer",
@@ -1289,17 +1289,17 @@
         "listId": {
           "type": "integer",
           "format": "int64",
-          "description": "序列号"
+          "description": "序列号 "
         },
         "masterId": {
           "type": "integer",
           "format": "int64",
-          "description": "主险Id"
+          "description": "主险Id "
         },
         "packageId": {
           "type": "integer",
           "format": "int64",
-          "description": "组合Id"
+          "description": "组合Id "
         }
       }
     },
@@ -1308,7 +1308,7 @@
       "properties": {
         "annuity_End_Period": {
           "type": "string",
-          "description": "年金结束支付时期类型<br>1 - 几年<br>2 - 到多少岁<br>3 - 终身"
+          "description": "年金结束支付时期类型 1：几年      2：到多少岁   3：终身  "
         },
         "annuity_End_Year": {
           "type": "integer",
@@ -1317,7 +1317,7 @@
         },
         "annuity_Start_Period": {
           "type": "string",
-          "description": "年金开始支付时期类型<br>1 - 立刻<br>2 - 从保单周年日年龄开始给付<br>3 - 几年之后开始给付<br>4 - 生日年龄那天开始给付"
+          "description": "年金开始支付时期类型 1：立刻      2：从保单周年日年龄开始给付   3：几年之后开始给付   4：生日年龄那天开始给付  "
         },
         "annuity_Start_Year": {
           "type": "integer",
@@ -1371,7 +1371,7 @@
       "properties": {
         "ageBase": {
           "type": "string",
-          "description": "年龄计算方法<br>1 - 按投保时年龄计算<br>2 - 按当年的保单周年日年龄计算"
+          "description": "年龄计算方法 1:按投保时年龄计算     2:按当年的保单周年日年龄计算"
         },
         "premiumFrequency": {
           "type": "array",
@@ -1381,7 +1381,7 @@
         },
         "unitFlag": {
           "type": "string",
-          "description": "保费保额计算方法<br>0 - 保费保额由用户输入<br>1 - 产品按单位售卖<br>2 - 根据保额算保费，但是也允许协议保费<br>3 - 产品根据计划或单位售卖<br>4 - 产品只允许按计划售卖<br>5 - 根据保费算保额，但是也允许协议保费<br>6 - 只允许保额算保费但是也允许协议保费<br>7 - 只允许保费算保额<br>8 - 保费算保额或保额算保费"
+          "description": "保费保额计算方法  0         保费保额由用户输入   1         产品按单位售卖   2         根据保额算保费，但是也允许协议保费   3         产品根据计划或单位售卖   4         产品只允许按计划售卖   5          根据保费算保额，但是也允许协议保费   6         只允许保额算保费但是也允许协议保费   7         只允许保费算保额   8         保费算保额或保额算保费\t"
         },
         "waiver": {
           "type": "boolean",
@@ -1451,7 +1451,7 @@
         "chargePeriod": {
           "type": "string",
           "example": "2",
-          "description": "缴费期限类型<br>1 - 趸交<br>2 - 缴几年<br>3 - 缴至某年龄<br>4 - 缴终身<br>在产品允许多种缴费期限类型情况下,此项必填",
+          "description": "缴费期限类型（ 1:趸交     2:缴几年   3:缴至某年龄   4:缴终身）,在产品允许多种缴费期限类型情况下,此项必填",
           "enum": [
             "1",
             "2",
@@ -1474,7 +1474,7 @@
         "coveragePeriod": {
           "type": "string",
           "example": "2",
-          "description": "保障期限类型<br>1 - 保终身<br>2 - 保几年   3 - 保至某年龄   4 - 保几个月）,,在产品允许多种保障期限类型情况下,此项必填",
+          "description": "保障期限类型（ 1:保终身     2:保几年   3:保至某年龄   4:保几个月）,,在产品允许多种保障期限类型情况下,此项必填",
           "enum": [
             "1",
             "2",
@@ -1551,7 +1551,7 @@
       "properties": {
         "periodType": {
           "type": "string",
-          "description": "期限类型<br>1 - 趸交<br>2 - 缴几年<br>3 - 缴至某年龄<br>4 - 缴终身"
+          "description": "期限类型（ 1:趸交     2:缴几年   3:缴至某年龄   4:缴终身）"
         },
         "periodValueMax": {
           "type": "integer",
@@ -1692,7 +1692,7 @@
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "币种，非空，1 - 人民币",
+          "description": "币种，非空，1-人民币",
           "enum": [
             1
           ]
@@ -1714,7 +1714,7 @@
         "deliverType": {
           "type": "string",
           "example": "M",
-          "description": "保单递送方式<br>H - 手工<br>M - 邮件",
+          "description": "保单递送方式，H-手工；M-邮件",
           "enum": [
             "H",
             "M"
@@ -1805,7 +1805,7 @@
         "riskStatus": {
           "type": "integer",
           "format": "int32",
-          "description": "保单状态<br>0 - 未生效<br>1 - 生效<br>2 - 失效<br>3 - 终止",
+          "description": "保单状态,0-未生效；1-生效；2-失效；3-终止",
           "readOnly": true
         },
         "salesChannelCode": {
@@ -1888,7 +1888,7 @@
         "result": {
           "type": "integer",
           "format": "int32",
-          "description": "请求结果，1 - 业务成功<br>0 - 业务失败<br>-1 - 程序异常"
+          "description": "请求结果，1-业务成功；0-业务失败；-1-程序异常"
         }
       }
     },
@@ -2006,7 +2006,7 @@
         "medicalIndi": {
           "type": "string",
           "example": "Y",
-          "description": "是否有医保<br>Y - 是<br>N - 否",
+          "description": "是否有医保，Y-是；N-否",
           "enum": [
             "Y",
             "N"
@@ -2022,7 +2022,7 @@
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "被保人与投保人关系，数字类型<br>1 - 自己<br>2 - 子女<br>3 - 配偶<br>10 - 父母<br>7 - 其他",
+          "description": "被保人与投保人关系，数字类型，1-自己；2-子女；3-配偶；10-父母；7-其他",
           "enum": [
             1,
             2,
@@ -2034,7 +2034,7 @@
         "socialSecurityIndi": {
           "type": "string",
           "example": "Y",
-          "description": "是否有社保<br>Y - 是<br>N - 否",
+          "description": "是否有社保，Y-是；N-否",
           "enum": [
             "Y",
             "N"
@@ -2069,7 +2069,7 @@
           "type": "integer",
           "format": "int32",
           "example": 3,
-          "description": "首期付款方式，数字类型<br>1 - 现金<br>2 - 支票<br>3 - 银行转账<br>30 - 信用卡",
+          "description": "首期付款方式，数字类型，1-现金；2-支票；3-银行转账；30-信用卡",
           "enum": [
             1,
             2,
@@ -2081,7 +2081,7 @@
           "type": "integer",
           "format": "int32",
           "example": 3,
-          "description": "续期付款方式，数字类型<br>1 - 现金<br>2 - 支票<br>3 - 银行转账<br>30 - 信用卡",
+          "description": "续期付款方式，数字类型，1-现金；2-支票；3-银行转账；30-信用卡",
           "enum": [
             1,
             2,
@@ -2102,7 +2102,7 @@
         "endPeriod": {
           "type": "string",
           "example": "3",
-          "description": "年金领取期间类型，计划类型为年金/变额年金/GMWB时非空<br>1 - 领取固定年数<br>2 - 领取到一定年龄<br>3 - 终身领取",
+          "description": "年金领取期间类型，计划类型为年金/变额年金/GMWB时非空，1-领取固定年数；2-领取到一定年龄；3-终身领取",
           "enum": [
             "1",
             "2",
@@ -2129,7 +2129,7 @@
         "payOption": {
           "type": "string",
           "example": "1",
-          "description": "年金领取方式<br>1 - 现金领取<br>2 - 抵交保费<br>3 - 累积生息<br>4 - 累积生息x年后转抵交保费<br>5 - 买一个附加的缴清的附加险",
+          "description": "年金领取方式，1-现金领取；2-抵交保费；3-累积生息；4-累积生息x年后转抵交保费；5-买一个附加的缴清的附加险",
           "enum": [
             "1",
             "2",
@@ -2146,7 +2146,7 @@
         "payPeriod": {
           "type": "string",
           "example": "3",
-          "description": "年金开始领取期间类型<br>1 - 立即领取<br>2 - 到一定年龄的周年日领取<br>3 - 若干年后领取<br>4 - 一定年龄后领取",
+          "description": "年金开始领取期间类型，1-立即领取；2-到一定年龄的周年日领取；3-若干年后领取；4-一定年龄后领取",
           "enum": [
             "1",
             "2",
@@ -2162,7 +2162,7 @@
         "planFreq": {
           "type": "string",
           "example": "1",
-          "description": "领取频率<br>1 - 年<br>2 - 半年<br>3 - 季<br>4 - 月<br>5 - 趸领",
+          "description": "领取频率，1-年；2-半年；3-季；4-月；5-趸领",
           "enum": [
             "1",
             "2",
@@ -2174,7 +2174,7 @@
         "planType": {
           "type": "string",
           "example": "1",
-          "description": "支付计划类型，非空<br>1 - 现金红利<br>2 - 年金<br>3 - 生存金<br>4 - 满期金<br>5 - GMWB（保证最小提取利益）<br>6 - 变额年金<br>7 - 部分退保<br>8 - 保额红利",
+          "description": "支付计划类型，非空，1-现金红利；2-年金；3-生存金；4-满期金；5-GMWB（保证最小提取利益）；6-变额年金；7-部分退保；8-保额红利",
           "enum": [
             "1",
             "2",
@@ -2194,7 +2194,7 @@
         "chargePeriod": {
           "type": "string",
           "example": "2",
-          "description": "缴费年期类型，非空<br>1 - 趸缴<br>2 - 按年限缴<br>3 - 缴至某确定年龄<br>4 - 终身",
+          "description": "缴费年期类型，非空，1-趸缴；2-按年限缴；3-缴至某确定年龄；4-终身",
           "enum": [
             "1",
             "2",
@@ -2206,7 +2206,7 @@
           "type": "integer",
           "format": "int32",
           "example": 20,
-          "description": "缴费年期，非空，趸缴为<br>0 - 按年限缴时为缴费年限<br>缴至某确定年龄时为缴费期满年龄<br>终身为100"
+          "description": "缴费年期，非空，趸缴为0；按年限缴时为缴费年限；缴至某确定年龄时为缴费期满年龄；终身为100"
         },
         "coverageAgents": {
           "type": "array",
@@ -2218,7 +2218,7 @@
         "coveragePeriod": {
           "type": "string",
           "example": "1",
-          "description": "保障年期类型<br>1 - 保终身<br>2 - 按年限保<br>3 - 保至某确定年龄<br>4 - 按月保<br>5 - 按天保",
+          "description": "保障年期类型，1-保终身；2-按年限保；3-保至某确定年龄；4-按月保；5-按天保",
           "enum": [
             "1",
             "2",
@@ -2310,7 +2310,7 @@
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "当事人类型<br>1 - 个人当事人<br>2 - 机构当事人",
+          "description": "当事人类型，1-个人当事人；2-机构当事人",
           "enum": [
             1,
             2
@@ -2333,7 +2333,7 @@
         "endPeriod": {
           "type": "string",
           "example": "3",
-          "description": "年金领取期间类型，计划类型为年金/变额年金/GMWB时非空<br>1 - 领取固定年数<br>2 - 领取到一定年龄<br>3 - 终身领取",
+          "description": "年金领取期间类型，计划类型为年金/变额年金/GMWB时非空，1-领取固定年数；2-领取到一定年龄；3-终身领取",
           "enum": [
             "1",
             "2",
@@ -2360,7 +2360,7 @@
         "payOption": {
           "type": "string",
           "example": "1",
-          "description": "年金领取方式<br>1 - 现金领取<br>2 - 抵交保费<br>3 - 累积生息<br>4 - 累积生息x年后转抵交保费<br>5 - 买一个附加的缴清的附加险",
+          "description": "年金领取方式，1-现金领取；2-抵交保费；3-累积生息；4-累积生息x年后转抵交保费；5-买一个附加的缴清的附加险",
           "enum": [
             "1",
             "2",
@@ -2377,7 +2377,7 @@
         "payPeriod": {
           "type": "string",
           "example": "3",
-          "description": "年金开始领取期间类型<br>1 - 立即领取<br>2 - 到一定年龄的周年日领取<br>3 - 若干年后领取<br>4 - 一定年龄后领取",
+          "description": "年金开始领取期间类型，1-立即领取；2-到一定年龄的周年日领取；3-若干年后领取；4-一定年龄后领取",
           "enum": [
             "1",
             "2",
@@ -2393,7 +2393,7 @@
         "planFreq": {
           "type": "string",
           "example": "1",
-          "description": "领取频率<br>1 - 年<br>2 - 半年<br>3 - 季<br>4 - 月<br>5 - 趸领",
+          "description": "领取频率，1-年；2-半年；3-季；4-月；5-趸领",
           "enum": [
             "1",
             "2",
@@ -2410,7 +2410,7 @@
         "planType": {
           "type": "string",
           "example": "1",
-          "description": "支付计划类型，非空<br>1 - 现金红利<br>2 - 年金<br>3 - 生存金<br>4 - 满期金<br>5 - GMWB（保证最小提取利益）<br>6 - 变额年金<br>7 - 部分退保<br>8 - 保额红利",
+          "description": "支付计划类型，非空，1-现金红利；2-年金；3-生存金；4-满期金；5-GMWB（保证最小提取利益）；6-变额年金；7-部分退保；8-保额红利",
           "enum": [
             "1",
             "2",
@@ -2533,7 +2533,7 @@
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "被保人与投保人关系，数字类型<br>1 - 自己<br>2 - 子女<br>3 - 配偶<br>10 - 父母<br>7 - 其他",
+          "description": "被保人与投保人关系，数字类型，1-自己；2-子女；3-配偶；10-父母；7-其他",
           "enum": [
             1,
             2,
@@ -2557,7 +2557,7 @@
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "币种，非空，1 - 人民币",
+          "description": "币种，非空，1-人民币",
           "enum": [
             1
           ]
@@ -2579,7 +2579,7 @@
           "type": "integer",
           "format": "int32",
           "example": 3,
-          "description": "首期付款方式，数字类型<br>1 - 现金<br>2 - 支票<br>3 - 银行转账<br>30 - 信用卡",
+          "description": "首期付款方式，数字类型，1-现金；2-支票；3-银行转账；30-信用卡",
           "enum": [
             1,
             2,
@@ -2589,7 +2589,7 @@
         },
         "paymentPlatform": {
           "type": "string",
-          "description": "第三方支付平台代码<br>0 - 支付宝<br>11 - 财付通<br>12 - 快钱<br>21 - 快捷支付<br>30 - 京东支付<br>31 - 微信<br>32 - 银联<br>99 - 其他",
+          "description": "第三方支付平台代码，0-支付宝；11-财付通；12-快钱；21-快捷支付；30-京东支付；31-微信；32-银联；99-其他",
           "enum": [
             "0",
             "11",
@@ -2621,7 +2621,7 @@
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "币种，非空，1 - 人民币",
+          "description": "币种，非空，1-人民币",
           "enum": [
             1
           ]
@@ -2673,7 +2673,7 @@
         "riskStatus": {
           "type": "integer",
           "format": "int32",
-          "description": "保单状态<br>0 - 未生效<br>1 - 生效<br>2 - 失效<br>3 - 终止",
+          "description": "保单状态,0-未生效；1-生效；2-失效；3-终止",
           "readOnly": true
         }
       }
@@ -2696,7 +2696,7 @@
         "medicalIndi": {
           "type": "string",
           "example": "Y",
-          "description": "是否有医保<br>Y - 是<br>N - 否",
+          "description": "是否有医保，Y-是；N-否",
           "enum": [
             "Y",
             "N"
@@ -2716,7 +2716,7 @@
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "被保人与投保人关系，数字类型<br>1 - 自己<br>2 - 子女<br>3 - 配偶<br>10 - 父母<br>7 - 其他",
+          "description": "被保人与投保人关系，数字类型，1-自己；2-子女；3-配偶；10-父母；7-其他",
           "enum": [
             1,
             2,
@@ -2728,7 +2728,7 @@
         "socialSecurityIndi": {
           "type": "string",
           "example": "Y",
-          "description": "是否有社保<br>Y - 是<br>N - 否",
+          "description": "是否有社保，Y-是；N-否",
           "enum": [
             "Y",
             "N"
@@ -2887,7 +2887,7 @@
         "result": {
           "type": "integer",
           "format": "int32",
-          "description": "请求结果<br>1 - 业务成功<br>0 - 业务失败<br>-1 - 程序异常"
+          "description": "请求结果，1-业务成功；0-业务失败；-1-程序异常"
         }
       }
     },
@@ -2921,7 +2921,7 @@
           "type": "integer",
           "format": "int32",
           "example": 3,
-          "description": "证件类型，数字类型<br>1 - 身份证<br>2 - 军人证<br>3 - 护照<br>4 - 出生证<br>9 - 其他",
+          "description": "证件类型，数字类型，1-身份证；2-军人证；3-护照；4-出生证；9-其他",
           "enum": [
             1,
             2,
@@ -2938,7 +2938,7 @@
         "gender": {
           "type": "string",
           "example": "M",
-          "description": "性别<br>M - 男性<br>F - 女性",
+          "description": "性别，M-男性；F-女性",
           "enum": [
             "M",
             "F"
@@ -2964,7 +2964,7 @@
         "marriageStatus": {
           "type": "string",
           "example": "1",
-          "description": "婚姻状况<br>1 - 已婚<br>2 - 未婚<br>3 - 离异<br>4 - 丧偶<br>5 - 分居<br>6 - 其他",
+          "description": "婚姻状况，1-已婚；2-未婚；3-离异；4-丧偶；5-分居；6-其他",
           "enum": [
             "1",
             "2",
@@ -2981,7 +2981,7 @@
         "nationality": {
           "type": "string",
           "example": "7",
-          "description": "国籍，7 - 中国"
+          "description": "国籍，7-中国"
         },
         "occupationCode": {
           "type": "string",
@@ -2991,12 +2991,12 @@
         "preferredLifeIndi": {
           "type": "string",
           "example": "0",
-          "description": "是否优选体<br>0 - N/A<br>1 - 超优体<br>2 - 优选体<br>3 - 优标体<br>4 - 标准体<br>5 - 次选体<br>6 - 次标准体"
+          "description": "是否优选体, 0-N/A；1-超优体；2-优选体；3-优标体；4-标准体；5-次选体；6-次标准体"
         },
         "salutation": {
           "type": "string",
           "example": "1",
-          "description": "称呼<br>1 - 先生<br>2 - 女士",
+          "description": "称呼，1-先生；2-女士",
           "enum": [
             "1",
             "2"
@@ -3005,7 +3005,7 @@
         "smoking": {
           "type": "string",
           "example": "N",
-          "description": "是否吸烟<br>Y - 是<br>N - 否",
+          "description": "是否吸烟，Y-是；N-否",
           "enum": [
             "Y",
             "N"
@@ -3044,7 +3044,7 @@
         "countryCode": {
           "type": "string",
           "example": "156",
-          "description": "注册国家，156 - 中国"
+          "description": "注册国家，156-中国"
         },
         "registerCode": {
           "type": "string",
@@ -3054,7 +3054,7 @@
         "registerType": {
           "type": "string",
           "example": "1001",
-          "description": "公司证件类型，1001 - 公司注册号"
+          "description": "公司证件类型，1001-公司注册号"
         }
       }
     },
@@ -3134,7 +3134,7 @@
         "beneType": {
           "type": "string",
           "example": "2",
-          "description": "受益类型<br>1 - 生存受益人<br>2 - 身故受益人<br>3 - 投保受益人",
+          "description": "受益类型，1-生存受益人；2-身故受益人；3-投保受益人",
           "enum": [
             "1",
             "2",
@@ -3145,7 +3145,7 @@
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "与被保人关系<br>1 - 妻子<br>2 - 丈夫<br>3 - 子女<br>4 - 父亲<br>5 - 母亲<br>6 - 祖父/外祖父<br>7 - 祖母/外祖母<br>8 - 兄弟<br>9 - 姐妹<br>10 - 叔父/伯父<br>11 - 阿姨<br>12 - 表兄弟/表姐妹<br>13 - 外甥/外甥女/侄子/侄女<br>14 - 雇主<br>15 - 其他<br>16 - 被保人本人",
+          "description": "与被保人关系，1-妻子；2-丈夫；3-子女；4-父亲；5-母亲；6-祖父/外祖父；7-祖母/外祖母；8-兄弟；9-姐妹；10-叔父/伯父；11-阿姨；12-表兄弟/表姐妹；13-外甥/外甥女/侄子/侄女；14-雇主；15-其他；16-被保人本人",
           "enum": [
             1,
             2,
@@ -3233,7 +3233,7 @@
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "当事人类型，1 - 个人当事人<br>2 - 机构当事人",
+          "description": "当事人类型，1-个人当事人；2-机构当事人",
           "enum": [
             1,
             2
@@ -3356,7 +3356,7 @@
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "投保人与被保人关系，数字类型<br>1 - 自己<br>2 - 父母<br>3 - 配偶<br>10 - 子女<br>7 - 其他",
+          "description": "投保人与被保人关系，数字类型，1-自己；2-父母；3-配偶；10-子女；7-其他",
           "enum": [
             1,
             2,
@@ -3387,7 +3387,7 @@
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "投保人与被保人关系，数字类型<br>1 - 自己<br>2 - 父母<br>3 - 配偶<br>10 - 子女<br>7 - 其他",
+          "description": "投保人与被保人关系，数字类型，1-自己；2-父母；3-配偶；10-子女；7-其他",
           "enum": [
             1,
             2,
@@ -3535,7 +3535,7 @@
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "币种，非空，1 - 人民币",
+          "description": "币种，非空，1-人民币",
           "enum": [
             1
           ]
@@ -3557,7 +3557,7 @@
         "deliverType": {
           "type": "string",
           "example": "M",
-          "description": "保单递送方式<br>H - 手工<br>M - 邮件",
+          "description": "保单递送方式，H-手工；M-邮件",
           "enum": [
             "H",
             "M"
@@ -3714,7 +3714,7 @@
         "result": {
           "type": "integer",
           "format": "int32",
-          "description": "请求结果<br>1 - 业务成功<br>0 - 业务失败<br>-1 - 程序异常"
+          "description": "请求结果，1-业务成功；0-业务失败；-1-程序异常"
         }
       }
     },
@@ -3732,7 +3732,7 @@
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "币种，非空，1 - 人民币",
+          "description": "币种，非空，1-人民币",
           "enum": [
             1
           ]
@@ -3803,7 +3803,7 @@
         "chargePeriod": {
           "type": "string",
           "example": "2",
-          "description": "缴费年期类型，非空<br>1 - 趸缴<br>2 - 按年限缴<br>3 - 缴至某确定年龄<br>4 - 终身",
+          "description": "缴费年期类型，非空，1-趸缴；2-按年限缴；3-缴至某确定年龄；4-终身",
           "enum": [
             "1",
             "2",
@@ -3815,7 +3815,7 @@
           "type": "integer",
           "format": "int32",
           "example": 20,
-          "description": "缴费年期，非空<br>趸缴为0<br>按年限缴时为缴费年限<br>缴至某确定年龄时为缴费期满年龄<br>终身为100"
+          "description": "缴费年期，非空，趸缴为0；按年限缴时为缴费年限；缴至某确定年龄时为缴费期满年龄；终身为100"
         },
         "coverageAgents": {
           "type": "array",
@@ -3832,7 +3832,7 @@
         "coveragePeriod": {
           "type": "string",
           "example": "1",
-          "description": "保障年期类型<br>1 - 保终身<br>2 - 按年限保<br>3 - 保至某确定年龄<br>4 - 按月保<br>5 - 按天保",
+          "description": "保障年期类型，1-保终身；2-按年限保；3-保至某确定年龄；4-按月保；5-按天保",
           "enum": [
             "1",
             "2",
@@ -3920,7 +3920,7 @@
         "accountType": {
           "type": "string",
           "example": "2",
-          "description": "账户类型<br>2 - 借记卡<br>8 - 信用卡",
+          "description": "账户类型，2-借记卡；8-信用卡",
           "enum": [
             "2",
             "8"
@@ -3954,7 +3954,7 @@
         "creditCardType": {
           "type": "string",
           "example": "1",
-          "description": "信用卡类型，非信用卡为空<br>1 - Master<br>2 - Visa<br>3 - BCA<br>4 - JCB",
+          "description": "信用卡类型，非信用卡为空，1-Master；2-Visa；3-BCA；4-JCB",
           "enum": [
             "1",
             "2",
@@ -3965,7 +3965,7 @@
         "debitCreditType": {
           "type": "string",
           "example": "0",
-          "description": "帐号用途<br>0 - 收付两用<br>1 - 收费<br>2 - 退费",
+          "description": "帐号用途，0-收付两用；1-收费；2-退费",
           "enum": [
             "0",
             "1",
@@ -3999,7 +3999,7 @@
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "币种，非空，1 - 人民币",
+          "description": "币种，非空，1-人民币",
           "enum": [
             1
           ]
@@ -4048,7 +4048,7 @@
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "被保人与投保人关系，数字类型<br>1 - 自己<br>2 - 子女<br>3 - 配偶<br>10 - 父母<br>7 - 其他",
+          "description": "被保人与投保人关系，数字类型，1-自己；2-子女；3-配偶；10-父母；7-其他",
           "enum": [
             1,
             2,
@@ -4076,7 +4076,7 @@
         "waiver": {
           "type": "string",
           "example": "N",
-          "description": "是否豁免险<br>Y - 是<br>N - 否",
+          "description": "是否豁免险，Y-是；N-否",
           "enum": [
             "Y",
             "N"
@@ -4094,7 +4094,7 @@
         "paymentFreq": {
           "type": "string",
           "example": "1",
-          "description": "缴费频率<br>1 - 年缴<br>2 - 半年缴<br>3 - 季缴<br>4 - 月缴<br>5 - 趸缴",
+          "description": "缴费频率，1-年缴；2-半年缴；3-季缴；4-月缴；5-趸缴",
           "enum": [
             "1",
             "2",
@@ -4133,7 +4133,7 @@
         "accountType": {
           "type": "string",
           "example": "2",
-          "description": "账户类型<br>2 - 借记卡<br>8 - 信用卡",
+          "description": "账户类型，2-借记卡；8-信用卡",
           "enum": [
             "2",
             "8"
@@ -4162,7 +4162,7 @@
         "creditCardType": {
           "type": "string",
           "example": "1",
-          "description": "信用卡类型，非信用卡为空<br>1 - Master<br>2 - Visa<br>3 - BCA<br>4 - JCB",
+          "description": "信用卡类型，非信用卡为空，1-Master；2-Visa；3-BCA；4-JCB",
           "enum": [
             "1",
             "2",
@@ -4173,7 +4173,7 @@
         "debitCreditType": {
           "type": "string",
           "example": "0",
-          "description": "帐号用途<br>0 - 收付两用<br>1 - 收费<br>2 - 退费",
+          "description": "帐号用途，0-收付两用；1-收费；2-退费",
           "enum": [
             "0",
             "1",
@@ -4235,7 +4235,7 @@
           "type": "integer",
           "format": "int32",
           "example": 3,
-          "description": "首期付款方式，数字类型<br>1 - 现金<br>2 - 支票<br>3 - 银行转账<br>30 - 信用卡",
+          "description": "首期付款方式，数字类型，1-现金；2-支票；3-银行转账；30-信用卡",
           "enum": [
             1,
             2,
@@ -4247,7 +4247,7 @@
           "type": "integer",
           "format": "int32",
           "example": 3,
-          "description": "续期付款方式，数字类型<br>1 - 现金<br>2 - 支票<br>3 - 银行转账<br>30 - 信用卡",
+          "description": "续期付款方式，数字类型，1-现金；2-支票；3-银行转账；30-信用卡",
           "enum": [
             1,
             2,
@@ -4287,7 +4287,7 @@
         "beneType": {
           "type": "string",
           "example": "2",
-          "description": "受益类型<br>1 - 生存受益人<br>2 - 身故受益人<br>3 - 投保受益人",
+          "description": "受益类型，1-生存受益人；2-身故受益人；3-投保受益人",
           "enum": [
             "1",
             "2",
@@ -4298,7 +4298,7 @@
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "与被保人关系<br>1 - 妻子<br>2 - 丈夫<br>3 - 子女<br>4 - 父亲<br>5 - 母亲<br>6 - 祖父/外祖父<br>7 - 祖母/外祖母<br>8 - 兄弟<br>9 - 姐妹<br>10 - 叔父/伯父<br>11 - 阿姨<br>12 - 表兄弟/表姐妹<br>13 - 外甥/外甥女/侄子/侄女<br>14 - 雇主<br>15 - 其他<br>16 - 被保人本人",
+          "description": "与被保人关系，1-妻子；2-丈夫；3-子女；4-父亲；5-母亲；6-祖父/外祖父；7-祖母/外祖母；8-兄弟；9-姐妹；10-叔父/伯父；11-阿姨；12-表兄弟/表姐妹；13-外甥/外甥女/侄子/侄女；14-雇主；15-其他；16-被保人本人",
           "enum": [
             1,
             2,
