@@ -1,0 +1,331 @@
+{
+  "gender": {
+    "type": "string",
+    "example": "M",
+    "description": "性别，M-男性；F-女性",
+    "enum": [
+      "M",
+      "F"
+    ]
+  },
+  "medicalIndi": {
+    "type": "string",
+    "example": "Y",
+    "description": "是否有医保，Y-是；N-否",
+    "enum": [
+      "Y",
+      "N"
+    ]
+  },
+  "smoking": {
+    "type": "string",
+    "example": "N",
+    "description": "是否吸烟，Y-是；N-否",
+    "enum": [
+      "Y",
+      "N"
+    ]
+  },
+  "socialSecurityIndi": {
+    "type": "string",
+    "example": "Y",
+    "description": "是否有社保，Y-是；N-否",
+    "enum": [
+      "Y",
+      "N"
+    ]
+  },
+  "paymentFreq": {
+    "type": "string",
+    "example": "1",
+    "description": "缴费频率，1-年缴；2-半年缴；3-季缴；4-月缴；5-趸缴",
+    "enum": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5"
+    ]
+  },
+  "chargePeriod": {
+    "type": "string",
+    "example": "2",
+    "description": "缴费年期类型，非空，1-趸缴；2-按年限缴；3-缴至某确定年龄；4-终身",
+    "enum": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ]
+  },
+  "coveragePeriod": {
+    "type": "string",
+    "example": "1",
+    "description": "保障年期类型，1-保终身；2-按年限保；3-保至某确定年龄；4-按月保；5-按天保",
+    "enum": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5"
+    ]
+  },
+  "currency": {
+    "type": "integer",
+    "format": "int32",
+    "example": 1,
+    "description": "币种，非空，1-人民币",
+    "enum": [
+      1
+    ]
+  },
+  "deliverType": {
+    "type": "string",
+    "example": "M",
+    "description": "保单递送方式，H-手工；M-邮件",
+    "enum": [
+      "H",
+      "M"
+    ]
+  },
+  "relationToPH": {
+    "type": "integer",
+    "format": "int32",
+    "example": 1,
+    "description": "被保人与投保人关系，数字类型，1-自己；2-子女；3-配偶；10-父母；7-其他",
+    "enum": [
+      1,
+      2,
+      3,
+      10,
+      7
+    ]
+  },
+  "paymentMethod": {
+    "type": "integer",
+    "format": "int32",
+    "example": 3,
+    "description": "首期付款方式，数字类型，1-现金；2-支票；3-银行转账；30-信用卡",
+    "enum": [
+      1,
+      2,
+      3,
+      30
+    ]
+  },
+  "paymentMethodNext": {
+    "type": "integer",
+    "format": "int32",
+    "example": 3,
+    "description": "续期付款方式，数字类型，1-现金；2-支票；3-银行转账；30-信用卡",
+    "enum": [
+      1,
+      2,
+      3,
+      30
+    ]
+  },
+  "endPeriod": {
+    "type": "string",
+    "example": "3",
+    "description": "年金领取期间类型，计划类型为年金/变额年金/GMWB时非空，1-领取固定年数；2-领取到一定年龄；3-终身领取",
+    "enum": [
+      "1",
+      "2",
+      "3"
+    ]
+  },
+  "payOption": {
+    "type": "string",
+    "example": "1",
+    "description": "年金领取方式，1-现金领取；2-抵交保费；3-累积生息；4-累积生息x年后转抵交保费；5-买一个附加的缴清的附加险",
+    "enum": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5"
+    ]
+  },
+  "payPeriod": {
+    "type": "string",
+    "example": "3",
+    "description": "年金开始领取期间类型，1-立即领取；2-到一定年龄的周年日领取；3-若干年后领取；4-一定年龄后领取",
+    "enum": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ]
+  },
+  "planFreq": {
+    "type": "string",
+    "example": "1",
+    "description": "领取频率，1-年；2-半年；3-季；4-月；5-趸领",
+    "enum": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5"
+    ]
+  },
+  "planType": {
+    "type": "string",
+    "example": "1",
+    "description": "支付计划类型，非空，1-现金红利；2-年金；3-生存金；4-满期金；5-GMWB（保证最小提取利益）；6-变额年金；7-部分退保；8-保额红利",
+    "enum": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8"
+    ]
+  },
+  "partyType": {
+    "type": "integer",
+    "format": "int32",
+    "example": 1,
+    "description": "当事人类型，1-个人当事人；2-机构当事人",
+    "enum": [
+      1,
+      2
+    ]
+  },
+  "payMode": {
+    "type": "integer",
+    "format": "int32",
+    "example": 3,
+    "description": "首期付款方式，数字类型，1-现金；2-支票；3-银行转账；30-信用卡",
+    "enum": [
+      1,
+      2,
+      3,
+      30
+    ]
+  },
+  "certiType": {
+    "type": "integer",
+    "format": "int32",
+    "example": 3,
+    "description": "证件类型，数字类型，1-身份证；2-军人证；3-护照；4-出生证；9-其他",
+    "enum": [
+      1,
+      2,
+      3,
+      4,
+      9
+    ]
+  },
+  "marriageStatus": {
+    "type": "string",
+    "example": "1",
+    "description": "婚姻状况，1-已婚；2-未婚；3-离异；4-丧偶；5-分居；6-其他",
+    "enum": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6"
+    ]
+  },
+  "salutation": {
+    "type": "string",
+    "example": "1",
+    "description": "称呼，1-先生；2-女士",
+    "enum": [
+      "1",
+      "2"
+    ]
+  },
+  "beneType": {
+    "type": "string",
+    "example": "2",
+    "description": "受益类型，1-生存受益人；2-身故受益人；3-投保受益人",
+    "enum": [
+      "1",
+      "2",
+      "3"
+    ]
+  },
+  "designation": {
+    "type": "integer",
+    "format": "int32",
+    "example": 1,
+    "description": "与被保人关系，1-妻子；2-丈夫；3-子女；4-父亲；5-母亲；6-祖父/外祖父；7-祖母/外祖母；8-兄弟；9-姐妹；10-叔父/伯父；11-阿姨；12-表兄弟/表姐妹；13-外甥/外甥女/侄子/侄女；14-雇主；15-其他；16-被保人本人",
+    "enum": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16
+    ]
+  },
+  "relationToLA": {
+    "type": "integer",
+    "format": "int32",
+    "example": 1,
+    "description": "投保人与被保人关系，数字类型，1-自己；2-父母；3-配偶；10-子女；7-其他",
+    "enum": [
+      1,
+      2,
+      3,
+      10,
+      7
+    ]
+  },
+  "accountType": {
+    "type": "string",
+    "example": "2",
+    "description": "账户类型，2-借记卡；8-信用卡",
+    "enum": [
+      "2",
+      "8"
+    ]
+  },
+  "creditCardType": {
+    "type": "string",
+    "example": "1",
+    "description": "信用卡类型，非信用卡为空，1-Master；2-Visa；3-BCA；4-JCB",
+    "enum": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ]
+  },
+  "debitCreditType": {
+    "type": "string",
+    "example": "0",
+    "description": "帐号用途，0-收付两用；1-收费；2-退费",
+    "enum": [
+      "0",
+      "1",
+      "2"
+    ]
+  },
+  "waiver": {
+    "type": "string",
+    "example": "N",
+    "description": "是否豁免险，Y-是；N-否",
+    "enum": [
+      "Y",
+      "N"
+    ]
+  }
+}

@@ -1,3 +1,7 @@
+/**
+Retrieve the latest API swagger file and merge them into one.
+InitVersion: Chinese version
+*/
 'use strict';
 var swaggermerge = require('swagger-merge');
 var fs = require('fs');
@@ -6,9 +10,9 @@ var swaggerProduct = require('./product.json')
 var swaggerProposal = require('./proposal.json')
 
 //读readme 文件，加入description
-var readme = fs.readFileSync('./README.md', 'utf-8');
+var readme = fs.readFileSync('./locales/README-cn.md', 'utf-8');
 var info = {
-    version: "0.6",
+    version: "0.7",
     title: "eBaoCould LI OpenAPI",
     //add description from readme (in markdown)
     description: `${readme.toString()}`
@@ -32,7 +36,7 @@ mergedString = mergedString.replace(/\/proposal\/proposals/g, "\/proposals");
 mergedString = mergedString.replace(/product-controller/g, "Product");
 
 // 本地保存
-fs.writeFileSync("./swagger.json", mergedString);
+fs.writeFileSync("./swagger-cn.json", mergedString);
 //
 // //增加enum 分支
 // var swagger = require("./swagger.json");

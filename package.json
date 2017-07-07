@@ -122,6 +122,7 @@
     "zone.js": "^0.8.10"
   },
   "dependencies": {
+    "bootstrap": "^3.3.7",
     "lunr": "1.0.0",
     "perfect-scrollbar": "^0.7.0"
   }
