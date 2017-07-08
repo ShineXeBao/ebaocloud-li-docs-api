@@ -15,7 +15,7 @@
   "tags": [
     {
       "name": "Product",
-      "description": "Product Controller"
+      "description": "产品相关的服务，包括产品、产品组合信息以及产品计算、利益展示等"
     },
     {
       "name": "Proposal"
@@ -393,7 +393,7 @@
         "smoking": {
           "type": "string",
           "example": "Y",
-          "description": "是否抽烟(Y:抽烟   N:不抽烟)，如果没有输入，默认为不抽烟",
+          "description": "是否抽烟<br>Y - 抽烟<br>N - 不抽烟<br>如果没有输入，默认为不抽烟",
           "enum": [
             "Y",
             "N"
@@ -660,7 +660,7 @@
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "缴费频率（1 - 年缴   2 - 半年缴   3 - 季缴    4 - 月缴   5 - 趸缴）",
+          "description": "缴费频率<br>1 - 年缴<br>2 - 半年缴<br>3 - 季缴<br>4 - 月缴<br>5 - 趸缴",
           "enum": [
             1,
             2,
@@ -987,7 +987,7 @@
         },
         "benefitType": {
           "type": "string",
-          "description": "产品保障大类<br?>2 - 报销型医疗险<br>23 - 补贴型医疗险<br>31 - 意外险<br>11 - 两全险<br>12 - 年金险<br>13 - 终身险<br>14 - 定期险<br>41 - 投资险<br>15 - 抵押贷款险<br>16 - 长期照料险 <br>17 - 重疾险"
+          "description": "产品保障大类<br>2 - 报销型医疗险<br>23 - 补贴型医疗险<br>31 - 意外险<br>11 - 两全险<br>12 - 年金险<br>13 - 终身险<br>14 - 定期险<br>41 - 投资险<br>15 - 抵押贷款险<br>16 - 长期照料险 <br>17 - 重疾险"
         },
         "bonus": {
           "description": "红利信息",
@@ -1029,7 +1029,7 @@
       "properties": {
         "benefitType": {
           "type": "string",
-          "description": "产品保障大类<br?>2 - 报销型医疗险<br>23 - 补贴型医疗险<br>31 - 意外险<br>11 - 两全险<br>12 - 年金险<br>13 - 终身险<br>14 - 定期险<br>41 - 投资险<br>15 - 抵押贷款险<br>16 - 长期照料险 <br>17 - 重疾险"
+          "description": "产品保障大类<br>2 - 报销型医疗险<br>23 - 补贴型医疗险<br>31 - 意外险<br>11 - 两全险<br>12 - 年金险<br>13 - 终身险<br>14 - 定期险<br>41 - 投资险<br>15 - 抵押贷款险<br>16 - 长期照料险 <br>17 - 重疾险"
         },
         "endDate": {
           "type": "string",
@@ -1083,7 +1083,7 @@
         },
         "limitUnit": {
           "type": "string",
-          "description": "保额或单位限制 1 - 保额    2 - 单位"
+          "description": "保额或单位限制<br>1 - 保额<br>2 - 单位"
         },
         "lowAgeMonth": {
           "type": "integer",
@@ -1280,7 +1280,7 @@
         },
         "attachMode": {
           "type": "string",
-          "description": "附加方式 1 - 共存关系   2 - 依赖关系    3 - 互斥关系"
+          "description": "附加方式<br>1 - 共存关系<br>2 - 依赖关系<br>3 - 互斥关系"
         },
         "entityId": {
           "type": "integer",
@@ -1463,7 +1463,7 @@
           "type": "integer",
           "format": "int32",
           "example": 5,
-          "description": "缴费时长（缴费期限类型为 1的情况下，此字段无意义；     缴费期限类型为2的情况下，此字段为几年;   缴费期限类型为3的情况下，此字段为某一年龄;  缴费期限类型为 4的情况下，此字段无意义）"
+          "description": "缴费时长<br>缴费期限类型为 1的情况下，此字段无意义<br>缴费期限类型为2的情况下，此字段为几年<br>缴费期限类型为3的情况下，此字段为某一年龄<br>缴费期限类型为 4的情况下，此字段无意义"
         },
         "coverageId": {
           "type": "integer",
@@ -1474,7 +1474,7 @@
         "coveragePeriod": {
           "type": "string",
           "example": "2",
-          "description": "保障期限类型<br>1 - 保终身<br>2 - 保几年   3 - 保至某年龄   4 - 保几个月）,,在产品允许多种保障期限类型情况下,此项必填",
+          "description": "保障年期类型<br>1 - 保终身<br>2 - 按年限保<br>3 - 保至某确定年龄<br>4 - 按月保<br>5 - 按天保<br>在产品允许多种保障期限类型情况下,此项必填",
           "enum": [
             "1",
             "2",
@@ -1486,7 +1486,7 @@
           "type": "integer",
           "format": "int32",
           "example": 20,
-          "description": "保障时长（保障期限类型为 1的情况下，此字段无意义；     保障期限类型为2的情况下，此字段为几年;   保障期限类型为3的情况下，此字段为某一年龄;  缴费期限类型为 4的情况下，此字段为几个月）"
+          "description": "缴费时长<br>缴费期限类型为 1的情况下，此字段无意义<br>缴费期限类型为2的情况下，此字段为几年<br>缴费期限类型为3的情况下，此字段为某一年龄<br>缴费期限类型为 4的情况下，此字段无意义"
         },
         "extObject": {
           "$ref": "#/definitions/GenericVO"

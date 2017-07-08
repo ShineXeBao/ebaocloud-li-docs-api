@@ -15,7 +15,7 @@
   "tags": [
     {
       "name": "Product",
-      "description": "Product Controller"
+      "description": "Product related services, including product and pacakge information retrieve, pricing and illustration calculations."
     },
     {
       "name": "Proposal"
@@ -266,7 +266,7 @@
         "currency": {
           "type": "integer",
           "format": "int32",
-          "description": "Currency<br>non - empty<br>1 - CNY"
+          "description": "Currency, non empty<br>1 - CNY"
         },
         "endDate": {
           "type": "string",
@@ -363,7 +363,7 @@
         "gender": {
           "type": "string",
           "example": "M",
-          "description": "被保人性别（M:男性<br> F:女性  ）",
+          "description": "被保人性别（M:男性<br>F:女性  ）",
           "enum": [
             "M",
             "F"
@@ -471,7 +471,7 @@
         "baseAmount": {
           "type": "integer",
           "format": "int64",
-          "description": "基本保额 "
+          "description": "基本保额"
         },
         "description": {
           "type": "string",
@@ -484,50 +484,50 @@
         "maxAge": {
           "type": "integer",
           "format": "int32",
-          "description": "最大年龄 "
+          "description": "最大年龄"
         },
         "maxAgeUnit": {
           "type": "string",
-          "description": "最大年龄单位 "
+          "description": "最大年龄单位"
         },
         "maxAmount": {
           "type": "integer",
           "format": "int64",
-          "description": "最大保额 "
+          "description": "最大保额"
         },
         "maxPhAge": {
           "type": "integer",
           "format": "int32",
-          "description": "最大投保人年龄 "
+          "description": "最大投保人年龄"
         },
         "maxPremium": {
           "type": "integer",
           "format": "int64",
-          "description": "最大保费 "
+          "description": "最大保费"
         },
         "minAge": {
           "type": "integer",
           "format": "int32",
-          "description": "最小年龄 "
+          "description": "最小年龄"
         },
         "minAgeUnit": {
           "type": "string",
-          "description": "最小年龄单位 "
+          "description": "最小年龄单位"
         },
         "minAmount": {
           "type": "integer",
           "format": "int64",
-          "description": "最小保额 "
+          "description": "最小保额"
         },
         "minPhAge": {
           "type": "integer",
           "format": "int32",
-          "description": "最小投保人年龄 "
+          "description": "最小投保人年龄"
         },
         "minPremium": {
           "type": "integer",
           "format": "int64",
-          "description": "最小保费 "
+          "description": "最小保费"
         },
         "moneyId": {
           "type": "integer",
@@ -560,14 +560,14 @@
         },
         "productPkgProducts": {
           "type": "array",
-          "description": "基本产品 ",
+          "description": "基本产品",
           "items": {
             "$ref": "#/definitions/ProductPkgProduct"
           }
         },
         "productPkgTerms": {
           "type": "array",
-          "description": "基本期限限制 ",
+          "description": "基本期限限制",
           "items": {
             "$ref": "#/definitions/ProductPackageTerm"
           }
@@ -579,12 +579,12 @@
         "unitAmount": {
           "type": "integer",
           "format": "int64",
-          "description": "单位保额 "
+          "description": "单位保额"
         },
         "unitPremium": {
           "type": "integer",
           "format": "int64",
-          "description": "单位保费 "
+          "description": "单位保费"
         }
       }
     },
@@ -660,7 +660,7 @@
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "缴费频率（1:年缴<br>2:半年缴<br>3:季缴<br> 4:月缴<br>5-趸缴）",
+          "description": "缴费频率（1:年缴<br>2:半年缴<br>3:季缴<br>4:月缴<br>5 - 趸缴）",
           "enum": [
             1,
             2,
@@ -706,7 +706,7 @@
         },
         "survivalBenefitOptions": {
           "type": "array",
-          "description": "Allowed Survival Benefit Option (1: Get it now 2: Pay with premium for payment 3: There is an insurance company account)",
+          "description": "Allowed Survival Benefit Option<br>1 - Get it now<br>2 - Pay with premium for payment<br>3 - There is an insurance company account",
           "items": {
             "type": "string"
           }
@@ -722,7 +722,7 @@
         },
         "attachType": {
           "type": "string",
-          "description": "Additional type 1: only allowed once again 2: allowed to attach multiple times"
+          "description": "Additional type 1 - only allowed once again 2 - allowed to attach multiple times"
         },
         "masterProductCode": {
           "type": "string",
@@ -987,7 +987,7 @@
         },
         "benefitType": {
           "type": "string",
-          "description": "Product benefit category: 22 Reimbursement medical insurance 23 subsidised medical insurance 31 accident insurance 11 endowment insurance 12 annuities insurance 13 life insurance 14 term insurance 41 investment insurance 15 mortgage insurance 16 long-term care 17 critical illness"
+          "description": "Product benefit category<br>22 Reimbursement medical insurance<br>23 subsidised medical insurance<br>31 accident insurance<br>11 endowment insurance<br>12 annuities insurance<br>13 life insurance<br>14 term insurance<br>41 investment insurance<br>15 mortgage insurance<br>16 long-term care<br>17 critical illness"
         },
         "bonus": {
           "description": "Bonus information",
@@ -1029,7 +1029,7 @@
       "properties": {
         "benefitType": {
           "type": "string",
-          "description": "Product benefit category: 22 Reimbursement medical insurance 23 subsidised medical insurance 31 accident insurance 11 endowment insurance 12 annuities insurance 13 life insurance 14 term insurance 41 investment insurance 15 mortgage insurance 16 long-term care 17 critical illness"
+          "description": "Product benefit category<br>22 Reimbursement medical insurance<br>23 subsidised medical insurance<br>31 accident insurance<br>11 endowment insurance<br>12 annuities insurance<br>13 life insurance<br>14 term insurance<br>41 investment insurance<br>15 mortgage insurance<br>16 long-term care<br>17 critical illness"
         },
         "endDate": {
           "type": "string",
@@ -1083,7 +1083,7 @@
         },
         "limitUnit": {
           "type": "string",
-          "description": "Insured or unit limit 1: insured amount 2: unit"
+          "description": "Insured or unit limit<br>1 - insured amount<br>2 - unit"
         },
         "lowAgeMonth": {
           "type": "integer",
@@ -1149,7 +1149,7 @@
         },
         "cashBonusOptions": {
           "type": "array",
-          "description": "Allowed cash bonus option (1: Get it now 2: Pay with cash bonus premium 3: There is an insurance company account",
+          "description": "Allowed cash bonus option<br>1 - Get it now<br>2 - Pay with cash bonus premium<br>3 - There is an insurance company account",
           "items": {
             "type": "string"
           }
@@ -1276,11 +1276,11 @@
         "attachId": {
           "type": "integer",
           "format": "int64",
-          "description": "Waiver product id "
+          "description": "Waiver product id"
         },
         "attachMode": {
           "type": "string",
-          "description": "附加方式 1：共存关系<br>2：依赖关系<br> 3：互斥关系 "
+          "description": "附加方式 1：共存关系<br>2：依赖关系<br>3：互斥关系"
         },
         "entityId": {
           "type": "integer",
@@ -1289,17 +1289,17 @@
         "listId": {
           "type": "integer",
           "format": "int64",
-          "description": "序列号 "
+          "description": "序列号"
         },
         "masterId": {
           "type": "integer",
           "format": "int64",
-          "description": "主险Id "
+          "description": "主险Id"
         },
         "packageId": {
           "type": "integer",
           "format": "int64",
-          "description": "组合Id "
+          "description": "组合Id"
         }
       }
     },
@@ -1308,7 +1308,7 @@
       "properties": {
         "annuity_End_Period": {
           "type": "string",
-          "description": "年金结束支付时期类型 1：几年<br>2：到多少岁<br>3：终身  "
+          "description": "年金结束支付时期类型 1：几年<br>2：到多少岁<br>3：终身 "
         },
         "annuity_End_Year": {
           "type": "integer",
@@ -1317,7 +1317,7 @@
         },
         "annuity_Start_Period": {
           "type": "string",
-          "description": "年金开始支付时期类型 1：立刻<br>2：从保单周年日年龄开始给付<br>3：几年之后开始给付<br>4：生日年龄那天开始给付  "
+          "description": "年金开始支付时期类型 1：立刻<br>2：从保单周年日年龄开始给付<br>3：几年之后开始给付<br>4：生日年龄那天开始给付 "
         },
         "annuity_Start_Year": {
           "type": "integer",
@@ -1371,7 +1371,7 @@
       "properties": {
         "ageBase": {
           "type": "string",
-          "description": "Age calculation method 1: according to the age of insurance 2: according to the year of the annual anniversary of the policy"
+          "description": "Age calculation method<br>1 - according to the age of insurance<br>2 - according to the year of the annual anniversary of the policy"
         },
         "premiumFrequency": {
           "type": "array",
@@ -1463,7 +1463,7 @@
           "type": "integer",
           "format": "int32",
           "example": 5,
-          "description": "缴费时长（缴费期限类型为 1的情况下，此字段无意义；<br>  缴费期限类型为2的情况下，此字段为几年;<br>缴费期限类型为3的情况下，此字段为某一年龄;  缴费期限类型为 4的情况下，此字段无意义）"
+          "description": "缴费时长（缴费期限类型为 1的情况下，此字段无意义；<br> 缴费期限类型为2的情况下，此字段为几年;<br>缴费期限类型为3的情况下，此字段为某一年龄;  缴费期限类型为 4的情况下，此字段无意义）"
         },
         "coverageId": {
           "type": "integer",
@@ -1486,7 +1486,7 @@
           "type": "integer",
           "format": "int32",
           "example": 20,
-          "description": "保障时长（保障期限类型为 1的情况下，此字段无意义；<br>  保障期限类型为2的情况下，此字段为几年;<br>保障期限类型为3的情况下，此字段为某一年龄;  缴费期限类型为 4的情况下，此字段为几个月）"
+          "description": "保障时长（保障期限类型为 1的情况下，此字段无意义；<br> 保障期限类型为2的情况下，此字段为几年;<br>保障期限类型为3的情况下，此字段为某一年龄;  缴费期限类型为 4的情况下，此字段为几个月）"
         },
         "extObject": {
           "$ref": "#/definitions/GenericVO"
@@ -1551,7 +1551,7 @@
       "properties": {
         "periodType": {
           "type": "string",
-          "description": "Period type (1: Single payment  2: pay next few years 3: pay till a certain age 4: pay for whole life)"
+          "description": "Period type<br>1 - Single payment<br>2 - pay next few years<br>3 - pay till a certain age<br>4 - pay for whole life"
         },
         "periodValueMax": {
           "type": "integer",
@@ -1672,7 +1672,7 @@
         "applyDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Application date, non-empty, date format: yyyy-MM-dd'T'HH: mm: ss"
+          "description": "Application date, non-empty, date format: yyyy-MM-dd'T'HH:mm:ss"
         },
         "beneficiaries": {
           "type": "array",
@@ -1692,7 +1692,7 @@
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "Currency<br>non - empty<br>1 - CNY",
+          "description": "Currency, non empty<br>1 - CNY",
           "enum": [
             1
           ]
@@ -1727,7 +1727,7 @@
         "expiryDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Termination date, date format: yyyy-MM-dd'T'HH: mm: ss"
+          "description": "Termination date, date format: yyyy-MM-dd'T'HH:mm:ss"
         },
         "extendedProps": {
           "type": "object",
@@ -1739,7 +1739,7 @@
         "inceptionDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Policy effective date, date format: yyyy-MM-dd'T'HH: mm: ss"
+          "description": "Policy effective date, date format: yyyy-MM-dd'T'HH:mm:ss"
         },
         "installPrem": {
           "type": "number",
@@ -1761,7 +1761,7 @@
         "issueDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Policy issue date, date format: yyyy-MM-dd'T'HH: mm: ss"
+          "description": "Policy issue date, date format: yyyy-MM-dd'T'HH:mm:ss"
         },
         "payerAccounts": {
           "type": "array",
@@ -1805,7 +1805,7 @@
         "riskStatus": {
           "type": "integer",
           "format": "int32",
-          "description": "Policy status, 0 - not inforce; 1 - inforce; 2 - lapsed; 3 - terminated",
+          "description": "Policy status<br>0 - not inforce<br>1 - inforce<br>2 - lapsed<br>3 - terminated",
           "readOnly": true
         },
         "salesChannelCode": {
@@ -1819,7 +1819,7 @@
         "submissionDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Date of submission, date format: yyyy-MM-dd'T'HH: mm: ss"
+          "description": "Date of submission, date format: yyyy-MM-dd'T'HH:mm:ss"
         },
         "tenantCode": {
           "type": "string",
@@ -1888,7 +1888,7 @@
         "result": {
           "type": "integer",
           "format": "int32",
-          "description": "Request result, 1 - business success; 0 - business failure; -1- application exception"
+          "description": "Request result<br>1 - business success<br>0 - business failure; -1 - application exception"
         }
       }
     },
@@ -2022,7 +2022,7 @@
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "The relationship between the insured and the insured, integer type, 1 - self; 2 - child; 3 - spouse; 10 - parent; 7 - others",
+          "description": "The relationship between the insured and the insured, integer type<br>1 - self<br>2 - child<br>3 - spouse<br>10 - parent<br>7 - others",
           "enum": [
             1,
             2,
@@ -2069,7 +2069,7 @@
           "type": "integer",
           "format": "int32",
           "example": 3,
-          "description": "First time payment method, integer, 1 - cash; 2 - check; 3 - bank transfer; 30 - credit card",
+          "description": "First time payment method, integer<br>1 - cash<br>2 - check<br>3 - bank transfer<br>30 - credit card",
           "enum": [
             1,
             2,
@@ -2081,7 +2081,7 @@
           "type": "integer",
           "format": "int32",
           "example": 3,
-          "description": "Renewal payment method, integer, 1 - cash; 2 - check; 3 - bank transfer; 30 - credit card",
+          "description": "Renewal payment method, integer<br>1 - cash<br>2 - check<br>3 - bank transfer<br>30 - credit card",
           "enum": [
             1,
             2,
@@ -2102,7 +2102,7 @@
         "endPeriod": {
           "type": "string",
           "example": "3",
-          "description": "Year to receive the type of annuity, the type of annuity / variable annuity / GMWB should not be empty, 1 to receive a fixed number of years; 2 to receive till a certain age; 3 - receive whole life",
+          "description": "Year to receive the type of annuity, the type of annuity / variable annuity / GMWB should not be empty<br>1 to receive a fixed number of years<br>2 to receive till a certain age<br>3 - receive whole life",
           "enum": [
             "1",
             "2",
@@ -2129,7 +2129,7 @@
         "payOption": {
           "type": "string",
           "example": "1",
-          "description": "The annuity receive payment options: 1 - to receive payment by cash; 2 - to pay premium; 3 - accumulated interest; 4 - accumulated interest x years after the transfer to pay premium; 5 - to buy an additional payment of rider ",
+          "description": "The annuity receive payment options<br>1 - to receive payment by cash<br>2 - to pay premium<br>3 - accumulated interest<br>4 - accumulated interest x years after the transfer to pay premium<br>5 - to buy an additional payment of rider",
           "enum": [
             "1",
             "2",
@@ -2146,7 +2146,7 @@
         "payPeriod": {
           "type": "string",
           "example": "3",
-          "description": "The annuity begins to receive the type of period, 1- is immediately received; 2- till a certain age to receive; 3 - years after the collection; 4- after a certain age to receive ",
+          "description": "The annuity begins to receive the type of period<br>1 - is immediately received<br>2 - till a certain age to receive<br>3 - years after the collection<br>4 - after a certain age to receive",
           "enum": [
             "1",
             "2",
@@ -2162,7 +2162,7 @@
         "planFreq": {
           "type": "string",
           "example": "1",
-          "description": "To receive frequency, 1 yearly; 2-half yearly; 3- quarterly ; 4-monthly; 5 - single;",
+          "description": "To receive frequency<br>1 - yearly<br>2 - half yearly<br>3 - quarterly <br>4 - monthly<br>5 - single;",
           "enum": [
             "1",
             "2",
@@ -2174,7 +2174,7 @@
         "planType": {
           "type": "string",
           "example": "1",
-          "description": "Payment plan type: 1-cash payment; 2-annuity; 3-survival benefit; 4-maturity  5-GMWB (guaranteed minimum benefit); 6-variable annuity; 7-partial surrender; 8 - SA dividends ",
+          "description": "Payment plan type: 1 - cash payment<br>2 - annuity<br>3 - survival benefit<br>4 - maturity  5 - GMWB (guaranteed minimum benefit)<br>6 - variable annuity<br>7 - partial surrender<br>8 - SA dividends",
           "enum": [
             "1",
             "2",
@@ -2194,7 +2194,7 @@
         "chargePeriod": {
           "type": "string",
           "example": "2",
-          "description": "Payment period type, non-empty, 1 - single; 2 - per year; 3 to a certain age; 4 - whole life",
+          "description": "Payment period type, non-empty<br>1 - single<br>2 - per year; 3 to a certain age<br>4 - whole life",
           "enum": [
             "1",
             "2",
@@ -2206,7 +2206,7 @@
           "type": "integer",
           "format": "int32",
           "example": 20,
-          "description": "Payment period, non-empty, 0-single; by age: till which age or to pay the payment period: the pay years;  whole life is 100"
+          "description": "Payment period, non-empty<br>0 - single; by age: till which age or to pay the payment period: the pay years;  whole life is 100"
         },
         "coverageAgents": {
           "type": "array",
@@ -2218,7 +2218,7 @@
         "coveragePeriod": {
           "type": "string",
           "example": "1",
-          "description": "Coverage type, 1 - whole life; 2 - per year; 3 - Cover to a certain age; 4- per month; 5-per day",
+          "description": "Coverage type<br>1 - whole life<br>2 - per year<br>3 - Cover to a certain age<br>4 - per month<br>5 - per day",
           "enum": [
             "1",
             "2",
@@ -2310,7 +2310,7 @@
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "The type of the party, 1 - the personal party; 2- organization",
+          "description": "The type of the party<br>1 - the personal party<br>2 - organization",
           "enum": [
             1,
             2
@@ -2333,7 +2333,7 @@
         "endPeriod": {
           "type": "string",
           "example": "3",
-          "description": "Year to receive the type of annuity, the type of annuity / variable annuity / GMWB should not be empty, 1 to receive a fixed number of years; 2 to receive till a certain age; 3 - receive whole life",
+          "description": "Year to receive the type of annuity, the type of annuity / variable annuity / GMWB should not be empty, 1 to receive a fixed number of years; 2 to receive till a certain age<br>3 - receive whole life",
           "enum": [
             "1",
             "2",
@@ -2360,7 +2360,7 @@
         "payOption": {
           "type": "string",
           "example": "1",
-          "description": "The annuity receive payment options: 1 - to receive payment by cash; 2 - to pay premium; 3 - accumulated interest; 4 - accumulated interest x years after the transfer to pay premium; 5 - to buy an additional payment of rider ",
+          "description": "The annuity receive payment options: 1 - to receive payment by cash<br>2 - to pay premium<br>3 - accumulated interest<br>4 - accumulated interest x years after the transfer to pay premium<br>5 - to buy an additional payment of rider",
           "enum": [
             "1",
             "2",
@@ -2377,7 +2377,7 @@
         "payPeriod": {
           "type": "string",
           "example": "3",
-          "description": "The annuity begins to receive the type of period, 1- is immediately received; 2- till a certain age to receive; 3 - years after the collection; 4- after a certain age to receive ",
+          "description": "The annuity begins to receive the type of period<br>1 - is immediately received<br>2 - till a certain age to receive<br>3 - years after the collection<br>4 - after a certain age to receive",
           "enum": [
             "1",
             "2",
@@ -2393,7 +2393,7 @@
         "planFreq": {
           "type": "string",
           "example": "1",
-          "description": "To receive frequency, 1 yearly; 2-half yearly; 3- quarterly ; 4-monthly; 5 - single;",
+          "description": "To receive frequency<br>1 - yearly<br>2 - half yearly<br>3 - quarterly <br>4 - monthly<br>5 - single;",
           "enum": [
             "1",
             "2",
@@ -2410,7 +2410,7 @@
         "planType": {
           "type": "string",
           "example": "1",
-          "description": "Payment plan type: 1-cash payment; 2-annuity; 3-survival benefit; 4-maturity  5-GMWB (guaranteed minimum benefit); 6-variable annuity; 7-partial surrender; 8 - SA dividends ",
+          "description": "Payment plan type: 1 - cash payment<br>2 - annuity<br>3 - survival benefit<br>4 - maturity  5 - GMWB (guaranteed minimum benefit)<br>6 - variable annuity<br>7 - partial surrender<br>8 - SA dividends",
           "enum": [
             "1",
             "2",
@@ -2435,7 +2435,7 @@
         "declarationDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Declaration date, date format: yyyy-MM-dd'T'HH: mm: ss"
+          "description": "Declaration date, date format: yyyy-MM-dd'T'HH:mm:ss"
         },
         "details": {
           "type": "array",
@@ -2533,7 +2533,7 @@
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "The relationship between the insured and the insured, integer type, 1 - self; 2 - child; 3 - spouse; 10 - parent; 7 - others",
+          "description": "The relationship between the insured and the insured, integer type<br>1 - self<br>2 - child<br>3 - spouse<br>10 - parent<br>7 - others",
           "enum": [
             1,
             2,
@@ -2557,7 +2557,7 @@
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "Currency<br>non - empty<br>1 - CNY",
+          "description": "Currency, non empty<br>1 - CNY",
           "enum": [
             1
           ]
@@ -2579,7 +2579,7 @@
           "type": "integer",
           "format": "int32",
           "example": 3,
-          "description": "First time payment method, integer, 1 - cash; 2 - check; 3 - bank transfer; 30 - credit card",
+          "description": "First time payment method, integer<br>1 - cash<br>2 - check<br>3 - bank transfer<br>30 - credit card",
           "enum": [
             1,
             2,
@@ -2621,7 +2621,7 @@
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "Currency<br>non - empty<br>1 - CNY",
+          "description": "Currency, non empty<br>1 - CNY",
           "enum": [
             1
           ]
@@ -2633,7 +2633,7 @@
         "expiryDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Termination date, date format: yyyy-MM-dd'T'HH: mm: ss"
+          "description": "Termination date, date format: yyyy-MM-dd'T'HH:mm:ss"
         },
         "extendedProps": {
           "type": "object",
@@ -2645,7 +2645,7 @@
         "inceptionDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Policy effective date, date format: yyyy-MM-dd'T'HH: mm: ss"
+          "description": "Policy effective date, date format: yyyy-MM-dd'T'HH:mm:ss"
         },
         "installPrem": {
           "type": "number",
@@ -2656,7 +2656,7 @@
         "issueDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Underwriting date, date format: yyyy-MM-dd'T'HH: mm: ss"
+          "description": "Underwriting date, date format: yyyy-MM-dd'T'HH:mm:ss"
         },
         "policyNumber": {
           "type": "string",
@@ -2673,7 +2673,7 @@
         "riskStatus": {
           "type": "integer",
           "format": "int32",
-          "description": "Policy status, 0 - not inforce; 1 - inforce; 2 - lapsed; 3 - terminated",
+          "description": "Policy status<br>0 - not inforce<br>1 - inforce<br>2 - lapsed<br>3 - terminated",
           "readOnly": true
         }
       }
@@ -2716,7 +2716,7 @@
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "The relationship between the insured and the insured, integer type, 1 - self; 2 - child; 3 - spouse; 10 - parent; 7 - others",
+          "description": "The relationship between the insured and the insured, integer type<br>1 - self<br>2 - child<br>3 - spouse<br>10 - parent<br>7 - others",
           "enum": [
             1,
             2,
@@ -2797,7 +2797,7 @@
         "fax": {
           "type": "string",
           "example": "88888887",
-          "description": "Fax: (+86) {0}022-24143117{/0}"
+          "description": "Fax: (+86) {0}022 - 24143117{/0}"
         },
         "homeTel": {
           "type": "string",
@@ -2887,7 +2887,7 @@
         "result": {
           "type": "integer",
           "format": "int32",
-          "description": "Request result, 1 - business success; 0 - business failure; -1- application exception"
+          "description": "Request result<br>1 - business success<br>0 - business failure; -1 - application exception"
         }
       }
     },
@@ -2921,7 +2921,7 @@
           "type": "integer",
           "format": "int32",
           "example": 3,
-          "description": "ID type, number type, 1 - ID card; 2 - military certificate; 3 - passport; 4 - birth certificate; 9 - other",
+          "description": "ID type, number type<br>1 - ID card<br>2 - military certificate<br>3 - passport<br>4 - birth certificate<br>9 - other",
           "enum": [
             1,
             2,
@@ -2964,7 +2964,7 @@
         "marriageStatus": {
           "type": "string",
           "example": "1",
-          "description": "Marital status, 1 - married; 2 - unmarried; 3 - divorced; 4 - widowed; 5 - separated;",
+          "description": "Marital status<br>1 - married<br>2 - unmarried<br>3 - divorced<br>4 - widowed<br>5 - separated;",
           "enum": [
             "1",
             "2",
@@ -2981,7 +2981,7 @@
         "nationality": {
           "type": "string",
           "example": "7",
-          "description": "Nationality, 7 - China"
+          "description": "Nationality<br>7 - China"
         },
         "occupationCode": {
           "type": "string",
@@ -2991,12 +2991,12 @@
         "preferredLifeIndi": {
           "type": "string",
           "example": "0",
-          "description": "Is the preferred body, 0-N / A; 1-no;"
+          "description": "Is the preferred body<br>0 - N / A<br>1 - no;"
         },
         "salutation": {
           "type": "string",
           "example": "1",
-          "description": "Call, 1 - 2;",
+          "description": "Call<br>1 - 2;",
           "enum": [
             "1",
             "2"
@@ -3134,7 +3134,7 @@
         "beneType": {
           "type": "string",
           "example": "2",
-          "description": "Beneficiaries, 1 beneficiaries; 2 - beneficiaries; 3 - insured beneficiaries",
+          "description": "Beneficiaries, 1 beneficiaries<br>2 - beneficiaries<br>3 - insured beneficiaries",
           "enum": [
             "1",
             "2",
@@ -3145,7 +3145,7 @@
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "The relationship to the insured. 1-wife;2-husband;3-child;4-father;5-mother;6-Grand father;7-Grandparent;8-brother;9-sister;10-uncle;11-untie;12-cousin;13-nephew(niece);14-employer;15-other;16-self",
+          "description": "The relationship to the insured<br>1 - wife<br>2 - husband<br>3 - child<br>4 - father<br>5 - mother<br>6 - Grand father<br>7 - Grandparent<br>8 - brother<br>9 - sister<br>10 - uncle<br>11 - untie<br>12 - cousin<br>13 - nephew(niece)<br>14 - employer<br>15 - other<br>16 - self",
           "enum": [
             1,
             2,
@@ -3233,7 +3233,7 @@
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "The type of the party, 1 - the personal party; 2- organization",
+          "description": "The type of the party<br>1 - the personal party<br>2 - organization",
           "enum": [
             1,
             2
@@ -3356,7 +3356,7 @@
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "The relationship between the insured and the insured, the number type, 1 - own; 2 - parent; 3 - spouse; 10 - child; 7-others",
+          "description": "The relationship between the insured and the insured, the number type<br>1 - own<br>2 - parent<br>3 - spouse<br>10 - child<br>7 - others",
           "enum": [
             1,
             2,
@@ -3387,7 +3387,7 @@
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "The relationship between the insured and the insured, the number type, 1 - own; 2 - parent; 3 - spouse; 10 - child; 7-others",
+          "description": "The relationship between the insured and the insured, the number type<br>1 - own<br>2 - parent<br>3 - spouse<br>10 - child<br>7 - others",
           "enum": [
             1,
             2,
@@ -3485,7 +3485,7 @@
         "declarationDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Declaration date, date format: yyyy-MM-dd'T'HH: mm: ss"
+          "description": "Declaration date, date format: yyyy-MM-dd'T'HH:mm:ss"
         },
         "details": {
           "type": "array",
@@ -3515,7 +3515,7 @@
         "applyDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Application date, non-empty, date format: yyyy-MM-dd'T'HH: mm: ss"
+          "description": "Application date, non-empty, date format: yyyy-MM-dd'T'HH:mm:ss"
         },
         "beneficiaries": {
           "type": "array",
@@ -3535,7 +3535,7 @@
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "Currency<br>non - empty<br>1 - CNY",
+          "description": "Currency, non empty<br>1 - CNY",
           "enum": [
             1
           ]
@@ -3566,7 +3566,7 @@
         "expiryDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Termination date, date format: yyyy-MM-dd'T'HH: mm: ss"
+          "description": "Termination date, date format: yyyy-MM-dd'T'HH:mm:ss"
         },
         "extendedProps": {
           "type": "object",
@@ -3578,7 +3578,7 @@
         "inceptionDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Policy effective date, date format: yyyy-MM-dd'T'HH: mm: ss"
+          "description": "Policy effective date, date format: yyyy-MM-dd'T'HH:mm:ss"
         },
         "installPrem": {
           "type": "number",
@@ -3634,7 +3634,7 @@
         "submissionDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Date of submission, date format: yyyy-MM-dd'T'HH: mm: ss"
+          "description": "Date of submission, date format: yyyy-MM-dd'T'HH:mm:ss"
         },
         "trustees": {
           "type": "array",
@@ -3714,7 +3714,7 @@
         "result": {
           "type": "integer",
           "format": "int32",
-          "description": "Request result, 1 - business success; 0 - business failure; -1- application exception"
+          "description": "Request result<br>1 - business success<br>0 - business failure; -1 - application exception"
         }
       }
     },
@@ -3732,7 +3732,7 @@
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "Currency<br>non - empty<br>1 - CNY",
+          "description": "Currency, non empty<br>1 - CNY",
           "enum": [
             1
           ]
@@ -3747,7 +3747,7 @@
         "inceptionDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Policy effective date, date format: yyyy-MM-dd'T'HH: mm: ss"
+          "description": "Policy effective date, date format: yyyy-MM-dd'T'HH:mm:ss"
         },
         "installPrem": {
           "type": "number",
@@ -3803,7 +3803,7 @@
         "chargePeriod": {
           "type": "string",
           "example": "2",
-          "description": "Payment period type, non-empty, 1 - single; 2 - per year; 3 to a certain age; 4 - whole life",
+          "description": "Payment period type, non-empty<br>1 - single<br>2 - per year; 3 to a certain age<br>4 - whole life",
           "enum": [
             "1",
             "2",
@@ -3815,7 +3815,7 @@
           "type": "integer",
           "format": "int32",
           "example": 20,
-          "description": "Payment period, non-empty, 0-single; by age: till which age or to pay the payment period: the pay years;  whole life is 100"
+          "description": "Payment period, non-empty<br>0 - single; by age: till which age or to pay the payment period: the pay years;  whole life is 100"
         },
         "coverageAgents": {
           "type": "array",
@@ -3832,7 +3832,7 @@
         "coveragePeriod": {
           "type": "string",
           "example": "1",
-          "description": "Coverage type, 1 - whole life; 2 - per year; 3 - Cover to a certain age; 4- per month; 5-per day",
+          "description": "Coverage type<br>1 - whole life<br>2 - per year<br>3 - Cover to a certain age<br>4 - per month<br>5 - per day",
           "enum": [
             "1",
             "2",
@@ -3920,7 +3920,7 @@
         "accountType": {
           "type": "string",
           "example": "2",
-          "description": "Account type, 2 debit card; 8 - credit card",
+          "description": "Account type, 2 debit card<br>8 - credit card",
           "enum": [
             "2",
             "8"
@@ -3954,7 +3954,7 @@
         "creditCardType": {
           "type": "string",
           "example": "1",
-          "description": "Credit card type, if not credit card, be empty, 1-Master; 2-Visa; 3-BCA; 4-JCB",
+          "description": "Credit card type, if not credit card, be empty<br>1 - Master<br>2 - Visa<br>3 - BCA<br>4 - JCB",
           "enum": [
             "1",
             "2",
@@ -3965,7 +3965,7 @@
         "debitCreditType": {
           "type": "string",
           "example": "0",
-          "description": "Account use, 0 - pay and use; 1 - fee; 2 - refund",
+          "description": "Account use<br>0 - pay and use<br>1 - fee<br>2 - refund",
           "enum": [
             "0",
             "1",
@@ -3999,7 +3999,7 @@
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "Currency<br>non - empty<br>1 - CNY",
+          "description": "Currency, non empty<br>1 - CNY",
           "enum": [
             1
           ]
@@ -4014,7 +4014,7 @@
         "inceptionDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Policy effective date, date format: yyyy-MM-dd'T'HH: mm: ss"
+          "description": "Policy effective date, date format: yyyy-MM-dd'T'HH:mm:ss"
         },
         "installPrem": {
           "type": "number",
@@ -4048,7 +4048,7 @@
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "The relationship between the insured and the insured, integer type, 1 - self; 2 - child; 3 - spouse; 10 - parent; 7 - others",
+          "description": "The relationship between the insured and the insured, integer type<br>1 - self<br>2 - child<br>3 - spouse<br>10 - parent<br>7 - others",
           "enum": [
             1,
             2,
@@ -4076,7 +4076,7 @@
         "waiver": {
           "type": "string",
           "example": "N",
-          "description": "Is waiver, Y - yes; N - no",
+          "description": "Is waiver<br>Y - yes<br>N - no",
           "enum": [
             "Y",
             "N"
@@ -4094,7 +4094,7 @@
         "paymentFreq": {
           "type": "string",
           "example": "1",
-          "description": "Pay frequency, 1-yearly payment; 2-half yearly payment; 3-quarterly payment; 4-monthly payment;",
+          "description": "Pay frequency<br>1 - yearly payment<br>2 - half yearly payment<br>3 - quarterly payment<br>4 - monthly payment;",
           "enum": [
             "1",
             "2",
@@ -4133,7 +4133,7 @@
         "accountType": {
           "type": "string",
           "example": "2",
-          "description": "Account type, 2 debit card; 8 - credit card",
+          "description": "Account type, 2 debit card<br>8 - credit card",
           "enum": [
             "2",
             "8"
@@ -4162,7 +4162,7 @@
         "creditCardType": {
           "type": "string",
           "example": "1",
-          "description": "Credit card type, if not credit card, be empty, 1-Master; 2-Visa; 3-BCA; 4-JCB",
+          "description": "Credit card type, if not credit card, be empty<br>1 - Master<br>2 - Visa<br>3 - BCA<br>4 - JCB",
           "enum": [
             "1",
             "2",
@@ -4173,7 +4173,7 @@
         "debitCreditType": {
           "type": "string",
           "example": "0",
-          "description": "Account use, 0 - pay and use; 1 - fee; 2 - refund",
+          "description": "Account use<br>0 - pay and use<br>1 - fee<br>2 - refund",
           "enum": [
             "0",
             "1",
@@ -4235,7 +4235,7 @@
           "type": "integer",
           "format": "int32",
           "example": 3,
-          "description": "First time payment method, integer, 1 - cash; 2 - check; 3 - bank transfer; 30 - credit card",
+          "description": "First time payment method, integer<br>1 - cash<br>2 - check<br>3 - bank transfer<br>30 - credit card",
           "enum": [
             1,
             2,
@@ -4247,7 +4247,7 @@
           "type": "integer",
           "format": "int32",
           "example": 3,
-          "description": "Renewal payment method, integer, 1 - cash; 2 - check; 3 - bank transfer; 30 - credit card",
+          "description": "Renewal payment method, integer<br>1 - cash<br>2 - check<br>3 - bank transfer<br>30 - credit card",
           "enum": [
             1,
             2,
@@ -4287,7 +4287,7 @@
         "beneType": {
           "type": "string",
           "example": "2",
-          "description": "Beneficiaries, 1 beneficiaries; 2 - beneficiaries; 3 - insured beneficiaries",
+          "description": "Beneficiaries, 1 beneficiaries<br>2 - beneficiaries<br>3 - insured beneficiaries",
           "enum": [
             "1",
             "2",
@@ -4298,7 +4298,7 @@
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "The relationship to the insured. 1-wife;2-husband;3-child;4-father;5-mother;6-Grand father;7-Grandparent;8-brother;9-sister;10-uncle;11-untie;12-cousin;13-nephew(niece);14-employer;15-other;16-self",
+          "description": "The relationship to the insured. 1 - wife<br>2 - husband<br>3 - child<br>4 - father<br>5 - mother<br>6 - Grand father<br>7 - Grandparent<br>8 - brother<br>9 - sister<br>10 - uncle<br>11 - untie<br>12 - cousin<br>13 - nephew(niece)<br>14 - employer<br>15 - other<br>16 - self",
           "enum": [
             1,
             2,
