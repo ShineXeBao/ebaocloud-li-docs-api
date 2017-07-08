@@ -660,7 +660,7 @@
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "缴费频率（1:年缴<br>2:半年缴<br>3:季缴<br>4:月缴<br>5 - 趸缴）",
+          "description": "Pay frequency<br>1 - yearly payment<br>2 - half yearly payment<br>3 - quarterly payment<br>4 - monthly payment<br>5 - single premium",
           "enum": [
             1,
             2,
@@ -1280,7 +1280,7 @@
         },
         "attachMode": {
           "type": "string",
-          "description": "附加方式 1：共存关系<br>2：依赖关系<br>3：互斥关系"
+          "description": "附加方式<br>1 - 共存关系<br>2 - 依赖关系<br>3 - 互斥关系"
         },
         "entityId": {
           "type": "integer",
@@ -1308,7 +1308,7 @@
       "properties": {
         "annuity_End_Period": {
           "type": "string",
-          "description": "年金结束支付时期类型 1：几年<br>2：到多少岁<br>3：终身 "
+          "description": "年金结束支付时期类型<br>1 - 几年<br>2 - 到多少岁<br>3 - 终身"
         },
         "annuity_End_Year": {
           "type": "integer",
@@ -1317,7 +1317,7 @@
         },
         "annuity_Start_Period": {
           "type": "string",
-          "description": "年金开始支付时期类型 1：立刻<br>2：从保单周年日年龄开始给付<br>3：几年之后开始给付<br>4：生日年龄那天开始给付 "
+          "description": "年金开始支付时期类型<br>1 - 立刻<br>2 - 从保单周年日年龄开始给付<br>3 - 几年之后开始给付<br>4 - 生日年龄那天开始给付"
         },
         "annuity_Start_Year": {
           "type": "integer",
@@ -1451,7 +1451,7 @@
         "chargePeriod": {
           "type": "string",
           "example": "2",
-          "description": "缴费期限类型（ 1:趸交<br>2:缴几年<br>3:缴至某年龄<br>4:缴终身）,在产品允许多种缴费期限类型情况下,此项必填",
+          "description": "Charge period type<br>1 - Single payment<br>2 - pay next few years<br>3 - pay till a certain age<br>4 - pay for whole life<br>If the product supports payment peroid, this field is compulsory",
           "enum": [
             "1",
             "2",
@@ -1463,7 +1463,7 @@
           "type": "integer",
           "format": "int32",
           "example": 5,
-          "description": "缴费时长（缴费期限类型为 1的情况下，此字段无意义；<br> 缴费期限类型为2的情况下，此字段为几年;<br>缴费期限类型为3的情况下，此字段为某一年龄;  缴费期限类型为 4的情况下，此字段无意义）"
+          "description": "缴费时长（缴费期限类型为 1的情况下，此字段无意义；<br> 缴费期限类型为2的情况下，此字段为几年;<br>缴费期限类型为3的情况下，此字段为某一年龄;<br>缴费期限类型为 4的情况下，此字段无意义）"
         },
         "coverageId": {
           "type": "integer",
@@ -1474,7 +1474,7 @@
         "coveragePeriod": {
           "type": "string",
           "example": "2",
-          "description": "保障期限类型（ 1:保终身<br>2:保几年<br>3:保至某年龄<br>4:保几个月）,,在产品允许多种保障期限类型情况下,此项必填",
+          "description": "保障期限类型<br>1 - 保终身<br>2 - 保几年<br>3 - 保至某年龄<br>4 - 保几个月<br>在产品允许多种保障期限类型情况下,此项必填",
           "enum": [
             "1",
             "2",
@@ -1486,7 +1486,7 @@
           "type": "integer",
           "format": "int32",
           "example": 20,
-          "description": "保障时长（保障期限类型为 1的情况下，此字段无意义；<br> 保障期限类型为2的情况下，此字段为几年;<br>保障期限类型为3的情况下，此字段为某一年龄;  缴费期限类型为 4的情况下，此字段为几个月）"
+          "description": "保障时长（保障期限类型为 1的情况下，此字段无意义；<br> 保障期限类型为2的情况下，此字段为几年;<br>保障期限类型为3的情况下，此字段为某一年龄;<br>缴费期限类型为 4的情况下，此字段为几个月）"
         },
         "extObject": {
           "$ref": "#/definitions/GenericVO"
@@ -1714,7 +1714,7 @@
         "deliverType": {
           "type": "string",
           "example": "M",
-          "description": "Policy delivery method, H-by people; M-mail",
+          "description": "Policy delivery method<br>H - by people<br>M - by mail",
           "enum": [
             "H",
             "M"
@@ -1888,7 +1888,7 @@
         "result": {
           "type": "integer",
           "format": "int32",
-          "description": "Request result<br>1 - business success<br>0 - business failure; -1 - application exception"
+          "description": "Request result<br>1 - business success<br>0 - business failure<br>-1 - application exception"
         }
       }
     },
@@ -2162,7 +2162,7 @@
         "planFreq": {
           "type": "string",
           "example": "1",
-          "description": "To receive frequency<br>1 - yearly<br>2 - half yearly<br>3 - quarterly <br>4 - monthly<br>5 - single;",
+          "description": "To receive frequency<br>1 - yearly<br>2 - half yearly<br>3 - quarterly <br>4 - monthly<br>5 - single",
           "enum": [
             "1",
             "2",
@@ -2194,7 +2194,7 @@
         "chargePeriod": {
           "type": "string",
           "example": "2",
-          "description": "Payment period type, non-empty<br>1 - single<br>2 - per year; 3 to a certain age<br>4 - whole life",
+          "description": "Payment period type, non-empty<br>1 - single<br>2 - per year<br>3 to a certain age<br>4 - whole life",
           "enum": [
             "1",
             "2",
@@ -2206,7 +2206,7 @@
           "type": "integer",
           "format": "int32",
           "example": 20,
-          "description": "Payment period, non-empty<br>0 - single; by age: till which age or to pay the payment period: the pay years;  whole life is 100"
+          "description": "Payment period, non-empty<br>0 - single;<br>by age: till which age or to pay the payment period: the pay years;<br>whole life is 100"
         },
         "coverageAgents": {
           "type": "array",
@@ -2236,7 +2236,7 @@
         "coverageYear": {
           "type": "integer",
           "format": "int32",
-          "description": "Coverage Term. Meaning of this property is associated with property \"coveragePeriod\" (\"type\" for short). when covers whole life, value of this property is 9999; and if type is 2, means years covered; and if type is 3, means age when coverage expired; and if type is 4, means months covered; and if type is 5, means days covered."
+          "description": "Coverage Term. Meaning of this property is associated with property \"coveragePeriod\" (\"type\" for short). when covers whole life, value of this property is 9999;<br>and if type is 2, means years covered;<br>and if type is 3, means age when coverage expired;<br>and if type is 4, means months covered;<br>and if type is 5, means days covered."
         },
         "currentPremium": {
           "description": "The current period premium",
@@ -2333,7 +2333,7 @@
         "endPeriod": {
           "type": "string",
           "example": "3",
-          "description": "Year to receive the type of annuity, the type of annuity / variable annuity / GMWB should not be empty, 1 to receive a fixed number of years; 2 to receive till a certain age<br>3 - receive whole life",
+          "description": "Year to receive the type of annuity, the type of annuity / variable annuity / GMWB should not be empty, 1 to receive a fixed number of years;<br>2 to receive till a certain age<br>3 - receive whole life",
           "enum": [
             "1",
             "2",
@@ -2393,7 +2393,7 @@
         "planFreq": {
           "type": "string",
           "example": "1",
-          "description": "To receive frequency<br>1 - yearly<br>2 - half yearly<br>3 - quarterly <br>4 - monthly<br>5 - single;",
+          "description": "To receive frequency<br>1 - yearly<br>2 - half yearly<br>3 - quarterly <br>4 - monthly<br>5 - single",
           "enum": [
             "1",
             "2",
@@ -2887,7 +2887,7 @@
         "result": {
           "type": "integer",
           "format": "int32",
-          "description": "Request result<br>1 - business success<br>0 - business failure; -1 - application exception"
+          "description": "Request result<br>1 - business success<br>0 - business failure<br>-1 - application exception"
         }
       }
     },
@@ -2938,7 +2938,7 @@
         "gender": {
           "type": "string",
           "example": "M",
-          "description": "Sex, M - male; F - female",
+          "description": "Sex, M - male;<br>F - female",
           "enum": [
             "M",
             "F"
@@ -2964,7 +2964,7 @@
         "marriageStatus": {
           "type": "string",
           "example": "1",
-          "description": "Marital status<br>1 - married<br>2 - unmarried<br>3 - divorced<br>4 - widowed<br>5 - separated;",
+          "description": "Marital status<br>1 - married<br>2 - unmarried<br>3 - divorced<br>4 - widowed<br>5 - separated",
           "enum": [
             "1",
             "2",
@@ -2991,12 +2991,12 @@
         "preferredLifeIndi": {
           "type": "string",
           "example": "0",
-          "description": "Is the preferred body<br>0 - N / A<br>1 - no;"
+          "description": "Is the preferred body<br>0 - N / A<br>1 - no"
         },
         "salutation": {
           "type": "string",
           "example": "1",
-          "description": "Call<br>1 - 2;",
+          "description": "Call<br>1 - 2",
           "enum": [
             "1",
             "2"
@@ -3005,7 +3005,7 @@
         "smoking": {
           "type": "string",
           "example": "N",
-          "description": "Whether smoking, Y-yes; N =",
+          "description": "Whether smoking, Y-yes;<br>N =",
           "enum": [
             "Y",
             "N"
@@ -3557,7 +3557,7 @@
         "deliverType": {
           "type": "string",
           "example": "M",
-          "description": "Policy delivery method, H-by people; M-mail",
+          "description": "Policy delivery method<br>H - by people<br>M - by mail",
           "enum": [
             "H",
             "M"
@@ -3714,7 +3714,7 @@
         "result": {
           "type": "integer",
           "format": "int32",
-          "description": "Request result<br>1 - business success<br>0 - business failure; -1 - application exception"
+          "description": "Request result<br>1 - business success<br>0 - business failure<br>-1 - application exception"
         }
       }
     },
@@ -3803,7 +3803,7 @@
         "chargePeriod": {
           "type": "string",
           "example": "2",
-          "description": "Payment period type, non-empty<br>1 - single<br>2 - per year; 3 to a certain age<br>4 - whole life",
+          "description": "Payment period type, non-empty<br>1 - single<br>2 - per year<br>3 to a certain age<br>4 - whole life",
           "enum": [
             "1",
             "2",
@@ -3815,7 +3815,7 @@
           "type": "integer",
           "format": "int32",
           "example": 20,
-          "description": "Payment period, non-empty<br>0 - single; by age: till which age or to pay the payment period: the pay years;  whole life is 100"
+          "description": "Payment period, non-empty<br>0 - single;<br>by age: till which age or to pay the payment period: the pay years;<br>whole life is 100"
         },
         "coverageAgents": {
           "type": "array",
@@ -3849,7 +3849,7 @@
         "coverageYear": {
           "type": "integer",
           "format": "int32",
-          "description": "Coverage Term. Meaning of this property is associated with property \"coveragePeriod\" (\"type\" for short). when covers whole life, value of this property is 9999; and if type is 2, means years covered; and if type is 3, means age when coverage expired; and if type is 4, means months covered; and if type is 5, means days covered."
+          "description": "Coverage Term. Meaning of this property is associated with property \"coveragePeriod\" (\"type\" for short). when covers whole life, value of this property is 9999;<br>and if type is 2, means years covered;<br>and if type is 3, means age when coverage expired;<br>and if type is 4, means months covered;<br>and if type is 5, means days covered."
         },
         "currentPremium": {
           "description": "The current period premium",
@@ -4094,7 +4094,7 @@
         "paymentFreq": {
           "type": "string",
           "example": "1",
-          "description": "Pay frequency<br>1 - yearly payment<br>2 - half yearly payment<br>3 - quarterly payment<br>4 - monthly payment;",
+          "description": "Pay frequency<br>1 - yearly payment<br>2 - half yearly payment<br>3 - quarterly payment<br>4 - monthly payment<br>5 - single premium",
           "enum": [
             "1",
             "2",
