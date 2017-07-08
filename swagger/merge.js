@@ -12,7 +12,7 @@ var swaggerProposal = require('./proposal.json')
 //读readme 文件，加入description
 var readme = fs.readFileSync('./locales/README-cn.md', 'utf-8');
 var info = {
-    version: "0.7",
+    version: "0.8",
     title: "eBaoCould LI OpenAPI",
     //add description from readme (in markdown)
     description: `${readme.toString()}`
@@ -36,7 +36,7 @@ mergedString = mergedString.replace(/\/proposal\/proposals/g, "\/proposals");
 mergedString = mergedString.replace(/product-controller/g, "Product");
 
 // 本地保存
-fs.writeFileSync("./swagger-cn.json", mergedString);
+fs.writeFileSync("./swagger.json", mergedString);
 //
 // //增加enum 分支
 // var swagger = require("./swagger.json");

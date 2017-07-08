@@ -1,8 +1,7 @@
 'use strict';
 var fs = require('fs');
 
-//增加enum 分支
-var swagger = require("./swagger-cn.json");
+var swagger = require("./swagger.json");
 var trans = [];
 
 var getEnum = function (swaggerObj) {
@@ -48,6 +47,6 @@ for (var i in transEnum) {
    //console.log(trans[i]);
    eval(trans[i]);
 }
-fs.writeFileSync("./locales/swagger-cn.properties", properties);
+//fs.writeFileSync("./locales/swagger-cn.properties", properties);
 
 fs.writeFileSync("./swagger-template.json", JSON.stringify(swagger, null, 2));
