@@ -12,7 +12,7 @@ var swaggerProposal = require('./proposal.json')
 //读readme 文件，加入description
 var readme = fs.readFileSync('./locales/README-cn.md', 'utf-8');
 var info = {
-    version: "0.8",
+    version: "0.9",
     title: "eBaoCould LI OpenAPI",
     //add description from readme (in markdown)
     description: `${readme.toString()}`
