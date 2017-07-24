@@ -43,8 +43,8 @@ Response: {"access_token": "xxxx"}
 ```js
 POST: /rest/products
 Header: {
-  "authorization":"Bearer"+access_token,
-  "x-ebao-tenant-id": "tenant-id"
+  "authorization":"Bearer "+access_token,
+  "X-ebao-tenant-id": "tenant-id"
 }
 ```
 
@@ -64,12 +64,12 @@ Header: {
 curl --request POST \
   --url https://url/cas/ebao/v1/json/tickets \
   --header 'content-type: application/json' \
-  --header 'x-ebao-tenant-id: tenant-id' \
+  --header 'X-ebao-tenant-id: tenant-id' \
   --data '{\n \n "username":"site.admin",\n "password":"adminPWD!"\n}'
 ```
 
 Note:
-. the **x-ebao-tenant-id** is the unique id provided by eBaoCloud to identify the tenant.
+. the **X-ebao-tenant-id** is the unique id provided by eBaoCloud to identify the tenant.
 . the **username** and **password** are provided by eBaoCloud when you registered as an authorized vendor.
 
 
@@ -97,7 +97,7 @@ Note:
 HttpResponse<String> response = Unirest.post(url) // url：the UAT/product URL
   .header("content-type", "application/json") // application/json
   .header("authorization", "Bearer " + accessToken) // oauth2 access token：the accessToken
-  .header("x-ebao-tenant-id", "tenant-id")
+  .header("X-ebao-tenant-id", "tenant-id")
   .body(body) // body: http body
   .asString();
 ```
