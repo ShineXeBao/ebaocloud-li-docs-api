@@ -15,7 +15,7 @@
   "tags": [
     {
       "name": "Product",
-      "description": "Product related services, including product and pacakge information retrieve, pricing and illustration calculations."
+      "description": "产品相关的服务，包括产品、产品组合信息以及产品计算、利益展示等"
     },
     {
       "name": "Proposal"
