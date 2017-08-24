@@ -47,6 +47,6 @@ for (var i in transEnum) {
    //console.log(trans[i]);
    eval(trans[i]);
 }
-//fs.writeFileSync("./locales/swagger-cn.properties", properties);
+fs.writeFileSync("./locales/swagger-cn.properties", properties);
 
 fs.writeFileSync("./swagger-template.json", JSON.stringify(swagger, null, 2));
