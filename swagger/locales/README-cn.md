@@ -11,6 +11,7 @@ API version| Date  |Comments
 0.6  | 2017-06-19  | Add new category and readme
 0.6.5 | 2017-06-29  | oauth2 document, chinese version document
 0.8  | 2017-07-07  | oauth2 lanuch
+0.8.5 | 2017-07-31 | Enhancement in product services
 
 # Authentication
 
