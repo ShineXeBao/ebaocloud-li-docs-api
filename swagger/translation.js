@@ -19,4 +19,4 @@ var text = fs.readFileSync("./locales/swagger-cn.properties", 'utf8');
 text.split(/\r?\n/).forEach(function (line) {
   eval(line);
 });
-fs.writeFileSync("./swagger-cn.json", JSON.stringify(swagger, null, 2));;
+//fs.writeFileSync("./swagger-cn.json", JSON.stringify(swagger, null, 2));;

@@ -18,7 +18,7 @@ API version| Date  |Comments
 
 ## Overview
 
-eBaoCloud offers 3rd party applications the ability to issue authenticated requests on behalf of the eBaoCloud itself. Twitter’s implementation is based on the [Client Credentials Grant](http://tools.ietf.org/html/rfc6749#section-4.4) flow of the [oauth 2 specification](http://tools.ietf.org/html/rfc6749).
+eBaoCloud offers 3rd party applications the ability to issue authenticated requests on behalf of the eBaoCloud itself. eBaoCloud's implementation is based on the [Client Credentials Grant](http://tools.ietf.org/html/rfc6749#section-4.4) flow of the [oauth 2 specification](http://tools.ietf.org/html/rfc6749).
 
 ## Auth Flow
 
