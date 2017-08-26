@@ -91,10 +91,10 @@
         },
         "productCode": {
           "type": "string",
-          "description": "产品代码"
+          "description": "Product code"
         },
         "productSumAssured": {
-          "description": "保额限额结果",
+          "description": "SA limit enquire result",
           "$ref": "#/definitions/ProductSumAssured"
         },
         "result": {
@@ -127,11 +127,11 @@
         "birthdate": {
           "type": "string",
           "example": "1999-10-16",
-          "description": "被保人生日，格式(YYYY-MM-DD)"
+          "description": "Insured's birthday, non-empty, date format: yyyy-MM-dd"
         },
         "extFields": {
           "type": "object",
-          "description": "扩展字段"
+          "description": "Extended field"
         },
         "extObject": {
           "$ref": "#/definitions/GenericVO"
@@ -139,7 +139,7 @@
         "gender": {
           "type": "string",
           "example": "M",
-          "description": "被保人性别<br>M - 男性<br>F - 女性",
+          "description": "Insured's sex, M - male;<br>F - female",
           "enum": [
             "M",
             "F"
@@ -164,18 +164,18 @@
           "type": "integer",
           "format": "int32",
           "example": 10001,
-          "description": "职业类别，此项由保险公司提供列表，在某些跟职业有关的产品下，此项必输入"
+          "description": "Occupation code, provide by insurer officially. For some product, this field is compulsory"
         },
         "orderId": {
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "被保人顺序,在多个被保人时用来表示第一，第二被保人，在只有一个被保人情况下必须为1"
+          "description": "Insured sequence, for only one insured, this number is 1"
         },
         "smoking": {
           "type": "string",
           "example": "Y",
-          "description": "是否抽烟<br>Y - 抽烟<br>N - 不抽烟<br>如果没有输入，默认为不抽烟",
+          "description": "Whether smoking, Y - yes;<br>N - no<br>By default is no smoking",
           "enum": [
             "Y",
             "N"
@@ -204,11 +204,11 @@
           "type": "number",
           "format": "double",
           "example": 1,
-          "description": "分配比例"
+          "description": "Fund assign ratio"
         },
         "extFields": {
           "type": "object",
-          "description": "扩展字段"
+          "description": "Extended field"
         },
         "extObject": {
           "$ref": "#/definitions/GenericVO"
@@ -216,12 +216,12 @@
         "fundCode": {
           "type": "string",
           "example": "F001",
-          "description": "基金代码"
+          "description": "Fund code"
         },
         "premType": {
           "type": "string",
           "example": "2: regular premium; 3: regular topup; 4: ad-hoc topup",
-          "description": "费用类别"
+          "description": "Fee type for investement product"
         }
       }
     },
@@ -246,11 +246,11 @@
         "baseAmount": {
           "type": "integer",
           "format": "int64",
-          "description": "基本保额"
+          "description": "Base SA"
         },
         "description": {
           "type": "string",
-          "description": "组合描述"
+          "description": "Package description"
         },
         "entityId": {
           "type": "integer",
@@ -259,68 +259,68 @@
         "maxAge": {
           "type": "integer",
           "format": "int32",
-          "description": "最大年龄"
+          "description": "Allowed maximum age"
         },
         "maxAgeUnit": {
           "type": "string",
-          "description": "最大年龄单位"
+          "description": "Allowed maximum age (unit)"
         },
         "maxAmount": {
           "type": "integer",
           "format": "int64",
-          "description": "最大保额"
+          "description": "Allowed maximum SA"
         },
         "maxPhAge": {
           "type": "integer",
           "format": "int32",
-          "description": "最大投保人年龄"
+          "description": "Allowed maximum policy holder's age"
         },
         "maxPremium": {
           "type": "integer",
           "format": "int64",
-          "description": "最大保费"
+          "description": "Allowed maximum premium"
         },
         "minAge": {
           "type": "integer",
           "format": "int32",
-          "description": "最小年龄"
+          "description": "Allowed minimum age"
         },
         "minAgeUnit": {
           "type": "string",
-          "description": "最小年龄单位"
+          "description": "Allowed minimum age (unit)"
         },
         "minAmount": {
           "type": "integer",
           "format": "int64",
-          "description": "最小保额"
+          "description": "Allowed minimum SA"
         },
         "minPhAge": {
           "type": "integer",
           "format": "int32",
-          "description": "最小投保人年龄"
+          "description": "Allowed minimum policy holder's age"
         },
         "minPremium": {
           "type": "integer",
           "format": "int64",
-          "description": "最小保费"
+          "description": "Allowed minimum premium"
         },
         "moneyId": {
           "type": "integer",
           "format": "int64",
-          "description": "组合名称"
+          "description": "Package name"
         },
         "packageCode": {
           "type": "string",
-          "description": "组合代码"
+          "description": "Package code"
         },
         "packageId": {
           "type": "integer",
           "format": "int64",
-          "description": "组合Id"
+          "description": "Package Id"
         },
         "packageName": {
           "type": "string",
-          "description": "组合名称"
+          "description": "Package name"
         },
         "pricingMethod": {
           "type": "string",
@@ -328,38 +328,38 @@
         },
         "productPkgProductMatrixs": {
           "type": "array",
-          "description": "基本产品组合关系",
+          "description": "Basic package product's matrix relationship",
           "items": {
             "$ref": "#/definitions/ProductPkgProductMatrix"
           }
         },
         "productPkgProducts": {
           "type": "array",
-          "description": "基本产品",
+          "description": "Basic package product",
           "items": {
             "$ref": "#/definitions/ProductPkgProduct"
           }
         },
         "productPkgTerms": {
           "type": "array",
-          "description": "基本期限限制",
+          "description": "Basic package product terms",
           "items": {
             "$ref": "#/definitions/ProductPackageTerm"
           }
         },
         "specialClause": {
           "type": "string",
-          "description": "组合特殊条款"
+          "description": "Package clauses for sepecial usage"
         },
         "unitAmount": {
           "type": "integer",
           "format": "int64",
-          "description": "单位保额"
+          "description": "Unit SA"
         },
         "unitPremium": {
           "type": "integer",
           "format": "int64",
-          "description": "单位保费"
+          "description": "Unit premium"
         }
       }
     },
@@ -387,10 +387,10 @@
         },
         "productCode": {
           "type": "string",
-          "description": "产品代码"
+          "description": "Product code"
         },
         "productTerm": {
-          "description": "期限限额结果",
+          "description": "Term limit",
           "$ref": "#/definitions/ProductTerm"
         },
         "result": {
@@ -416,11 +416,11 @@
         "benefitLevel": {
           "type": "string",
           "example": "1",
-          "description": "档次，此项只对按档次售卖的产品有意义"
+          "description": "Benefit level, only apply to the products which sales by benefit level"
         },
         "extFields": {
           "type": "object",
-          "description": "扩展字段"
+          "description": "Extended field"
         },
         "extObject": {
           "$ref": "#/definitions/GenericVO"
@@ -442,19 +442,19 @@
           "type": "number",
           "format": "double",
           "example": 2000,
-          "description": "保费，输入此项为根据保费算保额"
+          "description": "Premium, only for the calculate SA from premium"
         },
         "sumAssured": {
           "type": "number",
           "format": "double",
           "example": 1000000,
-          "description": "保额，输入此项为根据保额算保费"
+          "description": "SA, when the premium calculation is from SA to premium."
         },
         "unit": {
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "购买单位，此项只对按单位售卖的产品有意义"
+          "description": "Unit, only apply to the product which sales by unit"
         }
       }
     },
@@ -466,14 +466,14 @@
       "properties": {
         "coverages": {
           "type": "array",
-          "description": "保障列表",
+          "description": "Coverage list",
           "items": {
             "$ref": "#/definitions/CalculateCoverage"
           }
         },
         "extFields": {
           "type": "object",
-          "description": "扩展字段"
+          "description": "Extended field"
         },
         "extObject": {
           "$ref": "#/definitions/GenericVO"
@@ -481,7 +481,7 @@
         "inceptionDate": {
           "type": "string",
           "example": "2017-01-01",
-          "description": "保单生效日，字符串类型，格式(\"YYYY-MM-DD\")"
+          "description": "Policy effective date, date format: (YYYY-MM-DD)"
         }
       }
     },
@@ -492,7 +492,7 @@
       ],
       "properties": {
         "calculatePolicy": {
-          "description": "利益展示保单计算数据",
+          "description": "Policy information for the illustration",
           "$ref": "#/definitions/CalculatePolicy"
         },
         "clientRequestId": {
@@ -528,42 +528,42 @@
         "benefitLevel": {
           "type": "string",
           "example": "1",
-          "description": "年龄限额相关性，档次"
+          "description": "Age range related factor: benefit level"
         },
         "chargePeriod": {
           "type": "string",
           "example": "1",
-          "description": "年龄限额相关性，缴费期限类型"
+          "description": "Age range related factor: charge period"
         },
         "chargeYear": {
           "type": "integer",
           "format": "int32",
           "example": 5,
-          "description": "年龄限额相关性，缴费年限"
+          "description": "Age range related factor: charge year"
         },
         "coveragePeriod": {
           "type": "string",
-          "description": "年龄限额相关性，保障期限类型"
+          "description": "Age range related factor: coverage period"
         },
         "coverageYear": {
           "type": "integer",
           "format": "int32",
-          "description": "年龄限额相关性，保障年限"
+          "description": "Age range related factor: coverage year"
         },
         "endPeriod": {
           "type": "string",
           "example": "1",
-          "description": "年龄限额相关性，年金给付结束期限类型"
+          "description": "Age range related factor: 年金给付结束期限类型"
         },
         "endYear": {
           "type": "integer",
           "format": "int32",
           "example": 5,
-          "description": "年龄限额相关性，年金给付结束期限年度"
+          "description": "Age range related factor: 年金给付结束期限年度"
         },
         "extFields": {
           "type": "object",
-          "description": "扩展字段"
+          "description": "Extended field"
         },
         "extObject": {
           "$ref": "#/definitions/GenericVO"
@@ -571,37 +571,37 @@
         "gender": {
           "type": "string",
           "example": "F",
-          "description": "年龄限额相关性，年龄"
+          "description": "Age range related factor: gender"
         },
         "payEnsure": {
           "type": "integer",
           "format": "int32",
           "example": 5,
-          "description": "年龄限额相关性，年金给付保证年度"
+          "description": "Age range related factor: 年金给付保证年度"
         },
         "payPeriod": {
           "type": "string",
-          "description": "年龄限额相关性，年金给付期限类型"
+          "description": "Age range related factor: 年金给付期限类型"
         },
         "payYear": {
           "type": "integer",
           "format": "int32",
-          "description": "年龄限额相关性，年金给付年限"
+          "description": "Age range related factor: 年金给付年限"
         },
         "premiumFrequency": {
           "type": "string",
           "example": "1",
-          "description": "年龄限额相关性，缴费频率"
+          "description": "Age range related factor: 缴费频率"
         },
         "productCode": {
           "type": "string",
           "example": "ABC",
-          "description": "产品代码"
+          "description": "Product code"
         },
         "sumAssured": {
           "type": "number",
           "format": "double",
-          "description": "年龄限额相关性，保额"
+          "description": "Age range related factor: 保额"
         }
       }
     },
@@ -716,7 +716,7 @@
       "properties": {
         "calculateCoverageResults": {
           "type": "array",
-          "description": "The detailed calculation of the results of the",
+          "description": "The detailed calculation of the results of the calculation",
           "items": {
             "$ref": "#/definitions/CalculateCoverageResult"
           }
@@ -724,7 +724,7 @@
         "inceptionDate": {
           "type": "string",
           "format": "date-time",
-          "description": "inception date"
+          "description": "Inception date"
         },
         "installPrem": {
           "type": "number",
@@ -785,7 +785,7 @@
         "annuity_End_Year": {
           "type": "integer",
           "format": "int64",
-          "description": "年或年龄"
+          "description": "Annuity end year or end age"
         },
         "annuity_Start_Period": {
           "type": "string",
@@ -794,11 +794,11 @@
         "annuity_Start_Year": {
           "type": "integer",
           "format": "int64",
-          "description": "年或年龄"
+          "description": "Annuity start year or start age"
         },
         "extFields": {
           "type": "object",
-          "description": "扩展字段"
+          "description": "Extended field"
         },
         "extObject": {
           "$ref": "#/definitions/GenericVO"
@@ -869,10 +869,10 @@
         },
         "productCode": {
           "type": "string",
-          "description": "产品代码"
+          "description": "Product code"
         },
         "productPremium": {
-          "description": "保费限额结果",
+          "description": "Premium limit enquire result",
           "$ref": "#/definitions/ProductPremium"
         },
         "result": {
@@ -894,30 +894,30 @@
       "properties": {
         "chargePeriod": {
           "type": "string",
-          "description": "缴费期限类型"
+          "description": "Charge period"
         },
         "chargeYear": {
           "type": "integer",
           "format": "int32",
-          "description": "缴费期限"
+          "description": "charge year"
         },
         "coveragePeriod": {
           "type": "string",
-          "description": "保障期限类型"
+          "description": "Coverage period"
         },
         "coverageYear": {
           "type": "integer",
           "format": "int32",
-          "description": "保障期限"
+          "description": "Coverage year"
         },
         "endPeriod": {
           "type": "string",
-          "description": "年金支付结束期限类型"
+          "description": "Annuity payment end period"
         },
         "endYear": {
           "type": "integer",
           "format": "int32",
-          "description": "年金支付结束期限"
+          "description": "Annuity payment end year"
         },
         "payEnsure": {
           "type": "integer",
@@ -926,12 +926,12 @@
         },
         "payPeriod": {
           "type": "string",
-          "description": "年金支付期限类型"
+          "description": "Annuity payment end period"
         },
         "payYear": {
           "type": "integer",
           "format": "int32",
-          "description": "年金支付期限"
+          "description": "Annuity payment end year"
         }
       }
     },
@@ -948,17 +948,17 @@
           "type": "number",
           "format": "double",
           "example": 100000,
-          "description": "金额"
+          "description": "Amount"
         },
         "endYear": {
           "type": "integer",
           "format": "int64",
           "example": 5,
-          "description": "终止保单年度"
+          "description": "Topup and withdraw plan: ending year"
         },
         "extFields": {
           "type": "object",
-          "description": "扩展字段"
+          "description": "Extended field"
         },
         "extObject": {
           "$ref": "#/definitions/GenericVO"
@@ -966,13 +966,13 @@
         "premType": {
           "type": "string",
           "example": "3: regular topup; 7: partial withdrawn; 4: ad-hoc topup",
-          "description": "费用类别"
+          "description": "Fee type for investement product"
         },
         "startYear": {
           "type": "integer",
           "format": "int64",
           "example": 2,
-          "description": "起始保单年度"
+          "description": "Start policy year"
         }
       }
     },
@@ -1042,15 +1042,15 @@
         },
         "productCode": {
           "type": "string",
-          "description": "产品代码"
+          "description": "Product code"
         },
         "ratingParameterType": {
           "type": "string",
-          "description": "相关性参数类型"
+          "description": "Rating relation parameter type"
         },
         "ratingParameters": {
           "type": "array",
-          "description": "相关性参数",
+          "description": "Rating relation parameter",
           "items": {
             "type": "string"
           }
@@ -1253,7 +1253,7 @@
         },
         "paymentFrequency": {
           "type": "string",
-          "description": "年龄限额相关性，缴费频率"
+          "description": "Age range related factor: 缴费频率"
         },
         "productVersionId": {
           "type": "integer",
@@ -1357,25 +1357,25 @@
       "properties": {
         "ageRange": {
           "type": "string",
-          "description": "年龄范围"
+          "description": "Age range"
         },
         "maxValue": {
           "type": "number",
           "format": "double",
-          "description": "允许的最大值"
+          "description": "Allowed maximum value"
         },
         "minValue": {
           "type": "number",
           "format": "double",
-          "description": "允许的最小值"
+          "description": "Allowed minimum value"
         },
         "productCode": {
           "type": "string",
-          "description": "产品代码"
+          "description": "Product code"
         },
         "termRange": {
           "type": "string",
-          "description": "缴费期限范围"
+          "description": "Term range"
         }
       }
     },
@@ -1482,39 +1482,39 @@
         "chargePeriod": {
           "type": "string",
           "example": "1",
-          "description": "限额相关性，缴费年限类型"
+          "description": "Term limit list related factor: charge period"
         },
         "chargeYear": {
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "限额相关性，缴费年限"
+          "description": "Term limit list related factor: charge year"
         },
         "coveragePeriod": {
           "type": "string",
           "example": "1",
-          "description": "限额相关性，保障年限类型"
+          "description": "Term limit list related factor: coverage period"
         },
         "coverageYear": {
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "限额相关性，保障年限"
+          "description": "Term limit list related factor: coverage year"
         },
         "endPeriod": {
           "type": "string",
           "example": "1",
-          "description": "限额相关性，年金给付结束期限类型"
+          "description": "Term limit list related factor: 年金给付结束期限类型"
         },
         "endYear": {
           "type": "integer",
           "format": "int32",
           "example": 10,
-          "description": "限额相关性，年金结束给付期限"
+          "description": "Term limit list related factor: 年金结束给付期限"
         },
         "extFields": {
           "type": "object",
-          "description": "扩展字段"
+          "description": "Extended field"
         },
         "extObject": {
           "$ref": "#/definitions/GenericVO"
@@ -1523,23 +1523,23 @@
           "type": "integer",
           "format": "int32",
           "example": 5,
-          "description": "限额相关性，年金给付保障期限"
+          "description": "Term limit list related factor: 年金给付保障期限"
         },
         "payPeriod": {
           "type": "string",
           "example": "1",
-          "description": "限额相关性，年金给付期限类型"
+          "description": "Term limit list related factor: 年金给付期限类型"
         },
         "payYear": {
           "type": "integer",
           "format": "int32",
           "example": 10,
-          "description": "限额相关性，年金给付期限"
+          "description": "Term limit list related factor: 年金给付期限"
         },
         "productCode": {
           "type": "string",
           "example": "ABC",
-          "description": "保额限额"
+          "description": "SA limit"
         }
       }
     },
@@ -1572,7 +1572,7 @@
       "properties": {
         "attachRelation": {
           "type": "string",
-          "description": "附加关系<br>N - attach\t<br>Y - compulsory<br>D - dependent<br>A - against"
+          "description": "Product relationship: <br>N - attach"
         },
         "attachType": {
           "type": "string",
@@ -1644,7 +1644,7 @@
         "riderSa2MainPremRate": {
           "type": "number",
           "format": "double",
-          "description": "附加险保额比主险保费的比例"
+          "description": "The ratio between attached rider's SA and master product's premium"
         },
         "saNoEqual": {
           "type": "string",
@@ -1665,7 +1665,7 @@
       "properties": {
         "extFields": {
           "type": "object",
-          "description": "扩展字段"
+          "description": "Extended field"
         },
         "extObject": {
           "$ref": "#/definitions/GenericVO"
@@ -1674,24 +1674,24 @@
           "type": "integer",
           "format": "int32",
           "example": 50,
-          "description": "保额限额相关性，被保人年龄"
+          "description": "SA list related factor: insured age"
         },
         "occupationCode": {
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "保额限额相关性，职业类别"
+          "description": "SA list related factor: occupation code"
         },
         "payMethod": {
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "保额限额相关性，支付方式"
+          "description": "SA list related factor: payment method"
         },
         "productCode": {
           "type": "string",
           "example": "ABC",
-          "description": "产品代码"
+          "description": "Product code"
         }
       }
     },
@@ -1768,7 +1768,7 @@
       "properties": {
         "listTermLimit": {
           "type": "array",
-          "description": "期限限制",
+          "description": "Term limit list",
           "items": {
             "$ref": "#/definitions/TermLimit"
           }
@@ -1816,7 +1816,7 @@
         },
         "name": {
           "type": "string",
-          "description": "name"
+          "description": "Illustration name"
         },
         "orderSeq": {
           "type": "integer",
@@ -1871,7 +1871,7 @@
           "$ref": "#/definitions/PremiumSaCalculation"
         },
         "productCoverMultiple": {
-          "description": "保费保额比例",
+          "description": "The ratio of SA and premium",
           "$ref": "#/definitions/ProductCoverMultiple"
         },
         "productId": {
@@ -2010,17 +2010,17 @@
         "chargePeriod": {
           "type": "string",
           "example": "1",
-          "description": "保费限额相关性，缴费期限类型"
+          "description": "Premium limites related factor: charge period"
         },
         "chargeYear": {
           "type": "integer",
           "format": "int32",
           "example": 5,
-          "description": "保费限额相关性，缴费期限年限"
+          "description": "Premium limites related factor: charge year"
         },
         "extFields": {
           "type": "object",
-          "description": "扩展字段"
+          "description": "Extended field"
         },
         "extObject": {
           "$ref": "#/definitions/GenericVO"
@@ -2029,23 +2029,23 @@
           "type": "integer",
           "format": "int32",
           "example": 50,
-          "description": "保费限额相关性，被保人年龄"
+          "description": "Premium limites related factor: insured age"
         },
         "payMode": {
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "保费限额相关性，付费方式"
+          "description": "Premium limites related factor: payment method"
         },
         "premiumFrequency": {
           "type": "string",
           "example": "1",
-          "description": "保费限额相关性，缴费频率"
+          "description": "Premium limites related factor: payment frequency"
         },
         "productCode": {
           "type": "string",
           "example": "ABC",
-          "description": "产品代码"
+          "description": "Product code"
         }
       }
     },
@@ -2059,7 +2059,7 @@
         },
         "attachMode": {
           "type": "string",
-          "description": "附加方式<br>1 - 共存关系<br>2 - 依赖关系<br>3 - 互斥关系"
+          "description": "Product relationship type: <br>1 - 共存关系<br>2 - 依赖关系<br>3 - 互斥关系"
         },
         "entityId": {
           "type": "integer",
@@ -2068,17 +2068,17 @@
         "listId": {
           "type": "integer",
           "format": "int64",
-          "description": "序列号"
+          "description": "List id"
         },
         "masterId": {
           "type": "integer",
           "format": "int64",
-          "description": "主险Id"
+          "description": "Master product Id"
         },
         "packageId": {
           "type": "integer",
           "format": "int64",
-          "description": "组合Id"
+          "description": "Package Id"
         }
       }
     },
@@ -2087,25 +2087,25 @@
       "properties": {
         "categoryCode": {
           "type": "string",
-          "description": "产品销售大类代码"
+          "description": "Product sales category code"
         },
         "categoryId": {
           "type": "integer",
           "format": "int32",
-          "description": "产品销售大类Id"
+          "description": "Product sales category Id"
         },
         "categoryName": {
           "type": "string",
-          "description": "产品销售大类名称"
+          "description": "Product sales category name"
         },
         "description": {
           "type": "string",
-          "description": "产品销售大类描述"
+          "description": "Product sales category description"
         },
         "displayOrder": {
           "type": "integer",
           "format": "int32",
-          "description": "显示顺序"
+          "description": "Display order"
         },
         "entityIdName": {
           "type": "string"
@@ -2115,7 +2115,7 @@
         },
         "parentCateId": {
           "type": "string",
-          "description": "产品销售大类父类别Id"
+          "description": "Product sales category's parent category Id"
         }
       }
     },
@@ -2142,12 +2142,12 @@
           }
         },
         "productAge": {
-          "description": "投保人年龄限制",
+          "description": "PH's age range",
           "$ref": "#/definitions/ProductAge"
         },
         "productCode": {
           "type": "string",
-          "description": "产品代码"
+          "description": "Product code"
         },
         "result": {
           "type": "integer",
@@ -2198,11 +2198,11 @@
       ],
       "properties": {
         "annuity": {
-          "description": "年金信息",
+          "description": "Annuity information",
           "$ref": "#/definitions/Annuity"
         },
         "calculatePremium": {
-          "description": "保费计算相关因子",
+          "description": "Product premium calculation related factory",
           "$ref": "#/definitions/CalculatePremium"
         },
         "chargePeriod": {
@@ -2248,21 +2248,21 @@
         },
         "extFields": {
           "type": "object",
-          "description": "扩展字段"
+          "description": "Extended field"
         },
         "extObject": {
           "$ref": "#/definitions/GenericVO"
         },
         "funds": {
           "type": "array",
-          "description": "基金列表",
+          "description": "Fund list",
           "items": {
             "$ref": "#/definitions/CalculateFund"
           }
         },
         "insureds": {
           "type": "array",
-          "description": "保费计算被保人相关信息",
+          "description": "Product premium calculation, insured related information",
           "items": {
             "$ref": "#/definitions/CalculateInsured"
           }
@@ -2271,16 +2271,16 @@
           "type": "integer",
           "format": "int64",
           "example": 1,
-          "description": "保障编号，如果是主保障此项为空，如果是附加保障，此项为主保障的coverageId"
+          "description": "Master coverage ID, for master coverage, this should be empty; for non-master coverage, this should be its master coverage id"
         },
         "productCode": {
           "type": "string",
           "example": "0170",
-          "description": "产品代码"
+          "description": "Product code"
         },
         "topupWithdrawns": {
           "type": "array",
-          "description": "变更计划列表",
+          "description": "Topup and withdraw plan",
           "items": {
             "$ref": "#/definitions/TopupWithdrawnPlan"
           }
@@ -2289,7 +2289,7 @@
           "type": "number",
           "format": "double",
           "example": 100000,
-          "description": "被豁免的保额，此项只对豁免险有意义"
+          "description": "Waived SA, only apply to the waiver product"
         }
       }
     },
@@ -3062,7 +3062,7 @@
         "endPeriod": {
           "type": "string",
           "example": "3",
-          "description": "Year to receive the type of annuity, the type of annuity / variable annuity / GMWB should not be empty, 1 to receive a fixed number of years;<br>2 to receive till a certain age<br>3 - receive whole life",
+          "description": "Year to receive the type of annuity, the type of annuity / variable annuity / GMWB should not be empty<br>1 to receive a fixed number of years<br>2 to receive till a certain age<br>3 - receive whole life",
           "enum": [
             "1",
             "2",
@@ -3734,7 +3734,7 @@
         "smoking": {
           "type": "string",
           "example": "N",
-          "description": "Whether smoking, Y-yes;<br>N =",
+          "description": "Whether smoking, Y - yes;<br>N - no",
           "enum": [
             "Y",
             "N"
@@ -5100,7 +5100,7 @@
           "Product"
         ],
         "summary": "Get the product package list",
-        "description": "Obtain a product list according to the criteria, the product list contains the product of basic information",
+        "description": "Obtain a product package list according to the criteria, the product package list contains the product package of basic information",
         "operationId": "findPackagesUsingGET",
         "consumes": [
           "application/json"
@@ -5255,7 +5255,7 @@
           {
             "name": "isMainProduct",
             "in": "query",
-            "description": "是否是主险",
+            "description": "Whether it is the main plan",
             "required": false,
             "type": "string"
           },
@@ -5296,8 +5296,8 @@
         "tags": [
           "Product"
         ],
-        "summary": "获取保额限额",
-        "description": "根据一定条件，获取某一产品的保额限额",
+        "summary": "Enquiry SA limit by some conditions",
+        "description": "Enquiry SA limit by some conditions",
         "operationId": "getSALimitByConUsingPOST",
         "consumes": [
           "application/json"
@@ -5309,7 +5309,7 @@
           {
             "in": "body",
             "name": "saLimitCon",
-            "description": "保额限额查询条件",
+            "description": "SA limit enquire request and parameters",
             "required": true,
             "schema": {
               "$ref": "#/definitions/SaLimitCon"
@@ -5355,8 +5355,8 @@
         "tags": [
           "Product"
         ],
-        "summary": "获取年龄限额",
-        "description": "根据一定条件，获取某一产品的年龄限额",
+        "summary": "Enquiry age limit by some conditions",
+        "description": "Enquiry age limit by some conditions",
         "operationId": "getAgeLimitByConUsingPOST",
         "consumes": [
           "application/json"
@@ -5368,7 +5368,7 @@
           {
             "in": "body",
             "name": "ageLimitCon",
-            "description": "年龄限额查询条件",
+            "description": "Age limit enquiry conditions",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AgeLimitCon"
@@ -5532,8 +5532,8 @@
         "tags": [
           "Product"
         ],
-        "summary": "获取保费限额",
-        "description": "根据一定条件，获取某一产品的保费限额",
+        "summary": "Enquiry premium limit by some conditions",
+        "description": "Enquiry premium limit by some conditions",
         "operationId": "getPremiumLimitByConUsingPOST",
         "consumes": [
           "application/json"
@@ -5545,7 +5545,7 @@
           {
             "in": "body",
             "name": "premiumLimitCon",
-            "description": "保费限额查询条件",
+            "description": "Premium limit enquire request and parameters",
             "required": true,
             "schema": {
               "$ref": "#/definitions/PremiumLimitCon"
@@ -5591,8 +5591,8 @@
         "tags": [
           "Product"
         ],
-        "summary": "获取产品相关性",
-        "description": "获取产品相关性",
+        "summary": "Get rating relations for the particular product",
+        "description": "Get rating relations for the particular product",
         "operationId": "getRatingParametersUsingGET",
         "consumes": [
           "application/json"
@@ -5604,14 +5604,14 @@
           {
             "name": "productCode",
             "in": "query",
-            "description": "产品代码",
+            "description": "Product code",
             "required": true,
             "type": "string"
           },
           {
             "name": "ratingParameterType",
             "in": "query",
-            "description": "相关参数类型,1:保费计算相关性",
+            "description": "Rating relation type: <br>1 - related to premium calculation",
             "required": true,
             "type": "integer",
             "format": "int32"
@@ -5700,8 +5700,8 @@
         "tags": [
           "Product"
         ],
-        "summary": "获取年限限额",
-        "description": "根据一定条件，获取某一产品的年限限额",
+        "summary": "Enquiry term limit by some conditions",
+        "description": "Enquiry term limit by some conditions",
         "operationId": "getTermLimitByConUsingPOST",
         "consumes": [
           "application/json"
@@ -5713,7 +5713,7 @@
           {
             "in": "body",
             "name": "termLimitCon",
-            "description": "年限限额查询条件",
+            "description": "Term limit enquiry conditions",
             "required": true,
             "schema": {
               "$ref": "#/definitions/TermLimitCon"

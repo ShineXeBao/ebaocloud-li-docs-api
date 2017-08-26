@@ -1482,7 +1482,7 @@
         "chargePeriod": {
           "type": "string",
           "example": "1",
-          "description": "限额相关性，缴费年限类型"
+          "description": "限额相关性，缴费期限类型"
         },
         "chargeYear": {
           "type": "integer",
