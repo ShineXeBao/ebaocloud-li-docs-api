@@ -49,4 +49,17 @@ for (var i in transEnum) {
 }
 //fs.writeFileSync("./locales/swagger-cn.properties", properties);
 
-fs.writeFileSync("./swagger-template.json", JSON.stringify(swagger, null, 2));
+fs.writeFileSync("./swagger-template-en.json", JSON.stringify(swagger, null, 2));
+
+//替换中文版readme
+//读readme 文件，加入description
+var readme = fs.readFileSync('./locales/README-cn.md', 'utf-8');
+var info = {
+    version: "0.9",
+    title: "eBaoCould 寿险API参考文档",
+    //add description from readme (in markdown)
+    description: `${readme.toString()}`
+}
+swagger.info = info;
+
+fs.writeFileSync("./swagger-template-cn.json", JSON.stringify(swagger, null, 2));
