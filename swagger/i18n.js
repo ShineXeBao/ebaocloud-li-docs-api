@@ -62,4 +62,8 @@ var info = {
 }
 swagger.info = info;
 
-fs.writeFileSync("./swagger-template-cn.json", JSON.stringify(swagger, null, 2));
+var timeStamp = `${new Date().toDateString()} - ${new Date().toTimeString()}`;
+var i18nString = JSON.stringify(swagger, null, 2);
+i18nString = i18nString.replace(/\[TIMESTAMP\]/, timeStamp);
+
+fs.writeFileSync("./swagger-template-cn.json", i18nString);
