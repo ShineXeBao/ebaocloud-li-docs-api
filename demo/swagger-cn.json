@@ -2168,7 +2168,7 @@
       "properties": {
         "ageBase": {
           "type": "string",
-          "description": "年龄计算方法 1:按投保时年龄计算     2:按当年的保单周年日年龄计算"
+          "description": "年龄计算方法<br>1 - 按投保时年龄计算<br>2 - 按当年的保单周年日年龄计算"
         },
         "premiumFrequency": {
           "type": "array",
@@ -2244,7 +2244,7 @@
           "type": "integer",
           "format": "int32",
           "example": 20,
-          "description": "缴费时长<br>缴费期限类型为 1的情况下，此字段无意义<br>缴费期限类型为2的情况下，此字段为几年<br>缴费期限类型为3的情况下，此字段为某一年龄<br>缴费期限类型为 4的情况下，此字段无意义"
+          "description": "保障时长<br>保障期限类型为 1的情况下，此字段无意义<br>保障期限类型为2的情况下，此字段为几年<br>保障期限类型为3的情况下，此字段为某一年龄<br>缴费期限类型为 4的情况下，此字段为几个月"
         },
         "extFields": {
           "type": "object",
@@ -3262,7 +3262,7 @@
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "被保人与投保人关系，数字类型<br>1 - 自己<br>2 - 子女<br>3 - 配偶<br>10 - 父母<br>7 - 其他",
+          "description": "付款人与投保人关系，数字类型<br>1 - 自己<br>2 - 子女<br>3 - 配偶<br>10 - 父母<br>7 - 其他",
           "enum": [
             1,
             2,
@@ -3308,7 +3308,7 @@
           "type": "integer",
           "format": "int32",
           "example": 3,
-          "description": "首期付款方式，数字类型<br>1 - 现金<br>2 - 支票<br>3 - 银行转账<br>30 - 信用卡",
+          "description": "付款方式，数字类型<br>1 - 现金<br>2 - 支票<br>3 - 银行转账<br>30 - 信用卡",
           "enum": [
             1,
             2,
@@ -3962,7 +3962,7 @@
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "当事人类型，1 - 个人当事人<br>2 - 机构当事人",
+          "description": "当事人类型<br>1 - 个人当事人<br>2 - 机构当事人",
           "enum": [
             1,
             2
@@ -4781,7 +4781,7 @@
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "被保人与投保人关系，数字类型<br>1 - 自己<br>2 - 子女<br>3 - 配偶<br>10 - 父母<br>7 - 其他",
+          "description": "付款人与投保人关系，数字类型<br>1 - 自己<br>2 - 子女<br>3 - 配偶<br>10 - 父母<br>7 - 其他",
           "enum": [
             1,
             2,

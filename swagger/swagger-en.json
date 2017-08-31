@@ -122,7 +122,7 @@
           "type": "integer",
           "format": "int32",
           "example": 17,
-          "description": "被保人投保日时的年龄，年龄生日必须输入一个，既有年龄又有生日，以生日为准重新计算年龄"
+          "description": "Policy holder's age on application date. At least capture one of the age or birthday.  When have both age and birthday, using birthday as the calculation base."
         },
         "birthdate": {
           "type": "string",
@@ -158,7 +158,7 @@
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "职业等级，此项由调用方提供，在某些跟职业等级的产品下，此项必输入"
+          "description": "Occupation level"
         },
         "occupationCode": {
           "type": "integer",
@@ -780,7 +780,7 @@
       "properties": {
         "annuity_End_Period": {
           "type": "string",
-          "description": "年金结束支付时期类型<br>1 - 几年<br>2 - 到多少岁<br>3 - 终身"
+          "description": "Annuity payment end period type<br>1 - Few years<br>2 - Till certain age<br>3 - Whole life"
         },
         "annuity_End_Year": {
           "type": "integer",
@@ -789,7 +789,7 @@
         },
         "annuity_Start_Period": {
           "type": "string",
-          "description": "年金开始支付时期类型<br>1 - 立刻<br>2 - 从保单周年日年龄开始给付<br>3 - 几年之后开始给付<br>4 - 生日年龄那天开始给付"
+          "description": "Annuity payment start period type<br>1 - immediately<br>2 - From the next policy anniversary date <br>3 - After few years (policy anniversary date)<br>4 - From the birthday"
         },
         "annuity_Start_Year": {
           "type": "integer",
@@ -922,7 +922,7 @@
         "payEnsure": {
           "type": "integer",
           "format": "int32",
-          "description": "年金保证支付年限"
+          "description": "Annuity guarentee pay year"
         },
         "payPeriod": {
           "type": "string",
@@ -1852,7 +1852,7 @@
         },
         "benefitType": {
           "type": "string",
-          "description": "Product benefit category<br>22 Reimbursement medical insurance<br>23 subsidised medical insurance<br>31 accident insurance<br>11 endowment insurance<br>12 annuities insurance<br>13 life insurance<br>14 term insurance<br>41 investment insurance<br>15 mortgage insurance<br>16 long-term care<br>17 critical illness"
+          "description": "Product benefit category<br>22 - Reimbursement medical insurance<br>23 - subsidised medical insurance<br>31 - accident insurance<br>11 - endowment insurance<br>12 - annuities insurance<br>13 - life insurance<br>14 - term insurance<br>41 - investment insurance<br>15 - mortgage insurance<br>16 - long-term care<br>17 - critical illness"
         },
         "bonus": {
           "description": "Bonus information",
@@ -1886,7 +1886,7 @@
       "properties": {
         "benefitType": {
           "type": "string",
-          "description": "Product benefit category<br>22 Reimbursement medical insurance<br>23 subsidised medical insurance<br>31 accident insurance<br>11 endowment insurance<br>12 annuities insurance<br>13 life insurance<br>14 term insurance<br>41 investment insurance<br>15 mortgage insurance<br>16 long-term care<br>17 critical illness"
+          "description": "Product benefit category<br>22 - Reimbursement medical insurance<br>23 - subsidised medical insurance<br>31 - accident insurance<br>11 - endowment insurance<br>12 - annuities insurance<br>13 - life insurance<br>14 - term insurance<br>41 - investment insurance<br>15 - mortgage insurance<br>16 - long-term care<br>17 - critical illness"
         },
         "endDate": {
           "type": "string",
@@ -2220,7 +2220,7 @@
           "type": "integer",
           "format": "int32",
           "example": 5,
-          "description": "缴费时长（缴费期限类型为 1的情况下，此字段无意义；<br> 缴费期限类型为2的情况下，此字段为几年;<br>缴费期限类型为3的情况下，此字段为某一年龄;<br>缴费期限类型为 4的情况下，此字段无意义）"
+          "description": "Payment period<br>When payment period type = 1, the field is meaningless<br>When payment period type = 2, this field represents years<br>When payment period type = 3, this field represents the age<br>When payment period type = 4, this field represents months"
         },
         "coverageId": {
           "type": "integer",
@@ -2244,7 +2244,7 @@
           "type": "integer",
           "format": "int32",
           "example": 20,
-          "description": "保障时长（保障期限类型为 1的情况下，此字段无意义；<br> 保障期限类型为2的情况下，此字段为几年;<br>保障期限类型为3的情况下，此字段为某一年龄;<br>缴费期限类型为 4的情况下，此字段为几个月）"
+          "description": "Coverage period<br>When coverage period type = 1, the field is meaningless<br>When coverage period type = 2, this field represents years<br>When coverage period type = 3, this field represents the age<br>When coverage period type = 4, this field represents months"
         },
         "extFields": {
           "type": "object",
@@ -3262,7 +3262,7 @@
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "The relationship between the insured and the insured, integer type<br>1 - self<br>2 - child<br>3 - spouse<br>10 - parent<br>7 - others",
+          "description": "The relationship between the insured and the payer integer type<br>1 - self<br>2 - child<br>3 - spouse<br>10 - parent<br>7 - others",
           "enum": [
             1,
             2,
@@ -3308,7 +3308,7 @@
           "type": "integer",
           "format": "int32",
           "example": 3,
-          "description": "First time payment method, integer<br>1 - cash<br>2 - check<br>3 - bank transfer<br>30 - credit card",
+          "description": "Payment method, integer<br>1 - cash<br>2 - check<br>3 - bank transfer<br>30 - credit card",
           "enum": [
             1,
             2,
@@ -4781,7 +4781,7 @@
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "The relationship between the insured and the insured, integer type<br>1 - self<br>2 - child<br>3 - spouse<br>10 - parent<br>7 - others",
+          "description": "The relationship between the insured and the payer, integer type<br>1 - self<br>2 - child<br>3 - spouse<br>10 - parent<br>7 - others",
           "enum": [
             1,
             2,
