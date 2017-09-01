@@ -1,5 +1,7 @@
 'use strict';
 var fs = require('fs');
+var format = require('date-fns/format')
+var zh_cnLocale = require('date-fns/locale/zh_cn')
 
 var swagger = require("./swagger.json");
 var trans = [];
@@ -62,7 +64,7 @@ var info = {
 }
 swagger.info = info;
 
-var timeStamp = `${new Date().toDateString()} - ${new Date().toTimeString()}`;
+var timeStamp = `${format(new Date(), 'YYYY年MMMD日 ddd, HH:mm:ss Z', {locale: zh_cnLocale})}`;
 var i18nString = JSON.stringify(swagger, null, 2);
 i18nString = i18nString.replace(/\[TIMESTAMP\]/, timeStamp);
 

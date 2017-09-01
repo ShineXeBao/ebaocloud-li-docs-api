@@ -4,6 +4,8 @@ InitVersion: Chinese version
 */
 'use strict';
 var swaggermerge = require('swagger-merge');
+var format = require('date-fns/format')
+
 var fs = require('fs');
 
 var swaggerProduct = require('./product.json')
@@ -27,7 +29,7 @@ var mergedJson = swaggermerge.merge([swaggerProduct, swaggerProposal], info, '/r
 //替换json string
 var mergedString = JSON.stringify(mergedJson, null, 2);
 
-var timeStamp = `${new Date().toDateString()} - ${new Date().toTimeString()}`;
+var timeStamp = `${format(new Date(), 'ddd MMM D YYYY, HH:mm:ss Z')}`;
 mergedString = mergedString.replace(/\[TIMESTAMP\]/, timeStamp);
 //更新rest地址
 mergedString = mergedString.replace(/\/pd\/packages/g, "\/packages");
