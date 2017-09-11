@@ -8,13 +8,14 @@ var format = require('date-fns/format')
 
 var fs = require('fs');
 
-var swaggerProduct = require('./product.json')
-var swaggerProposal = require('./proposal.json')
+var swaggerProduct = require('./source/product.json')
+var swaggerProposal = require('./source/proposal.json')
+var swaggerSalesPackages = require('./source/salesPackages.json')
 
 //读readme 文件，加入description
 var readme = fs.readFileSync('./locales/README-en.md', 'utf-8');
 var info = {
-    version: "0.9",
+    version: "0.9.5",
     title: "eBaoCould LI OpenAPI",
     //add description from readme (in markdown)
     description: `${readme.toString()}`
@@ -24,7 +25,7 @@ var schemes = ['https']
 swaggermerge.on('warn', function (msg) {
     console.log(msg)
 })
-var mergedJson = swaggermerge.merge([swaggerProduct, swaggerProposal], info, '/rest', 'api.ebaocloud.life', schemes);
+var mergedJson = swaggermerge.merge([swaggerProduct, swaggerProposal], info, '/rest', 'sandbox.api.li.ebaocloud.com.cn', schemes);
 
 //替换json string
 var mergedString = JSON.stringify(mergedJson, null, 2);
@@ -34,8 +35,9 @@ mergedString = mergedString.replace(/\[TIMESTAMP\]/, timeStamp);
 //更新rest地址
 mergedString = mergedString.replace(/\/pd\/packages/g, "\/packages");
 mergedString = mergedString.replace(/\/pd\/products/g, "\/products");
+mergedString = mergedString.replace(/\/pd\/salesPackages/g, "\/sales/packages");
 mergedString = mergedString.replace(/\/proposal\/proposals/g, "\/proposals");
-mergedString = mergedString.replace(/product-controller/g, "Product");
+//smergedString = mergedString.replace(/product-controller/g, "Product");
 
 // 本地保存
 fs.writeFileSync("./swagger.json", mergedString);

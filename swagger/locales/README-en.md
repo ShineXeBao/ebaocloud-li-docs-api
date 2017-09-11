@@ -13,6 +13,7 @@ API version| Date  |Comments
 0.8  | 2017-07-07  | oauth2 lanuch
 0.8.5 | 2017-07-31 | Enhancement in product services
 0.9 | 2017-08-25 | Add limits related APIs (age, premium / SA and term )
+0.9.5 | 2017-09-05 | Add new service for e-policy downloading
 
 # Authentication
 

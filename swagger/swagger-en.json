@@ -1,11 +1,11 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "0.9",
+    "version": "0.9.5",
     "title": "eBaoCould LI OpenAPI",
-    "description": "This document is the API specification for the eBaoCloud Life part. To practice and run the APIs in this document, you need to apply a eBaoCloud tenant accout(start from a sandbox account instead of produciton) first.<br>\nContact liliang.zhu@ebaotech.com for more information and trail using.\n\n# Built on\nFri Sep 1 2017, 17:08:06 +08:00\n\n# Versioning\nAPI version| Date  |Comments\n--|---|--\n0.5  | 2017-06-13  | Init version\n0.6  | 2017-06-19  | Add new category and readme\n0.6.5 | 2017-06-29  | oauth2 document, chinese version document\n0.8  | 2017-07-07  | oauth2 lanuch\n0.8.5 | 2017-07-31 | Enhancement in product services\n0.9 | 2017-08-25 | Add limits related APIs (age, premium / SA and term )\n\n# Authentication\n\n## Overview\n\neBaoCloud offers 3rd party applications the ability to issue authenticated requests on behalf of the eBaoCloud itself. eBaoCloud's implementation is based on the [Client Credentials Grant](http://tools.ietf.org/html/rfc6749#section-4.4) flow of the [oauth 2 specification](http://tools.ietf.org/html/rfc6749).\n\n## Auth Flow\n\nThe oauth2 / token authentication flow follows these 3 major steps:\n\n1. An application (backend) encodes its consumer key and secret (provided by eBaoCloud as an authorized vender) into a specially encoded set of credentials.\n2. An application (backend) makes a request to the POST oauth2 / token endpoint to exchange these credentials for a bearer token.\n3. When accessing the REST API, the application (the APP or website) uses the bearer token to authenticate.\n\n![Auth Flow](/assets/oauth.png)\n\n## Step by step\n\n* Send request to auth end point\n\n```js\nPOST: /cas/ebao/v1/json/tickets\nBody: {\"username\":\"name\", \"password\":\"pwd\"}\nResponse: {\"access_token\": \"xxxx\"}\n```\n\n* Send request with access_token in header\n\n```js\nPOST: /rest/products\nHeader: {\n  \"authorization\":\"Bearer \"+access_token,\n  \"X-ebao-tenant-id\": \"tenant-id\"\n}\n```\n\n## End Points\n\n| | Sandbox | Production |\n| :--- | :--- | :--- |\n| auth / take token | [https://sandbox.ebaocloud.com.cn/cas/ebao/v1/json/tickets](https://sandbox.ebaocloud.com.cn/cas/ebao/v1/json/tickets) | [https://ebaocloud.com.cn/cas/ebao/v1/json/tickets](https://ebaocloud.com.cn/cas/ebao/v1/json/tickets) |\n| APIs | [https://sandbox.gw.ebaocloud.com.cn/li/eBao/1/](https://sandbox.gw.ebaocloud.com.cn/li/eBao/1/) | [https://gw.ebaocloud.com.cn/li/eBao/1/](https://gw.ebaocloud.com.cn/li/eBao/1/)|\n\n\n## Sample\n\n#### Request auth from application\n\n```bash\ncurl --request POST \\\n  --url https://url/cas/ebao/v1/json/tickets \\\n  --header 'content-type: application/json' \\\n  --header 'X-ebao-tenant-id: tenant-id' \\\n  --data '{\\n \\n \"username\":\"site.admin\",\\n \"password\":\"adminPWD!\"\\n}'\n```\n\nNote:\n. the **X-ebao-tenant-id** is the unique id provided by eBaoCloud to identify the tenant.\n. the **username** and **password** are provided by eBaoCloud when you registered as an authorized vendor.\n\n\n#### Response from API GateWay\n\n* Success\n\n```js\n{\n\"access_token\" : \"TGT-233-e7Zuc5FlSAa0SShO3B1f2iugYzRQGQrSSoGwAi0VnWbnBNDwHg\"\n}\n```\n\n* Failed\n\n```js\n{\n\"access_token\" : null\n}\n```\n\n#### App call (Java code sample)\n\n```java\nHttpResponse<String> response = Unirest.post(url) // url：the UAT/product URL\n  .header(\"content-type\", \"application/json\") // application/json\n  .header(\"authorization\", \"Bearer \" + accessToken) // oauth2 access token：the accessToken\n  .header(\"X-ebao-tenant-id\", \"tenant-id\")\n  .body(body) // body: http body\n  .asString();\n```\n\n## Others\n\n### Tokens are passwords\n\nKeep in mind that the consumer key & secret, bearer token credentials, and the bearer token itself grant access to make requests on behalf of an application. These values should be considered as sensitive as passwords, and must not be shared or distributed to untrusted parties.\n\n### SSL required\n\nAll requests (both to obtain and use the tokens) **must use** HTTPS endpoints.\n"
+    "description": "This document is the API specification for the eBaoCloud Life part. To practice and run the APIs in this document, you need to apply a eBaoCloud tenant accout(start from a sandbox account instead of produciton) first.<br>\nContact liliang.zhu@ebaotech.com for more information and trail using.\n\n# Built on\nMon Sep 11 2017, 15:48:09 +08:00\n\n# Versioning\nAPI version| Date  |Comments\n--|---|--\n0.5  | 2017-06-13  | Init version\n0.6  | 2017-06-19  | Add new category and readme\n0.6.5 | 2017-06-29  | oauth2 document, chinese version document\n0.8  | 2017-07-07  | oauth2 lanuch\n0.8.5 | 2017-07-31 | Enhancement in product services\n0.9 | 2017-08-25 | Add limits related APIs (age, premium / SA and term )\n0.9.5 | 2017-09-05 | Add new service for e-policy downloading\n\n# Authentication\n\n## Overview\n\neBaoCloud offers 3rd party applications the ability to issue authenticated requests on behalf of the eBaoCloud itself. eBaoCloud's implementation is based on the [Client Credentials Grant](http://tools.ietf.org/html/rfc6749#section-4.4) flow of the [oauth 2 specification](http://tools.ietf.org/html/rfc6749).\n\n## Auth Flow\n\nThe oauth2 / token authentication flow follows these 3 major steps:\n\n1. An application (backend) encodes its consumer key and secret (provided by eBaoCloud as an authorized vender) into a specially encoded set of credentials.\n2. An application (backend) makes a request to the POST oauth2 / token endpoint to exchange these credentials for a bearer token.\n3. When accessing the REST API, the application (the APP or website) uses the bearer token to authenticate.\n\n![Auth Flow](/assets/oauth.png)\n\n## Step by step\n\n* Send request to auth end point\n\n```js\nPOST: /cas/ebao/v1/json/tickets\nBody: {\"username\":\"name\", \"password\":\"pwd\"}\nResponse: {\"access_token\": \"xxxx\"}\n```\n\n* Send request with access_token in header\n\n```js\nPOST: /rest/products\nHeader: {\n  \"authorization\":\"Bearer \"+access_token,\n  \"X-ebao-tenant-id\": \"tenant-id\"\n}\n```\n\n## End Points\n\n| | Sandbox | Production |\n| :--- | :--- | :--- |\n| auth / take token | [https://sandbox.ebaocloud.com.cn/cas/ebao/v1/json/tickets](https://sandbox.ebaocloud.com.cn/cas/ebao/v1/json/tickets) | [https://ebaocloud.com.cn/cas/ebao/v1/json/tickets](https://ebaocloud.com.cn/cas/ebao/v1/json/tickets) |\n| APIs | [https://sandbox.gw.ebaocloud.com.cn/li/eBao/1/](https://sandbox.gw.ebaocloud.com.cn/li/eBao/1/) | [https://gw.ebaocloud.com.cn/li/eBao/1/](https://gw.ebaocloud.com.cn/li/eBao/1/)|\n\n\n## Sample\n\n#### Request auth from application\n\n```bash\ncurl --request POST \\\n  --url https://url/cas/ebao/v1/json/tickets \\\n  --header 'content-type: application/json' \\\n  --header 'X-ebao-tenant-id: tenant-id' \\\n  --data '{\\n \\n \"username\":\"site.admin\",\\n \"password\":\"adminPWD!\"\\n}'\n```\n\nNote:\n. the **X-ebao-tenant-id** is the unique id provided by eBaoCloud to identify the tenant.\n. the **username** and **password** are provided by eBaoCloud when you registered as an authorized vendor.\n\n\n#### Response from API GateWay\n\n* Success\n\n```js\n{\n\"access_token\" : \"TGT-233-e7Zuc5FlSAa0SShO3B1f2iugYzRQGQrSSoGwAi0VnWbnBNDwHg\"\n}\n```\n\n* Failed\n\n```js\n{\n\"access_token\" : null\n}\n```\n\n#### App call (Java code sample)\n\n```java\nHttpResponse<String> response = Unirest.post(url) // url：the UAT/product URL\n  .header(\"content-type\", \"application/json\") // application/json\n  .header(\"authorization\", \"Bearer \" + accessToken) // oauth2 access token：the accessToken\n  .header(\"X-ebao-tenant-id\", \"tenant-id\")\n  .body(body) // body: http body\n  .asString();\n```\n\n## Others\n\n### Tokens are passwords\n\nKeep in mind that the consumer key & secret, bearer token credentials, and the bearer token itself grant access to make requests on behalf of an application. These values should be considered as sensitive as passwords, and must not be shared or distributed to untrusted parties.\n\n### SSL required\n\nAll requests (both to obtain and use the tokens) **must use** HTTPS endpoints.\n"
   },
-  "host": "api.ebaocloud.life",
+  "host": "sandbox.api.li.ebaocloud.com.cn",
   "basePath": "/rest",
   "schemes": [
     "https"
@@ -458,6 +458,151 @@
         }
       }
     },
+    "ProductFundPremiumLimit": {
+      "type": "object",
+      "properties": {
+        "fundCode": {
+          "type": "string",
+          "description": "Fund code"
+        },
+        "maxInitialPrem": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Allowed maximum initial premium"
+        },
+        "minAdhocTopupPrem": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Allowed minimum adhoc topup amount"
+        },
+        "minInitialPrem": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Minimum initial premium"
+        },
+        "minRegulaTopupPrem": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Allowed minimum regular topup amount"
+        },
+        "paymentFrequency": {
+          "type": "string",
+          "description": "Product fund premium limit related factor: payment frequency"
+        },
+        "paymentMethod": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Product fund premium limit related factor: payment method"
+        }
+      }
+    },
+    "AgeLimit": {
+      "type": "object",
+      "properties": {
+        "ageUnit": {
+          "type": "string",
+          "description": "Age unit, by defaut is year."
+        },
+        "annuityEndPeriod": {
+          "type": "string",
+          "description": "Age range related factor: annuity payment end period"
+        },
+        "annuityEndYear": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Age range related factor: annuity payment end year"
+        },
+        "annuityEndYearMax": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Age range related factor: maximum annuity payment end year"
+        },
+        "annuityPayEnsure": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Age range related factor: guaranteed annuity payment year"
+        },
+        "annuityStartPeriod": {
+          "type": "string",
+          "description": "Age range related factor: annuity payment peroid"
+        },
+        "annuityStartYear": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Age range related factor: annuity payment year"
+        },
+        "annuityStartYearMax": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Age range related factor: maximum annuity payment year"
+        },
+        "benefitLevel": {
+          "type": "string",
+          "description": "Age range related factor: benefit level"
+        },
+        "chargePeriod": {
+          "type": "string",
+          "description": "Age range related factor: charge period"
+        },
+        "chargeYear": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Age range related factor: charge year"
+        },
+        "chargeYearMax": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Age range related factor: maximum charge year"
+        },
+        "coveragePeriod": {
+          "type": "string",
+          "description": "Age range related factor: coverage period"
+        },
+        "coverageYear": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Age range related factor: coverage year"
+        },
+        "coverageYearMax": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Age range related factor: maximum coverage year"
+        },
+        "gender": {
+          "type": "string",
+          "description": "Age range related factor: gender"
+        },
+        "highSa": {
+          "type": "number",
+          "format": "double",
+          "description": "Age range related factor: maximum SA"
+        },
+        "lowSa": {
+          "type": "number",
+          "format": "double",
+          "description": "Age range related factor: minimum SA"
+        },
+        "maxAge": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum age allowed"
+        },
+        "minAge": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The minimum age allowed"
+        },
+        "paymentFrequency": {
+          "type": "string",
+          "description": "Age range related factor: payment  frequency"
+        },
+        "paymentMethod": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Age range related factor: payment method"
+        }
+      }
+    },
     "CalculatePolicy": {
       "type": "object",
       "required": [
@@ -525,6 +670,34 @@
         "productCode"
       ],
       "properties": {
+        "annuityEndPeriod": {
+          "type": "string",
+          "example": "1",
+          "description": "Age range related factor: annuity payment end period"
+        },
+        "annuityEndYear": {
+          "type": "integer",
+          "format": "int32",
+          "example": 5,
+          "description": "Age range related factor: annuity payment end year"
+        },
+        "annuityPayEnsure": {
+          "type": "integer",
+          "format": "int32",
+          "example": 5,
+          "description": "Age range related factor: guaranteed annuity payment year"
+        },
+        "annuityStartPeriod": {
+          "type": "string",
+          "example": "1",
+          "description": "Age range related factor: annuity payment peroid"
+        },
+        "annuityStartYear": {
+          "type": "integer",
+          "format": "int32",
+          "example": 5,
+          "description": "Age range related factor: annuity payment year"
+        },
         "benefitLevel": {
           "type": "string",
           "example": "1",
@@ -543,23 +716,14 @@
         },
         "coveragePeriod": {
           "type": "string",
+          "example": "1",
           "description": "Age range related factor: coverage period"
         },
         "coverageYear": {
           "type": "integer",
           "format": "int32",
-          "description": "Age range related factor: coverage year"
-        },
-        "endPeriod": {
-          "type": "string",
-          "example": "1",
-          "description": "Age range related factor: annuity payment end period"
-        },
-        "endYear": {
-          "type": "integer",
-          "format": "int32",
           "example": 5,
-          "description": "Age range related factor: annuity payment end year"
+          "description": "Age range related factor: coverage year"
         },
         "extFields": {
           "type": "object",
@@ -572,21 +736,6 @@
           "type": "string",
           "example": "F",
           "description": "Age range related factor: gender"
-        },
-        "payEnsure": {
-          "type": "integer",
-          "format": "int32",
-          "example": 5,
-          "description": "Age range related factor: guaranteed annuity payment year"
-        },
-        "payPeriod": {
-          "type": "string",
-          "description": "Age range related factor: annuity payment peroid"
-        },
-        "payYear": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Age range related factor: annuity payment year"
         },
         "premiumFrequency": {
           "type": "string",
@@ -601,6 +750,7 @@
         "sumAssured": {
           "type": "number",
           "format": "double",
+          "example": 100000,
           "description": "Age range related factor: SA"
         }
       }
@@ -636,38 +786,47 @@
       "type": "object",
       "properties": {
         "chargePeriod": {
-          "type": "string"
+          "type": "string",
+          "description": "Premium limites related factor: charge period"
         },
         "chargeYear": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "Premium limites related factor: charge year"
+        },
+        "currency": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Premium limites related factor: currency"
         },
         "maxAge": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "Premium limites related factor: maximum age"
         },
         "maxPrem": {
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "description": "Premium limites related factor: maximum premium"
         },
         "minAge": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "Premium limites related factor: minium age"
         },
         "minPrem": {
           "type": "integer",
-          "format": "int64"
-        },
-        "moneyId": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "payMode": {
-          "type": "integer",
-          "format": "int32"
+          "format": "int64",
+          "description": "Premium limites related factor: minium premium"
         },
         "paymentFrequency": {
-          "type": "string"
+          "type": "string",
+          "description": "Premium limites related factor: payment frequency"
+        },
+        "paymentMethod": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Premium limites related factor: payment method"
         }
       }
     },
@@ -778,20 +937,20 @@
     "Annuity": {
       "type": "object",
       "properties": {
-        "annuity_End_Period": {
+        "annuityEndPeriod": {
           "type": "string",
           "description": "Annuity payment end period type<br>1 - Few years<br>2 - Till certain age<br>3 - Whole life"
         },
-        "annuity_End_Year": {
+        "annuityEndYear": {
           "type": "integer",
           "format": "int64",
           "description": "Annuity end year or end age"
         },
-        "annuity_Start_Period": {
+        "annuityStartPeriod": {
           "type": "string",
           "description": "Annuity payment start period type<br>1 - immediately<br>2 - From the next policy anniversary date <br>3 - After few years (policy anniversary date)<br>4 - From the birthday"
         },
-        "annuity_Start_Year": {
+        "annuityStartYear": {
           "type": "integer",
           "format": "int64",
           "description": "Annuity start year or start age"
@@ -892,6 +1051,29 @@
     "TermLimit": {
       "type": "object",
       "properties": {
+        "annuityEndPeriod": {
+          "type": "string",
+          "description": "Annuity payment end period"
+        },
+        "annuityEndYear": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Annuity payment end year"
+        },
+        "annuityPayEnsure": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Annuity guarentee pay year"
+        },
+        "annuityStartPeriod": {
+          "type": "string",
+          "description": "Annuity payment end period"
+        },
+        "annuityStartYear": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Annuity payment end year"
+        },
         "chargePeriod": {
           "type": "string",
           "description": "Charge period"
@@ -909,29 +1091,6 @@
           "type": "integer",
           "format": "int32",
           "description": "Coverage year"
-        },
-        "endPeriod": {
-          "type": "string",
-          "description": "Annuity payment end period"
-        },
-        "endYear": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Annuity payment end year"
-        },
-        "payEnsure": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Annuity guarentee pay year"
-        },
-        "payPeriod": {
-          "type": "string",
-          "description": "Annuity payment end period"
-        },
-        "payYear": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Annuity payment end year"
         }
       }
     },
@@ -1150,118 +1309,6 @@
         }
       }
     },
-    "AgeRange": {
-      "type": "object",
-      "properties": {
-        "ageUnit": {
-          "type": "string",
-          "description": "Age unit, by defaut is year."
-        },
-        "benefitLevel": {
-          "type": "string",
-          "description": "Age range related factor: benefit level"
-        },
-        "chargePeriod": {
-          "type": "string",
-          "description": "Age range related factor: charge period"
-        },
-        "chargeYear": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Age range related factor: charge year"
-        },
-        "chargeYearMax": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Age range related factor: maximum charge year"
-        },
-        "coveragePeriod": {
-          "type": "string",
-          "description": "Age range related factor: coverage period"
-        },
-        "coverageYear": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Age range related factor: coverage year"
-        },
-        "coverageYearMax": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Age range related factor: maximum coverage year"
-        },
-        "endPeriod": {
-          "type": "string",
-          "description": "Age range related factor: annuity payment end period"
-        },
-        "endYear": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Age range related factor: annuity payment end year"
-        },
-        "endYearMax": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Age range related factor: maximum annuity payment end year"
-        },
-        "gender": {
-          "type": "string",
-          "description": "Age range related factor: gender"
-        },
-        "highSa": {
-          "type": "number",
-          "format": "double",
-          "description": "Age range related factor: maximum SA"
-        },
-        "lowSa": {
-          "type": "number",
-          "format": "double",
-          "description": "Age range related factor: minimum SA"
-        },
-        "maxAge": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The maximum age allowed"
-        },
-        "minAge": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The minimum age allowed"
-        },
-        "payEnsure": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Age range related factor: guaranteed annuity payment year"
-        },
-        "payMode": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Age range related factor: pay mode"
-        },
-        "payPeriod": {
-          "type": "string",
-          "description": "Age range related factor: annuity payment peroid"
-        },
-        "payYear": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Age range related factor: annuity payment year"
-        },
-        "payYearMax": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Age range related factor: maximum annuity payment year"
-        },
-        "paymentFrequency": {
-          "type": "string",
-          "description": "Age range related factor: payment  frequency"
-        },
-        "productVersionId": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Age range related factor: product verion"
-        }
-      }
-    },
     "MainInformation": {
       "type": "object",
       "properties": {
@@ -1278,6 +1325,10 @@
         "familyType": {
           "type": "string",
           "description": "Family product type"
+        },
+        "indexIndi": {
+          "type": "string",
+          "description": "Indexation indicator"
         },
         "mainPlan": {
           "type": "string",
@@ -1450,6 +1501,101 @@
         }
       }
     },
+    "ProductFund": {
+      "type": "object",
+      "properties": {
+        "bonusSettleType": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Bonus settlement type<br>1 - settle bonus with principal<br>2 - settle bonus separately"
+        },
+        "fundCode": {
+          "type": "string",
+          "description": "Fund code"
+        },
+        "guaranteedRateOption": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Guaranteed interest rate indicator"
+        },
+        "maxPartialWithdralVal": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Allowed maximum partial withdraw amount"
+        },
+        "maxSwitInTimes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Allowed maximum switch in times"
+        },
+        "maxSwitOutTimes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Allowed maximum switch out times"
+        },
+        "minPartialWithdralRemainingVal": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Allowed minimum remain value after partial withdraw"
+        },
+        "minPartialWithdralval": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Allowed minimum parial withdraw amount"
+        },
+        "minSwitOutVal": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Allowed minimum switch out amount"
+        },
+        "minSwitRemainVal": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Allowed minimum remain value after switch"
+        },
+        "productId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Product ID"
+        },
+        "settleDay": {
+          "type": "integer",
+          "format": "int32",
+          "description": "settlement day"
+        },
+        "settleFreq": {
+          "type": "string",
+          "description": "settlement freqency"
+        },
+        "settleMethod": {
+          "type": "integer",
+          "format": "int32",
+          "description": "settlement method"
+        },
+        "settleMonth": {
+          "type": "integer",
+          "format": "int32",
+          "description": "settlement month"
+        },
+        "settleRatePeriodUnit": {
+          "type": "string",
+          "description": "settlement period unit"
+        },
+        "settleSimpleCompound": {
+          "type": "string",
+          "description": "settlement interest, simple or compound"
+        },
+        "settleYearType": {
+          "type": "integer",
+          "format": "int32",
+          "description": "settlement year type"
+        },
+        "switchPeriodUnit": {
+          "type": "string",
+          "description": "Minimum fund switch limit"
+        }
+      }
+    },
     "LiabilityInformation": {
       "type": "object",
       "properties": {
@@ -1479,6 +1625,34 @@
         "productCode"
       ],
       "properties": {
+        "annuityEndPeriod": {
+          "type": "string",
+          "example": "1",
+          "description": "Term limit list related factor: 年金给付结束期限类型"
+        },
+        "annuityEndYear": {
+          "type": "integer",
+          "format": "int32",
+          "example": 10,
+          "description": "Term limit list related factor: 年金结束给付期限"
+        },
+        "annuityPayEnsure": {
+          "type": "integer",
+          "format": "int32",
+          "example": 5,
+          "description": "Term limit list related factor: 年金给付保障期限"
+        },
+        "annuityStartPeriod": {
+          "type": "string",
+          "example": "1",
+          "description": "Term limit list related factor: 年金给付期限类型"
+        },
+        "annuityStartYear": {
+          "type": "integer",
+          "format": "int32",
+          "example": 10,
+          "description": "Term limit list related factor: 年金给付期限"
+        },
         "chargePeriod": {
           "type": "string",
           "example": "1",
@@ -1487,7 +1661,7 @@
         "chargeYear": {
           "type": "integer",
           "format": "int32",
-          "example": 1,
+          "example": 5,
           "description": "Term limit list related factor: charge year"
         },
         "coveragePeriod": {
@@ -1498,19 +1672,8 @@
         "coverageYear": {
           "type": "integer",
           "format": "int32",
-          "example": 1,
+          "example": 5,
           "description": "Term limit list related factor: coverage year"
-        },
-        "endPeriod": {
-          "type": "string",
-          "example": "1",
-          "description": "Term limit list related factor: 年金给付结束期限类型"
-        },
-        "endYear": {
-          "type": "integer",
-          "format": "int32",
-          "example": 10,
-          "description": "Term limit list related factor: 年金结束给付期限"
         },
         "extFields": {
           "type": "object",
@@ -1518,23 +1681,6 @@
         },
         "extObject": {
           "$ref": "#/definitions/GenericVO"
-        },
-        "payEnsure": {
-          "type": "integer",
-          "format": "int32",
-          "example": 5,
-          "description": "Term limit list related factor: 年金给付保障期限"
-        },
-        "payPeriod": {
-          "type": "string",
-          "example": "1",
-          "description": "Term limit list related factor: 年金给付期限类型"
-        },
-        "payYear": {
-          "type": "integer",
-          "format": "int32",
-          "example": 10,
-          "description": "Term limit list related factor: 年金给付期限"
         },
         "productCode": {
           "type": "string",
@@ -1670,11 +1816,11 @@
         "extObject": {
           "$ref": "#/definitions/GenericVO"
         },
-        "insuredAge": {
+        "insuredAgeMonth": {
           "type": "integer",
           "format": "int32",
-          "example": 50,
-          "description": "SA limit related factor: insured age"
+          "example": 60,
+          "description": "SA limit related factor: insured age (in month)"
         },
         "occupationCode": {
           "type": "integer",
@@ -1700,30 +1846,35 @@
       "properties": {
         "adhocTopup": {
           "type": "array",
+          "description": "投资险加费限额",
           "items": {
             "$ref": "#/definitions/PremiumLimit"
           }
         },
         "decreasePremium": {
           "type": "array",
+          "description": "投资险降低保费限额",
           "items": {
             "$ref": "#/definitions/PremiumLimit"
           }
         },
         "decreaseRegularTopup": {
           "type": "array",
+          "description": "投资险减少持续保费限额",
           "items": {
             "$ref": "#/definitions/PremiumLimit"
           }
         },
         "increasePremium": {
           "type": "array",
+          "description": "Increase premium limt",
           "items": {
             "$ref": "#/definitions/PremiumLimit"
           }
         },
         "increaseRegularTopup": {
           "type": "array",
+          "description": "投资险增加持续保费限额",
           "items": {
             "$ref": "#/definitions/PremiumLimit"
           }
@@ -1734,8 +1885,16 @@
             "$ref": "#/definitions/PremiumLimit"
           }
         },
+        "listFundPremiumLimit": {
+          "type": "array",
+          "description": "投资险减基金级别限额",
+          "items": {
+            "$ref": "#/definitions/ProductFundPremiumLimit"
+          }
+        },
         "regularTopup": {
           "type": "array",
+          "description": "投资险持续加费限额",
           "items": {
             "$ref": "#/definitions/PremiumLimit"
           }
@@ -1862,6 +2021,13 @@
           "description": "Product liability",
           "$ref": "#/definitions/ProductLiability"
         },
+        "listProductFund": {
+          "type": "array",
+          "description": "Fund code",
+          "items": {
+            "$ref": "#/definitions/ProductFund"
+          }
+        },
         "maininfo": {
           "description": "Product main information",
           "$ref": "#/definitions/MainInformation"
@@ -1933,7 +2099,12 @@
     "SaLimit": {
       "type": "object",
       "properties": {
-        "highAge": {
+        "currency": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Currency"
+        },
+        "highAgeMonth": {
           "type": "integer",
           "format": "int32",
           "description": "The maximum age allowed of the insured"
@@ -1942,7 +2113,7 @@
           "type": "string",
           "description": "Insured or unit limit<br>1 - insured amount<br>2 - unit"
         },
-        "lowAge": {
+        "lowAgeMonth": {
           "type": "integer",
           "format": "int32",
           "description": "The minimum age allowed of the insured"
@@ -1957,17 +2128,12 @@
           "format": "int64",
           "description": "The minimum amount, the amount of SA, or the unit"
         },
-        "moneyId": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Currency"
-        },
         "occupationCode": {
           "type": "integer",
           "format": "int32",
           "description": "Occupation code"
         },
-        "payMethod": {
+        "paymentMethod": {
           "type": "integer",
           "format": "int32",
           "description": "Payment method"
@@ -2329,14 +2495,14 @@
           "type": "array",
           "description": "The age limit of the insured person",
           "items": {
-            "$ref": "#/definitions/AgeRange"
+            "$ref": "#/definitions/AgeLimit"
           }
         },
         "policyHolderAge": {
           "type": "array",
           "description": "Policy holder's age range",
           "items": {
-            "$ref": "#/definitions/AgeRange"
+            "$ref": "#/definitions/AgeLimit"
           }
         }
       }
@@ -2461,6 +2627,10 @@
             "type": "string"
           }
         },
+        "groupProposalNumber": {
+          "type": "string",
+          "description": "Group proposal No."
+        },
         "inceptionDate": {
           "type": "string",
           "format": "date-time",
@@ -2469,8 +2639,7 @@
         "installPrem": {
           "type": "number",
           "format": "double",
-          "description": "Policy premium",
-          "readOnly": true
+          "description": "Policy premium"
         },
         "insureds": {
           "type": "array",
@@ -2519,6 +2688,17 @@
           "description": "Product package",
           "$ref": "#/definitions/PolicyPackage"
         },
+        "policyType": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "Policy type<br>1 - Individual policy<br>2 - Group policy<br>3 - Bancassurance",
+          "enum": [
+            1,
+            2,
+            3
+          ]
+        },
         "preprintedProposalNumber": {
           "type": "string",
           "description": "Pre-printed proposal number"
@@ -2561,6 +2741,49 @@
           "items": {
             "$ref": "#/definitions/Trustee"
           }
+        }
+      }
+    },
+    "PremInvestRate": {
+      "type": "object",
+      "properties": {
+        "addPremId": {
+          "type": "string",
+          "description": "Add premium ID, UUID type",
+          "readOnly": true
+        },
+        "assignRate": {
+          "type": "number",
+          "format": "double",
+          "example": 1,
+          "description": "Fund assign ratio"
+        },
+        "coverageId": {
+          "type": "string",
+          "description": "Insurance coverage(benefit) ID, UUID type",
+          "readOnly": true
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "Extended information, Map type, Key / Value, should be character",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "fundCode": {
+          "type": "string",
+          "example": "F001",
+          "description": "Fund code"
+        },
+        "listId": {
+          "type": "string",
+          "description": "Insurance type insured internal serial number, UUID type",
+          "readOnly": true
+        },
+        "policyId": {
+          "type": "string",
+          "description": "Policy internal serial number, UUID type",
+          "readOnly": true
         }
       }
     },
@@ -2757,6 +2980,7 @@
             2,
             3,
             10,
+            4,
             7
           ]
         },
@@ -2803,7 +3027,8 @@
             1,
             2,
             3,
-            30
+            30,
+            80
           ]
         },
         "paymentMethodNext": {
@@ -2815,7 +3040,8 @@
             1,
             2,
             3,
-            30
+            30,
+            80
           ]
         },
         "policyId": {
@@ -2903,7 +3129,7 @@
         "planType": {
           "type": "string",
           "example": "1",
-          "description": "Payment plan type: 1 - cash payment<br>2 - annuity<br>3 - survival benefit<br>4 - maturity  5 - GMWB (guaranteed minimum benefit)<br>6 - variable annuity<br>7 - partial surrender<br>8 - SA dividends",
+          "description": "Payment plan type<br>1 - cash payment<br>2 - annuity<br>3 - survival benefit<br>4 - maturity  5 - GMWB (guaranteed minimum benefit)<br>6 - variable annuity<br>7 - partial surrender<br>8 - SA dividends",
           "enum": [
             "1",
             "2",
@@ -2997,9 +3223,24 @@
             "$ref": "#/definitions/PayPlanInput"
           }
         },
+        "premInvestRates": {
+          "type": "array",
+          "description": "The ratio of premium and investment amount",
+          "items": {
+            "$ref": "#/definitions/ContractInvestRateInput"
+          }
+        },
         "productCode": {
           "type": "string",
           "description": "Product code"
+        },
+        "recurringTopup": {
+          "description": "Recurring topup",
+          "$ref": "#/definitions/RecurringTopupInput"
+        },
+        "singleTopup": {
+          "description": "Single topup",
+          "$ref": "#/definitions/SingleTopupInput"
         },
         "waiverExt": {
           "description": "Waiver plan information",
@@ -3056,7 +3297,7 @@
       "properties": {
         "coverageId": {
           "type": "string",
-          "description": "Insurance model serial number, UUID type",
+          "description": "Insurance coverage(benefit) ID, UUID type",
           "readOnly": true
         },
         "endPeriod": {
@@ -3139,7 +3380,7 @@
         "planType": {
           "type": "string",
           "example": "1",
-          "description": "Payment plan type: 1 - cash payment<br>2 - annuity<br>3 - survival benefit<br>4 - maturity  5 - GMWB (guaranteed minimum benefit)<br>6 - variable annuity<br>7 - partial surrender<br>8 - SA dividends",
+          "description": "Payment plan type<br>1 - cash payment<br>2 - annuity<br>3 - survival benefit<br>4 - maturity  5 - GMWB (guaranteed minimum benefit)<br>6 - variable annuity<br>7 - partial surrender<br>8 - SA dividends",
           "enum": [
             "1",
             "2",
@@ -3212,7 +3453,7 @@
         },
         "coverageId": {
           "type": "string",
-          "description": "Insurance model serial number, UUID type",
+          "description": "Insurance coverage(benefit) ID, UUID type",
           "readOnly": true
         },
         "extendedProps": {
@@ -3313,7 +3554,8 @@
             1,
             2,
             3,
-            30
+            30,
+            80
           ]
         },
         "paymentPlatform": {
@@ -3335,6 +3577,9 @@
           "description": "Third party payment number"
         }
       }
+    },
+    "Iterator«Policy»": {
+      "type": "object"
     },
     "IssurancePolicyResult": {
       "type": "object",
@@ -3371,6 +3616,10 @@
             "type": "string"
           }
         },
+        "groupProposalNumber": {
+          "type": "string",
+          "description": "Group proposal No."
+        },
         "inceptionDate": {
           "type": "string",
           "format": "date-time",
@@ -3403,6 +3652,49 @@
           "type": "integer",
           "format": "int32",
           "description": "Policy status<br>0 - not inforce<br>1 - inforce<br>2 - lapsed<br>3 - terminated",
+          "readOnly": true
+        }
+      }
+    },
+    "SingleTopupInvestRate": {
+      "type": "object",
+      "properties": {
+        "addPremId": {
+          "type": "string",
+          "description": "Add premium ID, UUID type",
+          "readOnly": true
+        },
+        "assignRate": {
+          "type": "number",
+          "format": "double",
+          "example": 1,
+          "description": "Fund assign ratio"
+        },
+        "coverageId": {
+          "type": "string",
+          "description": "Insurance coverage(benefit) ID, UUID type",
+          "readOnly": true
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "Extended information, Map type, Key / Value, should be character",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "fundCode": {
+          "type": "string",
+          "example": "F001",
+          "description": "Fund code"
+        },
+        "listId": {
+          "type": "string",
+          "description": "Insurance type insured internal serial number, UUID type",
+          "readOnly": true
+        },
+        "policyId": {
+          "type": "string",
+          "description": "Policy internal serial number, UUID type",
           "readOnly": true
         }
       }
@@ -3451,6 +3743,7 @@
             2,
             3,
             10,
+            4,
             7
           ]
         },
@@ -3502,6 +3795,29 @@
           "format": "int32",
           "example": 1,
           "description": "Customer temporary number, internal usage. Unique identify the customer for one request"
+        }
+      }
+    },
+    "ContractInvestRateInput": {
+      "type": "object",
+      "properties": {
+        "assignRate": {
+          "type": "number",
+          "format": "double",
+          "example": 1,
+          "description": "Fund assign ratio"
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "Extended information, Map type, Key / Value, should be character",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "fundCode": {
+          "type": "string",
+          "example": "F001",
+          "description": "Fund code"
         }
       }
     },
@@ -3580,6 +3896,46 @@
           "type": "number",
           "format": "double",
           "description": "Product unit, non empty when by unit insurance"
+        }
+      }
+    },
+    "SingleTopup": {
+      "type": "object",
+      "properties": {
+        "addPremId": {
+          "type": "string",
+          "description": "Insurance type insured internal serial number, UUID type",
+          "readOnly": true
+        },
+        "coverageId": {
+          "type": "string",
+          "description": "Insurance coverage(benefit) ID, UUID type",
+          "readOnly": true
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "Extended information, Map type, Key / Value, should be character",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "investRates": {
+          "type": "array",
+          "description": "Investment rate list",
+          "items": {
+            "$ref": "#/definitions/SingleTopupInvestRate"
+          }
+        },
+        "policyId": {
+          "type": "string",
+          "description": "Policy internal serial number, UUID type",
+          "readOnly": true
+        },
+        "topupAmount": {
+          "type": "number",
+          "format": "double",
+          "example": 10000,
+          "description": "Topup amount"
         }
       }
     },
@@ -3775,6 +4131,11 @@
           "example": "156",
           "description": "Registered country, 156 - China"
         },
+        "organCode": {
+          "type": "string",
+          "example": "xxxxxx",
+          "description": "Organization code"
+        },
         "registerCode": {
           "type": "string",
           "example": "xxxx",
@@ -3798,7 +4159,7 @@
         },
         "coverageId": {
           "type": "string",
-          "description": "Insurance model serial number, UUID type",
+          "description": "Insurance coverage(benefit) ID, UUID type",
           "readOnly": true
         },
         "extendedProps": {
@@ -3979,6 +4340,31 @@
         }
       }
     },
+    "SingleTopupInput": {
+      "type": "object",
+      "properties": {
+        "extendedProps": {
+          "type": "object",
+          "description": "Extended information, Map type, Key / Value, should be character",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "investRates": {
+          "type": "array",
+          "description": "Investment rate list",
+          "items": {
+            "$ref": "#/definitions/ContractInvestRateInput"
+          }
+        },
+        "topupAmount": {
+          "type": "number",
+          "format": "double",
+          "example": 10000,
+          "description": "Topup amount"
+        }
+      }
+    },
     "CustomerDeclarationDetail": {
       "type": "object",
       "properties": {
@@ -4093,6 +4479,49 @@
             10,
             7
           ]
+        }
+      }
+    },
+    "RecurringTopupInvestRate": {
+      "type": "object",
+      "properties": {
+        "addPremId": {
+          "type": "string",
+          "description": "Add premium ID, UUID type",
+          "readOnly": true
+        },
+        "assignRate": {
+          "type": "number",
+          "format": "double",
+          "example": 1,
+          "description": "Fund assign ratio"
+        },
+        "coverageId": {
+          "type": "string",
+          "description": "Insurance coverage(benefit) ID, UUID type",
+          "readOnly": true
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "Extended information, Map type, Key / Value, should be character",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "fundCode": {
+          "type": "string",
+          "example": "F001",
+          "description": "Fund code"
+        },
+        "listId": {
+          "type": "string",
+          "description": "Insurance type insured internal serial number, UUID type",
+          "readOnly": true
+        },
+        "policyId": {
+          "type": "string",
+          "description": "Policy internal serial number, UUID type",
+          "readOnly": true
         }
       }
     },
@@ -4312,8 +4741,7 @@
         "installPrem": {
           "type": "number",
           "format": "double",
-          "description": "Policy premium",
-          "readOnly": true
+          "description": "Policy premium"
         },
         "insureds": {
           "type": "array",
@@ -4347,6 +4775,17 @@
         "policyPackage": {
           "description": "Product package",
           "$ref": "#/definitions/PolicyPackageInput"
+        },
+        "policyType": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "Policy type<br>1 - Individual policy<br>2 - Group policy<br>3 - Bancassurance",
+          "enum": [
+            1,
+            2,
+            3
+          ]
         },
         "preprintedProposalNumber": {
           "type": "string",
@@ -4414,6 +4853,77 @@
         }
       }
     },
+    "PageableProposalCriteria": {
+      "type": "object",
+      "properties": {
+        "applyDateFrom": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2017-07-01",
+          "description": "Search criteria: application date from"
+        },
+        "applyDateTo": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2017-08-01",
+          "description": "Search criteria: application date to"
+        },
+        "brokerCode": {
+          "type": "string",
+          "example": "XM",
+          "description": "Search criteria: broker code"
+        },
+        "certiCode": {
+          "type": "string",
+          "example": "1234567890",
+          "description": "Search criteria: id no. of policy customer (policy holder or insured)"
+        },
+        "contractorCode": {
+          "type": "string",
+          "example": "XM",
+          "description": "Search criteria: contractor code"
+        },
+        "insurerCode": {
+          "type": "string",
+          "example": "AX_HEALTH",
+          "description": "Search criteria: insurer code"
+        },
+        "masterProductCode": {
+          "type": "string",
+          "example": "07H004",
+          "description": "Search criteria: code of master product"
+        },
+        "name": {
+          "type": "string",
+          "example": "name",
+          "description": "Search criteria: name of policy customer (policy holder or insured)"
+        },
+        "page": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Page criteria: target page number, start from 0"
+        },
+        "proposalNumber": {
+          "type": "string",
+          "description": "Search criteria: application code"
+        },
+        "quotationCode": {
+          "type": "string",
+          "description": "Search criteria: order no."
+        },
+        "salesChannelCode": {
+          "type": "string",
+          "example": "XINHUA",
+          "description": "Search criteria: sales channel code"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32",
+          "example": 10,
+          "description": "Page criteria: how many records per page, default as 10"
+        }
+      }
+    },
     "ApplicationResponse": {
       "type": "object",
       "properties": {
@@ -4476,6 +4986,10 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "groupProposalNumber": {
+          "type": "string",
+          "description": "Group proposal No."
         },
         "inceptionDate": {
           "type": "string",
@@ -4559,7 +5073,7 @@
         },
         "coverageId": {
           "type": "string",
-          "description": "Insurance model serial number, UUID type",
+          "description": "Insurance coverage(benefit) ID, UUID type",
           "readOnly": true
         },
         "coveragePeriod": {
@@ -4622,6 +5136,13 @@
           "description": "Policy internal serial number, UUID type",
           "readOnly": true
         },
+        "premInvestRates": {
+          "type": "array",
+          "description": "The ratio of premium and investment amount",
+          "items": {
+            "$ref": "#/definitions/PremInvestRate"
+          }
+        },
         "productCode": {
           "type": "string",
           "description": "Product code"
@@ -4630,6 +5151,14 @@
           "type": "integer",
           "format": "int64",
           "description": "Product ID"
+        },
+        "recurringTopup": {
+          "description": "Recurring topup",
+          "$ref": "#/definitions/RecurringTopup"
+        },
+        "singleTopup": {
+          "description": "Single topup",
+          "$ref": "#/definitions/SingleTopup"
         },
         "waiverExt": {
           "description": "Waiver plan information",
@@ -4715,6 +5244,43 @@
           "type": "string",
           "example": "ICBC",
           "description": "Card issue bank"
+        }
+      }
+    },
+    "EPolicyResponse": {
+      "type": "object",
+      "properties": {
+        "clientRequestId": {
+          "type": "string",
+          "description": "External transaction serial number"
+        },
+        "clientRequestTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "External client request time"
+        },
+        "exceptions": {
+          "type": "array",
+          "description": "Exception information:",
+          "items": {
+            "type": "string"
+          }
+        },
+        "messages": {
+          "type": "array",
+          "description": "Business failure reason description list node",
+          "items": {
+            "$ref": "#/definitions/GenericValidationResult"
+          }
+        },
+        "policy": {
+          "description": "Policy",
+          "$ref": "#/definitions/EPolicyResult"
+        },
+        "result": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Request result<br>1 - business success<br>0 - business failure<br>-1 - application exception"
         }
       }
     },
@@ -4814,6 +5380,95 @@
             "Y",
             "N"
           ]
+        }
+      }
+    },
+    "EPolicyResult": {
+      "type": "object",
+      "properties": {
+        "ePolicyDownloadUrl": {
+          "type": "string",
+          "description": "Electronic policy download address"
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "Extended information, Map type, Key / Value, should be character",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "policyNumber": {
+          "type": "string",
+          "description": "Policy number"
+        },
+        "proposalNumber": {
+          "type": "string",
+          "description": "Proposal number"
+        }
+      }
+    },
+    "RecurringTopup": {
+      "type": "object",
+      "properties": {
+        "addPremId": {
+          "type": "string",
+          "description": "Insurance type insured internal serial number, UUID type",
+          "readOnly": true
+        },
+        "coverageId": {
+          "type": "string",
+          "description": "Insurance coverage(benefit) ID, UUID type",
+          "readOnly": true
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "Extended information, Map type, Key / Value, should be character",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "investRates": {
+          "type": "array",
+          "description": "Investment rate list",
+          "items": {
+            "$ref": "#/definitions/RecurringTopupInvestRate"
+          }
+        },
+        "policyId": {
+          "type": "string",
+          "description": "Policy internal serial number, UUID type",
+          "readOnly": true
+        },
+        "topupAmount": {
+          "type": "number",
+          "format": "double",
+          "example": 10000,
+          "description": "Topup amount"
+        }
+      }
+    },
+    "RecurringTopupInput": {
+      "type": "object",
+      "properties": {
+        "extendedProps": {
+          "type": "object",
+          "description": "Extended information, Map type, Key / Value, should be character",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "investRates": {
+          "type": "array",
+          "description": "Investment rate list",
+          "items": {
+            "$ref": "#/definitions/ContractInvestRateInput"
+          }
+        },
+        "topupAmount": {
+          "type": "number",
+          "format": "double",
+          "example": 10000,
+          "description": "Topup amount"
         }
       }
     },
@@ -4942,7 +5597,16 @@
         },
         "paymentMethod": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "example": 3,
+          "description": "First time payment method, integer<br>1 - cash<br>2 - check<br>3 - bank transfer<br>30 - credit card<br>80 - 3rd party payment",
+          "enum": [
+            1,
+            2,
+            3,
+            30,
+            80
+          ]
         }
       }
     },
@@ -4973,7 +5637,8 @@
             1,
             2,
             3,
-            30
+            30,
+            80
           ]
         },
         "paymentMethodNext": {
@@ -4985,7 +5650,8 @@
             1,
             2,
             3,
-            30
+            30,
+            80
           ]
         }
       }
@@ -5031,7 +5697,7 @@
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "The relationship to the insured. 1 - wife<br>2 - husband<br>3 - child<br>4 - father<br>5 - mother<br>6 - Grand father<br>7 - Grandparent<br>8 - brother<br>9 - sister<br>10 - uncle<br>11 - untie<br>12 - cousin<br>13 - nephew(niece)<br>14 - employer<br>15 - other<br>16 - self",
+          "description": "The relationship to the insured<br>1 - wife<br>2 - husband<br>3 - child<br>4 - father<br>5 - mother<br>6 - Grand father<br>7 - Grandparent<br>8 - brother<br>9 - sister<br>10 - uncle<br>11 - untie<br>12 - cousin<br>13 - nephew(niece)<br>14 - employer<br>15 - other<br>16 - self",
           "enum": [
             1,
             2,
@@ -5099,8 +5765,8 @@
         "tags": [
           "Product"
         ],
-        "summary": "Get the product package list",
-        "description": "Date, package sales before this date, format (YYYY-MM-DD)",
+        "summary": "Get a package list",
+        "description": "Obtain a product list according to the criteria, the product list contains the product of basic information",
         "operationId": "findPackagesUsingGET",
         "consumes": [
           "application/json"
@@ -5112,21 +5778,21 @@
           {
             "name": "date",
             "in": "query",
-            "description": "Date, product sales before this date, format (YYYY-MM-DD)",
+            "description": "Date, package sales before this date, format (YYYY-MM-DD)",
             "required": false,
             "type": "string"
           },
           {
             "name": "salesCategory",
             "in": "query",
-            "description": "The list of insurance companies, product sales category can be multiple, if multiple are separated by commas (,)",
+            "description": "Date, product sales before this date, format (YYYY-MM-DD)",
             "required": false,
             "type": "string"
           },
           {
             "name": "insurerIds",
             "in": "query",
-            "description": "OK",
+            "description": "The list of insurance companies, product sales category can be multiple, if multiple are separated by commas (,)",
             "required": false,
             "type": "string"
           },
@@ -5139,25 +5805,25 @@
         ],
         "responses": {
           "200": {
-            "description": "Bad request",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/PackagesResponse"
             }
           },
           "400": {
-            "description": "Unauthorized"
+            "description": "Bad request"
           },
           "401": {
-            "description": "Forbidden"
+            "description": "Unauthorized"
           },
           "403": {
-            "description": "Not Found"
+            "description": "Forbidden"
           },
           "404": {
-            "description": "Internal Server Error"
+            "description": "Not Found"
           },
           "500": {
-            "description": "Get a package list"
+            "description": "Internal Server Error"
           }
         }
       }
@@ -5167,8 +5833,8 @@
         "tags": [
           "Product"
         ],
-        "summary": "Get product package detail",
-        "description": "Product package code",
+        "summary": "Get one package detail",
+        "description": "Get the product package list",
         "operationId": "findProductPackageUsingGET",
         "consumes": [
           "application/json"
@@ -5193,25 +5859,25 @@
         ],
         "responses": {
           "200": {
-            "description": "Bad request",
+            "description": "Product package code",
             "schema": {
               "$ref": "#/definitions/PackageResponse"
             }
           },
           "400": {
-            "description": "Unauthorized"
+            "description": "Bad request"
           },
           "401": {
-            "description": "Forbidden"
+            "description": "Unauthorized"
           },
           "403": {
-            "description": "Not Found"
+            "description": "Forbidden"
           },
           "404": {
-            "description": "Internal Server Error"
+            "description": "Not Found"
           },
           "500": {
-            "description": "Get one package detail"
+            "description": "Internal Server Error"
           }
         }
       }
@@ -5222,7 +5888,7 @@
           "Product"
         ],
         "summary": "Get the product list",
-        "description": "paths['/products'].get.description",
+        "description": "Get product package detail",
         "operationId": "findProductsUsingGET",
         "consumes": [
           "application/json"
@@ -5291,124 +5957,6 @@
         }
       }
     },
-    "/products/SALimits": {
-      "post": {
-        "tags": [
-          "Product"
-        ],
-        "summary": "Enquiry SA limit by some conditions",
-        "description": "Enquiry SA limit by some conditions",
-        "operationId": "getSALimitByConUsingPOST",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "*/*"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "saLimitCon",
-            "description": "SA limit enquire request and parameters",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SaLimitCon"
-            }
-          },
-          {
-            "name": "X-ebao-tenant-id",
-            "in": "header",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ProductSumAssuredResponse"
-            }
-          },
-          "201": {
-            "description": "Created"
-          },
-          "400": {
-            "description": "Bad request"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/products/ageLimits": {
-      "post": {
-        "tags": [
-          "Product"
-        ],
-        "summary": "Enquiry age limit by some conditions",
-        "description": "Enquiry age limit by some conditions",
-        "operationId": "getAgeLimitByConUsingPOST",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "*/*"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "ageLimitCon",
-            "description": "Age limit enquiry conditions",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AgeLimitCon"
-            }
-          },
-          {
-            "name": "X-ebao-tenant-id",
-            "in": "header",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ProductAgeResponse"
-            }
-          },
-          "201": {
-            "description": "Created"
-          },
-          "400": {
-            "description": "Bad request"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
     "/products/benefitIllustration": {
       "post": {
         "tags": [
@@ -5444,7 +5992,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/CalculatePremSAResponse"
+              "$ref": "#/definitions/IllustrationResponse"
             }
           },
           "201": {
@@ -5527,7 +6075,125 @@
         }
       }
     },
-    "/products/premiumLimits": {
+    "/products/limits/SA": {
+      "post": {
+        "tags": [
+          "Product"
+        ],
+        "summary": "Enquiry SA limit by some conditions",
+        "description": "Enquiry SA limit by some conditions",
+        "operationId": "getSALimitByConUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "saLimitCon",
+            "description": "SA limit enquire request and parameters",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SaLimitCon"
+            }
+          },
+          {
+            "name": "X-ebao-tenant-id",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProductSumAssuredResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/products/limits/age": {
+      "post": {
+        "tags": [
+          "Product"
+        ],
+        "summary": "Enquiry age limit by some conditions",
+        "description": "Enquiry age limit by some conditions",
+        "operationId": "getAgeLimitByConUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "ageLimitCon",
+            "description": "Age limit enquiry conditions",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AgeLimitCon"
+            }
+          },
+          {
+            "name": "X-ebao-tenant-id",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProductAgeResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/products/limits/premium": {
       "post": {
         "tags": [
           "Product"
@@ -5563,6 +6229,65 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/ProductPremiumResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/products/limits/term": {
+      "post": {
+        "tags": [
+          "Product"
+        ],
+        "summary": "Enquiry term limit by some conditions",
+        "description": "Enquiry term limit by some conditions",
+        "operationId": "getTermLimitByConUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "termLimitCon",
+            "description": "Term limit enquiry conditions",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TermLimitCon"
+            }
+          },
+          {
+            "name": "X-ebao-tenant-id",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProductTermResponse"
             }
           },
           "201": {
@@ -5695,65 +6420,6 @@
         }
       }
     },
-    "/products/termLimits": {
-      "post": {
-        "tags": [
-          "Product"
-        ],
-        "summary": "Enquiry term limit by some conditions",
-        "description": "Enquiry term limit by some conditions",
-        "operationId": "getTermLimitByConUsingPOST",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "*/*"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "termLimitCon",
-            "description": "Term limit enquiry conditions",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/TermLimitCon"
-            }
-          },
-          {
-            "name": "X-ebao-tenant-id",
-            "in": "header",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ProductTermResponse"
-            }
-          },
-          "201": {
-            "description": "Created"
-          },
-          "400": {
-            "description": "Bad request"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
     "/products/{productCode}": {
       "get": {
         "tags": [
@@ -5813,7 +6479,7 @@
         "tags": [
           "Proposal"
         ],
-        "summary": "Insurance",
+        "summary": "Application",
         "description": "Calculate the premium and verify the insurance underwriting rules, if passed, then generate an insurance policy number",
         "operationId": "applyUsingPOST",
         "consumes": [
@@ -5851,6 +6517,57 @@
           },
           "400": {
             "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorised"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/proposals/epolicy/{proposalNumber}": {
+      "get": {
+        "tags": [
+          "Proposal"
+        ],
+        "summary": "Get ePolicy download URI by proposal No. after policy issured",
+        "description": "Get ePolicy download URI by proposal No. after policy issured",
+        "operationId": "getEPolicyDownloadUrlUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "proposalNumber",
+            "in": "path",
+            "description": "Proposal Number",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "X-ebao-tenant-id",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/EPolicyResponse"
+            }
           },
           "401": {
             "description": "Unauthorised"
@@ -5916,6 +6633,9 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
@@ -5972,6 +6692,9 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
