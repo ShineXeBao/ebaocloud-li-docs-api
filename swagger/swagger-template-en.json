@@ -1,11 +1,11 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "0.9",
+    "version": "0.9.5",
     "title": "eBaoCould LI OpenAPI",
-    "description": "This document is the API specification for the eBaoCloud Life part. To practice and run the APIs in this document, you need to apply a eBaoCloud tenant accout(start from a sandbox account instead of produciton) first.<br>\nContact liliang.zhu@ebaotech.com for more information and trail using.\n\n# Built on\nFri Sep 1 2017, 17:08:06 +08:00\n\n# Versioning\nAPI version| Date  |Comments\n--|---|--\n0.5  | 2017-06-13  | Init version\n0.6  | 2017-06-19  | Add new category and readme\n0.6.5 | 2017-06-29  | oauth2 document, chinese version document\n0.8  | 2017-07-07  | oauth2 lanuch\n0.8.5 | 2017-07-31 | Enhancement in product services\n0.9 | 2017-08-25 | Add limits related APIs (age, premium / SA and term )\n\n# Authentication\n\n## Overview\n\neBaoCloud offers 3rd party applications the ability to issue authenticated requests on behalf of the eBaoCloud itself. eBaoCloud's implementation is based on the [Client Credentials Grant](http://tools.ietf.org/html/rfc6749#section-4.4) flow of the [oauth 2 specification](http://tools.ietf.org/html/rfc6749).\n\n## Auth Flow\n\nThe oauth2 / token authentication flow follows these 3 major steps:\n\n1. An application (backend) encodes its consumer key and secret (provided by eBaoCloud as an authorized vender) into a specially encoded set of credentials.\n2. An application (backend) makes a request to the POST oauth2 / token endpoint to exchange these credentials for a bearer token.\n3. When accessing the REST API, the application (the APP or website) uses the bearer token to authenticate.\n\n![Auth Flow](/assets/oauth.png)\n\n## Step by step\n\n* Send request to auth end point\n\n```js\nPOST: /cas/ebao/v1/json/tickets\nBody: {\"username\":\"name\", \"password\":\"pwd\"}\nResponse: {\"access_token\": \"xxxx\"}\n```\n\n* Send request with access_token in header\n\n```js\nPOST: /rest/products\nHeader: {\n  \"authorization\":\"Bearer \"+access_token,\n  \"X-ebao-tenant-id\": \"tenant-id\"\n}\n```\n\n## End Points\n\n| | Sandbox | Production |\n| :--- | :--- | :--- |\n| auth / take token | [https://sandbox.ebaocloud.com.cn/cas/ebao/v1/json/tickets](https://sandbox.ebaocloud.com.cn/cas/ebao/v1/json/tickets) | [https://ebaocloud.com.cn/cas/ebao/v1/json/tickets](https://ebaocloud.com.cn/cas/ebao/v1/json/tickets) |\n| APIs | [https://sandbox.gw.ebaocloud.com.cn/li/eBao/1/](https://sandbox.gw.ebaocloud.com.cn/li/eBao/1/) | [https://gw.ebaocloud.com.cn/li/eBao/1/](https://gw.ebaocloud.com.cn/li/eBao/1/)|\n\n\n## Sample\n\n#### Request auth from application\n\n```bash\ncurl --request POST \\\n  --url https://url/cas/ebao/v1/json/tickets \\\n  --header 'content-type: application/json' \\\n  --header 'X-ebao-tenant-id: tenant-id' \\\n  --data '{\\n \\n \"username\":\"site.admin\",\\n \"password\":\"adminPWD!\"\\n}'\n```\n\nNote:\n. the **X-ebao-tenant-id** is the unique id provided by eBaoCloud to identify the tenant.\n. the **username** and **password** are provided by eBaoCloud when you registered as an authorized vendor.\n\n\n#### Response from API GateWay\n\n* Success\n\n```js\n{\n\"access_token\" : \"TGT-233-e7Zuc5FlSAa0SShO3B1f2iugYzRQGQrSSoGwAi0VnWbnBNDwHg\"\n}\n```\n\n* Failed\n\n```js\n{\n\"access_token\" : null\n}\n```\n\n#### App call (Java code sample)\n\n```java\nHttpResponse<String> response = Unirest.post(url) // url：the UAT/product URL\n  .header(\"content-type\", \"application/json\") // application/json\n  .header(\"authorization\", \"Bearer \" + accessToken) // oauth2 access token：the accessToken\n  .header(\"X-ebao-tenant-id\", \"tenant-id\")\n  .body(body) // body: http body\n  .asString();\n```\n\n## Others\n\n### Tokens are passwords\n\nKeep in mind that the consumer key & secret, bearer token credentials, and the bearer token itself grant access to make requests on behalf of an application. These values should be considered as sensitive as passwords, and must not be shared or distributed to untrusted parties.\n\n### SSL required\n\nAll requests (both to obtain and use the tokens) **must use** HTTPS endpoints.\n"
+    "description": "This document is the API specification for the eBaoCloud Life part. To practice and run the APIs in this document, you need to apply a eBaoCloud tenant accout(start from a sandbox account instead of produciton) first.<br>\nContact liliang.zhu@ebaotech.com for more information and trail using.\n\n# Built on\nMon Sep 11 2017, 15:48:09 +08:00\n\n# Versioning\nAPI version| Date  |Comments\n--|---|--\n0.5  | 2017-06-13  | Init version\n0.6  | 2017-06-19  | Add new category and readme\n0.6.5 | 2017-06-29  | oauth2 document, chinese version document\n0.8  | 2017-07-07  | oauth2 lanuch\n0.8.5 | 2017-07-31 | Enhancement in product services\n0.9 | 2017-08-25 | Add limits related APIs (age, premium / SA and term )\n0.9.5 | 2017-09-05 | Add new service for e-policy downloading\n\n# Authentication\n\n## Overview\n\neBaoCloud offers 3rd party applications the ability to issue authenticated requests on behalf of the eBaoCloud itself. eBaoCloud's implementation is based on the [Client Credentials Grant](http://tools.ietf.org/html/rfc6749#section-4.4) flow of the [oauth 2 specification](http://tools.ietf.org/html/rfc6749).\n\n## Auth Flow\n\nThe oauth2 / token authentication flow follows these 3 major steps:\n\n1. An application (backend) encodes its consumer key and secret (provided by eBaoCloud as an authorized vender) into a specially encoded set of credentials.\n2. An application (backend) makes a request to the POST oauth2 / token endpoint to exchange these credentials for a bearer token.\n3. When accessing the REST API, the application (the APP or website) uses the bearer token to authenticate.\n\n![Auth Flow](/assets/oauth.png)\n\n## Step by step\n\n* Send request to auth end point\n\n```js\nPOST: /cas/ebao/v1/json/tickets\nBody: {\"username\":\"name\", \"password\":\"pwd\"}\nResponse: {\"access_token\": \"xxxx\"}\n```\n\n* Send request with access_token in header\n\n```js\nPOST: /rest/products\nHeader: {\n  \"authorization\":\"Bearer \"+access_token,\n  \"X-ebao-tenant-id\": \"tenant-id\"\n}\n```\n\n## End Points\n\n| | Sandbox | Production |\n| :--- | :--- | :--- |\n| auth / take token | [https://sandbox.ebaocloud.com.cn/cas/ebao/v1/json/tickets](https://sandbox.ebaocloud.com.cn/cas/ebao/v1/json/tickets) | [https://ebaocloud.com.cn/cas/ebao/v1/json/tickets](https://ebaocloud.com.cn/cas/ebao/v1/json/tickets) |\n| APIs | [https://sandbox.gw.ebaocloud.com.cn/li/eBao/1/](https://sandbox.gw.ebaocloud.com.cn/li/eBao/1/) | [https://gw.ebaocloud.com.cn/li/eBao/1/](https://gw.ebaocloud.com.cn/li/eBao/1/)|\n\n\n## Sample\n\n#### Request auth from application\n\n```bash\ncurl --request POST \\\n  --url https://url/cas/ebao/v1/json/tickets \\\n  --header 'content-type: application/json' \\\n  --header 'X-ebao-tenant-id: tenant-id' \\\n  --data '{\\n \\n \"username\":\"site.admin\",\\n \"password\":\"adminPWD!\"\\n}'\n```\n\nNote:\n. the **X-ebao-tenant-id** is the unique id provided by eBaoCloud to identify the tenant.\n. the **username** and **password** are provided by eBaoCloud when you registered as an authorized vendor.\n\n\n#### Response from API GateWay\n\n* Success\n\n```js\n{\n\"access_token\" : \"TGT-233-e7Zuc5FlSAa0SShO3B1f2iugYzRQGQrSSoGwAi0VnWbnBNDwHg\"\n}\n```\n\n* Failed\n\n```js\n{\n\"access_token\" : null\n}\n```\n\n#### App call (Java code sample)\n\n```java\nHttpResponse<String> response = Unirest.post(url) // url：the UAT/product URL\n  .header(\"content-type\", \"application/json\") // application/json\n  .header(\"authorization\", \"Bearer \" + accessToken) // oauth2 access token：the accessToken\n  .header(\"X-ebao-tenant-id\", \"tenant-id\")\n  .body(body) // body: http body\n  .asString();\n```\n\n## Others\n\n### Tokens are passwords\n\nKeep in mind that the consumer key & secret, bearer token credentials, and the bearer token itself grant access to make requests on behalf of an application. These values should be considered as sensitive as passwords, and must not be shared or distributed to untrusted parties.\n\n### SSL required\n\nAll requests (both to obtain and use the tokens) **must use** HTTPS endpoints.\n"
   },
-  "host": "api.ebaocloud.life",
+  "host": "sandbox.api.li.ebaocloud.com.cn",
   "basePath": "/rest",
   "schemes": [
     "https"
@@ -457,6 +457,151 @@
         }
       }
     },
+    "ProductFundPremiumLimit": {
+      "type": "object",
+      "properties": {
+        "fundCode": {
+          "type": "string",
+          "description": "definitions.ProductFundPremiumLimit.properties.fundCode.description"
+        },
+        "maxInitialPrem": {
+          "type": "integer",
+          "format": "int64",
+          "description": "definitions.ProductFundPremiumLimit.properties.maxInitialPrem.description"
+        },
+        "minAdhocTopupPrem": {
+          "type": "integer",
+          "format": "int64",
+          "description": "definitions.ProductFundPremiumLimit.properties.minAdhocTopupPrem.description"
+        },
+        "minInitialPrem": {
+          "type": "integer",
+          "format": "int64",
+          "description": "definitions.ProductFundPremiumLimit.properties.minInitialPrem.description"
+        },
+        "minRegulaTopupPrem": {
+          "type": "integer",
+          "format": "int64",
+          "description": "definitions.ProductFundPremiumLimit.properties.minRegulaTopupPrem.description"
+        },
+        "paymentFrequency": {
+          "type": "string",
+          "description": "definitions.ProductFundPremiumLimit.properties.paymentFrequency.description"
+        },
+        "paymentMethod": {
+          "type": "integer",
+          "format": "int32",
+          "description": "definitions.ProductFundPremiumLimit.properties.paymentMethod.description"
+        }
+      }
+    },
+    "AgeLimit": {
+      "type": "object",
+      "properties": {
+        "ageUnit": {
+          "type": "string",
+          "description": "definitions.AgeLimit.properties.ageUnit.description"
+        },
+        "annuityEndPeriod": {
+          "type": "string",
+          "description": "definitions.AgeLimit.properties.annuityEndPeriod.description"
+        },
+        "annuityEndYear": {
+          "type": "integer",
+          "format": "int32",
+          "description": "definitions.AgeLimit.properties.annuityEndYear.description"
+        },
+        "annuityEndYearMax": {
+          "type": "integer",
+          "format": "int32",
+          "description": "definitions.AgeLimit.properties.annuityEndYearMax.description"
+        },
+        "annuityPayEnsure": {
+          "type": "integer",
+          "format": "int32",
+          "description": "definitions.AgeLimit.properties.annuityPayEnsure.description"
+        },
+        "annuityStartPeriod": {
+          "type": "string",
+          "description": "definitions.AgeLimit.properties.annuityStartPeriod.description"
+        },
+        "annuityStartYear": {
+          "type": "integer",
+          "format": "int32",
+          "description": "definitions.AgeLimit.properties.annuityStartYear.description"
+        },
+        "annuityStartYearMax": {
+          "type": "integer",
+          "format": "int32",
+          "description": "definitions.AgeLimit.properties.annuityStartYearMax.description"
+        },
+        "benefitLevel": {
+          "type": "string",
+          "description": "definitions.AgeLimit.properties.benefitLevel.description"
+        },
+        "chargePeriod": {
+          "type": "string",
+          "description": "definitions.AgeLimit.properties.chargePeriod.description"
+        },
+        "chargeYear": {
+          "type": "integer",
+          "format": "int32",
+          "description": "definitions.AgeLimit.properties.chargeYear.description"
+        },
+        "chargeYearMax": {
+          "type": "integer",
+          "format": "int32",
+          "description": "definitions.AgeLimit.properties.chargeYearMax.description"
+        },
+        "coveragePeriod": {
+          "type": "string",
+          "description": "definitions.AgeLimit.properties.coveragePeriod.description"
+        },
+        "coverageYear": {
+          "type": "integer",
+          "format": "int32",
+          "description": "definitions.AgeLimit.properties.coverageYear.description"
+        },
+        "coverageYearMax": {
+          "type": "integer",
+          "format": "int32",
+          "description": "definitions.AgeLimit.properties.coverageYearMax.description"
+        },
+        "gender": {
+          "type": "string",
+          "description": "definitions.AgeLimit.properties.gender.description"
+        },
+        "highSa": {
+          "type": "number",
+          "format": "double",
+          "description": "definitions.AgeLimit.properties.highSa.description"
+        },
+        "lowSa": {
+          "type": "number",
+          "format": "double",
+          "description": "definitions.AgeLimit.properties.lowSa.description"
+        },
+        "maxAge": {
+          "type": "integer",
+          "format": "int32",
+          "description": "definitions.AgeLimit.properties.maxAge.description"
+        },
+        "minAge": {
+          "type": "integer",
+          "format": "int32",
+          "description": "definitions.AgeLimit.properties.minAge.description"
+        },
+        "paymentFrequency": {
+          "type": "string",
+          "description": "definitions.AgeLimit.properties.paymentFrequency.description"
+        },
+        "paymentMethod": {
+          "type": "integer",
+          "format": "int32",
+          "description": "definitions.AgeLimit.properties.paymentMethod.description"
+        }
+      }
+    },
     "CalculatePolicy": {
       "type": "object",
       "required": [
@@ -524,6 +669,34 @@
         "productCode"
       ],
       "properties": {
+        "annuityEndPeriod": {
+          "type": "string",
+          "example": "1",
+          "description": "definitions.AgeLimitCon.properties.annuityEndPeriod.description"
+        },
+        "annuityEndYear": {
+          "type": "integer",
+          "format": "int32",
+          "example": 5,
+          "description": "definitions.AgeLimitCon.properties.annuityEndYear.description"
+        },
+        "annuityPayEnsure": {
+          "type": "integer",
+          "format": "int32",
+          "example": 5,
+          "description": "definitions.AgeLimitCon.properties.annuityPayEnsure.description"
+        },
+        "annuityStartPeriod": {
+          "type": "string",
+          "example": "1",
+          "description": "definitions.AgeLimitCon.properties.annuityStartPeriod.description"
+        },
+        "annuityStartYear": {
+          "type": "integer",
+          "format": "int32",
+          "example": 5,
+          "description": "definitions.AgeLimitCon.properties.annuityStartYear.description"
+        },
         "benefitLevel": {
           "type": "string",
           "example": "1",
@@ -542,23 +715,14 @@
         },
         "coveragePeriod": {
           "type": "string",
+          "example": "1",
           "description": "definitions.AgeLimitCon.properties.coveragePeriod.description"
         },
         "coverageYear": {
           "type": "integer",
           "format": "int32",
-          "description": "definitions.AgeLimitCon.properties.coverageYear.description"
-        },
-        "endPeriod": {
-          "type": "string",
-          "example": "1",
-          "description": "definitions.AgeLimitCon.properties.endPeriod.description"
-        },
-        "endYear": {
-          "type": "integer",
-          "format": "int32",
           "example": 5,
-          "description": "definitions.AgeLimitCon.properties.endYear.description"
+          "description": "definitions.AgeLimitCon.properties.coverageYear.description"
         },
         "extFields": {
           "type": "object",
@@ -571,21 +735,6 @@
           "type": "string",
           "example": "F",
           "description": "definitions.AgeLimitCon.properties.gender.description"
-        },
-        "payEnsure": {
-          "type": "integer",
-          "format": "int32",
-          "example": 5,
-          "description": "definitions.AgeLimitCon.properties.payEnsure.description"
-        },
-        "payPeriod": {
-          "type": "string",
-          "description": "definitions.AgeLimitCon.properties.payPeriod.description"
-        },
-        "payYear": {
-          "type": "integer",
-          "format": "int32",
-          "description": "definitions.AgeLimitCon.properties.payYear.description"
         },
         "premiumFrequency": {
           "type": "string",
@@ -600,6 +749,7 @@
         "sumAssured": {
           "type": "number",
           "format": "double",
+          "example": 100000,
           "description": "definitions.AgeLimitCon.properties.sumAssured.description"
         }
       }
@@ -635,38 +785,47 @@
       "type": "object",
       "properties": {
         "chargePeriod": {
-          "type": "string"
+          "type": "string",
+          "description": "definitions.PremiumLimit.properties.chargePeriod.description"
         },
         "chargeYear": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "definitions.PremiumLimit.properties.chargeYear.description"
+        },
+        "currency": {
+          "type": "integer",
+          "format": "int32",
+          "description": "definitions.PremiumLimit.properties.currency.description"
         },
         "maxAge": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "definitions.PremiumLimit.properties.maxAge.description"
         },
         "maxPrem": {
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "description": "definitions.PremiumLimit.properties.maxPrem.description"
         },
         "minAge": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "definitions.PremiumLimit.properties.minAge.description"
         },
         "minPrem": {
           "type": "integer",
-          "format": "int64"
-        },
-        "moneyId": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "payMode": {
-          "type": "integer",
-          "format": "int32"
+          "format": "int64",
+          "description": "definitions.PremiumLimit.properties.minPrem.description"
         },
         "paymentFrequency": {
-          "type": "string"
+          "type": "string",
+          "description": "definitions.PremiumLimit.properties.paymentFrequency.description"
+        },
+        "paymentMethod": {
+          "type": "integer",
+          "format": "int32",
+          "description": "definitions.PremiumLimit.properties.paymentMethod.description"
         }
       }
     },
@@ -777,23 +936,23 @@
     "Annuity": {
       "type": "object",
       "properties": {
-        "annuity_End_Period": {
+        "annuityEndPeriod": {
           "type": "string",
-          "description": "definitions.Annuity.properties.annuity_End_Period.description"
+          "description": "definitions.Annuity.properties.annuityEndPeriod.description"
         },
-        "annuity_End_Year": {
+        "annuityEndYear": {
           "type": "integer",
           "format": "int64",
-          "description": "definitions.Annuity.properties.annuity_End_Year.description"
+          "description": "definitions.Annuity.properties.annuityEndYear.description"
         },
-        "annuity_Start_Period": {
+        "annuityStartPeriod": {
           "type": "string",
-          "description": "definitions.Annuity.properties.annuity_Start_Period.description"
+          "description": "definitions.Annuity.properties.annuityStartPeriod.description"
         },
-        "annuity_Start_Year": {
+        "annuityStartYear": {
           "type": "integer",
           "format": "int64",
-          "description": "definitions.Annuity.properties.annuity_Start_Year.description"
+          "description": "definitions.Annuity.properties.annuityStartYear.description"
         },
         "extFields": {
           "type": "object",
@@ -891,6 +1050,29 @@
     "TermLimit": {
       "type": "object",
       "properties": {
+        "annuityEndPeriod": {
+          "type": "string",
+          "description": "definitions.TermLimit.properties.annuityEndPeriod.description"
+        },
+        "annuityEndYear": {
+          "type": "integer",
+          "format": "int32",
+          "description": "definitions.TermLimit.properties.annuityEndYear.description"
+        },
+        "annuityPayEnsure": {
+          "type": "integer",
+          "format": "int32",
+          "description": "definitions.TermLimit.properties.annuityPayEnsure.description"
+        },
+        "annuityStartPeriod": {
+          "type": "string",
+          "description": "definitions.TermLimit.properties.annuityStartPeriod.description"
+        },
+        "annuityStartYear": {
+          "type": "integer",
+          "format": "int32",
+          "description": "definitions.TermLimit.properties.annuityStartYear.description"
+        },
         "chargePeriod": {
           "type": "string",
           "description": "definitions.TermLimit.properties.chargePeriod.description"
@@ -908,29 +1090,6 @@
           "type": "integer",
           "format": "int32",
           "description": "definitions.TermLimit.properties.coverageYear.description"
-        },
-        "endPeriod": {
-          "type": "string",
-          "description": "definitions.TermLimit.properties.endPeriod.description"
-        },
-        "endYear": {
-          "type": "integer",
-          "format": "int32",
-          "description": "definitions.TermLimit.properties.endYear.description"
-        },
-        "payEnsure": {
-          "type": "integer",
-          "format": "int32",
-          "description": "definitions.TermLimit.properties.payEnsure.description"
-        },
-        "payPeriod": {
-          "type": "string",
-          "description": "definitions.TermLimit.properties.payPeriod.description"
-        },
-        "payYear": {
-          "type": "integer",
-          "format": "int32",
-          "description": "definitions.TermLimit.properties.payYear.description"
         }
       }
     },
@@ -1149,118 +1308,6 @@
         }
       }
     },
-    "AgeRange": {
-      "type": "object",
-      "properties": {
-        "ageUnit": {
-          "type": "string",
-          "description": "definitions.AgeRange.properties.ageUnit.description"
-        },
-        "benefitLevel": {
-          "type": "string",
-          "description": "definitions.AgeRange.properties.benefitLevel.description"
-        },
-        "chargePeriod": {
-          "type": "string",
-          "description": "definitions.AgeRange.properties.chargePeriod.description"
-        },
-        "chargeYear": {
-          "type": "integer",
-          "format": "int32",
-          "description": "definitions.AgeRange.properties.chargeYear.description"
-        },
-        "chargeYearMax": {
-          "type": "integer",
-          "format": "int32",
-          "description": "definitions.AgeRange.properties.chargeYearMax.description"
-        },
-        "coveragePeriod": {
-          "type": "string",
-          "description": "definitions.AgeRange.properties.coveragePeriod.description"
-        },
-        "coverageYear": {
-          "type": "integer",
-          "format": "int32",
-          "description": "definitions.AgeRange.properties.coverageYear.description"
-        },
-        "coverageYearMax": {
-          "type": "integer",
-          "format": "int32",
-          "description": "definitions.AgeRange.properties.coverageYearMax.description"
-        },
-        "endPeriod": {
-          "type": "string",
-          "description": "definitions.AgeRange.properties.endPeriod.description"
-        },
-        "endYear": {
-          "type": "integer",
-          "format": "int32",
-          "description": "definitions.AgeRange.properties.endYear.description"
-        },
-        "endYearMax": {
-          "type": "integer",
-          "format": "int32",
-          "description": "definitions.AgeRange.properties.endYearMax.description"
-        },
-        "gender": {
-          "type": "string",
-          "description": "definitions.AgeRange.properties.gender.description"
-        },
-        "highSa": {
-          "type": "number",
-          "format": "double",
-          "description": "definitions.AgeRange.properties.highSa.description"
-        },
-        "lowSa": {
-          "type": "number",
-          "format": "double",
-          "description": "definitions.AgeRange.properties.lowSa.description"
-        },
-        "maxAge": {
-          "type": "integer",
-          "format": "int32",
-          "description": "definitions.AgeRange.properties.maxAge.description"
-        },
-        "minAge": {
-          "type": "integer",
-          "format": "int32",
-          "description": "definitions.AgeRange.properties.minAge.description"
-        },
-        "payEnsure": {
-          "type": "integer",
-          "format": "int32",
-          "description": "definitions.AgeRange.properties.payEnsure.description"
-        },
-        "payMode": {
-          "type": "integer",
-          "format": "int32",
-          "description": "definitions.AgeRange.properties.payMode.description"
-        },
-        "payPeriod": {
-          "type": "string",
-          "description": "definitions.AgeRange.properties.payPeriod.description"
-        },
-        "payYear": {
-          "type": "integer",
-          "format": "int32",
-          "description": "definitions.AgeRange.properties.payYear.description"
-        },
-        "payYearMax": {
-          "type": "integer",
-          "format": "int32",
-          "description": "definitions.AgeRange.properties.payYearMax.description"
-        },
-        "paymentFrequency": {
-          "type": "string",
-          "description": "definitions.AgeRange.properties.paymentFrequency.description"
-        },
-        "productVersionId": {
-          "type": "integer",
-          "format": "int64",
-          "description": "definitions.AgeRange.properties.productVersionId.description"
-        }
-      }
-    },
     "MainInformation": {
       "type": "object",
       "properties": {
@@ -1277,6 +1324,10 @@
         "familyType": {
           "type": "string",
           "description": "definitions.MainInformation.properties.familyType.description"
+        },
+        "indexIndi": {
+          "type": "string",
+          "description": "definitions.MainInformation.properties.indexIndi.description"
         },
         "mainPlan": {
           "type": "string",
@@ -1449,6 +1500,101 @@
         }
       }
     },
+    "ProductFund": {
+      "type": "object",
+      "properties": {
+        "bonusSettleType": {
+          "type": "integer",
+          "format": "int32",
+          "description": "definitions.ProductFund.properties.bonusSettleType.description"
+        },
+        "fundCode": {
+          "type": "string",
+          "description": "definitions.ProductFund.properties.fundCode.description"
+        },
+        "guaranteedRateOption": {
+          "type": "integer",
+          "format": "int32",
+          "description": "definitions.ProductFund.properties.guaranteedRateOption.description"
+        },
+        "maxPartialWithdralVal": {
+          "type": "integer",
+          "format": "int64",
+          "description": "definitions.ProductFund.properties.maxPartialWithdralVal.description"
+        },
+        "maxSwitInTimes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "definitions.ProductFund.properties.maxSwitInTimes.description"
+        },
+        "maxSwitOutTimes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "definitions.ProductFund.properties.maxSwitOutTimes.description"
+        },
+        "minPartialWithdralRemainingVal": {
+          "type": "integer",
+          "format": "int64",
+          "description": "definitions.ProductFund.properties.minPartialWithdralRemainingVal.description"
+        },
+        "minPartialWithdralval": {
+          "type": "integer",
+          "format": "int64",
+          "description": "definitions.ProductFund.properties.minPartialWithdralval.description"
+        },
+        "minSwitOutVal": {
+          "type": "integer",
+          "format": "int64",
+          "description": "definitions.ProductFund.properties.minSwitOutVal.description"
+        },
+        "minSwitRemainVal": {
+          "type": "integer",
+          "format": "int64",
+          "description": "definitions.ProductFund.properties.minSwitRemainVal.description"
+        },
+        "productId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "definitions.ProductFund.properties.productId.description"
+        },
+        "settleDay": {
+          "type": "integer",
+          "format": "int32",
+          "description": "definitions.ProductFund.properties.settleDay.description"
+        },
+        "settleFreq": {
+          "type": "string",
+          "description": "definitions.ProductFund.properties.settleFreq.description"
+        },
+        "settleMethod": {
+          "type": "integer",
+          "format": "int32",
+          "description": "definitions.ProductFund.properties.settleMethod.description"
+        },
+        "settleMonth": {
+          "type": "integer",
+          "format": "int32",
+          "description": "definitions.ProductFund.properties.settleMonth.description"
+        },
+        "settleRatePeriodUnit": {
+          "type": "string",
+          "description": "definitions.ProductFund.properties.settleRatePeriodUnit.description"
+        },
+        "settleSimpleCompound": {
+          "type": "string",
+          "description": "definitions.ProductFund.properties.settleSimpleCompound.description"
+        },
+        "settleYearType": {
+          "type": "integer",
+          "format": "int32",
+          "description": "definitions.ProductFund.properties.settleYearType.description"
+        },
+        "switchPeriodUnit": {
+          "type": "string",
+          "description": "definitions.ProductFund.properties.switchPeriodUnit.description"
+        }
+      }
+    },
     "LiabilityInformation": {
       "type": "object",
       "properties": {
@@ -1478,6 +1624,34 @@
         "productCode"
       ],
       "properties": {
+        "annuityEndPeriod": {
+          "type": "string",
+          "example": "1",
+          "description": "definitions.TermLimitCon.properties.annuityEndPeriod.description"
+        },
+        "annuityEndYear": {
+          "type": "integer",
+          "format": "int32",
+          "example": 10,
+          "description": "definitions.TermLimitCon.properties.annuityEndYear.description"
+        },
+        "annuityPayEnsure": {
+          "type": "integer",
+          "format": "int32",
+          "example": 5,
+          "description": "definitions.TermLimitCon.properties.annuityPayEnsure.description"
+        },
+        "annuityStartPeriod": {
+          "type": "string",
+          "example": "1",
+          "description": "definitions.TermLimitCon.properties.annuityStartPeriod.description"
+        },
+        "annuityStartYear": {
+          "type": "integer",
+          "format": "int32",
+          "example": 10,
+          "description": "definitions.TermLimitCon.properties.annuityStartYear.description"
+        },
         "chargePeriod": {
           "type": "string",
           "example": "1",
@@ -1486,7 +1660,7 @@
         "chargeYear": {
           "type": "integer",
           "format": "int32",
-          "example": 1,
+          "example": 5,
           "description": "definitions.TermLimitCon.properties.chargeYear.description"
         },
         "coveragePeriod": {
@@ -1497,19 +1671,8 @@
         "coverageYear": {
           "type": "integer",
           "format": "int32",
-          "example": 1,
+          "example": 5,
           "description": "definitions.TermLimitCon.properties.coverageYear.description"
-        },
-        "endPeriod": {
-          "type": "string",
-          "example": "1",
-          "description": "definitions.TermLimitCon.properties.endPeriod.description"
-        },
-        "endYear": {
-          "type": "integer",
-          "format": "int32",
-          "example": 10,
-          "description": "definitions.TermLimitCon.properties.endYear.description"
         },
         "extFields": {
           "type": "object",
@@ -1517,23 +1680,6 @@
         },
         "extObject": {
           "$ref": "#/definitions/GenericVO"
-        },
-        "payEnsure": {
-          "type": "integer",
-          "format": "int32",
-          "example": 5,
-          "description": "definitions.TermLimitCon.properties.payEnsure.description"
-        },
-        "payPeriod": {
-          "type": "string",
-          "example": "1",
-          "description": "definitions.TermLimitCon.properties.payPeriod.description"
-        },
-        "payYear": {
-          "type": "integer",
-          "format": "int32",
-          "example": 10,
-          "description": "definitions.TermLimitCon.properties.payYear.description"
         },
         "productCode": {
           "type": "string",
@@ -1669,11 +1815,11 @@
         "extObject": {
           "$ref": "#/definitions/GenericVO"
         },
-        "insuredAge": {
+        "insuredAgeMonth": {
           "type": "integer",
           "format": "int32",
-          "example": 50,
-          "description": "definitions.SaLimitCon.properties.insuredAge.description"
+          "example": 60,
+          "description": "definitions.SaLimitCon.properties.insuredAgeMonth.description"
         },
         "occupationCode": {
           "type": "integer",
@@ -1699,30 +1845,35 @@
       "properties": {
         "adhocTopup": {
           "type": "array",
+          "description": "definitions.ProductPremium.properties.adhocTopup.description",
           "items": {
             "$ref": "#/definitions/PremiumLimit"
           }
         },
         "decreasePremium": {
           "type": "array",
+          "description": "definitions.ProductPremium.properties.decreasePremium.description",
           "items": {
             "$ref": "#/definitions/PremiumLimit"
           }
         },
         "decreaseRegularTopup": {
           "type": "array",
+          "description": "definitions.ProductPremium.properties.decreaseRegularTopup.description",
           "items": {
             "$ref": "#/definitions/PremiumLimit"
           }
         },
         "increasePremium": {
           "type": "array",
+          "description": "definitions.ProductPremium.properties.increasePremium.description",
           "items": {
             "$ref": "#/definitions/PremiumLimit"
           }
         },
         "increaseRegularTopup": {
           "type": "array",
+          "description": "definitions.ProductPremium.properties.increaseRegularTopup.description",
           "items": {
             "$ref": "#/definitions/PremiumLimit"
           }
@@ -1733,8 +1884,16 @@
             "$ref": "#/definitions/PremiumLimit"
           }
         },
+        "listFundPremiumLimit": {
+          "type": "array",
+          "description": "definitions.ProductPremium.properties.listFundPremiumLimit.description",
+          "items": {
+            "$ref": "#/definitions/ProductFundPremiumLimit"
+          }
+        },
         "regularTopup": {
           "type": "array",
+          "description": "definitions.ProductPremium.properties.regularTopup.description",
           "items": {
             "$ref": "#/definitions/PremiumLimit"
           }
@@ -1861,6 +2020,13 @@
           "description": "definitions.ProductInfo.properties.liability.description",
           "$ref": "#/definitions/ProductLiability"
         },
+        "listProductFund": {
+          "type": "array",
+          "description": "definitions.ProductInfo.properties.listProductFund.description",
+          "items": {
+            "$ref": "#/definitions/ProductFund"
+          }
+        },
         "maininfo": {
           "description": "definitions.ProductInfo.properties.maininfo.description",
           "$ref": "#/definitions/MainInformation"
@@ -1932,19 +2098,24 @@
     "SaLimit": {
       "type": "object",
       "properties": {
-        "highAge": {
+        "currency": {
           "type": "integer",
           "format": "int32",
-          "description": "definitions.SaLimit.properties.highAge.description"
+          "description": "definitions.SaLimit.properties.currency.description"
+        },
+        "highAgeMonth": {
+          "type": "integer",
+          "format": "int32",
+          "description": "definitions.SaLimit.properties.highAgeMonth.description"
         },
         "limitUnit": {
           "type": "string",
           "description": "definitions.SaLimit.properties.limitUnit.description"
         },
-        "lowAge": {
+        "lowAgeMonth": {
           "type": "integer",
           "format": "int32",
-          "description": "definitions.SaLimit.properties.lowAge.description"
+          "description": "definitions.SaLimit.properties.lowAgeMonth.description"
         },
         "maxAmount": {
           "type": "integer",
@@ -1956,20 +2127,15 @@
           "format": "int64",
           "description": "definitions.SaLimit.properties.minAmount.description"
         },
-        "moneyId": {
-          "type": "integer",
-          "format": "int32",
-          "description": "definitions.SaLimit.properties.moneyId.description"
-        },
         "occupationCode": {
           "type": "integer",
           "format": "int32",
           "description": "definitions.SaLimit.properties.occupationCode.description"
         },
-        "payMethod": {
+        "paymentMethod": {
           "type": "integer",
           "format": "int32",
-          "description": "definitions.SaLimit.properties.payMethod.description"
+          "description": "definitions.SaLimit.properties.paymentMethod.description"
         }
       }
     },
@@ -2328,14 +2494,14 @@
           "type": "array",
           "description": "definitions.ProductAge.properties.insuredAge.description",
           "items": {
-            "$ref": "#/definitions/AgeRange"
+            "$ref": "#/definitions/AgeLimit"
           }
         },
         "policyHolderAge": {
           "type": "array",
           "description": "definitions.ProductAge.properties.policyHolderAge.description",
           "items": {
-            "$ref": "#/definitions/AgeRange"
+            "$ref": "#/definitions/AgeLimit"
           }
         }
       }
@@ -2460,6 +2626,10 @@
             "type": "string"
           }
         },
+        "groupProposalNumber": {
+          "type": "string",
+          "description": "definitions.Policy.properties.groupProposalNumber.description"
+        },
         "inceptionDate": {
           "type": "string",
           "format": "date-time",
@@ -2468,8 +2638,7 @@
         "installPrem": {
           "type": "number",
           "format": "double",
-          "description": "definitions.Policy.properties.installPrem.description",
-          "readOnly": true
+          "description": "definitions.Policy.properties.installPrem.description"
         },
         "insureds": {
           "type": "array",
@@ -2518,6 +2687,17 @@
           "description": "definitions.Policy.properties.policyPackage.description",
           "$ref": "#/definitions/PolicyPackage"
         },
+        "policyType": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "definitions.Policy.properties.policyType.description",
+          "enum": [
+            1,
+            2,
+            3
+          ]
+        },
         "preprintedProposalNumber": {
           "type": "string",
           "description": "definitions.Policy.properties.preprintedProposalNumber.description"
@@ -2560,6 +2740,49 @@
           "items": {
             "$ref": "#/definitions/Trustee"
           }
+        }
+      }
+    },
+    "PremInvestRate": {
+      "type": "object",
+      "properties": {
+        "addPremId": {
+          "type": "string",
+          "description": "definitions.PremInvestRate.properties.addPremId.description",
+          "readOnly": true
+        },
+        "assignRate": {
+          "type": "number",
+          "format": "double",
+          "example": 1,
+          "description": "definitions.PremInvestRate.properties.assignRate.description"
+        },
+        "coverageId": {
+          "type": "string",
+          "description": "definitions.PremInvestRate.properties.coverageId.description",
+          "readOnly": true
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "definitions.PremInvestRate.properties.extendedProps.description",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "fundCode": {
+          "type": "string",
+          "example": "F001",
+          "description": "definitions.PremInvestRate.properties.fundCode.description"
+        },
+        "listId": {
+          "type": "string",
+          "description": "definitions.PremInvestRate.properties.listId.description",
+          "readOnly": true
+        },
+        "policyId": {
+          "type": "string",
+          "description": "definitions.PremInvestRate.properties.policyId.description",
+          "readOnly": true
         }
       }
     },
@@ -2756,6 +2979,7 @@
             2,
             3,
             10,
+            4,
             7
           ]
         },
@@ -2802,7 +3026,8 @@
             1,
             2,
             3,
-            30
+            30,
+            80
           ]
         },
         "paymentMethodNext": {
@@ -2814,7 +3039,8 @@
             1,
             2,
             3,
-            30
+            30,
+            80
           ]
         },
         "policyId": {
@@ -2996,9 +3222,24 @@
             "$ref": "#/definitions/PayPlanInput"
           }
         },
+        "premInvestRates": {
+          "type": "array",
+          "description": "definitions.CoverageInput.properties.premInvestRates.description",
+          "items": {
+            "$ref": "#/definitions/ContractInvestRateInput"
+          }
+        },
         "productCode": {
           "type": "string",
           "description": "definitions.CoverageInput.properties.productCode.description"
+        },
+        "recurringTopup": {
+          "description": "definitions.CoverageInput.properties.recurringTopup.description",
+          "$ref": "#/definitions/RecurringTopupInput"
+        },
+        "singleTopup": {
+          "description": "definitions.CoverageInput.properties.singleTopup.description",
+          "$ref": "#/definitions/SingleTopupInput"
         },
         "waiverExt": {
           "description": "definitions.CoverageInput.properties.waiverExt.description",
@@ -3312,7 +3553,8 @@
             1,
             2,
             3,
-            30
+            30,
+            80
           ]
         },
         "paymentPlatform": {
@@ -3334,6 +3576,9 @@
           "description": "definitions.CollectionInput.properties.thirdPtyPayNO.description"
         }
       }
+    },
+    "Iterator«Policy»": {
+      "type": "object"
     },
     "IssurancePolicyResult": {
       "type": "object",
@@ -3370,6 +3615,10 @@
             "type": "string"
           }
         },
+        "groupProposalNumber": {
+          "type": "string",
+          "description": "definitions.IssurancePolicyResult.properties.groupProposalNumber.description"
+        },
         "inceptionDate": {
           "type": "string",
           "format": "date-time",
@@ -3402,6 +3651,49 @@
           "type": "integer",
           "format": "int32",
           "description": "definitions.IssurancePolicyResult.properties.riskStatus.description",
+          "readOnly": true
+        }
+      }
+    },
+    "SingleTopupInvestRate": {
+      "type": "object",
+      "properties": {
+        "addPremId": {
+          "type": "string",
+          "description": "definitions.SingleTopupInvestRate.properties.addPremId.description",
+          "readOnly": true
+        },
+        "assignRate": {
+          "type": "number",
+          "format": "double",
+          "example": 1,
+          "description": "definitions.SingleTopupInvestRate.properties.assignRate.description"
+        },
+        "coverageId": {
+          "type": "string",
+          "description": "definitions.SingleTopupInvestRate.properties.coverageId.description",
+          "readOnly": true
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "definitions.SingleTopupInvestRate.properties.extendedProps.description",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "fundCode": {
+          "type": "string",
+          "example": "F001",
+          "description": "definitions.SingleTopupInvestRate.properties.fundCode.description"
+        },
+        "listId": {
+          "type": "string",
+          "description": "definitions.SingleTopupInvestRate.properties.listId.description",
+          "readOnly": true
+        },
+        "policyId": {
+          "type": "string",
+          "description": "definitions.SingleTopupInvestRate.properties.policyId.description",
           "readOnly": true
         }
       }
@@ -3450,6 +3742,7 @@
             2,
             3,
             10,
+            4,
             7
           ]
         },
@@ -3501,6 +3794,29 @@
           "format": "int32",
           "example": 1,
           "description": "definitions.TrusteeInput.properties.partySerialId.description"
+        }
+      }
+    },
+    "ContractInvestRateInput": {
+      "type": "object",
+      "properties": {
+        "assignRate": {
+          "type": "number",
+          "format": "double",
+          "example": 1,
+          "description": "definitions.ContractInvestRateInput.properties.assignRate.description"
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "definitions.ContractInvestRateInput.properties.extendedProps.description",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "fundCode": {
+          "type": "string",
+          "example": "F001",
+          "description": "definitions.ContractInvestRateInput.properties.fundCode.description"
         }
       }
     },
@@ -3579,6 +3895,46 @@
           "type": "number",
           "format": "double",
           "description": "definitions.CoverageCalculationResult.properties.unit.description"
+        }
+      }
+    },
+    "SingleTopup": {
+      "type": "object",
+      "properties": {
+        "addPremId": {
+          "type": "string",
+          "description": "definitions.SingleTopup.properties.addPremId.description",
+          "readOnly": true
+        },
+        "coverageId": {
+          "type": "string",
+          "description": "definitions.SingleTopup.properties.coverageId.description",
+          "readOnly": true
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "definitions.SingleTopup.properties.extendedProps.description",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "investRates": {
+          "type": "array",
+          "description": "definitions.SingleTopup.properties.investRates.description",
+          "items": {
+            "$ref": "#/definitions/SingleTopupInvestRate"
+          }
+        },
+        "policyId": {
+          "type": "string",
+          "description": "definitions.SingleTopup.properties.policyId.description",
+          "readOnly": true
+        },
+        "topupAmount": {
+          "type": "number",
+          "format": "double",
+          "example": 10000,
+          "description": "definitions.SingleTopup.properties.topupAmount.description"
         }
       }
     },
@@ -3773,6 +4129,11 @@
           "type": "string",
           "example": "156",
           "description": "definitions.Organization.properties.countryCode.description"
+        },
+        "organCode": {
+          "type": "string",
+          "example": "xxxxxx",
+          "description": "definitions.Organization.properties.organCode.description"
         },
         "registerCode": {
           "type": "string",
@@ -3978,6 +4339,31 @@
         }
       }
     },
+    "SingleTopupInput": {
+      "type": "object",
+      "properties": {
+        "extendedProps": {
+          "type": "object",
+          "description": "definitions.SingleTopupInput.properties.extendedProps.description",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "investRates": {
+          "type": "array",
+          "description": "definitions.SingleTopupInput.properties.investRates.description",
+          "items": {
+            "$ref": "#/definitions/ContractInvestRateInput"
+          }
+        },
+        "topupAmount": {
+          "type": "number",
+          "format": "double",
+          "example": 10000,
+          "description": "definitions.SingleTopupInput.properties.topupAmount.description"
+        }
+      }
+    },
     "CustomerDeclarationDetail": {
       "type": "object",
       "properties": {
@@ -4092,6 +4478,49 @@
             10,
             7
           ]
+        }
+      }
+    },
+    "RecurringTopupInvestRate": {
+      "type": "object",
+      "properties": {
+        "addPremId": {
+          "type": "string",
+          "description": "definitions.RecurringTopupInvestRate.properties.addPremId.description",
+          "readOnly": true
+        },
+        "assignRate": {
+          "type": "number",
+          "format": "double",
+          "example": 1,
+          "description": "definitions.RecurringTopupInvestRate.properties.assignRate.description"
+        },
+        "coverageId": {
+          "type": "string",
+          "description": "definitions.RecurringTopupInvestRate.properties.coverageId.description",
+          "readOnly": true
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "definitions.RecurringTopupInvestRate.properties.extendedProps.description",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "fundCode": {
+          "type": "string",
+          "example": "F001",
+          "description": "definitions.RecurringTopupInvestRate.properties.fundCode.description"
+        },
+        "listId": {
+          "type": "string",
+          "description": "definitions.RecurringTopupInvestRate.properties.listId.description",
+          "readOnly": true
+        },
+        "policyId": {
+          "type": "string",
+          "description": "definitions.RecurringTopupInvestRate.properties.policyId.description",
+          "readOnly": true
         }
       }
     },
@@ -4311,8 +4740,7 @@
         "installPrem": {
           "type": "number",
           "format": "double",
-          "description": "definitions.PolicyInput.properties.installPrem.description",
-          "readOnly": true
+          "description": "definitions.PolicyInput.properties.installPrem.description"
         },
         "insureds": {
           "type": "array",
@@ -4346,6 +4774,17 @@
         "policyPackage": {
           "description": "definitions.PolicyInput.properties.policyPackage.description",
           "$ref": "#/definitions/PolicyPackageInput"
+        },
+        "policyType": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "definitions.PolicyInput.properties.policyType.description",
+          "enum": [
+            1,
+            2,
+            3
+          ]
         },
         "preprintedProposalNumber": {
           "type": "string",
@@ -4413,6 +4852,77 @@
         }
       }
     },
+    "PageableProposalCriteria": {
+      "type": "object",
+      "properties": {
+        "applyDateFrom": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2017-07-01",
+          "description": "definitions.PageableProposalCriteria.properties.applyDateFrom.description"
+        },
+        "applyDateTo": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2017-08-01",
+          "description": "definitions.PageableProposalCriteria.properties.applyDateTo.description"
+        },
+        "brokerCode": {
+          "type": "string",
+          "example": "XM",
+          "description": "definitions.PageableProposalCriteria.properties.brokerCode.description"
+        },
+        "certiCode": {
+          "type": "string",
+          "example": "1234567890",
+          "description": "definitions.PageableProposalCriteria.properties.certiCode.description"
+        },
+        "contractorCode": {
+          "type": "string",
+          "example": "XM",
+          "description": "definitions.PageableProposalCriteria.properties.contractorCode.description"
+        },
+        "insurerCode": {
+          "type": "string",
+          "example": "AX_HEALTH",
+          "description": "definitions.PageableProposalCriteria.properties.insurerCode.description"
+        },
+        "masterProductCode": {
+          "type": "string",
+          "example": "07H004",
+          "description": "definitions.PageableProposalCriteria.properties.masterProductCode.description"
+        },
+        "name": {
+          "type": "string",
+          "example": "name",
+          "description": "definitions.PageableProposalCriteria.properties.name.description"
+        },
+        "page": {
+          "type": "integer",
+          "format": "int32",
+          "description": "definitions.PageableProposalCriteria.properties.page.description"
+        },
+        "proposalNumber": {
+          "type": "string",
+          "description": "definitions.PageableProposalCriteria.properties.proposalNumber.description"
+        },
+        "quotationCode": {
+          "type": "string",
+          "description": "definitions.PageableProposalCriteria.properties.quotationCode.description"
+        },
+        "salesChannelCode": {
+          "type": "string",
+          "example": "XINHUA",
+          "description": "definitions.PageableProposalCriteria.properties.salesChannelCode.description"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32",
+          "example": 10,
+          "description": "definitions.PageableProposalCriteria.properties.size.description"
+        }
+      }
+    },
     "ApplicationResponse": {
       "type": "object",
       "properties": {
@@ -4475,6 +4985,10 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "groupProposalNumber": {
+          "type": "string",
+          "description": "definitions.ApplicationPolicyResult.properties.groupProposalNumber.description"
         },
         "inceptionDate": {
           "type": "string",
@@ -4621,6 +5135,13 @@
           "description": "definitions.Coverage.properties.policyId.description",
           "readOnly": true
         },
+        "premInvestRates": {
+          "type": "array",
+          "description": "definitions.Coverage.properties.premInvestRates.description",
+          "items": {
+            "$ref": "#/definitions/PremInvestRate"
+          }
+        },
         "productCode": {
           "type": "string",
           "description": "definitions.Coverage.properties.productCode.description"
@@ -4629,6 +5150,14 @@
           "type": "integer",
           "format": "int64",
           "description": "definitions.Coverage.properties.productId.description"
+        },
+        "recurringTopup": {
+          "description": "definitions.Coverage.properties.recurringTopup.description",
+          "$ref": "#/definitions/RecurringTopup"
+        },
+        "singleTopup": {
+          "description": "definitions.Coverage.properties.singleTopup.description",
+          "$ref": "#/definitions/SingleTopup"
         },
         "waiverExt": {
           "description": "definitions.Coverage.properties.waiverExt.description",
@@ -4714,6 +5243,43 @@
           "type": "string",
           "example": "ICBC",
           "description": "definitions.BankAccount.properties.issueBankName.description"
+        }
+      }
+    },
+    "EPolicyResponse": {
+      "type": "object",
+      "properties": {
+        "clientRequestId": {
+          "type": "string",
+          "description": "definitions.EPolicyResponse.properties.clientRequestId.description"
+        },
+        "clientRequestTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "definitions.EPolicyResponse.properties.clientRequestTime.description"
+        },
+        "exceptions": {
+          "type": "array",
+          "description": "definitions.EPolicyResponse.properties.exceptions.description",
+          "items": {
+            "type": "string"
+          }
+        },
+        "messages": {
+          "type": "array",
+          "description": "definitions.EPolicyResponse.properties.messages.description",
+          "items": {
+            "$ref": "#/definitions/GenericValidationResult"
+          }
+        },
+        "policy": {
+          "description": "definitions.EPolicyResponse.properties.policy.description",
+          "$ref": "#/definitions/EPolicyResult"
+        },
+        "result": {
+          "type": "integer",
+          "format": "int32",
+          "description": "definitions.EPolicyResponse.properties.result.description"
         }
       }
     },
@@ -4813,6 +5379,95 @@
             "Y",
             "N"
           ]
+        }
+      }
+    },
+    "EPolicyResult": {
+      "type": "object",
+      "properties": {
+        "ePolicyDownloadUrl": {
+          "type": "string",
+          "description": "definitions.EPolicyResult.properties.ePolicyDownloadUrl.description"
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "definitions.EPolicyResult.properties.extendedProps.description",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "policyNumber": {
+          "type": "string",
+          "description": "definitions.EPolicyResult.properties.policyNumber.description"
+        },
+        "proposalNumber": {
+          "type": "string",
+          "description": "definitions.EPolicyResult.properties.proposalNumber.description"
+        }
+      }
+    },
+    "RecurringTopup": {
+      "type": "object",
+      "properties": {
+        "addPremId": {
+          "type": "string",
+          "description": "definitions.RecurringTopup.properties.addPremId.description",
+          "readOnly": true
+        },
+        "coverageId": {
+          "type": "string",
+          "description": "definitions.RecurringTopup.properties.coverageId.description",
+          "readOnly": true
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "definitions.RecurringTopup.properties.extendedProps.description",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "investRates": {
+          "type": "array",
+          "description": "definitions.RecurringTopup.properties.investRates.description",
+          "items": {
+            "$ref": "#/definitions/RecurringTopupInvestRate"
+          }
+        },
+        "policyId": {
+          "type": "string",
+          "description": "definitions.RecurringTopup.properties.policyId.description",
+          "readOnly": true
+        },
+        "topupAmount": {
+          "type": "number",
+          "format": "double",
+          "example": 10000,
+          "description": "definitions.RecurringTopup.properties.topupAmount.description"
+        }
+      }
+    },
+    "RecurringTopupInput": {
+      "type": "object",
+      "properties": {
+        "extendedProps": {
+          "type": "object",
+          "description": "definitions.RecurringTopupInput.properties.extendedProps.description",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "investRates": {
+          "type": "array",
+          "description": "definitions.RecurringTopupInput.properties.investRates.description",
+          "items": {
+            "$ref": "#/definitions/ContractInvestRateInput"
+          }
+        },
+        "topupAmount": {
+          "type": "number",
+          "format": "double",
+          "example": 10000,
+          "description": "definitions.RecurringTopupInput.properties.topupAmount.description"
         }
       }
     },
@@ -4941,7 +5596,16 @@
         },
         "paymentMethod": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "example": 3,
+          "description": "definitions.CollectionPayerAccountInput.properties.paymentMethod.description",
+          "enum": [
+            1,
+            2,
+            3,
+            30,
+            80
+          ]
         }
       }
     },
@@ -4972,7 +5636,8 @@
             1,
             2,
             3,
-            30
+            30,
+            80
           ]
         },
         "paymentMethodNext": {
@@ -4984,7 +5649,8 @@
             1,
             2,
             3,
-            30
+            30,
+            80
           ]
         }
       }
@@ -5290,124 +5956,6 @@
         }
       }
     },
-    "/products/SALimits": {
-      "post": {
-        "tags": [
-          "Product"
-        ],
-        "summary": "paths['/products/SALimits'].post.summary",
-        "description": "paths['/products/SALimits'].post.description",
-        "operationId": "getSALimitByConUsingPOST",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "*/*"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "saLimitCon",
-            "description": "paths['/products/SALimits'].post.parameters['0'].description",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SaLimitCon"
-            }
-          },
-          {
-            "name": "X-ebao-tenant-id",
-            "in": "header",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "paths['/products/SALimits'].post.responses['200'].description",
-            "schema": {
-              "$ref": "#/definitions/ProductSumAssuredResponse"
-            }
-          },
-          "201": {
-            "description": "paths['/products/SALimits'].post.responses['201'].description"
-          },
-          "400": {
-            "description": "paths['/products/SALimits'].post.responses['400'].description"
-          },
-          "401": {
-            "description": "paths['/products/SALimits'].post.responses['401'].description"
-          },
-          "403": {
-            "description": "paths['/products/SALimits'].post.responses['403'].description"
-          },
-          "404": {
-            "description": "paths['/products/SALimits'].post.responses['404'].description"
-          },
-          "500": {
-            "description": "paths['/products/SALimits'].post.responses['500'].description"
-          }
-        }
-      }
-    },
-    "/products/ageLimits": {
-      "post": {
-        "tags": [
-          "Product"
-        ],
-        "summary": "paths['/products/ageLimits'].post.summary",
-        "description": "paths['/products/ageLimits'].post.description",
-        "operationId": "getAgeLimitByConUsingPOST",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "*/*"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "ageLimitCon",
-            "description": "paths['/products/ageLimits'].post.parameters['0'].description",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AgeLimitCon"
-            }
-          },
-          {
-            "name": "X-ebao-tenant-id",
-            "in": "header",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "paths['/products/ageLimits'].post.responses['200'].description",
-            "schema": {
-              "$ref": "#/definitions/ProductAgeResponse"
-            }
-          },
-          "201": {
-            "description": "paths['/products/ageLimits'].post.responses['201'].description"
-          },
-          "400": {
-            "description": "paths['/products/ageLimits'].post.responses['400'].description"
-          },
-          "401": {
-            "description": "paths['/products/ageLimits'].post.responses['401'].description"
-          },
-          "403": {
-            "description": "paths['/products/ageLimits'].post.responses['403'].description"
-          },
-          "404": {
-            "description": "paths['/products/ageLimits'].post.responses['404'].description"
-          },
-          "500": {
-            "description": "paths['/products/ageLimits'].post.responses['500'].description"
-          }
-        }
-      }
-    },
     "/products/benefitIllustration": {
       "post": {
         "tags": [
@@ -5443,7 +5991,7 @@
           "200": {
             "description": "paths['/products/benefitIllustration'].post.responses['200'].description",
             "schema": {
-              "$ref": "#/definitions/CalculatePremSAResponse"
+              "$ref": "#/definitions/IllustrationResponse"
             }
           },
           "201": {
@@ -5526,13 +6074,131 @@
         }
       }
     },
-    "/products/premiumLimits": {
+    "/products/limits/SA": {
       "post": {
         "tags": [
           "Product"
         ],
-        "summary": "paths['/products/premiumLimits'].post.summary",
-        "description": "paths['/products/premiumLimits'].post.description",
+        "summary": "paths['/products/limits/SA'].post.summary",
+        "description": "paths['/products/limits/SA'].post.description",
+        "operationId": "getSALimitByConUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "saLimitCon",
+            "description": "paths['/products/limits/SA'].post.parameters['0'].description",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SaLimitCon"
+            }
+          },
+          {
+            "name": "X-ebao-tenant-id",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "paths['/products/limits/SA'].post.responses['200'].description",
+            "schema": {
+              "$ref": "#/definitions/ProductSumAssuredResponse"
+            }
+          },
+          "201": {
+            "description": "paths['/products/limits/SA'].post.responses['201'].description"
+          },
+          "400": {
+            "description": "paths['/products/limits/SA'].post.responses['400'].description"
+          },
+          "401": {
+            "description": "paths['/products/limits/SA'].post.responses['401'].description"
+          },
+          "403": {
+            "description": "paths['/products/limits/SA'].post.responses['403'].description"
+          },
+          "404": {
+            "description": "paths['/products/limits/SA'].post.responses['404'].description"
+          },
+          "500": {
+            "description": "paths['/products/limits/SA'].post.responses['500'].description"
+          }
+        }
+      }
+    },
+    "/products/limits/age": {
+      "post": {
+        "tags": [
+          "Product"
+        ],
+        "summary": "paths['/products/limits/age'].post.summary",
+        "description": "paths['/products/limits/age'].post.description",
+        "operationId": "getAgeLimitByConUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "ageLimitCon",
+            "description": "paths['/products/limits/age'].post.parameters['0'].description",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AgeLimitCon"
+            }
+          },
+          {
+            "name": "X-ebao-tenant-id",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "paths['/products/limits/age'].post.responses['200'].description",
+            "schema": {
+              "$ref": "#/definitions/ProductAgeResponse"
+            }
+          },
+          "201": {
+            "description": "paths['/products/limits/age'].post.responses['201'].description"
+          },
+          "400": {
+            "description": "paths['/products/limits/age'].post.responses['400'].description"
+          },
+          "401": {
+            "description": "paths['/products/limits/age'].post.responses['401'].description"
+          },
+          "403": {
+            "description": "paths['/products/limits/age'].post.responses['403'].description"
+          },
+          "404": {
+            "description": "paths['/products/limits/age'].post.responses['404'].description"
+          },
+          "500": {
+            "description": "paths['/products/limits/age'].post.responses['500'].description"
+          }
+        }
+      }
+    },
+    "/products/limits/premium": {
+      "post": {
+        "tags": [
+          "Product"
+        ],
+        "summary": "paths['/products/limits/premium'].post.summary",
+        "description": "paths['/products/limits/premium'].post.description",
         "operationId": "getPremiumLimitByConUsingPOST",
         "consumes": [
           "application/json"
@@ -5544,7 +6210,7 @@
           {
             "in": "body",
             "name": "premiumLimitCon",
-            "description": "paths['/products/premiumLimits'].post.parameters['0'].description",
+            "description": "paths['/products/limits/premium'].post.parameters['0'].description",
             "required": true,
             "schema": {
               "$ref": "#/definitions/PremiumLimitCon"
@@ -5559,28 +6225,87 @@
         ],
         "responses": {
           "200": {
-            "description": "paths['/products/premiumLimits'].post.responses['200'].description",
+            "description": "paths['/products/limits/premium'].post.responses['200'].description",
             "schema": {
               "$ref": "#/definitions/ProductPremiumResponse"
             }
           },
           "201": {
-            "description": "paths['/products/premiumLimits'].post.responses['201'].description"
+            "description": "paths['/products/limits/premium'].post.responses['201'].description"
           },
           "400": {
-            "description": "paths['/products/premiumLimits'].post.responses['400'].description"
+            "description": "paths['/products/limits/premium'].post.responses['400'].description"
           },
           "401": {
-            "description": "paths['/products/premiumLimits'].post.responses['401'].description"
+            "description": "paths['/products/limits/premium'].post.responses['401'].description"
           },
           "403": {
-            "description": "paths['/products/premiumLimits'].post.responses['403'].description"
+            "description": "paths['/products/limits/premium'].post.responses['403'].description"
           },
           "404": {
-            "description": "paths['/products/premiumLimits'].post.responses['404'].description"
+            "description": "paths['/products/limits/premium'].post.responses['404'].description"
           },
           "500": {
-            "description": "paths['/products/premiumLimits'].post.responses['500'].description"
+            "description": "paths['/products/limits/premium'].post.responses['500'].description"
+          }
+        }
+      }
+    },
+    "/products/limits/term": {
+      "post": {
+        "tags": [
+          "Product"
+        ],
+        "summary": "paths['/products/limits/term'].post.summary",
+        "description": "paths['/products/limits/term'].post.description",
+        "operationId": "getTermLimitByConUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "termLimitCon",
+            "description": "paths['/products/limits/term'].post.parameters['0'].description",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TermLimitCon"
+            }
+          },
+          {
+            "name": "X-ebao-tenant-id",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "paths['/products/limits/term'].post.responses['200'].description",
+            "schema": {
+              "$ref": "#/definitions/ProductTermResponse"
+            }
+          },
+          "201": {
+            "description": "paths['/products/limits/term'].post.responses['201'].description"
+          },
+          "400": {
+            "description": "paths['/products/limits/term'].post.responses['400'].description"
+          },
+          "401": {
+            "description": "paths['/products/limits/term'].post.responses['401'].description"
+          },
+          "403": {
+            "description": "paths['/products/limits/term'].post.responses['403'].description"
+          },
+          "404": {
+            "description": "paths['/products/limits/term'].post.responses['404'].description"
+          },
+          "500": {
+            "description": "paths['/products/limits/term'].post.responses['500'].description"
           }
         }
       }
@@ -5694,65 +6419,6 @@
         }
       }
     },
-    "/products/termLimits": {
-      "post": {
-        "tags": [
-          "Product"
-        ],
-        "summary": "paths['/products/termLimits'].post.summary",
-        "description": "paths['/products/termLimits'].post.description",
-        "operationId": "getTermLimitByConUsingPOST",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "*/*"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "termLimitCon",
-            "description": "paths['/products/termLimits'].post.parameters['0'].description",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/TermLimitCon"
-            }
-          },
-          {
-            "name": "X-ebao-tenant-id",
-            "in": "header",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "paths['/products/termLimits'].post.responses['200'].description",
-            "schema": {
-              "$ref": "#/definitions/ProductTermResponse"
-            }
-          },
-          "201": {
-            "description": "paths['/products/termLimits'].post.responses['201'].description"
-          },
-          "400": {
-            "description": "paths['/products/termLimits'].post.responses['400'].description"
-          },
-          "401": {
-            "description": "paths['/products/termLimits'].post.responses['401'].description"
-          },
-          "403": {
-            "description": "paths['/products/termLimits'].post.responses['403'].description"
-          },
-          "404": {
-            "description": "paths['/products/termLimits'].post.responses['404'].description"
-          },
-          "500": {
-            "description": "paths['/products/termLimits'].post.responses['500'].description"
-          }
-        }
-      }
-    },
     "/products/{productCode}": {
       "get": {
         "tags": [
@@ -5859,6 +6525,57 @@
           },
           "404": {
             "description": "paths['/proposals/application'].post.responses['404'].description"
+          },
+          "500": {
+            "description": "paths['/proposals/application'].post.responses['500'].description"
+          }
+        }
+      }
+    },
+    "/proposals/epolicy/{proposalNumber}": {
+      "get": {
+        "tags": [
+          "Proposal"
+        ],
+        "summary": "paths['/proposals/epolicy/{proposalNumber}'].get.summary",
+        "description": "paths['/proposals/epolicy/{proposalNumber}'].get.description",
+        "operationId": "getEPolicyDownloadUrlUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "proposalNumber",
+            "in": "path",
+            "description": "paths['/proposals/epolicy/{proposalNumber}'].get.parameters['0'].description",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "X-ebao-tenant-id",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "paths['/proposals/epolicy/{proposalNumber}'].get.responses['200'].description",
+            "schema": {
+              "$ref": "#/definitions/EPolicyResponse"
+            }
+          },
+          "401": {
+            "description": "paths['/proposals/epolicy/{proposalNumber}'].get.responses['401'].description"
+          },
+          "403": {
+            "description": "paths['/proposals/epolicy/{proposalNumber}'].get.responses['403'].description"
+          },
+          "404": {
+            "description": "paths['/proposals/epolicy/{proposalNumber}'].get.responses['404'].description"
           }
         }
       }
@@ -5915,6 +6632,9 @@
           },
           "404": {
             "description": "paths['/proposals/issurance'].post.responses['404'].description"
+          },
+          "500": {
+            "description": "paths['/proposals/issurance'].post.responses['500'].description"
           }
         }
       }
@@ -5971,6 +6691,9 @@
           },
           "404": {
             "description": "paths['/proposals/pre-verification'].post.responses['404'].description"
+          },
+          "500": {
+            "description": "paths['/proposals/pre-verification'].post.responses['500'].description"
           }
         }
       }

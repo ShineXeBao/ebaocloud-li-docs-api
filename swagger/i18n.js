@@ -41,7 +41,7 @@ var getEnum = function (swaggerObj) {
 
 var transEnum = getEnum(swagger);
 
-//fs.writeFileSync("./swagger-cn.json", JSON.stringify(swagger, null, 2));
+fs.writeFileSync("./swagger-cn.json", JSON.stringify(swagger, null, 2));
 //本地保存
 var properties = "";
 for (var i in transEnum) {
@@ -49,7 +49,7 @@ for (var i in transEnum) {
    //console.log(trans[i]);
    eval(trans[i]);
 }
-//fs.writeFileSync("./locales/swagger-cn.properties", properties);
+fs.writeFileSync("./locales/swagger-cn.properties", properties);
 
 fs.writeFileSync("./swagger-template-en.json", JSON.stringify(swagger, null, 2));
 
@@ -57,7 +57,7 @@ fs.writeFileSync("./swagger-template-en.json", JSON.stringify(swagger, null, 2))
 //读readme 文件，加入description
 var readme = fs.readFileSync('./locales/README-cn.md', 'utf-8');
 var info = {
-    version: "0.9",
+    version: "0.9.5",
     title: "eBaoCould 寿险API参考文档",
     //add description from readme (in markdown)
     description: `${readme.toString()}`

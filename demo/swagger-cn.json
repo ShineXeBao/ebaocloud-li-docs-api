@@ -4859,67 +4859,67 @@
           "type": "string",
           "format": "date-time",
           "example": "2017-07-01",
-          "description": "Search criteria: application date from"
+          "description": "搜索条件：投保日期，开始日期"
         },
         "applyDateTo": {
           "type": "string",
           "format": "date-time",
           "example": "2017-08-01",
-          "description": "Search criteria: application date to"
+          "description": "搜索条件：投保日期，结束日期"
         },
         "brokerCode": {
           "type": "string",
           "example": "XM",
-          "description": "Search criteria: broker code"
+          "description": "搜索条件：经代公司代码"
         },
         "certiCode": {
           "type": "string",
           "example": "1234567890",
-          "description": "Search criteria: id no. of policy customer (policy holder or insured)"
+          "description": "搜索条件：保单客户（投保人或者被保人）ID号码"
         },
         "contractorCode": {
           "type": "string",
           "example": "XM",
-          "description": "Search criteria: contractor code"
+          "description": "搜索条件：合同号"
         },
         "insurerCode": {
           "type": "string",
           "example": "AX_HEALTH",
-          "description": "Search criteria: insurer code"
+          "description": "搜索条件：被保人code"
         },
         "masterProductCode": {
           "type": "string",
           "example": "07H004",
-          "description": "Search criteria: code of master product"
+          "description": "搜索条件：主险产品code"
         },
         "name": {
           "type": "string",
           "example": "name",
-          "description": "Search criteria: name of policy customer (policy holder or insured)"
+          "description": "搜索条件：保单客户（投保人或者被保人）名字"
         },
         "page": {
           "type": "integer",
           "format": "int32",
-          "description": "Page criteria: target page number, start from 0"
+          "description": "分页条件：到第几页，缺省从0开始"
         },
         "proposalNumber": {
           "type": "string",
-          "description": "Search criteria: application code"
+          "description": "搜索条件：投保单号"
         },
         "quotationCode": {
           "type": "string",
-          "description": "Search criteria: order no."
+          "description": "搜索条件：订单号码"
         },
         "salesChannelCode": {
           "type": "string",
           "example": "XINHUA",
-          "description": "Search criteria: sales channel code"
+          "description": "搜索条件：渠道号码"
         },
         "size": {
           "type": "integer",
           "format": "int32",
           "example": 10,
-          "description": "Page criteria: how many records per page, default as 10"
+          "description": "分页条件：每页多少条记录，缺省是10"
         }
       }
     },
@@ -6550,7 +6550,7 @@
           {
             "name": "proposalNumber",
             "in": "path",
-            "description": "proposalNumber",
+            "description": "建议书号",
             "required": true,
             "type": "string"
           },
