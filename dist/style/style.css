@@ -472,6 +472,26 @@ body {
   -webkit-overflow-scrolling: touch;
 }
 
+a,
+.link {
+  transition: all 250ms ease-out;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+}
+a:visited,
+.link:visited {
+  color: #333;
+}
+.link:hover {
+  text-decoration: underline;
+}
+.link:focus {
+  outline: none;
+}
+.link:visited {
+  color: inherit;
+}
 .nav {
   padding-left: 1.25rem;
   padding-right: 1.25rem;
@@ -572,12 +592,6 @@ body {
     margin-left: 0;
   }
 }
-.nav .nav-item .link {
-  font-size: 14px;
-  line-height: 20px;
-  line-height: 1;
-  font-weight: 600;
-}
 .nav .nav-item .btn {
   vertical-align: middle;
 }
@@ -593,6 +607,7 @@ body {
   background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.96) 0%, rgba(255, 255, 255, 0.99) 100%);
 }
 .nav .nav-item .link {
+  font-size: 14px;
   display: inline-block;
   line-height: 4rem;
   margin-top: -0.5rem;
