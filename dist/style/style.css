@@ -428,29 +428,6 @@ template {
 
 
 
-
-@media screen and (min-width: 800px) {
-  .show-mobile {
-    display: none !important;
-  }
-}
-@media screen and (max-width: 799px) {
-  .show-desktop {
-    display: none !important;
-  }
-}
-@media screen and (min-width: 800px) {
-  .nav {
-    padding-left: 1.875rem;
-    padding-right: 1.875rem;
-  }
-}
-@media screen and (min-width: 800px) {
-  .nav .nav-group {
-    padding-left: 1.875rem;
-    padding-right: 1.875rem;
-  }
-}
 html,
 button,
 input,
@@ -644,6 +621,29 @@ a:visited,
   pointer-events: none;
 }
 
+
+@media screen and (min-width: 800px) {
+  .show-mobile {
+    display: none !important;
+  }
+}
+@media screen and (max-width: 799px) {
+  .show-desktop {
+    display: none !important;
+  }
+}
+@media screen and (min-width: 800px) {
+  .nav {
+    padding-left: 1.875rem;
+    padding-right: 1.875rem;
+  }
+}
+@media screen and (min-width: 800px) {
+  .nav .nav-group {
+    padding-left: 1.875rem;
+    padding-right: 1.875rem;
+  }
+}
 
 code,
 pre {
