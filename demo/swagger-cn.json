@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "0.9.5",
+    "version": "0.9.6",
     "title": "eBaoCould 寿险API参考文档",
-    "description": "本篇文档描述了eBaoCloud（易保云）寿险所提供的API（API specification）。如果您想运行和使用这些API，你需要首先获取一个eBaoCloud的租户账号，请联系Antang.Du@ebaotech.com获取账号。我们会提供沙箱环境给您。\n\n# 搭建时间\n2017年9月11日 周一, 15:16:53 +08:00\n\n# 版本\nAPI 版本| 时间  |说明\n--|---|--\n0.5  | 2017-06-13  | 初始公开版本\n0.6  | 2017-06-19  | 添加文档分类和Readme\n0.6.5 | 2017-06-29  | 身份验证，oauth2 使用，以及中文版本文档\n0.8  | 2017-07-07  | oauth2上线，生产和沙箱\n0.8.5 | 2017-07-31 | 产品API增强\n0.9 | 2017-08-25 | 产品API增强：limits相关APIs (年龄，保费、保额，期限)\n0.9.5 | 2017-09-05 | 投保单API增强：电子保单下载\n\n\n# API使用的身份验证\n\n## 总体介绍\n\neBaoCloud 给第三方应用提供了身份验证的功能，身份验证后，第三方应用就可以向eBaoCloud发起请求，并获得正确的响应。我们的实现基于[Client Credentials Grant](http://tools.ietf.org/html/rfc6749#section-4.4) 和[oauth 2 specification](http://tools.ietf.org/html/rfc6749)的标准\n\n## 验证流程\n\n我们的验证（token）获取流程分为三个步骤：\n\n1. 应用的后台系统（已经作为一个正式租户）组装认证请求，同时将用户名和验证码放在请求中。\n2. 后台应用发起认证请求，成功的话拿到一个token （bearer token）。\n3. 在后续要访问的API里面，在request header里面带上这个token即可。\n\n![Auth Flow](/assets/oauth.png)\n\n## 跟我做一遍\n\n* 发送验证请求\n\n```js\nPOST: /cas/ebao/v1/json/tickets\nBody: {\"username\":\"name\", \"password\":\"pwd\"}\nResponse: {\"access_token\": \"xxxx\"}\n```\n\n* 发送API请求，同时在请求header里面带上token\n\n```js\nPOST: /rest/products\nHeader: {\n  \"authorization\":\"Bearer \"+access_token,\n  \"X-ebao-tenant-id\": \"tenant-id\"\n}\n```\n\n## End Points\n\n| | 沙箱 | 生产 |\n| :--- | :--- | :--- |\n| auth / take token | [https://sandbox.ebaocloud.com.cn/cas/ebao/v1/json/tickets](https://sandbox.ebaocloud.com.cn/cas/ebao/v1/json/tickets) | [https://ebaocloud.com.cn/cas/ebao/v1/json/tickets](https://ebaocloud.com.cn/cas/ebao/v1/json/tickets) |\n| APIs | [https://sandbox.gw.ebaocloud.com.cn/li/eBao/1/](https://sandbox.gw.ebaocloud.com.cn/li/eBao/1/) | [https://gw.ebaocloud.com.cn/li/eBao/1/](https://gw.ebaocloud.com.cn/li/eBao/1/)|\n\n\n## 实例\n\n#### 应用的验证请求\n\n```bash\ncurl --request POST \\\n  --url https://url/cas/ebao/v1/json/tickets \\\n  --header 'content-type: application/json' \\\n  --header 'X-ebao-tenant-id: tenant-id' \\\n  --data '{\\n \\n \"username\":\"site.admin\",\\n \"password\":\"adminPWD!\"\\n}'\n```\n\n注意：\n.  **X-ebao-tenant-id** 是一个唯一的租户ID，所有租户都可以拿到一个唯一ID。\n.  **username** 和 **password** 由eBaoCloud提供给每个租户\n\n\n#### API Gateway的响应\n\n* 成功\n\n```js\n{\n\"access_token\" : \"TGT-233-e7Zuc5FlSAa0SShO3B1f2iugYzRQGQrSSoGwAi0VnWbnBNDwHg\"\n}\n```\n\n* 失败\n\n```js\n{\n\"access_token\" : null\n}\n```\n\n#### 调用App（Java代码样例）\n\n```java\nHttpResponse<String> response = Unirest.post(url) // url：the UAT/product URL\n  .header(\"content-type\", \"application/json\") // application/json\n  .header(\"authorization\", \"Bearer \" + accessToken) // oauth2 access token：the accessToken\n  .header(\"X-ebao-tenant-id\", \"tenant-id\")\n  .body(body) // body: http body\n  .asString();\n```\n\n## 其他\n\n### Token和password一样重要\n\n必须牢记，token和password一样重要，虽然每个token只有有限的使用期间，但拿到token就意味着获取访问eBaoCloud\n的权限。绝对不可以泄露或者分享token给其他人和应用。\n\n### SSL\n\n所有请求都**必须**使用HTTPS。\n"
+    "description": "本篇文档描述了eBaoCloud（易保云）寿险所提供的API（API specification）。如果您想运行和使用这些API，你需要首先获取一个eBaoCloud的租户账号，请联系Antang.Du@ebaotech.com获取账号。我们会提供沙箱环境给您。\n\n# 搭建时间\n2017年9月14日 周四, 11:29:24 +07:00\n\n# 版本\nAPI 版本| 时间  |说明\n--|---|--\n0.5  | 2017-06-13  | 初始公开版本\n0.6  | 2017-06-19  | 添加文档分类和Readme\n0.6.5 | 2017-06-29  | 身份验证，oauth2 使用，以及中文版本文档\n0.8  | 2017-07-07  | oauth2上线，生产和沙箱\n0.8.5 | 2017-07-31 | 产品API增强\n0.9 | 2017-08-25 | 产品API增强：limits相关APIs (年龄，保费、保额，期限)\n0.9.5 | 2017-09-05 | 投保单API增强：电子保单下载\n0.9.6 | 2017-09-13 | 增加几个字段，附加保费\n\n\n# API使用的身份验证\n\n## 总体介绍\n\neBaoCloud 给第三方应用提供了身份验证的功能，身份验证后，第三方应用就可以向eBaoCloud发起请求，并获得正确的响应。我们的实现基于[Client Credentials Grant](http://tools.ietf.org/html/rfc6749#section-4.4) 和[oauth 2 specification](http://tools.ietf.org/html/rfc6749)的标准\n\n## 验证流程\n\n我们的验证（token）获取流程分为三个步骤：\n\n1. 应用的后台系统（已经作为一个正式租户）组装认证请求，同时将用户名和验证码放在请求中。\n2. 后台应用发起认证请求，成功的话拿到一个token （bearer token）。\n3. 在后续要访问的API里面，在request header里面带上这个token即可。\n\n![Auth Flow](/assets/oauth.png)\n\n## 跟我做一遍\n\n* 发送验证请求\n\n```js\nPOST: /cas/ebao/v1/json/tickets\nBody: {\"username\":\"name\", \"password\":\"pwd\"}\nResponse: {\"access_token\": \"xxxx\"}\n```\n\n* 发送API请求，同时在请求header里面带上token\n\n```js\nPOST: /rest/products\nHeader: {\n  \"authorization\":\"Bearer \"+access_token,\n  \"X-ebao-tenant-id\": \"tenant-id\"\n}\n```\n\n## End Points\n\n| | 沙箱 | 生产 |\n| :--- | :--- | :--- |\n| auth / take token | [https://sandbox.ebaocloud.com.cn/cas/ebao/v1/json/tickets](https://sandbox.ebaocloud.com.cn/cas/ebao/v1/json/tickets) | [https://ebaocloud.com.cn/cas/ebao/v1/json/tickets](https://ebaocloud.com.cn/cas/ebao/v1/json/tickets) |\n| APIs | [https://sandbox.gw.ebaocloud.com.cn/li/eBao/1/](https://sandbox.gw.ebaocloud.com.cn/li/eBao/1/) | [https://gw.ebaocloud.com.cn/li/eBao/1/](https://gw.ebaocloud.com.cn/li/eBao/1/)|\n\n\n## 实例\n\n#### 应用的验证请求\n\n```bash\ncurl --request POST \\\n  --url https://url/cas/ebao/v1/json/tickets \\\n  --header 'content-type: application/json' \\\n  --header 'X-ebao-tenant-id: tenant-id' \\\n  --data '{\\n \\n \"username\":\"site.admin\",\\n \"password\":\"adminPWD!\"\\n}'\n```\n\n注意：\n.  **X-ebao-tenant-id** 是一个唯一的租户ID，所有租户都可以拿到一个唯一ID。\n.  **username** 和 **password** 由eBaoCloud提供给每个租户\n\n\n#### API Gateway的响应\n\n* 成功\n\n```js\n{\n\"access_token\" : \"TGT-233-e7Zuc5FlSAa0SShO3B1f2iugYzRQGQrSSoGwAi0VnWbnBNDwHg\"\n}\n```\n\n* 失败\n\n```js\n{\n\"access_token\" : null\n}\n```\n\n#### 调用App（Java代码样例）\n\n```java\nHttpResponse<String> response = Unirest.post(url) // url：the UAT/product URL\n  .header(\"content-type\", \"application/json\") // application/json\n  .header(\"authorization\", \"Bearer \" + accessToken) // oauth2 access token：the accessToken\n  .header(\"X-ebao-tenant-id\", \"tenant-id\")\n  .body(body) // body: http body\n  .asString();\n```\n\n## 其他\n\n### Token和password一样重要\n\n必须牢记，token和password一样重要，虽然每个token只有有限的使用期间，但拿到token就意味着获取访问eBaoCloud\n的权限。绝对不可以泄露或者分享token给其他人和应用。\n\n### SSL\n\n所有请求都**必须**使用HTTPS。\n"
   },
   "host": "sandbox.api.li.ebaocloud.com.cn",
   "basePath": "/rest",
@@ -509,7 +509,7 @@
         "annuityEndYear": {
           "type": "integer",
           "format": "int32",
-          "description": "年龄限额相关性，年金给付  结束期限年度"
+          "description": "年龄限额相关性，年金给付结束期限年度"
         },
         "annuityEndYearMax": {
           "type": "integer",
@@ -1325,6 +1325,10 @@
           "type": "string",
           "description": "家庭产品类型"
         },
+        "indexIndi": {
+          "type": "string",
+          "description": "是否保额递增"
+        },
         "mainPlan": {
           "type": "string",
           "description": "是否是主险"
@@ -1811,11 +1815,11 @@
         "extObject": {
           "$ref": "#/definitions/GenericVO"
         },
-        "insuredAge": {
+        "insuredAgeMonth": {
           "type": "integer",
           "format": "int32",
-          "example": 50,
-          "description": "保额限额相关性，被保人年龄"
+          "example": 60,
+          "description": "保额限额相关性，被保人年龄（单位月）"
         },
         "occupationCode": {
           "type": "integer",
@@ -2099,19 +2103,19 @@
           "format": "int32",
           "description": "币种"
         },
-        "highAge": {
+        "highAgeMonth": {
           "type": "integer",
           "format": "int32",
-          "description": "被保人最大年龄"
+          "description": "被保人最大年龄（单位月）"
         },
         "limitUnit": {
           "type": "string",
           "description": "保额或单位限制<br>1 - 保额<br>2 - 单位"
         },
-        "lowAge": {
+        "lowAgeMonth": {
           "type": "integer",
           "format": "int32",
-          "description": "被保人最小年龄"
+          "description": "被保人最小年龄（单位月）"
         },
         "maxAmount": {
           "type": "integer",
@@ -2461,6 +2465,11 @@
           "type": "integer",
           "format": "int64",
           "description": "传入的保障代码"
+        },
+        "extraPrem": {
+          "type": "number",
+          "format": "double",
+          "description": "附加保费"
         },
         "productCode": {
           "type": "string",
@@ -2835,7 +2844,7 @@
         "result": {
           "type": "integer",
           "format": "int32",
-          "description": "请求结果，1 - 业务成功<br>0 - 业务失败<br>-1 - 程序异常"
+          "description": "请求结果，<br>1 - 业务成功<br>0 - 业务失败<br>-1 - 程序异常"
         }
       }
     },
@@ -2969,12 +2978,13 @@
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "被保人与投保人关系，数字类型<br>1 - 自己<br>2 - 子女<br>3 - 配偶<br>10 - 父母<br>7 - 其他",
+          "description": "被保人与投保人关系，数字类型<br>1 - 自己<br>2 - 子女<br>3 - 配偶<br>10 - 父母<br>4 - 雇员<br>7 - 其他",
           "enum": [
             1,
             2,
             3,
             10,
+            4,
             7
           ]
         },
@@ -3731,12 +3741,13 @@
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "被保人与投保人关系，数字类型<br>1 - 自己<br>2 - 子女<br>3 - 配偶<br>10 - 父母<br>7 - 其他",
+          "description": "被保人与投保人关系，数字类型<br>1 - 自己<br>2 - 子女<br>3 - 配偶<br>10 - 父母<br>4 - 雇员<br>7 - 其他",
           "enum": [
             1,
             2,
             3,
             10,
+            4,
             7
           ]
         },
@@ -3965,7 +3976,7 @@
         "result": {
           "type": "integer",
           "format": "int32",
-          "description": "请求结果，1 - 业务成功<br>0 - 业务失败<br>-1 - 程序异常"
+          "description": "请求结果，<br>1 - 业务成功<br>0 - 业务失败<br>-1 - 程序异常"
         }
       }
     },
@@ -4853,67 +4864,67 @@
           "type": "string",
           "format": "date-time",
           "example": "2017-07-01",
-          "description": "Search criteria: application date from"
+          "description": "搜索条件：投保日期，开始日期"
         },
         "applyDateTo": {
           "type": "string",
           "format": "date-time",
           "example": "2017-08-01",
-          "description": "Search criteria: application date to"
+          "description": "搜索条件：投保日期，结束日期"
         },
         "brokerCode": {
           "type": "string",
           "example": "XM",
-          "description": "Search criteria: broker code"
+          "description": "搜索条件：经代公司代码"
         },
         "certiCode": {
           "type": "string",
           "example": "1234567890",
-          "description": "Search criteria: id no. of policy customer (policy holder or insured)"
+          "description": "搜索条件：保单客户（投保人或者被保人）ID号码"
         },
         "contractorCode": {
           "type": "string",
           "example": "XM",
-          "description": "Search criteria: contractor code"
+          "description": "搜索条件：合同号"
         },
         "insurerCode": {
           "type": "string",
           "example": "AX_HEALTH",
-          "description": "Search criteria: insurer code"
+          "description": "搜索条件：被保人code"
         },
         "masterProductCode": {
           "type": "string",
           "example": "07H004",
-          "description": "Search criteria: code of master product"
+          "description": "搜索条件：主险产品code"
         },
         "name": {
           "type": "string",
           "example": "name",
-          "description": "Search criteria: name of policy customer (policy holder or insured)"
+          "description": "搜索条件：保单客户（投保人或者被保人）名字"
         },
         "page": {
           "type": "integer",
           "format": "int32",
-          "description": "Page criteria: target page number, start from 0"
+          "description": "分页条件：到第几页，缺省从0开始"
         },
         "proposalNumber": {
           "type": "string",
-          "description": "Search criteria: application code"
+          "description": "搜索条件：投保单号"
         },
         "quotationCode": {
           "type": "string",
-          "description": "Search criteria: order no."
+          "description": "搜索条件：订单号码"
         },
         "salesChannelCode": {
           "type": "string",
           "example": "XINHUA",
-          "description": "Search criteria: sales channel code"
+          "description": "搜索条件：渠道号码"
         },
         "size": {
           "type": "integer",
           "format": "int32",
           "example": 10,
-          "description": "Page criteria: how many records per page, default as 10"
+          "description": "分页条件：每页多少条记录，缺省是10"
         }
       }
     },
@@ -4950,7 +4961,7 @@
         "result": {
           "type": "integer",
           "format": "int32",
-          "description": "请求结果，1 - 业务成功<br>0 - 业务失败<br>-1 - 程序异常"
+          "description": "请求结果，<br>1 - 业务成功<br>0 - 业务失败<br>-1 - 程序异常"
         }
       }
     },
@@ -5273,7 +5284,7 @@
         "result": {
           "type": "integer",
           "format": "int32",
-          "description": "请求结果，1 - 业务成功<br>0 - 业务失败<br>-1 - 程序异常"
+          "description": "请求结果，<br>1 - 业务成功<br>0 - 业务失败<br>-1 - 程序异常"
         }
       }
     },
@@ -6544,7 +6555,7 @@
           {
             "name": "proposalNumber",
             "in": "path",
-            "description": "proposalNumber",
+            "description": "建议书号",
             "required": true,
             "type": "string"
           },
