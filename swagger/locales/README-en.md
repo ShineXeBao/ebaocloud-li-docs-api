@@ -1,4 +1,4 @@
-This document is the API specification for the eBaoCloud Life part. To practice and run the APIs in this document, you need to apply an ebaocloud tenant accout(start from a sandbox account instead of production) first.<br>
+This document is the API specification for the eBaoCloud Life part. To practice and run the APIs in this document, you need to apply an eBaoCloud tenant accout(start from a sandbox account instead of production) first.<br>
 Contact liliang.zhu@ebaotech.com for more information and trial using.
 
 # Built on
