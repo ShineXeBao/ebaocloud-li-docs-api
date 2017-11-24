@@ -1,7 +1,7 @@
 swagger: '2.0'
 info:
   version: '0.5'
-  title: eBaoCould Open API
+  title: eBaoCloud Open API
   description: |
     eBaoCloud API 文档 (To be update)
 host: api.ebaocloud.life

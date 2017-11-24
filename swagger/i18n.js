@@ -58,7 +58,7 @@ fs.writeFileSync("./swagger-template-en.json", JSON.stringify(swagger, null, 2))
 var readme = fs.readFileSync('./locales/README-cn.md', 'utf-8');
 var info = {
     version: "0.9.6",
-    title: "eBaoCould 寿险API参考文档",
+    title: "eBaoCloud 寿险API参考文档",
     //add description from readme (in markdown)
     description: `${readme.toString()}`
 }

@@ -16,7 +16,7 @@ var swaggerSalesPackages = require('./source/salesPackages.json')
 var readme = fs.readFileSync('./locales/README-en.md', 'utf-8');
 var info = {
     version: "0.9.6",
-    title: "eBaoCould LI OpenAPI",
+    title: "eBaoCloud LI OpenAPI",
     //add description from readme (in markdown)
     description: `${readme.toString()}`
 }
