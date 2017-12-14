@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <title>eBaoCloud API Document</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
+    <link rel="shortcut icon" type="image/png" href="../images/favicon.ico" sizes="16x16 32x32 64x64">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="eBaoCloud API document restful insurance life">
+    <meta name="description" content="eBaoCloud API document">
+    <!-- Misc -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.7.2/less.min.js"></script>
+    <meta name="google-site-verification" content="" />
+    <link rel="stylesheet" href="./style/main.css">
+    <link rel="stylesheet" href="./style/style.css">
+    <link rel="stylesheet" href="./style/Source Sans Pro.css">
+    <style>
+    .logo-img {
+      margin-top: 10px;
+      height: 35px;
+    }
+    </style>
+  </head>
+  <body>
+
+    <div class="nav dark">
+      <div class="nav-group">
+        <div class="nav-item show-mobile">
+          <span class="js-sidebar-toggle ">
+            <span class="icon-menu"></span>
+          </span>
+        </div>
+        <div class="nav-item">
+          <a class="logo-wrapper" href="http://docs.ebaocloud.life" title="eBaoCloud Docs eBaoCloud LI Docs"  >
+            <img src="./images/ebaocloud-logo-alpha.png" alt="eBaoCloud Docs" class="logo"/>
+          </a>
+        </div>
+      </div>
+
+      <div class="nav-group right">
+        <div class="nav-item show-desktop  ">
+          <a class="link" href="http://www.ebaotech.com/ebao-cloud-en/overview"  >
+            <span>About eBaoCloud</span>
+          </a>
+        </div>
+        <div class="nav-item show-desktop  ">
+          <a class="link" href="http://docs.ebaocloud.life/guide"  >
+            <span>Developers Guide</span>
+          </a>
+        </div>
+        <div class="nav-item show-desktop  ">
+          <a class="link" href="http://docs.ebaocloud.life/tc" target="_blank" >
+            <span>Test Cases</span>
+          </a>
+        </div>
+        <div class="nav-item active show-desktop  ">
+          <a class="link" href="http://docs.ebaocloud.life/api" >
+            <span>APIs Reference</span>
+          </a>
+        </div>
+        <div class="nav-item show-desktop  ">
+          <a class="link" href="#"  >
+            <span>Forums</span>
+          </a>
+        </div>
+        <div class="links">
+          <ul id="links_container">
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <redoc scroll-y-offset="60" lazy-rendering untrusted-spec></redoc>
+
+    <script src="redoc.min.js"> </script>
+    <script>
+      // list of APIS
+      var apis = [
+        {
+          name: 'en',
+          url: './swagger/swagger-en.json'
+        },
+        {
+          name: 'cn',
+          url: './swagger/swagger-cn.json'
+        }
+      ];
+
+      // initially render first API
+      Redoc.init(apis[0].url);
+
+      function onClick() {
+        var url = this.getAttribute('data-link');
+        Redoc.init(url);
+      }
+
+      // dynamically building navigation items
+      var $list = document.getElementById('links_container');
+      apis.forEach(function(api) {
+        var $listitem = document.createElement('li');
+        $listitem.className = 'lang-bar lang-'+api.name;
+        $listitem.setAttribute('data-link', api.url);
+        $listitem.addEventListener('click', onClick);
+        $list.appendChild($listitem);
+      });
+    </script>
+  </body>
+</html>
