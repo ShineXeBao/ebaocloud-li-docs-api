@@ -1,0 +1,443 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "APIs of Policy",
+    "termsOfService": "http://docs.ebaocloud.life/",
+    "contact": {
+      "name": "eBaoTech"
+    }
+  },
+  "host": "localhost:8080",
+  "basePath": "/policies/alterations",
+  "tags": [
+    {
+      "name": "policy alteration",
+      "description": "Policy Alteration Controller"
+    }
+  ],
+  "paths": {
+    "/inforce": {
+      "post": {
+        "tags": [
+          "policy alteration"
+        ],
+        "summary": "policyAlterations",
+        "description": "Policy Alterations",
+        "operationId": "inforceUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "input",
+            "description": "input",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PolicyAlterationInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PolicyAlterationResultInfo"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/quotations": {
+      "post": {
+        "tags": [
+          "policy alteration",
+          "quotation"
+        ],
+        "summary": "quotationsForPolicyAlterations",
+        "description": "Quotations For Alterations",
+        "operationId": "quote2UsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "input",
+            "description": "input",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AlterationQuotationInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AlterationQuotationResultInfo"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AlterationItemResultInfo": {
+      "type": "object",
+      "properties": {
+        "effectiveDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "effective date, format: yyyy-MM-dd'T'HH:mm:ss"
+        },
+        "freelookResultInfo": {
+          "$ref": "#/definitions/FreelookResultInfo"
+        },
+        "orderId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "alteration order"
+        },
+        "policyChgId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "policy alteration internal id"
+        },
+        "policyId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "policy internal id"
+        },
+        "serviceId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "alteration type id<br>201 - Freelook",
+          "example": "201"
+        },
+        "submissionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "submission date, format: yyyy-MM-dd'T'HH:mm:ss"
+        }
+      }
+    },
+    "PolicyAlterationResultInfo": {
+      "type": "object",
+      "properties": {
+        "changeId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "alteration internal id"
+        },
+        "clientRequestId": {
+          "type": "string",
+          "description": "client request id, to identify a request"
+        },
+        "clientRequestTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "client request time, format: yyyy-MM-dd'T'HH:mm:ss"
+        },
+        "exceptions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "exception messages"
+        },
+        "finishTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "alteration finishing time, format: yyyy-MM-dd'T'HH:mm:ss"
+        },
+        "itemResults": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AlterationItemResultInfo"
+          },
+          "description": "alteration items"
+        },
+        "result": {
+          "type": "integer",
+          "format": "int32",
+          "description": "result. <br>1 - Success<br>0 - Failed with business issue<br>-1 - Failed with unknown exception"
+        }
+      }
+    },
+    "CoverageInput": {
+      "type": "object",
+      "properties": {
+        "coverageId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "coverage internal id to be alterated"
+        }
+      }
+    },
+    "FreelookInput": {
+      "type": "object",
+      "properties": {
+        "alteredCoverages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CoverageInput"
+          },
+          "description": "coverage to be alterated"
+        },
+        "freelookReason": {
+          "type": "integer",
+          "format": "int32",
+          "description": "freelook reason<br>51 - Financial Difficulty<br>52 - Agent Misrepresented<br>53 - Poor Service from Agent<br>54 - Mismatched Product<br>55 - Others",
+          "enum": [
+            "51",
+            "52",
+            "53",
+            "54",
+            "55"
+          ]
+        }
+      }
+    },
+    "GenericVO": {
+      "type": "object",
+      "properties": {
+        "extObject": {
+          "$ref": "#/definitions/GenericVO"
+        }
+      }
+    },
+    "PolicyAlterationInput": {
+      "type": "object",
+      "properties": {
+        "clientRequestId": {
+          "type": "string",
+          "description": "client request id, to identify a request"
+        },
+        "clientRequestTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "client request time, format: yyyy-MM-dd'T'HH:mm:ss"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AlterationItemInput"
+          },
+          "description": "alteration item"
+        }
+      }
+    },
+    "AlterationItemInput": {
+      "type": "object",
+      "properties": {
+        "effectiveDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "effective date, format: yyyy-MM-dd'T'HH:mm:ss"
+        },
+        "freelookInput": {
+          "$ref": "#/definitions/FreelookInput"
+        },
+        "orderId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "alteration order, default is 1",
+          "example": "1"
+        },
+        "policyChgId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "policy alteration internal id"
+        },
+        "policyId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "policy alteration internal id"
+        },
+        "serviceId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "alteration type id<br>201 - Freelook",
+          "example": "201"
+        },
+        "submissionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "submission date, format: yyyy-MM-dd'T'HH:mm:ss"
+        }
+      }
+    },
+    "AlterationQuotationInput": {
+      "type": "object",
+      "properties": {
+        "clientRequestId": {
+          "type": "string",
+          "description": "client request id, to identify a request"
+        },
+        "clientRequestTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "client request time, format: yyyy-MM-dd'T'HH:mm:ss"
+        },
+        "effectiveDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "effective date, format: yyyy-MM-dd'T'HH:mm:ss"
+        },
+        "freelookInput": {
+          "$ref": "#/definitions/FreelookInput"
+        },
+        "policyId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "policy alteration internal id"
+        },
+        "serviceId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "alteration type id<br>201 - Freelook",
+          "example": "201"
+        },
+        "submissionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "submission date, format: yyyy-MM-dd'T'HH:mm:ss"
+        }
+      }
+    },
+    "AlterationQuotationResultInfo": {
+      "type": "object",
+      "properties": {
+        "clientRequestId": {
+          "type": "string",
+          "description": "client request id, to identify a request"
+        },
+        "clientRequestTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "client request time, format: yyyy-MM-dd'T'HH:mm:ss"
+        },
+        "effectiveDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "effective date, format: yyyy-MM-dd'T'HH:mm:ss"
+        },
+        "exceptions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "exception messages"
+        },
+        "policyId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "policy alteration internal id"
+        },
+        "freelookResultInfo": {
+          "$ref": "#/definitions/FreelookResultInfo"
+        },
+        "result": {
+          "type": "integer",
+          "format": "int32",
+          "description": "result. <br>1 - Success<br>0 - Failed with business issue<br>-1 - Failed with unknown exception"
+        },
+        "serviceId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "alteration type id<br>201 - Freelook",
+          "example": "201"
+        },
+        "submissionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "submission date, format: yyyy-MM-dd'T'HH:mm:ss"
+        }
+      }
+    },
+    "FreelookResultInfo": {
+      "type": "object",
+      "properties": {
+        "adminFee": {
+          "type": "number",
+          "format": "double",
+          "description": "alteration administration fee"
+        },
+        "advancePremium": {
+          "type": "number",
+          "format": "double",
+          "description": "advance premium"
+        },
+        "medicalFee": {
+          "type": "number",
+          "format": "double",
+          "description": "medical fee"
+        },
+        "suspense": {
+          "type": "number",
+          "format": "double",
+          "description": "premium suspense"
+        },
+        "totalExtraPremium": {
+          "type": "number",
+          "format": "double",
+          "description": "total addtional premium"
+        },
+        "totalGrossPremium": {
+          "type": "number",
+          "format": "double",
+          "description": "total gross premium"
+        },
+        "totalRefundAmount": {
+          "type": "number",
+          "format": "double",
+          "description": "total refund amount"
+        }
+      }
+    }
+  }
+}

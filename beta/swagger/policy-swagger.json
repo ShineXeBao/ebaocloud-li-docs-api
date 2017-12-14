@@ -1,573 +1,131 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "0.1.0",
-    "title": "eBaoCloud LI OpenAPI",
-    "termsOfService": "http://api.ebaocloud.life/beta",
-    "description": ""
-  },
-  "host": "sandbox.gw.ebaocloud.com.cn",
-  "basePath": "/",
-  "schemes": [
-    "https"
-  ],
-  "consumes": [],
-  "produces": [],
-  "tags": [
-    {
-      "name": "Claim"
-    },
-    {
-      "name": "policy alteration",
-      "description": "Policy Alteration Controller"
-    },
-    {
-      "name": "Policy"
+    "version": "1.0",
+    "title": "APIs of Policy",
+    "termsOfService": "http://docs.ebaocloud.life/",
+    "contact": {
+      "name": "eBaoTech"
     }
-  ],
+  },
+  "host": "172.25.12.205",
+  "basePath": "/policy",
+  "tags": [{
+    "name": "Policy"
+  }],
+  "paths": {
+    "/policies/{insurerCode}/search": {
+      "post": {
+        "tags": ["Policy"],
+        "summary": "PolicySummaryQuerying",
+        "description": "Search Policy by Criteria",
+        "operationId": "searchUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [{
+          "name": "insurerCode",
+          "in": "path",
+          "description": "insurerCode",
+          "required": true,
+          "type": "string"
+        }, {
+          "in": "body",
+          "name": "criteria",
+          "description": "criteria",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/PageablePolicyCriteria"
+          }
+        }, {
+          "name": "X-ebao-tenant-id",
+          "in": "header",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/PolicySummaryInfo"
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/policies/{insurerCode}/{policyNumber}": {
+      "get": {
+        "tags": ["Policy"],
+        "summary": "PolicyDetailGetting",
+        "description": "Get Policy by Policy No.",
+        "operationId": "getUsingGET",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [{
+          "name": "insurerCode",
+          "in": "path",
+          "description": "insurerCode",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "policyNumber",
+          "in": "path",
+          "description": "policyNumber",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "X-ebao-tenant-id",
+          "in": "header",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PolicyInfo"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    }
+  },
   "definitions": {
-    "RegisterRequest": {
-      "type": "object",
-      "required": [
-        "claimType",
-        "claimant",
-        "event",
-        "insured",
-        "policyNo",
-        "relationToInsured"
-      ],
-      "properties": {
-        "clientRequestId": {
-          "type": "string",
-          "description": "client request id, to identify a request"
-        },
-        "clientRequestTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "client request time, format: yyyy-MM-dd'T'HH:mm:ss"
-        },
-        "policyNo": {
-          "type": "string",
-          "description": "claim policy number"
-        },
-        "claimant": {
-          "description": "informations of claimant",
-          "$ref": "#/definitions/ClaimantInput"
-        },
-        "insured": {
-          "description": "informations of insured",
-          "$ref": "#/definitions/InsuredInput"
-        },
-        "relationToInsured": {
-          "type": "integer",
-          "format": "int32",
-          "description": "claimant relation to insured <br>1 - Spouse <br>2 - Child <br>3 - Parent <br>4 - Relative <br>6 - others <br>7 - Employer <br>1001 - self",
-          "enum": [
-            1,
-            2,
-            3,
-            4,
-            6,
-            7,
-            1001
-          ]
-        },
-        "event": {
-          "description": "informations of claim event",
-          "$ref": "#/definitions/ClaimEventInput"
-        },
-        "claimType": {
-          "type": "integer",
-          "format": "int32",
-          "description": "claim type <br>1 - Accident <br>2 - Death <br>5 - Hospitalisation<br>8 - Medical ",
-          "enum": [
-            1,
-            2,
-            5,
-            8
-          ]
-        }
-      }
-    },
-    "RegisterResponse": {
-      "type": "object",
-      "required": [
-        "claimCaseNo"
-      ],
-      "properties": {
-        "clientRequestId": {
-          "type": "string",
-          "description": "client request id, to identify a request"
-        },
-        "clientRequestTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "client request time, format: yyyy-MM-dd'T'HH:mm:ss"
-        },
-        "result": {
-          "type": "integer",
-          "format": "int32",
-          "description": "result. <br>1 - Success<br>0 - Failed with business issue<br>-1 - Failed with unknown exception"
-        },
-        "messages": {
-          "type": "array",
-          "description": "messages of business issues",
-          "items": {
-            "$ref": "#/definitions/GenericValidationResult"
-          }
-        },
-        "exceptions": {
-          "type": "array",
-          "description": "exception messages",
-          "items": {
-            "type": "string"
-          }
-        },
-        "claimCaseNo": {
-          "type": "string",
-          "description": "claim case number"
-        }
-      }
-    },
-    "ContactInput": {
-      "type": "object",
-      "required": [
-        "email",
-        "mobile"
-      ],
-      "properties": {
-        "email": {
-          "type": "string",
-          "description": "email address"
-        },
-        "mobile": {
-          "type": "string",
-          "description": "mobile no"
-        }
-      }
-    },
-    "ClaimEventInput": {
-      "type": "object",
-      "required": [
-        "eventDetail",
-        "eventNature",
-        "eventTime"
-      ],
-      "properties": {
-        "reportType": {
-          "type": "integer",
-          "format": "int32",
-          "description": "report by <br>1 - phone <br>2 - fax <br>4 - sms <br>5 - network <br>6 - email",
-          "enum": [
-            1,
-            2,
-            4,
-            5,
-            6
-          ]
-        },
-        "eventNature": {
-          "type": "integer",
-          "format": "int32",
-          "description": "event nature <br>1 - illness <br>2 - accident",
-          "enum": [
-            1,
-            2
-          ]
-        },
-        "eventTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "date when claim event happens,format: yyyy-MM-dd'T'HH:mm:ss"
-        },
-        "eventDetail": {
-          "type": "string",
-          "description": "detail of cliam event"
-        }
-      }
-    },
-    "InsuredInput": {
-      "type": "object",
-      "required": [
-        "certiCode",
-        "certiType",
-        "gender",
-        "name"
-      ],
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "name"
-        },
-        "gender": {
-          "type": "string",
-          "description": "gender <br>F -  female<br>M - male",
-          "enum": [
-            "F",
-            "M"
-          ]
-        },
-        "certiType": {
-          "type": "integer",
-          "format": "int32",
-          "description": "certificate type of insured<br>1 - id card<br>3 - passport<br>9 - others",
-          "enum": [
-            1,
-            3,
-            9
-          ]
-        },
-        "certiCode": {
-          "type": "string",
-          "description": "certificate code "
-        }
-      }
-    },
-    "GenericValidationResult": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "string"
-        },
-        "message": {
-          "type": "string"
-        },
-        "ruleType": {
-          "type": "integer",
-          "format": "int32"
-        }
-      }
-    },
-    "ClaimantInput": {
-      "type": "object",
-      "required": [
-        "name",
-        "partyContact"
-      ],
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "name"
-        },
-        "partyContact": {
-          "description": "contact information",
-          "$ref": "#/definitions/ContactInput"
-        }
-      }
-    },
-    "AlterationItemResultInfo": {
-      "type": "object",
-      "properties": {
-        "effectiveDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "effective date, format: yyyy-MM-dd'T'HH:mm:ss"
-        },
-        "freelookResultInfo": {
-          "$ref": "#/definitions/FreelookResultInfo"
-        },
-        "orderId": {
-          "type": "integer",
-          "format": "int32",
-          "description": "alteration order"
-        },
-        "policyChgId": {
-          "type": "integer",
-          "format": "int64",
-          "description": "policy alteration internal id"
-        },
-        "policyId": {
-          "type": "integer",
-          "format": "int64",
-          "description": "policy internal id"
-        },
-        "serviceId": {
-          "type": "integer",
-          "format": "int32",
-          "description": "alteration type id<br>201 - Freelook",
-          "example": "201"
-        },
-        "submissionDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "submission date, format: yyyy-MM-dd'T'HH:mm:ss"
-        }
-      }
-    },
-    "PolicyAlterationResultInfo": {
-      "type": "object",
-      "properties": {
-        "changeId": {
-          "type": "integer",
-          "format": "int64",
-          "description": "alteration internal id"
-        },
-        "clientRequestId": {
-          "type": "string",
-          "description": "client request id, to identify a request"
-        },
-        "clientRequestTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "client request time, format: yyyy-MM-dd'T'HH:mm:ss"
-        },
-        "exceptions": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "exception messages"
-        },
-        "finishTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "alteration finishing time, format: yyyy-MM-dd'T'HH:mm:ss"
-        },
-        "itemResults": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AlterationItemResultInfo"
-          },
-          "description": "alteration items"
-        },
-        "result": {
-          "type": "integer",
-          "format": "int32",
-          "description": "result. <br>1 - Success<br>0 - Failed with business issue<br>-1 - Failed with unknown exception"
-        }
-      }
-    },
-    "CoverageInput": {
-      "type": "object",
-      "properties": {
-        "coverageId": {
-          "type": "integer",
-          "format": "int64",
-          "description": "coverage internal id to be alterated"
-        }
-      }
-    },
-    "FreelookInput": {
-      "type": "object",
-      "properties": {
-        "alteredCoverages": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CoverageInput"
-          },
-          "description": "coverage to be alterated"
-        },
-        "freelookReason": {
-          "type": "integer",
-          "format": "int32",
-          "description": "freelook reason<br>51 - Financial Difficulty<br>52 - Agent Misrepresented<br>53 - Poor Service from Agent<br>54 - Mismatched Product<br>55 - Others",
-          "enum": [
-            "51",
-            "52",
-            "53",
-            "54",
-            "55"
-          ]
-        }
-      }
-    },
-    "GenericVO": {
-      "type": "object",
-      "properties": {
-        "extObject": {
-          "$ref": "#/definitions/GenericVO"
-        }
-      }
-    },
-    "PolicyAlterationInput": {
-      "type": "object",
-      "properties": {
-        "clientRequestId": {
-          "type": "string",
-          "description": "client request id, to identify a request"
-        },
-        "clientRequestTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "client request time, format: yyyy-MM-dd'T'HH:mm:ss"
-        },
-        "items": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AlterationItemInput"
-          },
-          "description": "alteration item"
-        }
-      }
-    },
-    "AlterationItemInput": {
-      "type": "object",
-      "properties": {
-        "effectiveDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "effective date, format: yyyy-MM-dd'T'HH:mm:ss"
-        },
-        "freelookInput": {
-          "$ref": "#/definitions/FreelookInput"
-        },
-        "orderId": {
-          "type": "integer",
-          "format": "int32",
-          "description": "alteration order, default is 1",
-          "example": "1"
-        },
-        "policyChgId": {
-          "type": "integer",
-          "format": "int64",
-          "description": "policy alteration internal id"
-        },
-        "policyId": {
-          "type": "integer",
-          "format": "int64",
-          "description": "policy alteration internal id"
-        },
-        "serviceId": {
-          "type": "integer",
-          "format": "int32",
-          "description": "alteration type id<br>201 - Freelook",
-          "example": "201"
-        },
-        "submissionDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "submission date, format: yyyy-MM-dd'T'HH:mm:ss"
-        }
-      }
-    },
-    "AlterationQuotationInput": {
-      "type": "object",
-      "properties": {
-        "clientRequestId": {
-          "type": "string",
-          "description": "client request id, to identify a request"
-        },
-        "clientRequestTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "client request time, format: yyyy-MM-dd'T'HH:mm:ss"
-        },
-        "effectiveDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "effective date, format: yyyy-MM-dd'T'HH:mm:ss"
-        },
-        "freelookInput": {
-          "$ref": "#/definitions/FreelookInput"
-        },
-        "policyId": {
-          "type": "integer",
-          "format": "int64",
-          "description": "policy alteration internal id"
-        },
-        "serviceId": {
-          "type": "integer",
-          "format": "int32",
-          "description": "alteration type id<br>201 - Freelook",
-          "example": "201"
-        },
-        "submissionDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "submission date, format: yyyy-MM-dd'T'HH:mm:ss"
-        }
-      }
-    },
-    "AlterationQuotationResultInfo": {
-      "type": "object",
-      "properties": {
-        "clientRequestId": {
-          "type": "string",
-          "description": "client request id, to identify a request"
-        },
-        "clientRequestTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "client request time, format: yyyy-MM-dd'T'HH:mm:ss"
-        },
-        "effectiveDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "effective date, format: yyyy-MM-dd'T'HH:mm:ss"
-        },
-        "exceptions": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "exception messages"
-        },
-        "policyId": {
-          "type": "integer",
-          "format": "int64",
-          "description": "policy alteration internal id"
-        },
-        "freelookResultInfo": {
-          "$ref": "#/definitions/FreelookResultInfo"
-        },
-        "result": {
-          "type": "integer",
-          "format": "int32",
-          "description": "result. <br>1 - Success<br>0 - Failed with business issue<br>-1 - Failed with unknown exception"
-        },
-        "serviceId": {
-          "type": "integer",
-          "format": "int32",
-          "description": "alteration type id<br>201 - Freelook",
-          "example": "201"
-        },
-        "submissionDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "submission date, format: yyyy-MM-dd'T'HH:mm:ss"
-        }
-      }
-    },
-    "FreelookResultInfo": {
-      "type": "object",
-      "properties": {
-        "adminFee": {
-          "type": "number",
-          "format": "double",
-          "description": "alteration administration fee"
-        },
-        "advancePremium": {
-          "type": "number",
-          "format": "double",
-          "description": "advance premium"
-        },
-        "medicalFee": {
-          "type": "number",
-          "format": "double",
-          "description": "medical fee"
-        },
-        "suspense": {
-          "type": "number",
-          "format": "double",
-          "description": "premium suspense"
-        },
-        "totalExtraPremium": {
-          "type": "number",
-          "format": "double",
-          "description": "total addtional premium"
-        },
-        "totalGrossPremium": {
-          "type": "number",
-          "format": "double",
-          "description": "total gross premium"
-        },
-        "totalRefundAmount": {
-          "type": "number",
-          "format": "double",
-          "description": "total refund amount"
-        }
-      }
-    },
     "Organization": {
       "type": "object",
       "properties": {
@@ -609,7 +167,7 @@
         "assignRate": {
           "type": "number",
           "format": "double",
-          "example": 1,
+          "example": 1.0,
           "description": "分配比例"
         },
         "extendedProps": {
@@ -640,35 +198,14 @@
           "type": "string",
           "example": "2",
           "description": "受益类型<br>1 - 生存受益人<br>2 - 身故受益人<br>3 - 投保受益人",
-          "enum": [
-            "1",
-            "2",
-            "3"
-          ]
+          "enum": ["1", "2", "3"]
         },
         "designation": {
           "type": "integer",
           "format": "int32",
           "example": 1,
           "description": "与被保人关系<br>1 - 妻子<br>2 - 丈夫<br>3 - 子女<br>4 - 父亲<br>5 - 母亲<br>6 - 祖父/外祖父<br>7 - 祖母/外祖母<br>8 - 兄弟<br>9 - 姐妹<br>10 - 叔父/伯父<br>11 - 阿姨<br>12 - 表兄弟/表姐妹<br>13 - 外甥/外甥女/侄子/侄女<br>14 - 雇主<br>15 - 其他<br>16 - 被保人本人",
-          "enum": [
-            1,
-            2,
-            3,
-            4,
-            5,
-            6,
-            7,
-            8,
-            9,
-            10,
-            11,
-            12,
-            13,
-            14,
-            15,
-            16
-          ]
+          "enum": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
         },
         "shareOrder": {
           "type": "integer",
@@ -679,7 +216,7 @@
         "shareRate": {
           "type": "number",
           "format": "double",
-          "example": 1,
+          "example": 1.0,
           "description": "受益比例，最大为1"
         },
         "extendedProps": {
@@ -698,11 +235,7 @@
           "type": "string",
           "example": "3",
           "description": "年金领取期间类型，计划类型为年金/变额年金/GMWB时非空<br>1 - 领取固定年数<br>2 - 领取到一定年龄<br>3 - 终身领取",
-          "enum": [
-            "1",
-            "2",
-            "3"
-          ]
+          "enum": ["1", "2", "3"]
         },
         "endYear": {
           "type": "integer",
@@ -718,13 +251,7 @@
           "type": "string",
           "example": "1",
           "description": "年金领取方式<br>1 - 现金领取<br>2 - 抵交保费<br>3 - 累积生息<br>4 - 累积生息x年后转抵交保费<br>5 - 买一个附加的缴清的附加险",
-          "enum": [
-            "1",
-            "2",
-            "3",
-            "4",
-            "5"
-          ]
+          "enum": ["1", "2", "3", "4", "5"]
         },
         "payOptionTerm": {
           "type": "integer",
@@ -735,12 +262,7 @@
           "type": "string",
           "example": "3",
           "description": "年金开始领取期间类型<br>1 - 立即领取<br>2 - 到一定年龄的周年日领取<br>3 - 若干年后领取<br>4 - 一定年龄后领取",
-          "enum": [
-            "1",
-            "2",
-            "3",
-            "4"
-          ]
+          "enum": ["1", "2", "3", "4"]
         },
         "payYear": {
           "type": "integer",
@@ -751,28 +273,13 @@
           "type": "string",
           "example": "1",
           "description": "领取频率<br>1 - 年<br>2 - 半年<br>3 - 季<br>4 - 月<br>5 - 趸领",
-          "enum": [
-            "1",
-            "2",
-            "3",
-            "4",
-            "5"
-          ]
+          "enum": ["1", "2", "3", "4", "5"]
         },
         "planType": {
           "type": "string",
           "example": "1",
           "description": "支付计划类型，非空<br>1 - 现金红利<br>2 - 年金<br>3 - 生存金<br>4 - 满期金<br>5 - GMWB（保证最小提取利益）<br>6 - 变额年金<br>7 - 部分退保<br>8 - 保额红利",
-          "enum": [
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8"
-          ]
+          "enum": ["1", "2", "3", "4", "5", "6", "7", "8"]
         },
         "extendedProps": {
           "type": "object",
@@ -892,31 +399,19 @@
           "type": "string",
           "example": "2",
           "description": "账户类型<br>2 - 借记卡<br>8 - 信用卡",
-          "enum": [
-            "2",
-            "8"
-          ]
+          "enum": ["2", "8"]
         },
         "debitCreditType": {
           "type": "string",
           "example": "0",
           "description": "帐号用途<br>0 - 收付两用<br>1 - 收费<br>2 - 退费",
-          "enum": [
-            "0",
-            "1",
-            "2"
-          ]
+          "enum": ["0", "1", "2"]
         },
         "creditCardType": {
           "type": "string",
           "example": "1",
           "description": "信用卡类型，非信用卡为空<br>1 - Master<br>2 - Visa<br>3 - BCA<br>4 - JCB",
-          "enum": [
-            "1",
-            "2",
-            "3",
-            "4"
-          ]
+          "enum": ["1", "2", "3", "4"]
         },
         "expireDate": {
           "type": "string",
@@ -989,26 +484,14 @@
           "format": "int32",
           "example": 3,
           "description": "首期付款方式，数字类型<br>1 - 现金<br>2 - 支票<br>3 - 银行转账<br>30 - 信用卡",
-          "enum": [
-            1,
-            2,
-            3,
-            30,
-            80
-          ]
+          "enum": [1, 2, 3, 30, 80]
         },
         "paymentMethodNext": {
           "type": "integer",
           "format": "int32",
           "example": 3,
           "description": "续期付款方式，数字类型<br>1 - 现金<br>2 - 支票<br>3 - 银行转账<br>30 - 信用卡",
-          "enum": [
-            1,
-            2,
-            3,
-            30,
-            80
-          ]
+          "enum": [1, 2, 3, 30, 80]
         },
         "bankAccount": {
           "description": "首期银行账户",
@@ -1092,11 +575,7 @@
           "format": "int32",
           "example": 1,
           "description": "Policy Type<br>1 - Individual insurance<br>2 - Group Biz<br>3 - Bancassurance",
-          "enum": [
-            1,
-            2,
-            3
-          ]
+          "enum": [1, 2, 3]
         },
         "riskStatus": {
           "type": "integer",
@@ -1124,9 +603,7 @@
           "format": "int32",
           "example": 1,
           "description": "币种，非空，1 - 人民币",
-          "enum": [
-            1
-          ]
+          "enum": [1]
         },
         "ePolicyDownloadUrl": {
           "type": "string",
@@ -1154,10 +631,7 @@
           "type": "string",
           "example": "M",
           "description": "保单递送方式<br>H - 手工<br>M - 邮件",
-          "enum": [
-            "H",
-            "M"
-          ]
+          "enum": ["H", "M"]
         },
         "policyNumber": {
           "type": "string",
@@ -1263,41 +737,25 @@
           "format": "int32",
           "example": 1,
           "description": "被保人与投保人关系，数字类型<br>1 - 自己<br>2 - 子女<br>3 - 配偶<br>10 - 父母<br>4 - 雇员<br>7 - 其他",
-          "enum": [
-            1,
-            2,
-            3,
-            10,
-            4,
-            7
-          ]
+          "enum": [1, 2, 3, 10, 4, 7]
         },
         "medicalExamIndi": {
           "type": "string",
           "example": "N",
           "description": "是否有体检件<br>Y - 是<br>N - 否",
-          "enum": [
-            "Y",
-            "N"
-          ]
+          "enum": ["Y", "N"]
         },
         "medicalIndi": {
           "type": "string",
           "example": "Y",
           "description": "是否有医保<br>Y - 是<br>N - 否",
-          "enum": [
-            "Y",
-            "N"
-          ]
+          "enum": ["Y", "N"]
         },
         "socialSecurityIndi": {
           "type": "string",
           "example": "Y",
           "description": "是否有社保<br>Y - 是<br>N - 否",
-          "enum": [
-            "Y",
-            "N"
-          ]
+          "enum": ["Y", "N"]
         },
         "extendedProps": {
           "type": "object",
@@ -1378,7 +836,7 @@
         "assignRate": {
           "type": "number",
           "format": "double",
-          "example": 1,
+          "example": 1.0,
           "description": "业绩分摊比例，最大为1"
         },
         "extendedProps": {
@@ -1427,12 +885,7 @@
           "type": "string",
           "example": "2",
           "description": "缴费年期类型，非空<br>1 - 趸缴<br>2 - 按年限缴<br>3 - 缴至某确定年龄<br>4 - 终身",
-          "enum": [
-            "1",
-            "2",
-            "3",
-            "4"
-          ]
+          "enum": ["1", "2", "3", "4"]
         },
         "chargeYear": {
           "type": "integer",
@@ -1444,13 +897,7 @@
           "type": "string",
           "example": "1",
           "description": "保障年期类型<br>1 - 保终身<br>2 - 按年限保<br>3 - 保至某确定年龄<br>4 - 按月保<br>5 - 按天保",
-          "enum": [
-            "1",
-            "2",
-            "3",
-            "4",
-            "5"
-          ]
+          "enum": ["1", "2", "3", "4", "5"]
         },
         "coverageYear": {
           "type": "integer",
@@ -1536,7 +983,7 @@
         "assignRate": {
           "type": "number",
           "format": "double",
-          "example": 1,
+          "example": 1.0,
           "description": "分配比例"
         },
         "extendedProps": {
@@ -1560,10 +1007,7 @@
           "type": "string",
           "example": "N",
           "description": "是否豁免险<br>Y - 是<br>N - 否",
-          "enum": [
-            "Y",
-            "N"
-          ]
+          "enum": ["Y", "N"]
         }
       }
     },
@@ -1578,7 +1022,7 @@
         "accumUnits": {
           "type": "number",
           "format": "double",
-          "example": 1000,
+          "example": 1000.0,
           "description": "基金份数"
         },
         "extendedProps": {
@@ -1624,24 +1068,18 @@
           "type": "string",
           "example": "1",
           "description": "缴费频率<br>1 - 年缴<br>2 - 半年缴<br>3 - 季缴<br>4 - 月缴<br>5 - 趸缴",
-          "enum": [
-            "1",
-            "2",
-            "3",
-            "4",
-            "5"
-          ]
+          "enum": ["1", "2", "3", "4", "5"]
         },
         "sumAssured": {
           "type": "number",
           "format": "double",
-          "example": 100000,
+          "example": 100000.0,
           "description": "险种保额，保额算保费时非空"
         },
         "premium": {
           "type": "number",
           "format": "double",
-          "example": 2314,
+          "example": 2314.0,
           "description": "险种保费，保费算保额时非空"
         },
         "unit": {
@@ -1663,10 +1101,7 @@
           "format": "int32",
           "example": 1,
           "description": "当事人类型，1 - 个人当事人<br>2 - 机构当事人",
-          "enum": [
-            1,
-            2
-          ]
+          "enum": [1, 2]
         },
         "person": {
           "description": "个人客户信息",
@@ -1778,13 +1213,7 @@
           "format": "int32",
           "example": 1,
           "description": "投保人与被保人关系，数字类型<br>1 - 自己<br>2 - 父母<br>3 - 配偶<br>10 - 子女<br>7 - 其他",
-          "enum": [
-            1,
-            2,
-            3,
-            10,
-            7
-          ]
+          "enum": [1, 2, 3, 10, 7]
         },
         "extendedProps": {
           "type": "object",
@@ -1802,10 +1231,7 @@
           "type": "string",
           "example": "M",
           "description": "性别<br>M - 男性<br>F - 女性",
-          "enum": [
-            "M",
-            "F"
-          ]
+          "enum": ["M", "F"]
         },
         "birthdate": {
           "type": "string",
@@ -1818,13 +1244,7 @@
           "format": "int32",
           "example": 3,
           "description": "证件类型，数字类型<br>1 - 身份证<br>2 - 军人证<br>3 - 护照<br>4 - 出生证<br>9 - 其他",
-          "enum": [
-            1,
-            2,
-            3,
-            4,
-            9
-          ]
+          "enum": [1, 2, 3, 4, 9]
         },
         "certiCode": {
           "type": "string",
@@ -1871,10 +1291,7 @@
           "type": "string",
           "example": "N",
           "description": "是否抽烟<br>Y - 抽烟<br>N - 不抽烟",
-          "enum": [
-            "Y",
-            "N"
-          ]
+          "enum": ["Y", "N"]
         },
         "occupationCode": {
           "type": "string",
@@ -1891,14 +1308,7 @@
           "type": "string",
           "example": "1",
           "description": "婚姻状况<br>1 - 已婚<br>2 - 未婚<br>3 - 离异<br>4 - 丧偶<br>5 - 分居<br>6 - 其他",
-          "enum": [
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6"
-          ]
+          "enum": ["1", "2", "3", "4", "5", "6"]
         },
         "height": {
           "type": "number",
@@ -1916,10 +1326,7 @@
           "type": "string",
           "example": "1",
           "description": "称呼<br>1 - 先生<br>2 - 女士",
-          "enum": [
-            "1",
-            "2"
-          ]
+          "enum": ["1", "2"]
         }
       }
     },
@@ -1975,7 +1382,7 @@
         "topupAmount": {
           "type": "number",
           "format": "double",
-          "example": 10000,
+          "example": 10000.0,
           "description": "追加金额"
         },
         "extendedProps": {
@@ -1983,304 +1390,6 @@
           "description": "扩展信息, Map类型, Key/Value都是字符型",
           "additionalProperties": {
             "type": "string"
-          }
-        }
-      }
-    }
-  },
-  "paths": {
-    "/claim/register": {
-      "post": {
-        "tags": [
-          "Claim"
-        ],
-        "summary": "ClaimCaseRegister",
-        "description": "Register Claim Case",
-        "operationId": "registerUsingPOST",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "*/*"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "request",
-            "description": "request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/RegisterRequest"
-            }
-          },
-          {
-            "name": "X-ebao-tenant-id",
-            "in": "header",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/RegisterResponse"
-            }
-          },
-          "201": {
-            "description": "Created"
-          },
-          "400": {
-            "description": "Bad request"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/policies/alterations/inforce": {
-      "post": {
-        "tags": [
-          "policy alteration"
-        ],
-        "summary": "policyAlterations",
-        "description": "Policy Alterations",
-        "operationId": "inforceUsingPOST",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "*/*"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "input",
-            "description": "input",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/PolicyAlterationInput"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/PolicyAlterationResultInfo"
-            }
-          },
-          "201": {
-            "description": "Created"
-          },
-          "400": {
-            "description": "Bad request"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/policies/alterations/quotations": {
-      "post": {
-        "tags": [
-          "policy alteration",
-          "quotation"
-        ],
-        "summary": "quotationsForPolicyAlterations",
-        "description": "Quotations For Alterations",
-        "operationId": "quote2UsingPOST",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "*/*"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "input",
-            "description": "input",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AlterationQuotationInput"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/AlterationQuotationResultInfo"
-            }
-          },
-          "201": {
-            "description": "Created"
-          },
-          "400": {
-            "description": "Bad request"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/policy/policies/{insurerCode}/search": {
-      "post": {
-        "tags": [
-          "Policy"
-        ],
-        "summary": "PolicySummaryQuerying",
-        "description": "Search Policy by Criteria",
-        "operationId": "searchUsingPOST",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "*/*"
-        ],
-        "parameters": [
-          {
-            "name": "insurerCode",
-            "in": "path",
-            "description": "insurerCode",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "criteria",
-            "description": "criteria",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/PageablePolicyCriteria"
-            }
-          },
-          {
-            "name": "X-ebao-tenant-id",
-            "in": "header",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/PolicySummaryInfo"
-              }
-            }
-          },
-          "201": {
-            "description": "Created"
-          },
-          "400": {
-            "description": "Bad request"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/policy/policies/{insurerCode}/{policyNumber}": {
-      "get": {
-        "tags": [
-          "Policy"
-        ],
-        "summary": "PolicyDetailGetting",
-        "description": "Get Policy by Policy No.",
-        "operationId": "getUsingGET",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "*/*"
-        ],
-        "parameters": [
-          {
-            "name": "insurerCode",
-            "in": "path",
-            "description": "insurerCode",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "policyNumber",
-            "in": "path",
-            "description": "policyNumber",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "X-ebao-tenant-id",
-            "in": "header",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/PolicyInfo"
-            }
-          },
-          "400": {
-            "description": "Bad request"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
           }
         }
       }
