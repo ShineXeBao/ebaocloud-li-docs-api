@@ -1,0 +1,2043 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "APIs of SalesPackage",
+    "termsOfService": "http://li.ebaocloud.com.cn/salespackages/",
+    "contact": {
+      "name": "eBaoTech"
+    }
+  },
+  "host": "172.25.12.205:38080",
+  "basePath": "/pd",
+  "tags": [
+    {
+      "name": "SalesPackage"
+    }
+  ],
+  "paths": {
+    "/advancedFilters": {
+      "get": {
+        "tags": [
+          "SalesPackage"
+        ],
+        "summary": "获取高级搜索条件组合",
+        "description": "根据租户code获取高级搜索条件组合",
+        "operationId": "getAdvancedFiltersUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "X-ebao-tenant-id",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AdvancedFiltersResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/salesPackages": {
+      "get": {
+        "tags": [
+          "SalesPackage"
+        ],
+        "summary": "获取产品组合列表",
+        "description": "根据条件获取产品组合列表，组合列表包含组合基本信息",
+        "operationId": "findSalesPackagesUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "searchWords",
+            "in": "query",
+            "description": "搜索词",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "salesRights",
+            "in": "query",
+            "description": "产品标签列表，可以多个，如果多个以逗号（，）分隔",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "salesCategorys",
+            "in": "query",
+            "description": "产品销售大类，可以多个，如果多个以逗号（，）分隔",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "insurerCodes",
+            "in": "query",
+            "description": "保险公司列表，可以多个，如果多个以逗号（，）分隔",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "产品可电投status,Y 代表可电投；N 代表不可电投",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "sort",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "start",
+            "in": "query",
+            "description": "起始数",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "每页数",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "X-ebao-tenant-id",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SalesPackagesResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/salesPackages/getAvailableRiders": {
+      "post": {
+        "tags": [
+          "SalesPackage"
+        ],
+        "summary": "获取可以添加的附加险",
+        "description": "根据投保人和已录入险种信息获取其他可以添加的附加险列表及附加险对应的投保属性列表",
+        "operationId": "getAvailableRidersUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "riderRequest",
+            "description": "主险及投保人/被保人信息数据",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RiderRequest"
+            }
+          },
+          {
+            "name": "X-ebao-tenant-id",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SalesProductDetailResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/salesPackages/{salesPackageCode}": {
+      "get": {
+        "tags": [
+          "SalesPackage"
+        ],
+        "summary": "获取产品组合营销信息",
+        "description": "根据产品组合代码，获取该产品组合的详细营销信息",
+        "operationId": "findSalesPackageUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "salesPackageCode",
+            "in": "path",
+            "description": "销售计划代码",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "X-ebao-tenant-id",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SalesPackageResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/salesProductDetailInfo": {
+      "get": {
+        "tags": [
+          "SalesPackage"
+        ],
+        "summary": "产品营销属性详情",
+        "description": "根据租户code和产品代码列表获取对应产品的营销属性列表",
+        "operationId": "salesProductDetailInfoUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "salesPackageCode",
+            "in": "query",
+            "description": "产品组合代码",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "productCodes",
+            "in": "query",
+            "description": "产品代码列表，可以多个，如果多个以逗号（，）分隔",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "X-ebao-tenant-id",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SalesProductDetailResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/salesProductSummaryInfo": {
+      "get": {
+        "tags": [
+          "SalesPackage"
+        ],
+        "summary": "产品责任营销属性列表",
+        "description": "根据租户code，packageCode和产品代码列表获取对应产品的保障责任列表",
+        "operationId": "salesProductSummaryInfoUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "salesPackageCode",
+            "in": "query",
+            "description": "销售计划代码",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "productCodes",
+            "in": "query",
+            "description": "产品代码列表，可以多个，如果多个以逗号（，）分隔",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "X-ebao-tenant-id",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SalesProductSummaryResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AttachedProductLimit": {
+      "type": "object",
+      "properties": {
+        "ageRange": {
+          "$ref": "#/definitions/AgeRangeVO"
+        },
+        "amountLimitList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AmountLimit"
+          }
+        },
+        "attachedProductId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "premLimitList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PremLimit"
+          }
+        }
+      }
+    },
+    "Serializable": {
+      "type": "object"
+    },
+    "SalesLabel": {
+      "type": "object",
+      "properties": {
+        "entityIdName": {
+          "type": "string"
+        },
+        "identifier": {
+          "$ref": "#/definitions/Serializable"
+        },
+        "ifFilter": {
+          "type": "string"
+        },
+        "labelName": {
+          "type": "string"
+        },
+        "labelPic": {
+          "type": "string"
+        },
+        "listId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "version": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "Fund": {
+      "type": "object",
+      "properties": {
+        "endDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "基金销售终止日"
+        },
+        "fundCode": {
+          "type": "string",
+          "description": "基金代码"
+        },
+        "fundCurrency": {
+          "type": "integer",
+          "format": "int64",
+          "description": "基金售卖币种"
+        },
+        "fundName": {
+          "type": "string",
+          "description": "基金名称"
+        },
+        "fundType": {
+          "type": "string",
+          "description": "基金类别"
+        },
+        "highRate": {
+          "type": "number",
+          "format": "double",
+          "description": "基金高收益率"
+        },
+        "lowRate": {
+          "type": "number",
+          "format": "double",
+          "description": "基金低收益率"
+        },
+        "midRate": {
+          "type": "number",
+          "format": "double",
+          "description": "基金中收益率"
+        },
+        "rateDesc": {
+          "type": "string",
+          "description": "基金收益率描述"
+        },
+        "startDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "基金销售起始日"
+        }
+      }
+    },
+    "SalesProductDetailInfo": {
+      "type": "object",
+      "properties": {
+        "ageLimitList": {
+          "type": "array",
+          "description": "年龄限制信息",
+          "items": {
+            "$ref": "#/definitions/AgeLimit"
+          }
+        },
+        "ageRange": {
+          "description": "年龄限制信息",
+          "$ref": "#/definitions/AgeRangeVO"
+        },
+        "amountLimitList": {
+          "type": "array",
+          "description": "保额限制信息",
+          "items": {
+            "$ref": "#/definitions/AmountLimit"
+          }
+        },
+        "attachCompulsory": {
+          "type": "string",
+          "description": "是否强制绑定的附加险，1：强制附加；0：非强制附加"
+        },
+        "attachedPrdtLimitCondition": {
+          "type": "array",
+          "description": "险种附约限制条件信息",
+          "items": {
+            "$ref": "#/definitions/AttachedProductLimit"
+          }
+        },
+        "benefitLevelList": {
+          "type": "array",
+          "description": "险种档次信息",
+          "items": {
+            "$ref": "#/definitions/ProductBenefitLevel"
+          }
+        },
+        "benefitType": {
+          "type": "string",
+          "description": "险种类别"
+        },
+        "coexistPrdtList": {
+          "type": "array",
+          "description": "险种共存信息",
+          "items": {
+            "$ref": "#/definitions/ProductRelationVO"
+          }
+        },
+        "dependPrdtList": {
+          "type": "array",
+          "description": "险种依赖信息",
+          "items": {
+            "$ref": "#/definitions/ProductRelationVO"
+          }
+        },
+        "funds": {
+          "type": "array",
+          "description": "险种允许添加的基金列表",
+          "items": {
+            "$ref": "#/definitions/Fund"
+          }
+        },
+        "incrementIndex": {
+          "type": "number",
+          "format": "double",
+          "description": "险种保额/保费递增倍数"
+        },
+        "insType": {
+          "type": "string",
+          "description": "主险或附加险，1：主险；2：附加险/豁免险"
+        },
+        "insurerCode": {
+          "type": "string",
+          "description": "保险公司代码"
+        },
+        "isAnnuityProduct": {
+          "type": "string",
+          "description": "险种是否是年金产品，Y:N"
+        },
+        "isIlpProduct": {
+          "type": "string",
+          "description": "是否是投连险,Y：N"
+        },
+        "isPackageProduct": {
+          "type": "string",
+          "description": "组合内产品，Y：N"
+        },
+        "isSalesLevelProduct": {
+          "type": "boolean"
+        },
+        "isWaiver": {
+          "type": "string",
+          "description": "险种是否是豁免险，Y:N"
+        },
+        "jobCateList": {
+          "type": "array",
+          "description": "险种支持的职业代码列表",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "jobIndi": {
+          "type": "string",
+          "description": "费率是否与职业相关，Y：N"
+        },
+        "moneyId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "币种"
+        },
+        "partialWithdrawPermit": {
+          "type": "string",
+          "description": "是否支持部分领取，Y：N"
+        },
+        "pointToPH": {
+          "type": "string",
+          "description": "险种被保人是否是投保人，Y:N"
+        },
+        "pointToSecInsured": {
+          "type": "string",
+          "description": "是否需要第二被保人，Y:N"
+        },
+        "premLimitList": {
+          "type": "array",
+          "description": "保费限制信息",
+          "items": {
+            "$ref": "#/definitions/PremLimit"
+          }
+        },
+        "productLiabilityList": {
+          "type": "array",
+          "description": "险种营销责任列表",
+          "items": {
+            "$ref": "#/definitions/Liability"
+          }
+        },
+        "regularTopupPermit": {
+          "type": "string",
+          "description": "是否支持定期追加投资,Y：N"
+        },
+        "saEqual": {
+          "type": "string",
+          "description": "主/附险种的保额是否一样，Y：N"
+        },
+        "saPremTip": {
+          "type": "string",
+          "description": "保额/保费提示"
+        },
+        "salesProductCode": {
+          "type": "string",
+          "description": "销售产品代码"
+        },
+        "salesProductId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "销售产品ID"
+        },
+        "salesProductName": {
+          "type": "string",
+          "description": "销售产品名称"
+        },
+        "singleTopupPermit": {
+          "type": "string",
+          "description": "是否支持一次性追加投资,Y：N"
+        },
+        "smokingIndi": {
+          "type": "string",
+          "description": "是否吸烟，0：不吸烟；1：特殊；2：普通"
+        },
+        "socialInsureIndi": {
+          "type": "string",
+          "description": "费率是否与社保相关：Y：N"
+        },
+        "targetAthRateList": {
+          "type": "array",
+          "description": "险种附约限制信息",
+          "items": {
+            "$ref": "#/definitions/TargetAttachRateVO"
+          }
+        },
+        "unitFlag": {
+          "type": "string",
+          "description": "计算方式"
+        },
+        "waiverChargeYearAdjustment": {
+          "type": "integer",
+          "format": "int32",
+          "description": "豁免险种缴费期调整值；0：与被豁免险种一样，-1：与被豁免险中少一年"
+        }
+      }
+    },
+    "SalesProduct": {
+      "type": "object",
+      "properties": {
+        "attachCompulsory": {
+          "type": "string",
+          "description": "是否强制捆绑销售产品"
+        },
+        "funds": {
+          "type": "array",
+          "description": "ILP产品基金列表",
+          "items": {
+            "$ref": "#/definitions/Fund"
+          }
+        },
+        "insType": {
+          "type": "string",
+          "description": "是否是主险，1：主险，2附加险/豁免险"
+        },
+        "insurer": {
+          "description": "所属保险公司",
+          "$ref": "#/definitions/Insurer"
+        },
+        "masterId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "被附加险种ID"
+        },
+        "packageCode": {
+          "type": "string",
+          "description": "所在的计划的代码"
+        },
+        "productCode": {
+          "type": "string",
+          "description": "销售产品代码"
+        },
+        "productId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "销售产品ID"
+        },
+        "productName": {
+          "type": "string",
+          "description": "销售产品名称"
+        },
+        "salesProductLiabilities": {
+          "type": "array",
+          "description": "销售计划营销责任列表",
+          "items": {
+            "$ref": "#/definitions/SalesProductLiability"
+          }
+        }
+      }
+    },
+    "AmountLimit": {
+      "type": "object",
+      "properties": {
+        "jobClass": {
+          "type": "integer",
+          "format": "int32",
+          "description": "职业类别"
+        },
+        "maxAge": {
+          "type": "integer",
+          "format": "int32",
+          "description": "最大年龄"
+        },
+        "maxAmount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "允许的最大保额/Unit"
+        },
+        "minAge": {
+          "type": "integer",
+          "format": "int32",
+          "description": "最小年龄"
+        },
+        "minAmount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "允许的最小保额/Unit"
+        },
+        "moneyId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "币种"
+        }
+      }
+    },
+    "PremLimit": {
+      "type": "object",
+      "properties": {
+        "chargePeriod": {
+          "type": "integer",
+          "format": "int32",
+          "description": "缴费类别"
+        },
+        "chargeYear": {
+          "type": "integer",
+          "format": "int32",
+          "description": "缴费期限"
+        },
+        "maxAge": {
+          "type": "integer",
+          "format": "int32",
+          "description": "允许的最大年龄"
+        },
+        "maxInitialPrem": {
+          "type": "integer",
+          "format": "int64",
+          "description": "允许的最大保费"
+        },
+        "minAge": {
+          "type": "integer",
+          "format": "int32",
+          "description": "允许的最小年龄"
+        },
+        "minInitialPrem": {
+          "type": "integer",
+          "format": "int64",
+          "description": "允许的最小保费"
+        },
+        "moneyId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "币种"
+        }
+      }
+    },
+    "SalesCategory": {
+      "type": "object",
+      "properties": {
+        "displayOrder": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "listId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "typeName": {
+          "type": "string"
+        }
+      }
+    },
+    "TargetAttachRateVO": {
+      "type": "object",
+      "properties": {
+        "amountEqual": {
+          "type": "string"
+        },
+        "mastLimitUnit": {
+          "type": "string"
+        },
+        "maxAthRate": {
+          "type": "number",
+          "format": "double"
+        },
+        "maxMastAmt": {
+          "type": "number",
+          "format": "double"
+        },
+        "minAthRate": {
+          "type": "number",
+          "format": "double"
+        },
+        "minMastAmt": {
+          "type": "number",
+          "format": "double"
+        },
+        "targetAttachedId": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "ProductRelationVO": {
+      "type": "object",
+      "properties": {
+        "listId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "productAId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "productBId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "relation": {
+          "type": "string"
+        }
+      }
+    },
+    "Rights": {
+      "type": "object",
+      "properties": {
+        "rightDesc": {
+          "type": "string"
+        },
+        "rightId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "rightName": {
+          "type": "string"
+        }
+      }
+    },
+    "ProductBenefitLevel": {
+      "type": "object",
+      "properties": {
+        "benefitLevel": {
+          "type": "string"
+        },
+        "levelDesc": {
+          "type": "string"
+        },
+        "productId": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "AgeLimit": {
+      "type": "object",
+      "properties": {
+        "benefitLevel": {
+          "type": "string",
+          "description": "销售产品档次"
+        },
+        "chargePeriod": {
+          "type": "integer",
+          "format": "int32",
+          "description": "缴费类别"
+        },
+        "chargeYear": {
+          "type": "integer",
+          "format": "int32",
+          "description": "缴费期限"
+        },
+        "coveragePeriod": {
+          "type": "integer",
+          "format": "int32",
+          "description": "保障类别"
+        },
+        "coverageYear": {
+          "type": "integer",
+          "format": "int32",
+          "description": "保障期限"
+        },
+        "endPeriod": {
+          "type": "integer",
+          "format": "int32",
+          "description": "年金领取截止类别"
+        },
+        "endYear": {
+          "type": "integer",
+          "format": "int32",
+          "description": "年金领取截止期限"
+        },
+        "gender": {
+          "type": "string",
+          "description": "性别"
+        },
+        "maxInsdAge": {
+          "type": "integer",
+          "format": "int32",
+          "description": "被保人允许的最大年龄"
+        },
+        "maxPhAge": {
+          "type": "integer",
+          "format": "int32",
+          "description": "投保人允许的最大年龄"
+        },
+        "minInsdAge": {
+          "type": "integer",
+          "format": "int32",
+          "description": "被保人允许的最新年龄"
+        },
+        "minPhAge": {
+          "type": "integer",
+          "format": "int32",
+          "description": "投保人允许的最小年龄"
+        },
+        "payPeriod": {
+          "type": "integer",
+          "format": "int32",
+          "description": "年金领取类别"
+        },
+        "payYear": {
+          "type": "integer",
+          "format": "int32",
+          "description": "年龄领取期限"
+        }
+      }
+    },
+    "SalesProductSummaryResponse": {
+      "type": "object",
+      "properties": {
+        "clientRequestId": {
+          "type": "string"
+        },
+        "clientRequestTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "exceptions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "messages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GenericValidationResult"
+          }
+        },
+        "result": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "salesProduct": {
+          "type": "array",
+          "description": "销售产品列表",
+          "items": {
+            "$ref": "#/definitions/SalesProduct"
+          }
+        },
+        "serviceReqTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "serviceResTime": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "SalesPackageInfo": {
+      "type": "object",
+      "properties": {
+        "ageRange": {
+          "description": "年龄限制信息",
+          "$ref": "#/definitions/AgeRangeVO"
+        },
+        "attachProductList": {
+          "type": "array",
+          "description": "销售计划可添加附加险列表",
+          "items": {
+            "$ref": "#/definitions/SalesProduct"
+          }
+        },
+        "chargeList": {
+          "type": "array",
+          "description": "缴费期信息",
+          "items": {
+            "$ref": "#/definitions/ProductTermVO"
+          }
+        },
+        "coverageList": {
+          "type": "array",
+          "description": "保障期信息",
+          "items": {
+            "$ref": "#/definitions/ProductTermVO"
+          }
+        },
+        "insurer": {
+          "description": "所属保险公司",
+          "$ref": "#/definitions/Insurer"
+        },
+        "isCollected": {
+          "type": "string",
+          "description": "是否收藏"
+        },
+        "isNew": {
+          "type": "string",
+          "description": "是否新上计划"
+        },
+        "mainProductCode": {
+          "type": "string",
+          "description": "主险Code"
+        },
+        "mainProductId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "主险Id"
+        },
+        "moneyId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "销售计划名称"
+        },
+        "packageCode": {
+          "type": "string",
+          "description": "销售计划代码"
+        },
+        "packageFeatureList": {
+          "type": "array",
+          "description": "销售计划特色信息",
+          "items": {
+            "$ref": "#/definitions/PackageFeature"
+          }
+        },
+        "packageId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "销售计划Id"
+        },
+        "packageName": {
+          "type": "string",
+          "description": "销售计划名称"
+        },
+        "saPremInfo": {
+          "type": "string",
+          "description": "保额保费描述"
+        },
+        "salesLiabilityList": {
+          "type": "array",
+          "description": "销售计划营销责任信息",
+          "items": {
+            "$ref": "#/definitions/SalesProductLiability"
+          }
+        },
+        "salesRightsList": {
+          "type": "array",
+          "description": "销售计划权益列表",
+          "items": {
+            "$ref": "#/definitions/PackageRights"
+          }
+        },
+        "suggestReason": {
+          "type": "string",
+          "description": "计划推荐理由"
+        },
+        "totalVisitCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "计划访问量"
+        }
+      }
+    },
+    "GenericValidationResult": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "ruleType": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "ChargePeriod": {
+      "type": "object",
+      "required": [
+        "periodType",
+        "periodValue"
+      ],
+      "properties": {
+        "extFields": {
+          "type": "object",
+          "description": "扩展字段"
+        },
+        "extObject": {
+          "$ref": "#/definitions/GenericVO"
+        },
+        "periodType": {
+          "type": "integer",
+          "format": "int32",
+          "description": "缴费类型"
+        },
+        "periodValue": {
+          "type": "integer",
+          "format": "int32",
+          "description": "缴费期限"
+        }
+      }
+    },
+    "AgeRangeVO": {
+      "type": "object",
+      "properties": {
+        "maxAge": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "maxUnit": {
+          "type": "string"
+        },
+        "minAge": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "minUnit": {
+          "type": "string"
+        }
+      }
+    },
+    "SalesPackagesResponse": {
+      "type": "object",
+      "properties": {
+        "basicSalesPackageInfo": {
+          "type": "array",
+          "description": "销售计划基本信息列表",
+          "items": {
+            "$ref": "#/definitions/SalesPackageBasicInfo"
+          }
+        },
+        "clientRequestId": {
+          "type": "string"
+        },
+        "clientRequestTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "exceptions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "messages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GenericValidationResult"
+          }
+        },
+        "result": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "serviceReqTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "serviceResTime": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "GenericVO": {
+      "type": "object",
+      "properties": {
+        "extObject": {
+          "$ref": "#/definitions/GenericVO"
+        }
+      }
+    },
+    "SalesRights": {
+      "type": "object",
+      "properties": {
+        "displayOrder": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "entityIdName": {
+          "type": "string"
+        },
+        "identifier": {
+          "$ref": "#/definitions/Serializable"
+        },
+        "ifFilter": {
+          "type": "string"
+        },
+        "listId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "rightDesc": {
+          "type": "string"
+        },
+        "rightName": {
+          "type": "string"
+        },
+        "version": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "RiderRequest": {
+      "type": "object",
+      "required": [
+        "insureds",
+        "mainCoverages",
+        "packageCode",
+        "proposer",
+        "riderCoverages"
+      ],
+      "properties": {
+        "attachedPrdtLimitCondition": {
+          "type": "array",
+          "description": "附加险/豁免险限制信息",
+          "items": {
+            "$ref": "#/definitions/AttachedProductLimit"
+          }
+        },
+        "extFields": {
+          "type": "object",
+          "description": "扩展字段"
+        },
+        "extObject": {
+          "$ref": "#/definitions/GenericVO"
+        },
+        "insureds": {
+          "type": "array",
+          "description": "被保人信息",
+          "items": {
+            "$ref": "#/definitions/Insured"
+          }
+        },
+        "mainCoverages": {
+          "type": "array",
+          "description": "销售计划主险列表",
+          "items": {
+            "$ref": "#/definitions/Coverage"
+          }
+        },
+        "packageCode": {
+          "type": "string",
+          "description": "销售计划代码"
+        },
+        "proposer": {
+          "description": "投保人信息",
+          "$ref": "#/definitions/Proposer"
+        },
+        "riderCoverages": {
+          "type": "array",
+          "description": "销售计划附加险/豁免险列表",
+          "items": {
+            "$ref": "#/definitions/Coverage"
+          }
+        }
+      }
+    },
+    "ProductTermVO": {
+      "type": "object",
+      "properties": {
+        "periodType": {
+          "type": "string",
+          "description": "期限类别"
+        },
+        "periodValue": {
+          "type": "integer",
+          "format": "int32",
+          "description": "期限值"
+        }
+      }
+    },
+    "PayPeriod": {
+      "type": "object",
+      "properties": {
+        "extFields": {
+          "type": "object",
+          "description": "扩展字段"
+        },
+        "extObject": {
+          "$ref": "#/definitions/GenericVO"
+        },
+        "periodType": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "periodValue": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "SalesProductDetailResponse": {
+      "type": "object",
+      "properties": {
+        "clientRequestId": {
+          "type": "string"
+        },
+        "clientRequestTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "exceptions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "insurer": {
+          "description": "保险公司",
+          "$ref": "#/definitions/Insurer"
+        },
+        "messages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GenericValidationResult"
+          }
+        },
+        "packageCode": {
+          "type": "string",
+          "description": "销售计划代码"
+        },
+        "packageName": {
+          "type": "string",
+          "description": "销售计划名称"
+        },
+        "result": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "salesProducts": {
+          "type": "array",
+          "description": "销售产品投保属性信息",
+          "items": {
+            "$ref": "#/definitions/SalesProductDetailInfo"
+          }
+        },
+        "serviceReqTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "serviceResTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "suggestReason": {
+          "type": "string",
+          "description": "推荐理由"
+        }
+      }
+    },
+    "Coverage": {
+      "type": "object",
+      "required": [
+        "benefitlevel",
+        "chargePeriod",
+        "coveragePeriod",
+        "payPeriod",
+        "premium",
+        "productCode",
+        "productId",
+        "sa",
+        "unit"
+      ],
+      "properties": {
+        "benefitlevel": {
+          "type": "string",
+          "example": "1",
+          "description": "档次"
+        },
+        "chargePeriod": {
+          "description": "缴费信息",
+          "$ref": "#/definitions/ChargePeriod"
+        },
+        "coveragePeriod": {
+          "description": "保障信息",
+          "$ref": "#/definitions/CoveragePeriod"
+        },
+        "extFields": {
+          "type": "object",
+          "description": "扩展字段"
+        },
+        "extObject": {
+          "$ref": "#/definitions/GenericVO"
+        },
+        "payPeriod": {
+          "description": "年金领取信息",
+          "$ref": "#/definitions/PayPeriod"
+        },
+        "paymentFreq": {
+          "type": "string",
+          "example": "1",
+          "description": "缴费频率"
+        },
+        "premium": {
+          "type": "number",
+          "format": "double",
+          "example": 100000,
+          "description": "保费"
+        },
+        "productCode": {
+          "type": "integer",
+          "format": "int64",
+          "example": "EBAO001",
+          "description": "产品代码"
+        },
+        "productId": {
+          "type": "integer",
+          "format": "int64",
+          "example": 1,
+          "description": "产品ID"
+        },
+        "sa": {
+          "type": "number",
+          "format": "double",
+          "example": 100000,
+          "description": "保额"
+        },
+        "unit": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "份数"
+        }
+      }
+    },
+    "Insured": {
+      "type": "object",
+      "properties": {
+        "age": {
+          "type": "integer",
+          "format": "int32",
+          "description": "年龄"
+        },
+        "birthday": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "extFields": {
+          "type": "object",
+          "description": "扩展字段"
+        },
+        "extObject": {
+          "$ref": "#/definitions/GenericVO"
+        },
+        "gender": {
+          "type": "string",
+          "description": "性别"
+        },
+        "jobCateCode": {
+          "type": "string",
+          "description": "职业代码"
+        },
+        "jobCateId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "职业"
+        },
+        "name": {
+          "type": "string",
+          "description": "姓名"
+        },
+        "relationWithProposer": {
+          "type": "string"
+        },
+        "smoking": {
+          "type": "string",
+          "description": "吸烟状态"
+        },
+        "socialInsuranceIndi": {
+          "type": "string",
+          "description": "是否有社保"
+        }
+      }
+    },
+    "SalesPackageResponse": {
+      "type": "object",
+      "properties": {
+        "clientRequestId": {
+          "type": "string"
+        },
+        "clientRequestTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "exceptions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "messages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GenericValidationResult"
+          }
+        },
+        "result": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "salesPackageBasicInfo": {
+          "description": "销售计划基本信息",
+          "$ref": "#/definitions/SalesPackageInfo"
+        },
+        "serviceReqTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "serviceResTime": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "Liability": {
+      "type": "object",
+      "properties": {
+        "benefitLevel": {
+          "type": "string"
+        },
+        "countWay": {
+          "type": "string",
+          "description": "营销责任计算方式"
+        },
+        "displayOrder": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "isPricedOnLiab": {
+          "type": "string"
+        },
+        "liabDesc": {
+          "type": "string",
+          "description": "营销责任描述"
+        },
+        "liabDescProd": {
+          "type": "string"
+        },
+        "liabId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "营销责任ID"
+        },
+        "liabName": {
+          "type": "string",
+          "description": "营销责任名称"
+        },
+        "liabType": {
+          "type": "string"
+        },
+        "optionalIndi": {
+          "type": "string"
+        },
+        "premIndi": {
+          "type": "string"
+        },
+        "renderBenefitLevel": {
+          "type": "boolean"
+        },
+        "renderPrem": {
+          "type": "boolean"
+        },
+        "renderSa": {
+          "type": "boolean"
+        },
+        "renderUnit": {
+          "type": "boolean"
+        },
+        "sa": {
+          "type": "number",
+          "format": "double"
+        },
+        "selected": {
+          "type": "boolean"
+        },
+        "stdPremAf": {
+          "type": "number",
+          "format": "double"
+        },
+        "stdPremBf": {
+          "type": "number",
+          "format": "double"
+        },
+        "totalPremAf": {
+          "type": "number",
+          "format": "double"
+        },
+        "unit": {
+          "type": "number",
+          "format": "double"
+        },
+        "unitFlag": {
+          "type": "string"
+        }
+      }
+    },
+    "SalesProductLiability": {
+      "type": "object",
+      "properties": {
+        "categoryName": {
+          "type": "string",
+          "description": "营销责任类别名称"
+        },
+        "liabCategory": {
+          "type": "string",
+          "description": "营销责任类别"
+        },
+        "liabDesc": {
+          "type": "string",
+          "description": "营销责任描述"
+        },
+        "liabId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "liabName": {
+          "type": "string",
+          "description": "营销责任名称"
+        },
+        "needDiseaseIndi": {
+          "type": "string",
+          "description": "是否有疾病描述"
+        }
+      }
+    },
+    "CoveragePeriod": {
+      "type": "object",
+      "properties": {
+        "periodType": {
+          "type": "integer",
+          "format": "int32",
+          "description": "保障期类别"
+        },
+        "periodValue": {
+          "type": "integer",
+          "format": "int32",
+          "description": "保障期限"
+        }
+      }
+    },
+    "AdvancedFiltersResponse": {
+      "type": "object",
+      "properties": {
+        "clientRequestId": {
+          "type": "string"
+        },
+        "clientRequestTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "exceptions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "hotKeywords": {
+          "type": "array",
+          "description": "热搜词列表",
+          "items": {
+            "$ref": "#/definitions/SalesHotKeywords"
+          }
+        },
+        "insurers": {
+          "type": "array",
+          "description": "保险公司列表",
+          "items": {
+            "$ref": "#/definitions/Insurer"
+          }
+        },
+        "messages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GenericValidationResult"
+          }
+        },
+        "result": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "salesCategorys": {
+          "type": "array",
+          "description": "销售产品类别列表",
+          "items": {
+            "$ref": "#/definitions/SalesCategory"
+          }
+        },
+        "salesRights": {
+          "type": "array",
+          "description": "销售产品权益列表",
+          "items": {
+            "$ref": "#/definitions/Rights"
+          }
+        },
+        "serviceReqTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "serviceResTime": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "SalesHotKeywords": {
+      "type": "object",
+      "properties": {
+        "defaultIndi": {
+          "type": "string"
+        },
+        "displayOrder": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "keyWords": {
+          "type": "string"
+        }
+      }
+    },
+    "Proposer": {
+      "type": "object",
+      "properties": {
+        "age": {
+          "type": "integer",
+          "format": "int32",
+          "description": "年龄"
+        },
+        "birthday": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "extFields": {
+          "type": "object",
+          "description": "扩展字段"
+        },
+        "extObject": {
+          "$ref": "#/definitions/GenericVO"
+        },
+        "gender": {
+          "type": "string",
+          "description": "性别"
+        },
+        "income": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "jobCateCode": {
+          "type": "string",
+          "description": "职业代码"
+        },
+        "jobCateId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "职业"
+        },
+        "name": {
+          "type": "string",
+          "description": "姓名"
+        },
+        "smoking": {
+          "type": "string",
+          "description": "吸烟状态"
+        },
+        "socialInsuranceIndi": {
+          "type": "string",
+          "description": "是否有社保"
+        }
+      }
+    },
+    "PackageRights": {
+      "type": "object",
+      "properties": {
+        "displayOrder": {
+          "type": "integer",
+          "format": "int32",
+          "description": "显示顺序"
+        },
+        "ifFilter": {
+          "type": "string",
+          "description": "是否作为筛选条件"
+        },
+        "packageCode": {
+          "type": "string",
+          "description": "销售计划代码"
+        },
+        "rightDesc": {
+          "type": "string",
+          "description": "销售权益描述"
+        },
+        "rightWords": {
+          "type": "string",
+          "description": "销售权益"
+        }
+      }
+    },
+    "PackageFeature": {
+      "type": "object",
+      "properties": {
+        "featureDesc": {
+          "type": "string",
+          "description": "销售计划特色图片描述"
+        },
+        "featurePic": {
+          "type": "string",
+          "description": "销售计划特色图片"
+        },
+        "packageCode": {
+          "type": "string",
+          "description": "销售计划代码"
+        }
+      }
+    },
+    "SalesPackageBasicInfo": {
+      "type": "object",
+      "properties": {
+        "collected": {
+          "type": "boolean",
+          "example": false,
+          "description": "是否收藏"
+        },
+        "coveragePeriods": {
+          "type": "array",
+          "description": "销售计划保障期列表",
+          "items": {
+            "$ref": "#/definitions/CoveragePeriod"
+          }
+        },
+        "examplePrem": {
+          "type": "number",
+          "format": "double",
+          "description": "示例保费"
+        },
+        "examplePremNote": {
+          "type": "string",
+          "description": "示例保费提示"
+        },
+        "isNew": {
+          "type": "boolean",
+          "example": false,
+          "description": "是否新计划"
+        },
+        "labels": {
+          "type": "array",
+          "description": "销售计划标签列表",
+          "items": {
+            "$ref": "#/definitions/SalesLabel"
+          }
+        },
+        "maxAge": {
+          "type": "integer",
+          "format": "int32",
+          "description": "允许的最大投保年龄"
+        },
+        "maxAgeUnit": {
+          "type": "string",
+          "description": "允许的最大投保年龄单位"
+        },
+        "minAge": {
+          "type": "integer",
+          "format": "int32",
+          "description": "允许的最小投保年龄"
+        },
+        "minAgeUnit": {
+          "type": "string",
+          "description": "允许的最小投保年龄单位"
+        },
+        "moneyId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "币种"
+        },
+        "packageCode": {
+          "type": "string",
+          "description": "销售计划代码"
+        },
+        "packageId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "销售计划Id"
+        },
+        "packageName": {
+          "type": "string",
+          "description": "销售计划名称"
+        },
+        "rights": {
+          "type": "array",
+          "description": "销售计划权益列表",
+          "items": {
+            "$ref": "#/definitions/SalesRights"
+          }
+        },
+        "saPremInfo": {
+          "type": "string",
+          "description": "保额保费描述"
+        },
+        "visitNum": {
+          "type": "integer",
+          "format": "int64",
+          "description": "访问量"
+        }
+      }
+    },
+    "Insurer": {
+      "type": "object",
+      "properties": {
+        "abbrCode": {
+          "type": "string"
+        },
+        "abbrName": {
+          "type": "string"
+        },
+        "entityIdName": {
+          "type": "string"
+        },
+        "identifier": {
+          "$ref": "#/definitions/Serializable"
+        },
+        "ifFilter": {
+          "type": "string"
+        },
+        "insurerCode": {
+          "type": "string"
+        },
+        "insurerDesc": {
+          "type": "string"
+        },
+        "insurerId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "insurerLogo": {
+          "type": "string"
+        },
+        "insurerName": {
+          "type": "string"
+        },
+        "telephone": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "version": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    }
+  }
+}
