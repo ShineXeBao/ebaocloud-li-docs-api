@@ -4,7 +4,7 @@
     "version": "1.0",
     "title": "eBaoCloud LI OpenAPI",
     "termsOfService": "http://api.ebaocloud.life/",
-    "description": "This document is the API specification for the eBaoCloud Life part. To practice and run the APIs in this document, you need to apply an eBaoCloud tenant accout(starting from a sandbox account instead of production account) first.<br>\nContact liliang.zhu@ebaotech.com for more information and trial using.\n\n# Built on\nSat Dec 2 2017, 17:05:32 +08:00\n\n# Versioning\nAPI version| Date  |Comments\n--|---|--\n0.5  | 2017-06-13  | Init version\n0.6  | 2017-06-19  | Add new category and readme\n0.6.5 | 2017-06-29  | oauth2 document, Chinese version document\n0.8  | 2017-07-07  | oauth2 lanuch\n0.8.5 | 2017-07-31 | Enhancement in product services\n0.9 | 2017-08-25 | Add limits related APIs (age, premium / SA and term )\n0.9.5 | 2017-09-05 | Add new service for e-policy downloading\n0.9.6 | 2017-09-13 | Add field: extra premium\n1.0 | 2017-11-09 | parameter sequence, add some new function in product\n\n# Authentication\n\n## Overview\n\neBaoCloud offers 3rd party applications the ability to issue authenticated requests on behalf of the eBaoCloud itself. eBaoCloud's implementation is based on the [Client Credentials Grant](http://tools.ietf.org/html/rfc6749#section-4.4) flow of the [oauth 2 specification](http://tools.ietf.org/html/rfc6749).\n\n## Auth Flow\n\nThe oauth2 / token authentication flow follows these 3 major steps:\n\n1. An application (backend) encodes its consumer key and secret (provided by eBaoCloud as an authorized vender) into a specially encoded set of credentials.\n2. An application (backend) makes a request to the POST oauth2 / token endpoint to exchange these credentials for a bearer token.\n3. When accessing the REST API, the application (the APP or website) uses the bearer token to authenticate.\n\n![Auth Flow](/assets/oauth.png)\n\n## Step by step\n\n* Send request to auth end point\n\n```js\nPOST: /cas/ebao/v1/json/tickets\nBody: {\"username\":\"name\", \"password\":\"pwd\"}\nResponse: {\"access_token\": \"xxxx\"}\n```\n\n* Send request with access_token in header\n\n```js\nPOST: /rest/products\nHeader: {\n  \"authorization\":\"Bearer \"+access_token,\n  \"X-ebao-tenant-id\": \"tenant-id\"\n}\n```\n\n## End Points\n\n| | Sandbox | Production |\n| :--- | :--- | :--- |\n| auth / take token | [https://sandbox.ebaocloud.com.cn/cas/ebao/v1/json/tickets](https://sandbox.ebaocloud.com.cn/cas/ebao/v1/json/tickets) | [https://ebaocloud.com.cn/cas/ebao/v1/json/tickets](https://ebaocloud.com.cn/cas/ebao/v1/json/tickets) |\n| APIs | [https://sandbox.gw.ebaocloud.com.cn/li/eBao/1/](https://sandbox.gw.ebaocloud.com.cn/li/eBao/1/) | [https://gw.ebaocloud.com.cn/li/eBao/1/](https://gw.ebaocloud.com.cn/li/eBao/1/)|\n\n\n## Sample\n\n#### Request auth from application\n\n```bash\ncurl --request POST \\\n  --url https://url/cas/ebao/v1/json/tickets \\\n  --header 'content-type: application/json' \\\n  --header 'X-ebao-tenant-id: tenant-id' \\\n  --data '{\\n \\n \"username\":\"site.admin\",\\n \"password\":\"adminPWD!\"\\n}'\n```\n\nNote:\n. the **X-ebao-tenant-id** is the unique id provided by eBaoCloud to identify the tenant.\n. the **username** and **password** are provided by eBaoCloud when you registered as an authorized vendor.\n\n\n#### Response from API GateWay\n\n* Success\n\n```js\n{\n\"access_token\" : \"TGT-233-e7Zuc5FlSAa0SShO3B1f2iugYzRQGQrSSoGwAi0VnWbnBNDwHg\"\n}\n```\n\n* Failed\n\n```js\n{\n\"access_token\" : null\n}\n```\n\n#### App call (Java code sample)\n\n```java\nHttpResponse<String> response = Unirest.post(url) // url：the UAT/product URL\n  .header(\"content-type\", \"application/json\") // application/json\n  .header(\"authorization\", \"Bearer \" + accessToken) // oauth2 access token：the accessToken\n  .header(\"X-ebao-tenant-id\", \"tenant-id\")\n  .body(body) // body: http body\n  .asString();\n```\n\n## Others\n\n### Tokens are passwords\n\nKeep in mind that the consumer key & secret, bearer token credentials, and the bearer token itself grant access to make requests on behalf of an application. These values should be considered as sensitive as passwords, and must not be shared or distributed to untrusted parties.\n\n### SSL required\n\nAll requests (both to obtain and use the tokens) **must use** HTTPS endpoints.\n"
+    "description": "This document is the API specification for the eBaoCloud Life part. To practice and run the APIs in this document, you need to apply an eBaoCloud tenant accout(starting from a sandbox account instead of production account) first.<br>\nContact liliang.zhu@ebaotech.com for more information and trial using.\n\n# Built on\nThu Dec 21 2017, 04:22:45 +08:00\n\n# Versioning\nAPI version| Date  |Comments\n--|---|--\n0.5  | 2017-06-13  | Init version\n0.6  | 2017-06-19  | Add new category and readme\n0.6.5 | 2017-06-29  | oauth2 document, Chinese version document\n0.8  | 2017-07-07  | oauth2 lanuch\n0.8.5 | 2017-07-31 | Enhancement in product services\n0.9 | 2017-08-25 | Add limits related APIs (age, premium / SA and term )\n0.9.5 | 2017-09-05 | Add new service for e-policy downloading\n0.9.6 | 2017-09-13 | Add field: extra premium\n0.9.7 | 2017-11-09 | Parameter sequence, add some new function in product\n0.9.8 | 2017-11-22 | Mortgage product suppport\n1.0 | 2017-12-19 | Proudct model enhancement\n\n# Authentication\n\n## Overview\n\neBaoCloud offers 3rd party applications the ability to issue authenticated requests on behalf of the eBaoCloud itself. eBaoCloud's implementation is based on the [Client Credentials Grant](http://tools.ietf.org/html/rfc6749#section-4.4) flow of the [oauth 2 specification](http://tools.ietf.org/html/rfc6749).\n\n## Auth Flow\n\nThe oauth2 / token authentication flow follows these 3 major steps:\n\n1. An application (backend) encodes its consumer key and secret (provided by eBaoCloud as an authorized vender) into a specially encoded set of credentials.\n2. An application (backend) makes a request to the POST oauth2 / token endpoint to exchange these credentials for a bearer token.\n3. When accessing the REST API, the application (the APP or website) uses the bearer token to authenticate.\n\n![Auth Flow](/assets/oauth.png)\n\n## Step by step\n\n* Send request to auth end point\n\n```js\nPOST: /cas/ebao/v1/json/tickets\nBody: {\"username\":\"name\", \"password\":\"pwd\"}\nResponse: {\"access_token\": \"xxxx\"}\n```\n\n* Send request with access_token in header\n\n```js\nPOST: /rest/products\nHeader: {\n  \"authorization\":\"Bearer \"+access_token,\n  \"X-ebao-tenant-id\": \"tenant-id\"\n}\n```\n\n## End Points\n\n| | Sandbox | Production |\n| :--- | :--- | :--- |\n| auth / take token | [https://sandbox.ebaocloud.com.cn/cas/ebao/v1/json/tickets](https://sandbox.ebaocloud.com.cn/cas/ebao/v1/json/tickets) | [https://ebaocloud.com.cn/cas/ebao/v1/json/tickets](https://ebaocloud.com.cn/cas/ebao/v1/json/tickets) |\n| APIs | [https://sandbox.gw.ebaocloud.com.cn/li/eBao/1/](https://sandbox.gw.ebaocloud.com.cn/li/eBao/1/) | [https://gw.ebaocloud.com.cn/li/eBao/1/](https://gw.ebaocloud.com.cn/li/eBao/1/)|\n\n\n## Sample\n\n#### Request auth from application\n\n```bash\ncurl --request POST \\\n  --url https://url/cas/ebao/v1/json/tickets \\\n  --header 'content-type: application/json' \\\n  --header 'X-ebao-tenant-id: tenant-id' \\\n  --data '{\\n \\n \"username\":\"site.admin\",\\n \"password\":\"adminPWD!\"\\n}'\n```\n\nNote:\n. the **X-ebao-tenant-id** is the unique id provided by eBaoCloud to identify the tenant.\n. the **username** and **password** are provided by eBaoCloud when you registered as an authorized vendor.\n\n\n#### Response from API GateWay\n\n* Success\n\n```js\n{\n\"access_token\" : \"TGT-233-e7Zuc5FlSAa0SShO3B1f2iugYzRQGQrSSoGwAi0VnWbnBNDwHg\"\n}\n```\n\n* Failed\n\n```js\n{\n\"access_token\" : null\n}\n```\n\n#### App call (Java code sample)\n\n```java\nHttpResponse<String> response = Unirest.post(url) // url：the UAT/product URL\n  .header(\"content-type\", \"application/json\") // application/json\n  .header(\"authorization\", \"Bearer \" + accessToken) // oauth2 access token：the accessToken\n  .header(\"X-ebao-tenant-id\", \"tenant-id\")\n  .body(body) // body: http body\n  .asString();\n```\n\n## Others\n\n### Tokens are passwords\n\nKeep in mind that the consumer key & secret, bearer token credentials, and the bearer token itself grant access to make requests on behalf of an application. These values should be considered as sensitive as passwords, and must not be shared or distributed to untrusted parties.\n\n### SSL required\n\nAll requests (both to obtain and use the tokens) **must use** HTTPS endpoints.\n"
   },
   "host": "sandbox.gw.ebaocloud.com.cn",
   "basePath": "/eBao/1.0/",
@@ -53,6 +53,12 @@
             "type": "string"
           }
         },
+        "extendedProps": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "listSalesCategory": {
           "type": "array",
           "description": "产品销售分类",
@@ -83,6 +89,12 @@
           "type": "array",
           "description": "异常信息",
           "items": {
+            "type": "string"
+          }
+        },
+        "extendedProps": {
+          "type": "object",
+          "additionalProperties": {
             "type": "string"
           }
         },
@@ -207,6 +219,12 @@
     "ProductPackageInfo": {
       "type": "object",
       "properties": {
+        "extendedProps": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "packageCode": {
           "type": "string",
           "description": "组合代码"
@@ -347,6 +365,12 @@
             "type": "string"
           }
         },
+        "extendedProps": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "productCode": {
           "type": "string",
           "description": "产品代码"
@@ -408,6 +432,12 @@
     "ProductFundPremiumLimit": {
       "type": "object",
       "properties": {
+        "extendedProps": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "fundCode": {
           "type": "string",
           "description": "基金代码"
@@ -449,31 +479,17 @@
         "coveragePeriod"
       ],
       "properties": {
-        "annuityEndYearMax": {
-          "type": "integer",
-          "format": "int32",
-          "description": "年龄限额相关性，最高年金给付结束年度"
-        },
-        "annuityStartYearMax": {
-          "type": "integer",
-          "format": "int32",
-          "description": "年龄限额相关性，最高年金给付年度"
-        },
         "benefitLevel": {
           "type": "string",
           "description": "年龄限额相关性，档次"
         },
-        "coverageYearMax": {
-          "type": "integer",
-          "format": "int32",
-          "description": "年龄限额相关性，最高保障年度"
+        "extendedProps": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
-        "maxAge": {
-          "type": "integer",
-          "format": "int32",
-          "description": "允许的最大年龄"
-        },
-        "maxAgeUnit": {
+        "minAgeUnit": {
           "type": "string",
           "description": "年龄单位，1:岁,5:天, 4:月"
         },
@@ -482,9 +498,14 @@
           "format": "int32",
           "description": "允许的最小年龄"
         },
-        "minAgeUnit": {
+        "maxAgeUnit": {
           "type": "string",
           "description": "年龄单位，1:岁,5:天, 4:月"
+        },
+        "maxAge": {
+          "type": "integer",
+          "format": "int32",
+          "description": "允许的最大年龄"
         },
         "chargePeriod": {
           "type": "string",
@@ -542,6 +563,21 @@
           "type": "integer",
           "format": "int32",
           "description": "年龄限额相关性，年金给付保证年度"
+        },
+        "coverageYearMax": {
+          "type": "integer",
+          "format": "int32",
+          "description": "年龄限额相关性，最高保障年度"
+        },
+        "annuityStartYearMax": {
+          "type": "integer",
+          "format": "int32",
+          "description": "年龄限额相关性，最高年金给付年度"
+        },
+        "annuityEndYearMax": {
+          "type": "integer",
+          "format": "int32",
+          "description": "年龄限额相关性，最高年金给付结束年度"
         },
         "paymentMethod": {
           "type": "integer",
@@ -604,30 +640,29 @@
       ],
       "properties": {
         "clientRequestId": {
-          "type": "string"
+          "type": "string",
+          "description": "外部交易流水号"
         },
         "clientRequestTime": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "外部请求时间"
         },
-        "extObject": {
-          "$ref": "#/definitions/GenericVO"
-        },
-        "serviceReqTime": {
-          "type": "string",
-          "format": "date-time"
+        "extendedProps": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "calculatePolicy": {
           "description": "利益展示保单计算数据",
           "$ref": "#/definitions/CalculatePolicy"
-        }
-      }
-    },
-    "GenericVO": {
-      "type": "object",
-      "properties": {
-        "extObject": {
-          "$ref": "#/definitions/GenericVO"
+        },
+        "performanceLevel": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "performance level: 1, Low; 2, Middle; 3, High"
         }
       }
     },
@@ -735,6 +770,12 @@
     "Bonus": {
       "type": "object",
       "properties": {
+        "extendedProps": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "cashBonus": {
           "type": "boolean",
           "example": false,
@@ -762,14 +803,11 @@
     "PremiumLimit": {
       "type": "object",
       "properties": {
-        "paymentMethod": {
-          "type": "integer",
-          "format": "int32",
-          "description": "保费限额相关性，支付方式"
-        },
-        "paymentFrequency": {
-          "type": "string",
-          "description": "保费限额相关性，缴费频率"
+        "extendedProps": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "minPrem": {
           "type": "integer",
@@ -781,6 +819,20 @@
           "format": "int64",
           "description": "保费限额相关性，最大保费 "
         },
+        "paymentMethod": {
+          "type": "integer",
+          "format": "int32",
+          "description": "保费限额相关性，支付方式"
+        },
+        "paymentFrequency": {
+          "type": "string",
+          "description": "保费限额相关性，缴费频率"
+        },
+        "currency": {
+          "type": "integer",
+          "format": "int32",
+          "description": "保费限额相关性，币种"
+        },
         "minAge": {
           "type": "integer",
           "format": "int32",
@@ -790,11 +842,6 @@
           "type": "integer",
           "format": "int32",
           "description": "保费限额相关性，最大年龄"
-        },
-        "currency": {
-          "type": "integer",
-          "format": "int32",
-          "description": "保费限额相关性，币种"
         },
         "chargePeriod": {
           "type": "string",
@@ -843,6 +890,12 @@
           "type": "array",
           "description": "异常信息",
           "items": {
+            "type": "string"
+          }
+        },
+        "extendedProps": {
+          "type": "object",
+          "additionalProperties": {
             "type": "string"
           }
         },
@@ -905,6 +958,12 @@
           "type": "array",
           "description": "异常信息",
           "items": {
+            "type": "string"
+          }
+        },
+        "extendedProps": {
+          "type": "object",
+          "additionalProperties": {
             "type": "string"
           }
         },
@@ -975,6 +1034,12 @@
             "type": "string"
           }
         },
+        "extendedProps": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "productInfo": {
           "description": "产品详细信息",
           "$ref": "#/definitions/ProductInfo"
@@ -1005,6 +1070,12 @@
             "type": "string"
           }
         },
+        "extendedProps": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "productCode": {
           "type": "string",
           "description": "产品代码"
@@ -1021,28 +1092,11 @@
         "coveragePeriod"
       ],
       "properties": {
-        "annuityStartPeriod": {
-          "type": "string",
-          "description": "年金支付期限类型"
-        },
-        "annuityStartYear": {
-          "type": "integer",
-          "format": "int32",
-          "description": "年金支付期限"
-        },
-        "annuityEndPeriod": {
-          "type": "string",
-          "description": "年金支付结束期限类型"
-        },
-        "annuityEndYear": {
-          "type": "integer",
-          "format": "int32",
-          "description": "年金支付结束期限"
-        },
-        "annuityPayEnsure": {
-          "type": "integer",
-          "format": "int32",
-          "description": "年金保证支付年限"
+        "extendedProps": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "chargePeriod": {
           "type": "string",
@@ -1077,6 +1131,29 @@
           "format": "int32",
           "example": 20,
           "description": "保障时长（保障期限类型为 1的情况下，此字段无意义；     保障期限类型为2的情况下，此字段为几年;   保障期限类型为3的情况下，此字段为某一年龄;  缴费期限类型为 4的情况下，此字段为几个月）"
+        },
+        "annuityStartPeriod": {
+          "type": "string",
+          "description": "年金支付期限类型"
+        },
+        "annuityStartYear": {
+          "type": "integer",
+          "format": "int32",
+          "description": "年金支付期限"
+        },
+        "annuityEndPeriod": {
+          "type": "string",
+          "description": "年金支付结束期限类型"
+        },
+        "annuityEndYear": {
+          "type": "integer",
+          "format": "int32",
+          "description": "年金支付结束期限"
+        },
+        "annuityPayEnsure": {
+          "type": "integer",
+          "format": "int32",
+          "description": "年金保证支付年限"
         }
       }
     },
@@ -1149,6 +1226,12 @@
             "type": "string"
           }
         },
+        "extendedProps": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "listProductBasicInformation": {
           "type": "array",
           "description": "产品基本信息",
@@ -1182,6 +1265,12 @@
             "type": "string"
           }
         },
+        "extendedProps": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "productCode": {
           "type": "string",
           "description": "产品代码"
@@ -1202,6 +1291,12 @@
     "ProductPkgProduct": {
       "type": "object",
       "properties": {
+        "extendedProps": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "packageId": {
           "type": "integer",
           "format": "int64",
@@ -1278,6 +1373,12 @@
     "Illustrations": {
       "type": "object",
       "properties": {
+        "extendedProps": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "illustrationResultList": {
           "type": "array",
           "description": "利益展示结果列表",
@@ -1290,6 +1391,12 @@
     "MainInformation": {
       "type": "object",
       "properties": {
+        "extendedProps": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "productCode": {
           "type": "string",
           "description": "产品代码"
@@ -1342,9 +1449,17 @@
           "type": "string",
           "description": "是否保额递增"
         },
+        "spouseWaiver": {
+          "type": "string",
+          "description": "if spouse waiver, Y: Yes; N:No"
+        },
         "familyType": {
           "type": "string",
           "description": "家庭产品类型"
+        },
+        "payerWop": {
+          "type": "string",
+          "description": "if payer waiver, Y: Yes; N:No"
         }
       }
     },
@@ -1355,18 +1470,19 @@
       ],
       "properties": {
         "clientRequestId": {
-          "type": "string"
+          "type": "string",
+          "description": "外部交易流水号"
         },
         "clientRequestTime": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "外部请求时间"
         },
-        "extObject": {
-          "$ref": "#/definitions/GenericVO"
-        },
-        "serviceReqTime": {
-          "type": "string",
-          "format": "date-time"
+        "extendedProps": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "calculatePolicy": {
           "description": "保费保额计算数据",
@@ -1437,6 +1553,12 @@
             "type": "string"
           }
         },
+        "extendedProps": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "productPackageInfo": {
           "description": "产品组合详细信息",
           "$ref": "#/definitions/ProductPackageInfo"
@@ -1449,6 +1571,12 @@
         "coveragePeriod"
       ],
       "properties": {
+        "extendedProps": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "packageId": {
           "type": "integer",
           "format": "int64",
@@ -1493,6 +1621,12 @@
     "ProductFund": {
       "type": "object",
       "properties": {
+        "extendedProps": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "fundCode": {
           "type": "string",
           "description": "基金代码"
@@ -1588,6 +1722,12 @@
     "LiabilityInformation": {
       "type": "object",
       "properties": {
+        "extendedProps": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "liabilityName": {
           "type": "string",
           "description": "责任名称"
@@ -1691,6 +1831,12 @@
     "ProductLiability": {
       "type": "object",
       "properties": {
+        "extendedProps": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "annuity": {
           "type": "boolean",
           "example": false,
@@ -1715,6 +1861,12 @@
     "ProductRelationship": {
       "type": "object",
       "properties": {
+        "extendedProps": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "masterProductCode": {
           "type": "string",
           "description": "主险产品代码"
@@ -1840,6 +1992,12 @@
     "ProductPremium": {
       "type": "object",
       "properties": {
+        "extendedProps": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "initialPremium": {
           "type": "array",
           "description": "初始保费限额信息",
@@ -1923,6 +2081,12 @@
     "ProductTerm": {
       "type": "object",
       "properties": {
+        "extendedProps": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "listTermLimit": {
           "type": "array",
           "description": "期限限制",
@@ -1935,6 +2099,12 @@
     "ProductSumAssured": {
       "type": "object",
       "properties": {
+        "extendedProps": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "saLimit": {
           "type": "array",
           "description": "产品保额限制",
@@ -1947,6 +2117,12 @@
     "IllustrationResult": {
       "type": "object",
       "properties": {
+        "extendedProps": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "coverageId": {
           "type": "integer",
           "format": "int64",
@@ -2000,6 +2176,12 @@
     "ProductInfo": {
       "type": "object",
       "properties": {
+        "extendedProps": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "maininfo": {
           "description": "产品主要信息",
           "$ref": "#/definitions/MainInformation"
@@ -2048,6 +2230,12 @@
     "ProductBasicInformation": {
       "type": "object",
       "properties": {
+        "extendedProps": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "productId": {
           "type": "integer",
           "format": "int64",
@@ -2097,25 +2285,11 @@
     "SaLimit": {
       "type": "object",
       "properties": {
-        "lowAgeMonth": {
-          "type": "integer",
-          "format": "int32",
-          "description": "被保人最小年龄（单位月）"
-        },
-        "highAgeMonth": {
-          "type": "integer",
-          "format": "int32",
-          "description": "被保人最大年龄（单位月）"
-        },
-        "occupationCode": {
-          "type": "integer",
-          "format": "int32",
-          "description": "职业类型"
-        },
-        "paymentMethod": {
-          "type": "integer",
-          "format": "int32",
-          "description": "支付方式"
+        "extendedProps": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "limitUnit": {
           "type": "string",
@@ -2135,12 +2309,38 @@
           "type": "integer",
           "format": "int32",
           "description": "币种"
+        },
+        "lowAgeMonth": {
+          "type": "integer",
+          "format": "int32",
+          "description": "被保人最小年龄（单位月）"
+        },
+        "highAgeMonth": {
+          "type": "integer",
+          "format": "int32",
+          "description": "被保人最大年龄（单位月）"
+        },
+        "occupationCode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "职业类型"
+        },
+        "paymentMethod": {
+          "type": "integer",
+          "format": "int32",
+          "description": "支付方式"
         }
       }
     },
     "BasicProductPackageInfo": {
       "type": "object",
       "properties": {
+        "extendedProps": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "packageId": {
           "type": "integer",
           "format": "int64",
@@ -2219,6 +2419,12 @@
     "ProductPkgProductMatrix": {
       "type": "object",
       "properties": {
+        "extendedProps": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "packageId": {
           "type": "integer",
           "format": "int64",
@@ -2243,6 +2449,12 @@
     "ProductSalesCategory": {
       "type": "object",
       "properties": {
+        "extendedProps": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "categoryName": {
           "type": "string",
           "description": "产品销售大类名称"
@@ -2295,6 +2507,12 @@
             "type": "string"
           }
         },
+        "extendedProps": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "productCode": {
           "type": "string",
           "description": "产品代码"
@@ -2308,6 +2526,12 @@
     "PremiumSaCalculation": {
       "type": "object",
       "properties": {
+        "extendedProps": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "unitFlag": {
           "type": "string",
           "description": "保费保额计算方法<br>0 - 保费保额由用户输入<br>1 - 产品按单位售卖<br>2 - 根据保额算保费，但是也允许协议保费<br>3 - 产品根据计划或单位售卖<br>4 - 产品只允许按计划售卖<br>5 - 根据保费算保额，但是也允许协议保费<br>6 - 只允许保额算保费但是也允许协议保费<br>7 - 只允许保费算保额<br>8 - 保费算保额或保额算保费"
@@ -2443,6 +2667,12 @@
     "CalculateCoverageResult": {
       "type": "object",
       "properties": {
+        "extendedProps": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "productCode": {
           "type": "string",
           "description": "计算的产品代码"
@@ -2523,6 +2753,12 @@
     "ProductAge": {
       "type": "object",
       "properties": {
+        "extendedProps": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "policyHolderAge": {
           "type": "array",
           "description": "投保人年龄限制",
@@ -2567,6 +2803,12 @@
           "type": "array",
           "description": "异常信息",
           "items": {
+            "type": "string"
+          }
+        },
+        "extendedProps": {
+          "type": "object",
+          "additionalProperties": {
             "type": "string"
           }
         },
@@ -3500,6 +3742,14 @@
           "type": "string",
           "description": "保单内部序列号, UUID type",
           "readOnly": true
+        }
+      }
+    },
+    "GenericVO": {
+      "type": "object",
+      "properties": {
+        "extObject": {
+          "$ref": "#/definitions/GenericVO"
         }
       }
     },
@@ -6417,6 +6667,60 @@
           "*/*"
         ],
         "parameters": [
+          {
+            "name": "X-ebao-tenant-id",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SalesCategoryResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/pd/products/salesCategory/{productCode}": {
+      "get": {
+        "tags": [
+          "Product"
+        ],
+        "summary": "获取某租户某个销售产品的产品大类",
+        "description": "获取某租户某个销售产品的产品大类",
+        "operationId": "findProductSalesCategoryUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "productCode",
+            "in": "path",
+            "description": "产品代码",
+            "required": true,
+            "type": "string"
+          },
           {
             "name": "X-ebao-tenant-id",
             "in": "header",

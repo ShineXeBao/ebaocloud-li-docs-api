@@ -6,5 +6,5 @@ node merge.js
 node i18n.js
 
 node translation.js
-cp swagger-cn.json ../demo/swagger-cn.json
-cp swagger-en.json ../demo/swagger-en.json
+cp swagger-cn.json ../dist/swagger/swagger-cn.json
+cp swagger-en.json ../dist/swagger/swagger-en.json
