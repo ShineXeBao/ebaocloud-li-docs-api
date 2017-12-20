@@ -1,4 +1,4 @@
-This document is the API specification for the eBaoCloud Life part. To practice and run the APIs in this document, you need to apply an eBaoCloud tenant accout(start from a sandbox account instead of production) first.<br>
+This document is the API specification for the eBaoCloud Life part. To practice and run the APIs in this document, you need to apply an eBaoCloud tenant accout(starting from a sandbox account instead of production account) first.<br>
 Contact liliang.zhu@ebaotech.com for more information and trial using.
 
 # Built on
@@ -15,6 +15,9 @@ API version| Date  |Comments
 0.9 | 2017-08-25 | Add limits related APIs (age, premium / SA and term )
 0.9.5 | 2017-09-05 | Add new service for e-policy downloading
 0.9.6 | 2017-09-13 | Add field: extra premium
+0.9.7 | 2017-11-09 | Parameter sequence, add some new function in product
+0.9.8 | 2017-11-22 | Mortgage product suppport
+1.0 | 2017-12-19 | Proudct model enhancement
 
 # Authentication
 
