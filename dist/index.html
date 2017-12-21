@@ -109,6 +109,17 @@
             }
           ];
           break;
+        case "/bff":
+        case "/bff/":  // bff, waiting for release
+        case "/api/bff":
+        case "/api/bff/":  // bff, waiting for release
+          apis = [
+            {
+              name: 'en',
+              url: './swagger/swagger-bff-mobile-en.json'
+            }
+          ];
+          break;
         default:
           apis = [
             {
