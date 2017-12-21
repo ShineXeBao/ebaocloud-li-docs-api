@@ -8,9 +8,9 @@ var swaggermerge = require('swagger-merge');
 
 var fs = require('fs');
 
-var swaggerClaim = require('./claim-swagger.json')
-var swaggerfreelook = require('./freelook-swagger.json')
-var swaggerPolicy = require('./policy-swagger.json')
+var swaggerClaim = require('./source/claim-swagger.json')
+var swaggerfreelook = require('./source/freelook-swagger.json')
+var swaggerPolicy = require('./source/policy-swagger.json')
 
 //读readme 文件，加入description
 var readme = ''
@@ -41,4 +41,4 @@ var mergedString = JSON.stringify(mergedJson, null, 2);
 //smergedString = mergedString.replace(/product-controller/g, "Product");
 
 // 本地保存
-fs.writeFileSync("./swagger-en.json", mergedString);
+fs.writeFileSync("./swagger-beta-en.json", mergedString);
