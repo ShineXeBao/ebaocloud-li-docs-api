@@ -78,11 +78,11 @@
       function getQueryString(name) {
         var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
         var r = window.location.search.substr(1).match(reg);
-        //console.log("r: " + r);
+        console.log("r: " + window.location.search);
         if (r != null) return unescape(r[2]); return null;
       }
 
-      var view = getQueryString("for");
+      var view = window.location.search;
       console.log("View API name: " + view);
       var apis;
       switch (view) {
@@ -98,7 +98,8 @@
             }
           ];
           break;
-        case "beta":  // beta, waiting for release
+        case "beta":
+        case "?beta":  // beta, waiting for release
           apis = [
             {
               name: 'en',
