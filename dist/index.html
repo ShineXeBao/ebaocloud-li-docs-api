@@ -82,7 +82,7 @@
         if (r != null) return unescape(r[2]); return null;
       }
 
-      var view = window.location.search;
+      var view = window.location.pathname;
       console.log("View API name: " + view);
       var apis;
       switch (view) {
@@ -98,7 +98,7 @@
             }
           ];
           break;
-        case "beta":
+        case "/beta":
         case "?beta":  // beta, waiting for release
           apis = [
             {
