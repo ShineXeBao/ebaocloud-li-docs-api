@@ -75,17 +75,49 @@
 
     <script src="redoc.min.js"> </script>
     <script>
-      // list of APIS
-      var apis = [
-        {
-          name: 'en',
-          url: './swagger/swagger-en.json'
-        },
-        {
-          name: 'cn',
-          url: './swagger/swagger-cn.json'
-        }
-      ];
+      function getQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var r = window.location.search.substr(1).match(reg);
+        //console.log("r: " + r);
+        if (r != null) return unescape(r[2]); return null;
+      }
+
+      var view = getQueryString("for");
+      console.log("View API name: " + view);
+      var apis;
+      switch (view) {
+        case "eBaoCloud":  // standard API doc
+          apis = [
+            {
+              name: 'en',
+              url: './swagger/swagger-en.json'
+            },
+            {
+              name: 'cn',
+              url: './swagger/swagger-cn.json'
+            }
+          ];
+          break;
+        case "beta":  // beta, waiting for release
+          apis = [
+            {
+              name: 'en',
+              url: './swagger/swagger-beta-en.json'
+            }
+          ];
+          break;
+        default:
+          apis = [
+            {
+              name: 'en',
+              url: './swagger/swagger-en.json'
+            },
+            {
+              name: 'cn',
+              url: './swagger/swagger-cn.json'
+            }
+          ];
+      }
 
       // initially render first API
       Redoc.init(apis[0].url);
