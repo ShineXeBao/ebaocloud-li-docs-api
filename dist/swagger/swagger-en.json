@@ -208,7 +208,7 @@
         "premType": {
           "type": "string",
           "example": "2: regular premium; 3: regular topup; 4: ad-hoc topup",
-          "description": "Fee type for investement product"
+          "description": "Fee type for investment product"
         },
         "extFields": {
           "type": "object",
@@ -244,7 +244,7 @@
         },
         "specialClause": {
           "type": "string",
-          "description": "Package clauses for sepecial usage"
+          "description": "Package clauses for special usage"
         },
         "pricingMethod": {
           "type": "string",
@@ -450,12 +450,12 @@
         "minAdhocTopupPrem": {
           "type": "integer",
           "format": "int64",
-          "description": "Allowed minimum adhoc topup amount"
+          "description": "Allowed minimum ad-hoc top-up amount"
         },
         "minRegulaTopupPrem": {
           "type": "integer",
           "format": "int64",
-          "description": "Allowed minimum regular topup amount"
+          "description": "Allowed minimum regular top-up amount"
         },
         "paymentFrequency": {
           "type": "string",
@@ -543,7 +543,7 @@
         },
         "annuityStartPeriod": {
           "type": "string",
-          "description": "Age range related factor: annuity payment peroid"
+          "description": "Age range related factor: annuity payment period"
         },
         "annuityStartYear": {
           "type": "integer",
@@ -662,7 +662,7 @@
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "Performance level of the illustartion<br>1 - Low<br>2 - Middle<br>3 - High"
+          "description": "Performance level of the illustration<br>1 - Low<br>2 - Middle<br>3 - High"
         }
       }
     },
@@ -736,7 +736,7 @@
         "annuityStartPeriod": {
           "type": "string",
           "example": "1",
-          "description": "Age range related factor: annuity payment peroid"
+          "description": "Age range related factor: annuity payment period"
         },
         "annuityStartYear": {
           "type": "integer",
@@ -812,41 +812,41 @@
         "minPrem": {
           "type": "integer",
           "format": "int64",
-          "description": "Premium limites related factor: minium premium"
+          "description": "Premium limits related factor: minimum premium"
         },
         "maxPrem": {
           "type": "integer",
           "format": "int64",
-          "description": "Premium limites related factor: maximum premium"
+          "description": "Premium limits related factor: maximum premium"
         },
         "paymentMethod": {
           "type": "integer",
           "format": "int32",
-          "description": "Premium limites related factor: payment method"
+          "description": "Premium limits related factor: payment method"
         },
         "paymentFrequency": {
           "type": "string",
-          "description": "Premium limites related factor: payment frequency"
+          "description": "Premium limits related factor: payment frequency"
         },
         "currency": {
           "type": "integer",
           "format": "int32",
-          "description": "Premium limites related factor: currency"
+          "description": "Premium limits related factor: currency"
         },
         "minAge": {
           "type": "integer",
           "format": "int32",
-          "description": "Premium limites related factor: minium age"
+          "description": "Premium limits related factor: minimum age"
         },
         "maxAge": {
           "type": "integer",
           "format": "int32",
-          "description": "Premium limites related factor: maximum age"
+          "description": "Premium limits related factor: maximum age"
         },
         "chargePeriod": {
           "type": "string",
           "example": "2",
-          "description": "Premium limites related factor: charge period",
+          "description": "Premium limits related factor: charge period",
           "enum": [
             "1",
             "2",
@@ -858,7 +858,7 @@
           "type": "integer",
           "format": "int32",
           "example": 5,
-          "description": "Premium limites related factor: charge year"
+          "description": "Premium limits related factor: charge year"
         }
       }
     },
@@ -916,7 +916,7 @@
         "annualPrem": {
           "type": "number",
           "format": "double",
-          "description": "Total annual permium"
+          "description": "Total annual premium"
         },
         "policyFee": {
           "type": "number",
@@ -1153,7 +1153,7 @@
         "annuityPayEnsure": {
           "type": "integer",
           "format": "int32",
-          "description": "Annuity guarentee pay year"
+          "description": "Annuity guarantee pay year"
         }
       }
     },
@@ -1169,7 +1169,7 @@
         "premType": {
           "type": "string",
           "example": "3: regular topup; 7: partial withdrawn; 4: ad-hoc topup",
-          "description": "Fee type for investement product"
+          "description": "Fee type for investment product"
         },
         "startYear": {
           "type": "integer",
@@ -1181,7 +1181,7 @@
           "type": "integer",
           "format": "int64",
           "example": 5,
-          "description": "Topup and withdraw plan: ending year"
+          "description": "Top-up and withdraw plan: ending year"
         },
         "amount": {
           "type": "number",
@@ -1333,7 +1333,7 @@
         },
         "calcMethod": {
           "type": "string",
-          "description": "Premium / SA calcualtion method"
+          "description": "Premium / SA calculation method"
         },
         "benefitLevel": {
           "type": "string",
@@ -1639,7 +1639,7 @@
         "minPartialWithdralval": {
           "type": "integer",
           "format": "int64",
-          "description": "Allowed minimum parial withdraw amount"
+          "description": "Allowed minimum partial withdraw amount"
         },
         "minPartialWithdralRemainingVal": {
           "type": "integer",
@@ -1686,7 +1686,7 @@
         },
         "settleFreq": {
           "type": "string",
-          "description": "settlement freqency"
+          "description": "settlement frequency"
         },
         "settleMonth": {
           "type": "integer",
@@ -1820,7 +1820,7 @@
           "type": "integer",
           "format": "int32",
           "example": 5,
-          "description": "Term limit list related factor: Annuity guarentee pay year"
+          "description": "Term limit list related factor: Annuity guarantee pay year"
         },
         "extFields": {
           "type": "object",
@@ -2014,21 +2014,21 @@
         },
         "adhocTopup": {
           "type": "array",
-          "description": "Investment product, single topup limit",
+          "description": "Investment product, single top-up limit",
           "items": {
             "$ref": "#/definitions/PremiumLimit"
           }
         },
         "regularTopup": {
           "type": "array",
-          "description": "Investment product, regular topup limit",
+          "description": "Investment product, regular top-up limit",
           "items": {
             "$ref": "#/definitions/PremiumLimit"
           }
         },
         "increasePremium": {
           "type": "array",
-          "description": "Increase premium limt",
+          "description": "Increase premium limit",
           "items": {
             "$ref": "#/definitions/PremiumLimit"
           }
@@ -2042,21 +2042,21 @@
         },
         "increaseRegularTopup": {
           "type": "array",
-          "description": "Investment product, increase regular topup limit",
+          "description": "Investment product, increase regular top-up limit",
           "items": {
             "$ref": "#/definitions/PremiumLimit"
           }
         },
         "decreaseRegularTopup": {
           "type": "array",
-          "description": "Investment product, decrease regular topup limit",
+          "description": "Investment product, decrease regular top-up limit",
           "items": {
             "$ref": "#/definitions/PremiumLimit"
           }
         },
         "listFundPremiumLimit": {
           "type": "array",
-          "description": "Investment product, fund permium limit",
+          "description": "Investment product, fund premium limit",
           "items": {
             "$ref": "#/definitions/ProductFundPremiumLimit"
           }
@@ -2188,7 +2188,7 @@
         },
         "benefitType": {
           "type": "string",
-          "description": "Product benefit category<br>22 - Reimbursement medical insurance<br>23 - subsidised medical insurance<br>31 - accident insurance<br>11 - endowment insurance<br>12 - annuities insurance<br>13 - life insurance<br>14 - term insurance<br>41 - investment insurance<br>15 - mortgage insurance<br>16 - long-term care<br>17 - critical illness"
+          "description": "Product benefit category<br>22 - Reimbursement medical insurance<br>23 - subsidized medical insurance<br>31 - accident insurance<br>11 - endowment insurance<br>12 - annuities insurance<br>13 - life insurance<br>14 - term insurance<br>41 - investment insurance<br>15 - mortgage insurance<br>16 - long-term care<br>17 - critical illness"
         },
         "productId": {
           "type": "integer",
@@ -2269,7 +2269,7 @@
         },
         "benefitType": {
           "type": "string",
-          "description": "Product benefit category<br>22 - Reimbursement medical insurance<br>23 - subsidised medical insurance<br>31 - accident insurance<br>11 - endowment insurance<br>12 - annuities insurance<br>13 - life insurance<br>14 - term insurance<br>41 - investment insurance<br>15 - mortgage insurance<br>16 - long-term care<br>17 - critical illness"
+          "description": "Product benefit category<br>22 - Reimbursement medical insurance<br>23 - subsidized medical insurance<br>31 - accident insurance<br>11 - endowment insurance<br>12 - annuities insurance<br>13 - life insurance<br>14 - term insurance<br>41 - investment insurance<br>15 - mortgage insurance<br>16 - long-term care<br>17 - critical illness"
         },
         "isMainProduct": {
           "type": "string",
@@ -2379,7 +2379,7 @@
         "chargePeriod": {
           "type": "string",
           "example": "2",
-          "description": "Premium limites related factor: charge period",
+          "description": "Premium limits related factor: charge period",
           "enum": [
             "1",
             "2",
@@ -2391,24 +2391,24 @@
           "type": "integer",
           "format": "int32",
           "example": 5,
-          "description": "Premium limites related factor: charge year"
+          "description": "Premium limits related factor: charge year"
         },
         "insuredAge": {
           "type": "integer",
           "format": "int32",
           "example": 50,
-          "description": "Premium limites related factor: insured age"
+          "description": "Premium limits related factor: insured age"
         },
         "premiumFrequency": {
           "type": "string",
           "example": "1",
-          "description": "Premium limites related factor: payment frequency"
+          "description": "Premium limits related factor: payment frequency"
         },
         "payMode": {
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "Premium limites related factor: payment method"
+          "description": "Premium limits related factor: payment method"
         },
         "extFields": {
           "type": "object",
@@ -2578,7 +2578,7 @@
         "chargePeriod": {
           "type": "string",
           "example": "2",
-          "description": "Charge period type<br>1 - Single payment<br>2 - pay next few years<br>3 - pay till a certain age<br>4 - pay for whole life<br>If the product supports payment peroid, this field is compulsory",
+          "description": "Charge period type<br>1 - Single payment<br>2 - pay next few years<br>3 - pay till a certain age<br>4 - pay for whole life<br>If the product supports payment period, this field is compulsory",
           "enum": [
             "1",
             "2",
@@ -2640,7 +2640,7 @@
         },
         "topupWithdrawns": {
           "type": "array",
-          "description": "Topup and withdraw plan",
+          "description": "Top-up and withdraw plan",
           "items": {
             "$ref": "#/definitions/TopupWithdrawnPlan"
           }
@@ -2695,7 +2695,7 @@
         "premAn": {
           "type": "number",
           "format": "double",
-          "description": "Annual permium"
+          "description": "Annual premium"
         },
         "extraPrem": {
           "type": "number",
@@ -2709,7 +2709,7 @@
         "coverageId": {
           "type": "integer",
           "format": "int64",
-          "description": "Inputed coverage code"
+          "description": "Inputted coverage code"
         }
       }
     },
@@ -2914,7 +2914,7 @@
         },
         "insureds": {
           "type": "array",
-          "description": "Policy issured list",
+          "description": "Policy insured list",
           "items": {
             "$ref": "#/definitions/Insured"
           }
@@ -2963,7 +2963,7 @@
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "Policy type<br>1 - Individual policy<br>2 - Group policy<br>3 - Bancassurance",
+          "description": "Policy type<br>1 - Individual policy<br>2 - Group policy<br>3 - Banc assurance",
           "enum": [
             1,
             2,
@@ -3506,11 +3506,11 @@
           "description": "Product code"
         },
         "recurringTopup": {
-          "description": "Recurring topup",
+          "description": "Recurring top-up",
           "$ref": "#/definitions/RecurringTopupInput"
         },
         "singleTopup": {
-          "description": "Single topup",
+          "description": "Single top-up",
           "$ref": "#/definitions/SingleTopupInput"
         },
         "waiverExt": {
@@ -4214,7 +4214,7 @@
           "type": "number",
           "format": "double",
           "example": 10000,
-          "description": "Topup amount"
+          "description": "Top-up amount"
         }
       }
     },
@@ -4355,7 +4355,7 @@
         "preferredLifeIndi": {
           "type": "string",
           "example": "0",
-          "description": "Insurance risk classifications <br>0 - N/A<br>1 - Prefer pluse<br>2 - Prefer<br>3 - Standard plus<br>4 - Standard<br>5 - Sub-perfer<br>6 - Sub-standard"
+          "description": "Insurance risk classifications <br>0 - N/A<br>1 - Prefer plus<br>2 - Prefer<br>3 - Standard plus<br>4 - Standard<br>5 - Sub-prefer<br>6 - Sub-standard"
         },
         "salutation": {
           "type": "string",
@@ -4640,7 +4640,7 @@
           "type": "number",
           "format": "double",
           "example": 10000,
-          "description": "Topup amount"
+          "description": "Top-up amount"
         }
       }
     },
@@ -5024,7 +5024,7 @@
         },
         "insureds": {
           "type": "array",
-          "description": "Policy issured list",
+          "description": "Policy insured list",
           "items": {
             "$ref": "#/definitions/InsuredInput"
           }
@@ -5059,7 +5059,7 @@
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "Policy type<br>1 - Individual policy<br>2 - Group policy<br>3 - Bancassurance",
+          "description": "Policy type<br>1 - Individual policy<br>2 - Group policy<br>3 - Banc assurance",
           "enum": [
             1,
             2,
@@ -5432,11 +5432,11 @@
           "description": "Product ID"
         },
         "recurringTopup": {
-          "description": "Recurring topup",
+          "description": "Recurring top-up",
           "$ref": "#/definitions/RecurringTopup"
         },
         "singleTopup": {
-          "description": "Single topup",
+          "description": "Single top-up",
           "$ref": "#/definitions/SingleTopup"
         },
         "waiverExt": {
@@ -5722,7 +5722,7 @@
           "type": "number",
           "format": "double",
           "example": 10000,
-          "description": "Topup amount"
+          "description": "Top-up amount"
         }
       }
     },
@@ -5747,7 +5747,7 @@
           "type": "number",
           "format": "double",
           "example": 10000,
-          "description": "Topup amount"
+          "description": "Top-up amount"
         }
       }
     },
@@ -6005,7 +6005,7 @@
         },
         "insuredPartyId": {
           "type": "string",
-          "description": "Internal ID for the beneficiary according to the issured , UUID type",
+          "description": "Internal ID for the beneficiary according to the insured , UUID type",
           "readOnly": true
         },
         "listId": {
@@ -6871,8 +6871,8 @@
         "tags": [
           "Proposal"
         ],
-        "summary": "Get ePolicy download URI by proposal No. after policy issured",
-        "description": "Get ePolicy download URI by proposal No. after policy issured",
+        "summary": "Get ePolicy download URI by proposal No. after policy issued",
+        "description": "Get ePolicy download URI by proposal No. after policy issued",
         "operationId": "getEPolicyDownloadUrlUsingGET",
         "consumes": [
           "application/json"
