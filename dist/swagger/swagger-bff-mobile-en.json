@@ -2332,7 +2332,7 @@
     "Map«string,List«IllusItem»»": {
       "type": "object",
       "additionalProperties": {
-        "$ref": "#/definitions/List"
+        "type": "array"
       }
     },
     "ProposalCriteriaRequest": {
