@@ -12,6 +12,7 @@
     "swagger-merge": "^0.3.3"
   },
   "dependencies": {
+    "commander": "^2.12.2",
     "date-fns": "^1.29.0"
   }
 }
