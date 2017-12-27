@@ -1,6 +1,6 @@
 'use strict';
 var cli = require ('./cli.js');
-var path = cli();
+var path = __dirname + '/' + cli.workPath();
 console.log('Working path: %s', path);
 
 var fs = require('fs');
@@ -53,23 +53,23 @@ for (var i in transEnum) {
    //console.log(trans[i]);
    eval(trans[i]);
 }
-fs.writeFileSync(path + '/locales/swagger-cn.properties', properties);
+fs.writeFileSync(path + '/tmp/swagger.properties', properties);
 
-fs.writeFileSync(path + '/tmp/swagger-template-en.json', JSON.stringify(swagger, null, 2));
+fs.writeFileSync(path + '/tmp/swagger-template.json', JSON.stringify(swagger, null, 2));
 
 //替换中文版readme
 //读readme 文件，加入description
-var readme = fs.readFileSync(path + '/locales/README-cn.md', 'utf-8');
-var info = {
-    version: "1.0",
-    title: "eBaoCloud 寿险API参考文档",
-    //add description from readme (in markdown)
-    description: `${readme.toString()}`
-}
-swagger.info = info;
-
-var timeStamp = `${format(new Date(), 'YYYY年MMMD日 ddd, HH:mm:ss Z', {locale: zh_cnLocale})}`;
-var i18nString = JSON.stringify(swagger, null, 2);
-i18nString = i18nString.replace(/\[TIMESTAMP\]/, timeStamp);
-
-fs.writeFileSync(path + '/tmp/swagger-template-cn.json', i18nString);
+// var readme = fs.readFileSync(path + '/locales/README-cn.md', 'utf-8');
+// var info = {
+//     version: "1.0",
+//     title: "eBaoCloud 寿险API参考文档",
+//     //add description from readme (in markdown)
+//     description: `${readme.toString()}`
+// }
+// swagger.info = info;
+//
+// var timeStamp = `${format(new Date(), 'YYYY年MMMD日 ddd, HH:mm:ss Z', {locale: zh_cnLocale})}`;
+// var i18nString = JSON.stringify(swagger, null, 2);
+// i18nString = i18nString.replace(/\[TIMESTAMP\]/, timeStamp);
+//
+// fs.writeFileSync(path + '/tmp/swagger-template-cn.json', i18nString);
