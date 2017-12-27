@@ -53,6 +53,6 @@ var timeStamp = `${format(new Date(), 'ddd MMM D YYYY, HH:mm:ss Z')}`;
 swaggerString = swaggerString.replace(/\[TIMESTAMP\]/, timeStamp);
 
 //写入文件
-console.log('Writing file to: %s',path + '/swagger-' + lang + '.json' );
+console.log('Writing file to: %s',path + '/swagger-' + cli.workPath() + '-' + lang + '.json' );
 fs.writeFileSync(path + '/swagger-' + cli.workPath() + '-' + lang + '.json', swaggerString);
-console.log('Writing swagger-' + lang + '.json... Done.');
+console.log('Writing swagger-' + cli.workPath() + '-' + lang + '.json... Done.');
