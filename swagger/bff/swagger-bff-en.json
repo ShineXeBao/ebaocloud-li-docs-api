@@ -4,7 +4,7 @@
     "version": "1.0",
     "title": "eBaoCloud OpenAPI for Mobile BFF (Backends for Frontends)",
     "termsOfService": "http://api.ebaocloud.life/",
-    "description": "This document is the API specification for the eBaoCloud Life part. To practice and run the APIs in this document, you need to apply an eBaoCloud tenant account(starting from a sandbox account instead of production account) first.<br>\nContact liliang.zhu@ebaotech.com for more information and trial using.\n\n# Built on\nThu Dec 28 2017, 03:37:54 +08:00\n\n# Versioning\nAPI version| Date  |Comments\n"
+    "description": "This document is the API specification for the eBaoCloud Life part. To practice and run the APIs in this document, you need to apply an eBaoCloud tenant account(starting from a sandbox account instead of production account) first.<br>\nContact liliang.zhu@ebaotech.com for more information and trial using.\n\n# Built on\nThu Dec 28 2017, 13:51:11 +08:00\n\n# Versioning\nAPI version| Date  |Comments\n"
   },
   "host": "eli.ebaocloud.com.cn",
   "basePath": "/bff",
@@ -206,7 +206,7 @@
           "eBaoCloud-Li"
         ],
         "summary": "Premium calculation",
-        "description": "Call eBaoCloud premium calculation serivce",
+        "description": "Call eBaoCloud premium calculation service",
         "operationId": "calcPremiumUsingPOST",
         "consumes": [
           "application/json"
@@ -253,7 +253,7 @@
           "eBaoCloud-Li"
         ],
         "summary": "Benefit illustration",
-        "description": "Call eBaoCloud benefit illustration calculation serivce",
+        "description": "Call eBaoCloud benefit illustration calculation service",
         "operationId": "illustrationCalcUsingPOST",
         "consumes": [
           "application/json"
@@ -494,7 +494,7 @@
           "Calculate Premium"
         ],
         "summary": "Premium calculation",
-        "description": "Call eBaoCloud premium calculation serivce",
+        "description": "Call eBaoCloud premium calculation service",
         "operationId": "calcPremiumUsingPOST_1",
         "consumes": [
           "application/json"
@@ -667,7 +667,7 @@
           "Proposal"
         ],
         "summary": "Proposal enquiry",
-        "description": "Enquiry propoal base on the according conditions",
+        "description": "Enquiry proposal base on the according conditions",
         "operationId": "queryUsingPOST",
         "consumes": [
           "application/json"
@@ -1253,7 +1253,7 @@
           {
             "name": "tenantCode",
             "in": "path",
-            "description": "Tenant Code",
+            "description": "Tenant code",
             "required": true,
             "type": "string"
           }

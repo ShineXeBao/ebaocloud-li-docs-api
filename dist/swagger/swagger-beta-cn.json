@@ -4,7 +4,7 @@
     "version": "0.1.0",
     "title": "eBaoCloud LI OpenAPI",
     "termsOfService": "http://api.ebaocloud.life/",
-    "description": "This document is the API specification for the eBaoCloud Life part. To practice and run the APIs in this document, you need to apply an eBaoCloud tenant account(starting from a sandbox account instead of production account) first.<br>\nContact liliang.zhu@ebaotech.com for more information and trial using.\n\n# Built on\nThu Dec 28 2017, 13:46:49 +08:00\n\n# Versioning\nAPI version| Date  |Comments\n"
+    "description": "本篇文档描述了eBaoCloud（易保云）寿险所提供的API（API specification）。如果您想运行和使用这些API，你需要首先获取一个eBaoCloud的租户账号，请联系Antang.Du@ebaotech.com获取账号。我们会提供沙箱环境给您。\n\n# 搭建时间\nThu Dec 28 2017, 13:47:37 +08:00\n\n# 版本\nAPI 版本| 时间  |说明\n"
   },
   "host": "sandbox.gw.ebaocloud.com.cn",
   "basePath": "/",
@@ -19,7 +19,7 @@
     },
     {
       "name": "policy alteration",
-      "description": "Policy alteration controller"
+      "description": "保全控制"
     },
     {
       "name": "Policy"
@@ -39,29 +39,29 @@
       "properties": {
         "clientRequestId": {
           "type": "string",
-          "description": "Client request id, to identify a request"
+          "description": "客户请求ID"
         },
         "clientRequestTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Client request time, format: yyyy-MM-dd'T'HH:mm:ss"
+          "description": "客户请求日期，日期格式：yyyy-MM-dd'T'HH:mm:ss"
         },
         "policyNo": {
           "type": "string",
-          "description": "Claim policy number"
+          "description": "理赔保单号"
         },
         "claimant": {
-          "description": "Information of claimant",
+          "description": "理赔索赔人信息",
           "$ref": "#/definitions/ClaimantInput"
         },
         "insured": {
-          "description": "Information of insured",
+          "description": "理赔被保险人信息",
           "$ref": "#/definitions/InsuredInput"
         },
         "relationToInsured": {
           "type": "integer",
           "format": "int32",
-          "description": "Claimant relation to insured <br>1 - Spouse <br>2 - Child <br>3 - Parent <br>4 - Relative <br>6 - others <br>7 - Employer <br>1001 - self",
+          "description": "理赔索赔人和被保人关系<br>1 - 夫妻 <br>2 - 子女<br>3 - 父母 <br>4 - 亲属 <br>6 - 其他 <br>7 - 雇主<br>1001 - 本人",
           "enum": [
             1,
             2,
@@ -73,13 +73,13 @@
           ]
         },
         "event": {
-          "description": "Information of claim event",
+          "description": "理赔事件信息",
           "$ref": "#/definitions/ClaimEventInput"
         },
         "claimType": {
           "type": "integer",
           "format": "int32",
-          "description": "Claim type <br>1 - Accident <br>2 - Death <br>5 - Hospitalization<br>8 - Medical ",
+          "description": "理赔类型<br>1 - 意外 <br>2 - 死亡 <br>5 - 住院<br>8 - 医疗",
           "enum": [
             1,
             2,
@@ -97,35 +97,35 @@
       "properties": {
         "clientRequestId": {
           "type": "string",
-          "description": "Client request id, to identify a request"
+          "description": "客户请求ID"
         },
         "clientRequestTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Client request time, format: yyyy-MM-dd'T'HH:mm:ss"
+          "description": "客户请求日期，日期格式：yyyy-MM-dd'T'HH:mm:ss"
         },
         "result": {
           "type": "integer",
           "format": "int32",
-          "description": "Result. <br>1 - Success<br>0 - Failed with business issue<br>-1 - Failed with unknown exception"
+          "description": "注册结果<br>1 - 成功s<br>0 - 失败<br>-1 - 未知错误的失败"
         },
         "messages": {
           "type": "array",
-          "description": "Messages of business issues",
+          "description": "理赔注册返回消息",
           "items": {
             "$ref": "#/definitions/GenericValidationResult"
           }
         },
         "exceptions": {
           "type": "array",
-          "description": "Exception messages",
+          "description": "例外消息",
           "items": {
             "type": "string"
           }
         },
         "claimCaseNo": {
           "type": "string",
-          "description": "Claim case number"
+          "description": "理赔案件号"
         }
       }
     },
@@ -142,7 +142,7 @@
         },
         "mobile": {
           "type": "string",
-          "description": "Mobile No."
+          "description": "手机号"
         }
       }
     },
@@ -157,7 +157,7 @@
         "reportType": {
           "type": "integer",
           "format": "int32",
-          "description": "Report by <br>1 - phone <br>2 - fax <br>4 - sms <br>5 - network <br>6 - email",
+          "description": "通过如下方式注册<br>1 - 电话 <br>2 - 传真 <br>4 - SMS短信 <br>5 - 网络 <br>6 - email",
           "enum": [
             1,
             2,
@@ -169,7 +169,7 @@
         "eventNature": {
           "type": "integer",
           "format": "int32",
-          "description": "Event nature <br>1 - illness <br>2 - accident",
+          "description": "理赔事件类型<br>1 - 生病<br>2 - 意外",
           "enum": [
             1,
             2
@@ -178,11 +178,11 @@
         "eventTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Date when claim event happens, format: yyyy-MM-dd'T'HH:mm:ss"
+          "description": "理赔事件发生日期，日期格式：yyyy-MM-dd'T'HH:mm:ss"
         },
         "eventDetail": {
           "type": "string",
-          "description": "Detail of claim event"
+          "description": "理赔事件信息"
         }
       }
     },
@@ -197,11 +197,11 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Name"
+          "description": "被保人姓名"
         },
         "gender": {
           "type": "string",
-          "description": "Insured's sex, M - male;<br>F - female",
+          "description": "被保人性别<br>M - 男性<br>F - 女性",
           "enum": [
             "F",
             "M"
@@ -210,7 +210,7 @@
         "certiType": {
           "type": "integer",
           "format": "int32",
-          "description": "ID type, number type<br>1 - ID card<br>2 - military certificate<br>3 - passport<br>4 - birth certificate<br>9 - other",
+          "description": "证件类型，数字类型<br>1 - 身份证<br>2 - 军人证<br>3 - 护照<br>4 - 出生证<br>9 - 其他",
           "enum": [
             1,
             3,
@@ -219,7 +219,7 @@
         },
         "certiCode": {
           "type": "string",
-          "description": "ID Number"
+          "description": "证件号码"
         }
       }
     },
@@ -247,10 +247,10 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Name"
+          "description": "索赔人姓名"
         },
         "partyContact": {
-          "description": "Contact information",
+          "description": "联系信息",
           "$ref": "#/definitions/ContactInput"
         }
       }
@@ -261,7 +261,7 @@
         "effectiveDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Effective date, format: yyyy-MM-dd'T'HH:mm:ss"
+          "description": "生效日期，日期格式：yyyy-MM-dd'T'HH:mm:ss"
         },
         "freelookResultInfo": {
           "$ref": "#/definitions/FreelookResultInfo"
@@ -269,28 +269,28 @@
         "orderId": {
           "type": "integer",
           "format": "int32",
-          "description": "Alteration order, default is 1"
+          "description": "保全变更顺序，缺省是1"
         },
         "policyChgId": {
           "type": "integer",
           "format": "int64",
-          "description": "Policy alteration internal id"
+          "description": "保全ID"
         },
         "policyId": {
           "type": "integer",
           "format": "int64",
-          "description": "Policy internal id"
+          "description": "保单ID"
         },
         "serviceId": {
           "type": "integer",
           "format": "int32",
-          "description": "Alteration type id<br>201 - Freelook",
+          "description": "保全变更类型Id<br>201 - 犹豫期撤件",
           "example": "201"
         },
         "submissionDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Submission date, format: yyyy-MM-dd'T'HH:mm:ss"
+          "description": "提交日期，日期格式：yyyy-MM-dd'T'HH:mm:ss"
         }
       }
     },
@@ -300,40 +300,40 @@
         "changeId": {
           "type": "integer",
           "format": "int64",
-          "description": "Alteration internal id"
+          "description": "保全变更ID"
         },
         "clientRequestId": {
           "type": "string",
-          "description": "Client request id, to identify a request"
+          "description": "客户请求ID"
         },
         "clientRequestTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Client request time, format: yyyy-MM-dd'T'HH:mm:ss"
+          "description": "客户请求日期，日期格式：yyyy-MM-dd'T'HH:mm:ss"
         },
         "exceptions": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "Exception messages"
+          "description": "例外消息"
         },
         "finishTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Alteration finishing time, format: yyyy-MM-dd'T'HH:mm:ss"
+          "description": "保全变更结束日期，日期格式：yyyy-MM-dd'T'HH:mm:ss"
         },
         "itemResults": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/AlterationItemResultInfo"
           },
-          "description": "Alteration items"
+          "description": "保全变更项列表"
         },
         "result": {
           "type": "integer",
           "format": "int32",
-          "description": "Result. <br>1 - Success<br>0 - Failed with business issue<br>-1 - Failed with unknown exception"
+          "description": "注册结果<br>1 - 成功s<br>0 - 失败<br>-1 - 未知错误的失败"
         }
       }
     },
@@ -343,7 +343,7 @@
         "coverageId": {
           "type": "integer",
           "format": "int64",
-          "description": "Coverage internal id to be alternated"
+          "description": "需要变更的保障Id"
         }
       }
     },
@@ -355,12 +355,12 @@
           "items": {
             "$ref": "#/definitions/CoverageInput"
           },
-          "description": "Coverage to be alternated"
+          "description": "需要变更的保障"
         },
         "freelookReason": {
           "type": "integer",
           "format": "int32",
-          "description": "Freelook reason<br>51 - Financial Difficulty<br>52 - Agent Misrepresented<br>53 - Poor Service from Agent<br>54 - Mismatched Product<br>55 - Others",
+          "description": "犹豫期撤件原因<br>51 - 财务原因<br>52 - 代理人错误引导<br>53 - 代理人服务差<br>54 - 错误产品<br>55 - 其他",
           "enum": [
             "51",
             "52",
@@ -384,19 +384,19 @@
       "properties": {
         "clientRequestId": {
           "type": "string",
-          "description": "Client request id, to identify a request"
+          "description": "客户请求ID"
         },
         "clientRequestTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Client request time, format: yyyy-MM-dd'T'HH:mm:ss"
+          "description": "客户请求日期，日期格式：yyyy-MM-dd'T'HH:mm:ss"
         },
         "items": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/AlterationItemInput"
           },
-          "description": "Alteration item"
+          "description": "保全变更项"
         }
       }
     },
@@ -406,7 +406,7 @@
         "effectiveDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Effective date, format: yyyy-MM-dd'T'HH:mm:ss"
+          "description": "生效日期，日期格式：yyyy-MM-dd'T'HH:mm:ss"
         },
         "freelookInput": {
           "$ref": "#/definitions/FreelookInput"
@@ -414,29 +414,29 @@
         "orderId": {
           "type": "integer",
           "format": "int32",
-          "description": "Alteration order, default is 1",
+          "description": "保全变更顺序，缺省是1",
           "example": "1"
         },
         "policyChgId": {
           "type": "integer",
           "format": "int64",
-          "description": "Policy alteration internal id"
+          "description": "保全ID"
         },
         "policyId": {
           "type": "integer",
           "format": "int64",
-          "description": "Policy alteration internal id"
+          "description": "保全ID"
         },
         "serviceId": {
           "type": "integer",
           "format": "int32",
-          "description": "Alteration type id<br>201 - Freelook",
+          "description": "保全变更类型Id<br>201 - 犹豫期撤件",
           "example": "201"
         },
         "submissionDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Submission date, format: yyyy-MM-dd'T'HH:mm:ss"
+          "description": "提交日期，日期格式：yyyy-MM-dd'T'HH:mm:ss"
         }
       }
     },
@@ -445,17 +445,17 @@
       "properties": {
         "clientRequestId": {
           "type": "string",
-          "description": "Client request id, to identify a request"
+          "description": "客户请求ID"
         },
         "clientRequestTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Client request time, format: yyyy-MM-dd'T'HH:mm:ss"
+          "description": "客户请求日期，日期格式：yyyy-MM-dd'T'HH:mm:ss"
         },
         "effectiveDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Effective date, format: yyyy-MM-dd'T'HH:mm:ss"
+          "description": "生效日期，日期格式：yyyy-MM-dd'T'HH:mm:ss"
         },
         "freelookInput": {
           "$ref": "#/definitions/FreelookInput"
@@ -463,18 +463,18 @@
         "policyId": {
           "type": "integer",
           "format": "int64",
-          "description": "Policy alteration internal id"
+          "description": "保全ID"
         },
         "serviceId": {
           "type": "integer",
           "format": "int32",
-          "description": "Alteration type id<br>201 - Freelook",
+          "description": "保全变更类型Id<br>201 - 犹豫期撤件",
           "example": "201"
         },
         "submissionDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Submission date, format: yyyy-MM-dd'T'HH:mm:ss"
+          "description": "提交日期，日期格式：yyyy-MM-dd'T'HH:mm:ss"
         }
       }
     },
@@ -483,29 +483,29 @@
       "properties": {
         "clientRequestId": {
           "type": "string",
-          "description": "Client request id, to identify a request"
+          "description": "客户请求ID"
         },
         "clientRequestTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Client request time, format: yyyy-MM-dd'T'HH:mm:ss"
+          "description": "客户请求日期，日期格式：yyyy-MM-dd'T'HH:mm:ss"
         },
         "effectiveDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Effective date, format: yyyy-MM-dd'T'HH:mm:ss"
+          "description": "生效日期，日期格式：yyyy-MM-dd'T'HH:mm:ss"
         },
         "exceptions": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "Exception messages"
+          "description": "例外消息"
         },
         "policyId": {
           "type": "integer",
           "format": "int64",
-          "description": "Policy alteration internal id"
+          "description": "保全ID"
         },
         "freelookResultInfo": {
           "$ref": "#/definitions/FreelookResultInfo"
@@ -513,18 +513,18 @@
         "result": {
           "type": "integer",
           "format": "int32",
-          "description": "Result. <br>1 - Success<br>0 - Failed with business issue<br>-1 - Failed with unknown exception"
+          "description": "注册结果<br>1 - 成功s<br>0 - 失败<br>-1 - 未知错误的失败"
         },
         "serviceId": {
           "type": "integer",
           "format": "int32",
-          "description": "Alteration type id<br>201 - Freelook",
+          "description": "保全变更类型Id<br>201 - 犹豫期撤件",
           "example": "201"
         },
         "submissionDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Submission date, format: yyyy-MM-dd'T'HH:mm:ss"
+          "description": "提交日期，日期格式：yyyy-MM-dd'T'HH:mm:ss"
         }
       }
     },
@@ -534,37 +534,37 @@
         "adminFee": {
           "type": "number",
           "format": "double",
-          "description": "Alteration administration fee"
+          "description": "保全变更管理费"
         },
         "advancePremium": {
           "type": "number",
           "format": "double",
-          "description": "Advance premium"
+          "description": "预交保费"
         },
         "medicalFee": {
           "type": "number",
           "format": "double",
-          "description": "Medical fee"
+          "description": "医疗费用"
         },
         "suspense": {
           "type": "number",
           "format": "double",
-          "description": "Premium suspense"
+          "description": "暂计保费"
         },
         "totalExtraPremium": {
           "type": "number",
           "format": "double",
-          "description": "Total additional premium"
+          "description": "总加费"
         },
         "totalGrossPremium": {
           "type": "number",
           "format": "double",
-          "description": "Total gross premium"
+          "description": "总毛保费"
         },
         "totalRefundAmount": {
           "type": "number",
           "format": "double",
-          "description": "Total refund amount"
+          "description": "总退费"
         }
       }
     },
@@ -574,27 +574,27 @@
         "registerType": {
           "type": "string",
           "example": "1001",
-          "description": "Company certificate type, 1001 - company registration number"
+          "description": "公司证件类型，1001 - 公司注册号"
         },
         "registerCode": {
           "type": "string",
           "example": "xxxx",
-          "description": "Company ID"
+          "description": "公司证件号"
         },
         "countryCode": {
           "type": "string",
           "example": "156",
-          "description": "Registered country, 156 - China"
+          "description": "注册国家，156 - 中国"
         },
         "companyName": {
           "type": "string",
           "example": "xxxxxx",
-          "description": "Name of company"
+          "description": "公司名称"
         },
         "organCode": {
           "type": "string",
           "example": "xxxxxx",
-          "description": "Organization code"
+          "description": "公司组织机构代码"
         }
       }
     },
@@ -604,17 +604,17 @@
         "fundCode": {
           "type": "string",
           "example": "F001",
-          "description": "Fund code"
+          "description": "基金代码"
         },
         "assignRate": {
           "type": "number",
           "format": "double",
           "example": 1,
-          "description": "Fund assign ratio"
+          "description": "分配比例"
         },
         "extendedProps": {
           "type": "object",
-          "description": "Extended information, Map type, Key / Value, should be character",
+          "description": "扩展信息, Map类型, Key/Value都是字符型",
           "additionalProperties": {
             "type": "string"
           }
@@ -626,20 +626,20 @@
       "properties": {
         "partyId": {
           "type": "string",
-          "description": "Customer number, UUID type"
+          "description": "客户编号, UUID type"
         },
         "policyCustomer": {
-          "description": "Customer detail",
+          "description": "客户详细信息",
           "$ref": "#/definitions/PolicyCustomerInfo"
         },
         "insuredPartyId": {
           "type": "string",
-          "description": "Beneficiaries' according insured Id"
+          "description": "受益人所对应被保人的当事人编号"
         },
         "beneType": {
           "type": "string",
           "example": "2",
-          "description": "Beneficiaries, 1 beneficiaries<br>2 - beneficiaries<br>3 - insured beneficiaries",
+          "description": "受益类型<br>1 - 生存受益人<br>2 - 身故受益人<br>3 - 投保受益人",
           "enum": [
             "1",
             "2",
@@ -650,7 +650,7 @@
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "The relationship to the insured<br>1 - wife<br>2 - husband<br>3 - child<br>4 - father<br>5 - mother<br>6 - Grand father<br>7 - Grandparent<br>8 - brother<br>9 - sister<br>10 - uncle<br>11 - untie<br>12 - cousin<br>13 - nephew(niece)<br>14 - employer<br>15 - other<br>16 - self",
+          "description": "与被保人关系<br>1 - 妻子<br>2 - 丈夫<br>3 - 子女<br>4 - 父亲<br>5 - 母亲<br>6 - 祖父/外祖父<br>7 - 祖母/外祖母<br>8 - 兄弟<br>9 - 姐妹<br>10 - 叔父/伯父<br>11 - 阿姨<br>12 - 表兄弟/表姐妹<br>13 - 外甥/外甥女/侄子/侄女<br>14 - 雇主<br>15 - 其他<br>16 - 被保人本人",
           "enum": [
             1,
             2,
@@ -674,17 +674,17 @@
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "Benefit order"
+          "description": "受益顺位"
         },
         "shareRate": {
           "type": "number",
           "format": "double",
           "example": 1,
-          "description": "Benefit ratio, up to 1"
+          "description": "受益比例，最大为1"
         },
         "extendedProps": {
           "type": "object",
-          "description": "Extended information, Map type, Key / Value, should be character",
+          "description": "扩展信息, Map类型, Key/Value都是字符型",
           "additionalProperties": {
             "type": "string"
           }
@@ -697,7 +697,7 @@
         "endPeriod": {
           "type": "string",
           "example": "3",
-          "description": "Year to receive the type of annuity, the type of annuity / variable annuity / GMWB should not be empty<br>1 to receive a fixed number of years<br>2 to receive till a certain age<br>3 - receive whole life",
+          "description": "年金领取期间类型，计划类型为年金/变额年金/GMWB时非空<br>1 - 领取固定年数<br>2 - 领取到一定年龄<br>3 - 终身领取",
           "enum": [
             "1",
             "2",
@@ -707,17 +707,17 @@
         "endYear": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of payment years"
+          "description": "领取年数"
         },
         "gurntPeriod": {
           "type": "integer",
           "format": "int32",
-          "description": "Annuity guarantee period (years or age)"
+          "description": "年金保证领取期间（年数或年龄）"
         },
         "payOption": {
           "type": "string",
           "example": "1",
-          "description": "The annuity receive payment options: 1 - to receive payment by cash<br>2 - to pay premium<br>3 - accumulated interest<br>4 - accumulated interest x years after the transfer to pay premium<br>5 - to buy an additional payment of rider",
+          "description": "年金领取方式<br>1 - 现金领取<br>2 - 抵交保费<br>3 - 累积生息<br>4 - 累积生息x年后转抵交保费<br>5 - 买一个附加的缴清的附加险",
           "enum": [
             "1",
             "2",
@@ -729,12 +729,12 @@
         "payOptionTerm": {
           "type": "integer",
           "format": "int32",
-          "description": "Years, only when payOption is 4, this field has value, for others are empty"
+          "description": "年数，当payOption为4时有意义，其他为空"
         },
         "payPeriod": {
           "type": "string",
           "example": "3",
-          "description": "The annuity begins to receive the type of period<br>1 - is immediately received<br>2 - till a certain age to receive<br>3 - years after the collection<br>4 - after a certain age to receive",
+          "description": "年金开始领取期间类型<br>1 - 立即领取<br>2 - 到一定年龄的周年日领取<br>3 - 若干年后领取<br>4 - 一定年龄后领取",
           "enum": [
             "1",
             "2",
@@ -745,12 +745,12 @@
         "payYear": {
           "type": "integer",
           "format": "int32",
-          "description": "The annuity begins to receive the period (years or age)"
+          "description": "年金开始领取期间（年数或年龄）"
         },
         "planFreq": {
           "type": "string",
           "example": "1",
-          "description": "To receive frequency<br>1 - yearly<br>2 - half yearly<br>3 - quarterly <br>4 - monthly<br>5 - single",
+          "description": "领取频率<br>1 - 年<br>2 - 半年<br>3 - 季<br>4 - 月<br>5 - 趸领",
           "enum": [
             "1",
             "2",
@@ -762,7 +762,7 @@
         "planType": {
           "type": "string",
           "example": "1",
-          "description": "Payment plan type<br>1 - cash payment<br>2 - annuity<br>3 - survival benefit<br>4 - maturity  5 - GMWB (guaranteed minimum benefit)<br>6 - variable annuity<br>7 - partial surrender<br>8 - SA dividends",
+          "description": "支付计划类型，非空<br>1 - 现金红利<br>2 - 年金<br>3 - 生存金<br>4 - 满期金<br>5 - GMWB（保证最小提取利益）<br>6 - 变额年金<br>7 - 部分退保<br>8 - 保额红利",
           "enum": [
             "1",
             "2",
@@ -776,7 +776,7 @@
         },
         "extendedProps": {
           "type": "object",
-          "description": "Extended information, Map type, Key / Value, should be character",
+          "description": "扩展信息, Map类型, Key/Value都是字符型",
           "additionalProperties": {
             "type": "string"
           }
@@ -788,65 +788,65 @@
       "properties": {
         "quotationCode": {
           "type": "string",
-          "description": "Quotation calculation request number"
+          "description": "试算请求编号"
         },
         "policyNumber": {
           "type": "string",
-          "description": "Policy number"
+          "description": "保单号码"
         },
         "proposalNumber": {
           "type": "string",
-          "description": "Proposal number"
+          "description": "投保单号码"
         },
         "applyDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Application date, non-empty, date format: yyyy-MM-dd'T'HH:mm:ss"
+          "description": "申请日期，非空，日期格式：yyyy-MM-dd'T'HH:mm:ss"
         },
         "inceptionDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Policy effective date, date format: yyyy-MM-dd'T'HH:mm:ss"
+          "description": "保单生效日期，日期格式：yyyy-MM-dd'T'HH:mm:ss"
         },
         "issueDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Policy issue date, date format: yyyy-MM-dd'T'HH:mm:ss"
+          "description": "承保日期，日期格式：yyyy-MM-dd'T'HH:mm:ss"
         },
         "expiryDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Termination date, date format: yyyy-MM-dd'T'HH:mm:ss"
+          "description": "终止日期，日期格式：yyyy-MM-dd'T'HH:mm:ss"
         },
         "policyHolderName": {
           "type": "string",
-          "description": "Policy holder's name"
+          "description": "投保人姓名"
         },
         "mainInsuredName": {
           "type": "string",
-          "description": "Main insured name"
+          "description": "主被保人姓名"
         },
         "masterProductCode": {
           "type": "string",
-          "description": "Main product code"
+          "description": "主险代码"
         },
         "masterProductName": {
           "type": "string",
-          "description": "Main product name"
+          "description": "主险名称"
         },
         "installPrem": {
           "type": "number",
           "format": "double",
-          "description": "Policy premium",
+          "description": "保单保费",
           "readOnly": true
         },
         "proposalStatus": {
           "type": "string",
-          "description": "Proposal status"
+          "description": "投保单状态"
         },
         "riskStatus": {
           "type": "string",
-          "description": "Policy status<br>0 - not inforce<br>1 - inforce<br>2 - lapsed<br>3 - terminated"
+          "description": "保单状态<br>0 - 未生效<br>1 - 生效<br>2 - 失效<br>3 - 终止"
         }
       }
     },
@@ -856,42 +856,42 @@
         "branchCode": {
           "type": "string",
           "example": "1001",
-          "description": "Branch code"
+          "description": "分行代码"
         },
         "bankCode": {
           "type": "string",
           "example": "test_bank",
-          "description": "Bank code"
+          "description": "银行代码"
         },
         "bankAccountProvince": {
           "type": "string",
           "example": "Shanghai",
-          "description": "The province, the bank account belongs to"
+          "description": "银行帐号所属省份"
         },
         "bankAccountCity": {
           "type": "string",
           "example": "Shanghai",
-          "description": "The city, the bank account belongs to"
+          "description": "银行帐号所属城市"
         },
         "issueBankName": {
           "type": "string",
           "example": "ICBC",
-          "description": "Card issue bank"
+          "description": "发卡行"
         },
         "bankAccount": {
           "type": "string",
           "example": "1111222233334444567",
-          "description": "Bank Account"
+          "description": "银行帐号"
         },
         "accoName": {
           "type": "string",
           "example": "张三",
-          "description": "Account holder name"
+          "description": "帐号持有人姓名"
         },
         "accountType": {
           "type": "string",
           "example": "2",
-          "description": "Account type, 2 debit card<br>8 - credit card",
+          "description": "账户类型<br>2 - 借记卡<br>8 - 信用卡",
           "enum": [
             "2",
             "8"
@@ -900,7 +900,7 @@
         "debitCreditType": {
           "type": "string",
           "example": "0",
-          "description": "Account use<br>0 - pay and use<br>1 - fee<br>2 - refund",
+          "description": "帐号用途<br>0 - 收付两用<br>1 - 收费<br>2 - 退费",
           "enum": [
             "0",
             "1",
@@ -910,7 +910,7 @@
         "creditCardType": {
           "type": "string",
           "example": "1",
-          "description": "Credit card type, if not credit card, be empty<br>1 - Master<br>2 - Visa<br>3 - BCA<br>4 - JCB",
+          "description": "信用卡类型，非信用卡为空<br>1 - Master<br>2 - Visa<br>3 - BCA<br>4 - JCB",
           "enum": [
             "1",
             "2",
@@ -922,7 +922,7 @@
           "type": "string",
           "format": "date-time",
           "example": "10/2020",
-          "description": "Account expiration date, MM / yyyy"
+          "description": "帐号失效日期，MM/yyyy"
         }
       }
     },
@@ -933,51 +933,51 @@
           "type": "string",
           "format": "date-time",
           "example": "2017-07-01",
-          "description": "Search criteria: application date from"
+          "description": "查询条件：投保单时间范围，开始日期，application date from"
         },
         "applyDateTo": {
           "type": "string",
           "format": "date-time",
           "example": "2017-08-01",
-          "description": "Search criteria: application date to"
+          "description": "查询条件：投保单时间范围，结束日期，application date to"
         },
         "certiCode": {
           "type": "string",
           "example": "1234567890",
-          "description": "Search criteria: id no. of policy customer (policy holder or insured)"
+          "description": "查询条件：投保人或者被保人ID，ID no. of policy customer (policy holder or insured)"
         },
         "masterProductCode": {
           "type": "string",
           "example": "07H004",
-          "description": "Search criteria: code of master product"
+          "description": "查询条件：主险编号，code of master product"
         },
         "name": {
           "type": "string",
           "example": "name",
-          "description": "Search criteria: name of policy customer (policy holder or insured)"
+          "description": "查询条件：投保人或者被保人姓名，name of policy customer (policy holder or insured)"
         },
         "page": {
           "type": "integer",
           "format": "int32",
-          "description": "Page criteria: target page number, start from 0"
+          "description": "页面条件：目标页面序号，缺省是0"
         },
         "policyNumber": {
           "type": "string",
-          "description": "Search criteria: policy no."
+          "description": "查询条件：保单编号，policy no."
         },
         "proposalNumber": {
           "type": "string",
-          "description": "Search criteria: application code"
+          "description": "查询条件：投保单号，application code"
         },
         "quotationCode": {
           "type": "string",
-          "description": "Search criteria: order no."
+          "description": "查询条件：询价编号，order no."
         },
         "size": {
           "type": "integer",
           "format": "int32",
           "example": 10,
-          "description": "Page criteria: how many records per page, default as 10"
+          "description": "页面条件：每页多少条记录，缺省是10"
         }
       }
     },
@@ -988,7 +988,7 @@
           "type": "integer",
           "format": "int32",
           "example": 3,
-          "description": "First time payment method, integer<br>1 - cash<br>2 - check<br>3 - bank transfer<br>30 - credit card",
+          "description": "首期付款方式，数字类型<br>1 - 现金<br>2 - 支票<br>3 - 银行转账<br>30 - 信用卡",
           "enum": [
             1,
             2,
@@ -1001,7 +1001,7 @@
           "type": "integer",
           "format": "int32",
           "example": 3,
-          "description": "Renewal payment method, integer<br>1 - cash<br>2 - check<br>3 - bank transfer<br>30 - credit card",
+          "description": "续期付款方式，数字类型<br>1 - 现金<br>2 - 支票<br>3 - 银行转账<br>30 - 信用卡",
           "enum": [
             1,
             2,
@@ -1011,16 +1011,16 @@
           ]
         },
         "bankAccount": {
-          "description": "The first premium bank account",
+          "description": "首期银行账户",
           "$ref": "#/definitions/BankAccountInfo"
         },
         "nextBankAccount": {
-          "description": "Renewal premium bank account",
+          "description": "续期银行账户",
           "$ref": "#/definitions/BankAccountInfo"
         },
         "extendedProps": {
           "type": "object",
-          "description": "Extended information, Map type, Key / Value, should be character",
+          "description": "扩展信息, Map类型, Key/Value都是字符型",
           "additionalProperties": {
             "type": "string"
           }
@@ -1033,51 +1033,51 @@
         "declId": {
           "type": "integer",
           "format": "int64",
-          "description": "Declaration item number, number type"
+          "description": "告知项编号，数字类型"
         },
         "fill1": {
           "type": "string",
-          "description": "Declaration item to answer the content 1, character type, the content with the different items and different"
+          "description": "告知项回答内容1，字符类型，内容随告知项不同而不同"
         },
         "fill2": {
           "type": "string",
-          "description": "Declaration item to answer the content 2, character type, the content with the different items and different"
+          "description": "告知项回答内容2，字符类型，内容随告知项不同而不同"
         },
         "fill3": {
           "type": "string",
-          "description": "Declaration item to answer the content 3, character type, the content with the different items and different"
+          "description": "告知项回答内容3，字符类型，内容随告知项不同而不同"
         },
         "fill4": {
           "type": "string",
-          "description": "Declaration item to answer the content 4, character type, the content with the different items and different"
+          "description": "告知项回答内容4，字符类型，内容随告知项不同而不同"
         },
         "fill5": {
           "type": "string",
-          "description": "Declaration item to answer the content 5, character type, the content with the different items and different"
+          "description": "告知项回答内容5，字符类型，内容随告知项不同而不同"
         },
         "fill6": {
           "type": "string",
-          "description": "Declaration item to answer the content 6, character type, the content with the different items and different"
+          "description": "告知项回答内容6，字符类型，内容随告知项不同而不同"
         },
         "fill7": {
           "type": "string",
-          "description": "Declaration item to answer the content 7, character type, the content with the different items and different"
+          "description": "告知项回答内容7，字符类型，内容随告知项不同而不同"
         },
         "fill8": {
           "type": "string",
-          "description": "Declaration item to answer the content 8, character type, the content with the different items and different"
+          "description": "告知项回答内容8，字符类型，内容随告知项不同而不同"
         },
         "fill9": {
           "type": "string",
-          "description": "Declaration item to answer the content 9, character type, the content with the different items and different"
+          "description": "告知项回答内容9，字符类型，内容随告知项不同而不同"
         },
         "fill10": {
           "type": "string",
-          "description": "Declaration item to answer the content 10, character type, the content with the different items and different"
+          "description": "告知项回答内容10，字符类型，内容随告知项不同而不同"
         },
         "extendedProps": {
           "type": "object",
-          "description": "Extended information, Map type, Key / Value, should be character",
+          "description": "扩展信息, Map类型, Key/Value都是字符型",
           "additionalProperties": {
             "type": "string"
           }
@@ -1091,7 +1091,7 @@
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "Policy type<br>1 - Individual policy<br>2 - Group policy<br>3 - Banc assurance",
+          "description": "保单类型，<br>1 - 个单<br>2 - 团单<br>3 - 银代",
           "enum": [
             1,
             2,
@@ -1101,59 +1101,59 @@
         "riskStatus": {
           "type": "integer",
           "format": "int32",
-          "description": "Policy status<br>0 - not inforce<br>1 - inforce<br>2 - lapsed<br>3 - terminated",
+          "description": "保单状态<br>0 - 未生效<br>1 - 生效<br>2 - 失效<br>3 - 终止",
           "readOnly": true
         },
         "applyDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Application Date, mandatory, format: yyyy-MM-dd'T'HH:mm:ss"
+          "description": "投保日期，必填，日期格式：yyyy-MM-dd'T'HH:mm:ss"
         },
         "issueDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Policy issue date, date format: yyyy-MM-dd'T'HH:mm:ss"
+          "description": "承保日期，日期格式：yyyy-MM-dd'T'HH:mm:ss"
         },
         "installPrem": {
           "type": "number",
           "format": "double",
-          "description": "Policy premium"
+          "description": "保单保费"
         },
         "currency": {
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "Currency, non empty<br>1 - CNY",
+          "description": "币种，非空，1 - 人民币",
           "enum": [
             1
           ]
         },
         "ePolicyDownloadUrl": {
           "type": "string",
-          "description": "Electronic policy download address"
+          "description": "电子保单下载地址"
         },
         "groupProposalNumber": {
           "type": "string",
-          "description": "Group proposal No."
+          "description": "团单投保单号码"
         },
         "inceptionDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Policy effective date, date format: yyyy-MM-dd'T'HH:mm:ss"
+          "description": "保单生效日期，日期格式：yyyy-MM-dd'T'HH:mm:ss"
         },
         "expiryDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Termination date, date format: yyyy-MM-dd'T'HH:mm:ss"
+          "description": "终止日期，日期格式：yyyy-MM-dd'T'HH:mm:ss"
         },
         "proposalNumber": {
           "type": "string",
-          "description": "Proposal number"
+          "description": "投保单号码"
         },
         "deliverType": {
           "type": "string",
           "example": "M",
-          "description": "Policy delivery method<br>H - by people<br>M - by mail",
+          "description": "保单递送方式<br>H - 手工<br>M - 邮件",
           "enum": [
             "H",
             "M"
@@ -1161,86 +1161,86 @@
         },
         "policyNumber": {
           "type": "string",
-          "description": "Policy number"
+          "description": "保单号码"
         },
         "quotationCode": {
           "type": "string",
-          "description": "Quotation calculation request number"
+          "description": "试算请求编号"
         },
         "submissionDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Date of submission, date format: yyyy-MM-dd'T'HH:mm:ss"
+          "description": "提交日期，日期格式：yyyy-MM-dd'T'HH:mm:ss"
         },
         "serviceAgentCode": {
           "type": "string",
-          "description": "Policy agent code"
+          "description": "保单代理人代码"
         },
         "salesChannelCode": {
           "type": "string",
-          "description": "Sales channel code"
+          "description": "销售渠道代码"
         },
         "preprintedProposalNumber": {
           "type": "string",
-          "description": "Pre-printed proposal number"
+          "description": "投保单预印号"
         },
         "proposalInfo": {
-          "description": "Proposal detail",
+          "description": "投保单信息",
           "$ref": "#/definitions/PolicyProposalInfo"
         },
         "policyPackage": {
-          "description": "Product package",
+          "description": "产品组合",
           "$ref": "#/definitions/PolicyPackageInfo"
         },
         "coverages": {
           "type": "array",
-          "description": "Policy's coverage list",
+          "description": "保单险种列表",
           "items": {
             "$ref": "#/definitions/CoverageInfo"
           }
         },
         "policyHolder": {
-          "description": "Policy holder",
+          "description": "投保人",
           "$ref": "#/definitions/PolicyHolderInfo"
         },
         "insureds": {
           "type": "array",
-          "description": "Policy insured list",
+          "description": "保单被保人列表",
           "items": {
             "$ref": "#/definitions/InsuredInfo"
           }
         },
         "beneficiaries": {
           "type": "array",
-          "description": "List of beneficiaries",
+          "description": "受益人列表",
           "items": {
             "$ref": "#/definitions/BeneficiaryInfo"
           }
         },
         "payerAccounts": {
           "type": "array",
-          "description": "Payment list",
+          "description": "付款方式列表",
           "items": {
             "$ref": "#/definitions/PayerAccountInfo"
           }
         },
         "declarations": {
           "type": "array",
-          "description": "Customer declaration list",
+          "description": "客户告知列表",
           "items": {
             "$ref": "#/definitions/CustomerDeclarationInfo"
           }
         },
         "agentDeclarations": {
           "type": "array",
-          "description": "Agent declarations",
+          "description": "代理人告知列表",
           "items": {
             "$ref": "#/definitions/AgentDeclarationInfo"
           }
         },
         "extendedProps": {
           "type": "object",
-          "description": "Extended information, Map type, Key / Value, should be character",
+          "description": "扩展信息, Map类型, Key/Value都是字符型",
           "additionalProperties": {
             "type": "string"
           }
@@ -1252,17 +1252,17 @@
       "properties": {
         "partyId": {
           "type": "string",
-          "description": "Customer number, UUID type"
+          "description": "客户编号, UUID type"
         },
         "policyCustomer": {
-          "description": "Customer detail",
+          "description": "客户详细信息",
           "$ref": "#/definitions/PolicyCustomerInfo"
         },
         "relationToPH": {
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "The relationship between the insured and the insured, integer type<br>1 - self<br>2 - child<br>3 - spouse<br>10 - parent<br>7 - others",
+          "description": "被保人与投保人关系，数字类型<br>1 - 自己<br>2 - 子女<br>3 - 配偶<br>10 - 父母<br>4 - 雇员<br>7 - 其他",
           "enum": [
             1,
             2,
@@ -1275,7 +1275,7 @@
         "medicalExamIndi": {
           "type": "string",
           "example": "N",
-          "description": "Whether physical exam is required<br>Y - yes;<br>N - no",
+          "description": "是否有体检件<br>Y - 是<br>N - 否",
           "enum": [
             "Y",
             "N"
@@ -1284,7 +1284,7 @@
         "medicalIndi": {
           "type": "string",
           "example": "Y",
-          "description": "Whether there is medical insurance coverage<br>Y - yes<br>N - no",
+          "description": "是否有医保<br>Y - 是<br>N - 否",
           "enum": [
             "Y",
             "N"
@@ -1293,7 +1293,7 @@
         "socialSecurityIndi": {
           "type": "string",
           "example": "Y",
-          "description": "Whether there is social medical insurance coverage<br>Y - yes<br>N - no",
+          "description": "是否有社保<br>Y - 是<br>N - 否",
           "enum": [
             "Y",
             "N"
@@ -1301,7 +1301,7 @@
         },
         "extendedProps": {
           "type": "object",
-          "description": "Extended information, Map type, Key / Value, should be character",
+          "description": "扩展信息, Map类型, Key/Value都是字符型",
           "additionalProperties": {
             "type": "string"
           }
@@ -1313,55 +1313,55 @@
       "properties": {
         "agentCode": {
           "type": "string",
-          "description": "Agent code"
+          "description": "代理人代码"
         },
         "declCode": {
           "type": "string",
-          "description": "Declaration item code"
+          "description": "告知项编号"
         },
         "fill1": {
           "type": "string",
-          "description": "Declaration item to answer the content 1, character type, the content with the different items and different"
+          "description": "告知项回答内容1，字符类型，内容随告知项不同而不同"
         },
         "fill2": {
           "type": "string",
-          "description": "Declaration item to answer the content 2, character type, the content with the different items and different"
+          "description": "告知项回答内容2，字符类型，内容随告知项不同而不同"
         },
         "fill3": {
           "type": "string",
-          "description": "Declaration item to answer the content 3, character type, the content with the different items and different"
+          "description": "告知项回答内容3，字符类型，内容随告知项不同而不同"
         },
         "fill4": {
           "type": "string",
-          "description": "Declaration item to answer the content 4, character type, the content with the different items and different"
+          "description": "告知项回答内容4，字符类型，内容随告知项不同而不同"
         },
         "fill5": {
           "type": "string",
-          "description": "Declaration item to answer the content 5, character type, the content with the different items and different"
+          "description": "告知项回答内容5，字符类型，内容随告知项不同而不同"
         },
         "fill6": {
           "type": "string",
-          "description": "Declaration item to answer the content 6, character type, the content with the different items and different"
+          "description": "告知项回答内容6，字符类型，内容随告知项不同而不同"
         },
         "fill7": {
           "type": "string",
-          "description": "Declaration item to answer the content 7, character type, the content with the different items and different"
+          "description": "告知项回答内容7，字符类型，内容随告知项不同而不同"
         },
         "fill8": {
           "type": "string",
-          "description": "Declaration item to answer the content 8, character type, the content with the different items and different"
+          "description": "告知项回答内容8，字符类型，内容随告知项不同而不同"
         },
         "fill9": {
           "type": "string",
-          "description": "Declaration item to answer the content 9, character type, the content with the different items and different"
+          "description": "告知项回答内容9，字符类型，内容随告知项不同而不同"
         },
         "fill10": {
           "type": "string",
-          "description": "Declaration item to answer the content 10, character type, the content with the different items and different"
+          "description": "告知项回答内容10，字符类型，内容随告知项不同而不同"
         },
         "extendedProps": {
           "type": "object",
-          "description": "Extended information, Map type, Key / Value, should be character",
+          "description": "扩展信息, Map类型, Key/Value都是字符型",
           "additionalProperties": {
             "type": "string"
           }
@@ -1373,17 +1373,17 @@
       "properties": {
         "agentCode": {
           "type": "string",
-          "description": "Policy agent code"
+          "description": "保单代理人代码"
         },
         "assignRate": {
           "type": "number",
           "format": "double",
           "example": 1,
-          "description": "Performance rating, the maximum for the 1"
+          "description": "业绩分摊比例，最大为1"
         },
         "extendedProps": {
           "type": "object",
-          "description": "Extended information, Map type, Key / Value, should be character",
+          "description": "扩展信息, Map类型, Key/Value都是字符型",
           "additionalProperties": {
             "type": "string"
           }
@@ -1396,27 +1396,27 @@
         "address1": {
           "type": "string",
           "example": "上海市",
-          "description": "Province"
+          "description": "省"
         },
         "address2": {
           "type": "string",
           "example": "上海市",
-          "description": "City"
+          "description": "市"
         },
         "address3": {
           "type": "string",
           "example": "杨浦区",
-          "description": "District"
+          "description": "区县"
         },
         "address4": {
           "type": "string",
           "example": "淞沪路270号创智天地3号楼3楼",
-          "description": "Address"
+          "description": "地址"
         },
         "postCode": {
           "type": "string",
           "example": "200433",
-          "description": "Post code"
+          "description": "邮编"
         }
       }
     },
@@ -1426,7 +1426,7 @@
         "chargePeriod": {
           "type": "string",
           "example": "2",
-          "description": "Payment period type, non-empty<br>1 - single<br>2 - per year<br>3 to a certain age<br>4 - whole life",
+          "description": "缴费年期类型，非空<br>1 - 趸缴<br>2 - 按年限缴<br>3 - 缴至某确定年龄<br>4 - 终身",
           "enum": [
             "1",
             "2",
@@ -1438,12 +1438,12 @@
           "type": "integer",
           "format": "int32",
           "example": 20,
-          "description": "Payment period, non-empty<br>0 - single;<br>by age: till which age or to pay the payment period: the pay years;<br>whole life is 100"
+          "description": "缴费年期，非空<br>趸缴为0<br>按年限缴时为缴费年限<br>缴至某确定年龄时为缴费期满年龄<br>终身为100"
         },
         "coveragePeriod": {
           "type": "string",
           "example": "1",
-          "description": "Coverage type<br>1 - whole life<br>2 - per year<br>3 - Cover to a certain age<br>4 - per month<br>5 - per day",
+          "description": "保障年期类型<br>1 - 保终身<br>2 - 按年限保<br>3 - 保至某确定年龄<br>4 - 按月保<br>5 - 按天保",
           "enum": [
             "1",
             "2",
@@ -1455,70 +1455,70 @@
         "coverageYear": {
           "type": "integer",
           "format": "int32",
-          "description": "Coverage Term. Meaning of this property is associated with property \"coveragePeriod\" (\"type\" for short). when covers whole life, value of this property is 9999;<br>and if type is 2, means years covered;<br>and if type is 3, means age when coverage expired;<br>and if type is 4, means months covered;<br>and if type is 5, means days covered."
+          "description": "保障年期，保终身时为9999；按年限保时为保障年限；保至某确定年龄时为保障期满年龄；按月保时为保障月数；按天保时为保障天数"
         },
         "currentPremium": {
-          "description": "The current period premium",
+          "description": "当期保费",
           "$ref": "#/definitions/CoveragePremium"
         },
         "productCode": {
           "type": "string",
-          "description": "Product code"
+          "description": "产品代码"
         },
         "masterProductCode": {
           "type": "string",
-          "description": "Main product code"
+          "description": "主险代码"
         },
         "waiverExt": {
-          "description": "Waiver plan information",
+          "description": "险种豁免信息",
           "$ref": "#/definitions/CoverageExtWaiver"
         },
         "nextPremium": {
-          "description": "Renew premium (next premium)",
+          "description": "续期保费",
           "$ref": "#/definitions/CoveragePremium"
         },
         "coverageAgents": {
           "type": "array",
-          "description": "List of performance sharing of agent",
+          "description": "业绩分摊代理人列表",
           "items": {
             "$ref": "#/definitions/CoverageAgentInfo"
           }
         },
         "payPlans": {
           "type": "array",
-          "description": "Payment plan list",
+          "description": "支付计划列表",
           "items": {
             "$ref": "#/definitions/PayPlanInfo"
           }
         },
         "insureds": {
           "type": "array",
-          "description": "List of insured",
+          "description": "险种被保人列表",
           "items": {
             "$ref": "#/definitions/CoverageInsuredInfo"
           }
         },
         "premInvestRates": {
           "type": "array",
-          "description": "The ratio of premium and investment amount",
+          "description": "保费投资比例列表",
           "items": {
             "$ref": "#/definitions/PremInvestRateInfo"
           }
         },
         "recurringTopup": {
-          "description": "Recurring top-up",
+          "description": "定期追加投资",
           "$ref": "#/definitions/RecurringTopupInfo"
         },
         "contractInvests": {
           "type": "array",
-          "description": "Policy investment information",
+          "description": "保单投资信息",
           "items": {
             "$ref": "#/definitions/ContractInvestInfo"
           }
         },
         "extendedProps": {
           "type": "object",
-          "description": "Extended information, Map type, Key / Value, should be character",
+          "description": "扩展信息, Map类型, Key/Value都是字符型",
           "additionalProperties": {
             "type": "string"
           }
@@ -1531,17 +1531,17 @@
         "fundCode": {
           "type": "string",
           "example": "F001",
-          "description": "Fund code"
+          "description": "基金代码"
         },
         "assignRate": {
           "type": "number",
           "format": "double",
           "example": 1,
-          "description": "Fund assign ratio"
+          "description": "分配比例"
         },
         "extendedProps": {
           "type": "object",
-          "description": "Extended information, Map type, Key / Value, should be character",
+          "description": "扩展信息, Map类型, Key/Value都是字符型",
           "additionalProperties": {
             "type": "string"
           }
@@ -1554,12 +1554,12 @@
         "waivedSa": {
           "type": "number",
           "format": "double",
-          "description": "Exempt from the amount of insurance, 0 that a full exemption, not 0 that exemption from the specified amount, can not exceed the insurance premium is exempt"
+          "description": "豁免保额，0表示全额豁免，不为0表示豁免指定金额，不能超过被豁免险种保费"
         },
         "waiver": {
           "type": "string",
           "example": "N",
-          "description": "Is waiver<br>Y - yes<br>N - no",
+          "description": "是否豁免险<br>Y - 是<br>N - 否",
           "enum": [
             "Y",
             "N"
@@ -1573,17 +1573,17 @@
         "fundCode": {
           "type": "string",
           "example": "F001",
-          "description": "Fund code"
+          "description": "基金代码"
         },
         "accumUnits": {
           "type": "number",
           "format": "double",
           "example": 1000,
-          "description": "Fund units"
+          "description": "基金份数"
         },
         "extendedProps": {
           "type": "object",
-          "description": "Extended information, Map type, Key / Value, should be character",
+          "description": "扩展信息, Map类型, Key/Value都是字符型",
           "additionalProperties": {
             "type": "string"
           }
@@ -1595,12 +1595,12 @@
       "properties": {
         "packageCode": {
           "type": "string",
-          "description": "Product package code"
+          "description": "产品组合代码"
         },
         "unit": {
           "type": "number",
           "format": "double",
-          "description": "Product package unit, the default is 1"
+          "description": "产品组合投保份数，默认为1"
         }
       }
     },
@@ -1609,7 +1609,7 @@
       "properties": {
         "proposalStatus": {
           "type": "string",
-          "description": "Proposal status"
+          "description": "投保单状态"
         }
       }
     },
@@ -1618,12 +1618,12 @@
       "properties": {
         "benefitLevel": {
           "type": "string",
-          "description": "Plan benefit level, the product insured by the level of non-empty"
+          "description": "险种档次，产品按档次投保时非空"
         },
         "paymentFreq": {
           "type": "string",
           "example": "1",
-          "description": "Pay frequency<br>1 - yearly payment<br>2 - half yearly payment<br>3 - quarterly payment<br>4 - monthly payment<br>5 - single premium",
+          "description": "缴费频率<br>1 - 年缴<br>2 - 半年缴<br>3 - 季缴<br>4 - 月缴<br>5 - 趸缴",
           "enum": [
             "1",
             "2",
@@ -1636,18 +1636,18 @@
           "type": "number",
           "format": "double",
           "example": 100000,
-          "description": "Insurance SA, non empty when calculate premium base on SA"
+          "description": "险种保额，保额算保费时非空"
         },
         "premium": {
           "type": "number",
           "format": "double",
           "example": 2314,
-          "description": "Insurance premium, non empty when calculate SA base on premium"
+          "description": "险种保费，保费算保额时非空"
         },
         "unit": {
           "type": "number",
           "format": "double",
-          "description": "Product unit, non empty when by unit insurance"
+          "description": "险种份数，产品按份数投保时非空"
         }
       }
     },
@@ -1655,34 +1655,34 @@
       "type": "object",
       "properties": {
         "address": {
-          "description": "Customer address",
+          "description": "客户地址",
           "$ref": "#/definitions/AddressInfo"
         },
         "partyType": {
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "The type of the party<br>1 - the personal party<br>2 - organization",
+          "description": "当事人类型，1 - 个人当事人<br>2 - 机构当事人",
           "enum": [
             1,
             2
           ]
         },
         "person": {
-          "description": "Personal customer information",
+          "description": "个人客户信息",
           "$ref": "#/definitions/Person"
         },
         "organization": {
-          "description": "Organization customer information",
+          "description": "机构客户信息",
           "$ref": "#/definitions/Organization"
         },
         "partyContact": {
-          "description": "Party contact information",
+          "description": "当事人联系信息",
           "$ref": "#/definitions/PartyContact"
         },
         "extendedProps": {
           "type": "object",
-          "description": "Extended information, Map type, Key / Value, should be character",
+          "description": "扩展信息, Map类型, Key/Value都是字符型",
           "additionalProperties": {
             "type": "string"
           }
@@ -1694,23 +1694,23 @@
       "properties": {
         "partyId": {
           "type": "string",
-          "description": "Customer number, UUID type"
+          "description": "客户编号, UUID type"
         },
         "declarationDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Declaration date, date format: yyyy-MM-dd'T'HH:mm:ss"
+          "description": "告知日期，日期格式：yyyy-MM-dd'T'HH:mm:ss"
         },
         "details": {
           "type": "array",
-          "description": "Declaration details",
+          "description": "告知详细信息",
           "items": {
             "$ref": "#/definitions/CustomerDeclarationDetailInfo"
           }
         },
         "extendedProps": {
           "type": "object",
-          "description": "Extended information, Map type, Key / Value, should be character",
+          "description": "扩展信息, Map类型, Key/Value都是字符型",
           "additionalProperties": {
             "type": "string"
           }
@@ -1723,42 +1723,42 @@
         "homeTel": {
           "type": "string",
           "example": "87654321",
-          "description": "Home telephone"
+          "description": "家庭电话"
         },
         "mobileTel": {
           "type": "string",
           "example": "15012345678",
-          "description": "Phone number"
+          "description": "手机号"
         },
         "officeTel": {
           "type": "string",
           "example": "88888888",
-          "description": "Work phone"
+          "description": "工作电话"
         },
         "officeTelExt": {
           "type": "string",
           "example": "1234",
-          "description": "Work phone extension"
+          "description": "工作电话分机号"
         },
         "email": {
           "type": "string",
           "example": "TestPerson14@126.com",
-          "description": "E-mail:"
+          "description": "电子邮箱"
         },
         "contact": {
           "type": "string",
           "example": "张三",
-          "description": "Contact person"
+          "description": "联系人"
         },
         "contactTel": {
           "type": "string",
           "example": "88888888",
-          "description": "Contact Phone"
+          "description": "联系人电话"
         },
         "fax": {
           "type": "string",
           "example": "88888887",
-          "description": "Fax: (+86) {0}022 - 24143117{/0}"
+          "description": "传真"
         }
       }
     },
@@ -1767,17 +1767,17 @@
       "properties": {
         "partyId": {
           "type": "string",
-          "description": "Customer number, UUID type"
+          "description": "客户编号, UUID type"
         },
         "policyCustomer": {
-          "description": "Customer detail",
+          "description": "客户详细信息",
           "$ref": "#/definitions/PolicyCustomerInfo"
         },
         "relationToLA": {
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "The relationship between the insured and the insured, the number type<br>1 - own<br>2 - parent<br>3 - spouse<br>10 - child<br>7 - others",
+          "description": "投保人与被保人关系，数字类型<br>1 - 自己<br>2 - 父母<br>3 - 配偶<br>10 - 子女<br>7 - 其他",
           "enum": [
             1,
             2,
@@ -1788,7 +1788,7 @@
         },
         "extendedProps": {
           "type": "object",
-          "description": "Extended information, Map type, Key / Value, should be character",
+          "description": "扩展信息, Map类型, Key/Value都是字符型",
           "additionalProperties": {
             "type": "string"
           }
@@ -1801,7 +1801,7 @@
         "gender": {
           "type": "string",
           "example": "M",
-          "description": "Sex<br>M - male<br>F - female",
+          "description": "性别<br>M - 男性<br>F - 女性",
           "enum": [
             "M",
             "F"
@@ -1811,13 +1811,13 @@
           "type": "string",
           "format": "date-time",
           "example": "1980-01-01",
-          "description": "Birthday, non-empty, date format: yyyy-MM-dd"
+          "description": "生日，非空，日期格式：yyyy-MM-dd"
         },
         "certiType": {
           "type": "integer",
           "format": "int32",
           "example": 3,
-          "description": "ID type, number type<br>1 - ID card<br>2 - military certificate<br>3 - passport<br>4 - birth certificate<br>9 - other",
+          "description": "证件类型，数字类型<br>1 - 身份证<br>2 - 军人证<br>3 - 护照<br>4 - 出生证<br>9 - 其他",
           "enum": [
             1,
             2,
@@ -1829,24 +1829,24 @@
         "certiCode": {
           "type": "string",
           "example": "1234567890",
-          "description": "ID Number"
+          "description": "证件号码"
         },
         "certiStart": {
           "type": "string",
           "format": "date-time",
           "example": "2000-01-01",
-          "description": "Certificate start date, date format: yyyy-MM-dd"
+          "description": "证件起始有效日，日期格式：yyyy-MM-dd"
         },
         "certiEnd": {
           "type": "string",
           "format": "date-time",
           "example": "2019-12-31",
-          "description": "Valid date, date format: yyyy-MM-dd"
+          "description": "证件有效截止日，日期格式：yyyy-MM-dd"
         },
         "firstName": {
           "type": "string",
           "example": "三",
-          "description": "First name"
+          "description": "名"
         },
         "midName": {
           "type": "string",
@@ -1860,17 +1860,17 @@
         "nationality": {
           "type": "string",
           "example": "7",
-          "description": "Nationality<br>7 - China"
+          "description": "国籍，7 - 中国"
         },
         "preferredLifeIndi": {
           "type": "string",
           "example": "0",
-          "description": "Insurance risk classifications <br>0 - N/A<br>1 - Prefer plus<br>2 - Prefer<br>3 - Standard plus<br>4 - Standard<br>5 - Sub-prefer<br>6 - Sub-standard"
+          "description": "是否优选体<br>0 - N/A<br>1 - 超优体<br>2 - 优选体<br>3 - 优标体<br>4 - 标准体<br>5 - 次选体<br>6 - 次标准体"
         },
         "smoking": {
           "type": "string",
           "example": "N",
-          "description": "Whether smoking<br>Y - yes;<br>N - no",
+          "description": "是否抽烟<br>Y - 抽烟<br>N - 不抽烟",
           "enum": [
             "Y",
             "N"
@@ -1879,18 +1879,18 @@
         "occupationCode": {
           "type": "string",
           "example": "1",
-          "description": "Professional code"
+          "description": "职业代码"
         },
         "income": {
           "type": "integer",
           "format": "int64",
           "example": 200000,
-          "description": "Annual income"
+          "description": "年收入"
         },
         "marriageStatus": {
           "type": "string",
           "example": "1",
-          "description": "Marital status<br>1 - married<br>2 - unmarried<br>3 - divorced<br>4 - widowed<br>5 - separated",
+          "description": "婚姻状况<br>1 - 已婚<br>2 - 未婚<br>3 - 离异<br>4 - 丧偶<br>5 - 分居<br>6 - 其他",
           "enum": [
             "1",
             "2",
@@ -1904,18 +1904,18 @@
           "type": "number",
           "format": "double",
           "example": 175.3,
-          "description": "Height e.g. 172cm"
+          "description": "身高（cm）"
         },
         "weight": {
           "type": "number",
           "format": "double",
           "example": 70.25,
-          "description": "Weight (kg)"
+          "description": "体重（kg）"
         },
         "salutation": {
           "type": "string",
           "example": "1",
-          "description": "Title<br>1 - Mr.<br>2 - Mrs.",
+          "description": "称呼<br>1 - 先生<br>2 - 女士",
           "enum": [
             "1",
             "2"
@@ -1928,29 +1928,29 @@
       "properties": {
         "insuredPartyId": {
           "type": "string",
-          "description": "Insured internal ID"
+          "description": "被保人内部序列号"
         },
         "orderId": {
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "Insurance type of the insured person, the default is 1, if one plan applied by more than one insured (family policy or personal risk), the value is greater than 1"
+          "description": "险种被保人序号，默认为1，同一险种多被保人（家庭保单或连身险）时大于1"
         },
         "occupationClass": {
           "type": "integer",
           "format": "int32",
           "example": 1,
-          "description": "Occupation level"
+          "description": "职业等级"
         },
         "age": {
           "type": "integer",
           "format": "int32",
           "example": 25,
-          "description": "Age"
+          "description": "年龄"
         },
         "extendedProps": {
           "type": "object",
-          "description": "Extended information, Map type, Key / Value, should be character",
+          "description": "扩展信息, Map类型, Key/Value都是字符型",
           "additionalProperties": {
             "type": "string"
           }
@@ -1962,7 +1962,7 @@
       "properties": {
         "investRates": {
           "type": "array",
-          "description": "Investment rate list",
+          "description": "投资比例列表",
           "items": {
             "$ref": "#/definitions/RecurringTopupInvestRateInfo"
           }
@@ -1970,17 +1970,17 @@
         "topupStartDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Top-up start date"
+          "description": "追加开始时间"
         },
         "topupAmount": {
           "type": "number",
           "format": "double",
           "example": 10000,
-          "description": "Top-up amount"
+          "description": "追加金额"
         },
         "extendedProps": {
           "type": "object",
-          "description": "Extended information, Map type, Key / Value, should be character",
+          "description": "扩展信息, Map类型, Key/Value都是字符型",
           "additionalProperties": {
             "type": "string"
           }
@@ -1994,8 +1994,8 @@
         "tags": [
           "Claim"
         ],
-        "summary": "Claim case register",
-        "description": "Register Claim Case",
+        "summary": "理赔案件注册",
+        "description": "注册理赔案件",
         "operationId": "registerUsingPOST",
         "consumes": [
           "application/json"
@@ -2053,8 +2053,8 @@
         "tags": [
           "policy alteration"
         ],
-        "summary": "Policy alterations",
-        "description": "Policy alterations",
+        "summary": "保单保全",
+        "description": "保单保全",
         "operationId": "inforceUsingPOST",
         "consumes": [
           "application/json"
@@ -2066,7 +2066,7 @@
           {
             "in": "body",
             "name": "input",
-            "description": "Input",
+            "description": "输入",
             "required": true,
             "schema": {
               "$ref": "#/definitions/PolicyAlterationInput"
@@ -2107,8 +2107,8 @@
           "policy alteration",
           "quotation"
         ],
-        "summary": "Quotations for policy alterations",
-        "description": "Quotations for policy alterations",
+        "summary": "保全变更试算",
+        "description": "保全变更试算",
         "operationId": "quote2UsingPOST",
         "consumes": [
           "application/json"
@@ -2120,7 +2120,7 @@
           {
             "in": "body",
             "name": "input",
-            "description": "Input",
+            "description": "输入",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AlterationQuotationInput"
@@ -2160,8 +2160,8 @@
         "tags": [
           "Policy"
         ],
-        "summary": "Policy summary querying",
-        "description": "Search policy by criteria",
+        "summary": "保单简要信息列表",
+        "description": "按照条件查询保单",
         "operationId": "searchUsingPOST",
         "consumes": [
           "application/json"
@@ -2173,14 +2173,14 @@
           {
             "name": "insurerCode",
             "in": "path",
-            "description": "Insurer code",
+            "description": "保险公司编号",
             "required": true,
             "type": "string"
           },
           {
             "in": "body",
             "name": "criteria",
-            "description": "Criteria",
+            "description": "查询条件",
             "required": true,
             "schema": {
               "$ref": "#/definitions/PageablePolicyCriteria"
@@ -2229,8 +2229,8 @@
         "tags": [
           "Policy"
         ],
-        "summary": "Policy detail getting",
-        "description": "Get Policy by Policy No.",
+        "summary": "保单信息",
+        "description": "根据保单号获取保单信息",
         "operationId": "getUsingGET",
         "consumes": [
           "application/json"
@@ -2242,14 +2242,14 @@
           {
             "name": "insurerCode",
             "in": "path",
-            "description": "Insurer code",
+            "description": "保险公司编号",
             "required": true,
             "type": "string"
           },
           {
             "name": "policyNumber",
             "in": "path",
-            "description": "Policy number",
+            "description": "保单号",
             "required": true,
             "type": "string"
           },

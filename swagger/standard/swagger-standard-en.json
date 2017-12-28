@@ -1,10 +1,10 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "1.0",
+    "version": "1.0.1",
     "title": "eBaoCloud LI OpenAPI",
     "termsOfService": "http://api.ebaocloud.life/",
-    "description": "This document is the API specification for the eBaoCloud Life part. To practice and run the APIs in this document, you need to apply an eBaoCloud tenant account(starting from a sandbox account instead of production account) first.<br>\nContact liliang.zhu@ebaotech.com for more information and trial using.\n\n# Built on\nThu Dec 28 2017, 03:53:33 +08:00\n\n# Versioning\nAPI version| Date  |Comments\n--|---|--\n0.5  | 2017-06-13  | Initial version\n0.6  | 2017-06-19  | Add new category and readme\n0.6.5 | 2017-06-29  | oauth2 document, Chinese version document\n0.8  | 2017-07-07  | oauth2 launch\n0.8.5 | 2017-07-31 | Enhancement in product services\n0.9 | 2017-08-25 | Add limits related APIs (age, premium / SA and term )\n0.9.5 | 2017-09-05 | Add new service for e-policy downloading\n0.9.6 | 2017-09-13 | Add field: extra premium\n0.9.7 | 2017-11-09 | Parameter sequence, add some new function in product\n0.9.8 | 2017-11-22 | Mortgage product support\n1.0 | 2017-12-19 | Product model enhancement\n\n# Authentication\n\n## Overview\n\neBaoCloud offers 3rd party applications the ability to issue authenticated requests on behalf of the eBaoCloud itself. eBaoCloud's implementation is based on the [Client Credentials Grant](http://tools.ietf.org/html/rfc6749#section-4.4) flow of the [oauth 2 specification](http://tools.ietf.org/html/rfc6749).\n\n## Auth Flow\n\nThe oauth2 / token authentication flow follows these 3 major steps:\n\n1. An application (backend) encodes its consumer key and secret (provided by eBaoCloud as an authorized vender) into a specially encoded set of credentials.\n2. An application (backend) makes a request to the POST oauth2 / token endpoint to exchange these credentials for a bearer token.\n3. When accessing the REST API, the application (the APP or website) uses the bearer token to authenticate.\n\n![Auth Flow](/assets/oauth.png)\n\n## Step by step\n\n* Send request to auth end point\n\n```js\nPOST: /cas/ebao/v1/json/tickets\nBody: {\"username\":\"name\", \"password\":\"pwd\"}\nResponse: {\"access_token\": \"xxxx\"}\n```\n\n* Send request with access_token in header\n\n```js\nPOST: /rest/products\nHeader: {\n  \"authorization\":\"Bearer \"+access_token,\n  \"X-ebao-tenant-id\": \"tenant-id\"\n}\n```\n\n## End Points\n\n| | Sandbox | Production |\n| :--- | :--- | :--- |\n| auth / take token | [https://sandbox.ebaocloud.com.cn/cas/ebao/v1/json/tickets](https://sandbox.ebaocloud.com.cn/cas/ebao/v1/json/tickets) | [https://ebaocloud.com.cn/cas/ebao/v1/json/tickets](https://ebaocloud.com.cn/cas/ebao/v1/json/tickets) |\n| APIs | [https://sandbox.gw.ebaocloud.com.cn/li/eBao/1/](https://sandbox.gw.ebaocloud.com.cn/li/eBao/1/) | [https://gw.ebaocloud.com.cn/li/eBao/1/](https://gw.ebaocloud.com.cn/li/eBao/1/)|\n\n\n## Sample\n\n#### Request auth from application\n\n```bash\ncurl --request POST \\\n  --url https://url/cas/ebao/v1/json/tickets \\\n  --header 'content-type: application/json' \\\n  --header 'X-ebao-tenant-id: tenant-id' \\\n  --data '{\\n \\n \"username\":\"site.admin\",\\n \"password\":\"adminPWD!\"\\n}'\n```\n\nNote:\n. the **X-ebao-tenant-id** is the unique id provided by eBaoCloud to identify the tenant.\n. the **username** and **password** are provided by eBaoCloud when you registered as an authorized vendor.\n\n\n#### Response from API Gateway\n\n* Success\n\n```js\n{\n\"access_token\" : \"TGT-233-e7Zuc5FlSAa0SShO3B1f2iugYzRQGQrSSoGwAi0VnWbnBNDwHg\"\n}\n```\n\n* Failed\n\n```js\n{\n\"access_token\" : null\n}\n```\n\n#### App call (Java code sample)\n\n```java\nHttpResponse<String> response = Unirest.post(url) // url：the UAT/product URL\n  .header(\"content-type\", \"application/json\") // application/json\n  .header(\"authorization\", \"Bearer \" + accessToken) // oauth2 access token：the accessToken\n  .header(\"X-ebao-tenant-id\", \"tenant-id\")\n  .body(body) // body: http body\n  .asString();\n```\n\n## Others\n\n### Tokens are passwords\n\nKeep in mind that the consumer key & secret, bearer token credentials, and the bearer token itself grant access to make requests on behalf of an application. These values should be considered as sensitive as passwords, and must not be shared or distributed to untrusted parties.\n\n### SSL required\n\nAll requests (both to obtain and use the tokens) **must use** HTTPS endpoints.\n"
+    "description": "This document is the API specification for the eBaoCloud Life part. To practice and run the APIs in this document, you need to apply an eBaoCloud tenant account(starting from a sandbox account instead of production account) first.<br>\nContact liliang.zhu@ebaotech.com for more information and trial using.\n\n# Built on\nThu Dec 28 2017, 13:49:14 +08:00\n\n# Versioning\nAPI version| Date  |Comments\n--|---|--\n0.5  | 2017-06-13  | Initial version\n0.6  | 2017-06-19  | Add new category and readme\n0.6.5 | 2017-06-29  | oauth2 document, Chinese version document\n0.8  | 2017-07-07  | oauth2 launch\n0.8.5 | 2017-07-31 | Enhancement in product services\n0.9 | 2017-08-25 | Add limits related APIs (age, premium / SA and term )\n0.9.5 | 2017-09-05 | Add new service for e-policy downloading\n0.9.6 | 2017-09-13 | Add field: extra premium\n0.9.7 | 2017-11-09 | Parameter sequence, add some new function in product\n0.9.8 | 2017-11-22 | Mortgage product support\n1.0 | 2017-12-19 | Product model enhancement\n\n# Authentication\n\n## Overview\n\neBaoCloud offers 3rd party applications the ability to issue authenticated requests on behalf of the eBaoCloud itself. eBaoCloud's implementation is based on the [Client Credentials Grant](http://tools.ietf.org/html/rfc6749#section-4.4) flow of the [oauth 2 specification](http://tools.ietf.org/html/rfc6749).\n\n## Auth Flow\n\nThe oauth2 / token authentication flow follows these 3 major steps:\n\n1. An application (backend) encodes its consumer key and secret (provided by eBaoCloud as an authorized vender) into a specially encoded set of credentials.\n2. An application (backend) makes a request to the POST oauth2 / token endpoint to exchange these credentials for a bearer token.\n3. When accessing the REST API, the application (the APP or website) uses the bearer token to authenticate.\n\n![Auth Flow](/assets/oauth.png)\n\n## Step by step\n\n* Send request to auth end point\n\n```js\nPOST: /cas/ebao/v1/json/tickets\nBody: {\"username\":\"name\", \"password\":\"pwd\"}\nResponse: {\"access_token\": \"xxxx\"}\n```\n\n* Send request with access_token in header\n\n```js\nPOST: /rest/products\nHeader: {\n  \"authorization\":\"Bearer \"+access_token,\n  \"X-ebao-tenant-id\": \"tenant-id\"\n}\n```\n\n## End Points\n\n| | Sandbox | Production |\n| :--- | :--- | :--- |\n| auth / take token | [https://sandbox.ebaocloud.com.cn/cas/ebao/v1/json/tickets](https://sandbox.ebaocloud.com.cn/cas/ebao/v1/json/tickets) | [https://ebaocloud.com.cn/cas/ebao/v1/json/tickets](https://ebaocloud.com.cn/cas/ebao/v1/json/tickets) |\n| APIs | [https://sandbox.gw.ebaocloud.com.cn/li/eBao/1/](https://sandbox.gw.ebaocloud.com.cn/li/eBao/1/) | [https://gw.ebaocloud.com.cn/li/eBao/1/](https://gw.ebaocloud.com.cn/li/eBao/1/)|\n\n\n## Sample\n\n#### Request auth from application\n\n```bash\ncurl --request POST \\\n  --url https://url/cas/ebao/v1/json/tickets \\\n  --header 'content-type: application/json' \\\n  --header 'X-ebao-tenant-id: tenant-id' \\\n  --data '{\\n \\n \"username\":\"site.admin\",\\n \"password\":\"adminPWD!\"\\n}'\n```\n\nNote:\n. the **X-ebao-tenant-id** is the unique id provided by eBaoCloud to identify the tenant.\n. the **username** and **password** are provided by eBaoCloud when you registered as an authorized vendor.\n\n\n#### Response from API Gateway\n\n* Success\n\n```js\n{\n\"access_token\" : \"TGT-233-e7Zuc5FlSAa0SShO3B1f2iugYzRQGQrSSoGwAi0VnWbnBNDwHg\"\n}\n```\n\n* Failed\n\n```js\n{\n\"access_token\" : null\n}\n```\n\n#### App call (Java code sample)\n\n```java\nHttpResponse<String> response = Unirest.post(url) // url：the UAT/product URL\n  .header(\"content-type\", \"application/json\") // application/json\n  .header(\"authorization\", \"Bearer \" + accessToken) // oauth2 access token：the accessToken\n  .header(\"X-ebao-tenant-id\", \"tenant-id\")\n  .body(body) // body: http body\n  .asString();\n```\n\n## Others\n\n### Tokens are passwords\n\nKeep in mind that the consumer key & secret, bearer token credentials, and the bearer token itself grant access to make requests on behalf of an application. These values should be considered as sensitive as passwords, and must not be shared or distributed to untrusted parties.\n\n### SSL required\n\nAll requests (both to obtain and use the tokens) **must use** HTTPS endpoints.\n"
   },
   "host": "sandbox.gw.ebaocloud.com.cn",
   "basePath": "/eBao/1.0/",
@@ -18,7 +18,8 @@
       "name": "Product"
     },
     {
-      "name": "Proposal"
+      "name": "Proposal",
+      "description": "Policy alteration controller"
     }
   ],
   "definitions": {
@@ -138,7 +139,7 @@
         "smoking": {
           "type": "string",
           "example": "Y",
-          "description": "Whether smoking, Y - yes;<br>N - no<br>By default is no smoking",
+          "description": "Whether smoking<br>Y - yes;<br>N - no<br>By default is no smoking",
           "enum": [
             "Y",
             "N"
@@ -1403,7 +1404,7 @@
         },
         "productName": {
           "type": "string",
-          "description": "Product Name"
+          "description": "Product name"
         },
         "mainPlan": {
           "type": "string",
@@ -1677,31 +1678,31 @@
         },
         "settleRatePeriodUnit": {
           "type": "string",
-          "description": "settlement period unit"
+          "description": "Settlement period unit"
         },
         "settleYearType": {
           "type": "integer",
           "format": "int32",
-          "description": "settlement year type"
+          "description": "Settlement year type"
         },
         "settleFreq": {
           "type": "string",
-          "description": "settlement frequency"
+          "description": "Settlement frequency"
         },
         "settleMonth": {
           "type": "integer",
           "format": "int32",
-          "description": "settlement month"
+          "description": "Settlement month"
         },
         "settleDay": {
           "type": "integer",
           "format": "int32",
-          "description": "settlement day"
+          "description": "Settlement day"
         },
         "settleMethod": {
           "type": "integer",
           "format": "int32",
-          "description": "settlement method"
+          "description": "Settlement method"
         },
         "guaranteedRateOption": {
           "type": "integer",
@@ -1710,7 +1711,7 @@
         },
         "settleSimpleCompound": {
           "type": "string",
-          "description": "settlement interest, simple or compound"
+          "description": "Settlement interest, simple or compound"
         },
         "bonusSettleType": {
           "type": "integer",
@@ -4369,7 +4370,7 @@
         "smoking": {
           "type": "string",
           "example": "N",
-          "description": "Whether smoking, Y - yes;<br>N - no",
+          "description": "Whether smoking<br>Y - yes;<br>N - no",
           "enum": [
             "Y",
             "N"
@@ -5370,7 +5371,7 @@
         "coverageSeriaId": {
           "type": "integer",
           "format": "int64",
-          "description": "sum assured type temporary serial number, the request within the use of a unique identification within a certain kind of insurance"
+          "description": "Sum assured type temporary serial number, the request within the use of a unique identification within a certain kind of insurance"
         },
         "coverageYear": {
           "type": "integer",
@@ -6884,7 +6885,7 @@
           {
             "name": "proposalNumber",
             "in": "path",
-            "description": "Proposal Number",
+            "description": "Proposal number",
             "required": true,
             "type": "string"
           },

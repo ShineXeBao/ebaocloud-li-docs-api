@@ -4,7 +4,7 @@
     "version": "1.0",
     "title": "eBaoCloud OpenAPI for Mobile BFF (Backends for Frontends)",
     "termsOfService": "http://api.ebaocloud.life/",
-    "description": "本篇文档描述了eBaoCloud（易保云）寿险所提供的API（API specification）。如果您想运行和使用这些API，你需要首先获取一个eBaoCloud的租户账号，请联系Antang.Du@ebaotech.com获取账号。我们会提供沙箱环境给您。\n\n# 搭建时间\nThu Dec 28 2017, 03:38:33 +08:00\n\n# 版本\nAPI 版本| 时间  |说明\n"
+    "description": "本篇文档描述了eBaoCloud（易保云）寿险所提供的API（API specification）。如果您想运行和使用这些API，你需要首先获取一个eBaoCloud的租户账号，请联系Antang.Du@ebaotech.com获取账号。我们会提供沙箱环境给您。\n\n# 搭建时间\nThu Dec 28 2017, 13:52:01 +08:00\n\n# 版本\nAPI 版本| 时间  |说明\n"
   },
   "host": "eli.ebaocloud.com.cn",
   "basePath": "/bff",
