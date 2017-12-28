@@ -3,6 +3,7 @@ Retrieve the latest API swagger file and merge them into one.
 InitVersion: Chinese version
 */
 'use strict';
+
 var swaggermerge = require('swagger-merge');
 //var format = require('date-fns/format')
 
@@ -41,4 +42,4 @@ var mergedString = JSON.stringify(mergedJson, null, 2);
 //smergedString = mergedString.replace(/product-controller/g, "Product");
 
 // 本地保存
-fs.writeFileSync("./swagger-beta-en.json", mergedString);
+fs.writeFileSync(__dirname + "/tmp/merged-swagger.json", mergedString);
