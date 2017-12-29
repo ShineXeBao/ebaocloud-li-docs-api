@@ -1,10 +1,10 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "0.1.0",
+    "version": "0.1.1",
     "title": "eBaoCloud LI OpenAPI",
     "termsOfService": "http://api.ebaocloud.life/",
-    "description": "This document is the API specification for the eBaoCloud Life part. To practice and run the APIs in this document, you need to apply an eBaoCloud tenant account(starting from a sandbox account instead of production account) first.<br>\nContact liliang.zhu@ebaotech.com for more information and trial using.\n\n# Built on\nThu Dec 28 2017, 16:21:59 +08:00\n\n# Versioning\nAPI version| Date  |Comments\n"
+    "description": "This document is the API specification for the eBaoCloud Life part. To practice and run the APIs in this document, you need to apply an eBaoCloud tenant account(starting from a sandbox account instead of production account) first.<br>\nContact liliang.zhu@ebaotech.com for more information and trial using.\n\n# Built on\nFri Dec 29 2017, 17:38:43 +08:00\n\n# Versioning\nAPI version| Date  |Comments\n"
   },
   "host": "sandbox.api.li.ebaocloud.com.cn",
   "basePath": "/rest",
@@ -86,7 +86,7 @@
           "in": "path",
           "required": true,
           "type": "string",
-          "description": "paths['/policy/policies/{insurerCode}/search'].parameters['0'].description"
+          "description": "Insurer code"
         }
       ]
     },
@@ -140,14 +140,14 @@
           "in": "path",
           "required": true,
           "type": "string",
-          "description": "paths['/policy/policies/{insurerCode}/{policyNumber}'].parameters['0'].description"
+          "description": "Insurer code"
         },
         {
           "name": "policyNumber",
           "in": "path",
           "required": true,
           "type": "string",
-          "description": "paths['/policy/policies/{insurerCode}/{policyNumber}'].parameters['1'].description"
+          "description": "Policy number"
         }
       ]
     },
@@ -156,8 +156,8 @@
         "tags": [
           "Party"
         ],
-        "summary": "paths['/customers/{customerId}'].get.summary",
-        "description": "paths['/customers/{customerId}'].get.description",
+        "summary": "Get specified customer data by customer ID",
+        "description": "Get specified customer data by customer ID",
         "operationId": "CustomerInfoGET",
         "produces": [
           "application/json"
@@ -165,7 +165,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "paths['/customers/{customerId}'].get.responses['200'].description",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/CustomerInfo"
             },
@@ -189,8 +189,8 @@
         "tags": [
           "Party"
         ],
-        "summary": "paths['/customers/'].put.summary",
-        "description": "paths['/customers/'].put.description",
+        "summary": "Create a customer information",
+        "description": "Request to modify the customer info",
         "operationId": "CustomerCreatePUT",
         "consumes": [
           "application/json"
@@ -207,7 +207,7 @@
         ],
         "responses": {
           "200": {
-            "description": "paths['/customers/'].put.responses['200'].description",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/CreateCustomerResultInfo"
             }
@@ -220,7 +220,7 @@
         "tags": [
           "Party"
         ],
-        "summary": "paths['/customers/corresponding/{customerId}'].post.summary",
+        "summary": "Modify an existing customer's contact and address information",
         "operationId": "CustomerAlterationPOST",
         "consumes": [],
         "parameters": [
@@ -235,7 +235,7 @@
         ],
         "responses": {
           "200": {
-            "description": "paths['/customers/corresponding/{customerId}'].post.responses['200'].description",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/CorrespondingResultInfo"
             }
@@ -1813,7 +1813,7 @@
         },
         "AddressInfo": {
           "type": "array",
-          "description": "definitions.CustomerInfo.properties.AddressInfo.description",
+          "description": "Address list",
           "items": {
             "required": [
               "Address"
@@ -1830,24 +1830,24 @@
           "$ref": "#/definitions/PartyContact"
         }
       },
-      "description": "definitions.CustomerInfo.description"
+      "description": "Customer related information with basic info, contact and so on"
     },
     "CorrespondingInput": {
       "type": "object",
       "properties": {
         "clientRequestId": {
           "type": "string",
-          "description": "definitions.CorrespondingInput.properties.clientRequestId.description"
+          "description": "Client request id, to identify a request"
         },
         "clientRequestTime": {
           "type": "string",
           "format": "date-time",
-          "description": "definitions.CorrespondingInput.properties.clientRequestTime.description"
+          "description": "Client request time, format: yyyy-MM-dd'T'HH:mm:ss"
         },
         "effectiveDate": {
           "type": "string",
           "format": "date-time",
-          "description": "definitions.CorrespondingInput.properties.effectiveDate.description"
+          "description": "Effective date, format: yyyy-MM-dd'T'HH:mm:ss"
         },
         "AddressInfo": {
           "type": "array",
@@ -1860,7 +1860,7 @@
         },
         "RelatedPolicy": {
           "type": "array",
-          "description": "definitions.CorrespondingInput.properties.RelatedPolicy.description",
+          "description": "Policy code list",
           "items": {
             "type": "integer"
           }
@@ -1872,17 +1872,17 @@
       "properties": {
         "clientRequestId": {
           "type": "string",
-          "description": "definitions.CorrespondingResultInfo.properties.clientRequestId.description"
+          "description": "Client request id, to identify a request"
         },
         "clientRequestTime": {
           "type": "string",
           "format": "date-time",
-          "description": "definitions.CorrespondingResultInfo.properties.clientRequestTime.description"
+          "description": "Client request time, format: yyyy-MM-dd'T'HH:mm:ss"
         },
         "effectiveDate": {
           "type": "string",
           "format": "date-time",
-          "description": "definitions.CorrespondingResultInfo.properties.effectiveDate.description"
+          "description": "Effective date, format: yyyy-MM-dd'T'HH:mm:ss"
         },
         "AddressInfo": {
           "type": "array",
@@ -1895,7 +1895,7 @@
         },
         "RelatedPolicy": {
           "type": "array",
-          "description": "definitions.CorrespondingResultInfo.properties.RelatedPolicy.description",
+          "description": "Policy code list",
           "items": {
             "type": "integer"
           }
@@ -1903,7 +1903,7 @@
         "result": {
           "type": "integer",
           "format": "int32",
-          "description": "definitions.CorrespondingResultInfo.properties.result.description",
+          "description": "Result. <br>1 - Success<br>0 - Failed with business issue<br>-1 - Failed with unknown exception",
           "enum": [
             -1,
             0,
@@ -1917,17 +1917,17 @@
       "properties": {
         "clientRequestId": {
           "type": "string",
-          "description": "definitions.CreateCustomerInput.properties.clientRequestId.description"
+          "description": "Client request id, to identify a request"
         },
         "clientRequestTime": {
           "type": "string",
           "format": "date-time",
-          "description": "definitions.CreateCustomerInput.properties.clientRequestTime.description"
+          "description": "Client request time, format: yyyy-MM-dd'T'HH:mm:ss"
         },
         "effectiveDate": {
           "type": "string",
           "format": "date-time",
-          "description": "definitions.CreateCustomerInput.properties.effectiveDate.description"
+          "description": "Effective date, format: yyyy-MM-dd'T'HH:mm:ss"
         },
         "CustomerInfo": {
           "$ref": "#/definitions/CustomerInfo"
@@ -1939,17 +1939,17 @@
       "properties": {
         "clientRequestId": {
           "type": "string",
-          "description": "definitions.CreateCustomerResultInfo.properties.clientRequestId.description"
+          "description": "Client request id, to identify a request"
         },
         "clientRequestTime": {
           "type": "string",
           "format": "date-time",
-          "description": "definitions.CreateCustomerResultInfo.properties.clientRequestTime.description"
+          "description": "Client request time, format: yyyy-MM-dd'T'HH:mm:ss"
         },
         "effectiveDate": {
           "type": "string",
           "format": "date-time",
-          "description": "definitions.CreateCustomerResultInfo.properties.effectiveDate.description"
+          "description": "Effective date, format: yyyy-MM-dd'T'HH:mm:ss"
         },
         "CustomerInfo": {
           "$ref": "#/definitions/CustomerInfo"
@@ -1957,7 +1957,7 @@
         "result": {
           "type": "integer",
           "format": "int32",
-          "description": "definitions.CreateCustomerResultInfo.properties.result.description",
+          "description": "Result. <br>1 - Success<br>0 - Failed with business issue<br>-1 - Failed with unknown exception",
           "enum": [
             -1,
             0,

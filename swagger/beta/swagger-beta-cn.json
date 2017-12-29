@@ -1,10 +1,10 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "0.1.0",
+    "version": "0.1.1",
     "title": "eBaoCloud LI OpenAPI",
     "termsOfService": "http://api.ebaocloud.life/",
-    "description": "本篇文档描述了eBaoCloud（易保云）寿险所提供的API（API specification）。如果您想运行和使用这些API，你需要首先获取一个eBaoCloud的租户账号，请联系Antang.Du@ebaotech.com获取账号。我们会提供沙箱环境给您。\n\n# 搭建时间\nThu Dec 28 2017, 16:21:56 +08:00\n\n# 版本\nAPI 版本| 时间  |说明\n"
+    "description": "本篇文档描述了eBaoCloud（易保云）寿险所提供的API（API specification）。如果您想运行和使用这些API，你需要首先获取一个eBaoCloud的租户账号，请联系Antang.Du@ebaotech.com获取账号。我们会提供沙箱环境给您。\n\n# 搭建时间\nFri Dec 29 2017, 17:38:47 +08:00\n\n# 版本\nAPI 版本| 时间  |说明\n"
   },
   "host": "sandbox.api.li.ebaocloud.com.cn",
   "basePath": "/rest",
@@ -86,7 +86,7 @@
           "in": "path",
           "required": true,
           "type": "string",
-          "description": "paths['/policy/policies/{insurerCode}/search'].parameters['0'].description"
+          "description": "保险公司编号"
         }
       ]
     },
@@ -140,14 +140,14 @@
           "in": "path",
           "required": true,
           "type": "string",
-          "description": "paths['/policy/policies/{insurerCode}/{policyNumber}'].parameters['0'].description"
+          "description": "保险公司编号"
         },
         {
           "name": "policyNumber",
           "in": "path",
           "required": true,
           "type": "string",
-          "description": "paths['/policy/policies/{insurerCode}/{policyNumber}'].parameters['1'].description"
+          "description": "保单号码"
         }
       ]
     },
@@ -156,8 +156,8 @@
         "tags": [
           "Party"
         ],
-        "summary": "paths['/customers/{customerId}'].get.summary",
-        "description": "paths['/customers/{customerId}'].get.description",
+        "summary": "根据客户ID获取客户信息",
+        "description": "根据客户ID获取客户信息",
         "operationId": "CustomerInfoGET",
         "produces": [
           "application/json"
@@ -165,7 +165,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "paths['/customers/{customerId}'].get.responses['200'].description",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/CustomerInfo"
             },
@@ -189,8 +189,8 @@
         "tags": [
           "Party"
         ],
-        "summary": "paths['/customers/'].put.summary",
-        "description": "paths['/customers/'].put.description",
+        "summary": "创建一个客户",
+        "description": "修改客户信息请求",
         "operationId": "CustomerCreatePUT",
         "consumes": [
           "application/json"
@@ -207,7 +207,7 @@
         ],
         "responses": {
           "200": {
-            "description": "paths['/customers/'].put.responses['200'].description",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/CreateCustomerResultInfo"
             }
@@ -220,7 +220,7 @@
         "tags": [
           "Party"
         ],
-        "summary": "paths['/customers/corresponding/{customerId}'].post.summary",
+        "summary": "修改已知客户联系信息和地址",
         "operationId": "CustomerAlterationPOST",
         "consumes": [],
         "parameters": [
@@ -235,7 +235,7 @@
         ],
         "responses": {
           "200": {
-            "description": "paths['/customers/corresponding/{customerId}'].post.responses['200'].description",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/CorrespondingResultInfo"
             }
@@ -1813,7 +1813,7 @@
         },
         "AddressInfo": {
           "type": "array",
-          "description": "definitions.CustomerInfo.properties.AddressInfo.description",
+          "description": "地址列表",
           "items": {
             "required": [
               "Address"
@@ -1830,24 +1830,24 @@
           "$ref": "#/definitions/PartyContact"
         }
       },
-      "description": "definitions.CustomerInfo.description"
+      "description": "客户相关基本信息，联系方式等"
     },
     "CorrespondingInput": {
       "type": "object",
       "properties": {
         "clientRequestId": {
           "type": "string",
-          "description": "definitions.CorrespondingInput.properties.clientRequestId.description"
+          "description": "客户请求ID"
         },
         "clientRequestTime": {
           "type": "string",
           "format": "date-time",
-          "description": "definitions.CorrespondingInput.properties.clientRequestTime.description"
+          "description": "客户请求日期，日期格式：yyyy-MM-dd'T'HH:mm:ss"
         },
         "effectiveDate": {
           "type": "string",
           "format": "date-time",
-          "description": "definitions.CorrespondingInput.properties.effectiveDate.description"
+          "description": "生效日期，日期格式：yyyy-MM-dd'T'HH:mm:ss"
         },
         "AddressInfo": {
           "type": "array",
@@ -1860,7 +1860,7 @@
         },
         "RelatedPolicy": {
           "type": "array",
-          "description": "definitions.CorrespondingInput.properties.RelatedPolicy.description",
+          "description": "保单号码列表",
           "items": {
             "type": "integer"
           }
@@ -1872,17 +1872,17 @@
       "properties": {
         "clientRequestId": {
           "type": "string",
-          "description": "definitions.CorrespondingResultInfo.properties.clientRequestId.description"
+          "description": "客户请求ID"
         },
         "clientRequestTime": {
           "type": "string",
           "format": "date-time",
-          "description": "definitions.CorrespondingResultInfo.properties.clientRequestTime.description"
+          "description": "客户请求日期，日期格式：yyyy-MM-dd'T'HH:mm:ss"
         },
         "effectiveDate": {
           "type": "string",
           "format": "date-time",
-          "description": "definitions.CorrespondingResultInfo.properties.effectiveDate.description"
+          "description": "生效日期，日期格式：yyyy-MM-dd'T'HH:mm:ss"
         },
         "AddressInfo": {
           "type": "array",
@@ -1895,7 +1895,7 @@
         },
         "RelatedPolicy": {
           "type": "array",
-          "description": "definitions.CorrespondingResultInfo.properties.RelatedPolicy.description",
+          "description": "保单号码列表",
           "items": {
             "type": "integer"
           }
@@ -1903,7 +1903,7 @@
         "result": {
           "type": "integer",
           "format": "int32",
-          "description": "definitions.CorrespondingResultInfo.properties.result.description",
+          "description": "注册结果<br>1 - 成功s<br>0 - 失败<br>-1 - 未知错误的失败",
           "enum": [
             -1,
             0,
@@ -1917,17 +1917,17 @@
       "properties": {
         "clientRequestId": {
           "type": "string",
-          "description": "definitions.CreateCustomerInput.properties.clientRequestId.description"
+          "description": "客户请求ID"
         },
         "clientRequestTime": {
           "type": "string",
           "format": "date-time",
-          "description": "definitions.CreateCustomerInput.properties.clientRequestTime.description"
+          "description": "客户请求日期，日期格式：yyyy-MM-dd'T'HH:mm:ss"
         },
         "effectiveDate": {
           "type": "string",
           "format": "date-time",
-          "description": "definitions.CreateCustomerInput.properties.effectiveDate.description"
+          "description": "生效日期，日期格式：yyyy-MM-dd'T'HH:mm:ss"
         },
         "CustomerInfo": {
           "$ref": "#/definitions/CustomerInfo"
@@ -1939,17 +1939,17 @@
       "properties": {
         "clientRequestId": {
           "type": "string",
-          "description": "definitions.CreateCustomerResultInfo.properties.clientRequestId.description"
+          "description": "客户请求ID"
         },
         "clientRequestTime": {
           "type": "string",
           "format": "date-time",
-          "description": "definitions.CreateCustomerResultInfo.properties.clientRequestTime.description"
+          "description": "客户请求日期，日期格式：yyyy-MM-dd'T'HH:mm:ss"
         },
         "effectiveDate": {
           "type": "string",
           "format": "date-time",
-          "description": "definitions.CreateCustomerResultInfo.properties.effectiveDate.description"
+          "description": "生效日期，日期格式：yyyy-MM-dd'T'HH:mm:ss"
         },
         "CustomerInfo": {
           "$ref": "#/definitions/CustomerInfo"
@@ -1957,7 +1957,7 @@
         "result": {
           "type": "integer",
           "format": "int32",
-          "description": "definitions.CreateCustomerResultInfo.properties.result.description",
+          "description": "注册结果<br>1 - 成功s<br>0 - 失败<br>-1 - 未知错误的失败",
           "enum": [
             -1,
             0,

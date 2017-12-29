@@ -636,10 +636,12 @@
           "description": "投保单预印号"
         },
         "proposalInfo": {
-          "$ref": "#/definitions/PolicyProposalInfo"
+          "$ref": "#/definitions/PolicyProposalInfo",
+          "description": "投保单信息"
         },
         "policyPackage": {
-          "$ref": "#/definitions/PolicyPackageInfo"
+          "$ref": "#/definitions/PolicyPackageInfo",
+          "description": "产品组合"
         },
         "coverages": {
           "type": "array",
@@ -649,7 +651,8 @@
           }
         },
         "policyHolder": {
-          "$ref": "#/definitions/PolicyHolderInfo"
+          "$ref": "#/definitions/PolicyHolderInfo",
+          "description": "投保人"
         },
         "insureds": {
           "type": "array",
@@ -753,7 +756,8 @@
           "description": "保障年期，保终身时为9999；按年限保时为保障年限；保至某确定年龄时为保障期满年龄；按月保时为保障月数；按天保时为保障天数"
         },
         "currentPremium": {
-          "$ref": "#/definitions/CoveragePremium"
+          "$ref": "#/definitions/CoveragePremium",
+          "description": "当期保费"
         },
         "productCode": {
           "type": "string",
@@ -764,10 +768,12 @@
           "description": "主险代码"
         },
         "waiverExt": {
-          "$ref": "#/definitions/CoverageExtWaiver"
+          "$ref": "#/definitions/CoverageExtWaiver",
+          "description": "险种豁免信息"
         },
         "nextPremium": {
-          "$ref": "#/definitions/CoveragePremium"
+          "$ref": "#/definitions/CoveragePremium",
+          "description": "续期保费"
         },
         "coverageAgents": {
           "type": "array",
@@ -798,7 +804,8 @@
           }
         },
         "recurringTopup": {
-          "$ref": "#/definitions/RecurringTopupInfo"
+          "$ref": "#/definitions/RecurringTopupInfo",
+          "description": "定期追加投资"
         },
         "contractInvests": {
           "type": "array",
@@ -1104,7 +1111,8 @@
           "description": "客户编号"
         },
         "policyCustomer": {
-          "$ref": "#/definitions/PolicyCustomerInfo"
+          "$ref": "#/definitions/PolicyCustomerInfo",
+          "description": "客户详细信息"
         },
         "relationToLA": {
           "type": "integer",
@@ -1129,7 +1137,8 @@
       "type": "object",
       "properties": {
         "address": {
-          "$ref": "#/definitions/AddressInfo"
+          "$ref": "#/definitions/AddressInfo",
+          "description": "客户地址"
         },
         "partyType": {
           "type": "integer",
@@ -1142,13 +1151,16 @@
           "example": 1
         },
         "person": {
-          "$ref": "#/definitions/Person"
+          "$ref": "#/definitions/Person",
+          "description": "个人客户信息"
         },
         "organization": {
-          "$ref": "#/definitions/Organization"
+          "$ref": "#/definitions/Organization",
+          "description": "机构客户信息"
         },
         "partyContact": {
-          "$ref": "#/definitions/PartyContact"
+          "$ref": "#/definitions/PartyContact",
+          "description": "当事人联系信息"
         },
         "extendedProps": {
           "type": "object",
@@ -1164,7 +1176,8 @@
           "description": "客户编号"
         },
         "policyCustomer": {
-          "$ref": "#/definitions/PolicyCustomerInfo"
+          "$ref": "#/definitions/PolicyCustomerInfo",
+          "description": "客户详细信息"
         },
         "relationToPH": {
           "type": "integer",
@@ -1221,7 +1234,8 @@
           "description": "客户编号"
         },
         "policyCustomer": {
-          "$ref": "#/definitions/PolicyCustomerInfo"
+          "$ref": "#/definitions/PolicyCustomerInfo",
+          "description": "客户详细信息"
         },
         "insuredPartyId": {
           "type": "string",
@@ -1309,10 +1323,12 @@
           "example": 3
         },
         "bankAccount": {
-          "$ref": "#/definitions/BankAccountInfo"
+          "$ref": "#/definitions/BankAccountInfo",
+          "description": "首期银行账户"
         },
         "nextBankAccount": {
-          "$ref": "#/definitions/BankAccountInfo"
+          "$ref": "#/definitions/BankAccountInfo",
+          "description": "续期银行账户"
         },
         "extendedProps": {
           "type": "object",
@@ -1971,10 +1987,12 @@
           "description": "claim policy number"
         },
         "claimant": {
-          "$ref": "#/definitions/ClaimantInput"
+          "$ref": "#/definitions/ClaimantInput",
+          "description": "理赔索赔人信息"
         },
         "insured": {
-          "$ref": "#/definitions/InsuredInput"
+          "$ref": "#/definitions/InsuredInput",
+          "description": "理赔被保险人信息"
         },
         "relationToInsured": {
           "type": "integer",
@@ -1991,7 +2009,8 @@
           ]
         },
         "event": {
-          "$ref": "#/definitions/ClaimEventInput"
+          "$ref": "#/definitions/ClaimEventInput",
+          "description": "理赔事件信息"
         },
         "claimType": {
           "type": "integer",
@@ -2058,7 +2077,8 @@
           "description": "name"
         },
         "partyContact": {
-          "$ref": "#/definitions/ContactInput"
+          "$ref": "#/definitions/ContactInput",
+          "description": "联系信息"
         }
       }
     },

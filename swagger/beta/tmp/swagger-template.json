@@ -636,10 +636,12 @@
           "description": "definitions.PolicyInfo.properties.preprintedProposalNumber.description"
         },
         "proposalInfo": {
-          "$ref": "#/definitions/PolicyProposalInfo"
+          "$ref": "#/definitions/PolicyProposalInfo",
+          "description": "definitions.PolicyInfo.properties.proposalInfo.description"
         },
         "policyPackage": {
-          "$ref": "#/definitions/PolicyPackageInfo"
+          "$ref": "#/definitions/PolicyPackageInfo",
+          "description": "definitions.PolicyInfo.properties.policyPackage.description"
         },
         "coverages": {
           "type": "array",
@@ -649,7 +651,8 @@
           }
         },
         "policyHolder": {
-          "$ref": "#/definitions/PolicyHolderInfo"
+          "$ref": "#/definitions/PolicyHolderInfo",
+          "description": "definitions.PolicyInfo.properties.policyHolder.description"
         },
         "insureds": {
           "type": "array",
@@ -753,7 +756,8 @@
           "description": "definitions.CoverageInfo.properties.coverageYear.description"
         },
         "currentPremium": {
-          "$ref": "#/definitions/CoveragePremium"
+          "$ref": "#/definitions/CoveragePremium",
+          "description": "definitions.CoverageInfo.properties.currentPremium.description"
         },
         "productCode": {
           "type": "string",
@@ -764,10 +768,12 @@
           "description": "definitions.CoverageInfo.properties.masterProductCode.description"
         },
         "waiverExt": {
-          "$ref": "#/definitions/CoverageExtWaiver"
+          "$ref": "#/definitions/CoverageExtWaiver",
+          "description": "definitions.CoverageInfo.properties.waiverExt.description"
         },
         "nextPremium": {
-          "$ref": "#/definitions/CoveragePremium"
+          "$ref": "#/definitions/CoveragePremium",
+          "description": "definitions.CoverageInfo.properties.nextPremium.description"
         },
         "coverageAgents": {
           "type": "array",
@@ -798,7 +804,8 @@
           }
         },
         "recurringTopup": {
-          "$ref": "#/definitions/RecurringTopupInfo"
+          "$ref": "#/definitions/RecurringTopupInfo",
+          "description": "definitions.CoverageInfo.properties.recurringTopup.description"
         },
         "contractInvests": {
           "type": "array",
@@ -1104,7 +1111,8 @@
           "description": "definitions.PolicyHolderInfo.properties.partyId.description"
         },
         "policyCustomer": {
-          "$ref": "#/definitions/PolicyCustomerInfo"
+          "$ref": "#/definitions/PolicyCustomerInfo",
+          "description": "definitions.PolicyHolderInfo.properties.policyCustomer.description"
         },
         "relationToLA": {
           "type": "integer",
@@ -1129,7 +1137,8 @@
       "type": "object",
       "properties": {
         "address": {
-          "$ref": "#/definitions/AddressInfo"
+          "$ref": "#/definitions/AddressInfo",
+          "description": "definitions.PolicyCustomerInfo.properties.address.description"
         },
         "partyType": {
           "type": "integer",
@@ -1142,13 +1151,16 @@
           "example": 1
         },
         "person": {
-          "$ref": "#/definitions/Person"
+          "$ref": "#/definitions/Person",
+          "description": "definitions.PolicyCustomerInfo.properties.person.description"
         },
         "organization": {
-          "$ref": "#/definitions/Organization"
+          "$ref": "#/definitions/Organization",
+          "description": "definitions.PolicyCustomerInfo.properties.organization.description"
         },
         "partyContact": {
-          "$ref": "#/definitions/PartyContact"
+          "$ref": "#/definitions/PartyContact",
+          "description": "definitions.PolicyCustomerInfo.properties.partyContact.description"
         },
         "extendedProps": {
           "type": "object",
@@ -1164,7 +1176,8 @@
           "description": "definitions.InsuredInfo.properties.partyId.description"
         },
         "policyCustomer": {
-          "$ref": "#/definitions/PolicyCustomerInfo"
+          "$ref": "#/definitions/PolicyCustomerInfo",
+          "description": "definitions.InsuredInfo.properties.policyCustomer.description"
         },
         "relationToPH": {
           "type": "integer",
@@ -1221,7 +1234,8 @@
           "description": "definitions.BeneficiaryInfo.properties.partyId.description"
         },
         "policyCustomer": {
-          "$ref": "#/definitions/PolicyCustomerInfo"
+          "$ref": "#/definitions/PolicyCustomerInfo",
+          "description": "definitions.BeneficiaryInfo.properties.policyCustomer.description"
         },
         "insuredPartyId": {
           "type": "string",
@@ -1309,10 +1323,12 @@
           "example": 3
         },
         "bankAccount": {
-          "$ref": "#/definitions/BankAccountInfo"
+          "$ref": "#/definitions/BankAccountInfo",
+          "description": "definitions.PayerAccountInfo.properties.bankAccount.description"
         },
         "nextBankAccount": {
-          "$ref": "#/definitions/BankAccountInfo"
+          "$ref": "#/definitions/BankAccountInfo",
+          "description": "definitions.PayerAccountInfo.properties.nextBankAccount.description"
         },
         "extendedProps": {
           "type": "object",
@@ -1971,10 +1987,12 @@
           "description": "definitions.RegisterRequest.properties.policyNo.description"
         },
         "claimant": {
-          "$ref": "#/definitions/ClaimantInput"
+          "$ref": "#/definitions/ClaimantInput",
+          "description": "definitions.RegisterRequest.properties.claimant.description"
         },
         "insured": {
-          "$ref": "#/definitions/InsuredInput"
+          "$ref": "#/definitions/InsuredInput",
+          "description": "definitions.RegisterRequest.properties.insured.description"
         },
         "relationToInsured": {
           "type": "integer",
@@ -1991,7 +2009,8 @@
           ]
         },
         "event": {
-          "$ref": "#/definitions/ClaimEventInput"
+          "$ref": "#/definitions/ClaimEventInput",
+          "description": "definitions.RegisterRequest.properties.event.description"
         },
         "claimType": {
           "type": "integer",
@@ -2058,7 +2077,8 @@
           "description": "definitions.ClaimantInput.properties.name.description"
         },
         "partyContact": {
-          "$ref": "#/definitions/ContactInput"
+          "$ref": "#/definitions/ContactInput",
+          "description": "definitions.ClaimantInput.properties.partyContact.description"
         }
       }
     },
