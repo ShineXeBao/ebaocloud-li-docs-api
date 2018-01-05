@@ -1,10 +1,10 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "0.1.1",
+    "version": "1.0",
     "title": "eBaoCloud LI OpenAPI",
     "termsOfService": "http://api.ebaocloud.life/",
-    "description": "This document is the API specification for the eBaoCloud Life part. To practice and run the APIs in this document, you need to apply an eBaoCloud tenant account(starting from a sandbox account instead of production account) first.<br>\nContact liliang.zhu@ebaotech.com for more information and trial using.\n\n# Built on\nFri Dec 29 2017, 17:38:43 +08:00\n\n# Versioning\nAPI version| Date  |Comments\n"
+    "description": "This document is the API specification for the eBaoCloud Life part. To practice and run the APIs in this document, you need to apply an eBaoCloud tenant account(starting from a sandbox account instead of production account) first.<br>\nContact liliang.zhu@ebaotech.com for more information and trial using.\n\n# Built on\nFri Jan 5 2018, 16:59:05 +08:00\n\n# Versioning\nAPI version| Date  |Comments\n"
   },
   "host": "sandbox.api.li.ebaocloud.com.cn",
   "basePath": "/rest",
@@ -425,29 +425,29 @@
         "applyDateFrom": {
           "type": "string",
           "format": "date-time",
-          "description": "Search criteria: application date from",
-          "example": "2017-07-01"
+          "example": "2017-07-01",
+          "description": "Search criteria: application date from"
         },
         "applyDateTo": {
           "type": "string",
           "format": "date-time",
-          "description": "Search criteria: application date to",
-          "example": "2017-08-01"
+          "example": "2017-08-01",
+          "description": "Search criteria: application date to"
         },
         "certiCode": {
           "type": "string",
-          "description": "Search criteria: id no. of policy customer (policy holder or insured)",
-          "example": "1234567890"
+          "example": "1234567890",
+          "description": "Search criteria: id no. of policy customer (policy holder or insured)"
         },
         "masterProductCode": {
           "type": "string",
-          "description": "Search criteria: code of master product",
-          "example": "07H004"
+          "example": "07H004",
+          "description": "Search criteria: code of master product"
         },
         "name": {
           "type": "string",
-          "description": "Search criteria: name of policy customer (policy holder or insured)",
-          "example": "name"
+          "example": "name",
+          "description": "Search criteria: name of policy customer (policy holder or insured)"
         },
         "page": {
           "type": "integer",
@@ -607,12 +607,12 @@
         },
         "deliverType": {
           "type": "string",
+          "example": "M",
           "description": "Policy delivery method<br>H - by people<br>M - by mail",
           "enum": [
             "H",
             "M"
-          ],
-          "example": "M"
+          ]
         },
         "policyNumber": {
           "type": "string",
@@ -727,14 +727,14 @@
       "properties": {
         "chargePeriod": {
           "type": "string",
+          "example": "2",
           "description": "Payment period type, non-empty<br>1 - single<br>2 - per year<br>3 to a certain age<br>4 - whole life",
           "enum": [
             "1",
             "2",
             "3",
             "4"
-          ],
-          "example": "2"
+          ]
         },
         "chargeYear": {
           "type": "integer",
@@ -744,6 +744,7 @@
         },
         "coveragePeriod": {
           "type": "string",
+          "example": "1",
           "description": "Coverage type<br>1 - whole life<br>2 - per year<br>3 - Cover to a certain age<br>4 - per month<br>5 - per day",
           "enum": [
             "1",
@@ -751,8 +752,7 @@
             "3",
             "4",
             "5"
-          ],
-          "example": "1"
+          ]
         },
         "coverageYear": {
           "type": "integer",
@@ -833,6 +833,7 @@
         },
         "paymentFreq": {
           "type": "string",
+          "example": "1",
           "description": "Pay frequency<br>1 - yearly payment<br>2 - half yearly payment<br>3 - quarterly payment<br>4 - monthly payment<br>5 - single premium",
           "enum": [
             "1",
@@ -840,8 +841,7 @@
             "3",
             "4",
             "5"
-          ],
-          "example": "1"
+          ]
         },
         "sumAssured": {
           "type": "number",
@@ -872,12 +872,12 @@
         },
         "waiver": {
           "type": "string",
+          "example": "N",
           "description": "Is waiver<br>Y - yes<br>N - no",
           "enum": [
             "Y",
             "N"
-          ],
-          "example": "N"
+          ]
         }
       }
     },
@@ -886,13 +886,13 @@
       "properties": {
         "endPeriod": {
           "type": "string",
+          "example": "3",
           "description": "Year to receive the type of annuity, the type of annuity / variable annuity / GMWB should not be empty<br>1 to receive a fixed number of years<br>2 to receive till a certain age<br>3 - receive whole life",
           "enum": [
             "1",
             "2",
             "3"
-          ],
-          "example": "3"
+          ]
         },
         "endYear": {
           "type": "integer",
@@ -906,6 +906,7 @@
         },
         "payOption": {
           "type": "string",
+          "example": "1",
           "description": "The annuity receive payment options: 1 - to receive payment by cash<br>2 - to pay premium<br>3 - accumulated interest<br>4 - accumulated interest x years after the transfer to pay premium<br>5 - to buy an additional payment of rider",
           "enum": [
             "1",
@@ -913,8 +914,7 @@
             "3",
             "4",
             "5"
-          ],
-          "example": "1"
+          ]
         },
         "payOptionTerm": {
           "type": "integer",
@@ -923,14 +923,14 @@
         },
         "payPeriod": {
           "type": "string",
+          "example": "3",
           "description": "The annuity begins to receive the type of period<br>1 - is immediately received<br>2 - till a certain age to receive<br>3 - years after the collection<br>4 - after a certain age to receive",
           "enum": [
             "1",
             "2",
             "3",
             "4"
-          ],
-          "example": "3"
+          ]
         },
         "payYear": {
           "type": "integer",
@@ -939,6 +939,7 @@
         },
         "planFreq": {
           "type": "string",
+          "example": "1",
           "description": "To receive frequency<br>1 - yearly<br>2 - half yearly<br>3 - quarterly <br>4 - monthly<br>5 - single",
           "enum": [
             "1",
@@ -946,11 +947,11 @@
             "3",
             "4",
             "5"
-          ],
-          "example": "1"
+          ]
         },
         "planType": {
           "type": "string",
+          "example": "1",
           "description": "Payment plan type<br>1 - cash payment<br>2 - annuity<br>3 - survival benefit<br>4 - maturity  5 - GMWB (guaranteed minimum benefit)<br>6 - variable annuity<br>7 - partial surrender<br>8 - SA dividends",
           "enum": [
             "1",
@@ -961,8 +962,7 @@
             "6",
             "7",
             "8"
-          ],
-          "example": "1"
+          ]
         },
         "extendedProps": {
           "type": "object",
@@ -1006,8 +1006,8 @@
       "properties": {
         "fundCode": {
           "type": "string",
-          "description": "Fund code",
-          "example": "F001"
+          "example": "F001",
+          "description": "Fund code"
         },
         "assignRate": {
           "type": "number",
@@ -1053,8 +1053,8 @@
       "properties": {
         "fundCode": {
           "type": "string",
-          "description": "Fund code",
-          "example": "F001"
+          "example": "F001",
+          "description": "Fund code"
         },
         "assignRate": {
           "type": "number",
@@ -1073,8 +1073,8 @@
       "properties": {
         "fundCode": {
           "type": "string",
-          "description": "Fund code",
-          "example": "F001"
+          "example": "F001",
+          "description": "Fund code"
         },
         "accumUnits": {
           "type": "number",
@@ -1199,30 +1199,30 @@
         },
         "medicalExamIndi": {
           "type": "string",
+          "example": "N",
           "description": "Whether physical exam is required<br>Y - yes;<br>N - no",
           "enum": [
             "Y",
             "N"
-          ],
-          "example": "N"
+          ]
         },
         "medicalIndi": {
           "type": "string",
+          "example": "Y",
           "description": "Whether there is medical insurance coverage<br>Y - yes<br>N - no",
           "enum": [
             "Y",
             "N"
-          ],
-          "example": "Y"
+          ]
         },
         "socialSecurityIndi": {
           "type": "string",
+          "example": "Y",
           "description": "Whether there is social medical insurance coverage<br>Y - yes<br>N - no",
           "enum": [
             "Y",
             "N"
-          ],
-          "example": "Y"
+          ]
         },
         "extendedProps": {
           "type": "object",
@@ -1247,13 +1247,13 @@
         },
         "beneType": {
           "type": "string",
+          "example": "2",
           "description": "Beneficiaries, 1 beneficiaries<br>2 - beneficiaries<br>3 - insured beneficiaries",
           "enum": [
             "1",
             "2",
             "3"
-          ],
-          "example": "2"
+          ]
         },
         "designation": {
           "type": "integer",
@@ -1498,18 +1498,18 @@
       "properties": {
         "gender": {
           "type": "string",
+          "example": "M",
           "description": "Sex<br>M - male<br>F - female",
           "enum": [
             "M",
             "F"
-          ],
-          "example": "M"
+          ]
         },
         "birthdate": {
           "type": "string",
           "format": "date-time",
-          "description": "Birthday, non-empty, date format: yyyy-MM-dd",
-          "example": "1980-01-01"
+          "example": "1980-01-01",
+          "description": "Birthday, non-empty, date format: yyyy-MM-dd"
         },
         "certiType": {
           "type": "integer",
@@ -1526,25 +1526,25 @@
         },
         "certiCode": {
           "type": "string",
-          "description": "ID Number",
-          "example": "1234567890"
+          "example": "1234567890",
+          "description": "ID Number"
         },
         "certiStart": {
           "type": "string",
           "format": "date-time",
-          "description": "Certificate start date, date format: yyyy-MM-dd",
-          "example": "2000-01-01"
+          "example": "2000-01-01",
+          "description": "Certificate start date, date format: yyyy-MM-dd"
         },
         "certiEnd": {
           "type": "string",
           "format": "date-time",
-          "description": "Valid date, date format: yyyy-MM-dd",
-          "example": "2019-12-31"
+          "example": "2019-12-31",
+          "description": "Valid date, date format: yyyy-MM-dd"
         },
         "firstName": {
           "type": "string",
-          "description": "First name",
-          "example": "三"
+          "example": "三",
+          "description": "First name"
         },
         "midName": {
           "type": "string",
@@ -1552,32 +1552,32 @@
         },
         "lastName": {
           "type": "string",
-          "description": "Last name of prospect",
-          "example": "张"
+          "example": "张",
+          "description": "Last name of prospect"
         },
         "nationality": {
           "type": "string",
-          "description": "Nationality<br>7 - China",
-          "example": "7"
+          "example": "7",
+          "description": "Nationality<br>7 - China"
         },
         "preferredLifeIndi": {
           "type": "string",
-          "description": "Insurance risk classifications <br>0 - N/A<br>1 - Prefer plus<br>2 - Prefer<br>3 - Standard plus<br>4 - Standard<br>5 - Sub-prefer<br>6 - Sub-standard",
-          "example": "0"
+          "example": "0",
+          "description": "Insurance risk classifications <br>0 - N/A<br>1 - Prefer plus<br>2 - Prefer<br>3 - Standard plus<br>4 - Standard<br>5 - Sub-prefer<br>6 - Sub-standard"
         },
         "smoking": {
           "type": "string",
+          "example": "N",
           "description": "Whether smoking<br>Y - yes;<br>N - no",
           "enum": [
             "Y",
             "N"
-          ],
-          "example": "N"
+          ]
         },
         "occupationCode": {
           "type": "string",
-          "description": "Professional code",
-          "example": "1"
+          "example": "1",
+          "description": "Professional code"
         },
         "income": {
           "type": "integer",
@@ -1587,6 +1587,7 @@
         },
         "marriageStatus": {
           "type": "string",
+          "example": "1",
           "description": "Marital status<br>1 - married<br>2 - unmarried<br>3 - divorced<br>4 - widowed<br>5 - separated",
           "enum": [
             "1",
@@ -1595,8 +1596,7 @@
             "4",
             "5",
             "6"
-          ],
-          "example": "1"
+          ]
         },
         "height": {
           "type": "number",
@@ -1612,12 +1612,12 @@
         },
         "salutation": {
           "type": "string",
+          "example": "1",
           "description": "Title<br>1 - Mr.<br>2 - Mrs.",
           "enum": [
             "1",
             "2"
-          ],
-          "example": "1"
+          ]
         }
       }
     },
@@ -1626,74 +1626,74 @@
       "properties": {
         "branchCode": {
           "type": "string",
-          "description": "Branch code",
-          "example": "1001"
+          "example": "1001",
+          "description": "Branch code"
         },
         "bankCode": {
           "type": "string",
-          "description": "Bank code",
-          "example": "test_bank"
+          "example": "test_bank",
+          "description": "Bank code"
         },
         "bankAccountProvince": {
           "type": "string",
-          "description": "The province, the bank account belongs to",
-          "example": "Shanghai"
+          "example": "Shanghai",
+          "description": "The province, the bank account belongs to"
         },
         "bankAccountCity": {
           "type": "string",
-          "description": "The city, the bank account belongs to",
-          "example": "Shanghai"
+          "example": "Shanghai",
+          "description": "The city, the bank account belongs to"
         },
         "issueBankName": {
           "type": "string",
-          "description": "Card issue bank",
-          "example": "ICBC"
+          "example": "ICBC",
+          "description": "Card issue bank"
         },
         "bankAccount": {
           "type": "string",
-          "description": "Bank Account",
-          "example": "1111222233334444567"
+          "example": "1111222233334444567",
+          "description": "Bank Account"
         },
         "accoName": {
           "type": "string",
-          "description": "Account holder name",
-          "example": "张三"
+          "example": "张三",
+          "description": "Account holder name"
         },
         "accountType": {
           "type": "string",
+          "example": "2",
           "description": "Account type, 2 debit card<br>8 - credit card",
           "enum": [
             "2",
             "8"
-          ],
-          "example": "2"
+          ]
         },
         "debitCreditType": {
           "type": "string",
+          "example": "0",
           "description": "Account use<br>0 - pay and use<br>1 - fee<br>2 - refund",
           "enum": [
             "0",
             "1",
             "2"
-          ],
-          "example": "0"
+          ]
         },
         "creditCardType": {
           "type": "string",
+          "example": "1",
           "description": "Credit card type, if not credit card, be empty<br>1 - Master<br>2 - Visa<br>3 - BCA<br>4 - JCB",
           "enum": [
             "1",
             "2",
             "3",
             "4"
-          ],
-          "example": "1"
+          ]
         },
         "expireDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Account expiration date, MM / yyyy",
-          "example": "10/2020"
+          "example": "10/2020",
+          "description": "Account expiration date, MM / yyyy"
         }
       }
     },
@@ -1702,43 +1702,43 @@
       "properties": {
         "homeTel": {
           "type": "string",
-          "description": "Home telephone",
-          "example": "87654321"
+          "example": "87654321",
+          "description": "Home telephone"
         },
         "mobileTel": {
           "type": "string",
-          "description": "Phone number",
-          "example": "15012345678"
+          "example": "15012345678",
+          "description": "Phone number"
         },
         "officeTel": {
           "type": "string",
-          "description": "Work phone",
-          "example": "88888888"
+          "example": "88888888",
+          "description": "Work phone"
         },
         "officeTelExt": {
           "type": "string",
-          "description": "Work phone extension",
-          "example": "1234"
+          "example": "1234",
+          "description": "Work phone extension"
         },
         "email": {
           "type": "string",
-          "description": "E-mail:",
-          "example": "TestPerson14@126.com"
+          "example": "TestPerson14@126.com",
+          "description": "E-mail:"
         },
         "contact": {
           "type": "string",
-          "description": "Contact person",
-          "example": "张三"
+          "example": "张三",
+          "description": "Contact person"
         },
         "contactTel": {
           "type": "string",
-          "description": "Contact Phone",
-          "example": "88888888"
+          "example": "88888888",
+          "description": "Contact Phone"
         },
         "fax": {
           "type": "string",
-          "description": "Fax: (+86) {0}022 - 24143117{/0}",
-          "example": "88888887"
+          "example": "88888887",
+          "description": "Fax: (+86) {0}022 - 24143117{/0}"
         }
       }
     },
@@ -1747,28 +1747,28 @@
       "properties": {
         "address1": {
           "type": "string",
-          "description": "Province",
-          "example": "上海市"
+          "example": "上海市",
+          "description": "Province"
         },
         "address2": {
           "type": "string",
-          "description": "City",
-          "example": "上海市"
+          "example": "上海市",
+          "description": "City"
         },
         "address3": {
           "type": "string",
-          "description": "District",
-          "example": "杨浦区"
+          "example": "杨浦区",
+          "description": "District"
         },
         "address4": {
           "type": "string",
-          "description": "Address",
-          "example": "淞沪路270号创智天地3号楼3楼"
+          "example": "淞沪路270号创智天地3号楼3楼",
+          "description": "Address"
         },
         "postCode": {
           "type": "string",
-          "description": "Post code",
-          "example": "200433"
+          "example": "200433",
+          "description": "Post code"
         }
       }
     },
@@ -1777,28 +1777,28 @@
       "properties": {
         "registerType": {
           "type": "string",
-          "description": "Company certificate type, 1001 - company registration number",
-          "example": "1001"
+          "example": "1001",
+          "description": "Company certificate type, 1001 - company registration number"
         },
         "registerCode": {
           "type": "string",
-          "description": "Company ID",
-          "example": "xxxx"
+          "example": "xxxx",
+          "description": "Company ID"
         },
         "countryCode": {
           "type": "string",
-          "description": "Registered country, 156 - China",
-          "example": "156"
+          "example": "156",
+          "description": "Registered country, 156 - China"
         },
         "companyName": {
           "type": "string",
-          "description": "Name of company",
-          "example": "xxxxxx"
+          "example": "xxxxxx",
+          "description": "Name of company"
         },
         "organCode": {
           "type": "string",
-          "description": "Organization code",
-          "example": "xxxxxx"
+          "example": "xxxxxx",
+          "description": "Organization code"
         }
       }
     },
@@ -1815,15 +1815,15 @@
           "type": "array",
           "description": "Address list",
           "items": {
-            "required": [
-              "Address"
-            ],
             "type": "object",
             "properties": {
               "Address": {
                 "$ref": "#/definitions/AddressInfo"
               }
-            }
+            },
+            "required": [
+              "Address"
+            ]
           }
         },
         "ContactInfo": {
@@ -1857,13 +1857,6 @@
         },
         "ContactInfo": {
           "$ref": "#/definitions/PartyContact"
-        },
-        "RelatedPolicy": {
-          "type": "array",
-          "description": "Policy code list",
-          "items": {
-            "type": "integer"
-          }
         }
       }
     },

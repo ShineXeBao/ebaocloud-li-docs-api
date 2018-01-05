@@ -1,10 +1,10 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "0.1.1",
+    "version": "1.0",
     "title": "eBaoCloud LI OpenAPI",
     "termsOfService": "http://api.ebaocloud.life/",
-    "description": "本篇文档描述了eBaoCloud（易保云）寿险所提供的API（API specification）。如果您想运行和使用这些API，你需要首先获取一个eBaoCloud的租户账号，请联系Antang.Du@ebaotech.com获取账号。我们会提供沙箱环境给您。\n\n# 搭建时间\nFri Dec 29 2017, 17:38:47 +08:00\n\n# 版本\nAPI 版本| 时间  |说明\n"
+    "description": "本篇文档描述了eBaoCloud（易保云）寿险所提供的API（API specification）。如果您想运行和使用这些API，你需要首先获取一个eBaoCloud的租户账号，请联系Antang.Du@ebaotech.com获取账号。我们会提供沙箱环境给您。\n\n# 搭建时间\nFri Jan 5 2018, 17:00:48 +08:00\n\n# 版本\nAPI 版本| 时间  |说明\n"
   },
   "host": "sandbox.api.li.ebaocloud.com.cn",
   "basePath": "/rest",
@@ -425,29 +425,29 @@
         "applyDateFrom": {
           "type": "string",
           "format": "date-time",
-          "description": "查询条件：投保单时间范围，开始日期，application date from",
-          "example": "2017-07-01"
+          "example": "2017-07-01",
+          "description": "查询条件：投保单时间范围，开始日期，application date from"
         },
         "applyDateTo": {
           "type": "string",
           "format": "date-time",
-          "description": "查询条件：投保单时间范围，结束日期，application date to",
-          "example": "2017-08-01"
+          "example": "2017-08-01",
+          "description": "查询条件：投保单时间范围，结束日期，application date to"
         },
         "certiCode": {
           "type": "string",
-          "description": "查询条件：投保人或者被保人ID，ID no. of policy customer (policy holder or insured)",
-          "example": "1234567890"
+          "example": "1234567890",
+          "description": "查询条件：投保人或者被保人ID，ID no. of policy customer (policy holder or insured)"
         },
         "masterProductCode": {
           "type": "string",
-          "description": "查询条件：主险编号，code of master product",
-          "example": "07H004"
+          "example": "07H004",
+          "description": "查询条件：主险编号，code of master product"
         },
         "name": {
           "type": "string",
-          "description": "查询条件：投保人或者被保人姓名，name of policy customer (policy holder or insured)",
-          "example": "name"
+          "example": "name",
+          "description": "查询条件：投保人或者被保人姓名，name of policy customer (policy holder or insured)"
         },
         "page": {
           "type": "integer",
@@ -607,12 +607,12 @@
         },
         "deliverType": {
           "type": "string",
+          "example": "M",
           "description": "保单递送方式<br>H - 手工<br>M - 邮件",
           "enum": [
             "H",
             "M"
-          ],
-          "example": "M"
+          ]
         },
         "policyNumber": {
           "type": "string",
@@ -727,14 +727,14 @@
       "properties": {
         "chargePeriod": {
           "type": "string",
+          "example": "2",
           "description": "缴费年期类型，非空<br>1 - 趸缴<br>2 - 按年限缴<br>3 - 缴至某确定年龄<br>4 - 终身",
           "enum": [
             "1",
             "2",
             "3",
             "4"
-          ],
-          "example": "2"
+          ]
         },
         "chargeYear": {
           "type": "integer",
@@ -744,6 +744,7 @@
         },
         "coveragePeriod": {
           "type": "string",
+          "example": "1",
           "description": "保障年期类型<br>1 - 保终身<br>2 - 按年限保<br>3 - 保至某确定年龄<br>4 - 按月保<br>5 - 按天保",
           "enum": [
             "1",
@@ -751,8 +752,7 @@
             "3",
             "4",
             "5"
-          ],
-          "example": "1"
+          ]
         },
         "coverageYear": {
           "type": "integer",
@@ -833,6 +833,7 @@
         },
         "paymentFreq": {
           "type": "string",
+          "example": "1",
           "description": "缴费频率<br>1 - 年缴<br>2 - 半年缴<br>3 - 季缴<br>4 - 月缴<br>5 - 趸缴",
           "enum": [
             "1",
@@ -840,8 +841,7 @@
             "3",
             "4",
             "5"
-          ],
-          "example": "1"
+          ]
         },
         "sumAssured": {
           "type": "number",
@@ -872,12 +872,12 @@
         },
         "waiver": {
           "type": "string",
+          "example": "N",
           "description": "是否豁免险<br>Y - 是<br>N - 否",
           "enum": [
             "Y",
             "N"
-          ],
-          "example": "N"
+          ]
         }
       }
     },
@@ -886,13 +886,13 @@
       "properties": {
         "endPeriod": {
           "type": "string",
+          "example": "3",
           "description": "年金领取期间类型，计划类型为年金/变额年金/GMWB时非空<br>1 - 领取固定年数<br>2 - 领取到一定年龄<br>3 - 终身领取",
           "enum": [
             "1",
             "2",
             "3"
-          ],
-          "example": "3"
+          ]
         },
         "endYear": {
           "type": "integer",
@@ -906,6 +906,7 @@
         },
         "payOption": {
           "type": "string",
+          "example": "1",
           "description": "年金领取方式<br>1 - 现金领取<br>2 - 抵交保费<br>3 - 累积生息<br>4 - 累积生息x年后转抵交保费<br>5 - 买一个附加的缴清的附加险",
           "enum": [
             "1",
@@ -913,8 +914,7 @@
             "3",
             "4",
             "5"
-          ],
-          "example": "1"
+          ]
         },
         "payOptionTerm": {
           "type": "integer",
@@ -923,14 +923,14 @@
         },
         "payPeriod": {
           "type": "string",
+          "example": "3",
           "description": "年金开始领取期间类型<br>1 - 立即领取<br>2 - 到一定年龄的周年日领取<br>3 - 若干年后领取<br>4 - 一定年龄后领取",
           "enum": [
             "1",
             "2",
             "3",
             "4"
-          ],
-          "example": "3"
+          ]
         },
         "payYear": {
           "type": "integer",
@@ -939,6 +939,7 @@
         },
         "planFreq": {
           "type": "string",
+          "example": "1",
           "description": "领取频率<br>1 - 年<br>2 - 半年<br>3 - 季<br>4 - 月<br>5 - 趸领",
           "enum": [
             "1",
@@ -946,11 +947,11 @@
             "3",
             "4",
             "5"
-          ],
-          "example": "1"
+          ]
         },
         "planType": {
           "type": "string",
+          "example": "1",
           "description": "支付计划类型，非空<br>1 - 现金红利<br>2 - 年金<br>3 - 生存金<br>4 - 满期金<br>5 - GMWB（保证最小提取利益）<br>6 - 变额年金<br>7 - 部分退保<br>8 - 保额红利",
           "enum": [
             "1",
@@ -961,8 +962,7 @@
             "6",
             "7",
             "8"
-          ],
-          "example": "1"
+          ]
         },
         "extendedProps": {
           "type": "object",
@@ -1006,8 +1006,8 @@
       "properties": {
         "fundCode": {
           "type": "string",
-          "description": "基金代码",
-          "example": "F001"
+          "example": "F001",
+          "description": "基金代码"
         },
         "assignRate": {
           "type": "number",
@@ -1053,8 +1053,8 @@
       "properties": {
         "fundCode": {
           "type": "string",
-          "description": "基金代码",
-          "example": "F001"
+          "example": "F001",
+          "description": "基金代码"
         },
         "assignRate": {
           "type": "number",
@@ -1073,8 +1073,8 @@
       "properties": {
         "fundCode": {
           "type": "string",
-          "description": "基金代码",
-          "example": "F001"
+          "example": "F001",
+          "description": "基金代码"
         },
         "accumUnits": {
           "type": "number",
@@ -1199,30 +1199,30 @@
         },
         "medicalExamIndi": {
           "type": "string",
+          "example": "N",
           "description": "是否有体检件<br>Y - 是<br>N - 否",
           "enum": [
             "Y",
             "N"
-          ],
-          "example": "N"
+          ]
         },
         "medicalIndi": {
           "type": "string",
+          "example": "Y",
           "description": "是否有医保<br>Y - 是<br>N - 否",
           "enum": [
             "Y",
             "N"
-          ],
-          "example": "Y"
+          ]
         },
         "socialSecurityIndi": {
           "type": "string",
+          "example": "Y",
           "description": "是否有社保<br>Y - 是<br>N - 否",
           "enum": [
             "Y",
             "N"
-          ],
-          "example": "Y"
+          ]
         },
         "extendedProps": {
           "type": "object",
@@ -1247,13 +1247,13 @@
         },
         "beneType": {
           "type": "string",
+          "example": "2",
           "description": "受益类型<br>1 - 生存受益人<br>2 - 身故受益人<br>3 - 投保受益人",
           "enum": [
             "1",
             "2",
             "3"
-          ],
-          "example": "2"
+          ]
         },
         "designation": {
           "type": "integer",
@@ -1498,18 +1498,18 @@
       "properties": {
         "gender": {
           "type": "string",
+          "example": "M",
           "description": "性别<br>M - 男性<br>F - 女性",
           "enum": [
             "M",
             "F"
-          ],
-          "example": "M"
+          ]
         },
         "birthdate": {
           "type": "string",
           "format": "date-time",
-          "description": "生日，非空，日期格式：yyyy-MM-dd",
-          "example": "1980-01-01"
+          "example": "1980-01-01",
+          "description": "生日，非空，日期格式：yyyy-MM-dd"
         },
         "certiType": {
           "type": "integer",
@@ -1526,25 +1526,25 @@
         },
         "certiCode": {
           "type": "string",
-          "description": "证件号码",
-          "example": "1234567890"
+          "example": "1234567890",
+          "description": "证件号码"
         },
         "certiStart": {
           "type": "string",
           "format": "date-time",
-          "description": "证件起始有效日，日期格式：yyyy-MM-dd",
-          "example": "2000-01-01"
+          "example": "2000-01-01",
+          "description": "证件起始有效日，日期格式：yyyy-MM-dd"
         },
         "certiEnd": {
           "type": "string",
           "format": "date-time",
-          "description": "证件有效截止日，日期格式：yyyy-MM-dd",
-          "example": "2019-12-31"
+          "example": "2019-12-31",
+          "description": "证件有效截止日，日期格式：yyyy-MM-dd"
         },
         "firstName": {
           "type": "string",
-          "description": "名",
-          "example": "三"
+          "example": "三",
+          "description": "名"
         },
         "midName": {
           "type": "string",
@@ -1552,32 +1552,32 @@
         },
         "lastName": {
           "type": "string",
-          "description": "Last name of prospect",
-          "example": "张"
+          "example": "张",
+          "description": "Last name of prospect"
         },
         "nationality": {
           "type": "string",
-          "description": "国籍，7 - 中国",
-          "example": "7"
+          "example": "7",
+          "description": "国籍，7 - 中国"
         },
         "preferredLifeIndi": {
           "type": "string",
-          "description": "是否优选体<br>0 - N/A<br>1 - 超优体<br>2 - 优选体<br>3 - 优标体<br>4 - 标准体<br>5 - 次选体<br>6 - 次标准体",
-          "example": "0"
+          "example": "0",
+          "description": "是否优选体<br>0 - N/A<br>1 - 超优体<br>2 - 优选体<br>3 - 优标体<br>4 - 标准体<br>5 - 次选体<br>6 - 次标准体"
         },
         "smoking": {
           "type": "string",
+          "example": "N",
           "description": "是否抽烟<br>Y - 抽烟<br>N - 不抽烟",
           "enum": [
             "Y",
             "N"
-          ],
-          "example": "N"
+          ]
         },
         "occupationCode": {
           "type": "string",
-          "description": "职业代码",
-          "example": "1"
+          "example": "1",
+          "description": "职业代码"
         },
         "income": {
           "type": "integer",
@@ -1587,6 +1587,7 @@
         },
         "marriageStatus": {
           "type": "string",
+          "example": "1",
           "description": "婚姻状况<br>1 - 已婚<br>2 - 未婚<br>3 - 离异<br>4 - 丧偶<br>5 - 分居<br>6 - 其他",
           "enum": [
             "1",
@@ -1595,8 +1596,7 @@
             "4",
             "5",
             "6"
-          ],
-          "example": "1"
+          ]
         },
         "height": {
           "type": "number",
@@ -1612,12 +1612,12 @@
         },
         "salutation": {
           "type": "string",
+          "example": "1",
           "description": "称呼<br>1 - 先生<br>2 - 女士",
           "enum": [
             "1",
             "2"
-          ],
-          "example": "1"
+          ]
         }
       }
     },
@@ -1626,74 +1626,74 @@
       "properties": {
         "branchCode": {
           "type": "string",
-          "description": "分行代码",
-          "example": "1001"
+          "example": "1001",
+          "description": "分行代码"
         },
         "bankCode": {
           "type": "string",
-          "description": "银行代码",
-          "example": "test_bank"
+          "example": "test_bank",
+          "description": "银行代码"
         },
         "bankAccountProvince": {
           "type": "string",
-          "description": "银行帐号所属省份",
-          "example": "Shanghai"
+          "example": "Shanghai",
+          "description": "银行帐号所属省份"
         },
         "bankAccountCity": {
           "type": "string",
-          "description": "银行帐号所属城市",
-          "example": "Shanghai"
+          "example": "Shanghai",
+          "description": "银行帐号所属城市"
         },
         "issueBankName": {
           "type": "string",
-          "description": "发卡行",
-          "example": "ICBC"
+          "example": "ICBC",
+          "description": "发卡行"
         },
         "bankAccount": {
           "type": "string",
-          "description": "银行帐号",
-          "example": "1111222233334444567"
+          "example": "1111222233334444567",
+          "description": "银行帐号"
         },
         "accoName": {
           "type": "string",
-          "description": "帐号持有人姓名",
-          "example": "张三"
+          "example": "张三",
+          "description": "帐号持有人姓名"
         },
         "accountType": {
           "type": "string",
+          "example": "2",
           "description": "账户类型<br>2 - 借记卡<br>8 - 信用卡",
           "enum": [
             "2",
             "8"
-          ],
-          "example": "2"
+          ]
         },
         "debitCreditType": {
           "type": "string",
+          "example": "0",
           "description": "帐号用途<br>0 - 收付两用<br>1 - 收费<br>2 - 退费",
           "enum": [
             "0",
             "1",
             "2"
-          ],
-          "example": "0"
+          ]
         },
         "creditCardType": {
           "type": "string",
+          "example": "1",
           "description": "信用卡类型，非信用卡为空<br>1 - Master<br>2 - Visa<br>3 - BCA<br>4 - JCB",
           "enum": [
             "1",
             "2",
             "3",
             "4"
-          ],
-          "example": "1"
+          ]
         },
         "expireDate": {
           "type": "string",
           "format": "date-time",
-          "description": "帐号失效日期，MM/yyyy",
-          "example": "10/2020"
+          "example": "10/2020",
+          "description": "帐号失效日期，MM/yyyy"
         }
       }
     },
@@ -1702,43 +1702,43 @@
       "properties": {
         "homeTel": {
           "type": "string",
-          "description": "家庭电话",
-          "example": "87654321"
+          "example": "87654321",
+          "description": "家庭电话"
         },
         "mobileTel": {
           "type": "string",
-          "description": "手机号",
-          "example": "15012345678"
+          "example": "15012345678",
+          "description": "手机号"
         },
         "officeTel": {
           "type": "string",
-          "description": "工作电话",
-          "example": "88888888"
+          "example": "88888888",
+          "description": "工作电话"
         },
         "officeTelExt": {
           "type": "string",
-          "description": "工作电话分机号",
-          "example": "1234"
+          "example": "1234",
+          "description": "工作电话分机号"
         },
         "email": {
           "type": "string",
-          "description": "电子邮箱",
-          "example": "TestPerson14@126.com"
+          "example": "TestPerson14@126.com",
+          "description": "电子邮箱"
         },
         "contact": {
           "type": "string",
-          "description": "联系人",
-          "example": "张三"
+          "example": "张三",
+          "description": "联系人"
         },
         "contactTel": {
           "type": "string",
-          "description": "联系人电话",
-          "example": "88888888"
+          "example": "88888888",
+          "description": "联系人电话"
         },
         "fax": {
           "type": "string",
-          "description": "传真",
-          "example": "88888887"
+          "example": "88888887",
+          "description": "传真"
         }
       }
     },
@@ -1747,28 +1747,28 @@
       "properties": {
         "address1": {
           "type": "string",
-          "description": "省",
-          "example": "上海市"
+          "example": "上海市",
+          "description": "省"
         },
         "address2": {
           "type": "string",
-          "description": "市",
-          "example": "上海市"
+          "example": "上海市",
+          "description": "市"
         },
         "address3": {
           "type": "string",
-          "description": "区县",
-          "example": "杨浦区"
+          "example": "杨浦区",
+          "description": "区县"
         },
         "address4": {
           "type": "string",
-          "description": "地址",
-          "example": "淞沪路270号创智天地3号楼3楼"
+          "example": "淞沪路270号创智天地3号楼3楼",
+          "description": "地址"
         },
         "postCode": {
           "type": "string",
-          "description": "邮编",
-          "example": "200433"
+          "example": "200433",
+          "description": "邮编"
         }
       }
     },
@@ -1777,28 +1777,28 @@
       "properties": {
         "registerType": {
           "type": "string",
-          "description": "公司证件类型，1001 - 公司注册号",
-          "example": "1001"
+          "example": "1001",
+          "description": "公司证件类型，1001 - 公司注册号"
         },
         "registerCode": {
           "type": "string",
-          "description": "公司证件号",
-          "example": "xxxx"
+          "example": "xxxx",
+          "description": "公司证件号"
         },
         "countryCode": {
           "type": "string",
-          "description": "注册国家，156 - 中国",
-          "example": "156"
+          "example": "156",
+          "description": "注册国家，156 - 中国"
         },
         "companyName": {
           "type": "string",
-          "description": "公司名称",
-          "example": "xxxxxx"
+          "example": "xxxxxx",
+          "description": "公司名称"
         },
         "organCode": {
           "type": "string",
-          "description": "公司组织机构代码",
-          "example": "xxxxxx"
+          "example": "xxxxxx",
+          "description": "公司组织机构代码"
         }
       }
     },
@@ -1815,15 +1815,15 @@
           "type": "array",
           "description": "地址列表",
           "items": {
-            "required": [
-              "Address"
-            ],
             "type": "object",
             "properties": {
               "Address": {
                 "$ref": "#/definitions/AddressInfo"
               }
-            }
+            },
+            "required": [
+              "Address"
+            ]
           }
         },
         "ContactInfo": {
@@ -1857,13 +1857,6 @@
         },
         "ContactInfo": {
           "$ref": "#/definitions/PartyContact"
-        },
-        "RelatedPolicy": {
-          "type": "array",
-          "description": "保单号码列表",
-          "items": {
-            "type": "integer"
-          }
         }
       }
     },
