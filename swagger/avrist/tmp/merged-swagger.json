@@ -1,0 +1,6325 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "APIs of Mobile BFF (Backends for Frontends)",
+    "termsOfService": "http://li.ebaocloud.com.cn/bff2/",
+    "contact": {
+      "name": "eBaoTech"
+    }
+  },
+  "host": "localhost:8080",
+  "basePath": "/bff2",
+  "tags": [{
+    "name": "Package"
+  }, {
+    "name": "Policy"
+  }, {
+    "name": "Claim"
+  }, {
+    "name": "Plan"
+  }, {
+    "name": "Tools"
+  }, {
+    "name": "Proposal"
+  }, {
+    "name": "Product"
+  }, {
+    "name": "User"
+  }, {
+    "name": "Prospect"
+  }, {
+    "name": "Customer service"
+  }],
+  "paths": {
+    "/ebaocloud-li/alteration/{tenantCode}/changeContactInfo": {
+      "post": {
+        "tags": ["Customer service"],
+        "summary": "changeContactInfo",
+        "operationId": "changeContactInfoUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [{
+          "name": "tenantCode",
+          "in": "path",
+          "description": "tenantCode",
+          "required": true,
+          "type": "string"
+        }, {
+          "in": "body",
+          "name": "request",
+          "description": "request",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/ChangingContactInfoRequest"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ChangingContactInfoResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/ebaocloud-li/alteration/{tenantCode}/freelook": {
+      "post": {
+        "tags": ["Customer service"],
+        "summary": "freelook",
+        "operationId": "freelookUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [{
+          "name": "tenantCode",
+          "in": "path",
+          "description": "tenantCode",
+          "required": true,
+          "type": "string"
+        }, {
+          "in": "body",
+          "name": "request",
+          "description": "request",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/FreelookRequest"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/FreelookResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/ebaocloud-li/alteration/{tenantCode}/freelook/quotations": {
+      "post": {
+        "tags": ["Customer service"],
+        "summary": "freelookQuote",
+        "operationId": "freelookQuoteUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [{
+          "name": "tenantCode",
+          "in": "path",
+          "description": "tenantCode",
+          "required": true,
+          "type": "string"
+        }, {
+          "in": "body",
+          "name": "request",
+          "description": "request",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/FreelookQuotationRequest"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/FreelookQuotationResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/ebaocloud-li/proposal/accept": {
+      "post": {
+        "tags": ["Proposal"],
+        "summary": "投保",
+        "description": "计算保费并校验投核保规则，如果通过，则生成投保单号",
+        "operationId": "acceptUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [{
+          "in": "body",
+          "name": "proposalRequest",
+          "description": "proposalRequest",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/SalesProposalRequest"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProposalResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/ebaocloud-li/proposal/epolicy/{tenantCode}/{proposalCode}": {
+      "get": {
+        "tags": ["Proposal"],
+        "summary": "取得电子保单",
+        "description": "根据投保单号获得电子保单下载地址",
+        "operationId": "getEPolicyDownloadUrlUsingGET",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [{
+          "name": "proposalCode",
+          "in": "path",
+          "description": "proposalCode",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "tenantCode",
+          "in": "path",
+          "description": "tenantCode",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProposalResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/ebaocloud-li/proposal/issue": {
+      "post": {
+        "tags": ["Proposal"],
+        "summary": "收费承保",
+        "description": "投核保后收费承保",
+        "operationId": "issueUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [{
+          "in": "body",
+          "name": "proposalRequest",
+          "description": "proposalRequest",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/SalesProposalRequest"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProposalResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/ebaocloud-li/proposal/underwrite": {
+      "post": {
+        "tags": ["Proposal"],
+        "summary": "投保预检",
+        "description": "计算保费并校验投保风险",
+        "operationId": "underwriteUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [{
+          "in": "body",
+          "name": "proposalRequest",
+          "description": "proposalRequest",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/SalesProposalRequest"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProposalResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/sales/package/advanceFilter/{tenantCode}": {
+      "get": {
+        "tags": ["Package"],
+        "summary": "获取产品营销组合筛选条件",
+        "description": "根据租户获取产品营销组合筛选条件",
+        "operationId": "getAdvancedFiltersUsingGET",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [{
+          "name": "tenantCode",
+          "in": "path",
+          "description": "tenantCode",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SalesProductAdvancedFiltersResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/sales/package/findList": {
+      "post": {
+        "tags": ["Package"],
+        "summary": "获取产品营销组合列表",
+        "description": "取得产品营销组合一览",
+        "operationId": "findSalesPackageListUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [{
+          "in": "body",
+          "name": "salesPackageListCretiriaRequest",
+          "description": "salesPackageListCretiriaRequest",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/SalesPackageListCretiriaRequest"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SalesPackageListResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/sales/package/getDetail": {
+      "post": {
+        "tags": ["Package"],
+        "summary": "获取产品营销组合详情",
+        "description": "获取产品营销组合详情",
+        "operationId": "findSalesPackageUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [{
+          "in": "body",
+          "name": "salesPackageCretiriaRequest",
+          "description": "salesPackageCretiriaRequest",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/SalesPackageCretiriaRequest"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SalesPackageResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/sales/pdf/exportProposalPdf": {
+      "post": {
+        "tags": ["Proposal"],
+        "summary": "根据条件生成投保pdf",
+        "description": "根据条件生成投保pdf",
+        "operationId": "getProposalPdfByRequestUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [{
+          "name": "X-ebao-tenant-id",
+          "in": "header",
+          "description": "X-ebao-tenant-id",
+          "required": true,
+          "type": "string"
+        }, {
+          "in": "body",
+          "name": "proposalPdfRequest",
+          "description": "proposalPdfRequest",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/ProposalPdfRequest"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PdfResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/sales/pdf/exportQuotationPdf": {
+      "post": {
+        "tags": ["Proposal"],
+        "summary": "根据条件生成询价pdf",
+        "description": "根据条件生成询价pdf",
+        "operationId": "getQuotationPdfByRequestUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [{
+          "name": "X-ebao-tenant-id",
+          "in": "header",
+          "description": "X-ebao-tenant-id",
+          "required": true,
+          "type": "string"
+        }, {
+          "in": "body",
+          "name": "quotationPdfRequest",
+          "description": "quotationPdfRequest",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/QuotationPdfRequest"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PdfResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/sales/pdf/getProposalPdf/{proposalCode}": {
+      "get": {
+        "tags": ["Proposal"],
+        "summary": "根据proposalCode生成投保pdf",
+        "description": "根据proposalCode生成投保pdf",
+        "operationId": "getProposalPdfByProposalCodeUsingGET",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [{
+          "name": "X-ebao-tenant-id",
+          "in": "header",
+          "description": "X-ebao-tenant-id",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "proposalCode",
+          "in": "path",
+          "description": "proposalCode",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PdfResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/sales/pdf/getQuotationPdf/{quotationCode}": {
+      "get": {
+        "tags": ["Proposal"],
+        "summary": "根据quotationCode生成询价pdf",
+        "description": "根据quotationCode生成询价pdf",
+        "operationId": "getQuotationPdfByQuotationCodeUsingGET",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [{
+          "name": "X-ebao-tenant-id",
+          "in": "header",
+          "description": "X-ebao-tenant-id",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "quotationCode",
+          "in": "path",
+          "description": "quotationCode",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PdfResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/sales/plan/delete": {
+      "post": {
+        "tags": ["Plan"],
+        "summary": "计划书删除",
+        "description": "删除指定的计划书",
+        "operationId": "deleteUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [{
+          "in": "body",
+          "name": "salesDeleteRequest",
+          "description": "salesDeleteRequest",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/SalesDeleteRequest"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SalesPlanDeleteResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/sales/plan/find": {
+      "post": {
+        "tags": ["Plan"],
+        "summary": "计划书列表取得",
+        "description": "取得对应租户下对应用户的计划书一览",
+        "operationId": "findUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [{
+          "in": "body",
+          "name": "salesProposalCretiriaRequest",
+          "description": "salesProposalCretiriaRequest",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/SalesCretiriaRequest"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SalesPlanListResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/sales/plan/get/{tenantCode}/{quotationCode}": {
+      "get": {
+        "tags": ["Plan"],
+        "summary": "计划书取得",
+        "description": "按计划书号取得计划书",
+        "operationId": "getUsingGET",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [{
+          "name": "tenantCode",
+          "in": "path",
+          "description": "tenantCode",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "quotationCode",
+          "in": "path",
+          "description": "quotationCode",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SalesPlanGetResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/sales/plan/save": {
+      "post": {
+        "tags": ["Plan"],
+        "summary": "保存计划书",
+        "description": "保存计划书",
+        "operationId": "saveUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [{
+          "in": "body",
+          "name": "salesPlanRequest",
+          "description": "salesPlanRequest",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/SalesPlanRequest"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SalesSaveResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/sales/policy/get/{tenantCode}/{policyCode}": {
+      "get": {
+        "tags": ["Policy"],
+        "summary": "保单查询",
+        "description": "根据保单号查询保单信息",
+        "operationId": "getPolicyByCodeUsingGET",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [{
+          "name": "tenantCode",
+          "in": "path",
+          "description": "tenantCode",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "policyCode",
+          "in": "path",
+          "description": "policyCode",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PolicyInfoResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/sales/policy/getGroup/{tenantCode}/{groupPolicyCode}": {
+      "get": {
+        "tags": ["Policy"],
+        "summary": "团单查询",
+        "description": "根据总单号查询保单信息",
+        "operationId": "getGroupListUsingGET",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [{
+          "name": "tenantCode",
+          "in": "path",
+          "description": "tenantCode",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "groupPolicyCode",
+          "in": "path",
+          "description": "groupPolicyCode",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PolicyInfoListResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/sales/product/calcPremium": {
+      "post": {
+        "tags": ["Product"],
+        "summary": "产品保费计算",
+        "description": "通过eBaoCloud-Li计算保费",
+        "operationId": "calcPremiumUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [{
+          "in": "body",
+          "name": "salesProductCalcRequest",
+          "description": "salesProductCalcRequest",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/SalesProductCalcRequest"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CalcPremiumResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/sales/product/findAvailableRiders": {
+      "post": {
+        "tags": ["Product"],
+        "summary": "获取可选险种（根据已选险种）",
+        "description": "根据投保人和已录入险种信息获取其他可以添加的附加险列表及附加险对应的投保属性列表",
+        "operationId": "getAvailableRidersUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [{
+          "in": "body",
+          "name": "salesAvailableRidersRequest",
+          "description": "salesAvailableRidersRequest",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/SalesAvailableRidersRequest"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SalesProductDetailDataResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/sales/product/getBasic": {
+      "post": {
+        "tags": ["Product"],
+        "summary": "获取产品营销属性基本信息",
+        "description": "获取产品营销属性基本信息",
+        "operationId": "getBasicUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [{
+          "in": "body",
+          "name": "salesProductBasicRequest",
+          "description": "salesProductBasicRequest",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/SalesProductBasicRequest"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SalesProductBasicResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/sales/product/getRuleMetaData": {
+      "post": {
+        "tags": ["Product"],
+        "summary": "获取产品营销规则配置数据",
+        "description": "根据租户code和产品代码列表获取对应产品的精算属性列表",
+        "operationId": "getRuleMetaDataUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [{
+          "in": "body",
+          "name": "ruleMetaDataRequest",
+          "description": "ruleMetaDataRequest",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/SalesProductBasicRequest"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SalesProductDetailDataResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/sales/product/illustrationCalc": {
+      "post": {
+        "tags": ["Product"],
+        "summary": "产品利益演示",
+        "description": "通过eBaoCloud-Li进行利益演示",
+        "operationId": "illustrationCalcUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [{
+          "in": "body",
+          "name": "salesProductCalcRequest",
+          "description": "salesProductCalcRequest",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/SalesProductCalcRequest"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IllustrationCalcResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/sales/product/products/{productCode}": {
+      "get": {
+        "tags": ["Product"],
+        "summary": "获取某一产品信息",
+        "description": "根据产品代码，获取某一产品的详细信息",
+        "operationId": "getProductDetailUsingGET",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [{
+          "name": "productCode",
+          "in": "path",
+          "description": "productCode",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "X-ebao-tenant-id",
+          "in": "header",
+          "description": "X-ebao-tenant-id",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProductResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/sales/product/salesCategory/{productCode}": {
+      "get": {
+        "tags": ["Product"],
+        "summary": "获取某租户某个销售产品的产品大类",
+        "description": "获取某租户某个销售产品的产品大类",
+        "operationId": "getSalesCategoryUsingGET",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [{
+          "name": "productCode",
+          "in": "path",
+          "description": "productCode",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "X-ebao-tenant-id",
+          "in": "header",
+          "description": "X-ebao-tenant-id",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SalesProductSalesCategoryResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/sales/proposal/find": {
+      "post": {
+        "tags": ["Proposal"],
+        "summary": "投保单列表取得",
+        "description": "取得对应租户下对应用户的投保单一览",
+        "operationId": "findUsingPOST_1",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [{
+          "in": "body",
+          "name": "salesProposalCretiriaRequest",
+          "description": "salesProposalCretiriaRequest",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/SalesCretiriaRequest"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SalesProposalListResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/sales/proposal/get/{tenantCode}/{proposalCode}": {
+      "get": {
+        "tags": ["Proposal"],
+        "summary": "投保单取得",
+        "description": "按投保单号取得投保单",
+        "operationId": "getUsingGET_1",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [{
+          "name": "tenantCode",
+          "in": "path",
+          "description": "tenantCode",
+          "required": true,
+          "type": "string"
+        }, {
+          "name": "proposalCode",
+          "in": "path",
+          "description": "proposalCode",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SalesProposalGetResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/sales/proposal/save": {
+      "post": {
+        "tags": ["Proposal"],
+        "summary": "保存投保单",
+        "description": "保存投保单",
+        "operationId": "saveUsingPOST_1",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [{
+          "in": "body",
+          "name": "salesProposalRequest",
+          "description": "salesProposalRequest",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/SalesProposalRequest"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SalesSaveResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/sales/prospect/find": {
+      "post": {
+        "tags": ["Prospect"],
+        "summary": "客户列表取得",
+        "description": "取得对应租户下对应用户的客户一览",
+        "operationId": "findUsingPOST_2",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [{
+          "in": "body",
+          "name": "salesCretiriaRequest",
+          "description": "salesCretiriaRequest",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/SalesCretiriaRequest"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SalesProspectListResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/sales/user/getProducer": {
+      "post": {
+        "tags": ["User"],
+        "summary": "解析租户系统用户信息",
+        "description": "解析租户系统用户信息",
+        "operationId": "getProducerUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [{
+          "in": "body",
+          "name": "salesUserRequest",
+          "description": "salesUserRequest",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/SalesUserRequest"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SalesUserResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/tools/checkSign": {
+      "post": {
+        "tags": ["Tools"],
+        "summary": "验签",
+        "description": "验证签名",
+        "operationId": "checkSignUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [{
+          "in": "body",
+          "name": "request",
+          "description": "request",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/ToolsSignRequest"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ToolsSignResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/tools/getShortUrl": {
+      "post": {
+        "tags": ["Tools"],
+        "summary": "获取短链接",
+        "description": "获取短链接",
+        "operationId": "getShortUrlUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [{
+          "in": "body",
+          "name": "request",
+          "description": "request",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/ShortUrlRequest"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ShortUrlResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/tools/sign": {
+      "post": {
+        "tags": ["Tools"],
+        "summary": "加签",
+        "description": "生成签名",
+        "operationId": "signUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [{
+          "in": "body",
+          "name": "request",
+          "description": "request",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/ToolsSignRequest"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ToolsSignResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/v4/alterations/inforce": {
+      "post": {
+        "tags": ["Customer service"],
+        "summary": "保全",
+        "description": "修改联系方式，犹豫期退保",
+        "operationId": "inforceUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [{
+          "in": "body",
+          "name": "policyAlterationInput",
+          "description": "policyAlterationInput",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/v4/claim/report": {
+      "post": {
+        "tags": ["Claim"],
+        "summary": "报案",
+        "description": "报案",
+        "operationId": "reportUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [{
+          "in": "body",
+          "name": "request",
+          "description": "request",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/v4/pd/calcPrem": {
+      "post": {
+        "tags": ["Product"],
+        "summary": "保费计算",
+        "description": "计算保费并校验投核保规则",
+        "operationId": "quoteUsingPOST",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [{
+          "in": "body",
+          "name": "proposalRequest",
+          "description": "proposalRequest",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/SalesProductCalcRequest"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CalcPremiumResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/v4/proposal/accept": {
+      "post": {
+        "tags": ["Proposal"],
+        "summary": "投保",
+        "description": "计算保费并校验投核保规则，如果通过，则生成投保单号",
+        "operationId": "acceptUsingPOST_1",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [{
+          "in": "body",
+          "name": "proposalRequest",
+          "description": "proposalRequest",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/SalesProposalRequest"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProposalResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/v4/proposal/get/{policyCode}": {
+      "get": {
+        "tags": ["Proposal"],
+        "summary": "保单查询",
+        "description": "根据保单号查询保单信息",
+        "operationId": "getPolicyByCodeUsingGET_1",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [{
+          "name": "policyCode",
+          "in": "path",
+          "description": "policyCode",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProposalResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/v4/proposal/getGroup/{groupPolicyCode}": {
+      "get": {
+        "tags": ["Proposal"],
+        "summary": "团单查询",
+        "description": "根据总单号查询保单信息",
+        "operationId": "getGroupListUsingGET_1",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [{
+          "name": "groupPolicyCode",
+          "in": "path",
+          "description": "groupPolicyCode",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProposalListInfoResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/v4/proposal/issue": {
+      "post": {
+        "tags": ["Proposal"],
+        "summary": "收费承保",
+        "description": "投核保后收费承保",
+        "operationId": "issueUsingPOST_1",
+        "consumes": ["application/json"],
+        "produces": ["*/*"],
+        "parameters": [{
+          "in": "body",
+          "name": "proposalRequest",
+          "description": "proposalRequest",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/SalesProposalRequest"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProposalResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Serializable": {
+      "type": "object"
+    },
+    "ToolsSignRequest": {
+      "type": "object",
+      "properties": {
+        "charSet": {
+          "type": "string"
+        },
+        "insuredCompanyCode": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "salesChannelCode": {
+          "type": "string"
+        },
+        "sign": {
+          "type": "string"
+        },
+        "tenantCode": {
+          "type": "string"
+        }
+      }
+    },
+    "Address": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string"
+        },
+        "addressExt1": {
+          "type": "string"
+        },
+        "addressExt2": {
+          "type": "string"
+        },
+        "addressId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "city": {
+          "type": "string"
+        },
+        "countryCode": {
+          "type": "string"
+        },
+        "postCode": {
+          "type": "string"
+        },
+        "province": {
+          "type": "string"
+        },
+        "region": {
+          "type": "string"
+        }
+      }
+    },
+    "SalesProductDetailInfo": {
+      "type": "object",
+      "properties": {
+        "ageLimitList": {
+          "type": "array",
+          "description": "年龄限制信息",
+          "items": {
+            "$ref": "#/definitions/AgeLimit"
+          }
+        },
+        "ageRange": {
+          "description": "年龄限制信息",
+          "$ref": "#/definitions/AgeRangeVO"
+        },
+        "ally": {
+          "type": "string",
+          "description": "险种是否是joint life，0:1"
+        },
+        "amountLimitList": {
+          "type": "array",
+          "description": "保额限制信息",
+          "items": {
+            "$ref": "#/definitions/AmountLimit"
+          }
+        },
+        "attachCompulsory": {
+          "type": "string",
+          "description": "是否强制绑定的附加险，1：强制附加；0：非强制附加"
+        },
+        "attachedPrdtLimitCondition": {
+          "type": "array",
+          "description": "险种附约限制条件信息",
+          "items": {
+            "$ref": "#/definitions/AttachedProductLimit"
+          }
+        },
+        "benefitLevelList": {
+          "type": "array",
+          "description": "险种档次信息",
+          "items": {
+            "$ref": "#/definitions/ProductBenefitLevel"
+          }
+        },
+        "benefitType": {
+          "type": "string",
+          "description": "险种类别"
+        },
+        "coexistPrdtList": {
+          "type": "array",
+          "description": "险种共存信息",
+          "items": {
+            "$ref": "#/definitions/ProductRelationVO"
+          }
+        },
+        "dependPrdtList": {
+          "type": "array",
+          "description": "险种依赖信息",
+          "items": {
+            "$ref": "#/definitions/ProductRelationVO"
+          }
+        },
+        "familyType": {
+          "type": "string",
+          "description": "险种是否是family，0:1"
+        },
+        "funds": {
+          "type": "array",
+          "description": "险种允许添加的基金列表",
+          "items": {
+            "$ref": "#/definitions/Fund"
+          }
+        },
+        "incrementIndex": {
+          "type": "number",
+          "format": "double",
+          "description": "险种保额/保费递增倍数"
+        },
+        "insType": {
+          "type": "string",
+          "description": "主险或附加险，1：主险；2：附加险/豁免险"
+        },
+        "insurerCode": {
+          "type": "string",
+          "description": "保险公司代码"
+        },
+        "isAnnuityProduct": {
+          "type": "string",
+          "description": "险种是否是年金产品，Y:N"
+        },
+        "isIlpProduct": {
+          "type": "string",
+          "description": "是否是投连险,Y：N"
+        },
+        "isPackageProduct": {
+          "type": "string",
+          "description": "组合内产品，Y：N"
+        },
+        "isSalesLevelProduct": {
+          "type": "boolean"
+        },
+        "isUDRider": {
+          "type": "string",
+          "description": "险种是否是UD Rider，Y:N"
+        },
+        "isWaiver": {
+          "type": "string",
+          "description": "险种是否是豁免险，Y:N"
+        },
+        "jobCateList": {
+          "type": "array",
+          "description": "险种支持的职业代码列表",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "jobIndi": {
+          "type": "string",
+          "description": "费率是否与职业相关，Y：N"
+        },
+        "moneyId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "币种"
+        },
+        "partialWithdrawPermit": {
+          "type": "string",
+          "description": "是否支持部分领取，Y：N"
+        },
+        "partialWithdrawStartYear": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "paymentFreqs": {
+          "type": "array",
+          "description": "缴费频率列表",
+          "items": {
+            "type": "string"
+          }
+        },
+        "pointToPH": {
+          "type": "string",
+          "description": "险种被保人是否是投保人，Y:N"
+        },
+        "pointToSecInsured": {
+          "type": "string",
+          "description": "是否需要第二被保人，Y:N"
+        },
+        "premLimitList": {
+          "type": "array",
+          "description": "保费限制信息",
+          "items": {
+            "$ref": "#/definitions/PremLimit"
+          }
+        },
+        "productLiabilityList": {
+          "type": "array",
+          "description": "险种营销责任列表",
+          "items": {
+            "$ref": "#/definitions/Liability"
+          }
+        },
+        "regPartWitdrStartYear": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "regPartWithdrMaxAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "regPartWithdrMinAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "regularTopupPermit": {
+          "type": "string",
+          "description": "是否支持定期追加投资,Y：N"
+        },
+        "saEqual": {
+          "type": "string",
+          "description": "主/附险种的保额是否一样，Y：N"
+        },
+        "saPremTip": {
+          "type": "string",
+          "description": "保额/保费提示"
+        },
+        "salesProductCode": {
+          "type": "string",
+          "description": "销售产品代码"
+        },
+        "salesProductId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "销售产品ID"
+        },
+        "salesProductName": {
+          "type": "string",
+          "description": "销售产品名称"
+        },
+        "singleTopupPermit": {
+          "type": "string",
+          "description": "是否支持一次性追加投资,Y：N"
+        },
+        "smokingIndi": {
+          "type": "string",
+          "description": "是否吸烟，0：不吸烟；1：特殊；2：普通"
+        },
+        "socialInsureIndi": {
+          "type": "string",
+          "description": "费率是否与社保相关：Y：N"
+        },
+        "targetAthRateList": {
+          "type": "array",
+          "description": "险种附约限制信息",
+          "items": {
+            "$ref": "#/definitions/TargetAttachRateVO"
+          }
+        },
+        "topupStartYear": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "unitFlag": {
+          "type": "string",
+          "description": "计算方式"
+        },
+        "waiverChargeYearAdjustment": {
+          "type": "integer",
+          "format": "int32",
+          "description": "豁免险种缴费期调整值；0：与被豁免险种一样，-1：与被豁免险中少一年"
+        }
+      }
+    },
+    "AddressInput": {
+      "type": "object",
+      "properties": {
+        "address1": {
+          "type": "string",
+          "example": "上海市",
+          "description": "省"
+        },
+        "address2": {
+          "type": "string",
+          "example": "上海市",
+          "description": "市"
+        },
+        "address3": {
+          "type": "string",
+          "example": "杨浦区",
+          "description": "区县"
+        },
+        "address4": {
+          "type": "string",
+          "example": "淞沪路270号创智天地3号楼3楼",
+          "description": "地址"
+        },
+        "postCode": {
+          "type": "string",
+          "example": "200433",
+          "description": "邮编"
+        }
+      }
+    },
+    "ToolsSignResponse": {
+      "type": "object",
+      "properties": {
+        "decodeMsg": {
+          "type": "string"
+        },
+        "encodeMsg": {
+          "type": "string"
+        },
+        "errorMessages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "status": {
+          "type": "string"
+        }
+      }
+    },
+    "AmountLimit": {
+      "type": "object",
+      "properties": {
+        "jobClass": {
+          "type": "integer",
+          "format": "int32",
+          "description": "职业类别"
+        },
+        "maxAge": {
+          "type": "integer",
+          "format": "int32",
+          "description": "最大年龄"
+        },
+        "maxAmount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "允许的最大保额/Unit"
+        },
+        "minAge": {
+          "type": "integer",
+          "format": "int32",
+          "description": "最小年龄"
+        },
+        "minAmount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "允许的最小保额/Unit"
+        },
+        "moneyId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "币种"
+        }
+      }
+    },
+    "Rights": {
+      "type": "object",
+      "properties": {
+        "rightDesc": {
+          "type": "string"
+        },
+        "rightId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "rightName": {
+          "type": "string"
+        }
+      }
+    },
+    "SalesProductSalesCategory": {
+      "type": "object",
+      "properties": {
+        "extendedProps": {
+          "type": "object"
+        },
+        "categoryName": {
+          "type": "string",
+          "description": "产品销售大类名称"
+        },
+        "description": {
+          "type": "string",
+          "description": "产品销售大类描述"
+        },
+        "categoryCode": {
+          "type": "string",
+          "description": "产品销售大类代码"
+        },
+        "displayOrder": {
+          "type": "integer",
+          "format": "int32",
+          "description": "显示顺序"
+        },
+        "categoryId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "产品销售大类Id"
+        },
+        "parentCateId": {
+          "type": "string",
+          "description": "产品销售大类父类别Id"
+        }
+      }
+    },
+    "SalesSaveResponse": {
+      "type": "object",
+      "properties": {
+        "errorMessages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "proposalCode": {
+          "type": "string"
+        },
+        "quotationCode": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        }
+      }
+    },
+    "PolicyInfoListResponse": {
+      "type": "object",
+      "properties": {
+        "errorMessages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "policyInfos": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProposalInfo"
+          }
+        },
+        "status": {
+          "type": "string"
+        },
+        "totalSize": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "SalesProposalGetResponse": {
+      "type": "object",
+      "properties": {
+        "errorMessages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "proposal": {
+          "$ref": "#/definitions/ProposalInfo"
+        },
+        "status": {
+          "type": "string"
+        }
+      }
+    },
+    "GenericVO": {
+      "type": "object",
+      "properties": {
+        "extObject": {
+          "$ref": "#/definitions/GenericVO"
+        }
+      }
+    },
+    "Agent": {
+      "type": "object",
+      "properties": {
+        "agentCode": {
+          "type": "string"
+        },
+        "salesAreaCode": {
+          "type": "string"
+        }
+      }
+    },
+    "SalesPackageListCretiriaRequest": {
+      "type": "object",
+      "properties": {
+        "insurerCodes": {
+          "type": "string"
+        },
+        "keyWords": {
+          "type": "string"
+        },
+        "msg": {
+          "type": "string"
+        },
+        "pageSize": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "salesCategories": {
+          "type": "string"
+        },
+        "salesRights": {
+          "type": "string"
+        },
+        "sign": {
+          "type": "string"
+        },
+        "sort": {
+          "type": "string"
+        },
+        "start": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "status": {
+          "type": "string"
+        },
+        "tenantCode": {
+          "type": "string"
+        }
+      }
+    },
+    "CollectionInput": {
+      "type": "object",
+      "properties": {
+        "arapCollectionTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "arapIndicator": {
+          "type": "string"
+        },
+        "bankAccount": {
+          "type": "string"
+        },
+        "bankCode": {
+          "type": "string"
+        },
+        "collectionDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "collectionNo": {
+          "type": "string"
+        },
+        "collectionTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "currency": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "extraProperties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "feeAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "paymentMethod": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "paymentPlatform": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "policyNumber": {
+          "type": "string"
+        },
+        "proposalNumber": {
+          "type": "string"
+        },
+        "thirdPtyPayNo": {
+          "type": "string"
+        }
+      }
+    },
+    "ProposalListInfoResponse": {
+      "type": "object",
+      "properties": {
+        "errorMessages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "proposalInfos": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProposalInfo"
+          }
+        },
+        "status": {
+          "type": "string"
+        },
+        "totalSize": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "SalesProposalRequest": {
+      "type": "object",
+      "properties": {
+        "msg": {
+          "type": "string"
+        },
+        "proposal": {
+          "$ref": "#/definitions/ProposalInfo"
+        },
+        "sign": {
+          "type": "string"
+        },
+        "tenantCode": {
+          "type": "string"
+        }
+      }
+    },
+    "SalesInsurer": {
+      "type": "object",
+      "properties": {
+        "insurerCode": {
+          "type": "string"
+        },
+        "insurerName": {
+          "type": "string"
+        }
+      }
+    },
+    "QuotationPdfRequest": {
+      "type": "object",
+      "properties": {
+        "ableRiders": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AbleRider"
+          }
+        },
+        "agentSignUrl": {
+          "type": "string"
+        },
+        "illustration": {
+          "$ref": "#/definitions/IllustrationCalc"
+        },
+        "investFunds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InvestFund"
+          }
+        },
+        "plan": {
+          "$ref": "#/definitions/ProposalInfo"
+        },
+        "proposerSignUrl": {
+          "type": "string"
+        }
+      }
+    },
+    "Bonus": {
+      "type": "object",
+      "properties": {
+        "cashBonus": {
+          "type": "boolean",
+          "example": false,
+          "description": "是否有现金红利"
+        },
+        "cashBonusOptions": {
+          "type": "array",
+          "description": "允许的现金红利选项 (1:马上领取      2:用现金红利支付保费     3:存在保险公司帐户中 ",
+          "items": {
+            "type": "string"
+          }
+        },
+        "cashBonusUnitAmount": {
+          "type": "number",
+          "format": "double",
+          "description": "现金红利单位"
+        },
+        "cashBonusVestYear": {
+          "type": "integer",
+          "format": "int32",
+          "description": "现金红利必须留在保险公司多少年投资之后才可以领取"
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "extendedProps"
+        }
+      }
+    },
+    "InvestRate": {
+      "type": "object",
+      "properties": {
+        "allocationFlag": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "number",
+          "format": "double"
+        },
+        "assignRate": {
+          "type": "number",
+          "format": "double"
+        },
+        "fundCode": {
+          "type": "string"
+        },
+        "highPlyYear": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "listId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "lowPlyYear": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "premType": {
+          "type": "string"
+        }
+      }
+    },
+    "ProposalInfo": {
+      "type": "object",
+      "properties": {
+        "advice": {
+          "type": "string"
+        },
+        "annualPrem": {
+          "type": "number",
+          "format": "double"
+        },
+        "applyCode": {
+          "type": "string"
+        },
+        "beneficiaries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Beneficiary"
+          }
+        },
+        "collectionInput": {
+          "$ref": "#/definitions/CollectionInput"
+        },
+        "ePolicyDownloadUrl": {
+          "type": "string"
+        },
+        "endDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "extraProperties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "inforceDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "insureds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Insured"
+          }
+        },
+        "langCode": {
+          "type": "string"
+        },
+        "mainCoverages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Coverage"
+          }
+        },
+        "mainProductName": {
+          "type": "string"
+        },
+        "miscFee": {
+          "type": "number",
+          "format": "double"
+        },
+        "moneyId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "organProposer": {
+          "$ref": "#/definitions/OrganProposer"
+        },
+        "outboundTenantCode": {
+          "type": "string"
+        },
+        "packageCode": {
+          "type": "string"
+        },
+        "packageId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "packageName": {
+          "type": "string"
+        },
+        "payerAccounts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PayerAccountInput"
+          }
+        },
+        "policyCode": {
+          "type": "string"
+        },
+        "policyId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "producer": {
+          "$ref": "#/definitions/Producer"
+        },
+        "productId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "proposalCode": {
+          "type": "string"
+        },
+        "proposalId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "proposalStatus": {
+          "type": "string"
+        },
+        "proposer": {
+          "$ref": "#/definitions/Proposer"
+        },
+        "quotationCode": {
+          "type": "string"
+        },
+        "quotationId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "riderCoverages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Coverage"
+          }
+        },
+        "riskStatus": {
+          "type": "string"
+        },
+        "salesChannelCode": {
+          "type": "string"
+        },
+        "salesCompanyCode": {
+          "type": "string"
+        },
+        "serviceAgentCode": {
+          "type": "string"
+        },
+        "showAdvice": {
+          "type": "string"
+        },
+        "submitDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "totalFirstYearPrem": {
+          "type": "number",
+          "format": "double"
+        },
+        "underwritingDesc": {
+          "type": "string"
+        }
+      }
+    },
+    "Insured": {
+      "type": "object",
+      "properties": {
+        "addresses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Address"
+          }
+        },
+        "age": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "birthday": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "certiBeginDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "certiCode": {
+          "type": "string"
+        },
+        "certiEndDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "certiType": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "declaration": {
+          "$ref": "#/definitions/CustomerDeclarationInput"
+        },
+        "email": {
+          "type": "string"
+        },
+        "extraProperties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "gender": {
+          "type": "string"
+        },
+        "height": {
+          "type": "number",
+          "format": "double"
+        },
+        "id": {
+          "type": "string"
+        },
+        "income": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "jobCateCode": {
+          "type": "string"
+        },
+        "jobCateId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "laPhRela": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "marriageStatus": {
+          "type": "string"
+        },
+        "mobile": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "nationality": {
+          "type": "string"
+        },
+        "relationToMainInsured": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "smoking": {
+          "type": "string"
+        },
+        "socialInsuranceIndi": {
+          "type": "string"
+        },
+        "weight": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "ChangingContactInfoItemInput": {
+      "type": "object",
+      "required": ["effectiveDate", "itemDetail", "orderId", "policyNumber", "serviceId"],
+      "properties": {
+        "policyNumber": {
+          "type": "string",
+          "example": "0000017623",
+          "description": "保单号码"
+        },
+        "serviceId": {
+          "type": "integer",
+          "format": "int32",
+          "example": 201,
+          "description": "保单变更项<br>201 - 犹豫期退保<br>104 - 变更联系方式",
+          "enum": [201, 104]
+        },
+        "submissionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "提交日期，日期格式：yyyy-MM-dd'T'HH:mm:ss"
+        },
+        "effectiveDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "变更生效日期，日期格式：yyyy-MM-dd'T'HH:mm:ss"
+        },
+        "orderId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "变更序号"
+        },
+        "itemDetail": {
+          "description": "变更详细信息",
+          "$ref": "#/definitions/ChangingContactInfoInputDetail"
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "扩展信息, Map类型, Key/Value都是字符型",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "CalcPremiumResponse": {
+      "type": "object",
+      "properties": {
+        "annualPrem": {
+          "type": "number",
+          "format": "double"
+        },
+        "coveragePrems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CoveragePremium"
+          }
+        },
+        "errorMessages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "status": {
+          "type": "string"
+        },
+        "totalFirstYearPrem": {
+          "type": "number",
+          "format": "double"
+        },
+        "valueAddedList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ValueAdded"
+          }
+        }
+      }
+    },
+    "SalesProductSalesCategoryResponse": {
+      "type": "object",
+      "properties": {
+        "clientRequestId": {
+          "type": "string"
+        },
+        "clientRequestTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "exceptions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "extendedProps"
+        },
+        "listSalesCategory": {
+          "type": "array",
+          "description": "产品销售分类",
+          "items": {
+            "$ref": "#/definitions/SalesProductSalesCategory"
+          }
+        },
+        "messages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GenericValidationResult"
+          }
+        },
+        "result": {
+          "type": "string",
+          "enum": ["1", "0", "-1"]
+        }
+      }
+    },
+    "Proposer": {
+      "type": "object",
+      "properties": {
+        "addresses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Address"
+          }
+        },
+        "age": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "birthday": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "certiBeginDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "certiCode": {
+          "type": "string"
+        },
+        "certiEndDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "certiType": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "declaration": {
+          "$ref": "#/definitions/CustomerDeclarationInput"
+        },
+        "email": {
+          "type": "string"
+        },
+        "extraProperties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "gender": {
+          "type": "string"
+        },
+        "height": {
+          "type": "number",
+          "format": "double"
+        },
+        "id": {
+          "type": "string"
+        },
+        "income": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "jobCateCode": {
+          "type": "string"
+        },
+        "jobCateId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "marriageStatus": {
+          "type": "string"
+        },
+        "mobile": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "nationality": {
+          "type": "string"
+        },
+        "smoking": {
+          "type": "string"
+        },
+        "socialInsuranceIndi": {
+          "type": "string"
+        },
+        "weight": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "SalesHotKeywords": {
+      "type": "object",
+      "properties": {
+        "defaultIndi": {
+          "type": "string"
+        },
+        "displayOrder": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "keyWords": {
+          "type": "string"
+        }
+      }
+    },
+    "ProductResponse": {
+      "type": "object",
+      "properties": {
+        "clientRequestId": {
+          "type": "string"
+        },
+        "clientRequestTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "exceptions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "extendedProps"
+        },
+        "messages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GenericValidationResult"
+          }
+        },
+        "productInfo": {
+          "description": "产品详细信息",
+          "$ref": "#/definitions/ProductInfo"
+        },
+        "result": {
+          "type": "string",
+          "enum": ["1", "0", "-1"]
+        }
+      }
+    },
+    "PackageRights": {
+      "type": "object",
+      "properties": {
+        "displayOrder": {
+          "type": "integer",
+          "format": "int32",
+          "description": "显示顺序"
+        },
+        "ifFilter": {
+          "type": "string",
+          "description": "是否作为筛选条件"
+        },
+        "packageCode": {
+          "type": "string",
+          "description": "销售计划代码"
+        },
+        "rightDesc": {
+          "type": "string",
+          "description": "销售权益描述"
+        },
+        "rightWords": {
+          "type": "string",
+          "description": "销售权益"
+        }
+      }
+    },
+    "PartyContact": {
+      "type": "object",
+      "properties": {
+        "homeTel": {
+          "type": "string",
+          "example": "87654321",
+          "description": "家庭电话"
+        },
+        "mobileTel": {
+          "type": "string",
+          "example": "15012345678",
+          "description": "手机号"
+        },
+        "officeTel": {
+          "type": "string",
+          "example": "88888888",
+          "description": "工作电话"
+        },
+        "officeTelExt": {
+          "type": "string",
+          "example": "1234",
+          "description": "工作电话分机号"
+        },
+        "email": {
+          "type": "string",
+          "example": "TestPerson14@126.com",
+          "description": "电子邮箱"
+        },
+        "contact": {
+          "type": "string",
+          "example": "张三",
+          "description": "联系人"
+        },
+        "contactTel": {
+          "type": "string",
+          "example": "88888888",
+          "description": "联系人电话"
+        },
+        "fax": {
+          "type": "string",
+          "example": "88888887",
+          "description": "传真"
+        }
+      }
+    },
+    "SalesUserResponse": {
+      "type": "object",
+      "properties": {
+        "errorMessages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "producer": {
+          "$ref": "#/definitions/Producer"
+        },
+        "status": {
+          "type": "string"
+        }
+      }
+    },
+    "FreelookInputDetail": {
+      "type": "object",
+      "required": ["alteredCoverages", "freelookReason"],
+      "properties": {
+        "freelookReason": {
+          "type": "integer",
+          "format": "int32",
+          "example": 54,
+          "description": "犹豫期退保原因，51-财务困难；52-销售误导；53-服务缺失；54-产品与需求不匹配；55-其他",
+          "enum": [51, 52, 53, 54, 55]
+        },
+        "alteredCoverages": {
+          "type": "array",
+          "description": "犹豫期退保险种列表",
+          "items": {
+            "$ref": "#/definitions/CommonAlterationCoverageInput"
+          }
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "扩展信息, Map类型, Key/Value都是字符型",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Person": {
+      "type": "object",
+      "properties": {
+        "addresses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Address"
+          }
+        },
+        "age": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "birthday": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "certiBeginDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "certiCode": {
+          "type": "string"
+        },
+        "certiEndDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "certiType": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "declaration": {
+          "$ref": "#/definitions/CustomerDeclarationInput"
+        },
+        "email": {
+          "type": "string"
+        },
+        "extraProperties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "gender": {
+          "type": "string"
+        },
+        "height": {
+          "type": "number",
+          "format": "double"
+        },
+        "id": {
+          "type": "string"
+        },
+        "income": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "jobCateCode": {
+          "type": "string"
+        },
+        "jobCateId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "marriageStatus": {
+          "type": "string"
+        },
+        "mobile": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "nationality": {
+          "type": "string"
+        },
+        "smoking": {
+          "type": "string"
+        },
+        "socialInsuranceIndi": {
+          "type": "string"
+        },
+        "weight": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "SalesPackageBasicInfo": {
+      "type": "object",
+      "properties": {
+        "collected": {
+          "type": "boolean",
+          "example": false,
+          "description": "是否收藏"
+        },
+        "coveragePeriods": {
+          "type": "array",
+          "description": "销售计划保障期列表",
+          "items": {
+            "$ref": "#/definitions/CoveragePeriod"
+          }
+        },
+        "examplePrem": {
+          "type": "number",
+          "format": "double",
+          "description": "示例保费"
+        },
+        "examplePremNote": {
+          "type": "string",
+          "description": "示例保费提示"
+        },
+        "insurer": {
+          "description": "保险公司信息",
+          "$ref": "#/definitions/Insurer"
+        },
+        "isNew": {
+          "type": "boolean",
+          "example": false,
+          "description": "是否新计划"
+        },
+        "labels": {
+          "type": "array",
+          "description": "销售计划标签列表",
+          "items": {
+            "$ref": "#/definitions/SalesLabel"
+          }
+        },
+        "maxAge": {
+          "type": "integer",
+          "format": "int32",
+          "description": "允许的最大投保年龄"
+        },
+        "maxAgeUnit": {
+          "type": "string",
+          "description": "允许的最大投保年龄单位"
+        },
+        "minAge": {
+          "type": "integer",
+          "format": "int32",
+          "description": "允许的最小投保年龄"
+        },
+        "minAgeUnit": {
+          "type": "string",
+          "description": "允许的最小投保年龄单位"
+        },
+        "moneyId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "币种"
+        },
+        "packageCode": {
+          "type": "string",
+          "description": "销售计划代码"
+        },
+        "packageId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "销售计划Id"
+        },
+        "packageName": {
+          "type": "string",
+          "description": "销售计划名称"
+        },
+        "proposalIndi": {
+          "type": "string",
+          "description": "是否可投保"
+        },
+        "quotationIndi": {
+          "type": "string",
+          "description": "是否可作计划书"
+        },
+        "rights": {
+          "type": "array",
+          "description": "销售计划权益列表",
+          "items": {
+            "$ref": "#/definitions/SalesRights"
+          }
+        },
+        "saPremInfo": {
+          "type": "string",
+          "description": "保额保费描述"
+        },
+        "visitNum": {
+          "type": "integer",
+          "format": "int64",
+          "description": "访问量"
+        }
+      }
+    },
+    "Insurer": {
+      "type": "object",
+      "properties": {
+        "abbrCode": {
+          "type": "string"
+        },
+        "abbrName": {
+          "type": "string"
+        },
+        "entityIdName": {
+          "type": "string"
+        },
+        "identifier": {
+          "$ref": "#/definitions/Serializable"
+        },
+        "ifFilter": {
+          "type": "string"
+        },
+        "insurerCode": {
+          "type": "string"
+        },
+        "insurerDesc": {
+          "type": "string"
+        },
+        "insurerId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "insurerLogo": {
+          "type": "string"
+        },
+        "insurerName": {
+          "type": "string"
+        },
+        "telephone": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "version": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "ChangingContactInfoResponse": {
+      "type": "object",
+      "properties": {
+        "clientRequestId": {
+          "type": "string",
+          "description": "外部交易流水号"
+        },
+        "clientRequestTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "外部请求时间"
+        },
+        "result": {
+          "type": "integer",
+          "format": "int32",
+          "description": "请求结果，<br>1 - 业务成功<br>0 - 业务失败<br>-1 - 程序异常"
+        },
+        "messages": {
+          "type": "array",
+          "description": "业务失败原因描述列表节点",
+          "items": {
+            "$ref": "#/definitions/GenericValidationResult"
+          }
+        },
+        "exceptions": {
+          "type": "array",
+          "description": "异常信息",
+          "items": {
+            "type": "string"
+          }
+        },
+        "changeNo": {
+          "type": "string",
+          "description": "变更序号"
+        },
+        "finishTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "变更完成时间，日期格式：yyyy-MM-dd'T'HH:mm:ss"
+        },
+        "itemResults": {
+          "type": "array",
+          "description": "保单变更结果列表",
+          "items": {
+            "$ref": "#/definitions/ChangingContactInfoItemResultInfo"
+          }
+        }
+      }
+    },
+    "SalesLabel": {
+      "type": "object",
+      "properties": {
+        "entityIdName": {
+          "type": "string"
+        },
+        "identifier": {
+          "$ref": "#/definitions/Serializable"
+        },
+        "ifFilter": {
+          "type": "string"
+        },
+        "labelName": {
+          "type": "string"
+        },
+        "labelPic": {
+          "type": "string"
+        },
+        "listId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "version": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "MainInformation": {
+      "type": "object",
+      "properties": {
+        "ally": {
+          "type": "string",
+          "description": "是否joint life, 1:是;0:否 ,"
+        },
+        "currency": {
+          "type": "integer",
+          "format": "int32",
+          "description": "产品币种"
+        },
+        "endDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "产品终止售卖时间"
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "extendedProps"
+        },
+        "familyType": {
+          "type": "string",
+          "description": "家庭产品类型"
+        },
+        "indexIndi": {
+          "type": "string",
+          "description": "是否保额递增 ,"
+        },
+        "mainPlan": {
+          "type": "string",
+          "description": "是否是主险"
+        },
+        "orgId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "此产品属于哪个机构"
+        },
+        "payerWop": {
+          "type": "string",
+          "description": "if payer waiver, Y: Yes; N:No"
+        },
+        "productAbbreviation": {
+          "type": "string",
+          "description": "产品简介"
+        },
+        "productCode": {
+          "type": "string",
+          "description": "产品代码"
+        },
+        "productDescription": {
+          "type": "string",
+          "description": "产品描述"
+        },
+        "productName": {
+          "type": "string",
+          "description": "产品名称"
+        },
+        "salesCategory": {
+          "description": "产品销售大类",
+          "$ref": "#/definitions/SalesProductSalesCategory"
+        },
+        "spouseWaiver": {
+          "type": "string",
+          "description": "if spouse waiver, Y: Yes; N:No ,"
+        },
+        "startDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "产品起售时间"
+        }
+      }
+    },
+    "SalesCretiriaRequest": {
+      "type": "object",
+      "properties": {
+        "keyWords": {
+          "type": "string"
+        },
+        "msg": {
+          "type": "string"
+        },
+        "pageSize": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "sign": {
+          "type": "string"
+        },
+        "sort": {
+          "type": "string"
+        },
+        "start": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "status": {
+          "type": "string"
+        },
+        "tenantCode": {
+          "type": "string"
+        }
+      }
+    },
+    "SalesProduct": {
+      "type": "object",
+      "properties": {
+        "attachCompulsory": {
+          "type": "string",
+          "description": "是否强制捆绑销售产品"
+        },
+        "funds": {
+          "type": "array",
+          "description": "ILP产品基金列表",
+          "items": {
+            "$ref": "#/definitions/Fund"
+          }
+        },
+        "insType": {
+          "type": "string",
+          "description": "是否是主险，1：主险，2附加险/豁免险"
+        },
+        "insurer": {
+          "description": "所属保险公司",
+          "$ref": "#/definitions/Insurer"
+        },
+        "masterId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "被附加险种ID"
+        },
+        "packageCode": {
+          "type": "string",
+          "description": "所在的计划的代码"
+        },
+        "productCode": {
+          "type": "string",
+          "description": "销售产品代码"
+        },
+        "productDesc": {
+          "type": "string",
+          "description": "销售产品描述"
+        },
+        "productId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "销售产品ID"
+        },
+        "productName": {
+          "type": "string",
+          "description": "销售产品名称"
+        },
+        "salesProductLiabilities": {
+          "type": "array",
+          "description": "销售计划营销责任列表",
+          "items": {
+            "$ref": "#/definitions/SalesProductLiability"
+          }
+        }
+      }
+    },
+    "SalesProductAdvancedFiltersResponse": {
+      "type": "object",
+      "properties": {
+        "errorMessages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "hotKeywords": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SalesHotKeywords"
+          }
+        },
+        "insurers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Insurer"
+          }
+        },
+        "salesCategories": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SalesCategory"
+          }
+        },
+        "salesRights": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Rights"
+          }
+        },
+        "status": {
+          "type": "string"
+        }
+      }
+    },
+    "ProductCoverMultiple": {
+      "type": "object",
+      "properties": {
+        "coverMultipleItems": {
+          "type": "array",
+          "description": "cover multiple item",
+          "items": {
+            "$ref": "#/definitions/CoverMultipleItem"
+          }
+        }
+      }
+    },
+    "FreelookResultDetail": {
+      "type": "object",
+      "properties": {
+        "totalGrossPremium": {
+          "type": "number",
+          "format": "double",
+          "description": "期缴保费"
+        },
+        "totalExtraPremium": {
+          "type": "number",
+          "format": "double",
+          "description": "加费"
+        },
+        "suspense": {
+          "type": "number",
+          "format": "double",
+          "description": "保单账户余额"
+        },
+        "advancePremium": {
+          "type": "number",
+          "format": "double",
+          "description": "保单预缴保费"
+        },
+        "medicalFee": {
+          "type": "number",
+          "format": "double",
+          "description": "体检费"
+        },
+        "totalRefundAmount": {
+          "type": "number",
+          "format": "double",
+          "description": "犹豫期退保原因"
+        },
+        "adminFee": {
+          "type": "number",
+          "format": "double"
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "扩展信息, Map类型, Key/Value都是字符型",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ProductFund": {
+      "type": "object",
+      "properties": {
+        "extendedProps": {
+          "type": "object"
+        },
+        "fundCode": {
+          "type": "string",
+          "description": "基金代码"
+        },
+        "productId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "产品Id"
+        },
+        "minPartialWithdralval": {
+          "type": "integer",
+          "format": "int64",
+          "description": "最小部分领取金额"
+        },
+        "minPartialWithdralRemainingVal": {
+          "type": "integer",
+          "format": "int64",
+          "description": "最小部分领取之后的剩余金额"
+        },
+        "minSwitOutVal": {
+          "type": "integer",
+          "format": "int64",
+          "description": "最小转出金额"
+        },
+        "minSwitRemainVal": {
+          "type": "integer",
+          "format": "int64",
+          "description": "最小转出之后剩余金额"
+        },
+        "switchPeriodUnit": {
+          "type": "string",
+          "description": "最小基金转换次数"
+        },
+        "maxSwitInTimes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "最大基金转入次数"
+        },
+        "maxSwitOutTimes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "最大基金转出次数"
+        },
+        "maxPartialWithdralVal": {
+          "type": "integer",
+          "format": "int64",
+          "description": "最大部分领取金额"
+        },
+        "settleRatePeriodUnit": {
+          "type": "string",
+          "description": "结息区间单位类型"
+        },
+        "settleYearType": {
+          "type": "integer",
+          "format": "int32",
+          "description": "结息年度类型"
+        },
+        "settleFreq": {
+          "type": "string",
+          "description": "结息频率"
+        },
+        "settleMonth": {
+          "type": "integer",
+          "format": "int32",
+          "description": "结息月"
+        },
+        "settleDay": {
+          "type": "integer",
+          "format": "int32",
+          "description": "结息天"
+        },
+        "settleMethod": {
+          "type": "integer",
+          "format": "int32",
+          "description": "结息方式"
+        },
+        "guaranteedRateOption": {
+          "type": "integer",
+          "format": "int32",
+          "description": "是否保证利率"
+        },
+        "settleSimpleCompound": {
+          "type": "string",
+          "description": "结息是复利还是单利"
+        },
+        "bonusSettleType": {
+          "type": "integer",
+          "format": "int32",
+          "description": "红利处理类型<br>1:红利和本金一起处理<br>2:红利单独处理"
+        }
+      }
+    },
+    "PremLimit": {
+      "type": "object",
+      "properties": {
+        "chargePeriod": {
+          "type": "integer",
+          "format": "int32",
+          "description": "缴费类别"
+        },
+        "chargeType": {
+          "type": "string",
+          "description": "缴费频率"
+        },
+        "chargeYear": {
+          "type": "integer",
+          "format": "int32",
+          "description": "缴费期限"
+        },
+        "maxAdTopupPrem": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "maxAge": {
+          "type": "integer",
+          "format": "int32",
+          "description": "允许的最大年龄"
+        },
+        "maxInitialPrem": {
+          "type": "integer",
+          "format": "int64",
+          "description": "允许的最大保费"
+        },
+        "maxReguTopupPrem": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "minAdTopupPrem": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "minAge": {
+          "type": "integer",
+          "format": "int32",
+          "description": "允许的最小年龄"
+        },
+        "minIncremntPrem": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "minInitialPrem": {
+          "type": "integer",
+          "format": "int64",
+          "description": "允许的最小保费"
+        },
+        "minReguTopupDecr": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "minReguTopupIncr": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "minReguTopupPrem": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "moneyId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "币种"
+        }
+      }
+    },
+    "ChangingContactInfoInputDetail": {
+      "type": "object",
+      "properties": {
+        "partyId": {
+          "type": "string",
+          "description": "客户编号"
+        },
+        "partyContact": {
+          "description": "当事人联系信息",
+          "$ref": "#/definitions/PartyContact"
+        },
+        "address": {
+          "description": "客户地址",
+          "$ref": "#/definitions/AddressInput"
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "扩展信息, Map类型, Key/Value都是字符型",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ShortUrlResponse": {
+      "type": "object",
+      "properties": {
+        "errorMessages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "shortUrl": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        }
+      }
+    },
+    "ProductRelationVO": {
+      "type": "object",
+      "properties": {
+        "listId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "productAId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "productBId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "relation": {
+          "type": "string"
+        }
+      }
+    },
+    "LiabilityInformation": {
+      "type": "object",
+      "properties": {
+        "categoryId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "责任大类Id"
+        },
+        "categoryName": {
+          "type": "string",
+          "description": "责任大类名称"
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "extendedProps"
+        },
+        "liabilityId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "责任Id"
+        },
+        "liabilityName": {
+          "type": "string",
+          "description": "责任名称"
+        }
+      }
+    },
+    "ProductLiability": {
+      "type": "object",
+      "properties": {
+        "annuity": {
+          "type": "boolean",
+          "example": false,
+          "description": "是否有年金"
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "extendedProps"
+        },
+        "liabilities": {
+          "type": "array",
+          "description": "产品责任列表",
+          "items": {
+            "$ref": "#/definitions/LiabilityInformation"
+          }
+        },
+        "survivalBenefitOptions": {
+          "type": "array",
+          "description": "允许的生存给付选项 (1:马上领取      2:用生存给付支付保费     3:存在保险公司帐户中 ",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ChangingContactInfoResultDetail": {
+      "type": "object",
+      "properties": {
+        "extendedProps": {
+          "type": "object",
+          "description": "扩展信息, Map类型, Key/Value都是字符型",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "IllusItem": {
+      "type": "object",
+      "properties": {
+        "displayOrder": {
+          "type": "string"
+        },
+        "type": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "value": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "CustomerDeclarationDetailInput": {
+      "type": "object",
+      "properties": {
+        "declId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "extraProperties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "fill1": {
+          "type": "string"
+        },
+        "fill10": {
+          "type": "string"
+        },
+        "fill2": {
+          "type": "string"
+        },
+        "fill3": {
+          "type": "string"
+        },
+        "fill4": {
+          "type": "string"
+        },
+        "fill5": {
+          "type": "string"
+        },
+        "fill6": {
+          "type": "string"
+        },
+        "fill7": {
+          "type": "string"
+        },
+        "fill8": {
+          "type": "string"
+        },
+        "fill9": {
+          "type": "string"
+        }
+      }
+    },
+    "GenericValidationResult": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "ruleType": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "CustomerDeclarationInput": {
+      "type": "object",
+      "properties": {
+        "declarationDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "declarationDetails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomerDeclarationDetailInput"
+          }
+        },
+        "extraProperties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "partyId": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "FreelookItemResultInfo": {
+      "type": "object",
+      "required": ["effectiveDate", "orderId", "policyNumber", "serviceId"],
+      "properties": {
+        "itemResult": {
+          "$ref": "#/definitions/FreelookResultDetail"
+        },
+        "policyNumber": {
+          "type": "string",
+          "example": "0000017623",
+          "description": "保单号码"
+        },
+        "serviceId": {
+          "type": "integer",
+          "format": "int32",
+          "example": 201,
+          "description": "保单变更项<br>201 - 犹豫期退保<br>104 - 变更联系方式",
+          "enum": [201, 104]
+        },
+        "submissionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "提交日期，日期格式：yyyy-MM-dd'T'HH:mm:ss"
+        },
+        "effectiveDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "变更生效日期，日期格式：yyyy-MM-dd'T'HH:mm:ss"
+        },
+        "orderId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "变更序号"
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "扩展信息, Map类型, Key/Value都是字符型",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "IllustrationCalc": {
+      "type": "object",
+      "properties": {
+        "illusMap": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/Map«string,List«IllusItem»»"
+          }
+        },
+        "illusRate": {
+          "type": "object"
+        },
+        "isULProduct": {
+          "type": "string"
+        },
+        "mainAssuredAge": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "quotationCode": {
+          "type": "string"
+        },
+        "quotationId": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "AgeRangeVO": {
+      "type": "object",
+      "properties": {
+        "maxAge": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "maxUnit": {
+          "type": "string"
+        },
+        "minAge": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "minUnit": {
+          "type": "string"
+        }
+      }
+    },
+    "SalesProductBasicResponse": {
+      "type": "object",
+      "properties": {
+        "errorMessages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "funds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Fund"
+          }
+        },
+        "liabilitiesMap": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/List"
+          }
+        },
+        "salesProductBasicList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SalesProductBasic"
+          }
+        },
+        "status": {
+          "type": "string"
+        }
+      }
+    },
+    "ProductInfo": {
+      "type": "object",
+      "properties": {
+        "attachedRiders": {
+          "type": "array",
+          "description": "主险附加险关系",
+          "items": {
+            "$ref": "#/definitions/ProductRelationship"
+          }
+        },
+        "benefitType": {
+          "type": "string",
+          "description": "产品保障大类\t  22       报销型医疗险        \t  23       补贴型医疗险       \t  31       意外险             \t  11       两全险             \t  12       年金险             \t  13       终身险             \t  14       定期险             \t  41       投资险             \t  15       抵押贷款险        \t  16       长期照料险         \t  17       重疾险             "
+        },
+        "bonus": {
+          "description": "红利信息",
+          "$ref": "#/definitions/Bonus"
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "extendedProps"
+        },
+        "liability": {
+          "description": "产品责任",
+          "$ref": "#/definitions/ProductLiability"
+        },
+        "listProductFund": {
+          "type": "array",
+          "description": "基金信息",
+          "items": {
+            "$ref": "#/definitions/ProductFund"
+          }
+        },
+        "maininfo": {
+          "description": "产品主要信息",
+          "$ref": "#/definitions/MainInformation"
+        },
+        "premSaCalc": {
+          "description": "产品保费计算相关信息",
+          "$ref": "#/definitions/PremiumSaCalculation"
+        },
+        "productCoverMultiple": {
+          "description": "保费保额比例",
+          "$ref": "#/definitions/ProductCoverMultiple"
+        },
+        "productId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "产品Id"
+        }
+      }
+    },
+    "SalesProductBasic": {
+      "type": "object",
+      "properties": {
+        "funds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Fund"
+          }
+        },
+        "insType": {
+          "type": "string"
+        },
+        "insurer": {
+          "$ref": "#/definitions/SalesInsurer"
+        },
+        "packageCode": {
+          "type": "string"
+        },
+        "productCode": {
+          "type": "string"
+        },
+        "productName": {
+          "type": "string"
+        },
+        "salesProductLiabilitiesList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SalesProductLiabilityBasic"
+          }
+        }
+      }
+    },
+    "ProductTermVO": {
+      "type": "object",
+      "properties": {
+        "periodType": {
+          "type": "string",
+          "description": "期限类别"
+        },
+        "periodValue": {
+          "type": "integer",
+          "format": "int32",
+          "description": "期限值"
+        }
+      }
+    },
+    "FreelookResponse": {
+      "type": "object",
+      "properties": {
+        "clientRequestId": {
+          "type": "string",
+          "description": "外部交易流水号"
+        },
+        "clientRequestTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "外部请求时间"
+        },
+        "result": {
+          "type": "integer",
+          "format": "int32",
+          "description": "请求结果，<br>1 - 业务成功<br>0 - 业务失败<br>-1 - 程序异常"
+        },
+        "messages": {
+          "type": "array",
+          "description": "业务失败原因描述列表节点",
+          "items": {
+            "$ref": "#/definitions/GenericValidationResult"
+          }
+        },
+        "exceptions": {
+          "type": "array",
+          "description": "异常信息",
+          "items": {
+            "type": "string"
+          }
+        },
+        "changeNo": {
+          "type": "string",
+          "description": "变更序号"
+        },
+        "finishTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "变更完成时间，日期格式：yyyy-MM-dd'T'HH:mm:ss"
+        },
+        "itemResults": {
+          "type": "array",
+          "description": "保单变更结果列表",
+          "items": {
+            "$ref": "#/definitions/FreelookItemResultInfo"
+          }
+        }
+      }
+    },
+    "ChangingContactInfoItemResultInfo": {
+      "type": "object",
+      "required": ["effectiveDate", "orderId", "policyNumber", "serviceId"],
+      "properties": {
+        "itemResult": {
+          "$ref": "#/definitions/ChangingContactInfoResultDetail"
+        },
+        "policyNumber": {
+          "type": "string",
+          "example": "0000017623",
+          "description": "保单号码"
+        },
+        "serviceId": {
+          "type": "integer",
+          "format": "int32",
+          "example": 201,
+          "description": "保单变更项<br>201 - 犹豫期退保<br>104 - 变更联系方式",
+          "enum": [201, 104]
+        },
+        "submissionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "提交日期，日期格式：yyyy-MM-dd'T'HH:mm:ss"
+        },
+        "effectiveDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "变更生效日期，日期格式：yyyy-MM-dd'T'HH:mm:ss"
+        },
+        "orderId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "变更序号"
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "扩展信息, Map类型, Key/Value都是字符型",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PolicyInfoResponse": {
+      "type": "object",
+      "properties": {
+        "errorMessages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "policy": {
+          "$ref": "#/definitions/ProposalInfo"
+        },
+        "policyCode": {
+          "type": "string"
+        },
+        "proposalCode": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        }
+      }
+    },
+    "ChangingContactInfoRequest": {
+      "type": "object",
+      "properties": {
+        "clientRequestId": {
+          "type": "string",
+          "description": "外部交易流水号"
+        },
+        "clientRequestTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "外部请求时间"
+        },
+        "items": {
+          "type": "array",
+          "description": "变更请求列表",
+          "items": {
+            "$ref": "#/definitions/ChangingContactInfoItemInput"
+          }
+        }
+      }
+    },
+    "SalesPackageResponse": {
+      "type": "object",
+      "properties": {
+        "errorMessages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "salesPackageInfo": {
+          "$ref": "#/definitions/SalesPackageInfo"
+        },
+        "status": {
+          "type": "string"
+        }
+      }
+    },
+    "SalesAvailableRidersRequest": {
+      "type": "object",
+      "properties": {
+        "attachedPrdtLimitCondition": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AttachedProductLimit"
+          }
+        },
+        "insureds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Insured"
+          }
+        },
+        "mainCoverages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Coverage"
+          }
+        },
+        "msg": {
+          "type": "string"
+        },
+        "packageCode": {
+          "type": "string"
+        },
+        "proposer": {
+          "$ref": "#/definitions/Proposer"
+        },
+        "riderCoverages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Coverage"
+          }
+        },
+        "sign": {
+          "type": "string"
+        },
+        "tenantCode": {
+          "type": "string"
+        }
+      }
+    },
+    "CoveragePremium": {
+      "type": "object",
+      "properties": {
+        "benefitlevel": {
+          "type": "string"
+        },
+        "chargePeriod": {
+          "$ref": "#/definitions/ChargePeriod"
+        },
+        "coveragePeriod": {
+          "$ref": "#/definitions/CoveragePeriod"
+        },
+        "displayPremIndi": {
+          "type": "string"
+        },
+        "firstYearPrem": {
+          "type": "number",
+          "format": "double"
+        },
+        "itemId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "premAn": {
+          "type": "number",
+          "format": "double"
+        },
+        "premium": {
+          "type": "number",
+          "format": "double"
+        },
+        "productId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "productName": {
+          "type": "string"
+        },
+        "sa": {
+          "type": "number",
+          "format": "double"
+        },
+        "unit": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "unitFlag": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "BankAccountInput": {
+      "type": "object",
+      "properties": {
+        "accoCertiCode": {
+          "type": "string"
+        },
+        "accoName": {
+          "type": "string"
+        },
+        "accountType": {
+          "type": "string"
+        },
+        "bankAccount": {
+          "type": "string"
+        },
+        "bankAccountCity": {
+          "type": "string"
+        },
+        "bankAccountProvince": {
+          "type": "string"
+        },
+        "bankCode": {
+          "type": "string"
+        },
+        "creditCardType": {
+          "type": "string"
+        },
+        "debitCreditType": {
+          "type": "string"
+        },
+        "expireDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "extraProperties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "issueBankName": {
+          "type": "string"
+        },
+        "partyId": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "SalesPlanGetResponse": {
+      "type": "object",
+      "properties": {
+        "errorMessages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "plan": {
+          "$ref": "#/definitions/ProposalInfo"
+        },
+        "status": {
+          "type": "string"
+        }
+      }
+    },
+    "SalesPackageCretiriaRequest": {
+      "type": "object",
+      "properties": {
+        "msg": {
+          "type": "string"
+        },
+        "salesPackageCode": {
+          "type": "string"
+        },
+        "sign": {
+          "type": "string"
+        },
+        "tenantCode": {
+          "type": "string"
+        }
+      }
+    },
+    "Beneficiary": {
+      "type": "object",
+      "properties": {
+        "addresses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Address"
+          }
+        },
+        "age": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "beneType": {
+          "type": "string"
+        },
+        "birthday": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "certiBeginDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "certiCode": {
+          "type": "string"
+        },
+        "certiEndDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "certiType": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "declaration": {
+          "$ref": "#/definitions/CustomerDeclarationInput"
+        },
+        "email": {
+          "type": "string"
+        },
+        "extraProperties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "gender": {
+          "type": "string"
+        },
+        "height": {
+          "type": "number",
+          "format": "double"
+        },
+        "id": {
+          "type": "string"
+        },
+        "income": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "insuredId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "jobCateCode": {
+          "type": "string"
+        },
+        "jobCateId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "marriageStatus": {
+          "type": "string"
+        },
+        "mobile": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "nationality": {
+          "type": "string"
+        },
+        "relToInsured": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "shareOrder": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "shareRate": {
+          "type": "number",
+          "format": "double"
+        },
+        "smoking": {
+          "type": "string"
+        },
+        "socialInsuranceIndi": {
+          "type": "string"
+        },
+        "weight": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "SalesUserRequest": {
+      "type": "object",
+      "properties": {
+        "msg": {
+          "type": "string"
+        },
+        "sign": {
+          "type": "string"
+        },
+        "tenantCode": {
+          "type": "string"
+        }
+      }
+    },
+    "AgeLimit": {
+      "type": "object",
+      "properties": {
+        "benefitLevel": {
+          "type": "string",
+          "description": "销售产品档次"
+        },
+        "chargePeriod": {
+          "type": "integer",
+          "format": "int32",
+          "description": "缴费类别"
+        },
+        "chargeYear": {
+          "type": "integer",
+          "format": "int32",
+          "description": "缴费期限"
+        },
+        "coveragePeriod": {
+          "type": "integer",
+          "format": "int32",
+          "description": "保障类别"
+        },
+        "coverageYear": {
+          "type": "integer",
+          "format": "int32",
+          "description": "保障期限"
+        },
+        "endPeriod": {
+          "type": "integer",
+          "format": "int32",
+          "description": "年金领取截止类别"
+        },
+        "endYear": {
+          "type": "integer",
+          "format": "int32",
+          "description": "年金领取截止期限"
+        },
+        "gender": {
+          "type": "string",
+          "description": "性别"
+        },
+        "maxInsdAge": {
+          "type": "integer",
+          "format": "int32",
+          "description": "被保人允许的最大年龄"
+        },
+        "maxPhAge": {
+          "type": "integer",
+          "format": "int32",
+          "description": "投保人允许的最大年龄"
+        },
+        "minInsdAge": {
+          "type": "integer",
+          "format": "int32",
+          "description": "被保人允许的最新年龄"
+        },
+        "minPhAge": {
+          "type": "integer",
+          "format": "int32",
+          "description": "投保人允许的最小年龄"
+        },
+        "payPeriod": {
+          "type": "integer",
+          "format": "int32",
+          "description": "年金领取类别"
+        },
+        "payYear": {
+          "type": "integer",
+          "format": "int32",
+          "description": "年龄领取期限"
+        }
+      }
+    },
+    "SalesPlanListResponse": {
+      "type": "object",
+      "properties": {
+        "errorMessages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "planList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProposalInfo"
+          }
+        },
+        "status": {
+          "type": "string"
+        }
+      }
+    },
+    "FreelookQuotationResponse": {
+      "type": "object",
+      "properties": {
+        "clientRequestId": {
+          "type": "string",
+          "description": "外部交易流水号"
+        },
+        "clientRequestTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "外部请求时间"
+        },
+        "result": {
+          "type": "integer",
+          "format": "int32",
+          "description": "请求结果，<br>1 - 业务成功<br>0 - 业务失败<br>-1 - 程序异常"
+        },
+        "messages": {
+          "type": "array",
+          "description": "业务失败原因描述列表节点",
+          "items": {
+            "$ref": "#/definitions/GenericValidationResult"
+          }
+        },
+        "exceptions": {
+          "type": "array",
+          "description": "异常信息",
+          "items": {
+            "type": "string"
+          }
+        },
+        "policyNumber": {
+          "type": "string",
+          "description": "保单号码"
+        },
+        "serviceId": {
+          "type": "integer",
+          "format": "int32",
+          "example": 201,
+          "description": "保单变更项<br>201 - 犹豫期退保",
+          "enum": [201]
+        },
+        "submissionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "提交日期，日期格式：yyyy-MM-dd'T'HH:mm:ss"
+        },
+        "effectiveDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "变更生效日期，日期格式：yyyy-MM-dd'T'HH:mm:ss"
+        },
+        "quotationResult": {
+          "description": "犹豫期退保试算结果信息",
+          "$ref": "#/definitions/FreelookResultDetail"
+        }
+      }
+    },
+    "SalesPackageInfo": {
+      "type": "object",
+      "properties": {
+        "ageRange": {
+          "description": "年龄限制信息",
+          "$ref": "#/definitions/AgeRangeVO"
+        },
+        "attachProductList": {
+          "type": "array",
+          "description": "销售计划可添加附加险列表",
+          "items": {
+            "$ref": "#/definitions/SalesProduct"
+          }
+        },
+        "chargeList": {
+          "type": "array",
+          "description": "缴费期信息",
+          "items": {
+            "$ref": "#/definitions/ProductTermVO"
+          }
+        },
+        "coverageList": {
+          "type": "array",
+          "description": "保障期信息",
+          "items": {
+            "$ref": "#/definitions/ProductTermVO"
+          }
+        },
+        "ilpProductIndi": {
+          "type": "string",
+          "description": "是否需要计算高中低 Y：是；N：否"
+        },
+        "insurer": {
+          "description": "所属保险公司",
+          "$ref": "#/definitions/Insurer"
+        },
+        "isCollected": {
+          "type": "string",
+          "description": "是否收藏"
+        },
+        "isNew": {
+          "type": "string",
+          "description": "是否新上计划"
+        },
+        "mainProductCode": {
+          "type": "string",
+          "description": "主险Code"
+        },
+        "mainProductId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "主险Id"
+        },
+        "moneyId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "销售计划名称"
+        },
+        "packageCode": {
+          "type": "string",
+          "description": "销售计划代码"
+        },
+        "packageFeatureList": {
+          "type": "array",
+          "description": "销售计划特色信息",
+          "items": {
+            "$ref": "#/definitions/PackageFeature"
+          }
+        },
+        "packageId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "销售计划Id"
+        },
+        "packageName": {
+          "type": "string",
+          "description": "销售计划名称"
+        },
+        "proposalIndi": {
+          "type": "string",
+          "description": "是否可投保 Y：是；N：否"
+        },
+        "proposalPdfIndi": {
+          "type": "string",
+          "description": "是否需要生成投保书PDF Y：是；N：否"
+        },
+        "quotationIndi": {
+          "type": "string",
+          "description": "是否可作计划书 Y：是；N：否"
+        },
+        "quotePdfIndi": {
+          "type": "string",
+          "description": "是否需要生成计划书PDF Y：是；N：否"
+        },
+        "saPremInfo": {
+          "type": "string",
+          "description": "保额保费描述"
+        },
+        "salesLiabilityList": {
+          "type": "array",
+          "description": "销售计划营销责任信息",
+          "items": {
+            "$ref": "#/definitions/SalesProductLiability"
+          }
+        },
+        "salesRightsList": {
+          "type": "array",
+          "description": "销售计划权益列表",
+          "items": {
+            "$ref": "#/definitions/PackageRights"
+          }
+        },
+        "suggestReason": {
+          "type": "string",
+          "description": "计划推荐理由"
+        },
+        "totalVisitCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "计划访问量"
+        }
+      }
+    },
+    "SalesProductCalcRequest": {
+      "type": "object",
+      "properties": {
+        "msg": {
+          "type": "string"
+        },
+        "performanceLevel": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "plan": {
+          "$ref": "#/definitions/ProposalInfo"
+        },
+        "sign": {
+          "type": "string"
+        },
+        "tenantCode": {
+          "type": "string"
+        }
+      }
+    },
+    "SalesProductDetailDataResponse": {
+      "type": "object",
+      "properties": {
+        "errorMessages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "packageCode": {
+          "type": "string"
+        },
+        "packageName": {
+          "type": "string"
+        },
+        "proposalPdfIndi": {
+          "type": "string"
+        },
+        "quotePdfIndi": {
+          "type": "string"
+        },
+        "salesInsurer": {
+          "$ref": "#/definitions/SalesInsurer"
+        },
+        "salesProductConfigInfoList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SalesProductDetailInfo"
+          }
+        },
+        "status": {
+          "type": "string"
+        },
+        "suggestReason": {
+          "type": "string"
+        }
+      }
+    },
+    "SalesProductBasicRequest": {
+      "type": "object",
+      "properties": {
+        "msg": {
+          "type": "string"
+        },
+        "productCodes": {
+          "type": "string"
+        },
+        "salesPackageCode": {
+          "type": "string"
+        },
+        "sign": {
+          "type": "string"
+        },
+        "tenantCode": {
+          "type": "string"
+        }
+      }
+    },
+    "PayPeriod": {
+      "type": "object",
+      "properties": {
+        "periodType": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "periodValue": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "FreelookQuotationRequest": {
+      "type": "object",
+      "required": ["effectiveDate", "item", "policyNumber", "serviceId"],
+      "properties": {
+        "clientRequestId": {
+          "type": "string",
+          "description": "外部交易流水号"
+        },
+        "clientRequestTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "外部请求时间"
+        },
+        "policyNumber": {
+          "type": "string",
+          "example": "0000017623",
+          "description": "保单号码"
+        },
+        "serviceId": {
+          "type": "integer",
+          "format": "int32",
+          "example": 201,
+          "description": "保单变更项<br>201 - 犹豫期退保",
+          "enum": [201]
+        },
+        "submissionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "提交日期，日期格式：yyyy-MM-dd'T'HH:mm:ss"
+        },
+        "effectiveDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "变更生效日期，日期格式：yyyy-MM-dd'T'HH:mm:ss"
+        },
+        "item": {
+          "description": "犹豫期退保试算请求信息",
+          "$ref": "#/definitions/FreelookInputDetail"
+        }
+      }
+    },
+    "CommonAlterationCoverageInput": {
+      "type": "object",
+      "properties": {
+        "coverageNo": {
+          "type": "string",
+          "example": "197531",
+          "description": "保单险种代号"
+        }
+      }
+    },
+    "FreelookItemInput": {
+      "type": "object",
+      "required": ["effectiveDate", "itemDetail", "orderId", "policyNumber", "serviceId"],
+      "properties": {
+        "policyNumber": {
+          "type": "string",
+          "example": "0000017623",
+          "description": "保单号码"
+        },
+        "serviceId": {
+          "type": "integer",
+          "format": "int32",
+          "example": 201,
+          "description": "保单变更项<br>201 - 犹豫期退保<br>104 - 变更联系方式",
+          "enum": [201, 104]
+        },
+        "submissionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "提交日期，日期格式：yyyy-MM-dd'T'HH:mm:ss"
+        },
+        "effectiveDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "变更生效日期，日期格式：yyyy-MM-dd'T'HH:mm:ss"
+        },
+        "orderId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "变更序号"
+        },
+        "itemDetail": {
+          "description": "变更详细信息",
+          "$ref": "#/definitions/FreelookInputDetail"
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "扩展信息, Map类型, Key/Value都是字符型",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ShortUrlRequest": {
+      "type": "object",
+      "properties": {
+        "shareUrl": {
+          "type": "string"
+        }
+      }
+    },
+    "SalesPlanRequest": {
+      "type": "object",
+      "properties": {
+        "msg": {
+          "type": "string"
+        },
+        "plan": {
+          "$ref": "#/definitions/ProposalInfo"
+        },
+        "sign": {
+          "type": "string"
+        },
+        "tenantCode": {
+          "type": "string"
+        }
+      }
+    },
+    "Producer": {
+      "type": "object",
+      "properties": {
+        "agentInfoMap": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/List"
+          }
+        },
+        "extraProperties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "producerCode": {
+          "type": "string"
+        },
+        "producerEmail": {
+          "type": "string"
+        },
+        "producerName": {
+          "type": "string"
+        },
+        "producerPhone": {
+          "type": "string"
+        },
+        "producerType": {
+          "type": "string"
+        },
+        "returnUrl": {
+          "type": "string"
+        },
+        "tenantCode": {
+          "type": "string"
+        }
+      }
+    },
+    "CoveragePeriod": {
+      "type": "object",
+      "properties": {
+        "periodType": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "periodValue": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "SalesProductLiability": {
+      "type": "object",
+      "properties": {
+        "categoryName": {
+          "type": "string",
+          "description": "营销责任类别名称"
+        },
+        "liabCategory": {
+          "type": "string",
+          "description": "营销责任类别"
+        },
+        "liabDesc": {
+          "type": "string",
+          "description": "营销责任描述"
+        },
+        "liabId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "liabName": {
+          "type": "string",
+          "description": "营销责任名称"
+        },
+        "needDiseaseIndi": {
+          "type": "string",
+          "description": "是否有疾病描述"
+        }
+      }
+    },
+    "SalesPlanDeleteResponse": {
+      "type": "object",
+      "properties": {
+        "errorMessages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "status": {
+          "type": "string"
+        }
+      }
+    },
+    "ProposalResponse": {
+      "type": "object",
+      "properties": {
+        "errorMessages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "proposal": {
+          "$ref": "#/definitions/ProposalInfo"
+        },
+        "proposalCode": {
+          "type": "string"
+        },
+        "quotationCode": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        }
+      }
+    },
+    "PackageFeature": {
+      "type": "object",
+      "properties": {
+        "featureDesc": {
+          "type": "string",
+          "description": "销售计划特色图片描述"
+        },
+        "featurePic": {
+          "type": "string",
+          "description": "销售计划特色图片"
+        },
+        "packageCode": {
+          "type": "string",
+          "description": "销售计划代码"
+        }
+      }
+    },
+    "InvestFund": {
+      "type": "object",
+      "properties": {
+        "endDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "fundCode": {
+          "type": "string"
+        },
+        "fundCurrency": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "fundName": {
+          "type": "string"
+        },
+        "fundType": {
+          "type": "string"
+        },
+        "highRate": {
+          "type": "number",
+          "format": "double"
+        },
+        "lowRate": {
+          "type": "number",
+          "format": "double"
+        },
+        "midRate": {
+          "type": "number",
+          "format": "double"
+        },
+        "rateDesc": {
+          "type": "string"
+        },
+        "startDate": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "ValueAdded": {
+      "type": "object",
+      "properties": {
+        "displayOrder": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "valueAddedDescPic": {
+          "type": "string"
+        },
+        "valueAddedId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "valueAddedName": {
+          "type": "string"
+        }
+      }
+    },
+    "AttachedProductLimit": {
+      "type": "object",
+      "properties": {
+        "ageRange": {
+          "$ref": "#/definitions/AgeRangeVO"
+        },
+        "amountLimitList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AmountLimit"
+          }
+        },
+        "attachedProductId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "premLimitList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PremLimit"
+          }
+        }
+      }
+    },
+    "Fund": {
+      "type": "object",
+      "properties": {
+        "endDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "基金销售终止日"
+        },
+        "fundCode": {
+          "type": "string",
+          "description": "基金代码"
+        },
+        "fundCurrency": {
+          "type": "integer",
+          "format": "int64",
+          "description": "基金售卖币种"
+        },
+        "fundName": {
+          "type": "string",
+          "description": "基金名称"
+        },
+        "fundType": {
+          "type": "string",
+          "description": "基金类别"
+        },
+        "highRate": {
+          "type": "number",
+          "format": "double",
+          "description": "基金高收益率"
+        },
+        "lowRate": {
+          "type": "number",
+          "format": "double",
+          "description": "基金低收益率"
+        },
+        "midRate": {
+          "type": "number",
+          "format": "double",
+          "description": "基金中收益率"
+        },
+        "rateDesc": {
+          "type": "string",
+          "description": "基金收益率描述"
+        },
+        "startDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "基金销售起始日"
+        }
+      }
+    },
+    "SalesPackageListResponse": {
+      "type": "object",
+      "properties": {
+        "errorMessages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "salesPackageBasicInfoList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SalesPackageBasicInfo"
+          }
+        },
+        "status": {
+          "type": "string"
+        }
+      }
+    },
+    "SalesDeleteRequest": {
+      "type": "object",
+      "properties": {
+        "msg": {
+          "type": "string"
+        },
+        "quotationCode": {
+          "type": "string"
+        },
+        "sign": {
+          "type": "string"
+        },
+        "tenantCode": {
+          "type": "string"
+        }
+      }
+    },
+    "FreelookRequest": {
+      "type": "object",
+      "properties": {
+        "clientRequestId": {
+          "type": "string",
+          "description": "外部交易流水号"
+        },
+        "clientRequestTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "外部请求时间"
+        },
+        "items": {
+          "type": "array",
+          "description": "变更请求列表",
+          "items": {
+            "$ref": "#/definitions/FreelookItemInput"
+          }
+        }
+      }
+    },
+    "CoverMultipleItem": {
+      "type": "object",
+      "properties": {
+        "productCode": {
+          "type": "string",
+          "description": "产品代码"
+        },
+        "ageRange": {
+          "type": "string",
+          "description": "年龄范围"
+        },
+        "termRange": {
+          "type": "string",
+          "description": "缴费期限范围"
+        },
+        "minValue": {
+          "type": "number",
+          "format": "double",
+          "description": "允许的最小值"
+        },
+        "maxValue": {
+          "type": "number",
+          "format": "double",
+          "description": "允许的最大值"
+        }
+      }
+    },
+    "SalesProductLiabilityBasic": {
+      "type": "object",
+      "properties": {
+        "categoryName": {
+          "type": "string"
+        },
+        "liabCategory": {
+          "type": "string"
+        },
+        "liabDesc": {
+          "type": "string"
+        },
+        "liabId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "liabName": {
+          "type": "string"
+        },
+        "needDiseaseIndi": {
+          "type": "string"
+        }
+      }
+    },
+    "PdfResponse": {
+      "type": "object",
+      "properties": {
+        "errorMessages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "filePath": {
+          "type": "string",
+          "description": "filePath"
+        },
+        "pdfStatus": {
+          "type": "string",
+          "description": "0.不存在,  1.未签名pdf生成中,  2.未签名pdf生成,  3.签名pdf生成中 , 4.签名pdf生成"
+        },
+        "status": {
+          "type": "string"
+        }
+      }
+    },
+    "SalesCategory": {
+      "type": "object",
+      "properties": {
+        "displayOrder": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "listId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "typeName": {
+          "type": "string"
+        }
+      }
+    },
+    "TargetAttachRateVO": {
+      "type": "object",
+      "properties": {
+        "amountEqual": {
+          "type": "string"
+        },
+        "mastLimitUnit": {
+          "type": "string"
+        },
+        "maxAthAge": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "maxAthAmt": {
+          "type": "number",
+          "format": "double"
+        },
+        "maxAthRate": {
+          "type": "number",
+          "format": "double"
+        },
+        "maxMastAge": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "maxMastAmt": {
+          "type": "number",
+          "format": "double"
+        },
+        "minAthAge": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "minAthAmt": {
+          "type": "number",
+          "format": "double"
+        },
+        "minAthRate": {
+          "type": "number",
+          "format": "double"
+        },
+        "minMastAge": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "minMastAmt": {
+          "type": "number",
+          "format": "double"
+        },
+        "targetAttachedId": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "ProductBenefitLevel": {
+      "type": "object",
+      "properties": {
+        "benefitLevel": {
+          "type": "string"
+        },
+        "levelDesc": {
+          "type": "string"
+        },
+        "productId": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "ProductRelationship": {
+      "type": "object",
+      "properties": {
+        "attachRelation": {
+          "type": "string",
+          "description": "附加关系：N-attach\tY-compulsory\tD-dependent\tA-against"
+        },
+        "attachType": {
+          "type": "string",
+          "description": "附加类型 1:只允许 附加一次       2:允许附加多次"
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "extendedProps"
+        },
+        "masterProductCode": {
+          "type": "string",
+          "description": "主险产品代码"
+        },
+        "masterProductId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "主险产品Id"
+        },
+        "maxAthAge": {
+          "type": "integer",
+          "format": "int32",
+          "description": "允许附加的最大年龄"
+        },
+        "maxAthMastAge": {
+          "type": "integer",
+          "format": "int32",
+          "description": "允许被附加的主险的最大年龄"
+        },
+        "maxAttachSa2MainSaRate": {
+          "type": "number",
+          "format": "double",
+          "description": "最大附加险比主险的比例"
+        },
+        "maxAttachedSa": {
+          "type": "number",
+          "format": "double",
+          "description": "最大附加想保额"
+        },
+        "maxTotalSa2MainSaRate": {
+          "type": "number",
+          "format": "double",
+          "description": "最大附加险比主险的比例"
+        },
+        "minAthAge": {
+          "type": "integer",
+          "format": "int32",
+          "description": "允许附加的最小年龄"
+        },
+        "minAthMastAge": {
+          "type": "integer",
+          "format": "int32",
+          "description": "允许被附加的主险的最小年龄"
+        },
+        "minAttachSa2MainSaRate": {
+          "type": "number",
+          "format": "double",
+          "description": "最小附加险比主险的比例"
+        },
+        "minMastSaAmount": {
+          "type": "number",
+          "format": "double",
+          "description": "允许被附加的主险的最小保额"
+        },
+        "riderProductCode": {
+          "type": "string",
+          "description": "附加险产品代码"
+        },
+        "riderProductId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "附加险产品Id"
+        },
+        "riderSa2MainPremRate": {
+          "type": "number",
+          "format": "double",
+          "description": "附加险保额比主险保费的比例"
+        },
+        "saNoEqual": {
+          "type": "string",
+          "description": "是否附加险的保额可以等于主险的保额"
+        },
+        "totalOverRate": {
+          "type": "number",
+          "format": "double",
+          "description": "最大 附加险保额加主险保额比主险保额比"
+        }
+      }
+    },
+    "ProposalPdfRequest": {
+      "type": "object",
+      "properties": {
+        "investFunds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InvestFund"
+          }
+        },
+        "proposalInfo": {
+          "$ref": "#/definitions/ProposalInfo"
+        }
+      }
+    },
+    "TopupWithdraw": {
+      "type": "object",
+      "properties": {
+        "addPeriod": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "addPremAn": {
+          "type": "number",
+          "format": "double"
+        },
+        "addPremType": {
+          "type": "string"
+        },
+        "addStartDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "addYear": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "amount": {
+          "type": "number",
+          "format": "double"
+        },
+        "chargeMode": {
+          "type": "string"
+        },
+        "endYear": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "paidupDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "payMode": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "payToDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "premType": {
+          "type": "string"
+        },
+        "startYear": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "ChargePeriod": {
+      "type": "object",
+      "properties": {
+        "periodType": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "periodValue": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "SalesRights": {
+      "type": "object",
+      "properties": {
+        "displayOrder": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "entityIdName": {
+          "type": "string"
+        },
+        "identifier": {
+          "$ref": "#/definitions/Serializable"
+        },
+        "ifFilter": {
+          "type": "string"
+        },
+        "listId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "rightDesc": {
+          "type": "string"
+        },
+        "rightName": {
+          "type": "string"
+        },
+        "version": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "AbleRider": {
+      "type": "object",
+      "properties": {
+        "productCode": {
+          "type": "string"
+        },
+        "productName": {
+          "type": "string"
+        }
+      }
+    },
+    "IllustrationCalcResponse": {
+      "type": "object",
+      "properties": {
+        "errorMessages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "illusMap": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/Map«string,List«IllusItem»»"
+          }
+        },
+        "illusRate": {
+          "type": "object"
+        },
+        "isULProduct": {
+          "type": "string"
+        },
+        "mainAssuredAge": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "quotationCode": {
+          "type": "string"
+        },
+        "quotationId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "status": {
+          "type": "string"
+        }
+      }
+    },
+    "Coverage": {
+      "type": "object",
+      "properties": {
+        "benefitlevel": {
+          "type": "string"
+        },
+        "chargePeriod": {
+          "$ref": "#/definitions/ChargePeriod"
+        },
+        "coveragePeriod": {
+          "$ref": "#/definitions/CoveragePeriod"
+        },
+        "displayPremIndi": {
+          "type": "string"
+        },
+        "endPeriod": {
+          "$ref": "#/definitions/PayPeriod"
+        },
+        "extraProperties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "firstYearPrem": {
+          "type": "number",
+          "format": "double"
+        },
+        "insuredCategory": {
+          "type": "string"
+        },
+        "insuredIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "investRates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InvestRate"
+          }
+        },
+        "itemId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "masterItemId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "masterProductId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "payPeriod": {
+          "$ref": "#/definitions/PayPeriod"
+        },
+        "paymentFreq": {
+          "type": "string"
+        },
+        "planLiabilityList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PlanLiabilityInput"
+          }
+        },
+        "premAn": {
+          "type": "number",
+          "format": "double"
+        },
+        "premium": {
+          "type": "number",
+          "format": "double"
+        },
+        "productCode": {
+          "type": "string"
+        },
+        "productId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "productName": {
+          "type": "string"
+        },
+        "sa": {
+          "type": "number",
+          "format": "double"
+        },
+        "topupWithdraws": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TopupWithdraw"
+          }
+        },
+        "unit": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "unitFlag": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "OrganProposer": {
+      "type": "object",
+      "properties": {
+        "addresses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Address"
+          }
+        },
+        "companyName": {
+          "type": "string"
+        },
+        "contact": {
+          "type": "string"
+        },
+        "contactTel": {
+          "type": "string"
+        },
+        "countryCode": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "fax": {
+          "type": "string"
+        },
+        "homeTel": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "mobileTel": {
+          "type": "string"
+        },
+        "officeTel": {
+          "type": "string"
+        },
+        "officeTelExt": {
+          "type": "string"
+        },
+        "registerCode": {
+          "type": "string"
+        },
+        "registerType": {
+          "type": "string"
+        }
+      }
+    },
+    "Liability": {
+      "type": "object",
+      "properties": {
+        "benefitLevel": {
+          "type": "string"
+        },
+        "countWay": {
+          "type": "string",
+          "description": "营销责任计算方式"
+        },
+        "displayOrder": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "isPricedOnLiab": {
+          "type": "string"
+        },
+        "liabDesc": {
+          "type": "string",
+          "description": "营销责任描述"
+        },
+        "liabDescProd": {
+          "type": "string"
+        },
+        "liabId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "营销责任ID"
+        },
+        "liabName": {
+          "type": "string",
+          "description": "营销责任名称"
+        },
+        "liabType": {
+          "type": "string"
+        },
+        "optionalIndi": {
+          "type": "string"
+        },
+        "premIndi": {
+          "type": "string"
+        },
+        "renderBenefitLevel": {
+          "type": "boolean"
+        },
+        "renderPrem": {
+          "type": "boolean"
+        },
+        "renderSa": {
+          "type": "boolean"
+        },
+        "renderUnit": {
+          "type": "boolean"
+        },
+        "sa": {
+          "type": "number",
+          "format": "double"
+        },
+        "selected": {
+          "type": "boolean"
+        },
+        "stdPremAf": {
+          "type": "number",
+          "format": "double"
+        },
+        "stdPremBf": {
+          "type": "number",
+          "format": "double"
+        },
+        "totalPremAf": {
+          "type": "number",
+          "format": "double"
+        },
+        "unit": {
+          "type": "number",
+          "format": "double"
+        },
+        "unitFlag": {
+          "type": "string"
+        }
+      }
+    },
+    "PremiumSaCalculation": {
+      "type": "object",
+      "properties": {
+        "ageBase": {
+          "type": "string",
+          "description": "年龄计算方法 1:按投保时年龄计算     2:按当年的保单周年日年龄计算"
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "extendedProps"
+        },
+        "premiumFrequency": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "unitFlag": {
+          "type": "string",
+          "description": "保费保额计算方法  0         保费保额由用户输入   1         产品按单位售卖   2         根据保额算保费，但是也允许协议保费   3         产品根据计划或单位售卖   4         产品只允许按计划售卖   5          根据保费算保额，但是也允许协议保费   6         只允许保额算保费但是也允许协议保费   7         只允许保费算保额   8         保费算保额或保额算保费\t"
+        },
+        "waiver": {
+          "type": "boolean",
+          "example": false,
+          "description": "是否是豁免险"
+        }
+      }
+    },
+    "Map«string,List«IllusItem»»": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/List"
+      }
+    },
+    "PlanLiabilityInput": {
+      "type": "object",
+      "properties": {
+        "liabId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "unitFlag": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "value": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "PayerAccountInput": {
+      "type": "object",
+      "properties": {
+        "bankAccount": {
+          "$ref": "#/definitions/BankAccountInput"
+        },
+        "extraProperties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "nextBankAccount": {
+          "$ref": "#/definitions/BankAccountInput"
+        },
+        "payerId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "paymentMethod": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "paymentMethodNext": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "SalesProposalListResponse": {
+      "type": "object",
+      "properties": {
+        "errorMessages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "proposalList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProposalInfo"
+          }
+        },
+        "status": {
+          "type": "string"
+        }
+      }
+    },
+    "SalesProspectListResponse": {
+      "type": "object",
+      "properties": {
+        "errorMessages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "prospectList": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/List"
+          }
+        },
+        "status": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
