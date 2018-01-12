@@ -1,0 +1,2010 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "eBaoCloud LI OpenAPI",
+    "termsOfService": "http://api.ebaocloud.life/",
+    "description": "This document is the API specification for the SingLife. To practice and run the APIs in this document, you need to apply an eBaoCloud tenant account(starting from a sandbox account instead of production account) first.<br>\nContact liliang.zhu@ebaotech.com for more information.\n\nPS: we have created an account for SingLife. Please refer to the email\n\n# Built on\n[TIMESTAMP]\n\n# Versioning\nAPI version| Date  |Comments\n--|---|--\n1.0  | 2018-01-10  | Initial version\n\n# Authentication\n\n## Overview\n\neBaoCloud offers 3rd party applications the ability to issue authenticated requests on behalf of the eBaoCloud itself. eBaoCloud's implementation is based on the [Client Credentials Grant](http://tools.ietf.org/html/rfc6749#section-4.4) flow of the [oauth 2 specification](http://tools.ietf.org/html/rfc6749).\n\n## Auth Flow\n\nThe oauth2 / token authentication flow follows these 3 major steps:\n\n1. An application (backend) encodes its consumer key and secret (provided by eBaoCloud as an authorized vender) into a specially encoded set of credentials.\n2. An application (backend) makes a request to the POST oauth2 / token endpoint to exchange these credentials for a bearer token.\n3. When accessing the REST API, the application (the APP or website) uses the bearer token to authenticate.\n\n## Step by step\n\n* Send request to auth end point\n\n```js\nPOST: /cas/ebao/v1/json/tickets\nBody: {\"username\":\"SINGLIFE_CP.admin\", \"password\":\"adminPWD!\"}\nResponse: {\"access_token\": \"xxxx\"}\n```\n\n* Send request with access_token in header\n\n```js\nPOST: /rest/products\nHeader: {\n  \"authorization\":\"Bearer \"+access_token,\n  \"X-ebao-tenant-id\": \"SINGLIFE\"\n}\n```\n\n## End Points\n\n| | Sandbox |\n| :--- | :--- |\n| auth / take token | [https://sandbox.ebaocloud.com.cn/cas/ebao/v1/json/tickets](https://sandbox.ebaocloud.com.cn/cas/ebao/v1/json/tickets) |\n| APIs | [http://sandbox.singlife.ebaocloud.life/eBao/1.0](http://sandbox.singlife.ebaocloud.life/eBao/1.0) |\n\n\n## Sample\n\n#### Request auth from application\n\n```bash\ncurl --request POST \\\n  --url https://url/cas/ebao/v1/json/tickets \\\n  --header 'content-type: application/json' \\\n  --data '{\\n \\n \"username\":\"SINGLIFE_CP.admin\",\\n \"password\":\"adminPWD!\"\\n}'\n```\n\nNote:\n. the **X-ebao-tenant-id** is the unique id provided by eBaoCloud to identify the tenant.\n. the **username** and **password** are provided by eBaoCloud when you registered as an authorized vendor.\n\n\n#### Response from API Gateway\n\n* Success\n\n```js\n{\n\"access_token\" : \"TGT-233-e7Zuc5FlSAa0SShO3B1f2iugYzRQGQrSSoGwAi0VnWbnBNDwHg\"\n}\n```\n\n* Failed\n\n```js\n{\n\"access_token\" : null\n}\n```\n\n#### App call (Java code sample)\n\n```java\nHttpResponse<String> response = Unirest.post(url) // url：the UAT/product URL\n  .header(\"content-type\", \"application/json\") // application/json\n  .header(\"authorization\", \"Bearer \" + accessToken) // oauth2 access token：the accessToken\n  .header(\"X-ebao-tenant-id\", \"SINGLIFE\")\n  .body(body) // body: http body\n  .asString();\n```\n\n## Others\n\n### Tokens are passwords\n\nKeep in mind that the consumer key & secret, bearer token credentials, and the bearer token itself grant access to make requests on behalf of an application. These values should be considered as sensitive as passwords, and must not be shared or distributed to untrusted parties.\n\n### SSL required\n\nAll requests (both to obtain and use the tokens) **must use** HTTPS endpoints.\n"
+  },
+  "host": "sandbox.singlife.ebaocloud.life",
+  "basePath": "/eBao/1.0/",
+  "schemes": [
+    "http"
+  ],
+  "consumes": [],
+  "produces": [],
+  "tags": [
+    {
+      "name": "Policy"
+    },
+    {
+      "name": "Party",
+      "description": "Operations related to customer / party"
+    }
+  ],
+  "definitions": {
+    "PageablePolicyCriteria": {
+      "type": "object",
+      "properties": {
+        "applyDateFrom": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Search criteria: application date from"
+        },
+        "applyDateTo": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Search criteria: application date to"
+        },
+        "certiCode": {
+          "type": "string",
+          "description": "Search criteria: id no. of policy customer (policy holder or insured)"
+        },
+        "masterProductCode": {
+          "type": "string",
+          "description": "Search criteria: code of master product"
+        },
+        "name": {
+          "type": "string",
+          "description": "Search criteria: name of policy customer (policy holder or insured)"
+        },
+        "page": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Page criteria: target page number, start from 0"
+        },
+        "policyNumber": {
+          "type": "string",
+          "description": "Search criteria: policy no."
+        },
+        "proposalNumber": {
+          "type": "string",
+          "description": "Search criteria: application code"
+        },
+        "quotationCode": {
+          "type": "string",
+          "description": "Search criteria: order no."
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Page criteria: how many records per page, default as 10"
+        }
+      }
+    },
+    "PolicySummaryInfo": {
+      "type": "object",
+      "properties": {
+        "quotationCode": {
+          "type": "string",
+          "description": "试算请求编号"
+        },
+        "policyNumber": {
+          "type": "string",
+          "description": "保单号码"
+        },
+        "proposalNumber": {
+          "type": "string",
+          "description": "投保单号码"
+        },
+        "applyDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "申请日期，非空，日期格式：yyyy-MM-dd'T'HH:mm:ss"
+        },
+        "inceptionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "保单生效日期，日期格式：yyyy-MM-dd'T'HH:mm:ss"
+        },
+        "issueDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "承保日期，日期格式：yyyy-MM-dd'T'HH:mm:ss"
+        },
+        "expiryDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "终止日期，日期格式：yyyy-MM-dd'T'HH:mm:ss"
+        },
+        "policyHolderName": {
+          "type": "string",
+          "description": "投保人姓名"
+        },
+        "mainInsuredName": {
+          "type": "string",
+          "description": "主被保人姓名"
+        },
+        "masterProductCode": {
+          "type": "string",
+          "description": "主险code"
+        },
+        "masterProductName": {
+          "type": "string",
+          "description": "主险名称"
+        },
+        "installPrem": {
+          "type": "number",
+          "format": "double",
+          "description": "保单保费"
+        },
+        "proposalStatus": {
+          "type": "string",
+          "description": "投保单状态"
+        },
+        "riskStatus": {
+          "type": "string",
+          "description": "保单状态<br>0 - 未生效<br>1 - 生效<br>2 - 失效<br>3 - 终止"
+        }
+      }
+    },
+    "PolicyInfo": {
+      "type": "object",
+      "properties": {
+        "policyType": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Policy Type<br>1 - Individual insurance<br>2 - Group Biz<br>3 - Bancassurance"
+        },
+        "riskStatus": {
+          "type": "integer",
+          "format": "int32",
+          "description": "保单状态<br>0 - 未生效<br>1 - 生效<br>2 - 失效<br>3 - 终止"
+        },
+        "applyDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Application Date, mandatory, format: yyyy-MM-dd'T'HH:mm:ss"
+        },
+        "issueDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "承保日期，日期格式：yyyy-MM-dd'T'HH:mm:ss"
+        },
+        "installPrem": {
+          "type": "number",
+          "format": "double",
+          "description": "保单保费"
+        },
+        "currency": {
+          "type": "integer",
+          "format": "int32",
+          "description": "币种，非空，1 - 人民币"
+        },
+        "ePolicyDownloadUrl": {
+          "type": "string",
+          "description": "电子保单下载地址"
+        },
+        "groupProposalNumber": {
+          "type": "string",
+          "description": "团单投保单号码"
+        },
+        "inceptionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "保单生效日期，日期格式：yyyy-MM-dd'T'HH:mm:ss"
+        },
+        "expiryDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "终止日期，日期格式：yyyy-MM-dd'T'HH:mm:ss"
+        },
+        "proposalNumber": {
+          "type": "string",
+          "description": "投保单号码"
+        },
+        "deliverType": {
+          "type": "string",
+          "description": "保单递送方式<br>H - 手工<br>M - 邮件"
+        },
+        "policyNumber": {
+          "type": "string",
+          "description": "保单号码"
+        },
+        "quotationCode": {
+          "type": "string",
+          "description": "试算请求编号"
+        },
+        "submissionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "提交日期，日期格式：yyyy-MM-dd'T'HH:mm:ss"
+        },
+        "serviceAgentCode": {
+          "type": "string",
+          "description": "保单代理人代码"
+        },
+        "salesChannelCode": {
+          "type": "string",
+          "description": "销售渠道代码"
+        },
+        "preprintedProposalNumber": {
+          "type": "string",
+          "description": "投保单预印号"
+        },
+        "proposalInfo": {
+          "$ref": "#/definitions/PolicyProposalInfo"
+        },
+        "policyPackage": {
+          "$ref": "#/definitions/PolicyPackageInfo"
+        },
+        "coverages": {
+          "type": "array",
+          "description": "保单险种列表",
+          "items": {
+            "$ref": "#/definitions/CoverageInfo"
+          }
+        },
+        "policyHolder": {
+          "$ref": "#/definitions/PolicyHolderInfo"
+        },
+        "insureds": {
+          "type": "array",
+          "description": "保单被保人列表",
+          "items": {
+            "$ref": "#/definitions/InsuredInfo"
+          }
+        },
+        "beneficiaries": {
+          "type": "array",
+          "description": "受益人列表",
+          "items": {
+            "$ref": "#/definitions/BeneficiaryInfo"
+          }
+        },
+        "payerAccounts": {
+          "type": "array",
+          "description": "付款方式列表",
+          "items": {
+            "$ref": "#/definitions/PayerAccountInfo"
+          }
+        },
+        "declarations": {
+          "type": "array",
+          "description": "客户告知列表",
+          "items": {
+            "$ref": "#/definitions/CustomerDeclarationInfo"
+          }
+        },
+        "agentDeclarations": {
+          "type": "array",
+          "description": "业务员告知列表",
+          "items": {
+            "$ref": "#/definitions/AgentDeclarationInfo"
+          }
+        },
+        "extendedProps": {
+          "description": "扩展信息, Map类型, Key/Value都是字符型",
+          "$ref": "#/definitions/PolicyInfo_ExtendedProps"
+        }
+      }
+    },
+    "PolicyProposalInfo": {
+      "type": "object",
+      "properties": {
+        "proposalStatus": {
+          "type": "string",
+          "description": "投保单状态"
+        }
+      }
+    },
+    "PolicyPackageInfo": {
+      "type": "object",
+      "properties": {
+        "packageCode": {
+          "type": "string",
+          "description": "产品组合代码"
+        },
+        "unit": {
+          "type": "number",
+          "format": "double",
+          "description": "产品组合投保份数，默认为1"
+        }
+      }
+    },
+    "CoverageInfo": {
+      "type": "object",
+      "properties": {
+        "chargePeriod": {
+          "type": "string",
+          "description": "缴费年期类型，非空<br>1 - 趸缴<br>2 - 按年限缴<br>3 - 缴至某确定年龄<br>4 - 终身"
+        },
+        "chargeYear": {
+          "type": "integer",
+          "format": "int32",
+          "description": "缴费年期，非空<br>趸缴为0<br>按年限缴时为缴费年限<br>缴至某确定年龄时为缴费期满年龄<br>终身为100"
+        },
+        "coveragePeriod": {
+          "type": "string",
+          "description": "保障年期类型<br>1 - 保终身<br>2 - 按年限保<br>3 - 保至某确定年龄<br>4 - 按月保<br>5 - 按天保"
+        },
+        "coverageYear": {
+          "type": "integer",
+          "format": "int32",
+          "description": "保障年期，保终身时为9999；按年限保时为保障年限；保至某确定年龄时为保障期满年龄；按月保时为保障月数；按天保时为保障天数"
+        },
+        "currentPremium": {
+          "$ref": "#/definitions/CoveragePremium"
+        },
+        "productCode": {
+          "type": "string",
+          "description": "产品代码"
+        },
+        "masterProductCode": {
+          "type": "string",
+          "description": "主险代码"
+        },
+        "waiverExt": {
+          "$ref": "#/definitions/CoverageExtWaiver"
+        },
+        "nextPremium": {
+          "$ref": "#/definitions/CoveragePremium"
+        },
+        "coverageAgents": {
+          "type": "array",
+          "description": "业绩分摊代理人列表",
+          "items": {
+            "$ref": "#/definitions/CoverageAgentInfo"
+          }
+        },
+        "payPlans": {
+          "type": "array",
+          "description": "支付计划列表",
+          "items": {
+            "$ref": "#/definitions/PayPlanInfo"
+          }
+        },
+        "insureds": {
+          "type": "array",
+          "description": "险种被保人列表",
+          "items": {
+            "$ref": "#/definitions/CoverageInsuredInfo"
+          }
+        },
+        "premInvestRates": {
+          "type": "array",
+          "description": "保费投资比例列表",
+          "items": {
+            "$ref": "#/definitions/PremInvestRateInfo"
+          }
+        },
+        "recurringTopup": {
+          "$ref": "#/definitions/RecurringTopupInfo"
+        },
+        "contractInvests": {
+          "type": "array",
+          "description": "保单投资信息",
+          "items": {
+            "$ref": "#/definitions/ContractInvestInfo"
+          }
+        },
+        "extendedProps": {
+          "description": "扩展信息, Map类型, Key/Value都是字符型",
+          "$ref": "#/definitions/CoverageInfo_ExtendedProps"
+        }
+      }
+    },
+    "CoveragePremium": {
+      "type": "object",
+      "properties": {
+        "benefitLevel": {
+          "type": "string",
+          "description": "险种档次，产品按档次投保时非空"
+        },
+        "paymentFreq": {
+          "type": "string",
+          "description": "缴费频率<br>1 - 年缴<br>2 - 半年缴<br>3 - 季缴<br>4 - 月缴<br>5 - 趸缴"
+        },
+        "sumAssured": {
+          "type": "number",
+          "format": "double",
+          "description": "险种保额，保额算保费时非空"
+        },
+        "premium": {
+          "type": "number",
+          "format": "double",
+          "description": "险种保费，保费算保额时非空"
+        },
+        "unit": {
+          "type": "number",
+          "format": "double",
+          "description": "险种份数，产品按份数投保时非空"
+        }
+      }
+    },
+    "CoverageExtWaiver": {
+      "type": "object",
+      "properties": {
+        "waivedSa": {
+          "type": "number",
+          "format": "double",
+          "description": "豁免保额，0表示全额豁免，不为0表示豁免指定金额，不能超过被豁免险种保费"
+        },
+        "waiver": {
+          "type": "string",
+          "description": "是否豁免险<br>Y - 是<br>N - 否"
+        }
+      }
+    },
+    "PayPlanInfo": {
+      "type": "object",
+      "properties": {
+        "endPeriod": {
+          "type": "string",
+          "description": "年金领取期间类型，计划类型为年金/变额年金/GMWB时非空<br>1 - 领取固定年数<br>2 - 领取到一定年龄<br>3 - 终身领取"
+        },
+        "endYear": {
+          "type": "integer",
+          "format": "int32",
+          "description": "领取年数"
+        },
+        "gurntPeriod": {
+          "type": "integer",
+          "format": "int32",
+          "description": "年金保证领取期间（年数或年龄）"
+        },
+        "payOption": {
+          "type": "string",
+          "description": "年金领取方式<br>1 - 现金领取<br>2 - 抵交保费<br>3 - 累积生息<br>4 - 累积生息x年后转抵交保费<br>5 - 买一个附加的缴清的附加险"
+        },
+        "payOptionTerm": {
+          "type": "integer",
+          "format": "int32",
+          "description": "年数，当payOption为4时有意义，其他为空"
+        },
+        "payPeriod": {
+          "type": "string",
+          "description": "年金开始领取期间类型<br>1 - 立即领取<br>2 - 到一定年龄的周年日领取<br>3 - 若干年后领取<br>4 - 一定年龄后领取"
+        },
+        "payYear": {
+          "type": "integer",
+          "format": "int32",
+          "description": "年金开始领取期间（年数或年龄）"
+        },
+        "planFreq": {
+          "type": "string",
+          "description": "领取频率<br>1 - 年<br>2 - 半年<br>3 - 季<br>4 - 月<br>5 - 趸领"
+        },
+        "planType": {
+          "type": "string",
+          "description": "支付计划类型，非空<br>1 - 现金红利<br>2 - 年金<br>3 - 生存金<br>4 - 满期金<br>5 - GMWB（保证最小提取利益）<br>6 - 变额年金<br>7 - 部分退保<br>8 - 保额红利"
+        },
+        "extendedProps": {
+          "description": "扩展信息, Map类型, Key/Value都是字符型",
+          "$ref": "#/definitions/PayPlanInfo_ExtendedProps"
+        }
+      }
+    },
+    "CoverageInsuredInfo": {
+      "type": "object",
+      "properties": {
+        "insuredPartyId": {
+          "type": "string",
+          "description": "被保人内部序列号"
+        },
+        "orderId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "险种被保人序号，默认为1，同一险种多被保人（家庭保单或连身险）时大于1"
+        },
+        "occupationClass": {
+          "type": "integer",
+          "format": "int32",
+          "description": "职业等级"
+        },
+        "age": {
+          "type": "integer",
+          "format": "int32",
+          "description": "年龄"
+        },
+        "extendedProps": {
+          "description": "扩展信息, Map类型, Key/Value都是字符型",
+          "$ref": "#/definitions/CoverageInsuredInfo_ExtendedProps"
+        }
+      }
+    },
+    "PremInvestRateInfo": {
+      "type": "object",
+      "properties": {
+        "fundCode": {
+          "type": "string",
+          "description": "基金代码"
+        },
+        "assignRate": {
+          "type": "number",
+          "format": "double",
+          "description": "分配比例"
+        },
+        "extendedProps": {
+          "description": "扩展信息, Map类型, Key/Value都是字符型",
+          "$ref": "#/definitions/PremInvestRateInfo_ExtendedProps"
+        }
+      }
+    },
+    "RecurringTopupInfo": {
+      "type": "object",
+      "properties": {
+        "investRates": {
+          "type": "array",
+          "description": "投资比例列表",
+          "items": {
+            "$ref": "#/definitions/RecurringTopupInvestRateInfo"
+          }
+        },
+        "topupStartDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "追加开始时间"
+        },
+        "topupAmount": {
+          "type": "number",
+          "format": "double",
+          "description": "追加金额"
+        },
+        "extendedProps": {
+          "description": "扩展信息, Map类型, Key/Value都是字符型",
+          "$ref": "#/definitions/RecurringTopupInfo_ExtendedProps"
+        }
+      }
+    },
+    "RecurringTopupInvestRateInfo": {
+      "type": "object",
+      "properties": {
+        "fundCode": {
+          "type": "string",
+          "description": "基金代码"
+        },
+        "assignRate": {
+          "type": "number",
+          "format": "double",
+          "description": "分配比例"
+        },
+        "extendedProps": {
+          "description": "扩展信息, Map类型, Key/Value都是字符型",
+          "$ref": "#/definitions/RecurringTopupInvestRateInfo_ExtendedProps"
+        }
+      }
+    },
+    "ContractInvestInfo": {
+      "type": "object",
+      "properties": {
+        "fundCode": {
+          "type": "string",
+          "description": "基金代码"
+        },
+        "accumUnits": {
+          "type": "number",
+          "format": "double",
+          "description": "基金份数"
+        },
+        "extendedProps": {
+          "description": "扩展信息, Map类型, Key/Value都是字符型",
+          "$ref": "#/definitions/ContractInvestInfo_ExtendedProps"
+        }
+      }
+    },
+    "CoverageAgentInfo": {
+      "type": "object",
+      "properties": {
+        "agentCode": {
+          "type": "string",
+          "description": "保单代理人代码"
+        },
+        "assignRate": {
+          "type": "number",
+          "format": "double",
+          "description": "业绩分摊比例，最大为1"
+        },
+        "extendedProps": {
+          "description": "扩展信息, Map类型, Key/Value都是字符型",
+          "$ref": "#/definitions/CoverageAgentInfo_ExtendedProps"
+        }
+      }
+    },
+    "PolicyHolderInfo": {
+      "type": "object",
+      "properties": {
+        "partyId": {
+          "type": "string",
+          "description": "客户编号"
+        },
+        "policyCustomer": {
+          "$ref": "#/definitions/PolicyCustomerInfo"
+        },
+        "relationToLA": {
+          "type": "integer",
+          "format": "int32",
+          "description": "投保人与被保人关系，数字类型<br>1 - 自己<br>2 - 父母<br>3 - 配偶<br>10 - 子女<br>7 - 其他"
+        },
+        "extendedProps": {
+          "description": "扩展信息, Map类型, Key/Value都是字符型",
+          "$ref": "#/definitions/PolicyHolderInfo_ExtendedProps"
+        }
+      }
+    },
+    "PolicyCustomerInfo": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "$ref": "#/definitions/AddressInfo"
+        },
+        "partyType": {
+          "type": "integer",
+          "format": "int32",
+          "description": "当事人类型，1 - 个人当事人<br>2 - 机构当事人"
+        },
+        "person": {
+          "$ref": "#/definitions/Person"
+        },
+        "organization": {
+          "$ref": "#/definitions/Organization"
+        },
+        "partyContact": {
+          "$ref": "#/definitions/PartyContact"
+        },
+        "extendedProps": {
+          "description": "扩展信息, Map类型, Key/Value都是字符型",
+          "$ref": "#/definitions/PolicyCustomerInfo_ExtendedProps"
+        }
+      }
+    },
+    "InsuredInfo": {
+      "type": "object",
+      "properties": {
+        "partyId": {
+          "type": "string",
+          "description": "客户编号"
+        },
+        "policyCustomer": {
+          "$ref": "#/definitions/PolicyCustomerInfo"
+        },
+        "relationToPH": {
+          "type": "integer",
+          "format": "int32",
+          "description": "被保人与投保人关系，数字类型<br>1 - 自己<br>2 - 子女<br>3 - 配偶<br>10 - 父母<br>4 - 雇员<br>7 - 其他"
+        },
+        "medicalExamIndi": {
+          "type": "string",
+          "description": "是否有体检件<br>Y - 是<br>N - 否"
+        },
+        "medicalIndi": {
+          "type": "string",
+          "description": "是否有医保<br>Y - 是<br>N - 否"
+        },
+        "socialSecurityIndi": {
+          "type": "string",
+          "description": "是否有社保<br>Y - 是<br>N - 否"
+        },
+        "extendedProps": {
+          "description": "扩展信息, Map类型, Key/Value都是字符型",
+          "$ref": "#/definitions/InsuredInfo_ExtendedProps"
+        }
+      }
+    },
+    "BeneficiaryInfo": {
+      "type": "object",
+      "properties": {
+        "partyId": {
+          "type": "string",
+          "description": "客户编号, UUID type"
+        },
+        "policyCustomer": {
+          "description": "客户详细信息",
+          "$ref": "#/definitions/PolicyCustomerInfo"
+        },
+        "insuredPartyId": {
+          "type": "string",
+          "description": "受益人所对应被保人的当事人编号"
+        },
+        "beneType": {
+          "type": "string",
+          "description": "受益类型<br>1 - 生存受益人<br>2 - 身故受益人<br>3 - 投保受益人"
+        },
+        "designation": {
+          "type": "integer",
+          "format": "int32",
+          "description": "与被保人关系<br>1 - 妻子<br>2 - 丈夫<br>3 - 子女<br>4 - 父亲<br>5 - 母亲<br>6 - 祖父/外祖父<br>7 - 祖母/外祖母<br>8 - 兄弟<br>9 - 姐妹<br>10 - 叔父/伯父<br>11 - 阿姨<br>12 - 表兄弟/表姐妹<br>13 - 外甥/外甥女/侄子/侄女<br>14 - 雇主<br>15 - 其他<br>16 - 被保人本人"
+        },
+        "shareOrder": {
+          "type": "integer",
+          "format": "int32",
+          "description": "受益顺位"
+        },
+        "shareRate": {
+          "type": "number",
+          "format": "double",
+          "description": "受益比例，最大为1"
+        },
+        "extendedProps": {
+          "description": "扩展信息, Map类型, Key/Value都是字符型",
+          "$ref": "#/definitions/BeneficiaryInfo_ExtendedProps"
+        }
+      }
+    },
+    "PayerAccountInfo": {
+      "type": "object",
+      "properties": {
+        "paymentMethod": {
+          "type": "integer",
+          "format": "int32",
+          "description": "首期付款方式，数字类型<br>1 - 现金<br>2 - 支票<br>3 - 银行转账<br>30 - 信用卡"
+        },
+        "paymentMethodNext": {
+          "type": "integer",
+          "format": "int32",
+          "description": "续期付款方式，数字类型<br>1 - 现金<br>2 - 支票<br>3 - 银行转账<br>30 - 信用卡"
+        },
+        "bankAccount": {
+          "$ref": "#/definitions/BankAccountInfo"
+        },
+        "nextBankAccount": {
+          "$ref": "#/definitions/BankAccountInfo"
+        },
+        "extendedProps": {
+          "description": "扩展信息, Map类型, Key/Value都是字符型",
+          "$ref": "#/definitions/PayerAccountInfo_ExtendedProps"
+        }
+      }
+    },
+    "CustomerDeclarationInfo": {
+      "type": "object",
+      "properties": {
+        "partyId": {
+          "type": "string",
+          "description": "客户编号"
+        },
+        "declarationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "告知日期，日期格式：yyyy-MM-dd'T'HH:mm:ss"
+        },
+        "details": {
+          "type": "array",
+          "description": "告知详细信息",
+          "items": {
+            "$ref": "#/definitions/CustomerDeclarationDetailInfo"
+          }
+        },
+        "extendedProps": {
+          "description": "扩展信息, Map类型, Key/Value都是字符型",
+          "$ref": "#/definitions/CustomerDeclarationInfo_ExtendedProps"
+        }
+      }
+    },
+    "CustomerDeclarationDetailInfo": {
+      "type": "object",
+      "properties": {
+        "declId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "告知项编号，数字类型"
+        },
+        "fill1": {
+          "type": "string",
+          "description": "告知项回答内容1，字符类型，内容随告知项不同而不同"
+        },
+        "fill2": {
+          "type": "string",
+          "description": "告知项回答内容2，字符类型，内容随告知项不同而不同"
+        },
+        "fill3": {
+          "type": "string",
+          "description": "告知项回答内容3，字符类型，内容随告知项不同而不同"
+        },
+        "fill4": {
+          "type": "string",
+          "description": "告知项回答内容4，字符类型，内容随告知项不同而不同"
+        },
+        "fill5": {
+          "type": "string",
+          "description": "告知项回答内容5，字符类型，内容随告知项不同而不同"
+        },
+        "fill6": {
+          "type": "string",
+          "description": "告知项回答内容6，字符类型，内容随告知项不同而不同"
+        },
+        "fill7": {
+          "type": "string",
+          "description": "告知项回答内容7，字符类型，内容随告知项不同而不同"
+        },
+        "fill8": {
+          "type": "string",
+          "description": "告知项回答内容8，字符类型，内容随告知项不同而不同"
+        },
+        "fill9": {
+          "type": "string",
+          "description": "告知项回答内容9，字符类型，内容随告知项不同而不同"
+        },
+        "fill10": {
+          "type": "string",
+          "description": "告知项回答内容10，字符类型，内容随告知项不同而不同"
+        },
+        "extendedProps": {
+          "description": "扩展信息, Map类型, Key/Value都是字符型",
+          "$ref": "#/definitions/CustomerDeclarationDetailInfo_ExtendedProps"
+        }
+      }
+    },
+    "AgentDeclarationInfo": {
+      "type": "object",
+      "properties": {
+        "agentCode": {
+          "type": "string",
+          "description": "业务员代码"
+        },
+        "declCode": {
+          "type": "string",
+          "description": "告知项编号"
+        },
+        "fill1": {
+          "type": "string",
+          "description": "告知项回答内容1，字符类型，内容随告知项不同而不同"
+        },
+        "fill2": {
+          "type": "string",
+          "description": "告知项回答内容2，字符类型，内容随告知项不同而不同"
+        },
+        "fill3": {
+          "type": "string",
+          "description": "告知项回答内容3，字符类型，内容随告知项不同而不同"
+        },
+        "fill4": {
+          "type": "string",
+          "description": "告知项回答内容4，字符类型，内容随告知项不同而不同"
+        },
+        "fill5": {
+          "type": "string",
+          "description": "告知项回答内容5，字符类型，内容随告知项不同而不同"
+        },
+        "fill6": {
+          "type": "string",
+          "description": "告知项回答内容6，字符类型，内容随告知项不同而不同"
+        },
+        "fill7": {
+          "type": "string",
+          "description": "告知项回答内容7，字符类型，内容随告知项不同而不同"
+        },
+        "fill8": {
+          "type": "string",
+          "description": "告知项回答内容8，字符类型，内容随告知项不同而不同"
+        },
+        "fill9": {
+          "type": "string",
+          "description": "告知项回答内容9，字符类型，内容随告知项不同而不同"
+        },
+        "fill10": {
+          "type": "string",
+          "description": "告知项回答内容10，字符类型，内容随告知项不同而不同"
+        },
+        "extendedProps": {
+          "description": "扩展信息, Map类型, Key/Value都是字符型",
+          "$ref": "#/definitions/AgentDeclarationInfo_ExtendedProps"
+        }
+      }
+    },
+    "ContactInput": {
+      "type": "object",
+      "required": [
+        "email",
+        "mobile"
+      ],
+      "properties": {
+        "email": {
+          "type": "string",
+          "description": "email address"
+        },
+        "mobile": {
+          "type": "string",
+          "description": "mobile no"
+        }
+      }
+    },
+    "Person": {
+      "type": "object",
+      "properties": {
+        "gender": {
+          "type": "string",
+          "description": "性别<br>M - 男性<br>F - 女性"
+        },
+        "birthdate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "生日，非空，日期格式：yyyy-MM-dd"
+        },
+        "certiType": {
+          "type": "integer",
+          "format": "int32",
+          "description": "证件类型，数字类型<br>1 - 身份证<br>2 - 军人证<br>3 - 护照<br>4 - 出生证<br>9 - 其他"
+        },
+        "certiCode": {
+          "type": "string",
+          "description": "证件号码"
+        },
+        "certiStart": {
+          "type": "string",
+          "format": "date-time",
+          "description": "证件起始有效日，日期格式：yyyy-MM-dd"
+        },
+        "certiEnd": {
+          "type": "string",
+          "format": "date-time",
+          "description": "证件有效截止日，日期格式：yyyy-MM-dd"
+        },
+        "firstName": {
+          "type": "string",
+          "description": "名"
+        },
+        "midName": {
+          "type": "string",
+          "description": "Middle name of prospect"
+        },
+        "lastName": {
+          "type": "string",
+          "description": "Last name of prospect"
+        },
+        "nationality": {
+          "type": "string",
+          "description": "国籍，7 - 中国"
+        },
+        "preferredLifeIndi": {
+          "type": "string",
+          "description": "是否优选体<br>0 - N/A<br>1 - 超优体<br>2 - 优选体<br>3 - 优标体<br>4 - 标准体<br>5 - 次选体<br>6 - 次标准体"
+        },
+        "smoking": {
+          "type": "string",
+          "description": "是否抽烟<br>Y - 抽烟<br>N - 不抽烟"
+        },
+        "occupationCode": {
+          "type": "string",
+          "description": "职业代码"
+        },
+        "income": {
+          "type": "integer",
+          "format": "int64",
+          "description": "年收入"
+        },
+        "marriageStatus": {
+          "type": "string",
+          "description": "婚姻状况<br>1 - 已婚<br>2 - 未婚<br>3 - 离异<br>4 - 丧偶<br>5 - 分居<br>6 - 其他"
+        },
+        "height": {
+          "type": "number",
+          "format": "double",
+          "description": "身高（cm）"
+        },
+        "weight": {
+          "type": "number",
+          "format": "double",
+          "description": "体重（kg）"
+        },
+        "salutation": {
+          "type": "string",
+          "description": "称呼<br>1 - 先生<br>2 - 女士"
+        }
+      }
+    },
+    "BankAccountInfo": {
+      "type": "object",
+      "properties": {
+        "branchCode": {
+          "type": "string",
+          "description": "分行代码"
+        },
+        "bankCode": {
+          "type": "string",
+          "description": "银行代码"
+        },
+        "bankAccountProvince": {
+          "type": "string",
+          "description": "银行帐号所属省份"
+        },
+        "bankAccountCity": {
+          "type": "string",
+          "description": "银行帐号所属城市"
+        },
+        "issueBankName": {
+          "type": "string",
+          "description": "发卡行"
+        },
+        "bankAccount": {
+          "type": "string",
+          "description": "银行帐号"
+        },
+        "accoName": {
+          "type": "string",
+          "description": "帐号持有人姓名"
+        },
+        "accountType": {
+          "type": "string",
+          "description": "账户类型<br>2 - 借记卡<br>8 - 信用卡"
+        },
+        "debitCreditType": {
+          "type": "string",
+          "description": "帐号用途<br>0 - 收付两用<br>1 - 收费<br>2 - 退费"
+        },
+        "creditCardType": {
+          "type": "string",
+          "description": "信用卡类型，非信用卡为空<br>1 - Master<br>2 - Visa<br>3 - BCA<br>4 - JCB"
+        },
+        "expireDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "帐号失效日期，MM/yyyy"
+        }
+      }
+    },
+    "PartyContact": {
+      "type": "object",
+      "properties": {
+        "homeTel": {
+          "type": "string",
+          "description": "家庭电话"
+        },
+        "mobileTel": {
+          "type": "string",
+          "description": "手机号"
+        },
+        "officeTel": {
+          "type": "string",
+          "description": "工作电话"
+        },
+        "officeTelExt": {
+          "type": "string",
+          "description": "工作电话分机号"
+        },
+        "email": {
+          "type": "string",
+          "description": "电子邮箱"
+        },
+        "contact": {
+          "type": "string",
+          "description": "联系人"
+        },
+        "contactTel": {
+          "type": "string",
+          "description": "联系人电话"
+        },
+        "fax": {
+          "type": "string",
+          "description": "传真"
+        }
+      }
+    },
+    "AddressInfo": {
+      "type": "object",
+      "properties": {
+        "address1": {
+          "type": "string",
+          "description": "省"
+        },
+        "address2": {
+          "type": "string",
+          "description": "市"
+        },
+        "address3": {
+          "type": "string",
+          "description": "区县"
+        },
+        "address4": {
+          "type": "string",
+          "description": "地址"
+        },
+        "postCode": {
+          "type": "string",
+          "description": "邮编"
+        }
+      }
+    },
+    "Organization": {
+      "type": "object",
+      "properties": {
+        "registerType": {
+          "type": "string",
+          "description": "公司证件类型，1001 - 公司注册号"
+        },
+        "registerCode": {
+          "type": "string",
+          "description": "公司证件号"
+        },
+        "countryCode": {
+          "type": "string",
+          "description": "注册国家，156 - 中国"
+        },
+        "companyName": {
+          "type": "string",
+          "description": "公司名称"
+        },
+        "organCode": {
+          "type": "string",
+          "description": "公司组织机构代码"
+        }
+      }
+    },
+    "CustomerInfo": {
+      "type": "object",
+      "required": [
+        "CustomerDetail"
+      ],
+      "properties": {
+        "CustomerDetail": {
+          "$ref": "#/definitions/Person"
+        },
+        "AddressInfo": {
+          "type": "array",
+          "description": "Address list",
+          "items": {
+            "$ref": "#/definitions/CustomerInfo_AddressInfo"
+          }
+        },
+        "ContactInfo": {
+          "$ref": "#/definitions/PartyContact"
+        }
+      },
+      "description": "Customer related information with basic info, contact and so on"
+    },
+    "CorrespondingInput": {
+      "type": "object",
+      "required": [
+        "clientRequestId",
+        "clientRequestTime",
+        "effectiveDate"
+      ],
+      "properties": {
+        "clientRequestId": {
+          "type": "string",
+          "description": "client request id, to identify a request"
+        },
+        "clientRequestTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "client request time, format: yyyy-MM-dd'T'HH:mm:ss"
+        },
+        "effectiveDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "effective date, format: yyyy-MM-dd'T'HH:mm:ss"
+        },
+        "AddressInfo": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AddressInfo"
+          }
+        },
+        "ContactInfo": {
+          "$ref": "#/definitions/PartyContact"
+        }
+      }
+    },
+    "CorrespondingResultInfo": {
+      "type": "object",
+      "required": [
+        "clientRequestId",
+        "clientRequestTime",
+        "customerId",
+        "effectiveDate"
+      ],
+      "properties": {
+        "clientRequestId": {
+          "type": "string",
+          "description": "client request id, to identify a request"
+        },
+        "clientRequestTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "client request time, format: yyyy-MM-dd'T'HH:mm:ss"
+        },
+        "effectiveDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "effective date, format: yyyy-MM-dd'T'HH:mm:ss"
+        },
+        "customerId": {
+          "type": "string",
+          "description": "Customer ID"
+        },
+        "AddressInfo": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AddressInfo"
+          }
+        },
+        "ContactInfo": {
+          "$ref": "#/definitions/PartyContact"
+        },
+        "RelatedPolicy": {
+          "type": "array",
+          "description": "Policy Code list",
+          "items": {
+            "type": "string"
+          }
+        },
+        "result": {
+          "type": "integer",
+          "format": "int32",
+          "description": "result. <br>1 - Success<br>0 - Failed with business issue<br>-1 - Failed with unknown exception"
+        }
+      }
+    },
+    "CreateCustomerInput": {
+      "type": "object",
+      "properties": {
+        "clientRequestId": {
+          "type": "string",
+          "description": "client request id, to identify a request"
+        },
+        "clientRequestTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "client request time, format: yyyy-MM-dd'T'HH:mm:ss"
+        },
+        "effectiveDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "effective date, format: yyyy-MM-dd'T'HH:mm:ss"
+        },
+        "CustomerInfo": {
+          "$ref": "#/definitions/CustomerInfo"
+        }
+      }
+    },
+    "CreateCustomerResultInfo": {
+      "type": "object",
+      "properties": {
+        "clientRequestId": {
+          "type": "string",
+          "description": "client request id, to identify a request"
+        },
+        "clientRequestTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "client request time, format: yyyy-MM-dd'T'HH:mm:ss"
+        },
+        "effectiveDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "effective date, format: yyyy-MM-dd'T'HH:mm:ss"
+        },
+        "CustomerInfo": {
+          "$ref": "#/definitions/CustomerInfo"
+        },
+        "result": {
+          "type": "integer",
+          "format": "int32",
+          "description": "result. <br>1 - Success<br>0 - Failed with business issue<br>-1 - Failed with unknown exception"
+        }
+      }
+    },
+    "RegisterRequest": {
+      "type": "object",
+      "required": [
+        "claimType",
+        "claimant",
+        "event",
+        "insured",
+        "policyNo",
+        "relationToInsured"
+      ],
+      "properties": {
+        "clientRequestId": {
+          "type": "string",
+          "description": "client request id, to identify a request"
+        },
+        "clientRequestTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "client request time, format: yyyy-MM-dd'T'HH:mm:ss"
+        },
+        "policyNo": {
+          "type": "string",
+          "description": "claim policy number"
+        },
+        "claimant": {
+          "$ref": "#/definitions/ClaimantInput"
+        },
+        "insured": {
+          "$ref": "#/definitions/InsuredInput"
+        },
+        "relationToInsured": {
+          "type": "integer",
+          "format": "int32",
+          "description": "claimant relation to insured <br>1 - Spouse <br>2 - Child <br>3 - Parent <br>4 - Relative <br>6 - others <br>7 - Employer <br>1001 - self"
+        },
+        "event": {
+          "$ref": "#/definitions/ClaimEventInput"
+        },
+        "claimType": {
+          "type": "integer",
+          "format": "int32",
+          "description": "claim type <br>1 - Accident <br>2 - Death <br>5 - Hospitalisation<br>8 - Medical "
+        }
+      }
+    },
+    "RegisterResponse": {
+      "type": "object",
+      "required": [
+        "claimCaseNo"
+      ],
+      "properties": {
+        "clientRequestId": {
+          "type": "string",
+          "description": "client request id, to identify a request"
+        },
+        "clientRequestTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "client request time, format: yyyy-MM-dd'T'HH:mm:ss"
+        },
+        "result": {
+          "type": "integer",
+          "format": "int32",
+          "description": "result. <br>1 - Success<br>0 - Failed with business issue<br>-1 - Failed with unknown exception"
+        },
+        "messages": {
+          "type": "array",
+          "description": "messages of business issues",
+          "items": {
+            "$ref": "#/definitions/GenericValidationResult"
+          }
+        },
+        "exceptions": {
+          "type": "array",
+          "description": "exception messages",
+          "items": {
+            "type": "string"
+          }
+        },
+        "claimCaseNo": {
+          "type": "string",
+          "description": "claim case number"
+        }
+      }
+    },
+    "ClaimantInput": {
+      "type": "object",
+      "required": [
+        "name",
+        "partyContact"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "name"
+        },
+        "partyContact": {
+          "$ref": "#/definitions/ContactInput"
+        }
+      }
+    },
+    "ClaimEventInput": {
+      "type": "object",
+      "required": [
+        "eventDetail",
+        "eventNature",
+        "eventTime"
+      ],
+      "properties": {
+        "reportType": {
+          "type": "integer",
+          "format": "int32",
+          "description": "report by <br>1 - phone <br>2 - fax <br>4 - sms <br>5 - network <br>6 - email"
+        },
+        "eventNature": {
+          "type": "integer",
+          "format": "int32",
+          "description": "event nature <br>1 - illness <br>2 - accident"
+        },
+        "eventTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "date when claim event happens,format: yyyy-MM-dd'T'HH:mm:ss"
+        },
+        "eventDetail": {
+          "type": "string",
+          "description": "detail of cliam event"
+        }
+      }
+    },
+    "InsuredInput": {
+      "type": "object",
+      "required": [
+        "certiCode",
+        "certiType",
+        "gender",
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "name"
+        },
+        "gender": {
+          "type": "string",
+          "description": "gender <br>F -  female<br>M - male"
+        },
+        "certiType": {
+          "type": "integer",
+          "format": "int32",
+          "description": "certificate type of insured<br>1 - id card<br>3 - passport<br>9 - others"
+        },
+        "certiCode": {
+          "type": "string",
+          "description": "certificate code "
+        }
+      }
+    },
+    "PolicyAlterationResultInfo": {
+      "type": "object",
+      "properties": {
+        "changeId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "alteration internal id"
+        },
+        "clientRequestId": {
+          "type": "string",
+          "description": "client request id, to identify a request"
+        },
+        "clientRequestTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "client request time, format: yyyy-MM-dd'T'HH:mm:ss"
+        },
+        "exceptions": {
+          "type": "array",
+          "description": "exception messages",
+          "items": {
+            "type": "string"
+          }
+        },
+        "finishTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "alteration finishing time, format: yyyy-MM-dd'T'HH:mm:ss"
+        },
+        "itemResults": {
+          "type": "array",
+          "description": "alteration items",
+          "items": {
+            "$ref": "#/definitions/AlterationItemResultInfo"
+          }
+        },
+        "result": {
+          "type": "integer",
+          "format": "int32",
+          "description": "result. <br>1 - Success<br>0 - Failed with business issue<br>-1 - Failed with unknown exception"
+        }
+      }
+    },
+    "AlterationItemResultInfo": {
+      "type": "object",
+      "properties": {
+        "effectiveDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "effective date, format: yyyy-MM-dd'T'HH:mm:ss"
+        },
+        "freelookResultInfo": {
+          "$ref": "#/definitions/FreelookResultInfo"
+        },
+        "orderId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "alteration order"
+        },
+        "policyChgId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "policy alteration internal id"
+        },
+        "policyId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "policy internal id"
+        },
+        "serviceId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "alteration type id<br>201 - Freelook"
+        },
+        "submissionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "submission date, format: yyyy-MM-dd'T'HH:mm:ss"
+        }
+      }
+    },
+    "PolicyAlterationInput": {
+      "type": "object",
+      "properties": {
+        "clientRequestId": {
+          "type": "string",
+          "description": "client request id, to identify a request"
+        },
+        "clientRequestTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "client request time, format: yyyy-MM-dd'T'HH:mm:ss"
+        },
+        "items": {
+          "type": "array",
+          "description": "alteration item",
+          "items": {
+            "$ref": "#/definitions/AlterationItemInput"
+          }
+        }
+      }
+    },
+    "AlterationItemInput": {
+      "type": "object",
+      "properties": {
+        "effectiveDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "effective date, format: yyyy-MM-dd'T'HH:mm:ss"
+        },
+        "freelookInput": {
+          "$ref": "#/definitions/FreelookInput"
+        },
+        "orderId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "alteration order, default is 1"
+        },
+        "policyChgId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "policy alteration internal id"
+        },
+        "policyId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "policy alteration internal id"
+        },
+        "serviceId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "alteration type id<br>201 - Freelook"
+        },
+        "submissionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "submission date, format: yyyy-MM-dd'T'HH:mm:ss"
+        }
+      }
+    },
+    "AlterationQuotationInput": {
+      "type": "object",
+      "properties": {
+        "clientRequestId": {
+          "type": "string",
+          "description": "client request id, to identify a request"
+        },
+        "clientRequestTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "client request time, format: yyyy-MM-dd'T'HH:mm:ss"
+        },
+        "effectiveDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "effective date, format: yyyy-MM-dd'T'HH:mm:ss"
+        },
+        "freelookInput": {
+          "$ref": "#/definitions/FreelookInput"
+        },
+        "policyId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "policy alteration internal id"
+        },
+        "serviceId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "alteration type id<br>201 - Freelook"
+        },
+        "submissionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "submission date, format: yyyy-MM-dd'T'HH:mm:ss"
+        }
+      }
+    },
+    "AlterationQuotationResultInfo": {
+      "type": "object",
+      "properties": {
+        "clientRequestId": {
+          "type": "string",
+          "description": "client request id, to identify a request"
+        },
+        "clientRequestTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "client request time, format: yyyy-MM-dd'T'HH:mm:ss"
+        },
+        "effectiveDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "effective date, format: yyyy-MM-dd'T'HH:mm:ss"
+        },
+        "exceptions": {
+          "type": "array",
+          "description": "exception messages",
+          "items": {
+            "type": "string"
+          }
+        },
+        "policyId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "policy alteration internal id"
+        },
+        "freelookResultInfo": {
+          "$ref": "#/definitions/FreelookResultInfo"
+        },
+        "result": {
+          "type": "integer",
+          "format": "int32",
+          "description": "result. <br>1 - Success<br>0 - Failed with business issue<br>-1 - Failed with unknown exception"
+        },
+        "serviceId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "alteration type id<br>201 - Freelook"
+        },
+        "submissionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "submission date, format: yyyy-MM-dd'T'HH:mm:ss"
+        }
+      }
+    },
+    "FreelookInput": {
+      "type": "object",
+      "properties": {
+        "alteredCoverages": {
+          "type": "array",
+          "description": "coverage to be alterated",
+          "items": {
+            "$ref": "#/definitions/CoverageInput"
+          }
+        },
+        "freelookReason": {
+          "type": "integer",
+          "format": "int32",
+          "description": "freelook reason<br>51 - Financial Difficulty<br>52 - Agent Misrepresented<br>53 - Poor Service from Agent<br>54 - Mismatched Product<br>55 - Others"
+        }
+      }
+    },
+    "FreelookResultInfo": {
+      "type": "object",
+      "properties": {
+        "adminFee": {
+          "type": "number",
+          "format": "double",
+          "description": "alteration administration fee"
+        },
+        "advancePremium": {
+          "type": "number",
+          "format": "double",
+          "description": "advance premium"
+        },
+        "medicalFee": {
+          "type": "number",
+          "format": "double",
+          "description": "medical fee"
+        },
+        "suspense": {
+          "type": "number",
+          "format": "double",
+          "description": "premium suspense"
+        },
+        "totalExtraPremium": {
+          "type": "number",
+          "format": "double",
+          "description": "total addtional premium"
+        },
+        "totalGrossPremium": {
+          "type": "number",
+          "format": "double",
+          "description": "total gross premium"
+        },
+        "totalRefundAmount": {
+          "type": "number",
+          "format": "double",
+          "description": "total refund amount"
+        }
+      }
+    },
+    "CoverageInput": {
+      "type": "object",
+      "properties": {
+        "coverageId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "coverage internal id to be alterated"
+        }
+      }
+    },
+    "GenericVO": {
+      "type": "object",
+      "properties": {
+        "extObject": {
+          "$ref": "#/definitions/GenericVO"
+        }
+      }
+    },
+    "GenericValidationResult": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "ruleType": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "PolicyInfo_ExtendedProps": {
+      "type": "object"
+    },
+    "CoverageInfo_ExtendedProps": {
+      "type": "object"
+    },
+    "PayPlanInfo_ExtendedProps": {
+      "type": "object"
+    },
+    "CoverageInsuredInfo_ExtendedProps": {
+      "type": "object"
+    },
+    "PremInvestRateInfo_ExtendedProps": {
+      "type": "object"
+    },
+    "RecurringTopupInfo_ExtendedProps": {
+      "type": "object"
+    },
+    "RecurringTopupInvestRateInfo_ExtendedProps": {
+      "type": "object"
+    },
+    "ContractInvestInfo_ExtendedProps": {
+      "type": "object"
+    },
+    "CoverageAgentInfo_ExtendedProps": {
+      "type": "object"
+    },
+    "PolicyHolderInfo_ExtendedProps": {
+      "type": "object"
+    },
+    "PolicyCustomerInfo_ExtendedProps": {
+      "type": "object"
+    },
+    "InsuredInfo_ExtendedProps": {
+      "type": "object"
+    },
+    "BeneficiaryInfo_ExtendedProps": {
+      "type": "object"
+    },
+    "PayerAccountInfo_ExtendedProps": {
+      "type": "object"
+    },
+    "CustomerDeclarationInfo_ExtendedProps": {
+      "type": "object"
+    },
+    "CustomerDeclarationDetailInfo_ExtendedProps": {
+      "type": "object"
+    },
+    "AgentDeclarationInfo_ExtendedProps": {
+      "type": "object"
+    },
+    "CustomerInfo_AddressInfo": {
+      "type": "object",
+      "required": [
+        "Address"
+      ],
+      "properties": {
+        "Address": {
+          "$ref": "#/definitions/AddressInfo"
+        }
+      }
+    }
+  },
+  "paths": {
+    "/eBao/1.0/customers/corresponding/{customerId}": {
+      "post": {
+        "tags": [
+          "Party"
+        ],
+        "summary": "Modify an existing customer's contact and address information",
+        "operationId": "CustomerAlterationPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "customerId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/CorrespondingInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Status 200",
+            "schema": {
+              "$ref": "#/definitions/CorrespondingResultInfo"
+            }
+          }
+        }
+      }
+    },
+    "/eBao/1.0/customers/{customerId}": {
+      "get": {
+        "tags": [
+          "Party"
+        ],
+        "summary": "Get specified customer data by customer ID",
+        "description": "Get specified customer data by customer ID",
+        "operationId": "CustomerInfoGET",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "customerId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Status 200",
+            "schema": {
+              "$ref": "#/definitions/CustomerInfo"
+            }
+          }
+        }
+      }
+    },
+    "/eBao/1.0/policy/policies/{insurerCode}/search": {
+      "post": {
+        "tags": [
+          "Policy"
+        ],
+        "summary": "PolicySummaryQuerying",
+        "description": "Search Policy by Criteria",
+        "operationId": "searchUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "insurerCode",
+            "in": "path",
+            "description": "insurerCode",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "X-ebao-tenant-id",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/PageablePolicyCriteria"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/PolicySummaryInfo"
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/eBao/1.0/policy/policies/{insurerCode}/{policyNumber}": {
+      "get": {
+        "tags": [
+          "Policy"
+        ],
+        "summary": "PolicyDetailGetting",
+        "description": "Get Policy by Policy No.",
+        "operationId": "getUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "insurerCode",
+            "in": "path",
+            "description": "insurerCode",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "policyNumber",
+            "in": "path",
+            "description": "policyNumber",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "X-ebao-tenant-id",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PolicyInfo"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  }
+}
