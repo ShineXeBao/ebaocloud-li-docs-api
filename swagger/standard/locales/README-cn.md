@@ -56,10 +56,32 @@ Header: {
 
 ## End Points
 
-| | 沙箱 | 生产 |
-| :--- | :--- | :--- |
-| auth / take token | [https://sandbox.ebaocloud.com.cn/cas/ebao/v1/json/tickets](https://sandbox.ebaocloud.com.cn/cas/ebao/v1/json/tickets) | [https://ebaocloud.com.cn/cas/ebao/v1/json/tickets](https://ebaocloud.com.cn/cas/ebao/v1/json/tickets) |
-| APIs | [https://sandbox.gw.ebaocloud.com.cn/li/eBao/1/](https://sandbox.gw.ebaocloud.com.cn/li/eBao/1/) | [https://gw.ebaocloud.com.cn/li/eBao/1/](https://gw.ebaocloud.com.cn/li/eBao/1/)|
+#### eBaoCloud 中国
+* 管理入口: https://ebaocloud.com.cn/
+* 沙箱环境:
+  * auth / token: https://sandbox.ebaocloud.com.cn/cas/ebao/v1/json/tickets
+  * API access: https://sandbox.gw.ebaocloud.com.cn/li/eBao/1/
+* 生产环境:
+  * auth / token: https://ebaocloud.com.cn/cas/ebao/v1/json/tickets
+  * API access: https://gw.ebaocloud.com.cn/li/eBao/1/
+
+#### eBaoCloud 新加坡
+  * 管理入口: https://sg.ebaocloud.com/
+  * 沙箱环境:
+    * auth / token: https://sandbox.sg.ebaocloud.com/cas/ebao/v1/json/tickets
+    * API access: https://sandbox.gw.sg.ebaocloud.com/li/eBao/1/
+  * 生产环境:
+    * auth / token: https://sg.ebaocloud.com/cas/ebao/v1/json/tickets
+    * API access: https://gw.sg.ebaocloud.com/li/eBao/1/
+
+#### eBaoCloud 斯里兰卡
+  * 管理入口: https://lk.ebaocloud.com/
+  * 沙箱环境:
+    * auth / token: https://sandbox.lk.ebaocloud.com/cas/ebao/v1/json/tickets
+    * API access: https://sandbox.gw.lk.ebaocloud.com/li/eBao/1/
+  * 生产环境:
+    * auth / token: https://lk.ebaocloud.com/cas/ebao/v1/json/tickets
+    * API access: https://gw.lk.ebaocloud.com/li/eBao/1/
 
 
 ## 实例

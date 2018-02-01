@@ -56,12 +56,33 @@ Header: {
 ```
 
 ## End Points
+#### eBaoCloud in China
+* Portal: https://ebaocloud.com.cn/
+* Sandbox:
+  * auth / token: https://sandbox.ebaocloud.com.cn/cas/ebao/v1/json/tickets
+  * API access: https://sandbox.gw.ebaocloud.com.cn/li/eBao/1/
+* Production:
+  * auth / token: https://ebaocloud.com.cn/cas/ebao/v1/json/tickets
+  * API access: https://gw.ebaocloud.com.cn/li/eBao/1/
 
-| | Sandbox | Production |
-| :--- | :--- | :--- |
-| auth / take token | [https://sandbox.ebaocloud.com.cn/cas/ebao/v1/json/tickets](https://sandbox.ebaocloud.com.cn/cas/ebao/v1/json/tickets) | [https://ebaocloud.com.cn/cas/ebao/v1/json/tickets](https://ebaocloud.com.cn/cas/ebao/v1/json/tickets) |
-| APIs | [https://sandbox.gw.ebaocloud.com.cn/li/eBao/1/](https://sandbox.gw.ebaocloud.com.cn/li/eBao/1/) | [https://gw.ebaocloud.com.cn/li/eBao/1/](https://gw.ebaocloud.com.cn/li/eBao/1/)|
+#### eBaoCloud in Singapore
+  * Portal: https://sg.ebaocloud.com/
+  * Sandbox:
+    * auth / token: https://sandbox.sg.ebaocloud.com/cas/ebao/v1/json/tickets
+    * API access: https://sandbox.gw.sg.ebaocloud.com/li/eBao/1/
+  * Production:
+    * auth / token: https://sg.ebaocloud.com/cas/ebao/v1/json/tickets
+    * API access: https://gw.sg.ebaocloud.com/li/eBao/1/
 
+
+#### eBaoCloud in Sri Lanka
+  * Portal: https://lk.ebaocloud.com/
+  * Sandbox:
+    * auth / token: https://sandbox.lk.ebaocloud.com/cas/ebao/v1/json/tickets
+    * API access: https://sandbox.gw.lk.ebaocloud.com/li/eBao/1/
+  * Production:
+    * auth / token: https://lk.ebaocloud.com/cas/ebao/v1/json/tickets
+    * API access: https://gw.lk.ebaocloud.com/li/eBao/1/
 
 ## Sample
 
