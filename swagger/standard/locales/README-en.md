@@ -60,29 +60,29 @@ Header: {
 * Portal: https://ebaocloud.com.cn/
 * Sandbox:
   * auth / token: https://sandbox.ebaocloud.com.cn/cas/ebao/v1/json/tickets
-  * API access: https://sandbox.gw.ebaocloud.com.cn/li/eBao/1.0/
+  * API access: https://sandbox.gw.ebaocloud.com.cn/eBao/1.0/
 * Production:
   * auth / token: https://ebaocloud.com.cn/cas/ebao/v1/json/tickets
-  * API access: https://gw.ebaocloud.com.cn/li/eBao/1.0/
+  * API access: https://gw.ebaocloud.com.cn/eBao/1.0/
 
 #### eBaoCloud in Singapore
   * Portal: https://sg.ebaocloud.com/
   * Sandbox:
     * auth / token: https://sandbox.sg.ebaocloud.com/cas/ebao/v1/json/tickets
-    * API access: https://sandbox.gw.sg.ebaocloud.com/li/eBao/1.0/
+    * API access: https://sandbox.gw.sg.ebaocloud.com/eBao/1.0/
   * Production:
     * auth / token: https://sg.ebaocloud.com/cas/ebao/v1/json/tickets
-    * API access: https://gw.sg.ebaocloud.com/li/eBao/1.0/
+    * API access: https://gw.sg.ebaocloud.com/eBao/1.0/
 
 
 #### eBaoCloud in Sri Lanka
   * Portal: https://lk.ebaocloud.com/
   * Sandbox:
     * auth / token: https://sandbox.lk.ebaocloud.com/cas/ebao/v1/json/tickets
-    * API access: https://sandbox.gw.lk.ebaocloud.com/li/eBao/1.0/
+    * API access: https://sandbox.gw.lk.ebaocloud.com/eBao/1.0/
   * Production:
     * auth / token: https://lk.ebaocloud.com/cas/ebao/v1/json/tickets
-    * API access: https://gw.lk.ebaocloud.com/li/eBao/1.0/
+    * API access: https://gw.lk.ebaocloud.com/eBao/1.0/
 
 ## Sample
 
