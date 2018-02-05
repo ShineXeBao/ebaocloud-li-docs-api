@@ -10,3 +10,4 @@
 3. Generation
    * run `node translation.js - p standard -l cn` or `node translation.js - p standard -l en`
 4. Copy to ../dist/swagger
+   * `cp ./standard/swagg*.json ../dist/swagger`
