@@ -1,5 +1,6 @@
 # eBaoCloud API document
 本文档基于[ReDoc](https://github.com/Rebilly/ReDoc) 文档框架完成。文档核心基于swagger文件，本框架仅仅是对swagger文件的展示。
+代码在这里：https://github.com/zhuliliang/ebaocloud-li-docs-api
 ## 目录结构
 
 ### dist
@@ -45,5 +46,15 @@ swagger目录是一个独立的node程序目录，如下
 ##### 文件合并和初始化
 合并和生成初始swagger，这个步骤主要完成两个事情
   1. 合并多个swagger文件，如product，proposal到一个文件，因为最终展示swagger必须使用单个文件
+  2. 命令如下：
+```node merge.js -p standard```
+```
+Working path: /Users/liliang.zhu/Works/Projects/Documentation/redoc/swagger/standar
+Warning: multiple definitions with the same name has define in swagger collection: GenericValidationResult
+...Done
+```
+#### 翻译的String文件提取
+
+#### 生成最终swagger文件（多语言）
+
   2. 给该swagger 文件添加```info```内容。swagger 文件的```info```字段可以添加任意大小的markdown格式内容，因此可以把大量的注释，说明文档添加进去。我在locales目录下单独写了README.md两个中英文文档，并把他们整体放在```info```下面。
-  3. 
