@@ -17,5 +17,10 @@
   ],
   "URL": "sandbox.gw.ebaocloud.com.cn",
   "URlPath": "/eBao/1.0/",
-  "mergedPath": "/tmp/merged-swagger.json"
+  "tmp": {
+    "swagger": "/tmp/merged-swagger.json",
+    "properties": "/tmp/swagger.properties",
+    "swaggerTemplate": "/tmp/swagger-template.json"
+  }
+
 }

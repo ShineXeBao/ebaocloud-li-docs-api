@@ -1,13 +1,18 @@
 'use strict';
-var cli = require ('./cli.js');
-var path = __dirname + '/' + cli.workPath();
-console.log('Working path: %s', path);
-
+var cli = require ('./cli.js');                   //调用命令行工具
+var swaggermerge = require('swagger-merge');      //swagger-merge工具
 var fs = require('fs');
 var format = require('date-fns/format')
 var zh_cnLocale = require('date-fns/locale/zh_cn')
 
-var swagger = require(path + '/tmp/merged-swagger.json');
+// 获取 -p 参数，确定merge.js 的工作路径并打印
+var path = __dirname + '/' + cli.workPath();
+console.log('  \x1b[4mWorking path\x1b[0m: %s', path);
+
+//配置文件
+var config = require(path + '/config.json');
+
+var swagger = require(path + config.tmp.swagger);
 var trans = [];
 
 var getEnum = function (swaggerObj) {
@@ -40,7 +45,8 @@ var getEnum = function (swaggerObj) {
     }
   })(swaggerObj);
 
-  return results;
+  trans.sort(function(a,b){return a.toLowerCase()>b.toLowerCase()?1:-1;});
+  return results.sort(function(a,b){return a.toLowerCase()>b.toLowerCase()?1:-1;});
 }
 
 var transEnum = getEnum(swagger);
@@ -53,23 +59,12 @@ for (var i in transEnum) {
    //console.log(trans[i]);
    eval(trans[i]);
 }
-fs.writeFileSync(path + '/tmp/swagger.properties', properties);
 
-fs.writeFileSync(path + '/tmp/swagger-template.json', JSON.stringify(swagger, null, 2));
-
-//替换中文版readme
-//读readme 文件，加入description
-// var readme = fs.readFileSync(path + '/locales/README-cn.md', 'utf-8');
-// var info = {
-//     version: "1.0",
-//     title: "eBaoCloud 寿险API参考文档",
-//     //add description from readme (in markdown)
-//     description: `${readme.toString()}`
-// }
-// swagger.info = info;
-//
-// var timeStamp = `${format(new Date(), 'YYYY年MMMD日 ddd, HH:mm:ss Z', {locale: zh_cnLocale})}`;
-// var i18nString = JSON.stringify(swagger, null, 2);
-// i18nString = i18nString.replace(/\[TIMESTAMP\]/, timeStamp);
-//
-// fs.writeFileSync(path + '/tmp/swagger-template-cn.json', i18nString);
+//临时目录下
+if (!fs.existsSync(path + '/tmp')) {
+  fs.mkdirSync(path + '/tmp');
+}
+//写properties
+fs.writeFileSync(path + config.tmp.properties, properties);
+//写swagger模板
+fs.writeFileSync(path + config.tmp.swaggerTemplate, JSON.stringify(swagger, null, 2));

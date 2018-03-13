@@ -7,7 +7,7 @@ var fs = require('fs');
 var path = __dirname + '/' + cli.workPath();
 console.log('  \x1b[4mWorking path\x1b[0m: %s', path);
 
-//合并配置文件
+//配置文件
 var config = require(path + '/config.json');
 
 //获取需要merge的文件
@@ -25,6 +25,10 @@ swaggermerge.on('warn', function (msg) {
 var mergedJson = swaggermerge.merge(config.sourceSwagger, config.info, config.URlPath, config.URL, config.schemes);
 
 //格式化以后写入/tmp/merged-swagger.json
-fs.writeFileSync(path + config.mergedPath, JSON.stringify(mergedJson, null, 2));
+if (!fs.existsSync(path + '/tmp')) {
+  fs.mkdirSync(path + '/tmp');
+}
+
+fs.writeFileSync(path + config.tmp.swagger, JSON.stringify(mergedJson, null, 2));
 console.log('  \x1b[1m...Done\x1b[0m');
-console.log('  \x1b[4mWriting file to\x1b[0m: %s', path + config.mergedPath);
+console.log('  \x1b[4mWriting file to\x1b[0m: %s', path + config.tmp.swagger);
