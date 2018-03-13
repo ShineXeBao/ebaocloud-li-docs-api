@@ -3,7 +3,7 @@
 var program = require('commander');
 
 program
-  .version('1.0.1')
+  .version('1.0.1', '-v, --version')
   .option('-p, --path [value]', 'Init swaager file(s) path')
   .option('-l, --language [value]', 'Language (cn, en...)')
   .parse(process.argv);

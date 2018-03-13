@@ -1,47 +1,30 @@
-/**
-如果有必要，合并swagger文件到一个：tmp/merged-swaager.json
-*/
 'use strict';
-var cli = require ('./cli.js');
-var path = __dirname + '/' + cli.workPath();
-console.log('Working path: %s', path);
-
-var swaggermerge = require('swagger-merge');
-var format = require('date-fns/format');
-
+var cli = require ('./cli.js');                   //调用命令行工具
+var swaggermerge = require('swagger-merge');      //swagger-merge工具
 var fs = require('fs');
 
-var swaggerProduct = require(path + '/source/product.json')
-var swaggerProposal = require(path + '/source/proposal.json')
-var swaggerSalesPackages = require(path + '/source/salesPackages.json')
-//
-// //读readme 文件，加入description
-// var readme = fs.readFileSync(path + '/locales/README-en.md', 'utf-8');
-var info = {
-    version: "1.0",
-    title: "eBaoCloud LI OpenAPI",
-    termsOfService: "http://api.ebaocloud.life/",
-    //add description from readme (in markdown)
-    //description: `${readme.toString()}`
-}
-var schemes = ['https']
+// 获取 -p 参数，确定merge.js 的工作路径并打印
+var path = __dirname + '/' + cli.workPath();
+console.log('  \x1b[4mWorking path\x1b[0m: %s', path);
 
+//合并配置文件
+var config = require(path + '/config.json');
+
+//获取需要merge的文件
+console.log('  \x1b[4mFile(s) will be merged\x1b[0m: %s', config.sourceSwagger);
+config.sourceSwagger = config.sourceSwagger.map(s => require(path + s));
+
+//版本号
+console.log('  \x1b[4mSwagger version\x1b[0m: %s', config.info.version);
+
+//合并
+console.log('\n  \x1b[1mStart to merge...\x1b[0m');
 swaggermerge.on('warn', function (msg) {
-    console.log('Warning: %s', msg)
+    console.log('      \x1b[45m\x1b[33mWarning:\x1b[0m %s', msg);
 })
-var mergedJson = swaggermerge.merge([swaggerProduct, swaggerProposal], info, '/eBao/1.0/', 'sandbox.gw.ebaocloud.com.cn', schemes);
+var mergedJson = swaggermerge.merge(config.sourceSwagger, config.info, config.URlPath, config.URL, config.schemes);
 
-//替换json string
-//var mergedString = JSON.stringify(mergedJson, null, 2);
-
-//更新rest地址
-// mergedString = mergedString.replace(/\/pd\/packages/g, "\/packages");
-// mergedString = mergedString.replace(/\/pd\/products/g, "\/products");
-// mergedString = mergedString.replace(/\/pd\/salesPackages/g, "\/sales/packages");
-// mergedString = mergedString.replace(/\/proposal\/proposals/g, "\/proposals");
-//smergedString = mergedString.replace(/product-controller/g, "Product");
-
-// 本地保存
-console.log('Writing file to: %s',path + '/tmp/merged-swagger.json' );
-fs.writeFileSync(path + '/tmp/merged-swagger.json', JSON.stringify(mergedJson, null, 2));
-console.log('...Done');
+//格式化以后写入/tmp/merged-swagger.json
+fs.writeFileSync(path + config.mergedPath, JSON.stringify(mergedJson, null, 2));
+console.log('  \x1b[1m...Done\x1b[0m');
+console.log('  \x1b[4mWriting file to\x1b[0m: %s', path + config.mergedPath);

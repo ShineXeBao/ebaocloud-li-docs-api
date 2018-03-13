@@ -1,0 +1,21 @@
+{
+  "lang": [
+    "en",
+    "cn"
+  ],
+  "sourceSwagger": [
+    "/source/product.json",
+    "/source/proposal.json"
+  ],
+  "info": {
+    "version": "1.1",
+    "title": "eBaoCloud LI OpenAPI",
+    "termsOfService": "http://api.ebaocloud.life/"
+  },
+  "schemes": [
+    "https"
+  ],
+  "URL": "sandbox.gw.ebaocloud.com.cn",
+  "URlPath": "/eBao/1.0/",
+  "mergedPath": "/tmp/merged-swagger.json"
+}
