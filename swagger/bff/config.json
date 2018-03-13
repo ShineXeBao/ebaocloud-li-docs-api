@@ -1,0 +1,28 @@
+{
+  "lang": [
+    "en",
+    "cn"
+  ],
+  "sourceSwagger": [
+    "/source/bff-swagger.json"
+  ],
+  "info": {
+    "version": "1.0",
+    "title": "eBaoCloud OpenAPI for Mobile BFF (Backends for Frontends)",
+    "termsOfService": "http://li.ebaocloud.com.cn/bff/",
+    "contact": {
+      "name": "eBaoTech"
+    }
+  },
+  "schemes": [
+    "https"
+  ],
+  "URL": "eli.ebaocloud.com.cn",
+  "URlPath": "/bff",
+  "tmp": {
+    "swagger": "/tmp/merged-swagger.json",
+    "properties": "/tmp/swagger.properties",
+    "swaggerTemplate": "/tmp/swagger-template.json"
+  }
+
+}

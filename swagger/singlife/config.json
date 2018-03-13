@@ -1,14 +1,12 @@
 {
   "lang": [
-    "en",
-    "cn"
+    "en"
   ],
   "sourceSwagger": [
-    "/source/product.json",
-    "/source/proposal.json"
+    "/source/singlife.json"
   ],
   "info": {
-    "version": "1.1",
+    "version": "0.1.0",
     "title": "eBaoCloud LI OpenAPI",
     "termsOfService": "http://api.ebaocloud.life/",
     "contact" : {
@@ -18,7 +16,7 @@
   "schemes": [
     "https"
   ],
-  "URL": "sandbox.gw.ebaocloud.com.cn",
+  "URL": "sandbox.singlife.ebaocloud.life",
   "URlPath": "/eBao/1.0/",
   "tmp": {
     "swagger": "/tmp/merged-swagger.json",

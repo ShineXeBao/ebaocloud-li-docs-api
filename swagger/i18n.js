@@ -66,5 +66,8 @@ if (!fs.existsSync(path + '/tmp')) {
 }
 //写properties
 fs.writeFileSync(path + config.tmp.properties, properties);
+console.log('  \x1b[4mWriting file to\x1b[0m: %s', path + config.tmp.properties);
 //写swagger模板
 fs.writeFileSync(path + config.tmp.swaggerTemplate, JSON.stringify(swagger, null, 2));
+console.log('  \x1b[4mWriting file to\x1b[0m: %s', path + config.tmp.swaggerTemplate);
+console.log('\n')

@@ -32,3 +32,4 @@ if (!fs.existsSync(path + '/tmp')) {
 fs.writeFileSync(path + config.tmp.swagger, JSON.stringify(mergedJson, null, 2));
 console.log('  \x1b[1m...Done\x1b[0m');
 console.log('  \x1b[4mWriting file to\x1b[0m: %s', path + config.tmp.swagger);
+console.log('\n')

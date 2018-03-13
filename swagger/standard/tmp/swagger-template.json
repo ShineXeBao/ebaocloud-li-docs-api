@@ -3,7 +3,10 @@
   "info": {
     "version": "1.1",
     "title": "eBaoCloud LI OpenAPI",
-    "termsOfService": "http://api.ebaocloud.life/"
+    "termsOfService": "http://api.ebaocloud.life/",
+    "contact": {
+      "email": "liliang.zhu@ebaotech.com"
+    }
   },
   "host": "sandbox.gw.ebaocloud.com.cn",
   "basePath": "/eBao/1.0/",

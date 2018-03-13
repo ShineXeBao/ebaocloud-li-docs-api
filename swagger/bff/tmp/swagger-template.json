@@ -10,6 +10,11 @@
   },
   "host": "eli.ebaocloud.com.cn",
   "basePath": "/bff",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [],
+  "produces": [],
   "tags": [
     {
       "name": "Wechat"
@@ -36,1404 +41,6 @@
       "name": "Calculate Premium"
     }
   ],
-  "paths": {
-    "/asyncCallback/pay": {
-      "post": {
-        "tags": [
-          "Callback"
-        ],
-        "summary": "paths['/asyncCallback/pay'].post.summary",
-        "description": "paths['/asyncCallback/pay'].post.description",
-        "operationId": "payUsingPOST",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "*/*"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "map",
-            "description": "paths['/asyncCallback/pay'].post.parameters['0'].description",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "additionalProperties": {
-                "type": "string"
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "paths['/asyncCallback/pay'].post.responses['200'].description",
-            "schema": {
-              "type": "string"
-            }
-          },
-          "201": {
-            "description": "paths['/asyncCallback/pay'].post.responses['201'].description"
-          },
-          "401": {
-            "description": "paths['/asyncCallback/pay'].post.responses['401'].description"
-          },
-          "403": {
-            "description": "paths['/asyncCallback/pay'].post.responses['403'].description"
-          },
-          "404": {
-            "description": "paths['/asyncCallback/pay'].post.responses['404'].description"
-          }
-        }
-      }
-    },
-    "/ax/inforce": {
-      "post": {
-        "tags": [
-          "Callback"
-        ],
-        "summary": "paths['/ax/inforce'].post.summary",
-        "description": "paths['/ax/inforce'].post.description",
-        "operationId": "inforceUsingPOST",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "*/*"
-        ],
-        "parameters": [
-          {
-            "name": "transNo",
-            "in": "query",
-            "description": "paths['/ax/inforce'].post.parameters['0'].description",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "transDate",
-            "in": "query",
-            "description": "paths['/ax/inforce'].post.parameters['1'].description",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "requestCode",
-            "in": "query",
-            "description": "paths['/ax/inforce'].post.parameters['2'].description",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "payNo",
-            "in": "query",
-            "description": "paths['/ax/inforce'].post.parameters['3'].description",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "payType",
-            "in": "query",
-            "description": "paths['/ax/inforce'].post.parameters['4'].description",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "payAmt",
-            "in": "query",
-            "description": "paths['/ax/inforce'].post.parameters['5'].description",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "payDate",
-            "in": "query",
-            "description": "paths['/ax/inforce'].post.parameters['6'].description",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "payResult",
-            "in": "query",
-            "description": "paths['/ax/inforce'].post.parameters['7'].description",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "payRemark",
-            "in": "query",
-            "description": "paths['/ax/inforce'].post.parameters['8'].description",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "checkValue",
-            "in": "query",
-            "description": "paths['/ax/inforce'].post.parameters['9'].description",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "attach",
-            "in": "query",
-            "description": "paths['/ax/inforce'].post.parameters['10'].description",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "paths['/ax/inforce'].post.responses['200'].description",
-            "schema": {
-              "type": "string"
-            }
-          },
-          "201": {
-            "description": "paths['/ax/inforce'].post.responses['201'].description"
-          },
-          "401": {
-            "description": "paths['/ax/inforce'].post.responses['401'].description"
-          },
-          "403": {
-            "description": "paths['/ax/inforce'].post.responses['403'].description"
-          },
-          "404": {
-            "description": "paths['/ax/inforce'].post.responses['404'].description"
-          }
-        }
-      }
-    },
-    "/ebaocloud-li/product/calcPremium": {
-      "post": {
-        "tags": [
-          "eBaoCloud-Li"
-        ],
-        "summary": "paths['/ebaocloud-li/product/calcPremium'].post.summary",
-        "description": "paths['/ebaocloud-li/product/calcPremium'].post.description",
-        "operationId": "calcPremiumUsingPOST",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "*/*"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "calcPremiumRequest",
-            "description": "paths['/ebaocloud-li/product/calcPremium'].post.parameters['0'].description",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CalcPremiumRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "paths['/ebaocloud-li/product/calcPremium'].post.responses['200'].description",
-            "schema": {
-              "$ref": "#/definitions/CalcPremiumResponse"
-            }
-          },
-          "201": {
-            "description": "paths['/ebaocloud-li/product/calcPremium'].post.responses['201'].description"
-          },
-          "401": {
-            "description": "paths['/ebaocloud-li/product/calcPremium'].post.responses['401'].description"
-          },
-          "403": {
-            "description": "paths['/ebaocloud-li/product/calcPremium'].post.responses['403'].description"
-          },
-          "404": {
-            "description": "paths['/ebaocloud-li/product/calcPremium'].post.responses['404'].description"
-          }
-        }
-      }
-    },
-    "/ebaocloud-li/product/illustrationCalc": {
-      "post": {
-        "tags": [
-          "eBaoCloud-Li"
-        ],
-        "summary": "paths['/ebaocloud-li/product/illustrationCalc'].post.summary",
-        "description": "paths['/ebaocloud-li/product/illustrationCalc'].post.description",
-        "operationId": "illustrationCalcUsingPOST",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "*/*"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "illustrationCalcRequest",
-            "description": "paths['/ebaocloud-li/product/illustrationCalc'].post.parameters['0'].description",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/IllustrationCalcRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "paths['/ebaocloud-li/product/illustrationCalc'].post.responses['200'].description",
-            "schema": {
-              "$ref": "#/definitions/IllustrationCalcResponse"
-            }
-          },
-          "201": {
-            "description": "paths['/ebaocloud-li/product/illustrationCalc'].post.responses['201'].description"
-          },
-          "401": {
-            "description": "paths['/ebaocloud-li/product/illustrationCalc'].post.responses['401'].description"
-          },
-          "403": {
-            "description": "paths['/ebaocloud-li/product/illustrationCalc'].post.responses['403'].description"
-          },
-          "404": {
-            "description": "paths['/ebaocloud-li/product/illustrationCalc'].post.responses['404'].description"
-          }
-        }
-      }
-    },
-    "/ebaocloud-li/proposal/apply": {
-      "post": {
-        "tags": [
-          "eBaoCloud-Li"
-        ],
-        "summary": "paths['/ebaocloud-li/proposal/apply'].post.summary",
-        "description": "paths['/ebaocloud-li/proposal/apply'].post.description",
-        "operationId": "applyUsingPOST",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "*/*"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "proposalRequest",
-            "description": "paths['/ebaocloud-li/proposal/apply'].post.parameters['0'].description",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ProposalRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "paths['/ebaocloud-li/proposal/apply'].post.responses['200'].description",
-            "schema": {
-              "$ref": "#/definitions/ProposalResponse"
-            }
-          },
-          "201": {
-            "description": "paths['/ebaocloud-li/proposal/apply'].post.responses['201'].description"
-          },
-          "401": {
-            "description": "paths['/ebaocloud-li/proposal/apply'].post.responses['401'].description"
-          },
-          "403": {
-            "description": "paths['/ebaocloud-li/proposal/apply'].post.responses['403'].description"
-          },
-          "404": {
-            "description": "paths['/ebaocloud-li/proposal/apply'].post.responses['404'].description"
-          }
-        }
-      }
-    },
-    "/ebaocloud-li/proposal/inforce": {
-      "post": {
-        "tags": [
-          "eBaoCloud-Li"
-        ],
-        "summary": "paths['/ebaocloud-li/proposal/inforce'].post.summary",
-        "description": "paths['/ebaocloud-li/proposal/inforce'].post.description",
-        "operationId": "inforceUsingPOST_1",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "*/*"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "proposalRequest",
-            "description": "paths['/ebaocloud-li/proposal/inforce'].post.parameters['0'].description",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ProposalRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "paths['/ebaocloud-li/proposal/inforce'].post.responses['200'].description",
-            "schema": {
-              "$ref": "#/definitions/ProposalResponse"
-            }
-          },
-          "201": {
-            "description": "paths['/ebaocloud-li/proposal/inforce'].post.responses['201'].description"
-          },
-          "401": {
-            "description": "paths['/ebaocloud-li/proposal/inforce'].post.responses['401'].description"
-          },
-          "403": {
-            "description": "paths['/ebaocloud-li/proposal/inforce'].post.responses['403'].description"
-          },
-          "404": {
-            "description": "paths['/ebaocloud-li/proposal/inforce'].post.responses['404'].description"
-          }
-        }
-      }
-    },
-    "/ebaocloud-li/proposal/quote": {
-      "post": {
-        "tags": [
-          "eBaoCloud-Li"
-        ],
-        "summary": "paths['/ebaocloud-li/proposal/quote'].post.summary",
-        "description": "paths['/ebaocloud-li/proposal/quote'].post.description",
-        "operationId": "quoteUsingPOST",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "*/*"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "proposalRequest",
-            "description": "paths['/ebaocloud-li/proposal/quote'].post.parameters['0'].description",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ProposalRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "paths['/ebaocloud-li/proposal/quote'].post.responses['200'].description",
-            "schema": {
-              "$ref": "#/definitions/ProposalResponse"
-            }
-          },
-          "201": {
-            "description": "paths['/ebaocloud-li/proposal/quote'].post.responses['201'].description"
-          },
-          "401": {
-            "description": "paths['/ebaocloud-li/proposal/quote'].post.responses['401'].description"
-          },
-          "403": {
-            "description": "paths['/ebaocloud-li/proposal/quote'].post.responses['403'].description"
-          },
-          "404": {
-            "description": "paths['/ebaocloud-li/proposal/quote'].post.responses['404'].description"
-          }
-        }
-      }
-    },
-    "/login": {
-      "post": {
-        "tags": [
-          "Login"
-        ],
-        "summary": "paths['/login'].post.summary",
-        "description": "paths['/login'].post.description",
-        "operationId": "loginUsingPOST",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "*/*"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "user",
-            "description": "paths['/login'].post.parameters['0'].description",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/User"
-            }
-          },
-          {
-            "name": "Authorization",
-            "in": "header",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "paths['/login'].post.responses['200'].description",
-            "schema": {
-              "$ref": "#/definitions/LoginResponse"
-            }
-          },
-          "201": {
-            "description": "paths['/login'].post.responses['201'].description"
-          },
-          "401": {
-            "description": "paths['/login'].post.responses['401'].description"
-          },
-          "403": {
-            "description": "paths['/login'].post.responses['403'].description"
-          },
-          "404": {
-            "description": "paths['/login'].post.responses['404'].description"
-          }
-        }
-      }
-    },
-    "/planService/calcPremium": {
-      "post": {
-        "tags": [
-          "Calculate Premium"
-        ],
-        "summary": "paths['/planService/calcPremium'].post.summary",
-        "description": "paths['/planService/calcPremium'].post.description",
-        "operationId": "calcPremiumUsingPOST_1",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "*/*"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "calcPremiumRequest",
-            "description": "paths['/planService/calcPremium'].post.parameters['0'].description",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CalcPremiumRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "paths['/planService/calcPremium'].post.responses['200'].description",
-            "schema": {
-              "$ref": "#/definitions/CalcPremiumResponse"
-            }
-          },
-          "201": {
-            "description": "paths['/planService/calcPremium'].post.responses['201'].description"
-          },
-          "401": {
-            "description": "paths['/planService/calcPremium'].post.responses['401'].description"
-          },
-          "403": {
-            "description": "paths['/planService/calcPremium'].post.responses['403'].description"
-          },
-          "404": {
-            "description": "paths['/planService/calcPremium'].post.responses['404'].description"
-          }
-        }
-      }
-    },
-    "/proposal/get/{proposalId}": {
-      "get": {
-        "tags": [
-          "Proposal"
-        ],
-        "summary": "paths['/proposal/get/{proposalId}'].get.summary",
-        "description": "paths['/proposal/get/{proposalId}'].get.description",
-        "operationId": "getUsingGET",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "*/*"
-        ],
-        "parameters": [
-          {
-            "name": "proposalId",
-            "in": "path",
-            "description": "paths['/proposal/get/{proposalId}'].get.parameters['0'].description",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "paths['/proposal/get/{proposalId}'].get.responses['200'].description",
-            "schema": {
-              "$ref": "#/definitions/ProposalResponse"
-            }
-          },
-          "401": {
-            "description": "paths['/proposal/get/{proposalId}'].get.responses['401'].description"
-          },
-          "403": {
-            "description": "paths['/proposal/get/{proposalId}'].get.responses['403'].description"
-          },
-          "404": {
-            "description": "paths['/proposal/get/{proposalId}'].get.responses['404'].description"
-          }
-        }
-      }
-    },
-    "/proposal/getByCode/{proposalCode}": {
-      "get": {
-        "tags": [
-          "Proposal"
-        ],
-        "summary": "paths['/proposal/getByCode/{proposalCode}'].get.summary",
-        "description": "paths['/proposal/getByCode/{proposalCode}'].get.description",
-        "operationId": "getByCodeUsingGET",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "*/*"
-        ],
-        "parameters": [
-          {
-            "name": "proposalCode",
-            "in": "path",
-            "description": "paths['/proposal/getByCode/{proposalCode}'].get.parameters['0'].description",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "paths['/proposal/getByCode/{proposalCode}'].get.responses['200'].description",
-            "schema": {
-              "$ref": "#/definitions/ProposalResponse"
-            }
-          },
-          "401": {
-            "description": "paths['/proposal/getByCode/{proposalCode}'].get.responses['401'].description"
-          },
-          "403": {
-            "description": "paths['/proposal/getByCode/{proposalCode}'].get.responses['403'].description"
-          },
-          "404": {
-            "description": "paths['/proposal/getByCode/{proposalCode}'].get.responses['404'].description"
-          }
-        }
-      }
-    },
-    "/proposal/getByUserId/{userId}": {
-      "get": {
-        "tags": [
-          "Proposal"
-        ],
-        "summary": "paths['/proposal/getByUserId/{userId}'].get.summary",
-        "description": "paths['/proposal/getByUserId/{userId}'].get.description",
-        "operationId": "getByUserIdUsingGET",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "*/*"
-        ],
-        "parameters": [
-          {
-            "name": "userId",
-            "in": "path",
-            "description": "paths['/proposal/getByUserId/{userId}'].get.parameters['0'].description",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "paths['/proposal/getByUserId/{userId}'].get.responses['200'].description",
-            "schema": {
-              "$ref": "#/definitions/ProposalListInfoResponse"
-            }
-          },
-          "401": {
-            "description": "paths['/proposal/getByUserId/{userId}'].get.responses['401'].description"
-          },
-          "403": {
-            "description": "paths['/proposal/getByUserId/{userId}'].get.responses['403'].description"
-          },
-          "404": {
-            "description": "paths['/proposal/getByUserId/{userId}'].get.responses['404'].description"
-          }
-        }
-      }
-    },
-    "/proposal/query": {
-      "post": {
-        "tags": [
-          "Proposal"
-        ],
-        "summary": "paths['/proposal/query'].post.summary",
-        "description": "paths['/proposal/query'].post.description",
-        "operationId": "queryUsingPOST",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "*/*"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "proposalRequest",
-            "description": "paths['/proposal/query'].post.parameters['0'].description",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ProposalCriteriaRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "paths['/proposal/query'].post.responses['200'].description",
-            "schema": {
-              "$ref": "#/definitions/ProposalListInfoResponse"
-            }
-          },
-          "201": {
-            "description": "paths['/proposal/query'].post.responses['201'].description"
-          },
-          "401": {
-            "description": "paths['/proposal/query'].post.responses['401'].description"
-          },
-          "403": {
-            "description": "paths['/proposal/query'].post.responses['403'].description"
-          },
-          "404": {
-            "description": "paths['/proposal/query'].post.responses['404'].description"
-          }
-        }
-      }
-    },
-    "/proposal/saveOrUpdate": {
-      "post": {
-        "tags": [
-          "Proposal"
-        ],
-        "summary": "paths['/proposal/saveOrUpdate'].post.summary",
-        "description": "paths['/proposal/saveOrUpdate'].post.description",
-        "operationId": "saveUsingPOST",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "*/*"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "proposalRequest",
-            "description": "paths['/proposal/saveOrUpdate'].post.parameters['0'].description",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ProposalRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "paths['/proposal/saveOrUpdate'].post.responses['200'].description",
-            "schema": {
-              "$ref": "#/definitions/ProposalResponse"
-            }
-          },
-          "201": {
-            "description": "paths['/proposal/saveOrUpdate'].post.responses['201'].description"
-          },
-          "401": {
-            "description": "paths['/proposal/saveOrUpdate'].post.responses['401'].description"
-          },
-          "403": {
-            "description": "paths['/proposal/saveOrUpdate'].post.responses['403'].description"
-          },
-          "404": {
-            "description": "paths['/proposal/saveOrUpdate'].post.responses['404'].description"
-          }
-        }
-      }
-    },
-    "/proposal/updateInforceInfo": {
-      "post": {
-        "tags": [
-          "Proposal"
-        ],
-        "summary": "paths['/proposal/updateInforceInfo'].post.summary",
-        "description": "paths['/proposal/updateInforceInfo'].post.description",
-        "operationId": "updateInforceInfoUsingPOST",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "*/*"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "proposalRequest",
-            "description": "paths['/proposal/updateInforceInfo'].post.parameters['0'].description",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ProposalRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "paths['/proposal/updateInforceInfo'].post.responses['200'].description",
-            "schema": {
-              "$ref": "#/definitions/ProposalResponse"
-            }
-          },
-          "201": {
-            "description": "paths['/proposal/updateInforceInfo'].post.responses['201'].description"
-          },
-          "401": {
-            "description": "paths['/proposal/updateInforceInfo'].post.responses['401'].description"
-          },
-          "403": {
-            "description": "paths['/proposal/updateInforceInfo'].post.responses['403'].description"
-          },
-          "404": {
-            "description": "paths['/proposal/updateInforceInfo'].post.responses['404'].description"
-          }
-        }
-      }
-    },
-    "/proposal/updateStatus": {
-      "post": {
-        "tags": [
-          "Proposal"
-        ],
-        "summary": "paths['/proposal/updateStatus'].post.summary",
-        "description": "paths['/proposal/updateStatus'].post.description",
-        "operationId": "updateStatusUsingPOST",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "*/*"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "proposalRequest",
-            "description": "paths['/proposal/updateStatus'].post.parameters['0'].description",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ProposalRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "paths['/proposal/updateStatus'].post.responses['200'].description",
-            "schema": {
-              "$ref": "#/definitions/ProposalResponse"
-            }
-          },
-          "201": {
-            "description": "paths['/proposal/updateStatus'].post.responses['201'].description"
-          },
-          "401": {
-            "description": "paths['/proposal/updateStatus'].post.responses['401'].description"
-          },
-          "403": {
-            "description": "paths['/proposal/updateStatus'].post.responses['403'].description"
-          },
-          "404": {
-            "description": "paths['/proposal/updateStatus'].post.responses['404'].description"
-          }
-        }
-      }
-    },
-    "/tools/checkSign": {
-      "post": {
-        "tags": [
-          "Tools"
-        ],
-        "summary": "paths['/tools/checkSign'].post.summary",
-        "description": "paths['/tools/checkSign'].post.description",
-        "operationId": "checkSignUsingPOST",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "*/*"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "request",
-            "description": "paths['/tools/checkSign'].post.parameters['0'].description",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ToolsSignRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "paths['/tools/checkSign'].post.responses['200'].description",
-            "schema": {
-              "$ref": "#/definitions/ToolsSignResponse"
-            }
-          },
-          "201": {
-            "description": "paths['/tools/checkSign'].post.responses['201'].description"
-          },
-          "401": {
-            "description": "paths['/tools/checkSign'].post.responses['401'].description"
-          },
-          "403": {
-            "description": "paths['/tools/checkSign'].post.responses['403'].description"
-          },
-          "404": {
-            "description": "paths['/tools/checkSign'].post.responses['404'].description"
-          }
-        }
-      }
-    },
-    "/tools/sign": {
-      "post": {
-        "tags": [
-          "Tools"
-        ],
-        "summary": "paths['/tools/sign'].post.summary",
-        "description": "paths['/tools/sign'].post.description",
-        "operationId": "signUsingPOST",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "*/*"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "request",
-            "description": "paths['/tools/sign'].post.parameters['0'].description",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ToolsSignRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "paths['/tools/sign'].post.responses['200'].description",
-            "schema": {
-              "$ref": "#/definitions/ToolsSignResponse"
-            }
-          },
-          "201": {
-            "description": "paths['/tools/sign'].post.responses['201'].description"
-          },
-          "401": {
-            "description": "paths['/tools/sign'].post.responses['401'].description"
-          },
-          "403": {
-            "description": "paths['/tools/sign'].post.responses['403'].description"
-          },
-          "404": {
-            "description": "paths['/tools/sign'].post.responses['404'].description"
-          }
-        }
-      }
-    },
-    "/transaction/broker/synAppoint": {
-      "post": {
-        "tags": [
-          "Transaction"
-        ],
-        "summary": "paths['/transaction/broker/synAppoint'].post.summary",
-        "description": "paths['/transaction/broker/synAppoint'].post.description",
-        "operationId": "brokerSynAppointUsingPOST",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "*/*"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "proposalRequest",
-            "description": "paths['/transaction/broker/synAppoint'].post.parameters['0'].description",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ProposalRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "paths['/transaction/broker/synAppoint'].post.responses['200'].description",
-            "schema": {
-              "$ref": "#/definitions/ProposalResponse"
-            }
-          },
-          "201": {
-            "description": "paths['/transaction/broker/synAppoint'].post.responses['201'].description"
-          },
-          "401": {
-            "description": "paths['/transaction/broker/synAppoint'].post.responses['401'].description"
-          },
-          "403": {
-            "description": "paths['/transaction/broker/synAppoint'].post.responses['403'].description"
-          },
-          "404": {
-            "description": "paths['/transaction/broker/synAppoint'].post.responses['404'].description"
-          }
-        }
-      }
-    },
-    "/transaction/broker/synPolicy": {
-      "post": {
-        "tags": [
-          "Transaction"
-        ],
-        "summary": "paths['/transaction/broker/synPolicy'].post.summary",
-        "description": "paths['/transaction/broker/synPolicy'].post.description",
-        "operationId": "brokerSynPolicyUsingPOST",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "*/*"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "proposalRequest",
-            "description": "paths['/transaction/broker/synPolicy'].post.parameters['0'].description",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ProposalRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "paths['/transaction/broker/synPolicy'].post.responses['200'].description",
-            "schema": {
-              "$ref": "#/definitions/ProposalResponse"
-            }
-          },
-          "201": {
-            "description": "paths['/transaction/broker/synPolicy'].post.responses['201'].description"
-          },
-          "401": {
-            "description": "paths['/transaction/broker/synPolicy'].post.responses['401'].description"
-          },
-          "403": {
-            "description": "paths['/transaction/broker/synPolicy'].post.responses['403'].description"
-          },
-          "404": {
-            "description": "paths['/transaction/broker/synPolicy'].post.responses['404'].description"
-          }
-        }
-      }
-    },
-    "/transaction/broker/synProposal": {
-      "post": {
-        "tags": [
-          "Transaction"
-        ],
-        "summary": "paths['/transaction/broker/synProposal'].post.summary",
-        "description": "paths['/transaction/broker/synProposal'].post.description",
-        "operationId": "brokerSynProposalUsingPOST",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "*/*"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "proposalRequest",
-            "description": "paths['/transaction/broker/synProposal'].post.parameters['0'].description",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ProposalRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "paths['/transaction/broker/synProposal'].post.responses['200'].description",
-            "schema": {
-              "$ref": "#/definitions/ProposalResponse"
-            }
-          },
-          "201": {
-            "description": "paths['/transaction/broker/synProposal'].post.responses['201'].description"
-          },
-          "401": {
-            "description": "paths['/transaction/broker/synProposal'].post.responses['401'].description"
-          },
-          "403": {
-            "description": "paths['/transaction/broker/synProposal'].post.responses['403'].description"
-          },
-          "404": {
-            "description": "paths['/transaction/broker/synProposal'].post.responses['404'].description"
-          }
-        }
-      }
-    },
-    "/transaction/insurer/accept": {
-      "post": {
-        "tags": [
-          "Transaction"
-        ],
-        "summary": "paths['/transaction/insurer/accept'].post.summary",
-        "description": "paths['/transaction/insurer/accept'].post.description",
-        "operationId": "acceptUsingPOST",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "*/*"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "proposalRequest",
-            "description": "paths['/transaction/insurer/accept'].post.parameters['0'].description",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ProposalRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "paths['/transaction/insurer/accept'].post.responses['200'].description",
-            "schema": {
-              "$ref": "#/definitions/ProposalResponse"
-            }
-          },
-          "201": {
-            "description": "paths['/transaction/insurer/accept'].post.responses['201'].description"
-          },
-          "401": {
-            "description": "paths['/transaction/insurer/accept'].post.responses['401'].description"
-          },
-          "403": {
-            "description": "paths['/transaction/insurer/accept'].post.responses['403'].description"
-          },
-          "404": {
-            "description": "paths['/transaction/insurer/accept'].post.responses['404'].description"
-          }
-        },
-        "deprecated": true
-      }
-    },
-    "/transaction/insurer/inforce": {
-      "post": {
-        "tags": [
-          "Transaction"
-        ],
-        "summary": "paths['/transaction/insurer/inforce'].post.summary",
-        "description": "paths['/transaction/insurer/inforce'].post.description",
-        "operationId": "inforceUsingPOST_2",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "*/*"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "proposalRequest",
-            "description": "paths['/transaction/insurer/inforce'].post.parameters['0'].description",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ProposalRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "paths['/transaction/insurer/inforce'].post.responses['200'].description",
-            "schema": {
-              "$ref": "#/definitions/ProposalResponse"
-            }
-          },
-          "201": {
-            "description": "paths['/transaction/insurer/inforce'].post.responses['201'].description"
-          },
-          "401": {
-            "description": "paths['/transaction/insurer/inforce'].post.responses['401'].description"
-          },
-          "403": {
-            "description": "paths['/transaction/insurer/inforce'].post.responses['403'].description"
-          },
-          "404": {
-            "description": "paths['/transaction/insurer/inforce'].post.responses['404'].description"
-          }
-        },
-        "deprecated": true
-      }
-    },
-    "/transaction/insurer/underwrite": {
-      "post": {
-        "tags": [
-          "Transaction"
-        ],
-        "summary": "paths['/transaction/insurer/underwrite'].post.summary",
-        "description": "paths['/transaction/insurer/underwrite'].post.description",
-        "operationId": "submitUsingPOST",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "*/*"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "proposalRequest",
-            "description": "paths['/transaction/insurer/underwrite'].post.parameters['0'].description",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ProposalRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "paths['/transaction/insurer/underwrite'].post.responses['200'].description",
-            "schema": {
-              "$ref": "#/definitions/ProposalResponse"
-            }
-          },
-          "201": {
-            "description": "paths['/transaction/insurer/underwrite'].post.responses['201'].description"
-          },
-          "401": {
-            "description": "paths['/transaction/insurer/underwrite'].post.responses['401'].description"
-          },
-          "403": {
-            "description": "paths['/transaction/insurer/underwrite'].post.responses['403'].description"
-          },
-          "404": {
-            "description": "paths['/transaction/insurer/underwrite'].post.responses['404'].description"
-          }
-        },
-        "deprecated": true
-      }
-    },
-    "/user/{openId}/{tenantCode}": {
-      "get": {
-        "tags": [
-          "Login"
-        ],
-        "summary": "paths['/user/{openId}/{tenantCode}'].get.summary",
-        "description": "paths['/user/{openId}/{tenantCode}'].get.description",
-        "operationId": "getByOpenIdUsingGET",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "*/*"
-        ],
-        "parameters": [
-          {
-            "name": "openId",
-            "in": "path",
-            "description": "paths['/user/{openId}/{tenantCode}'].get.parameters['0'].description",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "tenantCode",
-            "in": "path",
-            "description": "paths['/user/{openId}/{tenantCode}'].get.parameters['1'].description",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "paths['/user/{openId}/{tenantCode}'].get.responses['200'].description",
-            "schema": {
-              "$ref": "#/definitions/LoginResponse"
-            }
-          },
-          "401": {
-            "description": "paths['/user/{openId}/{tenantCode}'].get.responses['401'].description"
-          },
-          "403": {
-            "description": "paths['/user/{openId}/{tenantCode}'].get.responses['403'].description"
-          },
-          "404": {
-            "description": "paths['/user/{openId}/{tenantCode}'].get.responses['404'].description"
-          }
-        }
-      }
-    },
-    "/wx/jsConfig/{appId}": {
-      "get": {
-        "tags": [
-          "Wechat"
-        ],
-        "summary": "paths['/wx/jsConfig/{appId}'].get.summary",
-        "description": "paths['/wx/jsConfig/{appId}'].get.description",
-        "operationId": "getConfigUsingGET",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "*/*"
-        ],
-        "parameters": [
-          {
-            "name": "appId",
-            "in": "path",
-            "description": "paths['/wx/jsConfig/{appId}'].get.parameters['0'].description",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "url",
-            "in": "query",
-            "description": "paths['/wx/jsConfig/{appId}'].get.parameters['1'].description",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "paths['/wx/jsConfig/{appId}'].get.responses['200'].description",
-            "schema": {
-              "$ref": "#/definitions/WeChatRestResponse"
-            }
-          },
-          "401": {
-            "description": "paths['/wx/jsConfig/{appId}'].get.responses['401'].description"
-          },
-          "403": {
-            "description": "paths['/wx/jsConfig/{appId}'].get.responses['403'].description"
-          },
-          "404": {
-            "description": "paths['/wx/jsConfig/{appId}'].get.responses['404'].description"
-          }
-        }
-      }
-    },
-    "/wx/openidAndAccessToken/{appId}/{code}": {
-      "get": {
-        "tags": [
-          "Wechat"
-        ],
-        "summary": "paths['/wx/openidAndAccessToken/{appId}/{code}'].get.summary",
-        "description": "paths['/wx/openidAndAccessToken/{appId}/{code}'].get.description",
-        "operationId": "getOpenidAndAccessTokenUsingGET",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "*/*"
-        ],
-        "parameters": [
-          {
-            "name": "appId",
-            "in": "path",
-            "description": "paths['/wx/openidAndAccessToken/{appId}/{code}'].get.parameters['0'].description",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "code",
-            "in": "path",
-            "description": "paths['/wx/openidAndAccessToken/{appId}/{code}'].get.parameters['1'].description",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "paths['/wx/openidAndAccessToken/{appId}/{code}'].get.responses['200'].description",
-            "schema": {
-              "$ref": "#/definitions/WeChatRestResponse"
-            }
-          },
-          "401": {
-            "description": "paths['/wx/openidAndAccessToken/{appId}/{code}'].get.responses['401'].description"
-          },
-          "403": {
-            "description": "paths['/wx/openidAndAccessToken/{appId}/{code}'].get.responses['403'].description"
-          },
-          "404": {
-            "description": "paths['/wx/openidAndAccessToken/{appId}/{code}'].get.responses['404'].description"
-          }
-        }
-      }
-    },
-    "/wx/userInfo/{appId}/{code}/{authMethod}": {
-      "get": {
-        "tags": [
-          "Wechat"
-        ],
-        "summary": "paths['/wx/userInfo/{appId}/{code}/{authMethod}'].get.summary",
-        "description": "paths['/wx/userInfo/{appId}/{code}/{authMethod}'].get.description",
-        "operationId": "getUserBaseByCodeUsingGET",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "*/*"
-        ],
-        "parameters": [
-          {
-            "name": "appId",
-            "in": "path",
-            "description": "paths['/wx/userInfo/{appId}/{code}/{authMethod}'].get.parameters['0'].description",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "code",
-            "in": "path",
-            "description": "paths['/wx/userInfo/{appId}/{code}/{authMethod}'].get.parameters['1'].description",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "authMethod",
-            "in": "path",
-            "description": "paths['/wx/userInfo/{appId}/{code}/{authMethod}'].get.parameters['2'].description",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "paths['/wx/userInfo/{appId}/{code}/{authMethod}'].get.responses['200'].description",
-            "schema": {
-              "$ref": "#/definitions/WeChatRestResponse"
-            }
-          },
-          "401": {
-            "description": "paths['/wx/userInfo/{appId}/{code}/{authMethod}'].get.responses['401'].description"
-          },
-          "403": {
-            "description": "paths['/wx/userInfo/{appId}/{code}/{authMethod}'].get.responses['403'].description"
-          },
-          "404": {
-            "description": "paths['/wx/userInfo/{appId}/{code}/{authMethod}'].get.responses['404'].description"
-          }
-        }
-      }
-    }
-  },
   "definitions": {
     "ValueAdded": {
       "type": "object",
@@ -2956,6 +1563,1404 @@
         },
         "unionid": {
           "type": "string"
+        }
+      }
+    }
+  },
+  "paths": {
+    "/bff/asyncCallback/pay": {
+      "post": {
+        "tags": [
+          "Callback"
+        ],
+        "summary": "paths['/bff/asyncCallback/pay'].post.summary",
+        "description": "paths['/bff/asyncCallback/pay'].post.description",
+        "operationId": "payUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "map",
+            "description": "paths['/bff/asyncCallback/pay'].post.parameters['0'].description",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "paths['/bff/asyncCallback/pay'].post.responses['200'].description",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "201": {
+            "description": "paths['/bff/asyncCallback/pay'].post.responses['201'].description"
+          },
+          "401": {
+            "description": "paths['/bff/asyncCallback/pay'].post.responses['401'].description"
+          },
+          "403": {
+            "description": "paths['/bff/asyncCallback/pay'].post.responses['403'].description"
+          },
+          "404": {
+            "description": "paths['/bff/asyncCallback/pay'].post.responses['404'].description"
+          }
+        }
+      }
+    },
+    "/bff/ax/inforce": {
+      "post": {
+        "tags": [
+          "Callback"
+        ],
+        "summary": "paths['/bff/ax/inforce'].post.summary",
+        "description": "paths['/bff/ax/inforce'].post.description",
+        "operationId": "inforceUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "transNo",
+            "in": "query",
+            "description": "paths['/bff/ax/inforce'].post.parameters['0'].description",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "transDate",
+            "in": "query",
+            "description": "paths['/bff/ax/inforce'].post.parameters['1'].description",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "requestCode",
+            "in": "query",
+            "description": "paths['/bff/ax/inforce'].post.parameters['2'].description",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "payNo",
+            "in": "query",
+            "description": "paths['/bff/ax/inforce'].post.parameters['3'].description",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "payType",
+            "in": "query",
+            "description": "paths['/bff/ax/inforce'].post.parameters['4'].description",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "payAmt",
+            "in": "query",
+            "description": "paths['/bff/ax/inforce'].post.parameters['5'].description",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "payDate",
+            "in": "query",
+            "description": "paths['/bff/ax/inforce'].post.parameters['6'].description",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "payResult",
+            "in": "query",
+            "description": "paths['/bff/ax/inforce'].post.parameters['7'].description",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "payRemark",
+            "in": "query",
+            "description": "paths['/bff/ax/inforce'].post.parameters['8'].description",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "checkValue",
+            "in": "query",
+            "description": "paths['/bff/ax/inforce'].post.parameters['9'].description",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "attach",
+            "in": "query",
+            "description": "paths['/bff/ax/inforce'].post.parameters['10'].description",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "paths['/bff/ax/inforce'].post.responses['200'].description",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "201": {
+            "description": "paths['/bff/ax/inforce'].post.responses['201'].description"
+          },
+          "401": {
+            "description": "paths['/bff/ax/inforce'].post.responses['401'].description"
+          },
+          "403": {
+            "description": "paths['/bff/ax/inforce'].post.responses['403'].description"
+          },
+          "404": {
+            "description": "paths['/bff/ax/inforce'].post.responses['404'].description"
+          }
+        }
+      }
+    },
+    "/bff/ebaocloud-li/product/calcPremium": {
+      "post": {
+        "tags": [
+          "eBaoCloud-Li"
+        ],
+        "summary": "paths['/bff/ebaocloud-li/product/calcPremium'].post.summary",
+        "description": "paths['/bff/ebaocloud-li/product/calcPremium'].post.description",
+        "operationId": "calcPremiumUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "calcPremiumRequest",
+            "description": "paths['/bff/ebaocloud-li/product/calcPremium'].post.parameters['0'].description",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CalcPremiumRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "paths['/bff/ebaocloud-li/product/calcPremium'].post.responses['200'].description",
+            "schema": {
+              "$ref": "#/definitions/CalcPremiumResponse"
+            }
+          },
+          "201": {
+            "description": "paths['/bff/ebaocloud-li/product/calcPremium'].post.responses['201'].description"
+          },
+          "401": {
+            "description": "paths['/bff/ebaocloud-li/product/calcPremium'].post.responses['401'].description"
+          },
+          "403": {
+            "description": "paths['/bff/ebaocloud-li/product/calcPremium'].post.responses['403'].description"
+          },
+          "404": {
+            "description": "paths['/bff/ebaocloud-li/product/calcPremium'].post.responses['404'].description"
+          }
+        }
+      }
+    },
+    "/bff/ebaocloud-li/product/illustrationCalc": {
+      "post": {
+        "tags": [
+          "eBaoCloud-Li"
+        ],
+        "summary": "paths['/bff/ebaocloud-li/product/illustrationCalc'].post.summary",
+        "description": "paths['/bff/ebaocloud-li/product/illustrationCalc'].post.description",
+        "operationId": "illustrationCalcUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "illustrationCalcRequest",
+            "description": "paths['/bff/ebaocloud-li/product/illustrationCalc'].post.parameters['0'].description",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IllustrationCalcRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "paths['/bff/ebaocloud-li/product/illustrationCalc'].post.responses['200'].description",
+            "schema": {
+              "$ref": "#/definitions/IllustrationCalcResponse"
+            }
+          },
+          "201": {
+            "description": "paths['/bff/ebaocloud-li/product/illustrationCalc'].post.responses['201'].description"
+          },
+          "401": {
+            "description": "paths['/bff/ebaocloud-li/product/illustrationCalc'].post.responses['401'].description"
+          },
+          "403": {
+            "description": "paths['/bff/ebaocloud-li/product/illustrationCalc'].post.responses['403'].description"
+          },
+          "404": {
+            "description": "paths['/bff/ebaocloud-li/product/illustrationCalc'].post.responses['404'].description"
+          }
+        }
+      }
+    },
+    "/bff/ebaocloud-li/proposal/apply": {
+      "post": {
+        "tags": [
+          "eBaoCloud-Li"
+        ],
+        "summary": "paths['/bff/ebaocloud-li/proposal/apply'].post.summary",
+        "description": "paths['/bff/ebaocloud-li/proposal/apply'].post.description",
+        "operationId": "applyUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "proposalRequest",
+            "description": "paths['/bff/ebaocloud-li/proposal/apply'].post.parameters['0'].description",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProposalRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "paths['/bff/ebaocloud-li/proposal/apply'].post.responses['200'].description",
+            "schema": {
+              "$ref": "#/definitions/ProposalResponse"
+            }
+          },
+          "201": {
+            "description": "paths['/bff/ebaocloud-li/proposal/apply'].post.responses['201'].description"
+          },
+          "401": {
+            "description": "paths['/bff/ebaocloud-li/proposal/apply'].post.responses['401'].description"
+          },
+          "403": {
+            "description": "paths['/bff/ebaocloud-li/proposal/apply'].post.responses['403'].description"
+          },
+          "404": {
+            "description": "paths['/bff/ebaocloud-li/proposal/apply'].post.responses['404'].description"
+          }
+        }
+      }
+    },
+    "/bff/ebaocloud-li/proposal/inforce": {
+      "post": {
+        "tags": [
+          "eBaoCloud-Li"
+        ],
+        "summary": "paths['/bff/ebaocloud-li/proposal/inforce'].post.summary",
+        "description": "paths['/bff/ebaocloud-li/proposal/inforce'].post.description",
+        "operationId": "inforceUsingPOST_1",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "proposalRequest",
+            "description": "paths['/bff/ebaocloud-li/proposal/inforce'].post.parameters['0'].description",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProposalRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "paths['/bff/ebaocloud-li/proposal/inforce'].post.responses['200'].description",
+            "schema": {
+              "$ref": "#/definitions/ProposalResponse"
+            }
+          },
+          "201": {
+            "description": "paths['/bff/ebaocloud-li/proposal/inforce'].post.responses['201'].description"
+          },
+          "401": {
+            "description": "paths['/bff/ebaocloud-li/proposal/inforce'].post.responses['401'].description"
+          },
+          "403": {
+            "description": "paths['/bff/ebaocloud-li/proposal/inforce'].post.responses['403'].description"
+          },
+          "404": {
+            "description": "paths['/bff/ebaocloud-li/proposal/inforce'].post.responses['404'].description"
+          }
+        }
+      }
+    },
+    "/bff/ebaocloud-li/proposal/quote": {
+      "post": {
+        "tags": [
+          "eBaoCloud-Li"
+        ],
+        "summary": "paths['/bff/ebaocloud-li/proposal/quote'].post.summary",
+        "description": "paths['/bff/ebaocloud-li/proposal/quote'].post.description",
+        "operationId": "quoteUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "proposalRequest",
+            "description": "paths['/bff/ebaocloud-li/proposal/quote'].post.parameters['0'].description",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProposalRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "paths['/bff/ebaocloud-li/proposal/quote'].post.responses['200'].description",
+            "schema": {
+              "$ref": "#/definitions/ProposalResponse"
+            }
+          },
+          "201": {
+            "description": "paths['/bff/ebaocloud-li/proposal/quote'].post.responses['201'].description"
+          },
+          "401": {
+            "description": "paths['/bff/ebaocloud-li/proposal/quote'].post.responses['401'].description"
+          },
+          "403": {
+            "description": "paths['/bff/ebaocloud-li/proposal/quote'].post.responses['403'].description"
+          },
+          "404": {
+            "description": "paths['/bff/ebaocloud-li/proposal/quote'].post.responses['404'].description"
+          }
+        }
+      }
+    },
+    "/bff/login": {
+      "post": {
+        "tags": [
+          "Login"
+        ],
+        "summary": "paths['/bff/login'].post.summary",
+        "description": "paths['/bff/login'].post.description",
+        "operationId": "loginUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "user",
+            "description": "paths['/bff/login'].post.parameters['0'].description",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "paths['/bff/login'].post.responses['200'].description",
+            "schema": {
+              "$ref": "#/definitions/LoginResponse"
+            }
+          },
+          "201": {
+            "description": "paths['/bff/login'].post.responses['201'].description"
+          },
+          "401": {
+            "description": "paths['/bff/login'].post.responses['401'].description"
+          },
+          "403": {
+            "description": "paths['/bff/login'].post.responses['403'].description"
+          },
+          "404": {
+            "description": "paths['/bff/login'].post.responses['404'].description"
+          }
+        }
+      }
+    },
+    "/bff/planService/calcPremium": {
+      "post": {
+        "tags": [
+          "Calculate Premium"
+        ],
+        "summary": "paths['/bff/planService/calcPremium'].post.summary",
+        "description": "paths['/bff/planService/calcPremium'].post.description",
+        "operationId": "calcPremiumUsingPOST_1",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "calcPremiumRequest",
+            "description": "paths['/bff/planService/calcPremium'].post.parameters['0'].description",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CalcPremiumRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "paths['/bff/planService/calcPremium'].post.responses['200'].description",
+            "schema": {
+              "$ref": "#/definitions/CalcPremiumResponse"
+            }
+          },
+          "201": {
+            "description": "paths['/bff/planService/calcPremium'].post.responses['201'].description"
+          },
+          "401": {
+            "description": "paths['/bff/planService/calcPremium'].post.responses['401'].description"
+          },
+          "403": {
+            "description": "paths['/bff/planService/calcPremium'].post.responses['403'].description"
+          },
+          "404": {
+            "description": "paths['/bff/planService/calcPremium'].post.responses['404'].description"
+          }
+        }
+      }
+    },
+    "/bff/proposal/get/{proposalId}": {
+      "get": {
+        "tags": [
+          "Proposal"
+        ],
+        "summary": "paths['/bff/proposal/get/{proposalId}'].get.summary",
+        "description": "paths['/bff/proposal/get/{proposalId}'].get.description",
+        "operationId": "getUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "proposalId",
+            "in": "path",
+            "description": "paths['/bff/proposal/get/{proposalId}'].get.parameters['0'].description",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "paths['/bff/proposal/get/{proposalId}'].get.responses['200'].description",
+            "schema": {
+              "$ref": "#/definitions/ProposalResponse"
+            }
+          },
+          "401": {
+            "description": "paths['/bff/proposal/get/{proposalId}'].get.responses['401'].description"
+          },
+          "403": {
+            "description": "paths['/bff/proposal/get/{proposalId}'].get.responses['403'].description"
+          },
+          "404": {
+            "description": "paths['/bff/proposal/get/{proposalId}'].get.responses['404'].description"
+          }
+        }
+      }
+    },
+    "/bff/proposal/getByCode/{proposalCode}": {
+      "get": {
+        "tags": [
+          "Proposal"
+        ],
+        "summary": "paths['/bff/proposal/getByCode/{proposalCode}'].get.summary",
+        "description": "paths['/bff/proposal/getByCode/{proposalCode}'].get.description",
+        "operationId": "getByCodeUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "proposalCode",
+            "in": "path",
+            "description": "paths['/bff/proposal/getByCode/{proposalCode}'].get.parameters['0'].description",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "paths['/bff/proposal/getByCode/{proposalCode}'].get.responses['200'].description",
+            "schema": {
+              "$ref": "#/definitions/ProposalResponse"
+            }
+          },
+          "401": {
+            "description": "paths['/bff/proposal/getByCode/{proposalCode}'].get.responses['401'].description"
+          },
+          "403": {
+            "description": "paths['/bff/proposal/getByCode/{proposalCode}'].get.responses['403'].description"
+          },
+          "404": {
+            "description": "paths['/bff/proposal/getByCode/{proposalCode}'].get.responses['404'].description"
+          }
+        }
+      }
+    },
+    "/bff/proposal/getByUserId/{userId}": {
+      "get": {
+        "tags": [
+          "Proposal"
+        ],
+        "summary": "paths['/bff/proposal/getByUserId/{userId}'].get.summary",
+        "description": "paths['/bff/proposal/getByUserId/{userId}'].get.description",
+        "operationId": "getByUserIdUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "paths['/bff/proposal/getByUserId/{userId}'].get.parameters['0'].description",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "paths['/bff/proposal/getByUserId/{userId}'].get.responses['200'].description",
+            "schema": {
+              "$ref": "#/definitions/ProposalListInfoResponse"
+            }
+          },
+          "401": {
+            "description": "paths['/bff/proposal/getByUserId/{userId}'].get.responses['401'].description"
+          },
+          "403": {
+            "description": "paths['/bff/proposal/getByUserId/{userId}'].get.responses['403'].description"
+          },
+          "404": {
+            "description": "paths['/bff/proposal/getByUserId/{userId}'].get.responses['404'].description"
+          }
+        }
+      }
+    },
+    "/bff/proposal/query": {
+      "post": {
+        "tags": [
+          "Proposal"
+        ],
+        "summary": "paths['/bff/proposal/query'].post.summary",
+        "description": "paths['/bff/proposal/query'].post.description",
+        "operationId": "queryUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "proposalRequest",
+            "description": "paths['/bff/proposal/query'].post.parameters['0'].description",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProposalCriteriaRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "paths['/bff/proposal/query'].post.responses['200'].description",
+            "schema": {
+              "$ref": "#/definitions/ProposalListInfoResponse"
+            }
+          },
+          "201": {
+            "description": "paths['/bff/proposal/query'].post.responses['201'].description"
+          },
+          "401": {
+            "description": "paths['/bff/proposal/query'].post.responses['401'].description"
+          },
+          "403": {
+            "description": "paths['/bff/proposal/query'].post.responses['403'].description"
+          },
+          "404": {
+            "description": "paths['/bff/proposal/query'].post.responses['404'].description"
+          }
+        }
+      }
+    },
+    "/bff/proposal/saveOrUpdate": {
+      "post": {
+        "tags": [
+          "Proposal"
+        ],
+        "summary": "paths['/bff/proposal/saveOrUpdate'].post.summary",
+        "description": "paths['/bff/proposal/saveOrUpdate'].post.description",
+        "operationId": "saveUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "proposalRequest",
+            "description": "paths['/bff/proposal/saveOrUpdate'].post.parameters['0'].description",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProposalRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "paths['/bff/proposal/saveOrUpdate'].post.responses['200'].description",
+            "schema": {
+              "$ref": "#/definitions/ProposalResponse"
+            }
+          },
+          "201": {
+            "description": "paths['/bff/proposal/saveOrUpdate'].post.responses['201'].description"
+          },
+          "401": {
+            "description": "paths['/bff/proposal/saveOrUpdate'].post.responses['401'].description"
+          },
+          "403": {
+            "description": "paths['/bff/proposal/saveOrUpdate'].post.responses['403'].description"
+          },
+          "404": {
+            "description": "paths['/bff/proposal/saveOrUpdate'].post.responses['404'].description"
+          }
+        }
+      }
+    },
+    "/bff/proposal/updateInforceInfo": {
+      "post": {
+        "tags": [
+          "Proposal"
+        ],
+        "summary": "paths['/bff/proposal/updateInforceInfo'].post.summary",
+        "description": "paths['/bff/proposal/updateInforceInfo'].post.description",
+        "operationId": "updateInforceInfoUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "proposalRequest",
+            "description": "paths['/bff/proposal/updateInforceInfo'].post.parameters['0'].description",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProposalRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "paths['/bff/proposal/updateInforceInfo'].post.responses['200'].description",
+            "schema": {
+              "$ref": "#/definitions/ProposalResponse"
+            }
+          },
+          "201": {
+            "description": "paths['/bff/proposal/updateInforceInfo'].post.responses['201'].description"
+          },
+          "401": {
+            "description": "paths['/bff/proposal/updateInforceInfo'].post.responses['401'].description"
+          },
+          "403": {
+            "description": "paths['/bff/proposal/updateInforceInfo'].post.responses['403'].description"
+          },
+          "404": {
+            "description": "paths['/bff/proposal/updateInforceInfo'].post.responses['404'].description"
+          }
+        }
+      }
+    },
+    "/bff/proposal/updateStatus": {
+      "post": {
+        "tags": [
+          "Proposal"
+        ],
+        "summary": "paths['/bff/proposal/updateStatus'].post.summary",
+        "description": "paths['/bff/proposal/updateStatus'].post.description",
+        "operationId": "updateStatusUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "proposalRequest",
+            "description": "paths['/bff/proposal/updateStatus'].post.parameters['0'].description",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProposalRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "paths['/bff/proposal/updateStatus'].post.responses['200'].description",
+            "schema": {
+              "$ref": "#/definitions/ProposalResponse"
+            }
+          },
+          "201": {
+            "description": "paths['/bff/proposal/updateStatus'].post.responses['201'].description"
+          },
+          "401": {
+            "description": "paths['/bff/proposal/updateStatus'].post.responses['401'].description"
+          },
+          "403": {
+            "description": "paths['/bff/proposal/updateStatus'].post.responses['403'].description"
+          },
+          "404": {
+            "description": "paths['/bff/proposal/updateStatus'].post.responses['404'].description"
+          }
+        }
+      }
+    },
+    "/bff/tools/checkSign": {
+      "post": {
+        "tags": [
+          "Tools"
+        ],
+        "summary": "paths['/bff/tools/checkSign'].post.summary",
+        "description": "paths['/bff/tools/checkSign'].post.description",
+        "operationId": "checkSignUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "request",
+            "description": "paths['/bff/tools/checkSign'].post.parameters['0'].description",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ToolsSignRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "paths['/bff/tools/checkSign'].post.responses['200'].description",
+            "schema": {
+              "$ref": "#/definitions/ToolsSignResponse"
+            }
+          },
+          "201": {
+            "description": "paths['/bff/tools/checkSign'].post.responses['201'].description"
+          },
+          "401": {
+            "description": "paths['/bff/tools/checkSign'].post.responses['401'].description"
+          },
+          "403": {
+            "description": "paths['/bff/tools/checkSign'].post.responses['403'].description"
+          },
+          "404": {
+            "description": "paths['/bff/tools/checkSign'].post.responses['404'].description"
+          }
+        }
+      }
+    },
+    "/bff/tools/sign": {
+      "post": {
+        "tags": [
+          "Tools"
+        ],
+        "summary": "paths['/bff/tools/sign'].post.summary",
+        "description": "paths['/bff/tools/sign'].post.description",
+        "operationId": "signUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "request",
+            "description": "paths['/bff/tools/sign'].post.parameters['0'].description",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ToolsSignRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "paths['/bff/tools/sign'].post.responses['200'].description",
+            "schema": {
+              "$ref": "#/definitions/ToolsSignResponse"
+            }
+          },
+          "201": {
+            "description": "paths['/bff/tools/sign'].post.responses['201'].description"
+          },
+          "401": {
+            "description": "paths['/bff/tools/sign'].post.responses['401'].description"
+          },
+          "403": {
+            "description": "paths['/bff/tools/sign'].post.responses['403'].description"
+          },
+          "404": {
+            "description": "paths['/bff/tools/sign'].post.responses['404'].description"
+          }
+        }
+      }
+    },
+    "/bff/transaction/broker/synAppoint": {
+      "post": {
+        "tags": [
+          "Transaction"
+        ],
+        "summary": "paths['/bff/transaction/broker/synAppoint'].post.summary",
+        "description": "paths['/bff/transaction/broker/synAppoint'].post.description",
+        "operationId": "brokerSynAppointUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "proposalRequest",
+            "description": "paths['/bff/transaction/broker/synAppoint'].post.parameters['0'].description",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProposalRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "paths['/bff/transaction/broker/synAppoint'].post.responses['200'].description",
+            "schema": {
+              "$ref": "#/definitions/ProposalResponse"
+            }
+          },
+          "201": {
+            "description": "paths['/bff/transaction/broker/synAppoint'].post.responses['201'].description"
+          },
+          "401": {
+            "description": "paths['/bff/transaction/broker/synAppoint'].post.responses['401'].description"
+          },
+          "403": {
+            "description": "paths['/bff/transaction/broker/synAppoint'].post.responses['403'].description"
+          },
+          "404": {
+            "description": "paths['/bff/transaction/broker/synAppoint'].post.responses['404'].description"
+          }
+        }
+      }
+    },
+    "/bff/transaction/broker/synPolicy": {
+      "post": {
+        "tags": [
+          "Transaction"
+        ],
+        "summary": "paths['/bff/transaction/broker/synPolicy'].post.summary",
+        "description": "paths['/bff/transaction/broker/synPolicy'].post.description",
+        "operationId": "brokerSynPolicyUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "proposalRequest",
+            "description": "paths['/bff/transaction/broker/synPolicy'].post.parameters['0'].description",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProposalRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "paths['/bff/transaction/broker/synPolicy'].post.responses['200'].description",
+            "schema": {
+              "$ref": "#/definitions/ProposalResponse"
+            }
+          },
+          "201": {
+            "description": "paths['/bff/transaction/broker/synPolicy'].post.responses['201'].description"
+          },
+          "401": {
+            "description": "paths['/bff/transaction/broker/synPolicy'].post.responses['401'].description"
+          },
+          "403": {
+            "description": "paths['/bff/transaction/broker/synPolicy'].post.responses['403'].description"
+          },
+          "404": {
+            "description": "paths['/bff/transaction/broker/synPolicy'].post.responses['404'].description"
+          }
+        }
+      }
+    },
+    "/bff/transaction/broker/synProposal": {
+      "post": {
+        "tags": [
+          "Transaction"
+        ],
+        "summary": "paths['/bff/transaction/broker/synProposal'].post.summary",
+        "description": "paths['/bff/transaction/broker/synProposal'].post.description",
+        "operationId": "brokerSynProposalUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "proposalRequest",
+            "description": "paths['/bff/transaction/broker/synProposal'].post.parameters['0'].description",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProposalRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "paths['/bff/transaction/broker/synProposal'].post.responses['200'].description",
+            "schema": {
+              "$ref": "#/definitions/ProposalResponse"
+            }
+          },
+          "201": {
+            "description": "paths['/bff/transaction/broker/synProposal'].post.responses['201'].description"
+          },
+          "401": {
+            "description": "paths['/bff/transaction/broker/synProposal'].post.responses['401'].description"
+          },
+          "403": {
+            "description": "paths['/bff/transaction/broker/synProposal'].post.responses['403'].description"
+          },
+          "404": {
+            "description": "paths['/bff/transaction/broker/synProposal'].post.responses['404'].description"
+          }
+        }
+      }
+    },
+    "/bff/transaction/insurer/accept": {
+      "post": {
+        "tags": [
+          "Transaction"
+        ],
+        "summary": "paths['/bff/transaction/insurer/accept'].post.summary",
+        "description": "paths['/bff/transaction/insurer/accept'].post.description",
+        "operationId": "acceptUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "proposalRequest",
+            "description": "paths['/bff/transaction/insurer/accept'].post.parameters['0'].description",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProposalRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "paths['/bff/transaction/insurer/accept'].post.responses['200'].description",
+            "schema": {
+              "$ref": "#/definitions/ProposalResponse"
+            }
+          },
+          "201": {
+            "description": "paths['/bff/transaction/insurer/accept'].post.responses['201'].description"
+          },
+          "401": {
+            "description": "paths['/bff/transaction/insurer/accept'].post.responses['401'].description"
+          },
+          "403": {
+            "description": "paths['/bff/transaction/insurer/accept'].post.responses['403'].description"
+          },
+          "404": {
+            "description": "paths['/bff/transaction/insurer/accept'].post.responses['404'].description"
+          }
+        },
+        "deprecated": true
+      }
+    },
+    "/bff/transaction/insurer/inforce": {
+      "post": {
+        "tags": [
+          "Transaction"
+        ],
+        "summary": "paths['/bff/transaction/insurer/inforce'].post.summary",
+        "description": "paths['/bff/transaction/insurer/inforce'].post.description",
+        "operationId": "inforceUsingPOST_2",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "proposalRequest",
+            "description": "paths['/bff/transaction/insurer/inforce'].post.parameters['0'].description",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProposalRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "paths['/bff/transaction/insurer/inforce'].post.responses['200'].description",
+            "schema": {
+              "$ref": "#/definitions/ProposalResponse"
+            }
+          },
+          "201": {
+            "description": "paths['/bff/transaction/insurer/inforce'].post.responses['201'].description"
+          },
+          "401": {
+            "description": "paths['/bff/transaction/insurer/inforce'].post.responses['401'].description"
+          },
+          "403": {
+            "description": "paths['/bff/transaction/insurer/inforce'].post.responses['403'].description"
+          },
+          "404": {
+            "description": "paths['/bff/transaction/insurer/inforce'].post.responses['404'].description"
+          }
+        },
+        "deprecated": true
+      }
+    },
+    "/bff/transaction/insurer/underwrite": {
+      "post": {
+        "tags": [
+          "Transaction"
+        ],
+        "summary": "paths['/bff/transaction/insurer/underwrite'].post.summary",
+        "description": "paths['/bff/transaction/insurer/underwrite'].post.description",
+        "operationId": "submitUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "proposalRequest",
+            "description": "paths['/bff/transaction/insurer/underwrite'].post.parameters['0'].description",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProposalRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "paths['/bff/transaction/insurer/underwrite'].post.responses['200'].description",
+            "schema": {
+              "$ref": "#/definitions/ProposalResponse"
+            }
+          },
+          "201": {
+            "description": "paths['/bff/transaction/insurer/underwrite'].post.responses['201'].description"
+          },
+          "401": {
+            "description": "paths['/bff/transaction/insurer/underwrite'].post.responses['401'].description"
+          },
+          "403": {
+            "description": "paths['/bff/transaction/insurer/underwrite'].post.responses['403'].description"
+          },
+          "404": {
+            "description": "paths['/bff/transaction/insurer/underwrite'].post.responses['404'].description"
+          }
+        },
+        "deprecated": true
+      }
+    },
+    "/bff/user/{openId}/{tenantCode}": {
+      "get": {
+        "tags": [
+          "Login"
+        ],
+        "summary": "paths['/bff/user/{openId}/{tenantCode}'].get.summary",
+        "description": "paths['/bff/user/{openId}/{tenantCode}'].get.description",
+        "operationId": "getByOpenIdUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "openId",
+            "in": "path",
+            "description": "paths['/bff/user/{openId}/{tenantCode}'].get.parameters['0'].description",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tenantCode",
+            "in": "path",
+            "description": "paths['/bff/user/{openId}/{tenantCode}'].get.parameters['1'].description",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "paths['/bff/user/{openId}/{tenantCode}'].get.responses['200'].description",
+            "schema": {
+              "$ref": "#/definitions/LoginResponse"
+            }
+          },
+          "401": {
+            "description": "paths['/bff/user/{openId}/{tenantCode}'].get.responses['401'].description"
+          },
+          "403": {
+            "description": "paths['/bff/user/{openId}/{tenantCode}'].get.responses['403'].description"
+          },
+          "404": {
+            "description": "paths['/bff/user/{openId}/{tenantCode}'].get.responses['404'].description"
+          }
+        }
+      }
+    },
+    "/bff/wx/jsConfig/{appId}": {
+      "get": {
+        "tags": [
+          "Wechat"
+        ],
+        "summary": "paths['/bff/wx/jsConfig/{appId}'].get.summary",
+        "description": "paths['/bff/wx/jsConfig/{appId}'].get.description",
+        "operationId": "getConfigUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "paths['/bff/wx/jsConfig/{appId}'].get.parameters['0'].description",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "url",
+            "in": "query",
+            "description": "paths['/bff/wx/jsConfig/{appId}'].get.parameters['1'].description",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "paths['/bff/wx/jsConfig/{appId}'].get.responses['200'].description",
+            "schema": {
+              "$ref": "#/definitions/WeChatRestResponse"
+            }
+          },
+          "401": {
+            "description": "paths['/bff/wx/jsConfig/{appId}'].get.responses['401'].description"
+          },
+          "403": {
+            "description": "paths['/bff/wx/jsConfig/{appId}'].get.responses['403'].description"
+          },
+          "404": {
+            "description": "paths['/bff/wx/jsConfig/{appId}'].get.responses['404'].description"
+          }
+        }
+      }
+    },
+    "/bff/wx/openidAndAccessToken/{appId}/{code}": {
+      "get": {
+        "tags": [
+          "Wechat"
+        ],
+        "summary": "paths['/bff/wx/openidAndAccessToken/{appId}/{code}'].get.summary",
+        "description": "paths['/bff/wx/openidAndAccessToken/{appId}/{code}'].get.description",
+        "operationId": "getOpenidAndAccessTokenUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "paths['/bff/wx/openidAndAccessToken/{appId}/{code}'].get.parameters['0'].description",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "code",
+            "in": "path",
+            "description": "paths['/bff/wx/openidAndAccessToken/{appId}/{code}'].get.parameters['1'].description",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "paths['/bff/wx/openidAndAccessToken/{appId}/{code}'].get.responses['200'].description",
+            "schema": {
+              "$ref": "#/definitions/WeChatRestResponse"
+            }
+          },
+          "401": {
+            "description": "paths['/bff/wx/openidAndAccessToken/{appId}/{code}'].get.responses['401'].description"
+          },
+          "403": {
+            "description": "paths['/bff/wx/openidAndAccessToken/{appId}/{code}'].get.responses['403'].description"
+          },
+          "404": {
+            "description": "paths['/bff/wx/openidAndAccessToken/{appId}/{code}'].get.responses['404'].description"
+          }
+        }
+      }
+    },
+    "/bff/wx/userInfo/{appId}/{code}/{authMethod}": {
+      "get": {
+        "tags": [
+          "Wechat"
+        ],
+        "summary": "paths['/bff/wx/userInfo/{appId}/{code}/{authMethod}'].get.summary",
+        "description": "paths['/bff/wx/userInfo/{appId}/{code}/{authMethod}'].get.description",
+        "operationId": "getUserBaseByCodeUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "paths['/bff/wx/userInfo/{appId}/{code}/{authMethod}'].get.parameters['0'].description",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "code",
+            "in": "path",
+            "description": "paths['/bff/wx/userInfo/{appId}/{code}/{authMethod}'].get.parameters['1'].description",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authMethod",
+            "in": "path",
+            "description": "paths['/bff/wx/userInfo/{appId}/{code}/{authMethod}'].get.parameters['2'].description",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "paths['/bff/wx/userInfo/{appId}/{code}/{authMethod}'].get.responses['200'].description",
+            "schema": {
+              "$ref": "#/definitions/WeChatRestResponse"
+            }
+          },
+          "401": {
+            "description": "paths['/bff/wx/userInfo/{appId}/{code}/{authMethod}'].get.responses['401'].description"
+          },
+          "403": {
+            "description": "paths['/bff/wx/userInfo/{appId}/{code}/{authMethod}'].get.responses['403'].description"
+          },
+          "404": {
+            "description": "paths['/bff/wx/userInfo/{appId}/{code}/{authMethod}'].get.responses['404'].description"
+          }
         }
       }
     }

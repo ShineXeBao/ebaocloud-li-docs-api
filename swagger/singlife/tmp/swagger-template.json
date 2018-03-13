@@ -1,15 +1,17 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "1.0",
+    "version": "0.1.0",
     "title": "eBaoCloud LI OpenAPI",
     "termsOfService": "http://api.ebaocloud.life/",
-    "description": "This document is the API specification for the SingLife. To practice and run the APIs in this document, you need to apply an eBaoCloud tenant account(starting from a sandbox account instead of production account) first.<br>\nContact liliang.zhu@ebaotech.com for more information.\n\nPS: we have created an account for SingLife. Please refer to the email\n\n# Built on\n[TIMESTAMP]\n\n# Versioning\nAPI version| Date  |Comments\n--|---|--\n1.0  | 2018-01-10  | Initial version\n\n# Authentication\n\n## Overview\n\neBaoCloud offers 3rd party applications the ability to issue authenticated requests on behalf of the eBaoCloud itself. eBaoCloud's implementation is based on the [Client Credentials Grant](http://tools.ietf.org/html/rfc6749#section-4.4) flow of the [oauth 2 specification](http://tools.ietf.org/html/rfc6749).\n\n## Auth Flow\n\nThe oauth2 / token authentication flow follows these 3 major steps:\n\n1. An application (backend) encodes its consumer key and secret (provided by eBaoCloud as an authorized vender) into a specially encoded set of credentials.\n2. An application (backend) makes a request to the POST oauth2 / token endpoint to exchange these credentials for a bearer token.\n3. When accessing the REST API, the application (the APP or website) uses the bearer token to authenticate.\n\n## Step by step\n\n* Send request to auth end point\n\n```js\nPOST: /cas/ebao/v1/json/tickets\nBody: {\"username\":\"SINGLIFE_CP.admin\", \"password\":\"adminPWD!\"}\nResponse: {\"access_token\": \"xxxx\"}\n```\n\n* Send request with access_token in header\n\n```js\nPOST: /rest/products\nHeader: {\n  \"authorization\":\"Bearer \"+access_token,\n  \"X-ebao-tenant-id\": \"SINGLIFE\"\n}\n```\n\n## End Points\n\n| | Sandbox |\n| :--- | :--- |\n| auth / take token | [https://sandbox.ebaocloud.com.cn/cas/ebao/v1/json/tickets](https://sandbox.ebaocloud.com.cn/cas/ebao/v1/json/tickets) |\n| APIs | [http://sandbox.singlife.ebaocloud.life/eBao/1.0](http://sandbox.singlife.ebaocloud.life/eBao/1.0) |\n\n\n## Sample\n\n#### Request auth from application\n\n```bash\ncurl --request POST \\\n  --url https://url/cas/ebao/v1/json/tickets \\\n  --header 'content-type: application/json' \\\n  --data '{\\n \\n \"username\":\"SINGLIFE_CP.admin\",\\n \"password\":\"adminPWD!\"\\n}'\n```\n\nNote:\n. the **X-ebao-tenant-id** is the unique id provided by eBaoCloud to identify the tenant.\n. the **username** and **password** are provided by eBaoCloud when you registered as an authorized vendor.\n\n\n#### Response from API Gateway\n\n* Success\n\n```js\n{\n\"access_token\" : \"TGT-233-e7Zuc5FlSAa0SShO3B1f2iugYzRQGQrSSoGwAi0VnWbnBNDwHg\"\n}\n```\n\n* Failed\n\n```js\n{\n\"access_token\" : null\n}\n```\n\n#### App call (Java code sample)\n\n```java\nHttpResponse<String> response = Unirest.post(url) // url：the UAT/product URL\n  .header(\"content-type\", \"application/json\") // application/json\n  .header(\"authorization\", \"Bearer \" + accessToken) // oauth2 access token：the accessToken\n  .header(\"X-ebao-tenant-id\", \"SINGLIFE\")\n  .body(body) // body: http body\n  .asString();\n```\n\n## Others\n\n### Tokens are passwords\n\nKeep in mind that the consumer key & secret, bearer token credentials, and the bearer token itself grant access to make requests on behalf of an application. These values should be considered as sensitive as passwords, and must not be shared or distributed to untrusted parties.\n\n### SSL required\n\nAll requests (both to obtain and use the tokens) **must use** HTTPS endpoints.\n"
+    "contact": {
+      "email": "liliang.zhu@ebaotech.com"
+    }
   },
   "host": "sandbox.singlife.ebaocloud.life",
   "basePath": "/eBao/1.0/",
   "schemes": [
-    "http"
+    "https"
   ],
   "consumes": [],
   "produces": [],

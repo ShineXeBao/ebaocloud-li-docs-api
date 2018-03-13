@@ -10,1181 +10,37 @@
   },
   "host": "eli.ebaocloud.com.cn",
   "basePath": "/bff",
-  "tags": [{
-    "name": "Wechat"
-  }, {
-    "name": "Tools"
-  }, {
-    "name": "Proposal"
-  }, {
-    "name": "Login"
-  }, {
-    "name": "Callback"
-  }, {
-    "name": "eBaoCloud-Li"
-  }, {
-    "name": "Transaction"
-  }, {
-    "name": "Calculate Premium"
-  }],
-  "paths": {
-    "/asyncCallback/pay": {
-      "post": {
-        "tags": ["Callback"],
-        "summary": "ebao支付平台支付回调",
-        "description": "根据支付回调参数，更新投保单信息，并调用保险公司生效接口",
-        "operationId": "payUsingPOST",
-        "consumes": ["application/json"],
-        "produces": ["*/*"],
-        "parameters": [{
-          "in": "body",
-          "name": "map",
-          "description": "map",
-          "required": true,
-          "schema": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            }
-          }
-        }],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "string"
-            }
-          },
-          "201": {
-            "description": "Created"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        }
-      }
+  "schemes": [
+    "https"
+  ],
+  "consumes": [],
+  "produces": [],
+  "tags": [
+    {
+      "name": "Wechat"
     },
-    "/ax/inforce": {
-      "post": {
-        "tags": ["Callback"],
-        "summary": "安心支付平台支付回调",
-        "description": "根据支付回调参数，更新投保单信息，并调用安心核心系统生效接口",
-        "operationId": "inforceUsingPOST",
-        "consumes": ["application/json"],
-        "produces": ["*/*"],
-        "parameters": [{
-          "name": "transNo",
-          "in": "query",
-          "description": "Transaction number",
-          "required": true,
-          "type": "string"
-        }, {
-          "name": "transDate",
-          "in": "query",
-          "description": "Transaction time,format = yyyyMMddHHmmss",
-          "required": true,
-          "type": "string"
-        }, {
-          "name": "requestCode",
-          "in": "query",
-          "description": "requestCode",
-          "required": true,
-          "type": "string"
-        }, {
-          "name": "payNo",
-          "in": "query",
-          "description": "Pay Number",
-          "required": true,
-          "type": "string"
-        }, {
-          "name": "payType",
-          "in": "query",
-          "description": "Pay Type <br/>1:wechat-mobile<br/>2:alipay-mobile<br/>3:wechat-PC<br/>4:alipay-PC<br/>5:wechat-App<br/>6:alipay-App<br/>7:wechat-wap<br/>8:unionpay-wap",
-          "required": true,
-          "type": "string"
-        }, {
-          "name": "payAmt",
-          "in": "query",
-          "description": "Pay Amount(Units:fen)",
-          "required": true,
-          "type": "string"
-        }, {
-          "name": "payDate",
-          "in": "query",
-          "description": "Pay Date,format = yyyyMMddHHmmss",
-          "required": true,
-          "type": "string"
-        }, {
-          "name": "payResult",
-          "in": "query",
-          "description": "Pay Result(1:success 0:failure)",
-          "required": true,
-          "type": "string"
-        }, {
-          "name": "payRemark",
-          "in": "query",
-          "description": "Pay Remark(when failed , show failure reason)",
-          "required": true,
-          "type": "string"
-        }, {
-          "name": "checkValue",
-          "in": "query",
-          "description": "checkValue",
-          "required": true,
-          "type": "string"
-        }, {
-          "name": "attach",
-          "in": "query",
-          "description": "format='ProposalCode,PackageId,SalesChannelCode,InsuredAge'",
-          "required": true,
-          "type": "string"
-        }],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "string"
-            }
-          },
-          "201": {
-            "description": "Created"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        }
-      }
+    {
+      "name": "Tools"
     },
-    "/ebaocloud-li/product/calcPremium": {
-      "post": {
-        "tags": ["eBaoCloud-Li"],
-        "summary": "保费计算",
-        "description": "通过eBaoCloud-Li计算保费",
-        "operationId": "calcPremiumUsingPOST",
-        "consumes": ["application/json"],
-        "produces": ["*/*"],
-        "parameters": [{
-          "in": "body",
-          "name": "calcPremiumRequest",
-          "description": "calcPremiumRequest",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/CalcPremiumRequest"
-          }
-        }],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/CalcPremiumResponse"
-            }
-          },
-          "201": {
-            "description": "Created"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        }
-      }
+    {
+      "name": "Proposal"
     },
-    "/ebaocloud-li/product/illustrationCalc": {
-      "post": {
-        "tags": ["eBaoCloud-Li"],
-        "summary": "利益演示",
-        "description": "通过eBaoCloud-Li进行利益演示",
-        "operationId": "illustrationCalcUsingPOST",
-        "consumes": ["application/json"],
-        "produces": ["*/*"],
-        "parameters": [{
-          "in": "body",
-          "name": "illustrationCalcRequest",
-          "description": "illustrationCalcRequest",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/IllustrationCalcRequest"
-          }
-        }],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/IllustrationCalcResponse"
-            }
-          },
-          "201": {
-            "description": "Created"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        }
-      }
+    {
+      "name": "Login"
     },
-    "/ebaocloud-li/proposal/apply": {
-      "post": {
-        "tags": ["eBaoCloud-Li"],
-        "summary": "投保",
-        "description": "计算保费并校验投核保规则，如果通过，则生成投保单号",
-        "operationId": "applyUsingPOST",
-        "consumes": ["application/json"],
-        "produces": ["*/*"],
-        "parameters": [{
-          "in": "body",
-          "name": "proposalRequest",
-          "description": "proposalRequest",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/ProposalRequest"
-          }
-        }],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ProposalResponse"
-            }
-          },
-          "201": {
-            "description": "Created"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        }
-      }
+    {
+      "name": "Callback"
     },
-    "/ebaocloud-li/proposal/inforce": {
-      "post": {
-        "tags": ["eBaoCloud-Li"],
-        "summary": "收费承保",
-        "description": "投核保后收费承保",
-        "operationId": "inforceUsingPOST_1",
-        "consumes": ["application/json"],
-        "produces": ["*/*"],
-        "parameters": [{
-          "in": "body",
-          "name": "proposalRequest",
-          "description": "proposalRequest",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/ProposalRequest"
-          }
-        }],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ProposalResponse"
-            }
-          },
-          "201": {
-            "description": "Created"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        }
-      }
+    {
+      "name": "eBaoCloud-Li"
     },
-    "/ebaocloud-li/proposal/quote": {
-      "post": {
-        "tags": ["eBaoCloud-Li"],
-        "summary": "投保预检",
-        "description": "计算保费并校验投保风险",
-        "operationId": "quoteUsingPOST",
-        "consumes": ["application/json"],
-        "produces": ["*/*"],
-        "parameters": [{
-          "in": "body",
-          "name": "proposalRequest",
-          "description": "proposalRequest",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/ProposalRequest"
-          }
-        }],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ProposalResponse"
-            }
-          },
-          "201": {
-            "description": "Created"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        }
-      }
+    {
+      "name": "Transaction"
     },
-    "/login": {
-      "post": {
-        "tags": ["Login"],
-        "summary": "登陆",
-        "description": "使用httpbasic方式验证, 成功登录后重置数据库中的用户openId",
-        "operationId": "loginUsingPOST",
-        "consumes": ["application/json"],
-        "produces": ["*/*"],
-        "parameters": [{
-          "in": "body",
-          "name": "user",
-          "description": "user",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/User"
-          }
-        }, {
-          "name": "Authorization",
-          "in": "header",
-          "required": false,
-          "type": "string"
-        }],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/LoginResponse"
-            }
-          },
-          "201": {
-            "description": "Created"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        }
-      }
-    },
-    "/planService/calcPremium": {
-      "post": {
-        "tags": ["Calculate Premium"],
-        "summary": "保费计算",
-        "description": "调用eBaoCloud的保费计算接口进行保费计算",
-        "operationId": "calcPremiumUsingPOST_1",
-        "consumes": ["application/json"],
-        "produces": ["*/*"],
-        "parameters": [{
-          "in": "body",
-          "name": "calcPremiumRequest",
-          "description": "calcPremiumRequest",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/CalcPremiumRequest"
-          }
-        }],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/CalcPremiumResponse"
-            }
-          },
-          "201": {
-            "description": "Created"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        }
-      }
-    },
-    "/proposal/get/{proposalId}": {
-      "get": {
-        "tags": ["Proposal"],
-        "summary": "投保单取得",
-        "description": "按投保单Id取得投保单",
-        "operationId": "getUsingGET",
-        "consumes": ["application/json"],
-        "produces": ["*/*"],
-        "parameters": [{
-          "name": "proposalId",
-          "in": "path",
-          "description": "proposalId",
-          "required": true,
-          "type": "string"
-        }],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ProposalResponse"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        }
-      }
-    },
-    "/proposal/getByCode/{proposalCode}": {
-      "get": {
-        "tags": ["Proposal"],
-        "summary": "投保单取得",
-        "description": "按投保单号取得投保单",
-        "operationId": "getByCodeUsingGET",
-        "consumes": ["application/json"],
-        "produces": ["*/*"],
-        "parameters": [{
-          "name": "proposalCode",
-          "in": "path",
-          "description": "proposalCode",
-          "required": true,
-          "type": "string"
-        }],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ProposalResponse"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        }
-      }
-    },
-    "/proposal/getByUserId/{userId}": {
-      "get": {
-        "tags": ["Proposal"],
-        "summary": "用户投保单取得",
-        "description": "按用户ID取得其所有投保单",
-        "operationId": "getByUserIdUsingGET",
-        "consumes": ["application/json"],
-        "produces": ["*/*"],
-        "parameters": [{
-          "name": "userId",
-          "in": "path",
-          "description": "userId",
-          "required": true,
-          "type": "string"
-        }],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ProposalListInfoResponse"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        }
-      }
-    },
-    "/proposal/query": {
-      "post": {
-        "tags": ["Proposal"],
-        "summary": "投保单检索",
-        "description": "根据检索条件返回符合条件的投保单",
-        "operationId": "queryUsingPOST",
-        "consumes": ["application/json"],
-        "produces": ["*/*"],
-        "parameters": [{
-          "in": "body",
-          "name": "proposalRequest",
-          "description": "proposalRequest",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/ProposalCriteriaRequest"
-          }
-        }],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ProposalListInfoResponse"
-            }
-          },
-          "201": {
-            "description": "Created"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        }
-      }
-    },
-    "/proposal/saveOrUpdate": {
-      "post": {
-        "tags": ["Proposal"],
-        "summary": "保存投保单",
-        "description": "保存或更新投保单",
-        "operationId": "saveUsingPOST",
-        "consumes": ["application/json"],
-        "produces": ["*/*"],
-        "parameters": [{
-          "in": "body",
-          "name": "proposalRequest",
-          "description": "proposalRequest",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/ProposalRequest"
-          }
-        }],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ProposalResponse"
-            }
-          },
-          "201": {
-            "description": "Created"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        }
-      }
-    },
-    "/proposal/updateInforceInfo": {
-      "post": {
-        "tags": ["Proposal"],
-        "summary": "更新投保单信息",
-        "description": "更新投保单部分信息（核保结果，电子保单下载地址，投保单状态）",
-        "operationId": "updateInforceInfoUsingPOST",
-        "consumes": ["application/json"],
-        "produces": ["*/*"],
-        "parameters": [{
-          "in": "body",
-          "name": "proposalRequest",
-          "description": "proposalRequest",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/ProposalRequest"
-          }
-        }],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ProposalResponse"
-            }
-          },
-          "201": {
-            "description": "Created"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        }
-      }
-    },
-    "/proposal/updateStatus": {
-      "post": {
-        "tags": ["Proposal"],
-        "summary": "投保单状态更新",
-        "description": "更新投保单状态",
-        "operationId": "updateStatusUsingPOST",
-        "consumes": ["application/json"],
-        "produces": ["*/*"],
-        "parameters": [{
-          "in": "body",
-          "name": "proposalRequest",
-          "description": "proposalRequest",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/ProposalRequest"
-          }
-        }],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ProposalResponse"
-            }
-          },
-          "201": {
-            "description": "Created"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        }
-      }
-    },
-    "/tools/checkSign": {
-      "post": {
-        "tags": ["Tools"],
-        "summary": "验签",
-        "description": "验证签名",
-        "operationId": "checkSignUsingPOST",
-        "consumes": ["application/json"],
-        "produces": ["*/*"],
-        "parameters": [{
-          "in": "body",
-          "name": "request",
-          "description": "request",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/ToolsSignRequest"
-          }
-        }],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ToolsSignResponse"
-            }
-          },
-          "201": {
-            "description": "Created"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        }
-      }
-    },
-    "/tools/sign": {
-      "post": {
-        "tags": ["Tools"],
-        "summary": "加签",
-        "description": "生成签名",
-        "operationId": "signUsingPOST",
-        "consumes": ["application/json"],
-        "produces": ["*/*"],
-        "parameters": [{
-          "in": "body",
-          "name": "request",
-          "description": "request",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/ToolsSignRequest"
-          }
-        }],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ToolsSignResponse"
-            }
-          },
-          "201": {
-            "description": "Created"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        }
-      }
-    },
-    "/transaction/broker/synAppoint": {
-      "post": {
-        "tags": ["Transaction"],
-        "summary": "保代公司预约同步",
-        "description": "调用保代公司的预约接口",
-        "operationId": "brokerSynAppointUsingPOST",
-        "consumes": ["application/json"],
-        "produces": ["*/*"],
-        "parameters": [{
-          "in": "body",
-          "name": "proposalRequest",
-          "description": "proposalRequest",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/ProposalRequest"
-          }
-        }],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ProposalResponse"
-            }
-          },
-          "201": {
-            "description": "Created"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        }
-      }
-    },
-    "/transaction/broker/synPolicy": {
-      "post": {
-        "tags": ["Transaction"],
-        "summary": "保代公司保单同步",
-        "description": "调用保代公司的保单同步接口",
-        "operationId": "brokerSynPolicyUsingPOST",
-        "consumes": ["application/json"],
-        "produces": ["*/*"],
-        "parameters": [{
-          "in": "body",
-          "name": "proposalRequest",
-          "description": "proposalRequest",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/ProposalRequest"
-          }
-        }],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ProposalResponse"
-            }
-          },
-          "201": {
-            "description": "Created"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        }
-      }
-    },
-    "/transaction/broker/synProposal": {
-      "post": {
-        "tags": ["Transaction"],
-        "summary": "保代公司投保单同步",
-        "description": "调用保代公司的投保单同步接口",
-        "operationId": "brokerSynProposalUsingPOST",
-        "consumes": ["application/json"],
-        "produces": ["*/*"],
-        "parameters": [{
-          "in": "body",
-          "name": "proposalRequest",
-          "description": "proposalRequest",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/ProposalRequest"
-          }
-        }],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ProposalResponse"
-            }
-          },
-          "201": {
-            "description": "Created"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        }
-      }
-    },
-    "/transaction/insurer/accept": {
-      "post": {
-        "tags": ["Transaction"],
-        "summary": "保险公司投保",
-        "description": "调用对应保险公司的投保接口",
-        "operationId": "acceptUsingPOST",
-        "consumes": ["application/json"],
-        "produces": ["*/*"],
-        "parameters": [{
-          "in": "body",
-          "name": "proposalRequest",
-          "description": "proposalRequest",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/ProposalRequest"
-          }
-        }],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ProposalResponse"
-            }
-          },
-          "201": {
-            "description": "Created"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        },
-        "deprecated": true
-      }
-    },
-    "/transaction/insurer/inforce": {
-      "post": {
-        "tags": ["Transaction"],
-        "summary": "保险公司生效",
-        "description": "调用对应保险公司的生效接口",
-        "operationId": "inforceUsingPOST_2",
-        "consumes": ["application/json"],
-        "produces": ["*/*"],
-        "parameters": [{
-          "in": "body",
-          "name": "proposalRequest",
-          "description": "proposalRequest",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/ProposalRequest"
-          }
-        }],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ProposalResponse"
-            }
-          },
-          "201": {
-            "description": "Created"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        },
-        "deprecated": true
-      }
-    },
-    "/transaction/insurer/underwrite": {
-      "post": {
-        "tags": ["Transaction"],
-        "summary": "保险公司核保",
-        "description": "调用对应保险公司的核保接口",
-        "operationId": "submitUsingPOST",
-        "consumes": ["application/json"],
-        "produces": ["*/*"],
-        "parameters": [{
-          "in": "body",
-          "name": "proposalRequest",
-          "description": "proposalRequest",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/ProposalRequest"
-          }
-        }],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ProposalResponse"
-            }
-          },
-          "201": {
-            "description": "Created"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        },
-        "deprecated": true
-      }
-    },
-    "/user/{openId}/{tenantCode}": {
-      "get": {
-        "tags": ["Login"],
-        "summary": "用户取得",
-        "description": "根据OpenId和tenantCode取得用户信息",
-        "operationId": "getByOpenIdUsingGET",
-        "consumes": ["application/json"],
-        "produces": ["*/*"],
-        "parameters": [{
-          "name": "openId",
-          "in": "path",
-          "description": "openId",
-          "required": true,
-          "type": "string"
-        }, {
-          "name": "tenantCode",
-          "in": "path",
-          "description": "tenantCode",
-          "required": true,
-          "type": "string"
-        }],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/LoginResponse"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        }
-      }
-    },
-    "/wx/jsConfig/{appId}": {
-      "get": {
-        "tags": ["Wechat"],
-        "summary": "取得公众号的Js Config",
-        "description": "根据appId取得微信公众号的Js Config",
-        "operationId": "getConfigUsingGET",
-        "consumes": ["application/json"],
-        "produces": ["*/*"],
-        "parameters": [{
-          "name": "appId",
-          "in": "path",
-          "description": "appId",
-          "required": true,
-          "type": "string"
-        }, {
-          "name": "url",
-          "in": "query",
-          "description": "url",
-          "required": true,
-          "type": "string"
-        }],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/WeChatRestResponse"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        }
-      }
-    },
-    "/wx/openidAndAccessToken/{appId}/{code}": {
-      "get": {
-        "tags": ["Wechat"],
-        "summary": "取得微信用户的openId和AccessToken",
-        "description": "根据appId和code取得微信用户的openId和AccessToken",
-        "operationId": "getOpenidAndAccessTokenUsingGET",
-        "consumes": ["application/json"],
-        "produces": ["*/*"],
-        "parameters": [{
-          "name": "appId",
-          "in": "path",
-          "description": "appId",
-          "required": true,
-          "type": "string"
-        }, {
-          "name": "code",
-          "in": "path",
-          "description": "code",
-          "required": true,
-          "type": "string"
-        }],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/WeChatRestResponse"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        }
-      }
-    },
-    "/wx/userInfo/{appId}/{code}/{authMethod}": {
-      "get": {
-        "tags": ["Wechat"],
-        "summary": "取得微信用户的基本信息",
-        "description": "根据appId，code以及验证方式取得微信用户的基本信息",
-        "operationId": "getUserBaseByCodeUsingGET",
-        "consumes": ["application/json"],
-        "produces": ["*/*"],
-        "parameters": [{
-          "name": "appId",
-          "in": "path",
-          "description": "appId",
-          "required": true,
-          "type": "string"
-        }, {
-          "name": "code",
-          "in": "path",
-          "description": "code",
-          "required": true,
-          "type": "string"
-        }, {
-          "name": "authMethod",
-          "in": "path",
-          "description": "authMethod",
-          "required": true,
-          "type": "string"
-        }],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/WeChatRestResponse"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        }
-      }
+    {
+      "name": "Calculate Premium"
     }
-  },
+  ],
   "definitions": {
     "ValueAdded": {
       "type": "object",
@@ -2707,6 +1563,1404 @@
         },
         "unionid": {
           "type": "string"
+        }
+      }
+    }
+  },
+  "paths": {
+    "/bff/asyncCallback/pay": {
+      "post": {
+        "tags": [
+          "Callback"
+        ],
+        "summary": "ebao支付平台支付回调",
+        "description": "根据支付回调参数，更新投保单信息，并调用保险公司生效接口",
+        "operationId": "payUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "map",
+            "description": "map",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/bff/ax/inforce": {
+      "post": {
+        "tags": [
+          "Callback"
+        ],
+        "summary": "安心支付平台支付回调",
+        "description": "根据支付回调参数，更新投保单信息，并调用安心核心系统生效接口",
+        "operationId": "inforceUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "transNo",
+            "in": "query",
+            "description": "Transaction number",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "transDate",
+            "in": "query",
+            "description": "Transaction time,format = yyyyMMddHHmmss",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "requestCode",
+            "in": "query",
+            "description": "requestCode",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "payNo",
+            "in": "query",
+            "description": "Pay Number",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "payType",
+            "in": "query",
+            "description": "Pay Type <br/>1:wechat-mobile<br/>2:alipay-mobile<br/>3:wechat-PC<br/>4:alipay-PC<br/>5:wechat-App<br/>6:alipay-App<br/>7:wechat-wap<br/>8:unionpay-wap",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "payAmt",
+            "in": "query",
+            "description": "Pay Amount(Units:fen)",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "payDate",
+            "in": "query",
+            "description": "Pay Date,format = yyyyMMddHHmmss",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "payResult",
+            "in": "query",
+            "description": "Pay Result(1:success 0:failure)",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "payRemark",
+            "in": "query",
+            "description": "Pay Remark(when failed , show failure reason)",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "checkValue",
+            "in": "query",
+            "description": "checkValue",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "attach",
+            "in": "query",
+            "description": "format='ProposalCode,PackageId,SalesChannelCode,InsuredAge'",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/bff/ebaocloud-li/product/calcPremium": {
+      "post": {
+        "tags": [
+          "eBaoCloud-Li"
+        ],
+        "summary": "保费计算",
+        "description": "通过eBaoCloud-Li计算保费",
+        "operationId": "calcPremiumUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "calcPremiumRequest",
+            "description": "calcPremiumRequest",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CalcPremiumRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CalcPremiumResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/bff/ebaocloud-li/product/illustrationCalc": {
+      "post": {
+        "tags": [
+          "eBaoCloud-Li"
+        ],
+        "summary": "利益演示",
+        "description": "通过eBaoCloud-Li进行利益演示",
+        "operationId": "illustrationCalcUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "illustrationCalcRequest",
+            "description": "illustrationCalcRequest",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IllustrationCalcRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IllustrationCalcResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/bff/ebaocloud-li/proposal/apply": {
+      "post": {
+        "tags": [
+          "eBaoCloud-Li"
+        ],
+        "summary": "投保",
+        "description": "计算保费并校验投核保规则，如果通过，则生成投保单号",
+        "operationId": "applyUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "proposalRequest",
+            "description": "proposalRequest",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProposalRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProposalResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/bff/ebaocloud-li/proposal/inforce": {
+      "post": {
+        "tags": [
+          "eBaoCloud-Li"
+        ],
+        "summary": "收费承保",
+        "description": "投核保后收费承保",
+        "operationId": "inforceUsingPOST_1",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "proposalRequest",
+            "description": "proposalRequest",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProposalRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProposalResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/bff/ebaocloud-li/proposal/quote": {
+      "post": {
+        "tags": [
+          "eBaoCloud-Li"
+        ],
+        "summary": "投保预检",
+        "description": "计算保费并校验投保风险",
+        "operationId": "quoteUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "proposalRequest",
+            "description": "proposalRequest",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProposalRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProposalResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/bff/login": {
+      "post": {
+        "tags": [
+          "Login"
+        ],
+        "summary": "登陆",
+        "description": "使用httpbasic方式验证, 成功登录后重置数据库中的用户openId",
+        "operationId": "loginUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "user",
+            "description": "user",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/LoginResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/bff/planService/calcPremium": {
+      "post": {
+        "tags": [
+          "Calculate Premium"
+        ],
+        "summary": "保费计算",
+        "description": "调用eBaoCloud的保费计算接口进行保费计算",
+        "operationId": "calcPremiumUsingPOST_1",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "calcPremiumRequest",
+            "description": "calcPremiumRequest",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CalcPremiumRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CalcPremiumResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/bff/proposal/get/{proposalId}": {
+      "get": {
+        "tags": [
+          "Proposal"
+        ],
+        "summary": "投保单取得",
+        "description": "按投保单Id取得投保单",
+        "operationId": "getUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "proposalId",
+            "in": "path",
+            "description": "proposalId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProposalResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/bff/proposal/getByCode/{proposalCode}": {
+      "get": {
+        "tags": [
+          "Proposal"
+        ],
+        "summary": "投保单取得",
+        "description": "按投保单号取得投保单",
+        "operationId": "getByCodeUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "proposalCode",
+            "in": "path",
+            "description": "proposalCode",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProposalResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/bff/proposal/getByUserId/{userId}": {
+      "get": {
+        "tags": [
+          "Proposal"
+        ],
+        "summary": "用户投保单取得",
+        "description": "按用户ID取得其所有投保单",
+        "operationId": "getByUserIdUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProposalListInfoResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/bff/proposal/query": {
+      "post": {
+        "tags": [
+          "Proposal"
+        ],
+        "summary": "投保单检索",
+        "description": "根据检索条件返回符合条件的投保单",
+        "operationId": "queryUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "proposalRequest",
+            "description": "proposalRequest",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProposalCriteriaRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProposalListInfoResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/bff/proposal/saveOrUpdate": {
+      "post": {
+        "tags": [
+          "Proposal"
+        ],
+        "summary": "保存投保单",
+        "description": "保存或更新投保单",
+        "operationId": "saveUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "proposalRequest",
+            "description": "proposalRequest",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProposalRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProposalResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/bff/proposal/updateInforceInfo": {
+      "post": {
+        "tags": [
+          "Proposal"
+        ],
+        "summary": "更新投保单信息",
+        "description": "更新投保单部分信息（核保结果，电子保单下载地址，投保单状态）",
+        "operationId": "updateInforceInfoUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "proposalRequest",
+            "description": "proposalRequest",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProposalRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProposalResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/bff/proposal/updateStatus": {
+      "post": {
+        "tags": [
+          "Proposal"
+        ],
+        "summary": "投保单状态更新",
+        "description": "更新投保单状态",
+        "operationId": "updateStatusUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "proposalRequest",
+            "description": "proposalRequest",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProposalRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProposalResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/bff/tools/checkSign": {
+      "post": {
+        "tags": [
+          "Tools"
+        ],
+        "summary": "验签",
+        "description": "验证签名",
+        "operationId": "checkSignUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "request",
+            "description": "request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ToolsSignRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ToolsSignResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/bff/tools/sign": {
+      "post": {
+        "tags": [
+          "Tools"
+        ],
+        "summary": "加签",
+        "description": "生成签名",
+        "operationId": "signUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "request",
+            "description": "request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ToolsSignRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ToolsSignResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/bff/transaction/broker/synAppoint": {
+      "post": {
+        "tags": [
+          "Transaction"
+        ],
+        "summary": "保代公司预约同步",
+        "description": "调用保代公司的预约接口",
+        "operationId": "brokerSynAppointUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "proposalRequest",
+            "description": "proposalRequest",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProposalRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProposalResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/bff/transaction/broker/synPolicy": {
+      "post": {
+        "tags": [
+          "Transaction"
+        ],
+        "summary": "保代公司保单同步",
+        "description": "调用保代公司的保单同步接口",
+        "operationId": "brokerSynPolicyUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "proposalRequest",
+            "description": "proposalRequest",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProposalRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProposalResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/bff/transaction/broker/synProposal": {
+      "post": {
+        "tags": [
+          "Transaction"
+        ],
+        "summary": "保代公司投保单同步",
+        "description": "调用保代公司的投保单同步接口",
+        "operationId": "brokerSynProposalUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "proposalRequest",
+            "description": "proposalRequest",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProposalRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProposalResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/bff/transaction/insurer/accept": {
+      "post": {
+        "tags": [
+          "Transaction"
+        ],
+        "summary": "保险公司投保",
+        "description": "调用对应保险公司的投保接口",
+        "operationId": "acceptUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "proposalRequest",
+            "description": "proposalRequest",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProposalRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProposalResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": true
+      }
+    },
+    "/bff/transaction/insurer/inforce": {
+      "post": {
+        "tags": [
+          "Transaction"
+        ],
+        "summary": "保险公司生效",
+        "description": "调用对应保险公司的生效接口",
+        "operationId": "inforceUsingPOST_2",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "proposalRequest",
+            "description": "proposalRequest",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProposalRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProposalResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": true
+      }
+    },
+    "/bff/transaction/insurer/underwrite": {
+      "post": {
+        "tags": [
+          "Transaction"
+        ],
+        "summary": "保险公司核保",
+        "description": "调用对应保险公司的核保接口",
+        "operationId": "submitUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "proposalRequest",
+            "description": "proposalRequest",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProposalRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProposalResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": true
+      }
+    },
+    "/bff/user/{openId}/{tenantCode}": {
+      "get": {
+        "tags": [
+          "Login"
+        ],
+        "summary": "用户取得",
+        "description": "根据OpenId和tenantCode取得用户信息",
+        "operationId": "getByOpenIdUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "openId",
+            "in": "path",
+            "description": "openId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tenantCode",
+            "in": "path",
+            "description": "tenantCode",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/LoginResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/bff/wx/jsConfig/{appId}": {
+      "get": {
+        "tags": [
+          "Wechat"
+        ],
+        "summary": "取得公众号的Js Config",
+        "description": "根据appId取得微信公众号的Js Config",
+        "operationId": "getConfigUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "appId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "url",
+            "in": "query",
+            "description": "url",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WeChatRestResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/bff/wx/openidAndAccessToken/{appId}/{code}": {
+      "get": {
+        "tags": [
+          "Wechat"
+        ],
+        "summary": "取得微信用户的openId和AccessToken",
+        "description": "根据appId和code取得微信用户的openId和AccessToken",
+        "operationId": "getOpenidAndAccessTokenUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "appId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "code",
+            "in": "path",
+            "description": "code",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WeChatRestResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/bff/wx/userInfo/{appId}/{code}/{authMethod}": {
+      "get": {
+        "tags": [
+          "Wechat"
+        ],
+        "summary": "取得微信用户的基本信息",
+        "description": "根据appId，code以及验证方式取得微信用户的基本信息",
+        "operationId": "getUserBaseByCodeUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "appId",
+            "in": "path",
+            "description": "appId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "code",
+            "in": "path",
+            "description": "code",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authMethod",
+            "in": "path",
+            "description": "authMethod",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WeChatRestResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
         }
       }
     }

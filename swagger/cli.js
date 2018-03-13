@@ -23,12 +23,12 @@ exports.workPath = () => {
 
 exports.lang = () => {
   if (program.language === true || program.language === undefined) {
-    console.log('No language, using English (en) as default');
+    console.log('  \x1b[4mNo language, using English (en) as default\x1b[0m');
     return 'en';
   }
 
   if (program.language !== true) {
-    console.log('Generating ' + program.language + ' swagger file...');
+    console.log('  \x1b[4mGenerating\x1b[0m ' + program.language + ' swagger file...');
   }
 
   return program.language;
