@@ -6,7 +6,7 @@ var format = require('date-fns/format')
 var zh_cnLocale = require('date-fns/locale/zh_cn')
 
 // 获取 -p 参数，确定merge.js 的工作路径并打印
-var path = __dirname + '/' + cli.workPath();
+var path = __dirname + '/projects/' + cli.workPath();
 //console.log('  \x1b[4mWorking path\x1b[0m: %s', path);
 
 //配置文件
@@ -43,6 +43,15 @@ for (var i = 0; i < lang.length; i++) {
 
   //读取翻译，更新到swagger
   var properties = fs.readFileSync(__dirname + '/locales/swagger-' + lang[i] + '.properties', 'utf8');
+  // 将文件按行拆成数组，执行。替换swagger里面的string
+  properties.split(/\r?\n/).forEach(function (line) {
+    try {
+      eval(line);
+    } catch (err) {
+      //console.log('Swagger translation error: %s', err);
+    }
+  });
+  properties = fs.readFileSync(path + '/locales/swagger.properties', 'utf8');
   // 将文件按行拆成数组，执行。替换swagger里面的string
   properties.split(/\r?\n/).forEach(function (line) {
     try {

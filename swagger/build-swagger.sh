@@ -8,4 +8,4 @@ node i18n.js -p $1
 node translation.js -p $1 -l en
 # node translation.js -p $1 -l cn
 
-cp  ./$1/dist/swagger*.json ../dist/swagger/
+cp  ./projects/$1/dist/swagger*.json ../dist/swagger/
