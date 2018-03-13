@@ -7,7 +7,7 @@
     "contact": {
       "name": "eBaoTech"
     },
-    "description": "This document is the API specification for the eBaoCloud Life part. To practice and run the APIs in this document, you need to apply an eBaoCloud tenant account(starting from a sandbox account instead of production account) first.<br>\nContact liliang.zhu@ebaotech.com for more information and trial using.\n\n# Built on\nTue Mar 13 2018, 19:36:06 +08:00\n\n# Versioning\nAPI version| Date  |Comments\n"
+    "description": "This document is the API specification for the eBaoCloud Life part. To practice and run the APIs in this document, you need to apply an eBaoCloud tenant account(starting from a sandbox account instead of production account) first.<br>\nContact liliang.zhu@ebaotech.com for more information and trial using.\n\n# Built on\nTue Mar 13 2018, 19:41:03 +08:00\n\n# Versioning\nAPI version| Date  |Comments\n"
   },
   "host": "eli.ebaocloud.com.cn",
   "basePath": "/bff",

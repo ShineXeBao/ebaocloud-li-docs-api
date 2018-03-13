@@ -51,15 +51,18 @@ for (var i = 0; i < lang.length; i++) {
       //console.log('Swagger translation error: %s', err);
     }
   });
-  properties = fs.readFileSync(path + '/locales/swagger.properties', 'utf8');
+
+  try {
+    properties = fs.readFileSync(path + '/locales/swagger.properties', 'utf8');
   // 将文件按行拆成数组，执行。替换swagger里面的string
-  properties.split(/\r?\n/).forEach(function (line) {
-    try {
-      eval(line);
-    } catch (err) {
-      //console.log('Swagger translation error: %s', err);
-    }
-  });
+    properties.split(/\r?\n/).forEach(function (line) {
+      try {
+        eval(line);
+      } catch (err) {
+        //console.log('Swagger translation error: %s', err);
+      }
+    });
+  } catch (err) {};
 
   //替换json string里面的timestamp为当前时间
   var swaggerString = JSON.stringify(swagger, null, 2);

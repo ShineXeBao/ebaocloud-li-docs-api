@@ -1,0 +1,30 @@
+{
+  "lang": [
+    "en",
+    "cn"
+  ],
+  "sourceSwagger": [
+    "/source/claim-swagger.json",
+    "/source/freelook-swagger.json",
+    "/source/policy-swagger.json"
+  ],
+  "info": {
+    "version": "0.1.1",
+    "title": "eBaoCloud LI OpenAPI",
+    "termsOfService": "http://api.ebaocloud.life/",
+    "contact" : {
+      "email" : "liliang.zhu@ebaotech.com"
+    }
+  },
+  "schemes": [
+    "https"
+  ],
+  "URL": "sandbox.gw.ebaocloud.com.cn",
+  "URlPath": "rest",
+  "tmp": {
+    "swagger": "/tmp/merged-swagger.json",
+    "properties": "/tmp/swagger.properties",
+    "swaggerTemplate": "/tmp/swagger-template.json"
+  }
+
+}
