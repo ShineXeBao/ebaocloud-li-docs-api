@@ -7,6 +7,7 @@ var zh_cnLocale = require('date-fns/locale/zh_cn')
 
 // 获取 -p 参数，确定merge.js 的工作路径并打印
 var path = __dirname + '/projects/' + cli.workPath();
+console.log('\x1b[1m2. i18n\x1b[0m');
 console.log('  \x1b[4mWorking path\x1b[0m: %s', path);
 
 //配置文件

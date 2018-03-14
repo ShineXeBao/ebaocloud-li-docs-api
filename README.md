@@ -34,7 +34,6 @@ swagger目录是一个独立的node程序目录，如下
 ├── enum.js                 抽取enum，目前因为没有在文档中展示enum，暂时不需要用
 ├── i18n.js                 抽取swagger里面的中文字符串到翻译目录，共后续翻译使用
 ├── merge.js                合并多个swagger文件到单个swagger文件
-├── readme.md               最新的readme请看本文档
 └── translation.js          生成翻译后的swagger
 ```
 #### 使用方法
@@ -44,53 +43,52 @@ swagger目录是一个独立的node程序目录，如下
 ```
  ./build-swagger.sh standard
 ```
-根据传入参数```standard```，该命令对分别执行，如下命令。后面会解释每一个命令的作用。
+脚本内容如下：
 ```
-#文件合并和初始化
-node merge.js -p standard
+  根据传入参数```standard```，该命令对分别执行，如下命令。后面会解释每一个命令的作用。
+  ```
+  #文件合并和初始化
+  node merge.js -p standard
 
-#抽取翻译字符串
-node i18n.js -p standard
+  #抽取翻译字符串
+  node i18n.js -p standard
 
-#生成最终文件
-node translation.js -p standard
-
+  #生成最终文件
+  node translation.js -p standard
 ```
 #### 配置文件
 每个项目都有一个配置文件```config.json```，打开如下
 ```
-{
-  "lang": [                             //该项目需要支持的语言，需要有对应的properties支持
-    "en",
-    "cn"
-  ],
-  "sourceSwagger": [                    //该项目需要merge的原始swagger文件列表
-    "/source/product.json",
-    "/source/proposal.json"
-  ],
-  "info": {
-    "version": "1.1",
-    "title": "eBaoCloud LI OpenAPI",
-    "termsOfService": "http://api.ebaocloud.life/",
-    "contact" : {
-      "email" : "liliang.zhu@ebaotech.com"
+  {
+    "lang": [                             //该项目需要支持的语言，需要有对应的properties支持
+      "en",
+      "cn"
+    ],
+    "sourceSwagger": [                    //该项目需要merge的原始swagger文件列表
+      "/source/product.json",
+      "/source/proposal.json"
+    ],
+    "info": {                             //这些内容，最终会写入swagger文件，根据实际情况更新和修改。
+      "version": "1.1",
+      "title": "eBaoCloud LI OpenAPI",
+      "termsOfService": "http://api.ebaocloud.life/",
+      "contact" : {
+        "email" : "liliang.zhu@ebaotech.com"
+      }
+    },
+    "schemes": [
+      "https"
+    ],
+    "URL": "sandbox.gw.ebaocloud.com.cn",
+    "URlPath": "/eBao/1.0/",
+    "tmp": {                              //临时输出文件路径（正常情况下，不需要改动）
+      "swagger": "/tmp/merged-swagger.json",
+      "properties": "/tmp/swagger.properties",
+      "swaggerTemplate": "/tmp/swagger-template.json"
     }
-  },
-  "schemes": [
-    "https"
-  ],
-  "URL": "sandbox.gw.ebaocloud.com.cn",
-  "URlPath": "/eBao/1.0/",
-  "tmp": {                              //临时输出文件路径（正常情况下，不需要改动）
-    "swagger": "/tmp/merged-swagger.json",
-    "properties": "/tmp/swagger.properties",
-    "swaggerTemplate": "/tmp/swagger-template.json"
   }
-
-}
-
 ```
-node 程序会去读取
+node 程序会去读取上述参数，并且放到输出结果中。
 
 ##### 文件获取
 获取服务器上的单个swagger文件。比如```curl -o product.json http://106.14.50.232/pd/v2/api-docs?group=products;``` 保存到本地，一般放到 xxx/source/目录下，备用。
@@ -99,14 +97,29 @@ node 程序会去读取
 合并和生成初始swagger，这个步骤主要完成两个事情
   1. 合并多个swagger文件，如product，proposal到一个文件，因为最终展示swagger必须使用单个文件
   2. 命令如下：
-```node merge.js -p standard```
+```
+node merge.js -p standard```
 ```
  Working path: /Users/liliang.zhu/Works/Projects/Documentation/redoc/swagger/projects/standard
  File(s) will be merged: /source/product.json,/source/proposal.json
  Swagger version: 1.1
 ```
+该命令会根据配置文件，拿到需要merge的文件，进行合并。同时更新info键下的内容。
+
 #### 翻译的String文件提取
+该功能会从之前生成的swagger抽取出需要翻译的字段，存放到 ```./tmp/``` 目录下。同时转换swagger到swagger模板文件。具体可以参考```tmp```目录下的，```swagger-template.json``` 和 ```swagger.properties```
 
+命令如下：
+```
+node i18n.js -p standard
+```
 #### 生成最终swagger文件（多语言）
+注意：在运行这个命令前，需要确保翻译工作已经完成。
 
-  2. 给该swagger 文件添加```info```内容。swagger 文件的```info```字段可以添加任意大小的markdown格式内容，因此可以把大量的注释，说明文档添加进去。我在locales目录下单独写了README.md两个中英文文档，并把他们整体放在```info```下面。
+  1. 命令会到根目录下的 ```./locales```获取对应的 ```swagger-xx.properties```，把翻译结果更新到swagger 模板。
+  2. 给该swagger 文件添加```info```内容。swagger 文件的```info```字段可以添加任意大小的markdown格式内容，因此可以把大量的注释，说明文档添加进去。我在根目录的```./locales/```目录下单独写了README.md两个中英文文档，并把他们整体放在```info```下面。如果，项目```locales```下有README，该README会被优先获取。
+
+命令如下：
+  ```
+  node translation.js -p standard
+  ```

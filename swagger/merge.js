@@ -5,6 +5,8 @@ var fs = require('fs');
 
 // 获取 -p 参数，确定merge.js 的工作路径并打印
 var path = __dirname + '/projects/' + cli.workPath();
+
+console.log('\x1b[1m1. Merge\x1b[0m');
 console.log('  \x1b[4mWorking path\x1b[0m: %s', path);
 
 //配置文件
@@ -28,8 +30,8 @@ var mergedJson = swaggermerge.merge(config.sourceSwagger, config.info, config.UR
 if (!fs.existsSync(path + '/tmp')) {
   fs.mkdirSync(path + '/tmp');
 }
-
 fs.writeFileSync(path + config.tmp.swagger, JSON.stringify(mergedJson, null, 2));
+
 console.log('  \x1b[1m...Done\x1b[0m');
 console.log('  \x1b[4mWriting file to\x1b[0m: %s', path + config.tmp.swagger);
 console.log('\n')
