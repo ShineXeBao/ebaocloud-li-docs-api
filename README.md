@@ -44,9 +44,8 @@ swagger目录是一个独立的node程序目录，如下
  ./build-swagger.sh standard
 ```
 脚本内容如下：
+
 ```
-  根据传入参数```standard```，该命令对分别执行，如下命令。后面会解释每一个命令的作用。
-  ```
   #文件合并和初始化
   node merge.js -p standard
 
@@ -56,6 +55,8 @@ swagger目录是一个独立的node程序目录，如下
   #生成最终文件
   node translation.js -p standard
 ```
+  根据传入参数standard，该命令对分别执行，如下命令。后面会解释每一个命令的作用。
+
 #### 配置文件
 每个项目都有一个配置文件```config.json```，打开如下
 ```
@@ -91,7 +92,11 @@ swagger目录是一个独立的node程序目录，如下
 node 程序会去读取上述参数，并且放到输出结果中。
 
 ##### 文件获取
-获取服务器上的单个swagger文件。比如```curl -o product.json http://106.14.50.232/pd/v2/api-docs?group=products;``` 保存到本地，一般放到 xxx/source/目录下，备用。
+获取服务器上的单个swagger文件。比如
+```
+curl -o product.json http://106.14.50.232/pd/v2/api-docs?group=products;
+```
+保存到本地，一般放到 xxx/source/目录下，备用。
 
 ##### 文件合并和初始化
 合并和生成初始swagger，这个步骤主要完成两个事情
