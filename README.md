@@ -98,7 +98,9 @@ node 程序会去读取上述参数，并且放到输出结果中。
   1. 合并多个swagger文件，如product，proposal到一个文件，因为最终展示swagger必须使用单个文件
   2. 命令如下：
 ```
-node merge.js -p standard```
+node merge.js -p standard
+```
+
 ```
  Working path: /Users/liliang.zhu/Works/Projects/Documentation/redoc/swagger/projects/standard
  File(s) will be merged: /source/product.json,/source/proposal.json
