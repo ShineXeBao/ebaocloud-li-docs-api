@@ -5,11 +5,11 @@
   ],
   "sourceSwagger": [
     "/source/claim-swagger.json",
-    "/source/freelook-swagger.json",
+    "/source/policyalterations-swagger.json",
     "/source/policy-swagger.json"
   ],
   "info": {
-    "version": "0.1.1",
+    "version": "0.2.0",
     "title": "eBaoCloud LI OpenAPI",
     "termsOfService": "http://api.ebaocloud.life/",
     "contact" : {

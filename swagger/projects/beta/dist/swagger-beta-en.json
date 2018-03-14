@@ -1,13 +1,13 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "0.1.1",
+    "version": "0.2.0",
     "title": "eBaoCloud LI OpenAPI",
     "termsOfService": "http://api.ebaocloud.life/",
     "contact": {
       "email": "liliang.zhu@ebaotech.com"
     },
-    "description": "This document is the API specification for the eBaoCloud Life part. To practice and run the APIs in this document, you need to apply an eBaoCloud tenant account(starting from a sandbox account instead of production account) first.<br>\nContact liliang.zhu@ebaotech.com for more information and trial using.\n\n# Built on\nTue Mar 13 2018, 19:44:00 +08:00\n\n# Versioning\nAPI version| Date  |Comments\n"
+    "description": "This document is the API specification for the eBaoCloud Life part. To practice and run the APIs in this document, you need to apply an eBaoCloud tenant account(starting from a sandbox account instead of production account) first.<br>\nContact liliang.zhu@ebaotech.com for more information and trial using.\n\n# Built on\nWed Mar 14 2018, 17:31:35 +08:00\n\n# Versioning\nAPI version| Date  |Comments\n"
   },
   "host": "sandbox.gw.ebaocloud.com.cn",
   "basePath": "rest",
@@ -21,8 +21,10 @@
       "name": "Claim"
     },
     {
-      "name": "policy alteration",
-      "description": "tags['1'].description"
+      "name": "Freelook"
+    },
+    {
+      "name": "ChangeContactInfo"
     },
     {
       "name": "Policy"
@@ -258,316 +260,698 @@
         }
       }
     },
-    "AlterationItemResultInfo": {
+    "ChangingContactInfoResponse": {
       "type": "object",
       "properties": {
-        "effectiveDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Effective date, format: yyyy-MM-dd'T'HH:mm:ss"
-        },
-        "freelookResultInfo": {
-          "$ref": "#/definitions/FreelookResultInfo"
-        },
-        "orderId": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Alteration order, default is 1"
-        },
-        "policyChgId": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Policy alteration internal id"
-        },
-        "policyId": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Policy internal id"
-        },
-        "serviceId": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Alteration type id<br>201 - Freelook",
-          "example": "201"
-        },
-        "submissionDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Submission date, format: yyyy-MM-dd'T'HH:mm:ss"
-        }
-      }
-    },
-    "PolicyAlterationResultInfo": {
-      "type": "object",
-      "properties": {
-        "changeId": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Alteration internal id"
-        },
         "clientRequestId": {
           "type": "string",
-          "description": "Client request id, to identify a request"
+          "description": "definitions.ChangingContactInfoResponse.properties.clientRequestId.description"
         },
         "clientRequestTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Client request time, format: yyyy-MM-dd'T'HH:mm:ss"
+          "description": "definitions.ChangingContactInfoResponse.properties.clientRequestTime.description"
+        },
+        "result": {
+          "type": "integer",
+          "format": "int32",
+          "description": "definitions.ChangingContactInfoResponse.properties.result.description"
+        },
+        "messages": {
+          "type": "array",
+          "description": "definitions.ChangingContactInfoResponse.properties.messages.description",
+          "items": {
+            "$ref": "#/definitions/GenericValidationResult"
+          }
         },
         "exceptions": {
           "type": "array",
+          "description": "definitions.ChangingContactInfoResponse.properties.exceptions.description",
           "items": {
             "type": "string"
-          },
-          "description": "Exception messages"
+          }
+        },
+        "extendedProps": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "changeNo": {
+          "type": "string",
+          "description": "definitions.ChangingContactInfoResponse.properties.changeNo.description"
         },
         "finishTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Alteration finishing time, format: yyyy-MM-dd'T'HH:mm:ss"
+          "description": "definitions.ChangingContactInfoResponse.properties.finishTime.description"
         },
         "itemResults": {
           "type": "array",
+          "description": "definitions.ChangingContactInfoResponse.properties.itemResults.description",
           "items": {
-            "$ref": "#/definitions/AlterationItemResultInfo"
-          },
-          "description": "Alteration items"
+            "$ref": "#/definitions/ChangingContactInfoItemResultInfo"
+          }
+        }
+      }
+    },
+    "AddressInput": {
+      "type": "object",
+      "properties": {
+        "address1": {
+          "type": "string",
+          "example": "上海市",
+          "description": "Province"
         },
-        "result": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Result. <br>1 - Success<br>0 - Failed with business issue<br>-1 - Failed with unknown exception"
-        }
-      }
-    },
-    "CoverageInput": {
-      "type": "object",
-      "properties": {
-        "coverageId": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Coverage internal id to be alternated"
-        }
-      }
-    },
-    "FreelookInput": {
-      "type": "object",
-      "properties": {
-        "alteredCoverages": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CoverageInput"
-          },
-          "description": "Coverage to be alternated"
+        "address2": {
+          "type": "string",
+          "example": "上海市",
+          "description": "City"
         },
-        "freelookReason": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Freelook reason<br>51 - Financial Difficulty<br>52 - Agent Misrepresented<br>53 - Poor Service from Agent<br>54 - Mismatched Product<br>55 - Others",
-          "enum": [
-            "51",
-            "52",
-            "53",
-            "54",
-            "55"
-          ]
+        "address3": {
+          "type": "string",
+          "example": "杨浦区",
+          "description": "District"
+        },
+        "address4": {
+          "type": "string",
+          "example": "淞沪路270号创智天地3号楼3楼",
+          "description": "Address"
+        },
+        "postCode": {
+          "type": "string",
+          "example": "200433",
+          "description": "Post code"
         }
       }
     },
-    "GenericVO": {
-      "type": "object",
-      "properties": {
-        "extObject": {
-          "$ref": "#/definitions/GenericVO"
-        }
-      }
-    },
-    "PolicyAlterationInput": {
+    "FreelookResponse": {
       "type": "object",
       "properties": {
         "clientRequestId": {
           "type": "string",
-          "description": "Client request id, to identify a request"
+          "description": "definitions.FreelookResponse.properties.clientRequestId.description"
         },
         "clientRequestTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Client request time, format: yyyy-MM-dd'T'HH:mm:ss"
+          "description": "definitions.FreelookResponse.properties.clientRequestTime.description"
         },
-        "items": {
+        "result": {
+          "type": "integer",
+          "format": "int32",
+          "description": "definitions.FreelookResponse.properties.result.description"
+        },
+        "messages": {
           "type": "array",
+          "description": "definitions.FreelookResponse.properties.messages.description",
           "items": {
-            "$ref": "#/definitions/AlterationItemInput"
-          },
-          "description": "Alteration item"
+            "$ref": "#/definitions/GenericValidationResult"
+          }
+        },
+        "exceptions": {
+          "type": "array",
+          "description": "definitions.FreelookResponse.properties.exceptions.description",
+          "items": {
+            "type": "string"
+          }
+        },
+        "extendedProps": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "changeNo": {
+          "type": "string",
+          "description": "definitions.FreelookResponse.properties.changeNo.description"
+        },
+        "finishTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "definitions.FreelookResponse.properties.finishTime.description"
+        },
+        "itemResults": {
+          "type": "array",
+          "description": "definitions.FreelookResponse.properties.itemResults.description",
+          "items": {
+            "$ref": "#/definitions/FreelookItemResultInfo"
+          }
         }
       }
     },
-    "AlterationItemInput": {
+    "ChangingContactInfoItemResultInfo": {
       "type": "object",
+      "required": [
+        "effectiveDate",
+        "orderId",
+        "policyNumber",
+        "serviceId"
+      ],
       "properties": {
+        "itemResult": {
+          "$ref": "#/definitions/ChangingContactInfoResultDetail"
+        },
+        "policyNumber": {
+          "type": "string",
+          "example": "0000017623",
+          "description": "definitions.ChangingContactInfoItemResultInfo.properties.policyNumber.description"
+        },
+        "serviceId": {
+          "type": "integer",
+          "format": "int32",
+          "example": 201,
+          "description": "definitions.ChangingContactInfoItemResultInfo.properties.serviceId.description",
+          "enum": [
+            201,
+            104
+          ]
+        },
+        "submissionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "definitions.ChangingContactInfoItemResultInfo.properties.submissionDate.description"
+        },
         "effectiveDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Effective date, format: yyyy-MM-dd'T'HH:mm:ss"
-        },
-        "freelookInput": {
-          "$ref": "#/definitions/FreelookInput"
+          "description": "definitions.ChangingContactInfoItemResultInfo.properties.effectiveDate.description"
         },
         "orderId": {
           "type": "integer",
           "format": "int32",
-          "description": "Alteration order, default is 1",
-          "example": "1"
+          "description": "definitions.ChangingContactInfoItemResultInfo.properties.orderId.description"
         },
-        "policyChgId": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Policy alteration internal id"
-        },
-        "policyId": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Policy alteration internal id"
-        },
-        "serviceId": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Alteration type id<br>201 - Freelook",
-          "example": "201"
-        },
-        "submissionDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Submission date, format: yyyy-MM-dd'T'HH:mm:ss"
-        }
-      }
-    },
-    "AlterationQuotationInput": {
-      "type": "object",
-      "properties": {
-        "clientRequestId": {
-          "type": "string",
-          "description": "Client request id, to identify a request"
-        },
-        "clientRequestTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Client request time, format: yyyy-MM-dd'T'HH:mm:ss"
-        },
-        "effectiveDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Effective date, format: yyyy-MM-dd'T'HH:mm:ss"
-        },
-        "freelookInput": {
-          "$ref": "#/definitions/FreelookInput"
-        },
-        "policyId": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Policy alteration internal id"
-        },
-        "serviceId": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Alteration type id<br>201 - Freelook",
-          "example": "201"
-        },
-        "submissionDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Submission date, format: yyyy-MM-dd'T'HH:mm:ss"
-        }
-      }
-    },
-    "AlterationQuotationResultInfo": {
-      "type": "object",
-      "properties": {
-        "clientRequestId": {
-          "type": "string",
-          "description": "Client request id, to identify a request"
-        },
-        "clientRequestTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Client request time, format: yyyy-MM-dd'T'HH:mm:ss"
-        },
-        "effectiveDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Effective date, format: yyyy-MM-dd'T'HH:mm:ss"
-        },
-        "exceptions": {
-          "type": "array",
-          "items": {
+        "extendedProps": {
+          "type": "object",
+          "description": "definitions.ChangingContactInfoItemResultInfo.properties.extendedProps.description",
+          "additionalProperties": {
             "type": "string"
-          },
-          "description": "Exception messages"
+          }
+        }
+      }
+    },
+    "FreelookRequest": {
+      "type": "object",
+      "properties": {
+        "clientRequestId": {
+          "type": "string",
+          "description": "definitions.FreelookRequest.properties.clientRequestId.description"
         },
-        "policyId": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Policy alteration internal id"
+        "clientRequestTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "definitions.FreelookRequest.properties.clientRequestTime.description"
         },
-        "freelookResultInfo": {
-          "$ref": "#/definitions/FreelookResultInfo"
+        "extendedProps": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
-        "result": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Result. <br>1 - Success<br>0 - Failed with business issue<br>-1 - Failed with unknown exception"
+        "items": {
+          "type": "array",
+          "description": "definitions.FreelookRequest.properties.items.description",
+          "items": {
+            "$ref": "#/definitions/FreelookItemInput"
+          }
+        }
+      }
+    },
+    "ChangingContactInfoItemInput": {
+      "type": "object",
+      "required": [
+        "effectiveDate",
+        "itemDetail",
+        "orderId",
+        "policyNumber",
+        "serviceId"
+      ],
+      "properties": {
+        "policyNumber": {
+          "type": "string",
+          "example": "0000017623",
+          "description": "definitions.ChangingContactInfoItemInput.properties.policyNumber.description"
         },
         "serviceId": {
           "type": "integer",
           "format": "int32",
-          "description": "Alteration type id<br>201 - Freelook",
-          "example": "201"
+          "example": 201,
+          "description": "definitions.ChangingContactInfoItemInput.properties.serviceId.description",
+          "enum": [
+            201,
+            104
+          ]
         },
         "submissionDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Submission date, format: yyyy-MM-dd'T'HH:mm:ss"
+          "description": "definitions.ChangingContactInfoItemInput.properties.submissionDate.description"
+        },
+        "effectiveDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "definitions.ChangingContactInfoItemInput.properties.effectiveDate.description"
+        },
+        "orderId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "definitions.ChangingContactInfoItemInput.properties.orderId.description"
+        },
+        "itemDetail": {
+          "description": "definitions.ChangingContactInfoItemInput.properties.itemDetail.description",
+          "$ref": "#/definitions/ChangingContactInfoInputDetail"
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "definitions.ChangingContactInfoItemInput.properties.extendedProps.description",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
-    "FreelookResultInfo": {
+    "FreelookResultDetail": {
       "type": "object",
       "properties": {
-        "adminFee": {
+        "totalGrossPremium": {
           "type": "number",
           "format": "double",
-          "description": "Alteration administration fee"
-        },
-        "advancePremium": {
-          "type": "number",
-          "format": "double",
-          "description": "Advance premium"
-        },
-        "medicalFee": {
-          "type": "number",
-          "format": "double",
-          "description": "Medical fee"
-        },
-        "suspense": {
-          "type": "number",
-          "format": "double",
-          "description": "Premium suspense"
+          "description": "definitions.FreelookResultDetail.properties.totalGrossPremium.description"
         },
         "totalExtraPremium": {
           "type": "number",
           "format": "double",
-          "description": "Total additional premium"
+          "description": "definitions.FreelookResultDetail.properties.totalExtraPremium.description"
         },
-        "totalGrossPremium": {
+        "suspense": {
           "type": "number",
           "format": "double",
-          "description": "Total gross premium"
+          "description": "definitions.FreelookResultDetail.properties.suspense.description"
+        },
+        "advancePremium": {
+          "type": "number",
+          "format": "double",
+          "description": "definitions.FreelookResultDetail.properties.advancePremium.description"
+        },
+        "medicalFee": {
+          "type": "number",
+          "format": "double",
+          "description": "definitions.FreelookResultDetail.properties.medicalFee.description"
         },
         "totalRefundAmount": {
           "type": "number",
           "format": "double",
-          "description": "Total refund amount"
+          "description": "definitions.FreelookResultDetail.properties.totalRefundAmount.description"
+        },
+        "adminFee": {
+          "type": "number",
+          "format": "double"
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "definitions.FreelookResultDetail.properties.extendedProps.description",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "FreelookQuotationRequest": {
+      "type": "object",
+      "required": [
+        "effectiveDate",
+        "item",
+        "policyNumber",
+        "serviceId"
+      ],
+      "properties": {
+        "clientRequestId": {
+          "type": "string",
+          "description": "definitions.FreelookQuotationRequest.properties.clientRequestId.description"
+        },
+        "clientRequestTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "definitions.FreelookQuotationRequest.properties.clientRequestTime.description"
+        },
+        "extendedProps": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "policyNumber": {
+          "type": "string",
+          "example": "0000017623",
+          "description": "definitions.FreelookQuotationRequest.properties.policyNumber.description"
+        },
+        "serviceId": {
+          "type": "integer",
+          "format": "int32",
+          "example": 201,
+          "description": "definitions.FreelookQuotationRequest.properties.serviceId.description",
+          "enum": [
+            201
+          ]
+        },
+        "submissionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "definitions.FreelookQuotationRequest.properties.submissionDate.description"
+        },
+        "effectiveDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "definitions.FreelookQuotationRequest.properties.effectiveDate.description"
+        },
+        "item": {
+          "description": "definitions.FreelookQuotationRequest.properties.item.description",
+          "$ref": "#/definitions/FreelookInputDetail"
+        }
+      }
+    },
+    "CommonAlterationCoverageInput": {
+      "type": "object",
+      "properties": {
+        "coverageNo": {
+          "type": "string",
+          "example": "197531",
+          "description": "definitions.CommonAlterationCoverageInput.properties.coverageNo.description"
+        }
+      }
+    },
+    "ChangingContactInfoInputDetail": {
+      "type": "object",
+      "properties": {
+        "partyId": {
+          "type": "string",
+          "description": "definitions.ChangingContactInfoInputDetail.properties.partyId.description"
+        },
+        "partyContact": {
+          "description": "definitions.ChangingContactInfoInputDetail.properties.partyContact.description",
+          "$ref": "#/definitions/PartyContact"
+        },
+        "address": {
+          "description": "definitions.ChangingContactInfoInputDetail.properties.address.description",
+          "$ref": "#/definitions/AddressInput"
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "definitions.ChangingContactInfoInputDetail.properties.extendedProps.description",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "FreelookItemInput": {
+      "type": "object",
+      "required": [
+        "effectiveDate",
+        "itemDetail",
+        "orderId",
+        "policyNumber",
+        "serviceId"
+      ],
+      "properties": {
+        "policyNumber": {
+          "type": "string",
+          "example": "0000017623",
+          "description": "definitions.FreelookItemInput.properties.policyNumber.description"
+        },
+        "serviceId": {
+          "type": "integer",
+          "format": "int32",
+          "example": 201,
+          "description": "definitions.FreelookItemInput.properties.serviceId.description",
+          "enum": [
+            201,
+            104
+          ]
+        },
+        "submissionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "definitions.FreelookItemInput.properties.submissionDate.description"
+        },
+        "effectiveDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "definitions.FreelookItemInput.properties.effectiveDate.description"
+        },
+        "orderId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "definitions.FreelookItemInput.properties.orderId.description"
+        },
+        "itemDetail": {
+          "description": "definitions.FreelookItemInput.properties.itemDetail.description",
+          "$ref": "#/definitions/FreelookInputDetail"
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "definitions.FreelookItemInput.properties.extendedProps.description",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ChangingContactInfoRequest": {
+      "type": "object",
+      "properties": {
+        "clientRequestId": {
+          "type": "string",
+          "description": "definitions.ChangingContactInfoRequest.properties.clientRequestId.description"
+        },
+        "clientRequestTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "definitions.ChangingContactInfoRequest.properties.clientRequestTime.description"
+        },
+        "extendedProps": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "items": {
+          "type": "array",
+          "description": "definitions.ChangingContactInfoRequest.properties.items.description",
+          "items": {
+            "$ref": "#/definitions/ChangingContactInfoItemInput"
+          }
+        }
+      }
+    },
+    "FreelookQuotationResponse": {
+      "type": "object",
+      "properties": {
+        "clientRequestId": {
+          "type": "string",
+          "description": "definitions.FreelookQuotationResponse.properties.clientRequestId.description"
+        },
+        "clientRequestTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "definitions.FreelookQuotationResponse.properties.clientRequestTime.description"
+        },
+        "result": {
+          "type": "integer",
+          "format": "int32",
+          "description": "definitions.FreelookQuotationResponse.properties.result.description"
+        },
+        "messages": {
+          "type": "array",
+          "description": "definitions.FreelookQuotationResponse.properties.messages.description",
+          "items": {
+            "$ref": "#/definitions/GenericValidationResult"
+          }
+        },
+        "exceptions": {
+          "type": "array",
+          "description": "definitions.FreelookQuotationResponse.properties.exceptions.description",
+          "items": {
+            "type": "string"
+          }
+        },
+        "extendedProps": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "policyNumber": {
+          "type": "string",
+          "description": "definitions.FreelookQuotationResponse.properties.policyNumber.description"
+        },
+        "serviceId": {
+          "type": "integer",
+          "format": "int32",
+          "example": 201,
+          "description": "definitions.FreelookQuotationResponse.properties.serviceId.description",
+          "enum": [
+            201
+          ]
+        },
+        "submissionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "definitions.FreelookQuotationResponse.properties.submissionDate.description"
+        },
+        "effectiveDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "definitions.FreelookQuotationResponse.properties.effectiveDate.description"
+        },
+        "quotationResult": {
+          "description": "definitions.FreelookQuotationResponse.properties.quotationResult.description",
+          "$ref": "#/definitions/FreelookResultDetail"
+        }
+      }
+    },
+    "ChangingContactInfoResultDetail": {
+      "type": "object",
+      "properties": {
+        "extendedProps": {
+          "type": "object",
+          "description": "definitions.ChangingContactInfoResultDetail.properties.extendedProps.description",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PartyContact": {
+      "type": "object",
+      "properties": {
+        "homeTel": {
+          "type": "string",
+          "example": "87654321",
+          "description": "Home telephone"
+        },
+        "mobileTel": {
+          "type": "string",
+          "example": "15012345678",
+          "description": "Phone number"
+        },
+        "officeTel": {
+          "type": "string",
+          "example": "88888888",
+          "description": "Work phone"
+        },
+        "officeTelExt": {
+          "type": "string",
+          "example": "1234",
+          "description": "Work phone extension"
+        },
+        "email": {
+          "type": "string",
+          "example": "TestPerson14@126.com",
+          "description": "E-mail:"
+        },
+        "contact": {
+          "type": "string",
+          "example": "张三",
+          "description": "Contact person"
+        },
+        "contactTel": {
+          "type": "string",
+          "example": "88888888",
+          "description": "Contact Phone"
+        },
+        "fax": {
+          "type": "string",
+          "example": "88888887",
+          "description": "Fax: (+86) {0}022 - 24143117{/0}"
+        }
+      }
+    },
+    "FreelookItemResultInfo": {
+      "type": "object",
+      "required": [
+        "effectiveDate",
+        "orderId",
+        "policyNumber",
+        "serviceId"
+      ],
+      "properties": {
+        "itemResult": {
+          "$ref": "#/definitions/FreelookResultDetail"
+        },
+        "policyNumber": {
+          "type": "string",
+          "example": "0000017623",
+          "description": "definitions.FreelookItemResultInfo.properties.policyNumber.description"
+        },
+        "serviceId": {
+          "type": "integer",
+          "format": "int32",
+          "example": 201,
+          "description": "definitions.FreelookItemResultInfo.properties.serviceId.description",
+          "enum": [
+            201,
+            104
+          ]
+        },
+        "submissionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "definitions.FreelookItemResultInfo.properties.submissionDate.description"
+        },
+        "effectiveDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "definitions.FreelookItemResultInfo.properties.effectiveDate.description"
+        },
+        "orderId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "definitions.FreelookItemResultInfo.properties.orderId.description"
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "definitions.FreelookItemResultInfo.properties.extendedProps.description",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "FreelookInputDetail": {
+      "type": "object",
+      "required": [
+        "alteredCoverages",
+        "freelookReason"
+      ],
+      "properties": {
+        "freelookReason": {
+          "type": "integer",
+          "format": "int32",
+          "example": 54,
+          "description": "definitions.FreelookInputDetail.properties.freelookReason.description",
+          "enum": [
+            51,
+            52,
+            53,
+            54,
+            55
+          ]
+        },
+        "alteredCoverages": {
+          "type": "array",
+          "description": "definitions.FreelookInputDetail.properties.alteredCoverages.description",
+          "items": {
+            "$ref": "#/definitions/CommonAlterationCoverageInput"
+          }
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "definitions.FreelookInputDetail.properties.extendedProps.description",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -1720,51 +2104,6 @@
         }
       }
     },
-    "PartyContact": {
-      "type": "object",
-      "properties": {
-        "homeTel": {
-          "type": "string",
-          "example": "87654321",
-          "description": "Home telephone"
-        },
-        "mobileTel": {
-          "type": "string",
-          "example": "15012345678",
-          "description": "Phone number"
-        },
-        "officeTel": {
-          "type": "string",
-          "example": "88888888",
-          "description": "Work phone"
-        },
-        "officeTelExt": {
-          "type": "string",
-          "example": "1234",
-          "description": "Work phone extension"
-        },
-        "email": {
-          "type": "string",
-          "example": "TestPerson14@126.com",
-          "description": "E-mail:"
-        },
-        "contact": {
-          "type": "string",
-          "example": "张三",
-          "description": "Contact person"
-        },
-        "contactTel": {
-          "type": "string",
-          "example": "88888888",
-          "description": "Contact Phone"
-        },
-        "fax": {
-          "type": "string",
-          "example": "88888887",
-          "description": "Fax: (+86) {0}022 - 24143117{/0}"
-        }
-      }
-    },
     "PolicyHolderInfo": {
       "type": "object",
       "properties": {
@@ -2051,13 +2390,13 @@
         }
       }
     },
-    "/policies/alterations/inforce": {
+    "/policy/policy-alterations/{insurerCode}/changeContactInfo": {
       "post": {
         "tags": [
-          "policy alteration"
+          "ChangeContactInfo"
         ],
-        "summary": "Policy alterations",
-        "description": "Policy alterations",
+        "summary": "paths['/policy/policy-alterations/{insurerCode}/changeContactInfo'].post.summary",
+        "description": "paths['/policy/policy-alterations/{insurerCode}/changeContactInfo'].post.description",
         "operationId": "inforceUsingPOST",
         "consumes": [
           "application/json"
@@ -2067,52 +2406,64 @@
         ],
         "parameters": [
           {
+            "name": "insurerCode",
+            "in": "path",
+            "description": "paths['/policy/policy-alterations/{insurerCode}/changeContactInfo'].post.parameters['0'].description",
+            "required": true,
+            "type": "string"
+          },
+          {
             "in": "body",
-            "name": "input",
-            "description": "Input",
+            "name": "request",
+            "description": "paths['/policy/policy-alterations/{insurerCode}/changeContactInfo'].post.parameters['1'].description",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PolicyAlterationInput"
+              "$ref": "#/definitions/ChangingContactInfoRequest"
             }
+          },
+          {
+            "name": "X-ebao-tenant-id",
+            "in": "header",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "paths['/policy/policy-alterations/{insurerCode}/changeContactInfo'].post.responses['200'].description",
             "schema": {
-              "$ref": "#/definitions/PolicyAlterationResultInfo"
+              "$ref": "#/definitions/ChangingContactInfoResponse"
             }
           },
           "201": {
-            "description": "Created"
+            "description": "paths['/policy/policy-alterations/{insurerCode}/changeContactInfo'].post.responses['201'].description"
           },
           "400": {
-            "description": "Bad request"
+            "description": "paths['/policy/policy-alterations/{insurerCode}/changeContactInfo'].post.responses['400'].description"
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "paths['/policy/policy-alterations/{insurerCode}/changeContactInfo'].post.responses['401'].description"
           },
           "403": {
-            "description": "Forbidden"
+            "description": "paths['/policy/policy-alterations/{insurerCode}/changeContactInfo'].post.responses['403'].description"
           },
           "404": {
-            "description": "Not Found"
+            "description": "paths['/policy/policy-alterations/{insurerCode}/changeContactInfo'].post.responses['404'].description"
           },
           "500": {
-            "description": "Internal Server Error"
+            "description": "paths['/policy/policy-alterations/{insurerCode}/changeContactInfo'].post.responses['500'].description"
           }
         }
       }
     },
-    "/policies/alterations/quotations": {
+    "/policy/policy-alterations/{insurerCode}/freelook": {
       "post": {
         "tags": [
-          "policy alteration",
-          "quotation"
+          "Freelook"
         ],
-        "summary": "Quotations for policy alterations",
-        "description": "Quotations for policy alterations",
-        "operationId": "quote2UsingPOST",
+        "summary": "paths['/policy/policy-alterations/{insurerCode}/freelook'].post.summary",
+        "description": "paths['/policy/policy-alterations/{insurerCode}/freelook'].post.description",
+        "operationId": "inforceUsingPOST_1",
         "consumes": [
           "application/json"
         ],
@@ -2121,39 +2472,118 @@
         ],
         "parameters": [
           {
+            "name": "insurerCode",
+            "in": "path",
+            "description": "paths['/policy/policy-alterations/{insurerCode}/freelook'].post.parameters['0'].description",
+            "required": true,
+            "type": "string"
+          },
+          {
             "in": "body",
-            "name": "input",
-            "description": "Input",
+            "name": "request",
+            "description": "paths['/policy/policy-alterations/{insurerCode}/freelook'].post.parameters['1'].description",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AlterationQuotationInput"
+              "$ref": "#/definitions/FreelookRequest"
             }
+          },
+          {
+            "name": "X-ebao-tenant-id",
+            "in": "header",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "paths['/policy/policy-alterations/{insurerCode}/freelook'].post.responses['200'].description",
             "schema": {
-              "$ref": "#/definitions/AlterationQuotationResultInfo"
+              "$ref": "#/definitions/FreelookResponse"
             }
           },
           "201": {
-            "description": "Created"
+            "description": "paths['/policy/policy-alterations/{insurerCode}/freelook'].post.responses['201'].description"
           },
           "400": {
-            "description": "Bad request"
+            "description": "paths['/policy/policy-alterations/{insurerCode}/freelook'].post.responses['400'].description"
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "paths['/policy/policy-alterations/{insurerCode}/freelook'].post.responses['401'].description"
           },
           "403": {
-            "description": "Forbidden"
+            "description": "paths['/policy/policy-alterations/{insurerCode}/freelook'].post.responses['403'].description"
           },
           "404": {
-            "description": "Not Found"
+            "description": "paths['/policy/policy-alterations/{insurerCode}/freelook'].post.responses['404'].description"
           },
           "500": {
-            "description": "Internal Server Error"
+            "description": "paths['/policy/policy-alterations/{insurerCode}/freelook'].post.responses['500'].description"
+          }
+        }
+      }
+    },
+    "/policy/policy-alterations/{insurerCode}/freelook/quotations": {
+      "post": {
+        "tags": [
+          "Freelook"
+        ],
+        "summary": "paths['/policy/policy-alterations/{insurerCode}/freelook/quotations'].post.summary",
+        "description": "paths['/policy/policy-alterations/{insurerCode}/freelook/quotations'].post.description",
+        "operationId": "quoteUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "insurerCode",
+            "in": "path",
+            "description": "paths['/policy/policy-alterations/{insurerCode}/freelook/quotations'].post.parameters['0'].description",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "request",
+            "description": "paths['/policy/policy-alterations/{insurerCode}/freelook/quotations'].post.parameters['1'].description",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FreelookQuotationRequest"
+            }
+          },
+          {
+            "name": "X-ebao-tenant-id",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "paths['/policy/policy-alterations/{insurerCode}/freelook/quotations'].post.responses['200'].description",
+            "schema": {
+              "$ref": "#/definitions/FreelookQuotationResponse"
+            }
+          },
+          "201": {
+            "description": "paths['/policy/policy-alterations/{insurerCode}/freelook/quotations'].post.responses['201'].description"
+          },
+          "400": {
+            "description": "paths['/policy/policy-alterations/{insurerCode}/freelook/quotations'].post.responses['400'].description"
+          },
+          "401": {
+            "description": "paths['/policy/policy-alterations/{insurerCode}/freelook/quotations'].post.responses['401'].description"
+          },
+          "403": {
+            "description": "paths['/policy/policy-alterations/{insurerCode}/freelook/quotations'].post.responses['403'].description"
+          },
+          "404": {
+            "description": "paths['/policy/policy-alterations/{insurerCode}/freelook/quotations'].post.responses['404'].description"
+          },
+          "500": {
+            "description": "paths['/policy/policy-alterations/{insurerCode}/freelook/quotations'].post.responses['500'].description"
           }
         }
       }
