@@ -8,7 +8,7 @@ node merge.js -p $1
 node i18n.js -p $1
 
 #生成最终文件
-node translation.js -p $1 -l en
+node translation.js -p $1
 
 #拷贝到对应目录
 cp  ./projects/$1/dist/swagger*.json ../dist/swagger/

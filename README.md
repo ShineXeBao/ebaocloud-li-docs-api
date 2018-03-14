@@ -44,6 +44,53 @@ swagger目录是一个独立的node程序目录，如下
 ```
  ./build-swagger.sh standard
 ```
+根据传入参数```standard```，该命令对分别执行，如下命令。后面会解释每一个命令的作用。
+```
+#文件合并和初始化
+node merge.js -p standard
+
+#抽取翻译字符串
+node i18n.js -p standard
+
+#生成最终文件
+node translation.js -p standard
+
+```
+#### 配置文件
+每个项目都有一个配置文件```config.json```，打开如下
+```
+{
+  "lang": [                             //该项目需要支持的语言，需要有对应的properties支持
+    "en",
+    "cn"
+  ],
+  "sourceSwagger": [                    //该项目需要merge的原始swagger文件列表
+    "/source/product.json",
+    "/source/proposal.json"
+  ],
+  "info": {
+    "version": "1.1",
+    "title": "eBaoCloud LI OpenAPI",
+    "termsOfService": "http://api.ebaocloud.life/",
+    "contact" : {
+      "email" : "liliang.zhu@ebaotech.com"
+    }
+  },
+  "schemes": [
+    "https"
+  ],
+  "URL": "sandbox.gw.ebaocloud.com.cn",
+  "URlPath": "/eBao/1.0/",
+  "tmp": {                              //临时输出文件路径（正常情况下，不需要改动）
+    "swagger": "/tmp/merged-swagger.json",
+    "properties": "/tmp/swagger.properties",
+    "swaggerTemplate": "/tmp/swagger-template.json"
+  }
+
+}
+
+```
+node 程序会去读取
 
 ##### 文件获取
 获取服务器上的单个swagger文件。比如```curl -o product.json http://106.14.50.232/pd/v2/api-docs?group=products;``` 保存到本地，一般放到 xxx/source/目录下，备用。
@@ -54,9 +101,9 @@ swagger目录是一个独立的node程序目录，如下
   2. 命令如下：
 ```node merge.js -p standard```
 ```
-Working path: /Users/liliang.zhu/Works/Projects/Documentation/redoc/swagger/standar
-Warning: multiple definitions with the same name has define in swagger collection: GenericValidationResult
-...Done
+ Working path: /Users/liliang.zhu/Works/Projects/Documentation/redoc/swagger/projects/standard
+ File(s) will be merged: /source/product.json,/source/proposal.json
+ Swagger version: 1.1
 ```
 #### 翻译的String文件提取
 
