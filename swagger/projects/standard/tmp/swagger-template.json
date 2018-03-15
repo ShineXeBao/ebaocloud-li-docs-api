@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "1.1",
+    "version": "1.5",
     "title": "eBaoCloud LI OpenAPI",
     "termsOfService": "http://api.ebaocloud.life/",
     "contact": {
@@ -21,6 +21,12 @@
     },
     {
       "name": "Proposal"
+    },
+    {
+      "name": "Freelook"
+    },
+    {
+      "name": "ChangeContactInfo"
     }
   ],
   "definitions": {
@@ -987,7 +993,7 @@
         },
         "annuityStartYear": {
           "type": "integer",
-          "format": "int64",
+          "format": "int32",
           "description": "definitions.Annuity.properties.annuityStartYear.description"
         },
         "annuityEndPeriod": {
@@ -996,7 +1002,7 @@
         },
         "annuityEndYear": {
           "type": "integer",
-          "format": "int64",
+          "format": "int32",
           "description": "definitions.Annuity.properties.annuityEndYear.description"
         },
         "extFields": {
@@ -2823,14 +2829,14 @@
     "Policy": {
       "type": "object",
       "properties": {
-        "applyDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "definitions.Policy.properties.applyDate.description"
+        "agentDeclarations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AgentDeclaration"
+          }
         },
         "beneficiaries": {
           "type": "array",
-          "description": "definitions.Policy.properties.beneficiaries.description",
           "items": {
             "$ref": "#/definitions/Beneficiary"
           }
@@ -2847,105 +2853,41 @@
         },
         "coverages": {
           "type": "array",
-          "description": "definitions.Policy.properties.coverages.description",
           "items": {
             "$ref": "#/definitions/Coverage"
           }
         },
-        "currency": {
-          "type": "integer",
-          "format": "int32",
-          "example": 1,
-          "description": "definitions.Policy.properties.currency.description",
-          "enum": [
-            1
-          ]
-        },
         "customers": {
           "type": "array",
-          "description": "definitions.Policy.properties.customers.description",
           "items": {
             "$ref": "#/definitions/PolicyCustomer"
           }
         },
         "declarations": {
           "type": "array",
-          "description": "definitions.Policy.properties.declarations.description",
           "items": {
             "$ref": "#/definitions/CustomerDeclaration"
           }
         },
-        "deliverType": {
-          "type": "string",
-          "example": "M",
-          "description": "definitions.Policy.properties.deliverType.description",
-          "enum": [
-            "H",
-            "M"
-          ]
-        },
-        "ePolicyDownloadUrl": {
-          "type": "string",
-          "description": "definitions.Policy.properties.ePolicyDownloadUrl.description"
-        },
-        "expiryDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "definitions.Policy.properties.expiryDate.description"
-        },
-        "extendedProps": {
-          "type": "object",
-          "description": "definitions.Policy.properties.extendedProps.description",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "groupProposalNumber": {
-          "type": "string",
-          "description": "definitions.Policy.properties.groupProposalNumber.description"
-        },
-        "inceptionDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "definitions.Policy.properties.inceptionDate.description"
-        },
-        "installPrem": {
-          "type": "number",
-          "format": "double",
-          "description": "definitions.Policy.properties.installPrem.description"
-        },
         "insureds": {
           "type": "array",
-          "description": "definitions.Policy.properties.insureds.description",
           "items": {
             "$ref": "#/definitions/Insured"
           }
         },
-        "insurerCode": {
-          "type": "string",
-          "description": "definitions.Policy.properties.insurerCode.description"
-        },
-        "issueDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "definitions.Policy.properties.issueDate.description"
-        },
         "payerAccounts": {
           "type": "array",
-          "description": "definitions.Policy.properties.payerAccounts.description",
           "items": {
             "$ref": "#/definitions/PayerAccount"
           }
         },
         "payers": {
           "type": "array",
-          "description": "definitions.Policy.properties.payers.description",
           "items": {
             "$ref": "#/definitions/Payer"
           }
         },
         "policyHolder": {
-          "description": "definitions.Policy.properties.policyHolder.description",
           "$ref": "#/definitions/PolicyHolder"
         },
         "policyId": {
@@ -2953,13 +2895,19 @@
           "description": "definitions.Policy.properties.policyId.description",
           "readOnly": true
         },
-        "policyNumber": {
-          "type": "string",
-          "description": "definitions.Policy.properties.policyNumber.description"
-        },
         "policyPackage": {
-          "description": "definitions.Policy.properties.policyPackage.description",
           "$ref": "#/definitions/PolicyPackage"
+        },
+        "tenantCode": {
+          "type": "string",
+          "example": "GUEST",
+          "description": "definitions.Policy.properties.tenantCode.description"
+        },
+        "trustees": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Trustee"
+          }
         },
         "policyType": {
           "type": "integer",
@@ -2972,47 +2920,101 @@
             3
           ]
         },
-        "preprintedProposalNumber": {
-          "type": "string",
-          "description": "definitions.Policy.properties.preprintedProposalNumber.description"
-        },
-        "proposalNumber": {
-          "type": "string",
-          "description": "definitions.Policy.properties.proposalNumber.description"
-        },
-        "quotationCode": {
-          "type": "string",
-          "description": "definitions.Policy.properties.quotationCode.description"
-        },
         "riskStatus": {
           "type": "integer",
           "format": "int32",
           "description": "definitions.Policy.properties.riskStatus.description",
           "readOnly": true
         },
-        "salesChannelCode": {
+        "applyDate": {
           "type": "string",
-          "description": "definitions.Policy.properties.salesChannelCode.description"
+          "format": "date-time",
+          "description": "definitions.Policy.properties.applyDate.description"
         },
-        "serviceAgentCode": {
+        "issueDate": {
           "type": "string",
-          "description": "definitions.Policy.properties.serviceAgentCode.description"
+          "format": "date-time",
+          "description": "definitions.Policy.properties.issueDate.description"
+        },
+        "installPrem": {
+          "type": "number",
+          "format": "double",
+          "description": "definitions.Policy.properties.installPrem.description"
+        },
+        "currency": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "definitions.Policy.properties.currency.description",
+          "enum": [
+            1
+          ]
+        },
+        "ePolicyDownloadUrl": {
+          "type": "string",
+          "description": "definitions.Policy.properties.ePolicyDownloadUrl.description"
+        },
+        "groupProposalNumber": {
+          "type": "string",
+          "description": "definitions.Policy.properties.groupProposalNumber.description"
+        },
+        "inceptionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "definitions.Policy.properties.inceptionDate.description"
+        },
+        "expiryDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "definitions.Policy.properties.expiryDate.description"
+        },
+        "proposalNumber": {
+          "type": "string",
+          "description": "definitions.Policy.properties.proposalNumber.description"
+        },
+        "deliverType": {
+          "type": "string",
+          "example": "M",
+          "description": "definitions.Policy.properties.deliverType.description",
+          "enum": [
+            "H",
+            "M"
+          ]
+        },
+        "policyNumber": {
+          "type": "string",
+          "description": "definitions.Policy.properties.policyNumber.description"
+        },
+        "quotationCode": {
+          "type": "string",
+          "description": "definitions.Policy.properties.quotationCode.description"
         },
         "submissionDate": {
           "type": "string",
           "format": "date-time",
           "description": "definitions.Policy.properties.submissionDate.description"
         },
-        "tenantCode": {
+        "serviceAgentCode": {
           "type": "string",
-          "example": "GUEST",
-          "description": "definitions.Policy.properties.tenantCode.description"
+          "description": "definitions.Policy.properties.serviceAgentCode.description"
         },
-        "trustees": {
-          "type": "array",
-          "description": "definitions.Policy.properties.trustees.description",
-          "items": {
-            "$ref": "#/definitions/Trustee"
+        "salesChannelCode": {
+          "type": "string",
+          "description": "definitions.Policy.properties.salesChannelCode.description"
+        },
+        "insurerCode": {
+          "type": "string",
+          "description": "definitions.Policy.properties.insurerCode.description"
+        },
+        "preprintedProposalNumber": {
+          "type": "string",
+          "description": "definitions.Policy.properties.preprintedProposalNumber.description"
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "definitions.Policy.properties.extendedProps.description",
+          "additionalProperties": {
+            "type": "string"
           }
         }
       }
@@ -3025,28 +3027,10 @@
           "description": "definitions.PremInvestRate.properties.addPremId.description",
           "readOnly": true
         },
-        "assignRate": {
-          "type": "number",
-          "format": "double",
-          "example": 1,
-          "description": "definitions.PremInvestRate.properties.assignRate.description"
-        },
         "coverageId": {
           "type": "string",
           "description": "definitions.PremInvestRate.properties.coverageId.description",
           "readOnly": true
-        },
-        "extendedProps": {
-          "type": "object",
-          "description": "definitions.PremInvestRate.properties.extendedProps.description",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "fundCode": {
-          "type": "string",
-          "example": "F001",
-          "description": "definitions.PremInvestRate.properties.fundCode.description"
         },
         "listId": {
           "type": "string",
@@ -3057,21 +3041,39 @@
           "type": "string",
           "description": "definitions.PremInvestRate.properties.policyId.description",
           "readOnly": true
+        },
+        "fundCode": {
+          "type": "string",
+          "example": "F001",
+          "description": "definitions.PremInvestRate.properties.fundCode.description"
+        },
+        "assignRate": {
+          "type": "number",
+          "format": "double",
+          "example": 1,
+          "description": "definitions.PremInvestRate.properties.assignRate.description"
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "definitions.PremInvestRate.properties.extendedProps.description",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
     "PolicyPackage": {
       "type": "object",
       "properties": {
-        "packageCode": {
-          "type": "string",
-          "description": "definitions.PolicyPackage.properties.packageCode.description"
-        },
         "packageId": {
           "type": "integer",
           "format": "int64",
           "description": "definitions.PolicyPackage.properties.packageId.description",
           "readOnly": true
+        },
+        "packageCode": {
+          "type": "string",
+          "description": "definitions.PolicyPackage.properties.packageCode.description"
         },
         "unit": {
           "type": "number",
@@ -3092,12 +3094,10 @@
           "format": "date-time",
           "description": "definitions.QuotationResponse.properties.clientRequestTime.description"
         },
-        "exceptions": {
-          "type": "array",
-          "description": "definitions.QuotationResponse.properties.exceptions.description",
-          "items": {
-            "type": "string"
-          }
+        "result": {
+          "type": "integer",
+          "format": "int32",
+          "description": "definitions.QuotationResponse.properties.result.description"
         },
         "messages": {
           "type": "array",
@@ -3106,20 +3106,33 @@
             "$ref": "#/definitions/GenericValidationResult"
           }
         },
+        "exceptions": {
+          "type": "array",
+          "description": "definitions.QuotationResponse.properties.exceptions.description",
+          "items": {
+            "type": "string"
+          }
+        },
+        "extendedProps": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "policy": {
           "description": "definitions.QuotationResponse.properties.policy.description",
           "$ref": "#/definitions/QuotationPolicyResult"
-        },
-        "result": {
-          "type": "integer",
-          "format": "int32",
-          "description": "definitions.QuotationResponse.properties.result.description"
         }
       }
     },
     "Address": {
       "type": "object",
       "properties": {
+        "addressId": {
+          "type": "string",
+          "description": "definitions.Address.properties.addressId.description",
+          "readOnly": true
+        },
         "address1": {
           "type": "string",
           "example": "上海市",
@@ -3140,11 +3153,6 @@
           "example": "淞沪路270号创智天地3号楼3楼",
           "description": "definitions.Address.properties.address4.description"
         },
-        "addressId": {
-          "type": "string",
-          "description": "definitions.Address.properties.addressId.description",
-          "readOnly": true
-        },
         "postCode": {
           "type": "string",
           "example": "200433",
@@ -3155,6 +3163,24 @@
     "CoverageInsuredInput": {
       "type": "object",
       "properties": {
+        "partySerialId": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "definitions.CoverageInsuredInput.properties.partySerialId.description"
+        },
+        "orderId": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "definitions.CoverageInsuredInput.properties.orderId.description"
+        },
+        "occupationClass": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "definitions.CoverageInsuredInput.properties.occupationClass.description"
+        },
         "age": {
           "type": "integer",
           "format": "int32",
@@ -3167,24 +3193,6 @@
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "occupationClass": {
-          "type": "integer",
-          "format": "int32",
-          "example": 1,
-          "description": "definitions.CoverageInsuredInput.properties.occupationClass.description"
-        },
-        "orderId": {
-          "type": "integer",
-          "format": "int32",
-          "example": 1,
-          "description": "definitions.CoverageInsuredInput.properties.orderId.description"
-        },
-        "partySerialId": {
-          "type": "integer",
-          "format": "int32",
-          "example": 1,
-          "description": "definitions.CoverageInsuredInput.properties.partySerialId.description"
         }
       }
     },
@@ -3221,22 +3229,6 @@
     "InsuredInput": {
       "type": "object",
       "properties": {
-        "extendedProps": {
-          "type": "object",
-          "description": "definitions.InsuredInput.properties.extendedProps.description",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "medicalIndi": {
-          "type": "string",
-          "example": "Y",
-          "description": "definitions.InsuredInput.properties.medicalIndi.description",
-          "enum": [
-            "Y",
-            "N"
-          ]
-        },
         "partySerialId": {
           "type": "integer",
           "format": "int32",
@@ -3257,6 +3249,38 @@
             7
           ]
         },
+        "relationToMainInsured": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "definitions.InsuredInput.properties.relationToMainInsured.description",
+          "enum": [
+            1,
+            2,
+            3,
+            10,
+            4,
+            7
+          ]
+        },
+        "medicalIndi": {
+          "type": "string",
+          "example": "Y",
+          "description": "definitions.InsuredInput.properties.medicalIndi.description",
+          "enum": [
+            "Y",
+            "N"
+          ]
+        },
+        "medicalExamIndi": {
+          "type": "string",
+          "example": "N",
+          "description": "definitions.InsuredInput.properties.medicalExamIndi.description",
+          "enum": [
+            "Y",
+            "N"
+          ]
+        },
         "socialSecurityIndi": {
           "type": "string",
           "example": "Y",
@@ -3265,32 +3289,19 @@
             "Y",
             "N"
           ]
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "definitions.InsuredInput.properties.extendedProps.description",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
     "PayerAccount": {
       "type": "object",
       "properties": {
-        "bankAccount": {
-          "description": "definitions.PayerAccount.properties.bankAccount.description",
-          "$ref": "#/definitions/BankAccount"
-        },
-        "extendedProps": {
-          "type": "object",
-          "description": "definitions.PayerAccount.properties.extendedProps.description",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "listId": {
-          "type": "string",
-          "description": "definitions.PayerAccount.properties.listId.description",
-          "readOnly": true
-        },
-        "nextBankAccount": {
-          "description": "definitions.PayerAccount.properties.nextBankAccount.description",
-          "$ref": "#/definitions/BankAccount"
-        },
         "paymentMethod": {
           "type": "integer",
           "format": "int32",
@@ -3317,10 +3328,30 @@
             80
           ]
         },
+        "bankAccount": {
+          "description": "definitions.PayerAccount.properties.bankAccount.description",
+          "$ref": "#/definitions/BankAccount"
+        },
+        "listId": {
+          "type": "string",
+          "description": "definitions.PayerAccount.properties.listId.description",
+          "readOnly": true
+        },
+        "nextBankAccount": {
+          "description": "definitions.PayerAccount.properties.nextBankAccount.description",
+          "$ref": "#/definitions/BankAccount"
+        },
         "policyId": {
           "type": "string",
           "description": "definitions.PayerAccount.properties.policyId.description",
           "readOnly": true
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "definitions.PayerAccount.properties.extendedProps.description",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -3341,13 +3372,6 @@
           "type": "integer",
           "format": "int32",
           "description": "definitions.PayPlanInput.properties.endYear.description"
-        },
-        "extendedProps": {
-          "type": "object",
-          "description": "definitions.PayPlanInput.properties.extendedProps.description",
-          "additionalProperties": {
-            "type": "string"
-          }
         },
         "gurntPeriod": {
           "type": "integer",
@@ -3413,12 +3437,30 @@
             "7",
             "8"
           ]
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "definitions.PayPlanInput.properties.extendedProps.description",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
     "CoverageInput": {
       "type": "object",
       "properties": {
+        "coverageSerialId": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "definitions.CoverageInput.properties.coverageSerialId.description"
+        },
+        "masterCoverageSerialId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "definitions.CoverageInput.properties.masterCoverageSerialId.description"
+        },
         "chargePeriod": {
           "type": "string",
           "example": "2",
@@ -3436,13 +3478,6 @@
           "example": 20,
           "description": "definitions.CoverageInput.properties.chargeYear.description"
         },
-        "coverageAgents": {
-          "type": "array",
-          "description": "definitions.CoverageInput.properties.coverageAgents.description",
-          "items": {
-            "$ref": "#/definitions/CoverageAgentInput"
-          }
-        },
         "coveragePeriod": {
           "type": "string",
           "example": "1",
@@ -3455,12 +3490,6 @@
             "5"
           ]
         },
-        "coverageSeriaId": {
-          "type": "integer",
-          "format": "int32",
-          "example": 1,
-          "description": "definitions.CoverageInput.properties.coverageSeriaId.description"
-        },
         "coverageYear": {
           "type": "integer",
           "format": "int32",
@@ -3470,11 +3499,48 @@
           "description": "definitions.CoverageInput.properties.currentPremium.description",
           "$ref": "#/definitions/CoveragePremium"
         },
-        "extendedProps": {
-          "type": "object",
-          "description": "definitions.CoverageInput.properties.extendedProps.description",
-          "additionalProperties": {
-            "type": "string"
+        "productCode": {
+          "type": "string",
+          "description": "definitions.CoverageInput.properties.productCode.description"
+        },
+        "insuredCategory": {
+          "type": "string",
+          "example": "0",
+          "description": "definitions.CoverageInput.properties.insuredCategory.description",
+          "enum": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ]
+        },
+        "deferPeriod": {
+          "type": "integer",
+          "format": "int32",
+          "description": "definitions.CoverageInput.properties.deferPeriod.description"
+        },
+        "waiverExt": {
+          "description": "definitions.CoverageInput.properties.waiverExt.description",
+          "$ref": "#/definitions/CoverageExtWaiverInput"
+        },
+        "coverageAgents": {
+          "type": "array",
+          "description": "definitions.CoverageInput.properties.coverageAgents.description",
+          "items": {
+            "$ref": "#/definitions/CoverageAgentInput"
+          }
+        },
+        "payPlans": {
+          "type": "array",
+          "description": "definitions.CoverageInput.properties.payPlans.description",
+          "items": {
+            "$ref": "#/definitions/PayPlanInput"
           }
         },
         "insureds": {
@@ -3484,18 +3550,6 @@
             "$ref": "#/definitions/CoverageInsuredInput"
           }
         },
-        "masterCoverageSerialId": {
-          "type": "integer",
-          "format": "int32",
-          "description": "definitions.CoverageInput.properties.masterCoverageSerialId.description"
-        },
-        "payPlans": {
-          "type": "array",
-          "description": "definitions.CoverageInput.properties.payPlans.description",
-          "items": {
-            "$ref": "#/definitions/PayPlanInput"
-          }
-        },
         "premInvestRates": {
           "type": "array",
           "description": "definitions.CoverageInput.properties.premInvestRates.description",
@@ -3503,46 +3557,33 @@
             "$ref": "#/definitions/ContractInvestRateInput"
           }
         },
-        "productCode": {
-          "type": "string",
-          "description": "definitions.CoverageInput.properties.productCode.description"
+        "singleTopup": {
+          "description": "definitions.CoverageInput.properties.singleTopup.description",
+          "$ref": "#/definitions/SingleTopupInput"
         },
         "recurringTopup": {
           "description": "definitions.CoverageInput.properties.recurringTopup.description",
           "$ref": "#/definitions/RecurringTopupInput"
         },
-        "singleTopup": {
-          "description": "definitions.CoverageInput.properties.singleTopup.description",
-          "$ref": "#/definitions/SingleTopupInput"
+        "mortgageRates": {
+          "type": "array",
+          "description": "definitions.CoverageInput.properties.mortgageRates.description",
+          "items": {
+            "$ref": "#/definitions/MortgageRateInput"
+          }
         },
-        "waiverExt": {
-          "description": "definitions.CoverageInput.properties.waiverExt.description",
-          "$ref": "#/definitions/CoverageExtWaiverInput"
+        "extendedProps": {
+          "type": "object",
+          "description": "definitions.CoverageInput.properties.extendedProps.description",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
     "PolicyCustomerInput": {
       "type": "object",
       "properties": {
-        "address": {
-          "description": "definitions.PolicyCustomerInput.properties.address.description",
-          "$ref": "#/definitions/AddressInput"
-        },
-        "extendedProps": {
-          "type": "object",
-          "description": "definitions.PolicyCustomerInput.properties.extendedProps.description",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "organization": {
-          "description": "definitions.PolicyCustomerInput.properties.organization.description",
-          "$ref": "#/definitions/Organization"
-        },
-        "partyContact": {
-          "description": "definitions.PolicyCustomerInput.properties.partyContact.description",
-          "$ref": "#/definitions/PartyContact"
-        },
         "partySerialId": {
           "type": "integer",
           "format": "int32",
@@ -3562,6 +3603,25 @@
         "person": {
           "description": "definitions.PolicyCustomerInput.properties.person.description",
           "$ref": "#/definitions/Person"
+        },
+        "organization": {
+          "description": "definitions.PolicyCustomerInput.properties.organization.description",
+          "$ref": "#/definitions/Organization"
+        },
+        "partyContact": {
+          "description": "definitions.PolicyCustomerInput.properties.partyContact.description",
+          "$ref": "#/definitions/PartyContact"
+        },
+        "address": {
+          "description": "definitions.PolicyCustomerInput.properties.address.description",
+          "$ref": "#/definitions/AddressInput"
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "definitions.PolicyCustomerInput.properties.extendedProps.description",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -3571,6 +3631,16 @@
         "coverageId": {
           "type": "string",
           "description": "definitions.PayPlan.properties.coverageId.description",
+          "readOnly": true
+        },
+        "planId": {
+          "type": "string",
+          "description": "definitions.PayPlan.properties.planId.description",
+          "readOnly": true
+        },
+        "policyId": {
+          "type": "string",
+          "description": "definitions.PayPlan.properties.policyId.description",
           "readOnly": true
         },
         "endPeriod": {
@@ -3587,13 +3657,6 @@
           "type": "integer",
           "format": "int32",
           "description": "definitions.PayPlan.properties.endYear.description"
-        },
-        "extendedProps": {
-          "type": "object",
-          "description": "definitions.PayPlan.properties.extendedProps.description",
-          "additionalProperties": {
-            "type": "string"
-          }
         },
         "gurntPeriod": {
           "type": "integer",
@@ -3645,11 +3708,6 @@
             "5"
           ]
         },
-        "planId": {
-          "type": "string",
-          "description": "definitions.PayPlan.properties.planId.description",
-          "readOnly": true
-        },
         "planType": {
           "type": "string",
           "example": "1",
@@ -3665,33 +3723,23 @@
             "8"
           ]
         },
-        "policyId": {
-          "type": "string",
-          "description": "definitions.PayPlan.properties.policyId.description",
-          "readOnly": true
+        "extendedProps": {
+          "type": "object",
+          "description": "definitions.PayPlan.properties.extendedProps.description",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
     "CustomerDeclaration": {
       "type": "object",
       "properties": {
-        "declarationDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "definitions.CustomerDeclaration.properties.declarationDate.description"
-        },
         "details": {
           "type": "array",
           "description": "definitions.CustomerDeclaration.properties.details.description",
           "items": {
             "$ref": "#/definitions/CustomerDeclarationDetail"
-          }
-        },
-        "extendedProps": {
-          "type": "object",
-          "description": "definitions.CustomerDeclaration.properties.extendedProps.description",
-          "additionalProperties": {
-            "type": "string"
           }
         },
         "listId": {
@@ -3708,32 +3756,28 @@
           "type": "string",
           "description": "definitions.CustomerDeclaration.properties.policyId.description",
           "readOnly": true
+        },
+        "declarationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "definitions.CustomerDeclaration.properties.declarationDate.description"
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "definitions.CustomerDeclaration.properties.extendedProps.description",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
     "CoverageAgent": {
       "type": "object",
       "properties": {
-        "agentCode": {
-          "type": "string",
-          "description": "definitions.CoverageAgent.properties.agentCode.description"
-        },
-        "assignRate": {
-          "type": "number",
-          "format": "double",
-          "example": 1,
-          "description": "definitions.CoverageAgent.properties.assignRate.description"
-        },
         "coverageId": {
           "type": "string",
           "description": "definitions.CoverageAgent.properties.coverageId.description",
           "readOnly": true
-        },
-        "extendedProps": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
         },
         "listId": {
           "type": "string",
@@ -3744,27 +3788,29 @@
           "type": "string",
           "description": "definitions.CoverageAgent.properties.policyId.description",
           "readOnly": true
-        }
-      }
-    },
-    "GenericVO": {
-      "type": "object",
-      "properties": {
-        "extObject": {
-          "$ref": "#/definitions/GenericVO"
+        },
+        "agentCode": {
+          "type": "string",
+          "description": "definitions.CoverageAgent.properties.agentCode.description"
+        },
+        "assignRate": {
+          "type": "number",
+          "format": "double",
+          "example": 1,
+          "description": "definitions.CoverageAgent.properties.assignRate.description"
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "definitions.CoverageAgent.properties.extendedProps.description",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
     "Payer": {
       "type": "object",
       "properties": {
-        "extendedProps": {
-          "type": "object",
-          "description": "definitions.Payer.properties.extendedProps.description",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "listId": {
           "type": "string",
           "description": "definitions.Payer.properties.listId.description",
@@ -3798,34 +3844,62 @@
           "format": "double",
           "example": 1,
           "description": "definitions.Payer.properties.shareRate.description"
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "definitions.Payer.properties.extendedProps.description",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "MortgageRate": {
+      "type": "object",
+      "properties": {
+        "coverageId": {
+          "type": "string",
+          "description": "definitions.MortgageRate.properties.coverageId.description",
+          "readOnly": true
+        },
+        "listId": {
+          "type": "string",
+          "description": "definitions.MortgageRate.properties.listId.description",
+          "readOnly": true
+        },
+        "policyId": {
+          "type": "string",
+          "description": "definitions.MortgageRate.properties.policyId.description",
+          "readOnly": true
+        },
+        "lowPolicyYear": {
+          "type": "integer",
+          "format": "int32",
+          "description": "definitions.MortgageRate.properties.lowPolicyYear.description"
+        },
+        "highPolicyYear": {
+          "type": "integer",
+          "format": "int32",
+          "description": "definitions.MortgageRate.properties.highPolicyYear.description"
+        },
+        "mortgageRate": {
+          "type": "number",
+          "format": "double",
+          "example": 0.03,
+          "description": "definitions.MortgageRate.properties.mortgageRate.description"
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "definitions.MortgageRate.properties.extendedProps.description",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
     "CollectionInput": {
       "type": "object",
       "properties": {
-        "currency": {
-          "type": "integer",
-          "format": "int32",
-          "example": 1,
-          "description": "definitions.CollectionInput.properties.currency.description",
-          "enum": [
-            1
-          ]
-        },
-        "extendedProps": {
-          "type": "object",
-          "description": "definitions.CollectionInput.properties.extendedProps.description",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "feeAmount": {
-          "type": "number",
-          "format": "double",
-          "example": 2314,
-          "description": "definitions.CollectionInput.properties.feeAmount.description"
-        },
         "payMode": {
           "type": "integer",
           "format": "int32",
@@ -3838,6 +3912,21 @@
             30,
             80
           ]
+        },
+        "currency": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "definitions.CollectionInput.properties.currency.description",
+          "enum": [
+            1
+          ]
+        },
+        "feeAmount": {
+          "type": "number",
+          "format": "double",
+          "example": 2314,
+          "description": "definitions.CollectionInput.properties.feeAmount.description"
         },
         "paymentPlatform": {
           "type": "string",
@@ -3856,21 +3945,41 @@
         "thirdPtyPayNO": {
           "type": "string",
           "description": "definitions.CollectionInput.properties.thirdPtyPayNO.description"
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "definitions.CollectionInput.properties.extendedProps.description",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
-    "Iterator?Policy?": {
+    "Iterator«Policy»": {
       "type": "object"
     },
     "IssurancePolicyResult": {
       "type": "object",
       "properties": {
-        "coverages": {
-          "type": "array",
-          "description": "definitions.IssurancePolicyResult.properties.coverages.description",
-          "items": {
-            "$ref": "#/definitions/CoverageCalculationResult"
-          }
+        "inceptionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "definitions.IssurancePolicyResult.properties.inceptionDate.description"
+        },
+        "riskStatus": {
+          "type": "integer",
+          "format": "int32",
+          "description": "definitions.IssurancePolicyResult.properties.riskStatus.description",
+          "readOnly": true
+        },
+        "issueDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "definitions.IssurancePolicyResult.properties.issueDate.description"
+        },
+        "quotationCode": {
+          "type": "string",
+          "description": "definitions.IssurancePolicyResult.properties.quotationCode.description"
         },
         "currency": {
           "type": "integer",
@@ -3881,30 +3990,14 @@
             1
           ]
         },
-        "ePolicyDownloadUrl": {
-          "type": "string",
-          "description": "definitions.IssurancePolicyResult.properties.ePolicyDownloadUrl.description"
-        },
         "expiryDate": {
           "type": "string",
           "format": "date-time",
           "description": "definitions.IssurancePolicyResult.properties.expiryDate.description"
         },
-        "extendedProps": {
-          "type": "object",
-          "description": "definitions.IssurancePolicyResult.properties.extendedProps.description",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "groupProposalNumber": {
+        "ePolicyDownloadUrl": {
           "type": "string",
-          "description": "definitions.IssurancePolicyResult.properties.groupProposalNumber.description"
-        },
-        "inceptionDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "definitions.IssurancePolicyResult.properties.inceptionDate.description"
+          "description": "definitions.IssurancePolicyResult.properties.ePolicyDownloadUrl.description"
         },
         "installPrem": {
           "type": "number",
@@ -3912,28 +4005,31 @@
           "description": "definitions.IssurancePolicyResult.properties.installPrem.description",
           "readOnly": true
         },
-        "issueDate": {
+        "groupProposalNumber": {
           "type": "string",
-          "format": "date-time",
-          "description": "definitions.IssurancePolicyResult.properties.issueDate.description"
-        },
-        "policyNumber": {
-          "type": "string",
-          "description": "definitions.IssurancePolicyResult.properties.policyNumber.description"
+          "description": "definitions.IssurancePolicyResult.properties.groupProposalNumber.description"
         },
         "proposalNumber": {
           "type": "string",
           "description": "definitions.IssurancePolicyResult.properties.proposalNumber.description"
         },
-        "quotationCode": {
+        "policyNumber": {
           "type": "string",
-          "description": "definitions.IssurancePolicyResult.properties.quotationCode.description"
+          "description": "definitions.IssurancePolicyResult.properties.policyNumber.description"
         },
-        "riskStatus": {
-          "type": "integer",
-          "format": "int32",
-          "description": "definitions.IssurancePolicyResult.properties.riskStatus.description",
-          "readOnly": true
+        "coverages": {
+          "type": "array",
+          "description": "definitions.IssurancePolicyResult.properties.coverages.description",
+          "items": {
+            "$ref": "#/definitions/CoverageCalculationResult"
+          }
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "definitions.IssurancePolicyResult.properties.extendedProps.description",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -3945,28 +4041,10 @@
           "description": "definitions.SingleTopupInvestRate.properties.addPremId.description",
           "readOnly": true
         },
-        "assignRate": {
-          "type": "number",
-          "format": "double",
-          "example": 1,
-          "description": "definitions.SingleTopupInvestRate.properties.assignRate.description"
-        },
         "coverageId": {
           "type": "string",
           "description": "definitions.SingleTopupInvestRate.properties.coverageId.description",
           "readOnly": true
-        },
-        "extendedProps": {
-          "type": "object",
-          "description": "definitions.SingleTopupInvestRate.properties.extendedProps.description",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "fundCode": {
-          "type": "string",
-          "example": "F001",
-          "description": "definitions.SingleTopupInvestRate.properties.fundCode.description"
         },
         "listId": {
           "type": "string",
@@ -3977,32 +4055,34 @@
           "type": "string",
           "description": "definitions.SingleTopupInvestRate.properties.policyId.description",
           "readOnly": true
+        },
+        "fundCode": {
+          "type": "string",
+          "example": "F001",
+          "description": "definitions.SingleTopupInvestRate.properties.fundCode.description"
+        },
+        "assignRate": {
+          "type": "number",
+          "format": "double",
+          "example": 1,
+          "description": "definitions.SingleTopupInvestRate.properties.assignRate.description"
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "definitions.SingleTopupInvestRate.properties.extendedProps.description",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
     "Insured": {
       "type": "object",
       "properties": {
-        "extendedProps": {
-          "type": "object",
-          "description": "definitions.Insured.properties.extendedProps.description",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "listId": {
           "type": "string",
           "description": "definitions.Insured.properties.listId.description",
           "readOnly": true
-        },
-        "medicalIndi": {
-          "type": "string",
-          "example": "Y",
-          "description": "definitions.Insured.properties.medicalIndi.description",
-          "enum": [
-            "Y",
-            "N"
-          ]
         },
         "partyId": {
           "type": "string",
@@ -4028,6 +4108,38 @@
             7
           ]
         },
+        "relationToMainInsured": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "definitions.Insured.properties.relationToMainInsured.description",
+          "enum": [
+            1,
+            2,
+            3,
+            10,
+            4,
+            7
+          ]
+        },
+        "medicalIndi": {
+          "type": "string",
+          "example": "Y",
+          "description": "definitions.Insured.properties.medicalIndi.description",
+          "enum": [
+            "Y",
+            "N"
+          ]
+        },
+        "medicalExamIndi": {
+          "type": "string",
+          "example": "N",
+          "description": "definitions.Insured.properties.medicalExamIndi.description",
+          "enum": [
+            "Y",
+            "N"
+          ]
+        },
         "socialSecurityIndi": {
           "type": "string",
           "example": "Y",
@@ -4036,6 +4148,13 @@
             "Y",
             "N"
           ]
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "definitions.Insured.properties.extendedProps.description",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -4064,24 +4183,29 @@
     "TrusteeInput": {
       "type": "object",
       "properties": {
+        "partySerialId": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "definitions.TrusteeInput.properties.partySerialId.description"
+        },
         "extendedProps": {
           "type": "object",
           "description": "definitions.TrusteeInput.properties.extendedProps.description",
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "partySerialId": {
-          "type": "integer",
-          "format": "int32",
-          "example": 1,
-          "description": "definitions.TrusteeInput.properties.partySerialId.description"
         }
       }
     },
     "ContractInvestRateInput": {
       "type": "object",
       "properties": {
+        "fundCode": {
+          "type": "string",
+          "example": "F001",
+          "description": "definitions.ContractInvestRateInput.properties.fundCode.description"
+        },
         "assignRate": {
           "type": "number",
           "format": "double",
@@ -4094,37 +4218,12 @@
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "fundCode": {
-          "type": "string",
-          "example": "F001",
-          "description": "definitions.ContractInvestRateInput.properties.fundCode.description"
         }
       }
     },
     "PartyContact": {
       "type": "object",
       "properties": {
-        "contact": {
-          "type": "string",
-          "example": "张三",
-          "description": "definitions.PartyContact.properties.contact.description"
-        },
-        "contactTel": {
-          "type": "string",
-          "example": "88888888",
-          "description": "definitions.PartyContact.properties.contactTel.description"
-        },
-        "email": {
-          "type": "string",
-          "example": "TestPerson14@126.com",
-          "description": "definitions.PartyContact.properties.email.description"
-        },
-        "fax": {
-          "type": "string",
-          "example": "88888887",
-          "description": "definitions.PartyContact.properties.fax.description"
-        },
         "homeTel": {
           "type": "string",
           "example": "87654321",
@@ -4144,25 +4243,92 @@
           "type": "string",
           "example": "1234",
           "description": "definitions.PartyContact.properties.officeTelExt.description"
+        },
+        "email": {
+          "type": "string",
+          "example": "TestPerson14@126.com",
+          "description": "definitions.PartyContact.properties.email.description"
+        },
+        "contact": {
+          "type": "string",
+          "example": "张三",
+          "description": "definitions.PartyContact.properties.contact.description"
+        },
+        "contactTel": {
+          "type": "string",
+          "example": "88888888",
+          "description": "definitions.PartyContact.properties.contactTel.description"
+        },
+        "fax": {
+          "type": "string",
+          "example": "88888887",
+          "description": "definitions.PartyContact.properties.fax.description"
+        }
+      }
+    },
+    "AgentDeclarationInput": {
+      "type": "object",
+      "properties": {
+        "agentCode": {
+          "type": "string",
+          "description": "definitions.AgentDeclarationInput.properties.agentCode.description"
+        },
+        "declCode": {
+          "type": "string",
+          "description": "definitions.AgentDeclarationInput.properties.declCode.description"
+        },
+        "fill1": {
+          "type": "string",
+          "description": "definitions.AgentDeclarationInput.properties.fill1.description"
+        },
+        "fill2": {
+          "type": "string",
+          "description": "definitions.AgentDeclarationInput.properties.fill2.description"
+        },
+        "fill3": {
+          "type": "string",
+          "description": "definitions.AgentDeclarationInput.properties.fill3.description"
+        },
+        "fill4": {
+          "type": "string",
+          "description": "definitions.AgentDeclarationInput.properties.fill4.description"
+        },
+        "fill5": {
+          "type": "string",
+          "description": "definitions.AgentDeclarationInput.properties.fill5.description"
+        },
+        "fill6": {
+          "type": "string",
+          "description": "definitions.AgentDeclarationInput.properties.fill6.description"
+        },
+        "fill7": {
+          "type": "string",
+          "description": "definitions.AgentDeclarationInput.properties.fill7.description"
+        },
+        "fill8": {
+          "type": "string",
+          "description": "definitions.AgentDeclarationInput.properties.fill8.description"
+        },
+        "fill9": {
+          "type": "string",
+          "description": "definitions.AgentDeclarationInput.properties.fill9.description"
+        },
+        "fill10": {
+          "type": "string",
+          "description": "definitions.AgentDeclarationInput.properties.fill10.description"
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "definitions.AgentDeclarationInput.properties.extendedProps.description",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
     "CoverageCalculationResult": {
       "type": "object",
       "properties": {
-        "extendedProps": {
-          "type": "object",
-          "description": "definitions.CoverageCalculationResult.properties.extendedProps.description",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "premium": {
-          "type": "number",
-          "format": "double",
-          "example": 2314,
-          "description": "definitions.CoverageCalculationResult.properties.premium.description"
-        },
         "productCode": {
           "type": "string",
           "description": "definitions.CoverageCalculationResult.properties.productCode.description"
@@ -4173,10 +4339,23 @@
           "example": 100000,
           "description": "definitions.CoverageCalculationResult.properties.sumAssured.description"
         },
+        "premium": {
+          "type": "number",
+          "format": "double",
+          "example": 2314,
+          "description": "definitions.CoverageCalculationResult.properties.premium.description"
+        },
         "unit": {
           "type": "number",
           "format": "double",
           "description": "definitions.CoverageCalculationResult.properties.unit.description"
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "definitions.CoverageCalculationResult.properties.extendedProps.description",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -4192,13 +4371,6 @@
           "type": "string",
           "description": "definitions.SingleTopup.properties.coverageId.description",
           "readOnly": true
-        },
-        "extendedProps": {
-          "type": "object",
-          "description": "definitions.SingleTopup.properties.extendedProps.description",
-          "additionalProperties": {
-            "type": "string"
-          }
         },
         "investRates": {
           "type": "array",
@@ -4217,6 +4389,13 @@
           "format": "double",
           "example": 10000,
           "description": "definitions.SingleTopup.properties.topupAmount.description"
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "definitions.SingleTopup.properties.extendedProps.description",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -4232,12 +4411,10 @@
           "format": "date-time",
           "description": "definitions.IssuranceResponse.properties.clientRequestTime.description"
         },
-        "exceptions": {
-          "type": "array",
-          "description": "definitions.IssuranceResponse.properties.exceptions.description",
-          "items": {
-            "type": "string"
-          }
+        "result": {
+          "type": "integer",
+          "format": "int32",
+          "description": "definitions.IssuranceResponse.properties.result.description"
         },
         "messages": {
           "type": "array",
@@ -4246,42 +4423,42 @@
             "$ref": "#/definitions/GenericValidationResult"
           }
         },
+        "exceptions": {
+          "type": "array",
+          "description": "definitions.IssuranceResponse.properties.exceptions.description",
+          "items": {
+            "type": "string"
+          }
+        },
+        "extendedProps": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "policy": {
           "description": "definitions.IssuranceResponse.properties.policy.description",
           "$ref": "#/definitions/IssurancePolicyResult"
-        },
-        "result": {
-          "type": "integer",
-          "format": "int32",
-          "description": "definitions.IssuranceResponse.properties.result.description"
         }
       }
     },
     "Person": {
       "type": "object",
       "properties": {
+        "gender": {
+          "type": "string",
+          "example": "M",
+          "description": "definitions.Person.properties.gender.description",
+          "enum": [
+            "M",
+            "F"
+          ]
+        },
         "birthdate": {
           "type": "string",
           "format": "date-time",
           "example": "1980-01-01",
           "description": "definitions.Person.properties.birthdate.description"
-        },
-        "certiCode": {
-          "type": "string",
-          "example": "1234567890",
-          "description": "definitions.Person.properties.certiCode.description"
-        },
-        "certiEnd": {
-          "type": "string",
-          "format": "date-time",
-          "example": "2019-12-31",
-          "description": "definitions.Person.properties.certiEnd.description"
-        },
-        "certiStart": {
-          "type": "string",
-          "format": "date-time",
-          "example": "2000-01-01",
-          "description": "definitions.Person.properties.certiStart.description"
         },
         "certiType": {
           "type": "integer",
@@ -4296,36 +4473,71 @@
             9
           ]
         },
+        "certiCode": {
+          "type": "string",
+          "example": "1234567890",
+          "description": "definitions.Person.properties.certiCode.description"
+        },
+        "certiStart": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2000-01-01",
+          "description": "definitions.Person.properties.certiStart.description"
+        },
+        "certiEnd": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2019-12-31",
+          "description": "definitions.Person.properties.certiEnd.description"
+        },
         "firstName": {
           "type": "string",
           "example": "三",
           "description": "definitions.Person.properties.firstName.description"
         },
-        "gender": {
+        "midName": {
           "type": "string",
-          "example": "M",
-          "description": "definitions.Person.properties.gender.description",
+          "description": "definitions.Person.properties.midName.description"
+        },
+        "lastName": {
+          "type": "string",
+          "example": "张",
+          "description": "definitions.Person.properties.lastName.description"
+        },
+        "nationality": {
+          "type": "string",
+          "example": "7",
+          "description": "definitions.Person.properties.nationality.description"
+        },
+        "preferredLifeIndi": {
+          "type": "string",
+          "example": "0",
+          "description": "definitions.Person.properties.preferredLifeIndi.description"
+        },
+        "smoking": {
+          "type": "string",
+          "example": "N",
+          "description": "definitions.Person.properties.smoking.description",
           "enum": [
-            "M",
-            "F"
+            "Y",
+            "N"
           ]
         },
-        "height": {
-          "type": "number",
-          "format": "double",
-          "example": 175.3,
-          "description": "definitions.Person.properties.height.description"
+        "occupationCode": {
+          "type": "string",
+          "example": "1",
+          "description": "definitions.Person.properties.occupationCode.description"
+        },
+        "occupation": {
+          "type": "string",
+          "example": "伐木工",
+          "description": "definitions.Person.properties.occupation.description"
         },
         "income": {
           "type": "integer",
           "format": "int64",
           "example": 200000,
           "description": "definitions.Person.properties.income.description"
-        },
-        "lastName": {
-          "type": "string",
-          "example": "张",
-          "description": "definitions.Person.properties.lastName.description"
         },
         "marriageStatus": {
           "type": "string",
@@ -4340,24 +4552,17 @@
             "6"
           ]
         },
-        "midName": {
-          "type": "string",
-          "description": "definitions.Person.properties.midName.description"
+        "height": {
+          "type": "number",
+          "format": "double",
+          "example": 175.3,
+          "description": "definitions.Person.properties.height.description"
         },
-        "nationality": {
-          "type": "string",
-          "example": "7",
-          "description": "definitions.Person.properties.nationality.description"
-        },
-        "occupationCode": {
-          "type": "string",
-          "example": "1",
-          "description": "definitions.Person.properties.occupationCode.description"
-        },
-        "preferredLifeIndi": {
-          "type": "string",
-          "example": "0",
-          "description": "definitions.Person.properties.preferredLifeIndi.description"
+        "weight": {
+          "type": "number",
+          "format": "double",
+          "example": 70.25,
+          "description": "definitions.Person.properties.weight.description"
         },
         "salutation": {
           "type": "string",
@@ -4367,21 +4572,6 @@
             "1",
             "2"
           ]
-        },
-        "smoking": {
-          "type": "string",
-          "example": "N",
-          "description": "definitions.Person.properties.smoking.description",
-          "enum": [
-            "Y",
-            "N"
-          ]
-        },
-        "weight": {
-          "type": "number",
-          "format": "double",
-          "example": 70.25,
-          "description": "definitions.Person.properties.weight.description"
         }
       }
     },
@@ -4402,53 +4592,40 @@
     "Organization": {
       "type": "object",
       "properties": {
-        "companyName": {
+        "registerType": {
           "type": "string",
-          "example": "xxxxxx",
-          "description": "definitions.Organization.properties.companyName.description"
-        },
-        "countryCode": {
-          "type": "string",
-          "example": "156",
-          "description": "definitions.Organization.properties.countryCode.description"
-        },
-        "organCode": {
-          "type": "string",
-          "example": "xxxxxx",
-          "description": "definitions.Organization.properties.organCode.description"
+          "example": "1001",
+          "description": "definitions.Organization.properties.registerType.description"
         },
         "registerCode": {
           "type": "string",
           "example": "xxxx",
           "description": "definitions.Organization.properties.registerCode.description"
         },
-        "registerType": {
+        "countryCode": {
           "type": "string",
-          "example": "1001",
-          "description": "definitions.Organization.properties.registerType.description"
+          "example": "156",
+          "description": "definitions.Organization.properties.countryCode.description"
+        },
+        "companyName": {
+          "type": "string",
+          "example": "xxxxxx",
+          "description": "definitions.Organization.properties.companyName.description"
+        },
+        "organCode": {
+          "type": "string",
+          "example": "xxxxxx",
+          "description": "definitions.Organization.properties.organCode.description"
         }
       }
     },
     "CoverageInsured": {
       "type": "object",
       "properties": {
-        "age": {
-          "type": "integer",
-          "format": "int32",
-          "example": 25,
-          "description": "definitions.CoverageInsured.properties.age.description"
-        },
         "coverageId": {
           "type": "string",
           "description": "definitions.CoverageInsured.properties.coverageId.description",
           "readOnly": true
-        },
-        "extendedProps": {
-          "type": "object",
-          "description": "definitions.CoverageInsured.properties.extendedProps.description",
-          "additionalProperties": {
-            "type": "string"
-          }
         },
         "insuredPartyId": {
           "type": "string",
@@ -4460,11 +4637,10 @@
           "description": "definitions.CoverageInsured.properties.listId.description",
           "readOnly": true
         },
-        "occupationClass": {
-          "type": "integer",
-          "format": "int32",
-          "example": 1,
-          "description": "definitions.CoverageInsured.properties.occupationClass.description"
+        "policyId": {
+          "type": "string",
+          "description": "definitions.CoverageInsured.properties.policyId.description",
+          "readOnly": true
         },
         "orderId": {
           "type": "integer",
@@ -4472,36 +4648,62 @@
           "example": 1,
           "description": "definitions.CoverageInsured.properties.orderId.description"
         },
-        "policyId": {
-          "type": "string",
-          "description": "definitions.CoverageInsured.properties.policyId.description",
-          "readOnly": true
+        "occupationClass": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "definitions.CoverageInsured.properties.occupationClass.description"
+        },
+        "age": {
+          "type": "integer",
+          "format": "int32",
+          "example": 25,
+          "description": "definitions.CoverageInsured.properties.age.description"
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "definitions.CoverageInsured.properties.extendedProps.description",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
     "CollectionPolicyInput": {
       "type": "object",
       "properties": {
+        "proposalNumber": {
+          "type": "string",
+          "description": "definitions.CollectionPolicyInput.properties.proposalNumber.description"
+        },
+        "payerAccount": {
+          "description": "definitions.CollectionPolicyInput.properties.payerAccount.description",
+          "$ref": "#/definitions/CollectionPayerAccountInput"
+        },
         "extendedProps": {
           "type": "object",
           "description": "definitions.CollectionPolicyInput.properties.extendedProps.description",
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "payerAccount": {
-          "description": "definitions.CollectionPolicyInput.properties.payerAccount.description",
-          "$ref": "#/definitions/CollectionPayerAccountInput"
-        },
-        "proposalNumber": {
-          "type": "string",
-          "description": "definitions.CollectionPolicyInput.properties.proposalNumber.description"
         }
       }
     },
     "BeneficiaryInput": {
       "type": "object",
       "properties": {
+        "insuredPartySerialId": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "definitions.BeneficiaryInput.properties.insuredPartySerialId.description"
+        },
+        "partySerialId": {
+          "type": "integer",
+          "format": "int32",
+          "example": 2,
+          "description": "definitions.BeneficiaryInput.properties.partySerialId.description"
+        },
         "beneType": {
           "type": "string",
           "example": "2",
@@ -4536,25 +4738,6 @@
             16
           ]
         },
-        "extendedProps": {
-          "type": "object",
-          "description": "definitions.BeneficiaryInput.properties.extendedProps.description",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "insuredPartySerialId": {
-          "type": "integer",
-          "format": "int32",
-          "example": 1,
-          "description": "definitions.BeneficiaryInput.properties.insuredPartySerialId.description"
-        },
-        "partySerialId": {
-          "type": "integer",
-          "format": "int32",
-          "example": 2,
-          "description": "definitions.BeneficiaryInput.properties.partySerialId.description"
-        },
         "shareOrder": {
           "type": "integer",
           "format": "int32",
@@ -4566,6 +4749,13 @@
           "format": "double",
           "example": 1,
           "description": "definitions.BeneficiaryInput.properties.shareRate.description"
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "definitions.BeneficiaryInput.properties.extendedProps.description",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -4576,28 +4766,19 @@
           "description": "definitions.PolicyCustomer.properties.address.description",
           "$ref": "#/definitions/Address"
         },
-        "extendedProps": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "listId": {
           "type": "string",
           "description": "definitions.PolicyCustomer.properties.listId.description",
           "readOnly": true
         },
-        "organization": {
-          "description": "definitions.PolicyCustomer.properties.organization.description",
-          "$ref": "#/definitions/Organization"
-        },
-        "partyContact": {
-          "description": "definitions.PolicyCustomer.properties.partyContact.description",
-          "$ref": "#/definitions/PartyContact"
-        },
         "partyId": {
           "type": "string",
           "description": "definitions.PolicyCustomer.properties.partyId.description",
+          "readOnly": true
+        },
+        "policyId": {
+          "type": "string",
+          "description": "definitions.PolicyCustomer.properties.policyId.description",
           "readOnly": true
         },
         "partyType": {
@@ -4614,22 +4795,101 @@
           "description": "definitions.PolicyCustomer.properties.person.description",
           "$ref": "#/definitions/Person"
         },
+        "organization": {
+          "description": "definitions.PolicyCustomer.properties.organization.description",
+          "$ref": "#/definitions/Organization"
+        },
+        "partyContact": {
+          "description": "definitions.PolicyCustomer.properties.partyContact.description",
+          "$ref": "#/definitions/PartyContact"
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "definitions.PolicyCustomer.properties.extendedProps.description",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AgentDeclaration": {
+      "type": "object",
+      "properties": {
+        "listId": {
+          "type": "string",
+          "description": "definitions.AgentDeclaration.properties.listId.description",
+          "readOnly": true
+        },
         "policyId": {
           "type": "string",
-          "description": "definitions.PolicyCustomer.properties.policyId.description",
+          "description": "definitions.AgentDeclaration.properties.policyId.description",
           "readOnly": true
+        },
+        "agentCode": {
+          "type": "string",
+          "description": "definitions.AgentDeclaration.properties.agentCode.description"
+        },
+        "declCode": {
+          "type": "string",
+          "description": "definitions.AgentDeclaration.properties.declCode.description"
+        },
+        "fill1": {
+          "type": "string",
+          "description": "definitions.AgentDeclaration.properties.fill1.description"
+        },
+        "fill2": {
+          "type": "string",
+          "description": "definitions.AgentDeclaration.properties.fill2.description"
+        },
+        "fill3": {
+          "type": "string",
+          "description": "definitions.AgentDeclaration.properties.fill3.description"
+        },
+        "fill4": {
+          "type": "string",
+          "description": "definitions.AgentDeclaration.properties.fill4.description"
+        },
+        "fill5": {
+          "type": "string",
+          "description": "definitions.AgentDeclaration.properties.fill5.description"
+        },
+        "fill6": {
+          "type": "string",
+          "description": "definitions.AgentDeclaration.properties.fill6.description"
+        },
+        "fill7": {
+          "type": "string",
+          "description": "definitions.AgentDeclaration.properties.fill7.description"
+        },
+        "fill8": {
+          "type": "string",
+          "description": "definitions.AgentDeclaration.properties.fill8.description"
+        },
+        "fill9": {
+          "type": "string",
+          "description": "definitions.AgentDeclaration.properties.fill9.description"
+        },
+        "fill10": {
+          "type": "string",
+          "description": "definitions.AgentDeclaration.properties.fill10.description"
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "definitions.AgentDeclaration.properties.extendedProps.description",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
     "SingleTopupInput": {
       "type": "object",
       "properties": {
-        "extendedProps": {
-          "type": "object",
-          "description": "definitions.SingleTopupInput.properties.extendedProps.description",
-          "additionalProperties": {
-            "type": "string"
-          }
+        "topupAmount": {
+          "type": "number",
+          "format": "double",
+          "example": 10000,
+          "description": "definitions.SingleTopupInput.properties.topupAmount.description"
         },
         "investRates": {
           "type": "array",
@@ -4638,41 +4898,44 @@
             "$ref": "#/definitions/ContractInvestRateInput"
           }
         },
-        "topupAmount": {
-          "type": "number",
-          "format": "double",
-          "example": 10000,
-          "description": "definitions.SingleTopupInput.properties.topupAmount.description"
+        "extendedProps": {
+          "type": "object",
+          "description": "definitions.SingleTopupInput.properties.extendedProps.description",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
     "CustomerDeclarationDetail": {
       "type": "object",
       "properties": {
-        "declId": {
-          "type": "integer",
-          "format": "int64",
-          "description": "definitions.CustomerDeclarationDetail.properties.declId.description"
-        },
         "declListId": {
           "type": "string",
           "description": "definitions.CustomerDeclarationDetail.properties.declListId.description",
           "readOnly": true
         },
-        "extendedProps": {
-          "type": "object",
-          "description": "definitions.CustomerDeclarationDetail.properties.extendedProps.description",
-          "additionalProperties": {
-            "type": "string"
-          }
+        "listId": {
+          "type": "string",
+          "description": "definitions.CustomerDeclarationDetail.properties.listId.description",
+          "readOnly": true
+        },
+        "partyId": {
+          "type": "string"
+        },
+        "policyId": {
+          "type": "string",
+          "description": "definitions.CustomerDeclarationDetail.properties.policyId.description",
+          "readOnly": true
+        },
+        "declId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "definitions.CustomerDeclarationDetail.properties.declId.description"
         },
         "fill1": {
           "type": "string",
           "description": "definitions.CustomerDeclarationDetail.properties.fill1.description"
-        },
-        "fill10": {
-          "type": "string",
-          "description": "definitions.CustomerDeclarationDetail.properties.fill10.description"
         },
         "fill2": {
           "type": "string",
@@ -4706,33 +4969,22 @@
           "type": "string",
           "description": "definitions.CustomerDeclarationDetail.properties.fill9.description"
         },
-        "listId": {
+        "fill10": {
           "type": "string",
-          "description": "definitions.CustomerDeclarationDetail.properties.listId.description",
-          "readOnly": true
+          "description": "definitions.CustomerDeclarationDetail.properties.fill10.description"
         },
-        "partyId": {
-          "type": "string",
-          "description": "definitions.CustomerDeclarationDetail.properties.partyId.description",
-          "readOnly": true
-        },
-        "policyId": {
-          "type": "string",
-          "description": "definitions.CustomerDeclarationDetail.properties.policyId.description",
-          "readOnly": true
+        "extendedProps": {
+          "type": "object",
+          "description": "definitions.CustomerDeclarationDetail.properties.extendedProps.description",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
     "PolicyHolder": {
       "type": "object",
       "properties": {
-        "extendedProps": {
-          "type": "object",
-          "description": "definitions.PolicyHolder.properties.extendedProps.description",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "listId": {
           "type": "string",
           "description": "definitions.PolicyHolder.properties.listId.description",
@@ -4760,6 +5012,13 @@
             10,
             7
           ]
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "definitions.PolicyHolder.properties.extendedProps.description",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -4771,28 +5030,10 @@
           "description": "definitions.RecurringTopupInvestRate.properties.addPremId.description",
           "readOnly": true
         },
-        "assignRate": {
-          "type": "number",
-          "format": "double",
-          "example": 1,
-          "description": "definitions.RecurringTopupInvestRate.properties.assignRate.description"
-        },
         "coverageId": {
           "type": "string",
           "description": "definitions.RecurringTopupInvestRate.properties.coverageId.description",
           "readOnly": true
-        },
-        "extendedProps": {
-          "type": "object",
-          "description": "definitions.RecurringTopupInvestRate.properties.extendedProps.description",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "fundCode": {
-          "type": "string",
-          "example": "F001",
-          "description": "definitions.RecurringTopupInvestRate.properties.fundCode.description"
         },
         "listId": {
           "type": "string",
@@ -4803,19 +5044,30 @@
           "type": "string",
           "description": "definitions.RecurringTopupInvestRate.properties.policyId.description",
           "readOnly": true
+        },
+        "fundCode": {
+          "type": "string",
+          "example": "F001",
+          "description": "definitions.RecurringTopupInvestRate.properties.fundCode.description"
+        },
+        "assignRate": {
+          "type": "number",
+          "format": "double",
+          "example": 1,
+          "description": "definitions.RecurringTopupInvestRate.properties.assignRate.description"
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "definitions.RecurringTopupInvestRate.properties.extendedProps.description",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
     "PolicyHolderInput": {
       "type": "object",
       "properties": {
-        "extendedProps": {
-          "type": "object",
-          "description": "definitions.PolicyHolderInput.properties.extendedProps.description",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "partySerialId": {
           "type": "integer",
           "format": "int32",
@@ -4834,6 +5086,13 @@
             10,
             7
           ]
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "definitions.PolicyHolderInput.properties.extendedProps.description",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -4845,20 +5104,9 @@
           "format": "int64",
           "description": "definitions.CustomerDeclarationDetailInput.properties.declId.description"
         },
-        "extendedProps": {
-          "type": "object",
-          "description": "definitions.CustomerDeclarationDetailInput.properties.extendedProps.description",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "fill1": {
           "type": "string",
           "description": "definitions.CustomerDeclarationDetailInput.properties.fill1.description"
-        },
-        "fill10": {
-          "type": "string",
-          "description": "definitions.CustomerDeclarationDetailInput.properties.fill10.description"
         },
         "fill2": {
           "type": "string",
@@ -4891,6 +5139,17 @@
         "fill9": {
           "type": "string",
           "description": "definitions.CustomerDeclarationDetailInput.properties.fill9.description"
+        },
+        "fill10": {
+          "type": "string",
+          "description": "definitions.CustomerDeclarationDetailInput.properties.fill10.description"
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "definitions.CustomerDeclarationDetailInput.properties.extendedProps.description",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -4909,8 +5168,11 @@
           "format": "date-time",
           "description": "definitions.ApplicationRequest.properties.clientRequestTime.description"
         },
-        "extObject": {
-          "$ref": "#/definitions/GenericVO"
+        "extendedProps": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "policy": {
           "description": "definitions.ApplicationRequest.properties.policy.description",
@@ -4921,6 +5183,12 @@
     "CustomerDeclarationInput": {
       "type": "object",
       "properties": {
+        "partySerialId": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "definitions.CustomerDeclarationInput.properties.partySerialId.description"
+        },
         "declarationDate": {
           "type": "string",
           "format": "date-time",
@@ -4939,123 +5207,46 @@
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "partySerialId": {
+        }
+      }
+    },
+    "MortgageRateInput": {
+      "type": "object",
+      "properties": {
+        "lowPolicyYear": {
           "type": "integer",
           "format": "int32",
-          "example": 1,
-          "description": "definitions.CustomerDeclarationInput.properties.partySerialId.description"
+          "description": "definitions.MortgageRateInput.properties.lowPolicyYear.description"
+        },
+        "highPolicyYear": {
+          "type": "integer",
+          "format": "int32",
+          "description": "definitions.MortgageRateInput.properties.highPolicyYear.description"
+        },
+        "mortgageRate": {
+          "type": "number",
+          "format": "double",
+          "example": 0.03,
+          "description": "definitions.MortgageRateInput.properties.mortgageRate.description"
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "definitions.MortgageRateInput.properties.extendedProps.description",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
     "PolicyInput": {
       "type": "object",
       "properties": {
-        "applyDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "definitions.PolicyInput.properties.applyDate.description"
-        },
-        "beneficiaries": {
-          "type": "array",
-          "description": "definitions.PolicyInput.properties.beneficiaries.description",
-          "items": {
-            "$ref": "#/definitions/BeneficiaryInput"
-          }
-        },
-        "coverages": {
-          "type": "array",
-          "description": "definitions.PolicyInput.properties.coverages.description",
-          "items": {
-            "$ref": "#/definitions/CoverageInput"
-          }
-        },
-        "currency": {
-          "type": "integer",
-          "format": "int32",
-          "example": 1,
-          "description": "definitions.PolicyInput.properties.currency.description",
-          "enum": [
-            1
-          ]
-        },
         "customers": {
           "type": "array",
           "description": "definitions.PolicyInput.properties.customers.description",
           "items": {
             "$ref": "#/definitions/PolicyCustomerInput"
           }
-        },
-        "declarations": {
-          "type": "array",
-          "description": "definitions.PolicyInput.properties.declarations.description",
-          "items": {
-            "$ref": "#/definitions/CustomerDeclarationInput"
-          }
-        },
-        "deliverType": {
-          "type": "string",
-          "example": "M",
-          "description": "definitions.PolicyInput.properties.deliverType.description",
-          "enum": [
-            "H",
-            "M"
-          ]
-        },
-        "expiryDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "definitions.PolicyInput.properties.expiryDate.description"
-        },
-        "extendedProps": {
-          "type": "object",
-          "description": "definitions.PolicyInput.properties.extendedProps.description",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "inceptionDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "definitions.PolicyInput.properties.inceptionDate.description"
-        },
-        "installPrem": {
-          "type": "number",
-          "format": "double",
-          "description": "definitions.PolicyInput.properties.installPrem.description"
-        },
-        "insureds": {
-          "type": "array",
-          "description": "definitions.PolicyInput.properties.insureds.description",
-          "items": {
-            "$ref": "#/definitions/InsuredInput"
-          }
-        },
-        "insurerCode": {
-          "type": "string",
-          "description": "definitions.PolicyInput.properties.insurerCode.description"
-        },
-        "payerAccounts": {
-          "type": "array",
-          "description": "definitions.PolicyInput.properties.payerAccounts.description",
-          "items": {
-            "$ref": "#/definitions/PayerAccountInput"
-          }
-        },
-        "payers": {
-          "type": "array",
-          "description": "definitions.PolicyInput.properties.payers.description",
-          "items": {
-            "$ref": "#/definitions/PayerInput"
-          }
-        },
-        "policyHolder": {
-          "description": "definitions.PolicyInput.properties.policyHolder.description",
-          "$ref": "#/definitions/PolicyHolderInput"
-        },
-        "policyPackage": {
-          "description": "definitions.PolicyInput.properties.policyPackage.description",
-          "$ref": "#/definitions/PolicyPackageInput"
         },
         "policyType": {
           "type": "integer",
@@ -5068,26 +5259,111 @@
             3
           ]
         },
-        "preprintedProposalNumber": {
+        "applyDate": {
           "type": "string",
-          "description": "definitions.PolicyInput.properties.preprintedProposalNumber.description"
+          "format": "date-time",
+          "description": "definitions.PolicyInput.properties.applyDate.description"
+        },
+        "installPrem": {
+          "type": "number",
+          "format": "double",
+          "description": "definitions.PolicyInput.properties.installPrem.description"
+        },
+        "currency": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "definitions.PolicyInput.properties.currency.description",
+          "enum": [
+            1
+          ]
+        },
+        "inceptionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "definitions.PolicyInput.properties.inceptionDate.description"
+        },
+        "expiryDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "definitions.PolicyInput.properties.expiryDate.description"
+        },
+        "deliverType": {
+          "type": "string",
+          "example": "M",
+          "description": "definitions.PolicyInput.properties.deliverType.description",
+          "enum": [
+            "H",
+            "M"
+          ]
         },
         "quotationCode": {
           "type": "string",
           "description": "definitions.PolicyInput.properties.quotationCode.description"
         },
-        "salesChannelCode": {
+        "submissionDate": {
           "type": "string",
-          "description": "definitions.PolicyInput.properties.salesChannelCode.description"
+          "format": "date-time",
+          "description": "definitions.PolicyInput.properties.submissionDate.description"
         },
         "serviceAgentCode": {
           "type": "string",
           "description": "definitions.PolicyInput.properties.serviceAgentCode.description"
         },
-        "submissionDate": {
+        "salesChannelCode": {
           "type": "string",
-          "format": "date-time",
-          "description": "definitions.PolicyInput.properties.submissionDate.description"
+          "description": "definitions.PolicyInput.properties.salesChannelCode.description"
+        },
+        "insurerCode": {
+          "type": "string",
+          "description": "definitions.PolicyInput.properties.insurerCode.description"
+        },
+        "preprintedProposalNumber": {
+          "type": "string",
+          "description": "definitions.PolicyInput.properties.preprintedProposalNumber.description"
+        },
+        "policyPackage": {
+          "description": "definitions.PolicyInput.properties.policyPackage.description",
+          "$ref": "#/definitions/PolicyPackageInput"
+        },
+        "coverages": {
+          "type": "array",
+          "description": "definitions.PolicyInput.properties.coverages.description",
+          "items": {
+            "$ref": "#/definitions/CoverageInput"
+          }
+        },
+        "policyHolder": {
+          "description": "definitions.PolicyInput.properties.policyHolder.description",
+          "$ref": "#/definitions/PolicyHolderInput"
+        },
+        "insureds": {
+          "type": "array",
+          "description": "definitions.PolicyInput.properties.insureds.description",
+          "items": {
+            "$ref": "#/definitions/InsuredInput"
+          }
+        },
+        "beneficiaries": {
+          "type": "array",
+          "description": "definitions.PolicyInput.properties.beneficiaries.description",
+          "items": {
+            "$ref": "#/definitions/BeneficiaryInput"
+          }
+        },
+        "payers": {
+          "type": "array",
+          "description": "definitions.PolicyInput.properties.payers.description",
+          "items": {
+            "$ref": "#/definitions/PayerInput"
+          }
+        },
+        "payerAccounts": {
+          "type": "array",
+          "description": "definitions.PolicyInput.properties.payerAccounts.description",
+          "items": {
+            "$ref": "#/definitions/PayerAccountInput"
+          }
         },
         "trustees": {
           "type": "array",
@@ -5095,19 +5371,33 @@
           "items": {
             "$ref": "#/definitions/TrusteeInput"
           }
+        },
+        "declarations": {
+          "type": "array",
+          "description": "definitions.PolicyInput.properties.declarations.description",
+          "items": {
+            "$ref": "#/definitions/CustomerDeclarationInput"
+          }
+        },
+        "agentDeclarations": {
+          "type": "array",
+          "description": "definitions.PolicyInput.properties.agentDeclarations.description",
+          "items": {
+            "$ref": "#/definitions/AgentDeclarationInput"
+          }
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "definitions.PolicyInput.properties.extendedProps.description",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
     "Trustee": {
       "type": "object",
       "properties": {
-        "extendedProps": {
-          "type": "object",
-          "description": "definitions.Trustee.properties.extendedProps.description",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "listId": {
           "type": "string",
           "description": "definitions.Trustee.properties.listId.description",
@@ -5122,6 +5412,13 @@
           "type": "string",
           "description": "definitions.Trustee.properties.policyId.description",
           "readOnly": true
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "definitions.Trustee.properties.extendedProps.description",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -5130,7 +5427,8 @@
       "properties": {
         "waivedSa": {
           "type": "number",
-          "format": "double"
+          "format": "double",
+          "description": "definitions.CoverageExtWaiverInput.properties.waivedSa.description"
         }
       }
     },
@@ -5217,12 +5515,10 @@
           "format": "date-time",
           "description": "definitions.ApplicationResponse.properties.clientRequestTime.description"
         },
-        "exceptions": {
-          "type": "array",
-          "description": "definitions.ApplicationResponse.properties.exceptions.description",
-          "items": {
-            "type": "string"
-          }
+        "result": {
+          "type": "integer",
+          "format": "int32",
+          "description": "definitions.ApplicationResponse.properties.result.description"
         },
         "messages": {
           "type": "array",
@@ -5231,26 +5527,36 @@
             "$ref": "#/definitions/GenericValidationResult"
           }
         },
+        "exceptions": {
+          "type": "array",
+          "description": "definitions.ApplicationResponse.properties.exceptions.description",
+          "items": {
+            "type": "string"
+          }
+        },
+        "extendedProps": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "policy": {
           "description": "definitions.ApplicationResponse.properties.policy.description",
           "$ref": "#/definitions/ApplicationPolicyResult"
-        },
-        "result": {
-          "type": "integer",
-          "format": "int32",
-          "description": "definitions.ApplicationResponse.properties.result.description"
         }
       }
     },
     "ApplicationPolicyResult": {
       "type": "object",
       "properties": {
-        "coverages": {
-          "type": "array",
-          "description": "definitions.ApplicationPolicyResult.properties.coverages.description",
-          "items": {
-            "$ref": "#/definitions/CoverageCalculationResult"
-          }
+        "inceptionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "definitions.ApplicationPolicyResult.properties.inceptionDate.description"
+        },
+        "quotationCode": {
+          "type": "string",
+          "description": "definitions.ApplicationPolicyResult.properties.quotationCode.description"
         },
         "currency": {
           "type": "integer",
@@ -5261,39 +5567,37 @@
             1
           ]
         },
-        "extendedProps": {
-          "type": "object",
-          "description": "definitions.ApplicationPolicyResult.properties.extendedProps.description",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "groupProposalNumber": {
-          "type": "string",
-          "description": "definitions.ApplicationPolicyResult.properties.groupProposalNumber.description"
-        },
-        "inceptionDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "definitions.ApplicationPolicyResult.properties.inceptionDate.description"
-        },
         "installPrem": {
           "type": "number",
           "format": "double",
           "description": "definitions.ApplicationPolicyResult.properties.installPrem.description",
           "readOnly": true
         },
-        "policyNumber": {
+        "groupProposalNumber": {
           "type": "string",
-          "description": "definitions.ApplicationPolicyResult.properties.policyNumber.description"
+          "description": "definitions.ApplicationPolicyResult.properties.groupProposalNumber.description"
         },
         "proposalNumber": {
           "type": "string",
           "description": "definitions.ApplicationPolicyResult.properties.proposalNumber.description"
         },
-        "quotationCode": {
+        "policyNumber": {
           "type": "string",
-          "description": "definitions.ApplicationPolicyResult.properties.quotationCode.description"
+          "description": "definitions.ApplicationPolicyResult.properties.policyNumber.description"
+        },
+        "coverages": {
+          "type": "array",
+          "description": "definitions.ApplicationPolicyResult.properties.coverages.description",
+          "items": {
+            "$ref": "#/definitions/CoverageCalculationResult"
+          }
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "definitions.ApplicationPolicyResult.properties.extendedProps.description",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -5312,22 +5616,88 @@
           "format": "date-time",
           "description": "definitions.IssuranceRequest.properties.clientRequestTime.description"
         },
-        "collection": {
-          "description": "definitions.IssuranceRequest.properties.collection.description",
-          "$ref": "#/definitions/CollectionInput"
-        },
-        "extObject": {
-          "$ref": "#/definitions/GenericVO"
+        "extendedProps": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "policy": {
           "description": "definitions.IssuranceRequest.properties.policy.description",
           "$ref": "#/definitions/CollectionPolicyInput"
+        },
+        "collection": {
+          "description": "definitions.IssuranceRequest.properties.collection.description",
+          "$ref": "#/definitions/CollectionInput"
         }
       }
     },
     "Coverage": {
       "type": "object",
       "properties": {
+        "coverageAgents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CoverageAgent"
+          }
+        },
+        "coverageId": {
+          "type": "string",
+          "description": "definitions.Coverage.properties.coverageId.description",
+          "readOnly": true
+        },
+        "coverageSeriaId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "insureds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CoverageInsured"
+          }
+        },
+        "masterCoverageId": {
+          "type": "string",
+          "description": "definitions.Coverage.properties.masterCoverageId.description",
+          "readOnly": true
+        },
+        "mortgageRates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MortgageRate"
+          }
+        },
+        "payPlans": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PayPlan"
+          }
+        },
+        "policyId": {
+          "type": "string",
+          "description": "definitions.Coverage.properties.policyId.description",
+          "readOnly": true
+        },
+        "premInvestRates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PremInvestRate"
+          }
+        },
+        "productId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "definitions.Coverage.properties.productId.description"
+        },
+        "recurringTopup": {
+          "$ref": "#/definitions/RecurringTopup"
+        },
+        "singleTopup": {
+          "$ref": "#/definitions/SingleTopup"
+        },
+        "waiverExt": {
+          "$ref": "#/definitions/CoverageExtWaiver"
+        },
         "chargePeriod": {
           "type": "string",
           "example": "2",
@@ -5345,18 +5715,6 @@
           "example": 20,
           "description": "definitions.Coverage.properties.chargeYear.description"
         },
-        "coverageAgents": {
-          "type": "array",
-          "description": "definitions.Coverage.properties.coverageAgents.description",
-          "items": {
-            "$ref": "#/definitions/CoverageAgent"
-          }
-        },
-        "coverageId": {
-          "type": "string",
-          "description": "definitions.Coverage.properties.coverageId.description",
-          "readOnly": true
-        },
         "coveragePeriod": {
           "type": "string",
           "example": "1",
@@ -5369,11 +5727,6 @@
             "5"
           ]
         },
-        "coverageSeriaId": {
-          "type": "integer",
-          "format": "int64",
-          "description": "definitions.Coverage.properties.coverageSeriaId.description"
-        },
         "coverageYear": {
           "type": "integer",
           "format": "int32",
@@ -5383,82 +5736,87 @@
           "description": "definitions.Coverage.properties.currentPremium.description",
           "$ref": "#/definitions/CoveragePremium"
         },
+        "productCode": {
+          "type": "string",
+          "description": "definitions.Coverage.properties.productCode.description"
+        },
+        "insuredCategory": {
+          "type": "string",
+          "example": "0",
+          "description": "definitions.Coverage.properties.insuredCategory.description",
+          "enum": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+          ]
+        },
+        "deferPeriod": {
+          "type": "integer",
+          "format": "int32",
+          "description": "definitions.Coverage.properties.deferPeriod.description"
+        },
+        "nextPremium": {
+          "description": "definitions.Coverage.properties.nextPremium.description",
+          "$ref": "#/definitions/CoveragePremium"
+        },
         "extendedProps": {
           "type": "object",
           "description": "definitions.Coverage.properties.extendedProps.description",
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "insureds": {
-          "type": "array",
-          "description": "definitions.Coverage.properties.insureds.description",
-          "items": {
-            "$ref": "#/definitions/CoverageInsured"
-          }
-        },
-        "masterCoverageId": {
-          "type": "string",
-          "description": "definitions.Coverage.properties.masterCoverageId.description",
-          "readOnly": true
-        },
-        "nextPremium": {
-          "$ref": "#/definitions/CoveragePremium"
-        },
-        "payPlans": {
-          "type": "array",
-          "description": "definitions.Coverage.properties.payPlans.description",
-          "items": {
-            "$ref": "#/definitions/PayPlan"
-          }
-        },
-        "policyId": {
-          "type": "string",
-          "description": "definitions.Coverage.properties.policyId.description",
-          "readOnly": true
-        },
-        "premInvestRates": {
-          "type": "array",
-          "description": "definitions.Coverage.properties.premInvestRates.description",
-          "items": {
-            "$ref": "#/definitions/PremInvestRate"
-          }
-        },
-        "productCode": {
-          "type": "string",
-          "description": "definitions.Coverage.properties.productCode.description"
-        },
-        "productId": {
-          "type": "integer",
-          "format": "int64",
-          "description": "definitions.Coverage.properties.productId.description"
-        },
-        "recurringTopup": {
-          "description": "definitions.Coverage.properties.recurringTopup.description",
-          "$ref": "#/definitions/RecurringTopup"
-        },
-        "singleTopup": {
-          "description": "definitions.Coverage.properties.singleTopup.description",
-          "$ref": "#/definitions/SingleTopup"
-        },
-        "waiverExt": {
-          "description": "definitions.Coverage.properties.waiverExt.description",
-          "$ref": "#/definitions/CoverageExtWaiver"
         }
       }
     },
     "BankAccount": {
       "type": "object",
       "properties": {
-        "accoName": {
-          "type": "string",
-          "example": "张三",
-          "description": "definitions.BankAccount.properties.accoName.description"
-        },
         "accountId": {
           "type": "string",
           "description": "definitions.BankAccount.properties.accountId.description",
           "readOnly": true
+        },
+        "branchCode": {
+          "type": "string",
+          "example": "1001",
+          "description": "definitions.BankAccount.properties.branchCode.description"
+        },
+        "bankCode": {
+          "type": "string",
+          "example": "test_bank",
+          "description": "definitions.BankAccount.properties.bankCode.description"
+        },
+        "bankAccountProvince": {
+          "type": "string",
+          "example": "Shanghai",
+          "description": "definitions.BankAccount.properties.bankAccountProvince.description"
+        },
+        "bankAccountCity": {
+          "type": "string",
+          "example": "Shanghai",
+          "description": "definitions.BankAccount.properties.bankAccountCity.description"
+        },
+        "issueBankName": {
+          "type": "string",
+          "example": "ICBC",
+          "description": "definitions.BankAccount.properties.issueBankName.description"
+        },
+        "bankAccount": {
+          "type": "string",
+          "example": "1111222233334444567",
+          "description": "definitions.BankAccount.properties.bankAccount.description"
+        },
+        "accoName": {
+          "type": "string",
+          "example": "张三",
+          "description": "definitions.BankAccount.properties.accoName.description"
         },
         "accountType": {
           "type": "string",
@@ -5467,42 +5825,6 @@
           "enum": [
             "2",
             "8"
-          ]
-        },
-        "bankAccount": {
-          "type": "string",
-          "example": "1111222233334444567",
-          "description": "definitions.BankAccount.properties.bankAccount.description"
-        },
-        "bankAccountCity": {
-          "type": "string",
-          "example": "Shanghai",
-          "description": "definitions.BankAccount.properties.bankAccountCity.description"
-        },
-        "bankAccountProvince": {
-          "type": "string",
-          "example": "Shanghai",
-          "description": "definitions.BankAccount.properties.bankAccountProvince.description"
-        },
-        "bankCode": {
-          "type": "string",
-          "example": "test_bank",
-          "description": "definitions.BankAccount.properties.bankCode.description"
-        },
-        "branchCode": {
-          "type": "string",
-          "example": "1001",
-          "description": "definitions.BankAccount.properties.branchCode.description"
-        },
-        "creditCardType": {
-          "type": "string",
-          "example": "1",
-          "description": "definitions.BankAccount.properties.creditCardType.description",
-          "enum": [
-            "1",
-            "2",
-            "3",
-            "4"
           ]
         },
         "debitCreditType": {
@@ -5515,16 +5837,22 @@
             "2"
           ]
         },
+        "creditCardType": {
+          "type": "string",
+          "example": "1",
+          "description": "definitions.BankAccount.properties.creditCardType.description",
+          "enum": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ]
+        },
         "expireDate": {
           "type": "string",
           "format": "date-time",
           "example": "10/2020",
           "description": "definitions.BankAccount.properties.expireDate.description"
-        },
-        "issueBankName": {
-          "type": "string",
-          "example": "ICBC",
-          "description": "definitions.BankAccount.properties.issueBankName.description"
         }
       }
     },
@@ -5540,12 +5868,10 @@
           "format": "date-time",
           "description": "definitions.EPolicyResponse.properties.clientRequestTime.description"
         },
-        "exceptions": {
-          "type": "array",
-          "description": "definitions.EPolicyResponse.properties.exceptions.description",
-          "items": {
-            "type": "string"
-          }
+        "result": {
+          "type": "integer",
+          "format": "int32",
+          "description": "definitions.EPolicyResponse.properties.result.description"
         },
         "messages": {
           "type": "array",
@@ -5554,26 +5880,36 @@
             "$ref": "#/definitions/GenericValidationResult"
           }
         },
+        "exceptions": {
+          "type": "array",
+          "description": "definitions.EPolicyResponse.properties.exceptions.description",
+          "items": {
+            "type": "string"
+          }
+        },
+        "extendedProps": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "policy": {
           "description": "definitions.EPolicyResponse.properties.policy.description",
           "$ref": "#/definitions/EPolicyResult"
-        },
-        "result": {
-          "type": "integer",
-          "format": "int32",
-          "description": "definitions.EPolicyResponse.properties.result.description"
         }
       }
     },
     "QuotationPolicyResult": {
       "type": "object",
       "properties": {
-        "coverages": {
-          "type": "array",
-          "description": "definitions.QuotationPolicyResult.properties.coverages.description",
-          "items": {
-            "$ref": "#/definitions/CoverageCalculationResult"
-          }
+        "inceptionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "definitions.QuotationPolicyResult.properties.inceptionDate.description"
+        },
+        "quotationCode": {
+          "type": "string",
+          "description": "definitions.QuotationPolicyResult.properties.quotationCode.description"
         },
         "currency": {
           "type": "integer",
@@ -5584,40 +5920,31 @@
             1
           ]
         },
-        "extendedProps": {
-          "type": "object",
-          "description": "definitions.QuotationPolicyResult.properties.extendedProps.description",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "inceptionDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "definitions.QuotationPolicyResult.properties.inceptionDate.description"
-        },
         "installPrem": {
           "type": "number",
           "format": "double",
           "description": "definitions.QuotationPolicyResult.properties.installPrem.description",
           "readOnly": true
         },
-        "quotationCode": {
-          "type": "string",
-          "description": "definitions.QuotationPolicyResult.properties.quotationCode.description"
+        "coverages": {
+          "type": "array",
+          "description": "definitions.QuotationPolicyResult.properties.coverages.description",
+          "items": {
+            "$ref": "#/definitions/CoverageCalculationResult"
+          }
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "definitions.QuotationPolicyResult.properties.extendedProps.description",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
     "PayerInput": {
       "type": "object",
       "properties": {
-        "extendedProps": {
-          "type": "object",
-          "description": "definitions.PayerInput.properties.extendedProps.description",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "partySerialId": {
           "type": "integer",
           "format": "int32",
@@ -5642,6 +5969,13 @@
           "format": "double",
           "example": 1,
           "description": "definitions.PayerInput.properties.shareRate.description"
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "definitions.PayerInput.properties.extendedProps.description",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -5667,6 +6001,14 @@
     "EPolicyResult": {
       "type": "object",
       "properties": {
+        "proposalNumber": {
+          "type": "string",
+          "description": "definitions.EPolicyResult.properties.proposalNumber.description"
+        },
+        "policyNumber": {
+          "type": "string",
+          "description": "definitions.EPolicyResult.properties.policyNumber.description"
+        },
         "ePolicyDownloadUrl": {
           "type": "string",
           "description": "definitions.EPolicyResult.properties.ePolicyDownloadUrl.description"
@@ -5677,14 +6019,6 @@
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "policyNumber": {
-          "type": "string",
-          "description": "definitions.EPolicyResult.properties.policyNumber.description"
-        },
-        "proposalNumber": {
-          "type": "string",
-          "description": "definitions.EPolicyResult.properties.proposalNumber.description"
         }
       }
     },
@@ -5700,13 +6034,6 @@
           "type": "string",
           "description": "definitions.RecurringTopup.properties.coverageId.description",
           "readOnly": true
-        },
-        "extendedProps": {
-          "type": "object",
-          "description": "definitions.RecurringTopup.properties.extendedProps.description",
-          "additionalProperties": {
-            "type": "string"
-          }
         },
         "investRates": {
           "type": "array",
@@ -5725,18 +6052,24 @@
           "format": "double",
           "example": 10000,
           "description": "definitions.RecurringTopup.properties.topupAmount.description"
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "definitions.RecurringTopup.properties.extendedProps.description",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
     "RecurringTopupInput": {
       "type": "object",
       "properties": {
-        "extendedProps": {
-          "type": "object",
-          "description": "definitions.RecurringTopupInput.properties.extendedProps.description",
-          "additionalProperties": {
-            "type": "string"
-          }
+        "topupAmount": {
+          "type": "number",
+          "format": "double",
+          "example": 10000,
+          "description": "definitions.RecurringTopupInput.properties.topupAmount.description"
         },
         "investRates": {
           "type": "array",
@@ -5745,11 +6078,12 @@
             "$ref": "#/definitions/ContractInvestRateInput"
           }
         },
-        "topupAmount": {
-          "type": "number",
-          "format": "double",
-          "example": 10000,
-          "description": "definitions.RecurringTopupInput.properties.topupAmount.description"
+        "extendedProps": {
+          "type": "object",
+          "description": "definitions.RecurringTopupInput.properties.extendedProps.description",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -5772,17 +6106,17 @@
             "5"
           ]
         },
-        "premium": {
-          "type": "number",
-          "format": "double",
-          "example": 2314,
-          "description": "definitions.CoveragePremium.properties.premium.description"
-        },
         "sumAssured": {
           "type": "number",
           "format": "double",
           "example": 100000,
           "description": "definitions.CoveragePremium.properties.sumAssured.description"
+        },
+        "premium": {
+          "type": "number",
+          "format": "double",
+          "example": 2314,
+          "description": "definitions.CoveragePremium.properties.premium.description"
         },
         "unit": {
           "type": "number",
@@ -5794,6 +6128,31 @@
     "BankAccountInput": {
       "type": "object",
       "properties": {
+        "bankCode": {
+          "type": "string",
+          "example": "test_bank",
+          "description": "definitions.BankAccountInput.properties.bankCode.description"
+        },
+        "bankAccountProvince": {
+          "type": "string",
+          "example": "Shanghai",
+          "description": "definitions.BankAccountInput.properties.bankAccountProvince.description"
+        },
+        "bankAccountCity": {
+          "type": "string",
+          "example": "Shanghai",
+          "description": "definitions.BankAccountInput.properties.bankAccountCity.description"
+        },
+        "issueBankName": {
+          "type": "string",
+          "example": "ICBC",
+          "description": "definitions.BankAccountInput.properties.issueBankName.description"
+        },
+        "bankAccount": {
+          "type": "string",
+          "example": "1111222233334444567",
+          "description": "definitions.BankAccountInput.properties.bankAccount.description"
+        },
         "accoName": {
           "type": "string",
           "example": "张三",
@@ -5808,25 +6167,15 @@
             "8"
           ]
         },
-        "bankAccount": {
+        "debitCreditType": {
           "type": "string",
-          "example": "1111222233334444567",
-          "description": "definitions.BankAccountInput.properties.bankAccount.description"
-        },
-        "bankAccountCity": {
-          "type": "string",
-          "example": "Shanghai",
-          "description": "definitions.BankAccountInput.properties.bankAccountCity.description"
-        },
-        "bankAccountProvince": {
-          "type": "string",
-          "example": "Shanghai",
-          "description": "definitions.BankAccountInput.properties.bankAccountProvince.description"
-        },
-        "bankCode": {
-          "type": "string",
-          "example": "test_bank",
-          "description": "definitions.BankAccountInput.properties.bankCode.description"
+          "example": "0",
+          "description": "definitions.BankAccountInput.properties.debitCreditType.description",
+          "enum": [
+            "0",
+            "1",
+            "2"
+          ]
         },
         "creditCardType": {
           "type": "string",
@@ -5839,43 +6188,17 @@
             "4"
           ]
         },
-        "debitCreditType": {
-          "type": "string",
-          "example": "0",
-          "description": "definitions.BankAccountInput.properties.debitCreditType.description",
-          "enum": [
-            "0",
-            "1",
-            "2"
-          ]
-        },
         "expireDate": {
           "type": "string",
           "format": "date-time",
           "example": "10/2020",
           "description": "definitions.BankAccountInput.properties.expireDate.description"
-        },
-        "issueBankName": {
-          "type": "string",
-          "example": "ICBC",
-          "description": "definitions.BankAccountInput.properties.issueBankName.description"
         }
       }
     },
     "CollectionPayerAccountInput": {
       "type": "object",
       "properties": {
-        "bankAccount": {
-          "description": "definitions.CollectionPayerAccountInput.properties.bankAccount.description",
-          "$ref": "#/definitions/BankAccountInput"
-        },
-        "extendedProps": {
-          "type": "object",
-          "description": "definitions.CollectionPayerAccountInput.properties.extendedProps.description",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "paymentMethod": {
           "type": "integer",
           "format": "int32",
@@ -5888,27 +6211,27 @@
             30,
             80
           ]
+        },
+        "bankAccount": {
+          "description": "definitions.CollectionPayerAccountInput.properties.bankAccount.description",
+          "$ref": "#/definitions/BankAccountInput"
+        },
+        "nextBankAccount": {
+          "description": "definitions.CollectionPayerAccountInput.properties.nextBankAccount.description",
+          "$ref": "#/definitions/BankAccountInput"
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "definitions.CollectionPayerAccountInput.properties.extendedProps.description",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
     "PayerAccountInput": {
       "type": "object",
       "properties": {
-        "bankAccount": {
-          "description": "definitions.PayerAccountInput.properties.bankAccount.description",
-          "$ref": "#/definitions/BankAccountInput"
-        },
-        "extendedProps": {
-          "type": "object",
-          "description": "definitions.PayerAccountInput.properties.extendedProps.description",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "nextBankAccount": {
-          "description": "definitions.PayerAccountInput.properties.nextBankAccount.description",
-          "$ref": "#/definitions/BankAccountInput"
-        },
         "paymentMethod": {
           "type": "integer",
           "format": "int32",
@@ -5934,6 +6257,21 @@
             30,
             80
           ]
+        },
+        "bankAccount": {
+          "description": "definitions.PayerAccountInput.properties.bankAccount.description",
+          "$ref": "#/definitions/BankAccountInput"
+        },
+        "nextBankAccount": {
+          "description": "definitions.PayerAccountInput.properties.nextBankAccount.description",
+          "$ref": "#/definitions/BankAccountInput"
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "definitions.PayerAccountInput.properties.extendedProps.description",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -5952,8 +6290,11 @@
           "format": "date-time",
           "description": "definitions.QuotationRequest.properties.clientRequestTime.description"
         },
-        "extObject": {
-          "$ref": "#/definitions/GenericVO"
+        "extendedProps": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "policy": {
           "description": "definitions.QuotationRequest.properties.policy.description",
@@ -5964,6 +6305,26 @@
     "Beneficiary": {
       "type": "object",
       "properties": {
+        "insuredPartyId": {
+          "type": "string",
+          "description": "definitions.Beneficiary.properties.insuredPartyId.description",
+          "readOnly": true
+        },
+        "listId": {
+          "type": "string",
+          "description": "definitions.Beneficiary.properties.listId.description",
+          "readOnly": true
+        },
+        "partyId": {
+          "type": "string",
+          "description": "definitions.Beneficiary.properties.partyId.description",
+          "readOnly": true
+        },
+        "policyId": {
+          "type": "string",
+          "description": "definitions.Beneficiary.properties.policyId.description",
+          "readOnly": true
+        },
         "beneType": {
           "type": "string",
           "example": "2",
@@ -5998,33 +6359,6 @@
             16
           ]
         },
-        "extendedProps": {
-          "type": "object",
-          "description": "definitions.Beneficiary.properties.extendedProps.description",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "insuredPartyId": {
-          "type": "string",
-          "description": "definitions.Beneficiary.properties.insuredPartyId.description",
-          "readOnly": true
-        },
-        "listId": {
-          "type": "string",
-          "description": "definitions.Beneficiary.properties.listId.description",
-          "readOnly": true
-        },
-        "partyId": {
-          "type": "string",
-          "description": "definitions.Beneficiary.properties.partyId.description",
-          "readOnly": true
-        },
-        "policyId": {
-          "type": "string",
-          "description": "definitions.Beneficiary.properties.policyId.description",
-          "readOnly": true
-        },
         "shareOrder": {
           "type": "integer",
           "format": "int32",
@@ -6036,6 +6370,633 @@
           "format": "double",
           "example": 1,
           "description": "definitions.Beneficiary.properties.shareRate.description"
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "definitions.Beneficiary.properties.extendedProps.description",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ChangingContactInfoResponse": {
+      "type": "object",
+      "properties": {
+        "clientRequestId": {
+          "type": "string",
+          "description": "definitions.ChangingContactInfoResponse.properties.clientRequestId.description"
+        },
+        "clientRequestTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "definitions.ChangingContactInfoResponse.properties.clientRequestTime.description"
+        },
+        "result": {
+          "type": "integer",
+          "format": "int32",
+          "description": "definitions.ChangingContactInfoResponse.properties.result.description"
+        },
+        "messages": {
+          "type": "array",
+          "description": "definitions.ChangingContactInfoResponse.properties.messages.description",
+          "items": {
+            "$ref": "#/definitions/GenericValidationResult"
+          }
+        },
+        "exceptions": {
+          "type": "array",
+          "description": "definitions.ChangingContactInfoResponse.properties.exceptions.description",
+          "items": {
+            "type": "string"
+          }
+        },
+        "extendedProps": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "changeNo": {
+          "type": "string",
+          "description": "definitions.ChangingContactInfoResponse.properties.changeNo.description"
+        },
+        "finishTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "definitions.ChangingContactInfoResponse.properties.finishTime.description"
+        },
+        "itemResults": {
+          "type": "array",
+          "description": "definitions.ChangingContactInfoResponse.properties.itemResults.description",
+          "items": {
+            "$ref": "#/definitions/ChangingContactInfoItemResultInfo"
+          }
+        }
+      }
+    },
+    "FreelookResponse": {
+      "type": "object",
+      "properties": {
+        "clientRequestId": {
+          "type": "string",
+          "description": "definitions.FreelookResponse.properties.clientRequestId.description"
+        },
+        "clientRequestTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "definitions.FreelookResponse.properties.clientRequestTime.description"
+        },
+        "result": {
+          "type": "integer",
+          "format": "int32",
+          "description": "definitions.FreelookResponse.properties.result.description"
+        },
+        "messages": {
+          "type": "array",
+          "description": "definitions.FreelookResponse.properties.messages.description",
+          "items": {
+            "$ref": "#/definitions/GenericValidationResult"
+          }
+        },
+        "exceptions": {
+          "type": "array",
+          "description": "definitions.FreelookResponse.properties.exceptions.description",
+          "items": {
+            "type": "string"
+          }
+        },
+        "extendedProps": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "changeNo": {
+          "type": "string",
+          "description": "definitions.FreelookResponse.properties.changeNo.description"
+        },
+        "finishTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "definitions.FreelookResponse.properties.finishTime.description"
+        },
+        "itemResults": {
+          "type": "array",
+          "description": "definitions.FreelookResponse.properties.itemResults.description",
+          "items": {
+            "$ref": "#/definitions/FreelookItemResultInfo"
+          }
+        }
+      }
+    },
+    "ChangingContactInfoItemResultInfo": {
+      "type": "object",
+      "required": [
+        "effectiveDate",
+        "orderId",
+        "policyNumber",
+        "serviceId"
+      ],
+      "properties": {
+        "itemResult": {
+          "$ref": "#/definitions/ChangingContactInfoResultDetail"
+        },
+        "policyNumber": {
+          "type": "string",
+          "example": "0000017623",
+          "description": "definitions.ChangingContactInfoItemResultInfo.properties.policyNumber.description"
+        },
+        "serviceId": {
+          "type": "integer",
+          "format": "int32",
+          "example": 201,
+          "description": "definitions.ChangingContactInfoItemResultInfo.properties.serviceId.description",
+          "enum": [
+            201,
+            104
+          ]
+        },
+        "submissionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "definitions.ChangingContactInfoItemResultInfo.properties.submissionDate.description"
+        },
+        "effectiveDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "definitions.ChangingContactInfoItemResultInfo.properties.effectiveDate.description"
+        },
+        "orderId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "definitions.ChangingContactInfoItemResultInfo.properties.orderId.description"
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "definitions.ChangingContactInfoItemResultInfo.properties.extendedProps.description",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "FreelookRequest": {
+      "type": "object",
+      "properties": {
+        "clientRequestId": {
+          "type": "string",
+          "description": "definitions.FreelookRequest.properties.clientRequestId.description"
+        },
+        "clientRequestTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "definitions.FreelookRequest.properties.clientRequestTime.description"
+        },
+        "extendedProps": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "items": {
+          "type": "array",
+          "description": "definitions.FreelookRequest.properties.items.description",
+          "items": {
+            "$ref": "#/definitions/FreelookItemInput"
+          }
+        }
+      }
+    },
+    "ChangingContactInfoItemInput": {
+      "type": "object",
+      "required": [
+        "effectiveDate",
+        "itemDetail",
+        "orderId",
+        "policyNumber",
+        "serviceId"
+      ],
+      "properties": {
+        "policyNumber": {
+          "type": "string",
+          "example": "0000017623",
+          "description": "definitions.ChangingContactInfoItemInput.properties.policyNumber.description"
+        },
+        "serviceId": {
+          "type": "integer",
+          "format": "int32",
+          "example": 201,
+          "description": "definitions.ChangingContactInfoItemInput.properties.serviceId.description",
+          "enum": [
+            201,
+            104
+          ]
+        },
+        "submissionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "definitions.ChangingContactInfoItemInput.properties.submissionDate.description"
+        },
+        "effectiveDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "definitions.ChangingContactInfoItemInput.properties.effectiveDate.description"
+        },
+        "orderId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "definitions.ChangingContactInfoItemInput.properties.orderId.description"
+        },
+        "itemDetail": {
+          "description": "definitions.ChangingContactInfoItemInput.properties.itemDetail.description",
+          "$ref": "#/definitions/ChangingContactInfoInputDetail"
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "definitions.ChangingContactInfoItemInput.properties.extendedProps.description",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "FreelookResultDetail": {
+      "type": "object",
+      "properties": {
+        "totalGrossPremium": {
+          "type": "number",
+          "format": "double",
+          "description": "definitions.FreelookResultDetail.properties.totalGrossPremium.description"
+        },
+        "totalExtraPremium": {
+          "type": "number",
+          "format": "double",
+          "description": "definitions.FreelookResultDetail.properties.totalExtraPremium.description"
+        },
+        "suspense": {
+          "type": "number",
+          "format": "double",
+          "description": "definitions.FreelookResultDetail.properties.suspense.description"
+        },
+        "advancePremium": {
+          "type": "number",
+          "format": "double",
+          "description": "definitions.FreelookResultDetail.properties.advancePremium.description"
+        },
+        "medicalFee": {
+          "type": "number",
+          "format": "double",
+          "description": "definitions.FreelookResultDetail.properties.medicalFee.description"
+        },
+        "totalRefundAmount": {
+          "type": "number",
+          "format": "double",
+          "description": "definitions.FreelookResultDetail.properties.totalRefundAmount.description"
+        },
+        "adminFee": {
+          "type": "number",
+          "format": "double"
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "definitions.FreelookResultDetail.properties.extendedProps.description",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "FreelookQuotationRequest": {
+      "type": "object",
+      "required": [
+        "effectiveDate",
+        "item",
+        "policyNumber",
+        "serviceId"
+      ],
+      "properties": {
+        "clientRequestId": {
+          "type": "string",
+          "description": "definitions.FreelookQuotationRequest.properties.clientRequestId.description"
+        },
+        "clientRequestTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "definitions.FreelookQuotationRequest.properties.clientRequestTime.description"
+        },
+        "extendedProps": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "policyNumber": {
+          "type": "string",
+          "example": "0000017623",
+          "description": "definitions.FreelookQuotationRequest.properties.policyNumber.description"
+        },
+        "serviceId": {
+          "type": "integer",
+          "format": "int32",
+          "example": 201,
+          "description": "definitions.FreelookQuotationRequest.properties.serviceId.description",
+          "enum": [
+            201
+          ]
+        },
+        "submissionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "definitions.FreelookQuotationRequest.properties.submissionDate.description"
+        },
+        "effectiveDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "definitions.FreelookQuotationRequest.properties.effectiveDate.description"
+        },
+        "item": {
+          "description": "definitions.FreelookQuotationRequest.properties.item.description",
+          "$ref": "#/definitions/FreelookInputDetail"
+        }
+      }
+    },
+    "CommonAlterationCoverageInput": {
+      "type": "object",
+      "properties": {
+        "coverageNo": {
+          "type": "string",
+          "example": "197531",
+          "description": "definitions.CommonAlterationCoverageInput.properties.coverageNo.description"
+        }
+      }
+    },
+    "ChangingContactInfoInputDetail": {
+      "type": "object",
+      "properties": {
+        "partyId": {
+          "type": "string",
+          "description": "definitions.ChangingContactInfoInputDetail.properties.partyId.description"
+        },
+        "partyContact": {
+          "description": "definitions.ChangingContactInfoInputDetail.properties.partyContact.description",
+          "$ref": "#/definitions/PartyContact"
+        },
+        "address": {
+          "description": "definitions.ChangingContactInfoInputDetail.properties.address.description",
+          "$ref": "#/definitions/AddressInput"
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "definitions.ChangingContactInfoInputDetail.properties.extendedProps.description",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "FreelookItemInput": {
+      "type": "object",
+      "required": [
+        "effectiveDate",
+        "itemDetail",
+        "orderId",
+        "policyNumber",
+        "serviceId"
+      ],
+      "properties": {
+        "policyNumber": {
+          "type": "string",
+          "example": "0000017623",
+          "description": "definitions.FreelookItemInput.properties.policyNumber.description"
+        },
+        "serviceId": {
+          "type": "integer",
+          "format": "int32",
+          "example": 201,
+          "description": "definitions.FreelookItemInput.properties.serviceId.description",
+          "enum": [
+            201,
+            104
+          ]
+        },
+        "submissionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "definitions.FreelookItemInput.properties.submissionDate.description"
+        },
+        "effectiveDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "definitions.FreelookItemInput.properties.effectiveDate.description"
+        },
+        "orderId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "definitions.FreelookItemInput.properties.orderId.description"
+        },
+        "itemDetail": {
+          "description": "definitions.FreelookItemInput.properties.itemDetail.description",
+          "$ref": "#/definitions/FreelookInputDetail"
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "definitions.FreelookItemInput.properties.extendedProps.description",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ChangingContactInfoRequest": {
+      "type": "object",
+      "properties": {
+        "clientRequestId": {
+          "type": "string",
+          "description": "definitions.ChangingContactInfoRequest.properties.clientRequestId.description"
+        },
+        "clientRequestTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "definitions.ChangingContactInfoRequest.properties.clientRequestTime.description"
+        },
+        "extendedProps": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "items": {
+          "type": "array",
+          "description": "definitions.ChangingContactInfoRequest.properties.items.description",
+          "items": {
+            "$ref": "#/definitions/ChangingContactInfoItemInput"
+          }
+        }
+      }
+    },
+    "FreelookQuotationResponse": {
+      "type": "object",
+      "properties": {
+        "clientRequestId": {
+          "type": "string",
+          "description": "definitions.FreelookQuotationResponse.properties.clientRequestId.description"
+        },
+        "clientRequestTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "definitions.FreelookQuotationResponse.properties.clientRequestTime.description"
+        },
+        "result": {
+          "type": "integer",
+          "format": "int32",
+          "description": "definitions.FreelookQuotationResponse.properties.result.description"
+        },
+        "messages": {
+          "type": "array",
+          "description": "definitions.FreelookQuotationResponse.properties.messages.description",
+          "items": {
+            "$ref": "#/definitions/GenericValidationResult"
+          }
+        },
+        "exceptions": {
+          "type": "array",
+          "description": "definitions.FreelookQuotationResponse.properties.exceptions.description",
+          "items": {
+            "type": "string"
+          }
+        },
+        "extendedProps": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "policyNumber": {
+          "type": "string",
+          "description": "definitions.FreelookQuotationResponse.properties.policyNumber.description"
+        },
+        "serviceId": {
+          "type": "integer",
+          "format": "int32",
+          "example": 201,
+          "description": "definitions.FreelookQuotationResponse.properties.serviceId.description",
+          "enum": [
+            201
+          ]
+        },
+        "submissionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "definitions.FreelookQuotationResponse.properties.submissionDate.description"
+        },
+        "effectiveDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "definitions.FreelookQuotationResponse.properties.effectiveDate.description"
+        },
+        "quotationResult": {
+          "description": "definitions.FreelookQuotationResponse.properties.quotationResult.description",
+          "$ref": "#/definitions/FreelookResultDetail"
+        }
+      }
+    },
+    "ChangingContactInfoResultDetail": {
+      "type": "object",
+      "properties": {
+        "extendedProps": {
+          "type": "object",
+          "description": "definitions.ChangingContactInfoResultDetail.properties.extendedProps.description",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "FreelookItemResultInfo": {
+      "type": "object",
+      "required": [
+        "effectiveDate",
+        "orderId",
+        "policyNumber",
+        "serviceId"
+      ],
+      "properties": {
+        "itemResult": {
+          "$ref": "#/definitions/FreelookResultDetail"
+        },
+        "policyNumber": {
+          "type": "string",
+          "example": "0000017623",
+          "description": "definitions.FreelookItemResultInfo.properties.policyNumber.description"
+        },
+        "serviceId": {
+          "type": "integer",
+          "format": "int32",
+          "example": 201,
+          "description": "definitions.FreelookItemResultInfo.properties.serviceId.description",
+          "enum": [
+            201,
+            104
+          ]
+        },
+        "submissionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "definitions.FreelookItemResultInfo.properties.submissionDate.description"
+        },
+        "effectiveDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "definitions.FreelookItemResultInfo.properties.effectiveDate.description"
+        },
+        "orderId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "definitions.FreelookItemResultInfo.properties.orderId.description"
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "definitions.FreelookItemResultInfo.properties.extendedProps.description",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "FreelookInputDetail": {
+      "type": "object",
+      "required": [
+        "alteredCoverages",
+        "freelookReason"
+      ],
+      "properties": {
+        "freelookReason": {
+          "type": "integer",
+          "format": "int32",
+          "example": 54,
+          "description": "definitions.FreelookInputDetail.properties.freelookReason.description",
+          "enum": [
+            51,
+            52,
+            53,
+            54,
+            55
+          ]
+        },
+        "alteredCoverages": {
+          "type": "array",
+          "description": "definitions.FreelookInputDetail.properties.alteredCoverages.description",
+          "items": {
+            "$ref": "#/definitions/CommonAlterationCoverageInput"
+          }
+        },
+        "extendedProps": {
+          "type": "object",
+          "description": "definitions.FreelookInputDetail.properties.extendedProps.description",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     }
@@ -7030,6 +7991,204 @@
           },
           "500": {
             "description": "paths['/proposal/proposals/pre-verification'].post.responses['500'].description"
+          }
+        }
+      }
+    },
+    "/policy/policy-alterations/{insurerCode}/changeContactInfo": {
+      "post": {
+        "tags": [
+          "ChangeContactInfo"
+        ],
+        "summary": "paths['/policy/policy-alterations/{insurerCode}/changeContactInfo'].post.summary",
+        "description": "paths['/policy/policy-alterations/{insurerCode}/changeContactInfo'].post.description",
+        "operationId": "inforceUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "insurerCode",
+            "in": "path",
+            "description": "paths['/policy/policy-alterations/{insurerCode}/changeContactInfo'].post.parameters['0'].description",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "request",
+            "description": "paths['/policy/policy-alterations/{insurerCode}/changeContactInfo'].post.parameters['1'].description",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ChangingContactInfoRequest"
+            }
+          },
+          {
+            "name": "X-ebao-tenant-id",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "paths['/policy/policy-alterations/{insurerCode}/changeContactInfo'].post.responses['200'].description",
+            "schema": {
+              "$ref": "#/definitions/ChangingContactInfoResponse"
+            }
+          },
+          "201": {
+            "description": "paths['/policy/policy-alterations/{insurerCode}/changeContactInfo'].post.responses['201'].description"
+          },
+          "400": {
+            "description": "paths['/policy/policy-alterations/{insurerCode}/changeContactInfo'].post.responses['400'].description"
+          },
+          "401": {
+            "description": "paths['/policy/policy-alterations/{insurerCode}/changeContactInfo'].post.responses['401'].description"
+          },
+          "403": {
+            "description": "paths['/policy/policy-alterations/{insurerCode}/changeContactInfo'].post.responses['403'].description"
+          },
+          "404": {
+            "description": "paths['/policy/policy-alterations/{insurerCode}/changeContactInfo'].post.responses['404'].description"
+          },
+          "500": {
+            "description": "paths['/policy/policy-alterations/{insurerCode}/changeContactInfo'].post.responses['500'].description"
+          }
+        }
+      }
+    },
+    "/policy/policy-alterations/{insurerCode}/freelook": {
+      "post": {
+        "tags": [
+          "Freelook"
+        ],
+        "summary": "paths['/policy/policy-alterations/{insurerCode}/freelook'].post.summary",
+        "description": "paths['/policy/policy-alterations/{insurerCode}/freelook'].post.description",
+        "operationId": "inforceUsingPOST_1",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "insurerCode",
+            "in": "path",
+            "description": "paths['/policy/policy-alterations/{insurerCode}/freelook'].post.parameters['0'].description",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "request",
+            "description": "paths['/policy/policy-alterations/{insurerCode}/freelook'].post.parameters['1'].description",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FreelookRequest"
+            }
+          },
+          {
+            "name": "X-ebao-tenant-id",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "paths['/policy/policy-alterations/{insurerCode}/freelook'].post.responses['200'].description",
+            "schema": {
+              "$ref": "#/definitions/FreelookResponse"
+            }
+          },
+          "201": {
+            "description": "paths['/policy/policy-alterations/{insurerCode}/freelook'].post.responses['201'].description"
+          },
+          "400": {
+            "description": "paths['/policy/policy-alterations/{insurerCode}/freelook'].post.responses['400'].description"
+          },
+          "401": {
+            "description": "paths['/policy/policy-alterations/{insurerCode}/freelook'].post.responses['401'].description"
+          },
+          "403": {
+            "description": "paths['/policy/policy-alterations/{insurerCode}/freelook'].post.responses['403'].description"
+          },
+          "404": {
+            "description": "paths['/policy/policy-alterations/{insurerCode}/freelook'].post.responses['404'].description"
+          },
+          "500": {
+            "description": "paths['/policy/policy-alterations/{insurerCode}/freelook'].post.responses['500'].description"
+          }
+        }
+      }
+    },
+    "/policy/policy-alterations/{insurerCode}/freelook/quotations": {
+      "post": {
+        "tags": [
+          "Freelook"
+        ],
+        "summary": "paths['/policy/policy-alterations/{insurerCode}/freelook/quotations'].post.summary",
+        "description": "paths['/policy/policy-alterations/{insurerCode}/freelook/quotations'].post.description",
+        "operationId": "quoteUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "parameters": [
+          {
+            "name": "insurerCode",
+            "in": "path",
+            "description": "paths['/policy/policy-alterations/{insurerCode}/freelook/quotations'].post.parameters['0'].description",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "request",
+            "description": "paths['/policy/policy-alterations/{insurerCode}/freelook/quotations'].post.parameters['1'].description",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FreelookQuotationRequest"
+            }
+          },
+          {
+            "name": "X-ebao-tenant-id",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "paths['/policy/policy-alterations/{insurerCode}/freelook/quotations'].post.responses['200'].description",
+            "schema": {
+              "$ref": "#/definitions/FreelookQuotationResponse"
+            }
+          },
+          "201": {
+            "description": "paths['/policy/policy-alterations/{insurerCode}/freelook/quotations'].post.responses['201'].description"
+          },
+          "400": {
+            "description": "paths['/policy/policy-alterations/{insurerCode}/freelook/quotations'].post.responses['400'].description"
+          },
+          "401": {
+            "description": "paths['/policy/policy-alterations/{insurerCode}/freelook/quotations'].post.responses['401'].description"
+          },
+          "403": {
+            "description": "paths['/policy/policy-alterations/{insurerCode}/freelook/quotations'].post.responses['403'].description"
+          },
+          "404": {
+            "description": "paths['/policy/policy-alterations/{insurerCode}/freelook/quotations'].post.responses['404'].description"
+          },
+          "500": {
+            "description": "paths['/policy/policy-alterations/{insurerCode}/freelook/quotations'].post.responses['500'].description"
           }
         }
       }

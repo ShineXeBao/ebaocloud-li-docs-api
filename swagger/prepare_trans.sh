@@ -7,8 +7,5 @@ node merge.js -p $1
 #抽取翻译字符串
 node i18n.js -p $1
 
-#生成最终文件
-node translation.js -p $1
-
-#拷贝到对应目录
-cp  ./projects/$1/dist/swagger*.json ../dist/swagger/
+#生成properties文件，等待翻译
+node properties.js -p $1

@@ -1,0 +1,34 @@
+﻿key,property
+swagger.paths['/policy/policy-alterations/{insurerCode}/changeContactInfo'].post.description,`ChangeContactInfo`
+swagger.paths['/policy/policy-alterations/{insurerCode}/changeContactInfo'].post.parameters['0'].description,`insurerCode`
+swagger.paths['/policy/policy-alterations/{insurerCode}/changeContactInfo'].post.parameters['1'].description,`request`
+swagger.paths['/policy/policy-alterations/{insurerCode}/changeContactInfo'].post.responses['200'].description,`OK`
+swagger.paths['/policy/policy-alterations/{insurerCode}/changeContactInfo'].post.responses['201'].description,`Created`
+swagger.paths['/policy/policy-alterations/{insurerCode}/changeContactInfo'].post.responses['400'].description,`Bad request`
+swagger.paths['/policy/policy-alterations/{insurerCode}/changeContactInfo'].post.responses['401'].description,`Unauthorized`
+swagger.paths['/policy/policy-alterations/{insurerCode}/changeContactInfo'].post.responses['403'].description,`Forbidden`
+swagger.paths['/policy/policy-alterations/{insurerCode}/changeContactInfo'].post.responses['404'].description,`Not Found`
+swagger.paths['/policy/policy-alterations/{insurerCode}/changeContactInfo'].post.responses['500'].description,`Internal Server Error`
+swagger.paths['/policy/policy-alterations/{insurerCode}/changeContactInfo'].post.summary,`ChangeContactInfo`
+swagger.paths['/policy/policy-alterations/{insurerCode}/freelook'].post.description,`Freelook`
+swagger.paths['/policy/policy-alterations/{insurerCode}/freelook'].post.parameters['0'].description,`insurerCode`
+swagger.paths['/policy/policy-alterations/{insurerCode}/freelook'].post.parameters['1'].description,`request`
+swagger.paths['/policy/policy-alterations/{insurerCode}/freelook'].post.responses['200'].description,`OK`
+swagger.paths['/policy/policy-alterations/{insurerCode}/freelook'].post.responses['201'].description,`Created`
+swagger.paths['/policy/policy-alterations/{insurerCode}/freelook'].post.responses['400'].description,`Bad request`
+swagger.paths['/policy/policy-alterations/{insurerCode}/freelook'].post.responses['401'].description,`Unauthorized`
+swagger.paths['/policy/policy-alterations/{insurerCode}/freelook'].post.responses['403'].description,`Forbidden`
+swagger.paths['/policy/policy-alterations/{insurerCode}/freelook'].post.responses['404'].description,`Not Found`
+swagger.paths['/policy/policy-alterations/{insurerCode}/freelook'].post.responses['500'].description,`Internal Server Error`
+swagger.paths['/policy/policy-alterations/{insurerCode}/freelook'].post.summary,`Freelook`
+swagger.paths['/policy/policy-alterations/{insurerCode}/freelook/quotations'].post.description,`Freelook Quotation`
+swagger.paths['/policy/policy-alterations/{insurerCode}/freelook/quotations'].post.parameters['0'].description,`insurerCode`
+swagger.paths['/policy/policy-alterations/{insurerCode}/freelook/quotations'].post.parameters['1'].description,`request`
+swagger.paths['/policy/policy-alterations/{insurerCode}/freelook/quotations'].post.responses['200'].description,`OK`
+swagger.paths['/policy/policy-alterations/{insurerCode}/freelook/quotations'].post.responses['201'].description,`Created`
+swagger.paths['/policy/policy-alterations/{insurerCode}/freelook/quotations'].post.responses['400'].description,`Bad request`
+swagger.paths['/policy/policy-alterations/{insurerCode}/freelook/quotations'].post.responses['401'].description,`Unauthorized`
+swagger.paths['/policy/policy-alterations/{insurerCode}/freelook/quotations'].post.responses['403'].description,`Forbidden`
+swagger.paths['/policy/policy-alterations/{insurerCode}/freelook/quotations'].post.responses['404'].description,`Not Found`
+swagger.paths['/policy/policy-alterations/{insurerCode}/freelook/quotations'].post.responses['500'].description,`Internal Server Error`
+swagger.paths['/policy/policy-alterations/{insurerCode}/freelook/quotations'].post.summary,`FreelookQuotations`

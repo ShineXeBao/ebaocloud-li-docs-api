@@ -4,11 +4,13 @@
     "cn"
   ],
   "sourceSwagger": [
-    "/source/product.json",
-    "/source/proposal.json"
+    "/source/products-swagger.json",
+    "/source/proposals-swagger.json",
+    "/source/policyalterations-swagger.json"
+
   ],
   "info": {
-    "version": "1.1",
+    "version": "1.5",
     "title": "eBaoCloud LI OpenAPI",
     "termsOfService": "http://api.ebaocloud.life/",
     "contact" : {

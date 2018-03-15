@@ -1,0 +1,30 @@
+﻿key,old,new
+swagger.definitions.AgeLimit.properties.maxAgeUnit.description,`年龄单位<br>1 - 岁<br>5 - 天<br>4 - 月`,`年龄单位，1:岁,5:天, 4:月`
+swagger.definitions.AgeLimit.properties.minAgeUnit.description,`年龄单位<br>1 - 岁<br>5 - 天<br>4 - 月`,`年龄单位，1:岁,5:天, 4:月`
+swagger.definitions.ApplicationPolicyResult.properties.currency.description,`币种，非空，1 - 人民币`,`币种，非空，<br>1 - 人民币<br>23 - 比索（菲律宾）`
+swagger.definitions.CalculateCoverageResult.properties.paymentFrey.description,`缴费频率<br>1 - 年缴<br>2 - 半年缴<br>3 - 季缴<br>4 - 月缴<br>5 - 趸缴`,`缴费频率`
+swagger.definitions.CalculatePolicy.properties.inceptionDate.description,`保单生效日，字符串类型，格式("YYYY-MM-DD")`,`保单生效日，字符串类型，格式(YYYY-MM-DD)`
+swagger.definitions.CollectionInput.properties.currency.description,`币种，非空，1 - 人民币`,`币种，非空，<br>1 - 人民币<br>23 - 比索（菲律宾）`
+swagger.definitions.CollectionInput.properties.payMode.description,`首期付款方式，数字类型<br>1 - 现金<br>2 - 支票<br>3 - 银行转账<br>30 - 信用卡`,`首期付款方式，数字类型<br>1 - 现金<br>2 - 支票<br>3 - 银行转账<br>30 - 信用卡<br>80 - 第三方支付`
+swagger.definitions.IssurancePolicyResult.properties.currency.description,`币种，非空，1 - 人民币`,`币种，非空，<br>1 - 人民币<br>23 - 比索（菲律宾）`
+swagger.definitions.MainInformation.properties.ally.description,`是否joint life<br>1 - 是<br>0 - 否`,`是否joint life, 1:是;0:否`
+swagger.definitions.PayerAccount.properties.paymentMethod.description,`首期付款方式，数字类型<br>1 - 现金<br>2 - 支票<br>3 - 银行转账<br>30 - 信用卡`,`首期付款方式，数字类型<br>1 - 现金<br>2 - 支票<br>3 - 银行转账<br>30 - 信用卡<br>80 - 第三方支付`
+swagger.definitions.PayerAccount.properties.paymentMethodNext.description,`续期付款方式，数字类型<br>1 - 现金<br>2 - 支票<br>3 - 银行转账<br>30 - 信用卡`,`续期付款方式，数字类型<br>1 - 现金<br>2 - 支票<br>3 - 银行转账<br>30 - 信用卡<br>80 - 第三方支付`
+swagger.definitions.PayerAccountInput.properties.paymentMethod.description,`首期付款方式，数字类型<br>1 - 现金<br>2 - 支票<br>3 - 银行转账<br>30 - 信用卡`,`首期付款方式，数字类型<br>1 - 现金<br>2 - 支票<br>3 - 银行转账<br>30 - 信用卡<br>80 - 第三方支付`
+swagger.definitions.PayerAccountInput.properties.paymentMethodNext.description,`续期付款方式，数字类型<br>1 - 现金<br>2 - 支票<br>3 - 银行转账<br>30 - 信用卡`,`续期付款方式，数字类型<br>1 - 现金<br>2 - 支票<br>3 - 银行转账<br>30 - 信用卡<br>80 - 第三方支付`
+swagger.definitions.Policy.properties.currency.description,`币种，非空，1 - 人民币`,`币种，非空，<br>1 - 人民币<br>23 - 比索（菲律宾）`
+swagger.definitions.PolicyInput.properties.currency.description,`币种，非空，1 - 人民币`,`币种，非空，<br>1 - 人民币<br>23 - 比索（菲律宾）`
+swagger.definitions.ProductPkgProduct.properties.benefitLevel.description,`档次，此项只对按档次售卖的产品有意义`,`档次`
+swagger.definitions.ProductPkgProduct.properties.calcMethod.description,`计算方式`,`精算方式`
+swagger.definitions.ProductPkgProduct.properties.maxAmount.description,`最大保额`,`允许的最大保额`
+swagger.definitions.ProductPkgProduct.properties.maxPremium.description,`最大保费`,`允许的最大保费`
+swagger.definitions.ProductPkgProduct.properties.minAmount.description,`最小保额`,`允许的最小保额`
+swagger.definitions.ProductPkgProduct.properties.minPremium.description,`最小保费`,`允许的最小保费`
+swagger.definitions.ProductPremium.properties.adhocTopup.description,`投资险，单次追加保费限额`,`投资险加费限额`
+swagger.definitions.ProductPremium.properties.decreaseRegularTopup.description,`投资险，减少定期追加保费限额`,`投资险减少持续保费限额`
+swagger.definitions.ProductPremium.properties.increaseRegularTopup.description,`投资险，增加定期追加保费限额`,`投资险增加持续保费限额`
+swagger.definitions.ProductPremium.properties.listFundPremiumLimit.description,`投资险，基金保费限额`,`投资险减基金级别限额`
+swagger.definitions.ProductPremium.properties.regularTopup.description,`投资险，定期追加保费限额`,`投资险持续加费限额`
+swagger.definitions.QuotationPolicyResult.properties.currency.description,`币种，非空，1 - 人民币`,`币种，非空，<br>1 - 人民币<br>23 - 比索（菲律宾）`
+swagger.definitions.SalesCategoryResponse.properties.listSalesCategory.description,`产品销售大类`,`产品销售分类`
+swagger.definitions.TermLimitCon.properties.productCode.description,`保额限额`,`产品代码`

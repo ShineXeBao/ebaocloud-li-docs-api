@@ -54,9 +54,15 @@ var transEnum = getEnum(swagger);
 
 //fs.writeFileSync("./swagger-cn.json", JSON.stringify(swagger, null, 2));
 //本地保存
-var properties = "";
+var properties_cn = "";
+var properties_en = "";
+
 for (var i in transEnum) {
-   properties += transEnum[i] + "\n";
+   if (/[\u4e00-\u9FA5]+/.test(transEnum[i])) {
+      properties_cn += transEnum[i] + "\n";
+   } else {
+      properties_en += transEnum[i] + "\n";
+   }
    //console.log(trans[i]);
    eval(trans[i]);
 }
@@ -66,8 +72,10 @@ if (!fs.existsSync(path + '/tmp')) {
   fs.mkdirSync(path + '/tmp');
 }
 //写properties
-fs.writeFileSync(path + config.tmp.properties, properties);
-console.log('  \x1b[4mWriting file to\x1b[0m: %s', path + config.tmp.properties);
+fs.writeFileSync(path + config.tmp.properties+"_en", properties_en);
+console.log('  \x1b[4mWriting file to\x1b[0m: %s', path + config.tmp.properties+"_en");
+fs.writeFileSync(path + config.tmp.properties+"_cn", properties_cn);
+console.log('  \x1b[4mWriting file to\x1b[0m: %s', path + config.tmp.properties+"_cn");
 //写swagger模板
 fs.writeFileSync(path + config.tmp.swaggerTemplate, JSON.stringify(swagger, null, 2));
 console.log('  \x1b[4mWriting file to\x1b[0m: %s', path + config.tmp.swaggerTemplate);

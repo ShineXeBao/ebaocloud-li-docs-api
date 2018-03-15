@@ -1,0 +1,13 @@
+﻿key,old,new
+swagger.definitions.CalculatePolicyResult.properties.policyFee.description,`Policy fee`,`policy fee`
+swagger.definitions.IllustrationRequest.properties.performanceLevel.description,`Performance level of the illustration<br>1 - Low<br>2 - Middle<br>3 - High`,`performance level: 1, Low; 2, Middle; 3, High`
+swagger.definitions.MainInformation.properties.payerWop.description,`if payer waiver<br>Y - Yes<br>N - No`,`if payer waiver, Y: Yes; N:No`
+swagger.definitions.MainInformation.properties.spouseWaiver.description,`if spouse waiver<br>Y - Yes<br>N - No`,`if spouse waiver, Y: Yes; N:No`
+swagger.definitions.ProductCoverMultiple.properties.coverMultipleItems.description,`Cover multiple item`,`cover multiple item`
+swagger.definitions.ProductPkgProduct.properties.freeIndi.description,`Free rider indicator`,`free rider indicator`
+swagger.definitions.ProductPkgProduct.properties.premiumProportion.description,`Premium proportion`,`premium proportion`
+swagger.definitions.ProductPkgProduct.properties.saProportion.description,`SA proportion`,`sa proportion`
+swagger.paths['/proposal/proposals/application'].post.parameters['0'].description,`Request`,`request`
+swagger.paths['/proposal/proposals/epolicy/{proposalNumber}'].get.parameters['0'].description,`Proposal number`,`proposalNumber`
+swagger.paths['/proposal/proposals/issurance'].post.parameters['0'].description,`Request`,`request`
+swagger.paths['/proposal/proposals/pre-verification'].post.parameters['0'].description,`Request`,`request`
