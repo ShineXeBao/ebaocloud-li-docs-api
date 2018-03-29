@@ -41,7 +41,7 @@ swagger
 ```
 #### 使用方法
 1. 先准备swagger模板和properties文件（prepare_trans.sh）
-```文件获取 --> 文件合并和初始化 --> 抽取翻译字符串，生成properties文件```
+```文件获取 --> 文件合并和初始化 --> 抽取翻译字符串，生成 properties文件```
 2. 翻译
 3. 生成最终swagger文件（build-swagger.sh）
 ```生成最终文件```
@@ -61,7 +61,7 @@ swagger
   #抽取翻译字符串
   node i18n.js -p standard
 
-  #抽取翻译字符串，生成properties文件
+  #抽取翻译字符串，生成 properties文件
   node properties.js -p standard
 ```
   根据传入参数standard，该命令对分别执行，如下命令。后面会解释每一个命令的作用。
@@ -131,7 +131,7 @@ node merge.js -p standard
 node i18n.js -p standard
 ```
 #### 生成带翻译的properties文件
-根据之前所提取的properties，和总properties文件对比。生成如下文件：
+根据之前所提取的properties，和总properties文件对比。生成如下文件：
 ```
 modified_properties_cn.csv      和swagger-cn.properties对比，发生内容修改的item
 modified_properties_en.csv      和swagger-en.properties对比，发生内容修改的item
@@ -143,6 +143,9 @@ new_properties_en.csv           和swagger-en.properties对比，新增的item�
 ```
 node properties.js -p standard
 ```
+
+#### 翻译
+...
 
 #### 生成最终swagger文件（多语言）
 注意：在运行这个命令前，需要确保翻译工作已经完成。并且把修改和新增的item合并到swagger-xx.properties
