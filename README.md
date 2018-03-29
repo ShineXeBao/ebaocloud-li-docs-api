@@ -41,7 +41,7 @@ swagger
 ```
 #### 使用方法
 1. 先准备swagger模板和properties文件（prepare_trans.sh）
-```文件获取 --> 文件合并和初始化 --> 抽取翻译字符串，生成 properties文件```
+```文件获取 --> 文件合并和初始化 --> 抽取翻译字符串，生成properties文件```
 2. 翻译
 3. 生成最终swagger文件（build-swagger.sh）
 ```生成最终文件```
@@ -61,7 +61,7 @@ swagger
   #抽取翻译字符串
   node i18n.js -p standard
 
-  #抽取翻译字符串，生成 properties文件
+  #抽取翻译字符串，生成properties文件
   node properties.js -p standard
 ```
   根据传入参数standard，该命令对分别执行，如下命令。后面会解释每一个命令的作用。
