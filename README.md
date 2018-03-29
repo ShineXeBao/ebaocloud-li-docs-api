@@ -31,20 +31,28 @@ swagger
     │   └── standard            标准API （/api/)
     ├── locales                 翻译内容
     ├── build-swagger.sh        build swagger文件，参考用
+    ├── prepare_trans.sh        准备翻译文件
     ├── cli.js
     ├── enum.js                 抽取enum，目前因为没有在文档中展示enum，暂时不需要用
     ├── i18n.js                 抽取swagger里面的中文字符串到翻译目录，共后续翻译使用
     ├── merge.js                合并多个swagger文件到单个swagger文件
+    ├── properties.js           生成待翻译的properties文件
     └── translation.js          生成翻译后的swagger
 ```
 #### 使用方法
-请参考参考build-swagger.sh文件，根据不同情况，分成四步：
-```文件获取 --> 文件合并和初始化 --> 抽取翻译字符串 --> 生成最终文件```
+1. 先准备swagger模板和properties文件（prepare_trans.sh）
+```文件获取 --> 文件合并和初始化 --> 抽取翻译字符串，生成properties文件```
+2. 翻译
+3. 生成最终swagger文件（build-swagger.sh）
+```生成最终文件```
+
 一个典型的用法如下
 ```
+ ./prepare_trans.sh standard
+ 人工翻译
  ./build-swagger.sh standard
 ```
-脚本内容如下：
+```prepare_trans.sh```脚本内容如下：
 
 ```
   #文件合并和初始化
@@ -53,8 +61,8 @@ swagger
   #抽取翻译字符串
   node i18n.js -p standard
 
-  #生成最终文件
-  node translation.js -p standard
+  #抽取翻译字符串，生成properties文件
+  node properties.js -p standard
 ```
   根据传入参数standard，该命令对分别执行，如下命令。后面会解释每一个命令的作用。
 
@@ -122,8 +130,22 @@ node merge.js -p standard
 ```
 node i18n.js -p standard
 ```
+#### 生成带翻译的properties文件
+根据之前所提取的properties，和总properties文件对比。生成如下文件：
+```
+modified_properties_cn.csv      和swagger-cn.properties对比，发生内容修改的item
+modified_properties_en.csv      和swagger-en.properties对比，发生内容修改的item
+new_properties_cn.csv           和swagger-cn.properties对比，新增的item（新增item需要最终合并入swagger-cn.properties）
+new_properties_en.csv           和swagger-en.properties对比，新增的item（新增item需要最终合并入swagger-en.properties）
+```
+
+命令如下：
+```
+node properties.js -p standard
+```
+
 #### 生成最终swagger文件（多语言）
-注意：在运行这个命令前，需要确保翻译工作已经完成。
+注意：在运行这个命令前，需要确保翻译工作已经完成。并且把修改和新增的item合并到swagger-xx.properties
 
   1. 命令会到根目录下的 ```./locales```获取对应的 ```swagger-xx.properties```，把翻译结果更新到swagger 模板。
   2. 给该swagger 文件添加```info```内容。swagger 文件的```info```字段可以添加任意大小的markdown格式内容，因此可以把大量的注释，说明文档添加进去。我在根目录的```./locales/```目录下单独写了README.md两个中英文文档，并把他们整体放在```info```下面。如果，项目```locales```下有README，该README会被优先获取。
