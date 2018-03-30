@@ -3,11 +3,18 @@ swagger.definitions.CalculatePolicyResult.properties.policyFee.description,`Poli
 swagger.definitions.IllustrationRequest.properties.performanceLevel.description,`Performance level of the illustration<br>1 - Low<br>2 - Middle<br>3 - High`,`performance level: 1, Low; 2, Middle; 3, High`
 swagger.definitions.MainInformation.properties.payerWop.description,`if payer waiver<br>Y - Yes<br>N - No`,`if payer waiver, Y: Yes; N:No`
 swagger.definitions.MainInformation.properties.spouseWaiver.description,`if spouse waiver<br>Y - Yes<br>N - No`,`if spouse waiver, Y: Yes; N:No`
+swagger.definitions.PolicyInfo.properties.policyType.description,`Policy type<br>1 - Individual policy<br>2 - Group policy<br>3 - Banc assurance`,`Policy Type<br>1 - Individual insurance<br>2 - Group Biz<br>3 - Bancassurance`
 swagger.definitions.ProductCoverMultiple.properties.coverMultipleItems.description,`Cover multiple item`,`cover multiple item`
 swagger.definitions.ProductPkgProduct.properties.freeIndi.description,`Free rider indicator`,`free rider indicator`
 swagger.definitions.ProductPkgProduct.properties.premiumProportion.description,`Premium proportion`,`premium proportion`
 swagger.definitions.ProductPkgProduct.properties.saProportion.description,`SA proportion`,`sa proportion`
-swagger.paths['/proposal/proposals/application'].post.parameters['0'].description,`Request`,`request`
-swagger.paths['/proposal/proposals/epolicy/{proposalNumber}'].get.parameters['0'].description,`Proposal number`,`proposalNumber`
-swagger.paths['/proposal/proposals/issurance'].post.parameters['0'].description,`Request`,`request`
-swagger.paths['/proposal/proposals/pre-verification'].post.parameters['0'].description,`Request`,`request`
+swagger.paths['/policy/policies/{insurerCode}/search'].post.description,`Search policy by criteria`,`Search Policy by Criteria`
+swagger.paths['/policy/policies/{insurerCode}/search'].post.parameters['0'].description,`Insurer code`,`insurerCode`
+swagger.paths['/policy/policies/{insurerCode}/search'].post.parameters['1'].description,`Criteria`,`criteria`
+swagger.paths['/policy/policies/{insurerCode}/search'].post.summary,`Policy summary querying`,`PolicySummaryQuerying`
+swagger.paths['/policy/policies/{insurerCode}/{policyNumber}'].get.parameters['0'].description,`Insurer code`,`insurerCode`
+swagger.paths['/policy/policies/{insurerCode}/{policyNumber}'].get.parameters['1'].description,`Policy number`,`policyNumber`
+swagger.paths['/policy/policies/{insurerCode}/{policyNumber}'].get.summary,`Policy detail getting`,`PolicyDetailGetting`
+swagger.paths['/proposal/proposals/application'].post.parameters['0'].description,`Request`,`Application request`
+swagger.paths['/proposal/proposals/issurance'].post.parameters['0'].description,`Request`,`Issurance request`
+swagger.paths['/proposal/proposals/pre-verification'].post.parameters['0'].description,`Request`,`Quotation request`

@@ -6,8 +6,8 @@
   "sourceSwagger": [
     "/source/products-swagger.json",
     "/source/proposals-swagger.json",
-    "/source/policyalterations-swagger.json"
-
+    "/source/policyalterations-swagger.json",
+    "/source/policy-swagger.json"
   ],
   "info": {
     "version": "1.5",

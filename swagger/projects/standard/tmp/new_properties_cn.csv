@@ -1,7 +1,7 @@
 ﻿key,property
 swagger.definitions.AgentDeclaration.properties.agentCode.description,`业务员代码`
 swagger.definitions.AgentDeclaration.properties.declCode.description,`告知项编号`
-swagger.definitions.AgentDeclaration.properties.extendedProps.description,`扩展信息, Map类型, Key/Value都是字符型`
+swagger.definitions.AgentDeclaration.properties.extendedProps.description,`扩展信息，Map类型，Key/Value都是字符型`
 swagger.definitions.AgentDeclaration.properties.fill1.description,`告知项回答内容1，字符类型，内容随告知项不同而不同`
 swagger.definitions.AgentDeclaration.properties.fill10.description,`告知项回答内容10，字符类型，内容随告知项不同而不同`
 swagger.definitions.AgentDeclaration.properties.fill2.description,`告知项回答内容2，字符类型，内容随告知项不同而不同`
@@ -16,7 +16,7 @@ swagger.definitions.AgentDeclaration.properties.listId.description,`业务员告
 swagger.definitions.AgentDeclaration.properties.policyId.description,`保单内部序列号, UUID type`
 swagger.definitions.AgentDeclarationInput.properties.agentCode.description,`业务员代码`
 swagger.definitions.AgentDeclarationInput.properties.declCode.description,`告知项编号`
-swagger.definitions.AgentDeclarationInput.properties.extendedProps.description,`扩展信息, Map类型, Key/Value都是字符型`
+swagger.definitions.AgentDeclarationInput.properties.extendedProps.description,`扩展信息，Map类型，Key/Value都是字符型`
 swagger.definitions.AgentDeclarationInput.properties.fill1.description,`告知项回答内容1，字符类型，内容随告知项不同而不同`
 swagger.definitions.AgentDeclarationInput.properties.fill10.description,`告知项回答内容10，字符类型，内容随告知项不同而不同`
 swagger.definitions.AgentDeclarationInput.properties.fill2.description,`告知项回答内容2，字符类型，内容随告知项不同而不同`
@@ -61,8 +61,13 @@ swagger.definitions.CommonAlterationCoverageInput.properties.coverageNo.descript
 swagger.definitions.Coverage.properties.deferPeriod.description,`按揭延期期限`
 swagger.definitions.Coverage.properties.insuredCategory.description,`家庭保单类型<br>0 - 无关<br>1 - 主被保人<br>2 - 主被保人+配偶<br>3 - 主被保人+小孩<br>4 - 主被保人+家庭<br>5 - 配偶<br>6 - 小孩<br>7 - 主被保人+配偶+小孩<br>8 - 主被保人+父母<br>9 - 主被保人+父母+小孩`
 swagger.definitions.Coverage.properties.nextPremium.description,`续期保费`
-swagger.definitions.CoverageAgent.properties.extendedProps.description,`扩展信息, Map类型, Key/Value都是字符型`
+swagger.definitions.CoverageAgent.properties.extendedProps.description,`扩展信息，Map类型，Key/Value都是字符型`
 swagger.definitions.CoverageExtWaiverInput.properties.waivedSa.description,`豁免保额，0表示全额豁免，不为0表示豁免指定金额，不能超过被豁免险种保费`
+swagger.definitions.CoverageInfo.properties.coverageNo.description,`保单险种代号`
+swagger.definitions.CoverageInfo.properties.deferPeriod.description,`按揭延期期限`
+swagger.definitions.CoverageInfo.properties.insuredCategory.description,`家庭保单类型<br>0 - 无关<br>1 - 主被保人<br>2 - 主被保人+配偶<br>3 - 主被保人+小孩<br>4 - 主被保人+家庭<br>5 - 配偶<br>6 - 小孩<br>7 - 主被保人+配偶+小孩<br>8 - 主被保人+父母<br>9 - 主被保人+父母+小孩`
+swagger.definitions.CoverageInfo.properties.masterCoverageNo.description,`保单主险险种代号`
+swagger.definitions.CoverageInfo.properties.mortgageRates.description,`按揭利率列表`
 swagger.definitions.CoverageInput.properties.coverageSerialId.description,`保单险种临时序列号，请求内使用，唯一标识请求内某一险种`
 swagger.definitions.CoverageInput.properties.deferPeriod.description,`按揭延期期限`
 swagger.definitions.CoverageInput.properties.insuredCategory.description,`家庭保单类型<br>0 - 无关<br>1 - 主被保人<br>2 - 主被保人+配偶<br>3 - 主被保人+小孩<br>4 - 主被保人+家庭<br>5 - 配偶<br>6 - 小孩<br>7 - 主被保人+配偶+小孩<br>8 - 主被保人+父母<br>9 - 主被保人+父母+小孩`
@@ -120,19 +125,37 @@ swagger.definitions.FreelookResultDetail.properties.totalGrossPremium.descriptio
 swagger.definitions.FreelookResultDetail.properties.totalRefundAmount.description,`犹豫期退保原因`
 swagger.definitions.Insured.properties.medicalExamIndi.description,`是否有体检件<br>Y - 是<br>N - 否`
 swagger.definitions.Insured.properties.relationToMainInsured.description,`被保人与主被保人关系，数字类型<br>1 - 自己<br>2 - 子女<br>3 - 配偶<br>10 - 父母<br>4 - 雇员<br>7 - 其他`
+swagger.definitions.InsuredInfo.properties.relationToMainInsured.description,`被保人与主被保人关系，数字类型<br>1 - 自己<br>2 - 子女<br>3 - 配偶<br>10 - 父母<br>4 - 雇员<br>7 - 其他`
 swagger.definitions.InsuredInput.properties.medicalExamIndi.description,`是否有体检件<br>Y - 是<br>N - 否`
 swagger.definitions.InsuredInput.properties.relationToMainInsured.description,`被保人与主被保人关系，数字类型<br>1 - 自己<br>2 - 子女<br>3 - 配偶<br>10 - 父母<br>4 - 雇员<br>7 - 其他`
 swagger.definitions.MortgageRate.properties.coverageId.description,`保单险种序列号, UUID type`
-swagger.definitions.MortgageRate.properties.extendedProps.description,`扩展信息, Map类型, Key/Value都是字符型`
+swagger.definitions.MortgageRate.properties.extendedProps.description,`扩展信息，Map类型，Key/Value都是字符型`
 swagger.definitions.MortgageRate.properties.highPolicyYear.description,`利率结束年度`
 swagger.definitions.MortgageRate.properties.listId.description,`按揭利率信息内部序列号, UUID type`
 swagger.definitions.MortgageRate.properties.lowPolicyYear.description,`利率开始年度，从1开始`
 swagger.definitions.MortgageRate.properties.mortgageRate.description,`业绩分摊比例，最大为1`
 swagger.definitions.MortgageRate.properties.policyId.description,`保单内部序列号, UUID type`
-swagger.definitions.MortgageRateInput.properties.extendedProps.description,`扩展信息, Map类型, Key/Value都是字符型`
+swagger.definitions.MortgageRateInfo.properties.extendedProps.description,`扩展信息, Map类型, Key/Value都是字符型`
+swagger.definitions.MortgageRateInfo.properties.highPolicyYear.description,`利率结束年度`
+swagger.definitions.MortgageRateInfo.properties.lowPolicyYear.description,`利率开始年度，从1开始`
+swagger.definitions.MortgageRateInfo.properties.mortgageRate.description,`业绩分摊比例，最大为1`
+swagger.definitions.MortgageRateInput.properties.extendedProps.description,`扩展信息，Map类型，Key/Value都是字符型`
 swagger.definitions.MortgageRateInput.properties.highPolicyYear.description,`利率结束年度`
 swagger.definitions.MortgageRateInput.properties.lowPolicyYear.description,`利率开始年度，从1开始`
 swagger.definitions.MortgageRateInput.properties.mortgageRate.description,`业绩分摊比例，最大为1`
 swagger.definitions.Person.properties.occupation.description,`职业名称（职业代码为其他时填写）`
-swagger.definitions.PolicyCustomer.properties.extendedProps.description,`扩展信息, Map类型, Key/Value都是字符型`
+swagger.definitions.PolicyCustomer.properties.extendedProps.description,`扩展信息，Map类型，Key/Value都是字符型`
 swagger.definitions.PolicyInput.properties.agentDeclarations.description,`业务员告知列表`
+swagger.definitions.PolicyReturnVisitRequest.properties.clientRequestId.description,`外部交易流水号`
+swagger.definitions.PolicyReturnVisitRequest.properties.clientRequestTime.description,`外部请求时间`
+swagger.definitions.PolicyReturnVisitRequest.properties.returnVisit.description,`回访请求内容`
+swagger.definitions.PolicyReturnVisitResponse.properties.clientRequestId.description,`外部交易流水号`
+swagger.definitions.PolicyReturnVisitResponse.properties.clientRequestTime.description,`外部请求时间`
+swagger.definitions.PolicyReturnVisitResponse.properties.exceptions.description,`异常信息`
+swagger.definitions.PolicyReturnVisitResponse.properties.messages.description,`业务失败原因描述列表节点`
+swagger.definitions.PolicyReturnVisitResponse.properties.result.description,`请求结果，<br>1 - 业务成功<br>0 - 业务失败<br>-1 - 程序异常`
+swagger.definitions.PolicyReturnVisitResponse.properties.returnVisit.description,`回访结果`
+swagger.definitions.ReturnVisitInput.properties.extendedProps.description,`扩展信息, Map类型, Key/Value都是字符型`
+swagger.definitions.ReturnVisitInput.properties.policyNumber.description,`保单号码`
+swagger.definitions.ReturnVisitInput.properties.returnVisitDate.description,`回访时间，日期格式：yyyy-MM-dd'T'HH:mm:ss`
+swagger.definitions.ReturnVisitResult.properties.extendedProps.description,`扩展信息, Map类型, Key/Value都是字符型`

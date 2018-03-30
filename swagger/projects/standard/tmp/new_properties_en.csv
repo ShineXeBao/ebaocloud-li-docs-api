@@ -1,4 +1,15 @@
 ﻿key,property
+swagger.paths['/policy/policies/{insurerCode}/return-visits'].post.description,`Online Return Visit Feedback`
+swagger.paths['/policy/policies/{insurerCode}/return-visits'].post.parameters['0'].description,`insurerCode`
+swagger.paths['/policy/policies/{insurerCode}/return-visits'].post.parameters['1'].description,`request`
+swagger.paths['/policy/policies/{insurerCode}/return-visits'].post.responses['200'].description,`OK`
+swagger.paths['/policy/policies/{insurerCode}/return-visits'].post.responses['201'].description,`Created`
+swagger.paths['/policy/policies/{insurerCode}/return-visits'].post.responses['400'].description,`Bad request`
+swagger.paths['/policy/policies/{insurerCode}/return-visits'].post.responses['401'].description,`Unauthorized`
+swagger.paths['/policy/policies/{insurerCode}/return-visits'].post.responses['403'].description,`Forbidden`
+swagger.paths['/policy/policies/{insurerCode}/return-visits'].post.responses['404'].description,`Not Found`
+swagger.paths['/policy/policies/{insurerCode}/return-visits'].post.responses['500'].description,`Internal Server Error`
+swagger.paths['/policy/policies/{insurerCode}/return-visits'].post.summary,`ReturnVisits`
 swagger.paths['/policy/policy-alterations/{insurerCode}/changeContactInfo'].post.description,`ChangeContactInfo`
 swagger.paths['/policy/policy-alterations/{insurerCode}/changeContactInfo'].post.parameters['0'].description,`insurerCode`
 swagger.paths['/policy/policy-alterations/{insurerCode}/changeContactInfo'].post.parameters['1'].description,`request`

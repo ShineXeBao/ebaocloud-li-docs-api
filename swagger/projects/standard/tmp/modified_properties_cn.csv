@@ -1,19 +1,64 @@
 ﻿key,old,new
 swagger.definitions.AgeLimit.properties.maxAgeUnit.description,`年龄单位<br>1 - 岁<br>5 - 天<br>4 - 月`,`年龄单位，1:岁,5:天, 4:月`
 swagger.definitions.AgeLimit.properties.minAgeUnit.description,`年龄单位<br>1 - 岁<br>5 - 天<br>4 - 月`,`年龄单位，1:岁,5:天, 4:月`
+swagger.definitions.AgentDeclarationInfo.properties.agentCode.description,`代理人代码`,`业务员代码`
 swagger.definitions.ApplicationPolicyResult.properties.currency.description,`币种，非空，1 - 人民币`,`币种，非空，<br>1 - 人民币<br>23 - 比索（菲律宾）`
+swagger.definitions.ApplicationPolicyResult.properties.extendedProps.description,`扩展信息, Map类型, Key/Value都是字符型`,`扩展信息，Map类型，Key/Value都是字符型`
+swagger.definitions.Beneficiary.properties.designation.description,`与被保人关系<br>1 - 妻子<br>2 - 丈夫<br>3 - 子女<br>4 - 父亲<br>5 - 母亲<br>6 - 祖父/外祖父<br>7 - 祖母/外祖母<br>8 - 兄弟<br>9 - 姐妹<br>10 - 叔父/伯父<br>11 - 阿姨<br>12 - 表兄弟/表姐妹<br>13 - 外甥/外甥女/侄子/侄女<br>14 - 雇主<br>15 - 其他<br>16 - 被保人本人`,`与被保人关系<br>1 - 妻子<br>2 - 丈夫<br>3 - 子女<br>4 - 父亲<br>5 - 母亲<br>6 - 祖父/外祖父<br>7 - 祖母/外祖母<br>8 - 兄弟<br>9 - 姐妹<br>10 - 叔父/伯父<br>11 - 阿姨<br>12 - 表兄弟/表姐妹<br>13 - 外甥/外甥女/侄子/侄女<br>14 - 雇主<br>15 - 其他<br>16 - 被保人本人<br>17 - 投保人本人<br>20 - 配偶<br>21 - 父母<br>22 - 祖父母<br>23 - 兄弟姐妹`
+swagger.definitions.Beneficiary.properties.extendedProps.description,`扩展信息, Map类型, Key/Value都是字符型`,`扩展信息，Map类型，Key/Value都是字符型`
+swagger.definitions.BeneficiaryInfo.properties.partyId.description,`客户编号, UUID type`,`客户编号`
+swagger.definitions.BeneficiaryInput.properties.designation.description,`与被保人关系<br>1 - 妻子<br>2 - 丈夫<br>3 - 子女<br>4 - 父亲<br>5 - 母亲<br>6 - 祖父/外祖父<br>7 - 祖母/外祖母<br>8 - 兄弟<br>9 - 姐妹<br>10 - 叔父/伯父<br>11 - 阿姨<br>12 - 表兄弟/表姐妹<br>13 - 外甥/外甥女/侄子/侄女<br>14 - 雇主<br>15 - 其他<br>16 - 被保人本人`,`与被保人关系<br>1 - 妻子<br>2 - 丈夫<br>3 - 子女<br>4 - 父亲<br>5 - 母亲<br>6 - 祖父/外祖父<br>7 - 祖母/外祖母<br>8 - 兄弟<br>9 - 姐妹<br>10 - 叔父/伯父<br>11 - 阿姨<br>12 - 表兄弟/表姐妹<br>13 - 外甥/外甥女/侄子/侄女<br>14 - 雇主<br>15 - 其他<br>16 - 被保人本人<br>17 - 投保人本人<br>20 - 配偶<br>21 - 父母<br>22 - 祖父母<br>23 - 兄弟姐妹`
+swagger.definitions.BeneficiaryInput.properties.extendedProps.description,`扩展信息, Map类型, Key/Value都是字符型`,`扩展信息，Map类型，Key/Value都是字符型`
 swagger.definitions.CalculateCoverageResult.properties.paymentFrey.description,`缴费频率<br>1 - 年缴<br>2 - 半年缴<br>3 - 季缴<br>4 - 月缴<br>5 - 趸缴`,`缴费频率`
 swagger.definitions.CalculatePolicy.properties.inceptionDate.description,`保单生效日，字符串类型，格式("YYYY-MM-DD")`,`保单生效日，字符串类型，格式(YYYY-MM-DD)`
 swagger.definitions.CollectionInput.properties.currency.description,`币种，非空，1 - 人民币`,`币种，非空，<br>1 - 人民币<br>23 - 比索（菲律宾）`
+swagger.definitions.CollectionInput.properties.extendedProps.description,`扩展信息, Map类型, Key/Value都是字符型`,`扩展信息，Map类型，Key/Value都是字符型`
 swagger.definitions.CollectionInput.properties.payMode.description,`首期付款方式，数字类型<br>1 - 现金<br>2 - 支票<br>3 - 银行转账<br>30 - 信用卡`,`首期付款方式，数字类型<br>1 - 现金<br>2 - 支票<br>3 - 银行转账<br>30 - 信用卡<br>80 - 第三方支付`
+swagger.definitions.CollectionPayerAccountInput.properties.extendedProps.description,`扩展信息, Map类型, Key/Value都是字符型`,`扩展信息，Map类型，Key/Value都是字符型`
+swagger.definitions.CollectionPolicyInput.properties.extendedProps.description,`扩展信息, Map类型, Key/Value都是字符型`,`扩展信息，Map类型，Key/Value都是字符型`
+swagger.definitions.ContractInvestRateInput.properties.extendedProps.description,`扩展信息, Map类型, Key/Value都是字符型`,`扩展信息，Map类型，Key/Value都是字符型`
+swagger.definitions.Coverage.properties.extendedProps.description,`扩展信息, Map类型, Key/Value都是字符型`,`扩展信息，Map类型，Key/Value都是字符型`
+swagger.definitions.CoverageAgentInput.properties.extendedProps.description,`扩展信息, Map类型, Key/Value都是字符型`,`扩展信息，Map类型，Key/Value都是字符型`
+swagger.definitions.CoverageCalculationResult.properties.extendedProps.description,`扩展信息, Map类型, Key/Value都是字符型`,`扩展信息，Map类型，Key/Value都是字符型`
+swagger.definitions.CoverageInput.properties.extendedProps.description,`扩展信息, Map类型, Key/Value都是字符型`,`扩展信息，Map类型，Key/Value都是字符型`
+swagger.definitions.CoverageInsured.properties.extendedProps.description,`扩展信息, Map类型, Key/Value都是字符型`,`扩展信息，Map类型，Key/Value都是字符型`
+swagger.definitions.CoverageInsuredInput.properties.extendedProps.description,`扩展信息, Map类型, Key/Value都是字符型`,`扩展信息，Map类型，Key/Value都是字符型`
+swagger.definitions.CustomerDeclaration.properties.extendedProps.description,`扩展信息, Map类型, Key/Value都是字符型`,`扩展信息，Map类型，Key/Value都是字符型`
+swagger.definitions.CustomerDeclarationDetail.properties.extendedProps.description,`扩展信息, Map类型, Key/Value都是字符型`,`扩展信息，Map类型，Key/Value都是字符型`
+swagger.definitions.CustomerDeclarationDetailInput.properties.extendedProps.description,`扩展信息, Map类型, Key/Value都是字符型`,`扩展信息，Map类型，Key/Value都是字符型`
+swagger.definitions.CustomerDeclarationInfo.properties.partyId.description,`客户编号, UUID type`,`客户编号`
+swagger.definitions.CustomerDeclarationInput.properties.extendedProps.description,`扩展信息, Map类型, Key/Value都是字符型`,`扩展信息，Map类型，Key/Value都是字符型`
+swagger.definitions.EPolicyResult.properties.extendedProps.description,`扩展信息, Map类型, Key/Value都是字符型`,`扩展信息，Map类型，Key/Value都是字符型`
+swagger.definitions.Insured.properties.extendedProps.description,`扩展信息, Map类型, Key/Value都是字符型`,`扩展信息，Map类型，Key/Value都是字符型`
+swagger.definitions.InsuredInfo.properties.partyId.description,`客户编号, UUID type`,`客户编号`
+swagger.definitions.InsuredInput.properties.extendedProps.description,`扩展信息, Map类型, Key/Value都是字符型`,`扩展信息，Map类型，Key/Value都是字符型`
 swagger.definitions.IssurancePolicyResult.properties.currency.description,`币种，非空，1 - 人民币`,`币种，非空，<br>1 - 人民币<br>23 - 比索（菲律宾）`
+swagger.definitions.IssurancePolicyResult.properties.extendedProps.description,`扩展信息, Map类型, Key/Value都是字符型`,`扩展信息，Map类型，Key/Value都是字符型`
 swagger.definitions.MainInformation.properties.ally.description,`是否joint life<br>1 - 是<br>0 - 否`,`是否joint life, 1:是;0:否`
+swagger.definitions.Payer.properties.extendedProps.description,`扩展信息, Map类型, Key/Value都是字符型`,`扩展信息，Map类型，Key/Value都是字符型`
+swagger.definitions.PayerAccount.properties.extendedProps.description,`扩展信息, Map类型, Key/Value都是字符型`,`扩展信息，Map类型，Key/Value都是字符型`
 swagger.definitions.PayerAccount.properties.paymentMethod.description,`首期付款方式，数字类型<br>1 - 现金<br>2 - 支票<br>3 - 银行转账<br>30 - 信用卡`,`首期付款方式，数字类型<br>1 - 现金<br>2 - 支票<br>3 - 银行转账<br>30 - 信用卡<br>80 - 第三方支付`
 swagger.definitions.PayerAccount.properties.paymentMethodNext.description,`续期付款方式，数字类型<br>1 - 现金<br>2 - 支票<br>3 - 银行转账<br>30 - 信用卡`,`续期付款方式，数字类型<br>1 - 现金<br>2 - 支票<br>3 - 银行转账<br>30 - 信用卡<br>80 - 第三方支付`
+swagger.definitions.PayerAccountInfo.properties.paymentMethod.description,`首期付款方式，数字类型<br>1 - 现金<br>2 - 支票<br>3 - 银行转账<br>30 - 信用卡`,`首期付款方式，数字类型<br>1 - 现金<br>2 - 支票<br>3 - 银行转账<br>30 - 信用卡<br>80 - 第三方支付`
+swagger.definitions.PayerAccountInfo.properties.paymentMethodNext.description,`续期付款方式，数字类型<br>1 - 现金<br>2 - 支票<br>3 - 银行转账<br>30 - 信用卡`,`续期付款方式，数字类型<br>1 - 现金<br>2 - 支票<br>3 - 银行转账<br>30 - 信用卡<br>80 - 第三方支付`
+swagger.definitions.PayerAccountInput.properties.extendedProps.description,`扩展信息, Map类型, Key/Value都是字符型`,`扩展信息，Map类型，Key/Value都是字符型`
 swagger.definitions.PayerAccountInput.properties.paymentMethod.description,`首期付款方式，数字类型<br>1 - 现金<br>2 - 支票<br>3 - 银行转账<br>30 - 信用卡`,`首期付款方式，数字类型<br>1 - 现金<br>2 - 支票<br>3 - 银行转账<br>30 - 信用卡<br>80 - 第三方支付`
 swagger.definitions.PayerAccountInput.properties.paymentMethodNext.description,`续期付款方式，数字类型<br>1 - 现金<br>2 - 支票<br>3 - 银行转账<br>30 - 信用卡`,`续期付款方式，数字类型<br>1 - 现金<br>2 - 支票<br>3 - 银行转账<br>30 - 信用卡<br>80 - 第三方支付`
+swagger.definitions.PayerInput.properties.extendedProps.description,`扩展信息, Map类型, Key/Value都是字符型`,`扩展信息，Map类型，Key/Value都是字符型`
+swagger.definitions.PayPlan.properties.extendedProps.description,`扩展信息, Map类型, Key/Value都是字符型`,`扩展信息，Map类型，Key/Value都是字符型`
+swagger.definitions.PayPlanInput.properties.extendedProps.description,`扩展信息, Map类型, Key/Value都是字符型`,`扩展信息，Map类型，Key/Value都是字符型`
 swagger.definitions.Policy.properties.currency.description,`币种，非空，1 - 人民币`,`币种，非空，<br>1 - 人民币<br>23 - 比索（菲律宾）`
+swagger.definitions.Policy.properties.extendedProps.description,`扩展信息, Map类型, Key/Value都是字符型`,`扩展信息，Map类型，Key/Value都是字符型`
+swagger.definitions.PolicyCustomerInput.properties.extendedProps.description,`扩展信息, Map类型, Key/Value都是字符型`,`扩展信息，Map类型，Key/Value都是字符型`
+swagger.definitions.PolicyHolder.properties.extendedProps.description,`扩展信息, Map类型, Key/Value都是字符型`,`扩展信息，Map类型，Key/Value都是字符型`
+swagger.definitions.PolicyHolderInfo.properties.partyId.description,`客户编号, UUID type`,`客户编号`
+swagger.definitions.PolicyHolderInput.properties.extendedProps.description,`扩展信息, Map类型, Key/Value都是字符型`,`扩展信息，Map类型，Key/Value都是字符型`
+swagger.definitions.PolicyInfo.properties.agentDeclarations.description,`代理人告知列表`,`业务员告知列表`
+swagger.definitions.PolicyInfo.properties.currency.description,`币种，非空，1 - 人民币`,`币种，非空，<br>1 - 人民币<br>23 - 比索（菲律宾）`
 swagger.definitions.PolicyInput.properties.currency.description,`币种，非空，1 - 人民币`,`币种，非空，<br>1 - 人民币<br>23 - 比索（菲律宾）`
+swagger.definitions.PolicyInput.properties.extendedProps.description,`扩展信息, Map类型, Key/Value都是字符型`,`扩展信息，Map类型，Key/Value都是字符型`
+swagger.definitions.PolicySummaryInfo.properties.masterProductCode.description,`主险代码`,`主险code`
+swagger.definitions.PremInvestRate.properties.extendedProps.description,`扩展信息, Map类型, Key/Value都是字符型`,`扩展信息，Map类型，Key/Value都是字符型`
 swagger.definitions.ProductPkgProduct.properties.benefitLevel.description,`档次，此项只对按档次售卖的产品有意义`,`档次`
 swagger.definitions.ProductPkgProduct.properties.calcMethod.description,`计算方式`,`精算方式`
 swagger.definitions.ProductPkgProduct.properties.maxAmount.description,`最大保额`,`允许的最大保额`
@@ -26,5 +71,14 @@ swagger.definitions.ProductPremium.properties.increaseRegularTopup.description,`
 swagger.definitions.ProductPremium.properties.listFundPremiumLimit.description,`投资险，基金保费限额`,`投资险减基金级别限额`
 swagger.definitions.ProductPremium.properties.regularTopup.description,`投资险，定期追加保费限额`,`投资险持续加费限额`
 swagger.definitions.QuotationPolicyResult.properties.currency.description,`币种，非空，1 - 人民币`,`币种，非空，<br>1 - 人民币<br>23 - 比索（菲律宾）`
+swagger.definitions.QuotationPolicyResult.properties.extendedProps.description,`扩展信息, Map类型, Key/Value都是字符型`,`扩展信息，Map类型，Key/Value都是字符型`
+swagger.definitions.RecurringTopup.properties.extendedProps.description,`扩展信息, Map类型, Key/Value都是字符型`,`扩展信息，Map类型，Key/Value都是字符型`
+swagger.definitions.RecurringTopupInput.properties.extendedProps.description,`扩展信息, Map类型, Key/Value都是字符型`,`扩展信息，Map类型，Key/Value都是字符型`
+swagger.definitions.RecurringTopupInvestRate.properties.extendedProps.description,`扩展信息, Map类型, Key/Value都是字符型`,`扩展信息，Map类型，Key/Value都是字符型`
 swagger.definitions.SalesCategoryResponse.properties.listSalesCategory.description,`产品销售大类`,`产品销售分类`
+swagger.definitions.SingleTopup.properties.extendedProps.description,`扩展信息, Map类型, Key/Value都是字符型`,`扩展信息，Map类型，Key/Value都是字符型`
+swagger.definitions.SingleTopupInput.properties.extendedProps.description,`扩展信息, Map类型, Key/Value都是字符型`,`扩展信息，Map类型，Key/Value都是字符型`
+swagger.definitions.SingleTopupInvestRate.properties.extendedProps.description,`扩展信息, Map类型, Key/Value都是字符型`,`扩展信息，Map类型，Key/Value都是字符型`
 swagger.definitions.TermLimitCon.properties.productCode.description,`保额限额`,`产品代码`
+swagger.definitions.Trustee.properties.extendedProps.description,`扩展信息, Map类型, Key/Value都是字符型`,`扩展信息，Map类型，Key/Value都是字符型`
+swagger.definitions.TrusteeInput.properties.extendedProps.description,`扩展信息, Map类型, Key/Value都是字符型`,`扩展信息，Map类型，Key/Value都是字符型`
