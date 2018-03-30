@@ -1,0 +1,29 @@
+﻿key,old,new
+swagger.definitions.ClaimantInput.properties.name.description,`Name`,`name`
+swagger.definitions.ClaimantInput.properties.partyContact.description,`Contact information`,`contact information`
+swagger.definitions.ClaimEventInput.properties.eventDetail.description,`Detail of claim event`,`detail of cliam event`
+swagger.definitions.ClaimEventInput.properties.eventNature.description,`Event nature <br>1 - illness <br>2 - accident`,`event nature <br>1 - illness <br>2 - accident`
+swagger.definitions.ClaimEventInput.properties.eventTime.description,`Date when claim event happens, format: yyyy-MM-dd'T'HH:mm:ss`,`date when claim event happens,format: yyyy-MM-dd'T'HH:mm:ss`
+swagger.definitions.ClaimEventInput.properties.reportType.description,`Report by <br>1 - phone <br>2 - fax <br>4 - sms <br>5 - network <br>6 - email`,`report by <br>1 - phone <br>2 - fax <br>4 - sms <br>5 - network <br>6 - email`
+swagger.definitions.ContactInput.properties.email.description,`Email`,`email address`
+swagger.definitions.ContactInput.properties.mobile.description,`Mobile No.`,`mobile no`
+swagger.definitions.InsuredInput.properties.certiCode.description,`ID Number`,`certificate code `
+swagger.definitions.InsuredInput.properties.certiType.description,`ID type, number type<br>1 - ID card<br>2 - military certificate<br>3 - passport<br>4 - birth certificate<br>9 - other`,`certificate type of insured<br>1 - id card<br>3 - passport<br>9 - others`
+swagger.definitions.InsuredInput.properties.gender.description,`Insured's sex, M - male;<br>F - female`,`gender <br>F -  female<br>M - male`
+swagger.definitions.InsuredInput.properties.name.description,`Name`,`name`
+swagger.definitions.RegisterRequest.properties.claimant.description,`Information of claimant`,`informations of claimant`
+swagger.definitions.RegisterRequest.properties.claimType.description,`Claim type <br>1 - Accident <br>2 - Death <br>5 - Hospitalization<br>8 - Medical `,`claim type <br>1 - Accident <br>2 - Death <br>5 - Hospitalisation<br>8 - Medical `
+swagger.definitions.RegisterRequest.properties.clientRequestId.description,`Client request id, to identify a request`,`client request id, to identify a request`
+swagger.definitions.RegisterRequest.properties.clientRequestTime.description,`Client request time, format: yyyy-MM-dd'T'HH:mm:ss`,`client request time, format: yyyy-MM-dd'T'HH:mm:ss`
+swagger.definitions.RegisterRequest.properties.event.description,`Information of claim event`,`informations of claim event`
+swagger.definitions.RegisterRequest.properties.insured.description,`Information of insured`,`informations of insured`
+swagger.definitions.RegisterRequest.properties.policyNo.description,`Claim policy number`,`claim policy number`
+swagger.definitions.RegisterRequest.properties.relationToInsured.description,`Claimant relation to insured <br>1 - Spouse <br>2 - Child <br>3 - Parent <br>4 - Relative <br>6 - others <br>7 - Employer <br>1001 - self`,`claimant relation to insured <br>1 - Spouse <br>2 - Child <br>3 - Parent <br>4 - Relative <br>6 - others <br>7 - Employer <br>1001 - self`
+swagger.definitions.RegisterResponse.properties.claimCaseNo.description,`Claim case number`,`claim case number`
+swagger.definitions.RegisterResponse.properties.clientRequestId.description,`Client request id, to identify a request`,`client request id, to identify a request`
+swagger.definitions.RegisterResponse.properties.clientRequestTime.description,`Client request time, format: yyyy-MM-dd'T'HH:mm:ss`,`client request time, format: yyyy-MM-dd'T'HH:mm:ss`
+swagger.definitions.RegisterResponse.properties.exceptions.description,`Exception messages`,`exception messages`
+swagger.definitions.RegisterResponse.properties.messages.description,`Messages of business issues`,`messages of business issues`
+swagger.definitions.RegisterResponse.properties.result.description,`Result. <br>1 - Success<br>0 - Failed with business issue<br>-1 - Failed with unknown exception`,`result. <br>1 - Success<br>0 - Failed with business issue<br>-1 - Failed with unknown exception`
+swagger.paths['/claim/register'].post.parameters['0'].description,`Request`,`request`
+swagger.paths['/claim/register'].post.summary,`Claim case register`,`ClaimCaseRegister`

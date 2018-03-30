@@ -4,9 +4,7 @@
     "cn"
   ],
   "sourceSwagger": [
-    "/source/claim-swagger.json",
-    "/source/policyalterations-swagger.json",
-    "/source/policy-swagger.json"
+    "/source/claim-swagger.json"
   ],
   "info": {
     "version": "0.2.0",
